@@ -13,6 +13,7 @@ class EndoorphinTrainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+
       initialRoute: AppPages.initialRoute,
       getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,

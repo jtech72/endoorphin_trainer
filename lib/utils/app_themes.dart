@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 class AppThemes {
   static ThemeData appTheme = ThemeData(
+
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.backgroundBlack,
       ),
       inputDecorationTheme: const InputDecorationTheme(
-        fillColor: AppColors.white,
+        fillColor: AppColors.yellowishWhite,
         filled: true,
       ),
       useMaterial3: true,
@@ -80,6 +81,12 @@ class AppThemes {
             fontFamily: "Roboto",
             color: AppColors.white,
             fontSize: 36),
+        displayLarge: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontFamily: "Roboto",
+            color: AppColors.white,
+            fontSize: 14),
+
       ));
 }
 //
