@@ -1,5 +1,9 @@
+
+
 import 'package:flutter/material.dart';
-import '../utils/app_colors.dart';
+
+import '../utils/exports.dart';
+
 class SplashUI extends StatelessWidget {
   const SplashUI({super.key});
 
@@ -11,7 +15,8 @@ class SplashUI extends StatelessWidget {
         child: SizedBox(
             height: 55,
             width: 222,
-      ),)
+            child: Image.asset(ImagesPaths.logoimg)),
+      ),
     );
   }
 }

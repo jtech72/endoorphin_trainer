@@ -1,0 +1,20 @@
+export 'package:flutter/cupertino.dart';
+export '../utils/app_colors.dart';
+export '../utils/image_paths.dart';
+export 'package:get/get.dart';
+export 'package:get/get_core/src/get_main.dart';
+export 'package:get/get_instance/src/bindings_interface.dart';
+export '../controllers/countrycode_controller.dart';
+export 'package:get/get.dart';
+export 'package:get/get_navigation/src/routes/get_route.dart';
+
+export '../bindings/countrycode_binding.dart';
+export '../bindings/splash_binding.dart';
+export '../pages/countrycode_ui.dart';
+export '../pages/splash_ui.dart';
+export 'app_routes.dart';
+export '../bindings/otp_binding.dart';
+export '../pages/otp_ui.dart';
+export 'package:get/get_core/src/get_main.dart';
+export 'package:get/get_instance/src/bindings_interface.dart';
+export '../controllers/forgot_password_controller.dart';
