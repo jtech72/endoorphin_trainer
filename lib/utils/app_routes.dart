@@ -15,6 +15,8 @@ class AppRoutes{
   static const String sessionRunning="/sessionRunning";
 
 
+  static const String home="/home";
+  static const String earning="/earning";
 
 
 

@@ -10,7 +10,7 @@ class CreateNewPasswordUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar2(
+      appBar: myAppBar(
         title: Text('Create New Password',style: Theme.of(context).textTheme.bodyMedium,),
         context: context,),
       body: SingleChildScrollView(

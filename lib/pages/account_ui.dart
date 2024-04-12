@@ -16,7 +16,7 @@ class AccountUI extends StatelessWidget {
     AccountController controller =Get.find();
     return Scaffold(
       backgroundColor: AppColors.black,
-     appBar: myAppBar2(title:Text('Accounts',style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColors.lightGrey1),), context: context, ),
+     appBar: myAppBar(title:Text('Accounts',style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColors.lightGrey1),), context: context, ),
       body: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -9,7 +9,7 @@ class ProfileUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:myAppBar2(
+      appBar:myAppBar(
           title: Text("Profile",style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColors.lightGrey1)), context: context, ),
 
       body: SingleChildScrollView(

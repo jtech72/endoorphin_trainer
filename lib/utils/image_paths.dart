@@ -27,6 +27,10 @@ class ImagesPaths {
 
 
 
+  static const String trainerOnline = "${baseUrl}ic_trainer_notification.png";
+  static const String profileHome = "${baseUrl}ic_profile_home.png";
+  static const String earningHome = "${baseUrl}ic_earing_home.png";
+  static const String documentHome = "${baseUrl}ic_document_home.png";
 
 
 

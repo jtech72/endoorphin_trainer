@@ -13,7 +13,7 @@ class ForgotPasswordUI extends StatelessWidget {
   Widget build(BuildContext context) {
     CountryCodeController controller = Get.put(CountryCodeController());
     return Scaffold(
-      appBar: myAppBar2(
+      appBar: myAppBar(
           title: Text('Forgot Password',style: Theme.of(context).textTheme.bodyMedium,),
           context: context,),
       body: SingleChildScrollView(

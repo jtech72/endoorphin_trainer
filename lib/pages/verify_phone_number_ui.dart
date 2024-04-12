@@ -12,7 +12,7 @@ class VerifyPhoneNumberUI extends StatelessWidget {
   Widget build(BuildContext context) {
     OtpController controller = Get.put(OtpController());
     return Scaffold(
-      appBar: myAppBar2(
+      appBar: myAppBar(
         title: Text('Verify your Phone Number',style: Theme.of(context).textTheme.bodyMedium,),
         context: context,),
       body: SingleChildScrollView(

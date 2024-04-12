@@ -8,7 +8,7 @@ class NotificationUi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar2(title:Text('Notification',style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColors.lightGrey1),), context: context, ),
+      appBar: myAppBar(title:Text('Notification',style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColors.lightGrey1),), context: context, ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
