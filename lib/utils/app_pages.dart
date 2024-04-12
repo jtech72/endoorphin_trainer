@@ -1,8 +1,17 @@
+import 'package:endoorphin_trainer/bindings/profile_binding.dart';
+import 'package:endoorphin_trainer/pages/profile_ui.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
+
+import '../bindings/account_binding.dart';
+import '../bindings/notification_binding.dart';
+import '../bindings/session_running_binding.dart';
+import '../pages/account_ui.dart';
+import '../pages/notification_ui.dart';
+import '../pages/session_running_ui.dart';
 
 
 class AppPages {
-  static  const initialRoute = AppRoutes.login;
+  static  const initialRoute = AppRoutes.sessionRunning;
   static List<GetPage> routes =[
     GetPage(
         name: AppRoutes.splash,
@@ -45,5 +54,23 @@ class AppPages {
         name: AppRoutes.login,
         page: ()=>  const LoginUi(),
         binding: LoginBinding()),
+    GetPage(
+        name: AppRoutes.notification,
+        page: () => const NotificationUi(),
+        binding: NotificationBinding()
+    ),
+    GetPage(
+        name: AppRoutes.profile,
+        page: () => const ProfileUI(),
+        binding: ProfileBinding()
+    ),
+    GetPage(
+        name: AppRoutes.account,
+        page: () => const AccountUI(),
+        binding: AccountBinding()),
+    GetPage(
+        name: AppRoutes.sessionRunning,
+        page: () => const SessionRunningUi(),
+        binding: SessionRunningBinding()),
   ];
 }

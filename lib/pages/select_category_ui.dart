@@ -77,7 +77,7 @@ class SelectCategoryUI extends StatelessWidget {
                 Container(
                   height: 45,
                   decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.white),
+                    border: Border.all(color: AppColors.impgrey),
                     shape: BoxShape.rectangle,
                     borderRadius: BorderRadius.circular(5),
                   ),

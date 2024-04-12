@@ -9,6 +9,12 @@ class AppRoutes{
   static const String selectcategory="/selectcategory";
   static const String bio="/bio";
   static const String login="/login";
+  static const String notification="/notification";
+  static const String profile="/profile";
+  static const String account="/account";
+  static const String sessionRunning="/sessionRunning";
+
+
 
 
 

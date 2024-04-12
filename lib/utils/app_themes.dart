@@ -14,32 +14,32 @@ class AppThemes {
       brightness: Brightness.dark,
       colorScheme: const ColorScheme.dark(
         primary: AppColors.yellow,
-        onPrimary: AppColors.white,
+        onPrimary: AppColors.impgrey,
         background: AppColors.backgroundBlack,
         onBackground: AppColors.backgroundBlack,
-        primaryContainer: AppColors.white,
-        onPrimaryContainer: AppColors.white,
+        primaryContainer: AppColors.impgrey,
+        onPrimaryContainer: AppColors.impgrey,
       ),
       textTheme:  const TextTheme(
         headlineLarge: TextStyle(
             fontWeight: FontWeight.w700,
             fontFamily: "Roboto",
-            color: AppColors.white,
+            color: AppColors.impgrey,
             fontSize: 24),
         headlineMedium: TextStyle(
             fontWeight: FontWeight.w500,
             fontFamily: "Roboto",
-            color: AppColors.white,
+            color: AppColors.impgrey,
             fontSize: 24),
         headlineSmall: TextStyle(
             fontWeight: FontWeight.w700,
             fontFamily: "Roboto",
-            color: AppColors.white,
+            color: AppColors.impgrey,
             fontSize: 16),
         labelLarge: TextStyle(
             fontWeight: FontWeight.w700,
             fontFamily: "Roboto",
-            color: AppColors.white,
+            color: AppColors.impgrey,
             fontSize: 14),
         labelMedium: TextStyle(
             fontWeight: FontWeight.w400,
@@ -49,17 +49,17 @@ class AppThemes {
         labelSmall: TextStyle(
             fontWeight: FontWeight.w400,
             fontFamily: "Roboto",
-            color: AppColors.white,
+            color: AppColors.impgrey,
             fontSize: 10),
         bodyLarge: TextStyle(
             fontWeight: FontWeight.w700,
             fontFamily: "Roboto",
-            color: AppColors.white,
+            color: AppColors.impgrey,
             fontSize: 12),
         bodyMedium: TextStyle(
             fontWeight: FontWeight.w700,
             fontFamily: "Roboto",
-            color: AppColors.white,
+            color: AppColors.impgrey,
             fontSize: 16),
         bodySmall: TextStyle(
             fontWeight: FontWeight.w500,
@@ -69,22 +69,22 @@ class AppThemes {
         titleLarge: TextStyle(
             fontWeight: FontWeight.w600,
             fontFamily: "Roboto",
-            color: AppColors.white,
+            color: AppColors.impgrey,
             fontSize: 16),
         titleMedium: TextStyle(
             fontWeight: FontWeight.w500,
             fontFamily: "Roboto",
-            color: AppColors.white,
+            color: AppColors.impgrey,
             fontSize: 12),
         titleSmall: TextStyle(
             fontWeight: FontWeight.w600,
             fontFamily: "Roboto",
-            color: AppColors.white,
+            color: AppColors.impgrey,
             fontSize: 36),
         displayLarge: TextStyle(
             fontWeight: FontWeight.w500,
             fontFamily: "Roboto",
-            color: AppColors.white,
+            color: AppColors.impgrey,
             fontSize: 14),
 
       ));

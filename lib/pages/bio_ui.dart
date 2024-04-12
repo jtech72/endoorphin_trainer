@@ -73,7 +73,7 @@ class BioUi extends StatelessWidget {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      backgroundColor: AppColors.white,
+                      backgroundColor: AppColors.impgrey,
                       title: Column(
                         children: [
                           SizedBox(
