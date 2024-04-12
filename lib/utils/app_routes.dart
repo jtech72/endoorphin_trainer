@@ -5,8 +5,10 @@ class AppRoutes{
   static const String forgotPassword="/forgotPassword";
   static const String createNewPassword="/createNewPassword";
   static const String verifyPhoneNumber="/verifyPhoneNumber";
-  static const String traineronboarding="/traineronboarding";
   static const String registration="/registration";
+  static const String selectcategory="/selectcategory";
+  static const String bio="/bio";
+  static const String login="/login";
 
 
 

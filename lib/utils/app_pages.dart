@@ -1,17 +1,8 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
 
-import '../bindings/create_new_password_binding.dart';
-import '../bindings/forgot_password_binding.dart';
-import '../bindings/select_category_binding.dart';
-import '../bindings/trainer_onboarding_binding.dart';
-import '../bindings/verify_phone_number_binding.dart';
-import '../pages/create_new_password_ui.dart';
-import '../pages/forgot_password_ui.dart';
-import '../pages/select_category_ui.dart';
-import '../pages/trainer_onboarding_ui.dart';
-import '../pages/verify_phone_number_ui.dart';
+
 class AppPages {
-  static  const initialRoute = AppRoutes.registration;
+  static  const initialRoute = AppRoutes.login;
   static List<GetPage> routes =[
     GetPage(
         name: AppRoutes.splash,
@@ -39,12 +30,20 @@ class AppPages {
         page: ()=>  const VerifyPhoneNumberUI(),
         binding: VerifyPhoneNumberBinding()),
     GetPage(
-        name: AppRoutes.traineronboarding,
-        page: ()=>  const TrainerOnboardingUi(),
-        binding: TrainerOnboardingBinding()),
-    GetPage(
         name: AppRoutes.registration,
+        page: ()=>  const RegistrationUi(),
+        binding: RegistrationBinding()),
+    GetPage(
+        name: AppRoutes.selectcategory,
         page: ()=>  const SelectCategoryUI(),
         binding: SelectCategoryBinding()),
+    GetPage(
+        name: AppRoutes.bio,
+        page: ()=>  const BioUi(),
+        binding: BioBinding()),
+    GetPage(
+        name: AppRoutes.login,
+        page: ()=>  const LoginUi(),
+        binding: LoginBinding()),
   ];
 }
