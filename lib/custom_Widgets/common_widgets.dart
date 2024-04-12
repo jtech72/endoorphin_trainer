@@ -60,34 +60,8 @@ Widget InkButton({
 }
 
 
-AppBar myAppBar({
-  Color?backGroundColor,
-  List<Widget>? action,
-  required Widget title,
-  required BuildContext context,
 
-}) {
-  return AppBar(
-    toolbarHeight: 50,
-    leadingWidth: Get.width * 0.17,
-    centerTitle: false,
-    leading: GestureDetector(
-        onTap: (){
-          Get.back();
-        },
-        child: const SizedBox(
-            height: 30,
-            width: 40,
-            child: Icon(Icons.arrow_back_ios_new_rounded,color: AppColors.lightGrey1,size: 18,))),
-    title: title,
-    surfaceTintColor: Colors.transparent,
-    backgroundColor: backGroundColor??AppColors.black,
-    elevation: 3,
-    titleSpacing: -10,
-    actions: action,
-  );
-}
-AppBar myAppBar2({
+AppBar myAppBar({
   Color?backGroundColor,
   List<Widget>? action,
   required Widget title,

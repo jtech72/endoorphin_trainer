@@ -7,6 +7,8 @@ class AppRoutes{
   static const String verifyPhoneNumber="/verifyPhoneNumber";
   static const String traineronboarding="/traineronboarding";
   static const String registration="/registration";
+  static const String home="/home";
+  static const String earning="/earning";
 
 
 
