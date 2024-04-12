@@ -10,7 +10,7 @@ class AppColors{
   static const Color lightGrey=Color(0XFF888888);
   static const Color lightyGrey=Color(0XFFA5A5A5);
   static const Color lightGrey1=Color(0XFFA9A9A9);
-  static const Color white=Color(0XFFFFFFFF);
+  static const Color impgrey=Color(0XFFA9A9A9);
   static const Color lightWhite=Color(0XFFDDDDDD);
   static const Color yellowishWhite= Color(0XFFFFF7E7);
   static const Color green=Color(0XFFC1AF8B);
@@ -26,4 +26,7 @@ class AppColors{
   static const Color yellow3=Color(0XFFF9D07D);
   static const Color backgroundcolor2=Color(0xff3f3f3f);
   static const Color markerblinked=Color(0xffEFC458);
+  static const Color white=Color(0XFFFFFFFF);
+
+
 }

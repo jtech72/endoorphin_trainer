@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import '../custom_Widgets/common_widgets.dart';
 import '../utils/exports.dart';
 
-class TrainerOnboardingUi extends StatelessWidget {
-  const TrainerOnboardingUi({super.key});
+class RegistrationUi extends StatelessWidget {
+  const RegistrationUi({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class TrainerOnboardingUi extends StatelessWidget {
                   child: SizedBox(
                       height: 36,
                       width: 146,
-                      child: Image.asset(ImagesPaths.logoimg)),
+                      child: Image.asset(ImagesPaths.logoimg,color: AppColors.impgrey,)),
                 ),
         
               ],
@@ -38,7 +38,7 @@ class TrainerOnboardingUi extends StatelessWidget {
                   Container(
                     height: 45,
                     decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.white),
+                      border: Border.all(color: AppColors.impgrey),
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.circular(5),
                     ),
@@ -74,7 +74,7 @@ class TrainerOnboardingUi extends StatelessWidget {
                   Container(
                     height: 45,
                     decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.white),
+                      border: Border.all(color: AppColors.impgrey),
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.circular(5),
                     ),
@@ -105,7 +105,7 @@ class TrainerOnboardingUi extends StatelessWidget {
                   Container(
                     height: 45,
                     decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.white),
+                      border: Border.all(color: AppColors.impgrey),
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.circular(5),
                     ),
@@ -136,7 +136,7 @@ class TrainerOnboardingUi extends StatelessWidget {
                   Container(
                     height: 45,
                     decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.white),
+                      border: Border.all(color: AppColors.impgrey),
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.circular(5),
                     ),
@@ -167,7 +167,7 @@ class TrainerOnboardingUi extends StatelessWidget {
                   Container(
                     height: 45,
                     decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.white),
+                      border: Border.all(color: AppColors.impgrey),
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.circular(5),
                     ),
@@ -199,7 +199,7 @@ class TrainerOnboardingUi extends StatelessWidget {
                   Container(
                     height: 45,
                     decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.white),
+                      border: Border.all(color: AppColors.impgrey),
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.circular(5),
                     ),

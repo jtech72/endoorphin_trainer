@@ -1,21 +1,23 @@
+import 'package:endoorphin_trainer/bindings/profile_binding.dart';
+import 'package:endoorphin_trainer/pages/profile_ui.dart';
 import 'package:endoorphin_trainer/bindings/earning_binding.dart';
 import 'package:endoorphin_trainer/bindings/home_binding.dart';
 import 'package:endoorphin_trainer/pages/earning_ui.dart';
 import 'package:endoorphin_trainer/pages/home_ui.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 
-import '../bindings/create_new_password_binding.dart';
-import '../bindings/forgot_password_binding.dart';
-import '../bindings/select_category_binding.dart';
-import '../bindings/trainer_onboarding_binding.dart';
-import '../bindings/verify_phone_number_binding.dart';
-import '../pages/create_new_password_ui.dart';
-import '../pages/forgot_password_ui.dart';
-import '../pages/select_category_ui.dart';
-import '../pages/trainer_onboarding_ui.dart';
-import '../pages/verify_phone_number_ui.dart';
+import '../bindings/account_binding.dart';
+import '../bindings/notification_binding.dart';
+import '../bindings/session_running_binding.dart';
+import '../pages/account_ui.dart';
+import '../pages/notification_ui.dart';
+import '../pages/session_running_ui.dart';
+
+
+
+
 class AppPages {
-  static  const initialRoute = AppRoutes.earning;
+  static  const initialRoute = AppRoutes.sessionRunning;
   static List<GetPage> routes =[
     GetPage(
         name: AppRoutes.splash,
@@ -51,12 +53,38 @@ class AppPages {
         page: ()=>  const VerifyPhoneNumberUI(),
         binding: VerifyPhoneNumberBinding()),
     GetPage(
-        name: AppRoutes.traineronboarding,
-        page: ()=>  const TrainerOnboardingUi(),
-        binding: TrainerOnboardingBinding()),
-    GetPage(
         name: AppRoutes.registration,
+        page: ()=>  const RegistrationUi(),
+        binding: RegistrationBinding()),
+    GetPage(
+        name: AppRoutes.selectcategory,
         page: ()=>  const SelectCategoryUI(),
         binding: SelectCategoryBinding()),
+    GetPage(
+        name: AppRoutes.bio,
+        page: ()=>  const BioUi(),
+        binding: BioBinding()),
+    GetPage(
+        name: AppRoutes.login,
+        page: ()=>  const LoginUi(),
+        binding: LoginBinding()),
+    GetPage(
+        name: AppRoutes.notification,
+        page: () => const NotificationUi(),
+        binding: NotificationBinding()
+    ),
+    GetPage(
+        name: AppRoutes.profile,
+        page: () => const ProfileUI(),
+        binding: ProfileBinding()
+    ),
+    GetPage(
+        name: AppRoutes.account,
+        page: () => const AccountUI(),
+        binding: AccountBinding()),
+    GetPage(
+        name: AppRoutes.sessionRunning,
+        page: () => const SessionRunningUi(),
+        binding: SessionRunningBinding()),
   ];
 }

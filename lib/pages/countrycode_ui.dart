@@ -1,13 +1,7 @@
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'countrycode_ui.dart';
 
-import '../controllers/countrycode_controller.dart';
-import '../custom_Widgets/common_widgets.dart';
 
 class CountryCodeUI extends StatelessWidget {
   const CountryCodeUI({super.key});
