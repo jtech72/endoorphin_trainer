@@ -88,6 +88,7 @@ class OtpUI extends StatelessWidget {
             Center(
               child: InkButton(
                 onTap: () {
+                  Get.toNamed(AppRoutes.registration);
                   // controller.onVerify();
                 },
                 child: Text('Verify',

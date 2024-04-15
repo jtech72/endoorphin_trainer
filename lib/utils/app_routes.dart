@@ -20,6 +20,7 @@ class AppRoutes{
   static const String moreaboutyou="/moreaboutyou";
   static const String letverified="/letverified";
   static const String trainerPassport="/trainerPassport";
+  static const String bookingrequest="/bookingrequest";
 
 
 ///

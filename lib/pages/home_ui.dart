@@ -1,4 +1,5 @@
 import 'package:endoorphin_trainer/controllers/home_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../utils/exports.dart';
 class HomeUi extends StatelessWidget {
@@ -62,19 +63,24 @@ class HomeUi extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            RichText(
-                text: TextSpan(
-                    text: "Quick ",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineLarge
-                        ?.copyWith(color: AppColors.yellow),
-                    children: [
-                  TextSpan(
-                    text: "Glance",
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  )
-                ])).paddingOnly(bottom: 15),
+            GestureDetector(
+              onTap: (){
+                Get.toNamed(AppRoutes.notification);
+              },
+              child: RichText(
+                  text: TextSpan(
+                      text: "Quick ",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineLarge
+                          ?.copyWith(color: AppColors.yellow),
+                      children: [
+                    TextSpan(
+                      text: "Glance",
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    )
+                  ])).paddingOnly(bottom: 15),
+            ),
             SizedBox(
               height: Get.height * .59,
               child: GridView.builder(

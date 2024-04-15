@@ -19,6 +19,7 @@ class SelectCategoryUI extends StatelessWidget {
           style: Theme.of(context).textTheme.headlineLarge,
         ).paddingOnly(left: 15),
         centerTitle: false,
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Column(
