@@ -38,3 +38,21 @@ export 'package:get/get_core/src/get_main.dart';
 
 export '../controllers/countrycode_controller.dart';
 export '../custom_Widgets/common_widgets.dart';
+export 'package:endoorphin_trainer/bindings/profile_binding.dart';
+export 'package:endoorphin_trainer/pages/profile_ui.dart';
+export 'package:endoorphin_trainer/bindings/earning_binding.dart';
+export 'package:endoorphin_trainer/bindings/home_binding.dart';
+export 'package:endoorphin_trainer/pages/earning_ui.dart';
+export 'package:endoorphin_trainer/pages/home_ui.dart';
+export 'package:endoorphin_trainer/utils/exports.dart';
+
+export '../bindings/account_binding.dart';
+export '../bindings/notification_binding.dart';
+export '../bindings/review_binding.dart';
+export '../bindings/session_details_binding.dart';
+export '../bindings/session_running_binding.dart';
+export '../pages/account_ui.dart';
+export '../pages/notification_ui.dart';
+export '../pages/review_ui.dart';
+export '../pages/session_details_ui.dart';
+export '../pages/session_running_ui.dart';

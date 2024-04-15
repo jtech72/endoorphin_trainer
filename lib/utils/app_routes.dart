@@ -13,10 +13,12 @@ class AppRoutes{
   static const String profile="/profile";
   static const String account="/account";
   static const String sessionRunning="/sessionRunning";
-
-
+  static const String sessionDetails="/sessionDetails";
+  static const String review="/review";
   static const String home="/home";
   static const String earning="/earning";
+  static const String moreaboutyou="/moreaboutyou";
+  static const String letverified="/letverified";
 
 
 

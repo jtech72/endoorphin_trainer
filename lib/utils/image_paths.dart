@@ -21,16 +21,12 @@ class ImagesPaths {
   static const String support = "${baseUrl}ic_support.png";
   static const String my_earning = "${baseUrl}ic_my_earning.png";
   static const String sessionType = "${baseUrl}img_session_boxing.png";
-
-
-
-
-
-
   static const String trainerOnline = "${baseUrl}ic_trainer_notification.png";
   static const String profileHome = "${baseUrl}ic_profile_home.png";
   static const String earningHome = "${baseUrl}ic_earing_home.png";
   static const String documentHome = "${baseUrl}ic_document_home.png";
+  static const String swim = "${baseUrl}Ellipse.png";
+
 
 
 

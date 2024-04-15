@@ -80,7 +80,11 @@ class LoginUi extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text("Forgot password ?",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 12),).paddingOnly(top: 8,bottom: 8),
+                  GestureDetector(
+                      onTap: (){
+                        Get.toNamed(AppRoutes.forgotPassword);
+                      },
+                      child: Text("Forgot password ?",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 12),).paddingOnly(top: 8,bottom: 8)),
                 ],
               ),
 
@@ -92,7 +96,9 @@ class LoginUi extends StatelessWidget {
               InkButton(child: Text("Login",  style: Theme.of(context)
                   .textTheme
                   .headlineSmall!
-                  .copyWith(color: AppColors.black),), onTap: (){}),
+                  .copyWith(color: AppColors.black),), onTap: (){
+                Get.toNamed(AppRoutes.registration);
+              }),
             ],
           )
         ],

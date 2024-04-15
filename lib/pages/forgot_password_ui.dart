@@ -124,7 +124,7 @@ class ForgotPasswordUI extends StatelessWidget {
                       child: Text('Sent',
                         style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black),),
                       onTap: (){
-                        // Get.toNamed(AppRoutes.verifyPhoneNumber);
+                       Get.toNamed(AppRoutes.verifyPhoneNumber);
                       }))
             ],
           ).paddingOnly(left: Get.width*0.035,right: Get.width*0.035),
