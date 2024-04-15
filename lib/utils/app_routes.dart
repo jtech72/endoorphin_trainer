@@ -17,6 +17,7 @@ class AppRoutes{
 
   static const String home="/home";
   static const String earning="/earning";
+  static const String trainerPassport="/trainerPassport";
 
 
 
