@@ -1,3 +1,4 @@
+import 'package:endoorphin_trainer/bindings/booking_request_binding.dart';
 import 'package:endoorphin_trainer/bindings/profile_binding.dart';
 import 'package:endoorphin_trainer/bindings/trainer_passport_binding.dart';
 import 'package:endoorphin_trainer/pages/profile_ui.dart';
@@ -14,12 +15,13 @@ import 'package:endoorphin_trainer/bindings/more_about_you_binding.dart';
 import 'package:endoorphin_trainer/pages/let%E2%80%99s_get_you_verified_ui.dart';
 import 'package:endoorphin_trainer/pages/more_about_you_ui.dart';
 
+import '../pages/booking_request_ui.dart';
 import '../utils/exports.dart';
 
 
 
 class AppPages {
-  static  const initialRoute = AppRoutes.splash;
+  static  const initialRoute = AppRoutes.bookingrequest;
 
   static List<GetPage> routes =[
     GetPage(
@@ -109,5 +111,9 @@ GetPage(
         name: AppRoutes.trainerPassport,
         page: () => const TrainerPassportUI(),
         binding: TrainerPassportBinding()),
+    GetPage(
+        name: AppRoutes.bookingrequest,
+        page: () => const BookingRequsetUi(),
+        binding: BookingRequestBinding()),
   ];
 }

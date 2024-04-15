@@ -117,7 +117,8 @@ class CountryCodeUI extends StatelessWidget {
                         .copyWith(color: AppColors.black),
                   ),
                   onTap: () {
-                    controller.onNext();
+                    Get.toNamed(AppRoutes.otp);
+                    // controller.onNext();
                   }),
             )
           ],

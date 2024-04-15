@@ -140,7 +140,9 @@ class TrainerPassportUI extends StatelessWidget {
                 child: InkButton(
                     child: Text('Submit for Review',
                       style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black),),
-                    onTap: (){}),
+                    onTap: (){
+                      Get.toNamed(AppRoutes.selectcategory);
+                    }),
               ),
             )
           ],
