@@ -126,7 +126,7 @@ class BioUi extends StatelessWidget {
                                     .copyWith(color: AppColors.black),
                               ),
                               onTap: () {
-                                Get.offAllNamed(AppRoutes.home);
+                                Get.offAllNamed(AppRoutes.login);
                               },
                               height: 35,
                               width: 95),

@@ -100,7 +100,8 @@ class MoreAboutYouUi extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                InkButton(child: Text("Continue",style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: AppColors.black),), onTap: (){Get.toNamed(AppRoutes.letverified);}),
+                InkButton(
+                    child: Text("Continue",style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: AppColors.black),), onTap: (){Get.toNamed(AppRoutes.letverified);}),
               ],
             ).paddingOnly(top: Get.height*.09),          ],
         ),

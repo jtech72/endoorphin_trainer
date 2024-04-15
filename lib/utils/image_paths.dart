@@ -26,6 +26,11 @@ class ImagesPaths {
   static const String earningHome = "${baseUrl}ic_earing_home.png";
   static const String documentHome = "${baseUrl}ic_document_home.png";
   static const String swim = "${baseUrl}Ellipse.png";
+  static const String search = "${baseUrl}ic_search.png";
+  static const String send = "${baseUrl}img_send.png";
+  static const String addressLocation = "${baseUrl}ic_location_address.png";
+  static const String arrow_1 = "${baseUrl}img_arrow_1x.png";
+
 
 
 
