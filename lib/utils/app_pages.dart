@@ -8,18 +8,19 @@ import 'package:endoorphin_trainer/pages/home_ui.dart';
 import 'package:endoorphin_trainer/pages/trainer_passport_ui.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 
-import '../bindings/account_binding.dart';
-import '../bindings/notification_binding.dart';
-import '../bindings/session_running_binding.dart';
-import '../pages/account_ui.dart';
-import '../pages/notification_ui.dart';
-import '../pages/session_running_ui.dart';
 
+import 'package:endoorphin_trainer/bindings/let%E2%80%99s_get_you_verified_binding.dart';
+import 'package:endoorphin_trainer/bindings/more_about_you_binding.dart';
+import 'package:endoorphin_trainer/pages/let%E2%80%99s_get_you_verified_ui.dart';
+import 'package:endoorphin_trainer/pages/more_about_you_ui.dart';
+
+import '../utils/exports.dart';
 
 
 
 class AppPages {
-  static  const initialRoute = AppRoutes.trainerPassport;
+  static  const initialRoute = AppRoutes.splash;
+
   static List<GetPage> routes =[
     GetPage(
         name: AppRoutes.splash,
@@ -89,6 +90,22 @@ class AppPages {
         page: () => const SessionRunningUi(),
         binding: SessionRunningBinding()),
     GetPage(
+        name: AppRoutes.sessionDetails,
+        page: () => const SessionDetailsUi(),
+        binding: SessionDetailsBindings()),
+    GetPage(
+        name: AppRoutes.review,
+        page: () => const ReviewUi(),
+        binding: ReviewBinding()),
+    GetPage(
+        name: AppRoutes.moreaboutyou,
+        page: () => const MoreAboutYouUi(),
+        binding: MoreAboutYouBinding()),
+    GetPage(
+        name: AppRoutes.letverified,
+        page: () => const LetGetYouVerifiedUi(),
+        binding: LetGetYouVerifiedBinding()),
+GetPage(
         name: AppRoutes.trainerPassport,
         page: () => const TrainerPassportUI(),
         binding: TrainerPassportBinding()),

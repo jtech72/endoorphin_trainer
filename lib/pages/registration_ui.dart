@@ -12,6 +12,7 @@ class RegistrationUi extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: AppColors.black,
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -164,35 +165,24 @@ class RegistrationUi extends StatelessWidget {
                     ),
                   ),
                   Text("Image Upload",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
-                  Container(
-                    height: 45,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.impgrey),
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: TextField(
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(64),
-                        FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                      ],
-                      enableInteractiveSelection: true,
-                      style: Theme.of(context).textTheme.labelMedium,
-                      cursorColor: AppColors.grey,
-                      cursorHeight: 18,
-                      decoration: InputDecoration(
-        
-                        filled: true,
-                        fillColor: AppColors.yellowishWhite,
-                        border: InputBorder.none,
-                        hintStyle: Theme.of(context).textTheme.labelMedium,
-                        contentPadding:
-                        const EdgeInsets.only(bottom: 3, left: 15,top: 10),
-        
-                        hintText: "Select Image",
-                        alignLabelWithHint: true, // Center the hintText
-                        suffixIcon: Image.asset(ImagesPaths.upload,scale: 5,).paddingOnly(right: 15),
+                  GestureDetector(
+                    onTap: (){},
+                    child: Container(
+                      height: 45,
+                      decoration: BoxDecoration(
+                        color: AppColors.yellowishWhite,
+                        border: Border.all(color: AppColors.impgrey),
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(5),
                       ),
+                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Select Image',style: Theme.of(context).textTheme.labelMedium,),
+                          GestureDetector(
+                              onTap: (){},
+                              child: Image.asset(ImagesPaths.upload,scale: 5,))
+                        ],
+                      ).paddingOnly(left:15,right: 15 ),
                     ),
                   ),
                   Text("Gender",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
@@ -230,7 +220,7 @@ class RegistrationUi extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      InkButton(child: Text("Continue",style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: AppColors.black),), onTap: (){}),
+                      InkButton(child: Text("Continue",style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: AppColors.black),), onTap: (){Get.toNamed(AppRoutes.home);}),
                     ],
                   ).paddingOnly(top: 30,bottom: 30),
                   

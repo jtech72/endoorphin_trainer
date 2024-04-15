@@ -32,7 +32,7 @@ class BioUi extends StatelessWidget {
                 child: TextField(
                   minLines: 1,
                   maxLines: 8,
-                  style: const TextStyle(color: Colors.white, fontSize: 10),
+                  style: const TextStyle(color: AppColors.impgrey, fontSize: 10),
                   decoration: InputDecoration(
                     contentPadding:
                     EdgeInsets.only(bottom: 10, left: 10, right: 10),
@@ -47,10 +47,17 @@ class BioUi extends StatelessWidget {
                         width: 1,
                       ),
                     ),
+                    disabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(7),
+                      borderSide: const BorderSide(
+                        color: AppColors.yellowishWhite,
+                        width: 1,
+                      ),
+                    ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: const BorderSide(
-                        color: AppColors.greyButton,
+                        color: AppColors.yellowishWhite,
                         width: 1,
                       ),
                     ),
@@ -73,7 +80,7 @@ class BioUi extends StatelessWidget {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      backgroundColor: AppColors.impgrey,
+                      backgroundColor: AppColors.white,
                       title: Column(
                         children: [
                           SizedBox(
@@ -119,7 +126,7 @@ class BioUi extends StatelessWidget {
                                     .copyWith(color: AppColors.black),
                               ),
                               onTap: () {
-                                // Get.offAllNamed(AppRoutes.bottomNavigation);
+                                Get.offAllNamed(AppRoutes.home);
                               },
                               height: 35,
                               width: 95),
