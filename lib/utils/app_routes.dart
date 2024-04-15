@@ -22,6 +22,6 @@ class AppRoutes{
   static const String trainerPassport="/trainerPassport";
 
 
-///
+
 
 }
