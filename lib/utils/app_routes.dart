@@ -19,8 +19,9 @@ class AppRoutes{
   static const String earning="/earning";
   static const String moreaboutyou="/moreaboutyou";
   static const String letverified="/letverified";
+  static const String trainerPassport="/trainerPassport";
 
 
-
+///
 
 }

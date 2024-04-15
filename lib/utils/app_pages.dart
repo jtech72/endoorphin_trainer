@@ -1,3 +1,12 @@
+import 'package:endoorphin_trainer/bindings/profile_binding.dart';
+import 'package:endoorphin_trainer/bindings/trainer_passport_binding.dart';
+import 'package:endoorphin_trainer/pages/profile_ui.dart';
+import 'package:endoorphin_trainer/bindings/earning_binding.dart';
+import 'package:endoorphin_trainer/bindings/home_binding.dart';
+import 'package:endoorphin_trainer/pages/earning_ui.dart';
+import 'package:endoorphin_trainer/pages/home_ui.dart';
+import 'package:endoorphin_trainer/pages/trainer_passport_ui.dart';
+import 'package:endoorphin_trainer/utils/exports.dart';
 
 
 import 'package:endoorphin_trainer/bindings/let%E2%80%99s_get_you_verified_binding.dart';
@@ -11,6 +20,7 @@ import '../utils/exports.dart';
 
 class AppPages {
   static  const initialRoute = AppRoutes.splash;
+
   static List<GetPage> routes =[
     GetPage(
         name: AppRoutes.splash,
@@ -95,5 +105,9 @@ class AppPages {
         name: AppRoutes.letverified,
         page: () => const LetGetYouVerifiedUi(),
         binding: LetGetYouVerifiedBinding()),
+GetPage(
+        name: AppRoutes.trainerPassport,
+        page: () => const TrainerPassportUI(),
+        binding: TrainerPassportBinding()),
   ];
 }

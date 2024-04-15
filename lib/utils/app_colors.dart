@@ -5,6 +5,7 @@ class AppColors{
   static const Color backgroundBlack=Colors.black;
   static const Color lightDark=Color(0XFF525252);
   static const Color grey=Color(0XFF4D4D4D);
+  static const Color grey3=Color(0XFF606060);
   static const Color greyButton=Color(0XFF292929);
   static const Color darkGrey=Color(0XFF484848);
   static const Color lightGrey=Color(0XFF888888);
