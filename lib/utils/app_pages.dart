@@ -1,9 +1,11 @@
 import 'package:endoorphin_trainer/bindings/profile_binding.dart';
+import 'package:endoorphin_trainer/bindings/trainer_passport_binding.dart';
 import 'package:endoorphin_trainer/pages/profile_ui.dart';
 import 'package:endoorphin_trainer/bindings/earning_binding.dart';
 import 'package:endoorphin_trainer/bindings/home_binding.dart';
 import 'package:endoorphin_trainer/pages/earning_ui.dart';
 import 'package:endoorphin_trainer/pages/home_ui.dart';
+import 'package:endoorphin_trainer/pages/trainer_passport_ui.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 
 import '../bindings/account_binding.dart';
@@ -17,7 +19,7 @@ import '../pages/session_running_ui.dart';
 
 
 class AppPages {
-  static  const initialRoute = AppRoutes.sessionRunning;
+  static  const initialRoute = AppRoutes.trainerPassport;
   static List<GetPage> routes =[
     GetPage(
         name: AppRoutes.splash,
@@ -86,5 +88,9 @@ class AppPages {
         name: AppRoutes.sessionRunning,
         page: () => const SessionRunningUi(),
         binding: SessionRunningBinding()),
+    GetPage(
+        name: AppRoutes.trainerPassport,
+        page: () => const TrainerPassportUI(),
+        binding: TrainerPassportBinding()),
   ];
 }
