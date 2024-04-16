@@ -23,6 +23,6 @@ class AppRoutes{
   static const String bookingrequest="/bookingrequest";
 
 
-///
+
 
 }
