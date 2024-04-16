@@ -1,6 +1,8 @@
+import 'package:endoorphin_trainer/bindings/booking_details_binding.dart';
 import 'package:endoorphin_trainer/bindings/booking_request_binding.dart';
 import 'package:endoorphin_trainer/bindings/profile_binding.dart';
 import 'package:endoorphin_trainer/bindings/trainer_passport_binding.dart';
+import 'package:endoorphin_trainer/pages/booking_details_ui.dart';
 import 'package:endoorphin_trainer/pages/profile_ui.dart';
 import 'package:endoorphin_trainer/bindings/earning_binding.dart';
 import 'package:endoorphin_trainer/bindings/home_binding.dart';
@@ -15,13 +17,17 @@ import 'package:endoorphin_trainer/bindings/more_about_you_binding.dart';
 import 'package:endoorphin_trainer/pages/let%E2%80%99s_get_you_verified_ui.dart';
 import 'package:endoorphin_trainer/pages/more_about_you_ui.dart';
 
+import '../bindings/error_binding.dart';
+import '../bindings/no_internet_bindings.dart';
 import '../pages/booking_request_ui.dart';
+import '../pages/error_ui.dart';
+import '../pages/no_internet_ui.dart';
 import '../utils/exports.dart';
 
 
 
 class AppPages {
-  static  const initialRoute = AppRoutes.bookingrequest;
+  static  const initialRoute = AppRoutes.bookingdetails;
 
   static List<GetPage> routes =[
     GetPage(
@@ -115,5 +121,17 @@ GetPage(
         name: AppRoutes.bookingrequest,
         page: () => const BookingRequsetUi(),
         binding: BookingRequestBinding()),
+    GetPage(
+        name: AppRoutes.error,
+        page: ()=>   ErrorUi(),
+        binding: ErrorBinding()),
+    GetPage(
+        name: AppRoutes.noInternet,
+        page: ()=>  const NoInternetUI(),
+        binding: NoInternetBinding()),
+    GetPage(
+        name: AppRoutes.bookingdetails,
+        page: ()=>  const BookingDetailsUi(),
+        binding: BookingDetailsBinding()),
   ];
 }
