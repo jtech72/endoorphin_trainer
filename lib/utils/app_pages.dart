@@ -1,15 +1,10 @@
+import 'package:endoorphin_trainer/bindings/booking_details_binding.dart';
 import 'package:endoorphin_trainer/bindings/booking_request_binding.dart';
 import 'package:endoorphin_trainer/bindings/document_binding.dart';
-import 'package:endoorphin_trainer/bindings/profile_binding.dart';
 import 'package:endoorphin_trainer/bindings/support_binding.dart';
 import 'package:endoorphin_trainer/bindings/trainer_passport_binding.dart';
 import 'package:endoorphin_trainer/bindings/withdraw_binding.dart';
 import 'package:endoorphin_trainer/pages/document_ui.dart';
-import 'package:endoorphin_trainer/pages/profile_ui.dart';
-import 'package:endoorphin_trainer/bindings/earning_binding.dart';
-import 'package:endoorphin_trainer/bindings/home_binding.dart';
-import 'package:endoorphin_trainer/pages/earning_ui.dart';
-import 'package:endoorphin_trainer/pages/home_ui.dart';
 import 'package:endoorphin_trainer/pages/support_ui.dart';
 import 'package:endoorphin_trainer/pages/trainer_passport_ui.dart';
 import 'package:endoorphin_trainer/pages/withdraw_ui.dart';
@@ -21,8 +16,12 @@ import 'package:endoorphin_trainer/bindings/more_about_you_binding.dart';
 import 'package:endoorphin_trainer/pages/let%E2%80%99s_get_you_verified_ui.dart';
 import 'package:endoorphin_trainer/pages/more_about_you_ui.dart';
 
+import '../bindings/error_binding.dart';
+import '../bindings/no_internet_bindings.dart';
+import '../pages/booking_details_ui.dart';
 import '../pages/booking_request_ui.dart';
-import '../utils/exports.dart';
+import '../pages/error_ui.dart';
+import '../pages/no_internet_ui.dart';
 
 
 
@@ -133,5 +132,17 @@ GetPage(
         name: AppRoutes.support,
         page: () => const SupportUI(),
         binding: SupportBinding()),
+  GetPage(
+        name: AppRoutes.error,
+        page: ()=>   const ErrorUi(),
+        binding: ErrorBinding()),
+    GetPage(
+        name: AppRoutes.noInternet,
+        page: ()=>  const NoInternetUI(),
+        binding: NoInternetBinding()),
+    GetPage(
+        name: AppRoutes.bookingdetails,
+        page: ()=>  const BookingDetailsUi(),
+        binding: BookingDetailsBinding()),
   ];
 }

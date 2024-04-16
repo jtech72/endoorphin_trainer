@@ -37,9 +37,9 @@ class ImagesPaths {
   static const String visa = "${baseUrl}img_visa.png";
   static const String pdf = "${baseUrl}pdf.png";
   static const String crosspdf = "${baseUrl}cross_pdf.png";
-
-
-
+  static const String send2 = "${baseUrl}img_send_2.png";
+  static const String light= "${baseUrl}light.png";
+  static const String noInternet= "${baseUrl}noInternet.png";
 
 
 

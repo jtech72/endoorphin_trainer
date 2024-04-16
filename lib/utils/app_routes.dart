@@ -24,7 +24,9 @@ class AppRoutes{
   static const String withdraw="/withdraw";
   static const String document="/document";
   static const String support="/support";
-
+  static const String error="/error";
+  static const String noInternet="/noInternet";
+  static const String bookingdetails="/bookingdetails";
 
 
 
