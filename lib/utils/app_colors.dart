@@ -28,6 +28,7 @@ class AppColors{
   static const Color backgroundcolor2=Color(0xff3f3f3f);
   static const Color markerblinked=Color(0xffEFC458);
   static const Color white=Color(0XFFFFFFFF);
+  static const Color Black2=Color(0XFF6C6C6C);
 
 
 }
