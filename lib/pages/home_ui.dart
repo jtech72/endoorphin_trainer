@@ -1,6 +1,7 @@
 import 'package:endoorphin_trainer/controllers/home_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../utils/exports.dart';
 class HomeUi extends StatelessWidget {
   const HomeUi({super.key});
@@ -9,15 +10,25 @@ class HomeUi extends StatelessWidget {
     HomeController controller = Get.find();
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Offline',
-          style: Theme.of(context).textTheme.bodyMedium,
+        title: GestureDetector(
+          onTap: (){
+            Get.toNamed(AppRoutes.notification);
+          },
+          child: Text(
+            'Offline',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
         ),
         centerTitle: true,
-        leading: const Icon(
-          Icons.menu,
-          size: 28,
-        ).paddingOnly(left: 15),
+        leading:  GestureDetector(
+          onTap: (){
+            Get.toNamed(AppRoutes.bookingrequest);
+          },
+          child: Icon(
+            Icons.menu,
+            size: 28,
+          ).paddingOnly(left: 15),
+        ),
         actions: [
           Obx(
             () => InkWell(
@@ -65,7 +76,7 @@ class HomeUi extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: (){
-                Get.toNamed(AppRoutes.notification);
+                Get.toNamed(AppRoutes.bookingdetails);
               },
               child: RichText(
                   text: TextSpan(
@@ -95,41 +106,46 @@ class HomeUi extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
-                        Container(
-                          height: Get.height*.18,
-                          width: Get.width*.42,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: AppColors.greyButton,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                alignment: Alignment.center,
-                                height: 50,
-                                width: 50,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColors.lightBlack,
+                        GestureDetector(
+                          onTap: (){
+                            Get.toNamed(AppRoutes.account);
+                          },
+                          child: Container(
+                            height: Get.height*.16,
+                            width: Get.width*.42,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: AppColors.greyButton,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  alignment: Alignment.center,
+                                  height: 50,
+                                  width: 50,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: AppColors.lightBlack,
+                                  ),
+                                  child: Text(
+                                    "50",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineLarge
+                                        ?.copyWith(
+                                            color: AppColors.yellow,
+                                            fontWeight: FontWeight.w600),
+                                  ),
                                 ),
-                                child: Text(
-                                  "50",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineLarge
-                                      ?.copyWith(
-                                          color: AppColors.yellow,
-                                          fontWeight: FontWeight.w600),
-                                ),
-                              ),
-                              Text(index == 3 ? "Upcoming" : "Total",
-                                  style: Theme.of(context).textTheme.titleLarge),
-                              Text(controller.quickGlanceList[index],
-                                  style: Theme.of(context).textTheme.titleLarge),
+                                Text(index == 3 ? "Upcoming" : "Total",
+                                    style: Theme.of(context).textTheme.titleLarge),
+                                Text(controller.quickGlanceList[index],
+                                    style: Theme.of(context).textTheme.titleLarge),
 
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ],

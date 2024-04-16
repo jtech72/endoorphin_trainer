@@ -19,13 +19,10 @@ class RegistrationUi extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text("Welcome to ", style: Theme.of(context).textTheme.headlineLarge,),
+                Text("Welcome to ", style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: Colors.white),),
                 Transform.translate(
-                  offset: Offset(0, -1),
-                  child: SizedBox(
-                      height: 36,
-                      width: 146,
-                      child: Image.asset(ImagesPaths.logoimg,color: AppColors.impgrey,)),
+                  offset: Offset(0, -2),
+                  child: Image.asset(ImagesPaths.logoimg,scale: 4.2,),
                 ),
         
               ],
@@ -213,7 +210,9 @@ class RegistrationUi extends StatelessWidget {
         
                         hintText: "Select",
                         alignLabelWithHint: true, // Center the hintText
-                        suffixIcon: Image.asset(ImagesPaths.dropdown,scale: 5,),
+                        suffixIcon: Transform.translate(
+                            offset: Offset(17,0),
+                            child: Image.asset(ImagesPaths.dropdown,scale: 5,)),
                       ),
                     ),
                   ),

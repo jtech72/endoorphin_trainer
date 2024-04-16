@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../controllers/session_running_controller.dart';
@@ -78,34 +79,39 @@ class SessionRunningUi extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Container(
-                              alignment: Alignment.center,
-                              height: 60,
-                              width: 120,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(40),
-                                color: Colors.white.withOpacity(0.4),
+                            InkWell(
+                              onTap: (){
+                                Get.toNamed(AppRoutes.sessionDetails);
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: 60,
+                                width: 120,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(40),
+                                  color: Colors.white.withOpacity(0.4),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Text("Time",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelMedium
+                                            ?.copyWith(
+                                                color: AppColors.impgrey,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w600)),
+                                    Text("60 Min",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelMedium
+                                            ?.copyWith(
+                                                color: AppColors.impgrey,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600)),
+                                  ],
+                                ).paddingOnly(top: 9),
                               ),
-                              child: Column(
-                                children: [
-                                  Text("Time",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelMedium
-                                          ?.copyWith(
-                                              color: AppColors.impgrey,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w600)),
-                                  Text("60 Min",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelMedium
-                                          ?.copyWith(
-                                              color: AppColors.impgrey,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600)),
-                                ],
-                              ).paddingOnly(top: 9),
                             ),
                             InkWell(
                                 onTap: () {
@@ -124,22 +130,27 @@ class SessionRunningUi extends StatelessWidget {
                                   color: AppColors.yellow,
                                   size: 75,
                                 )),
-                            Container(
-                              alignment: Alignment.center,
-                              height: 60,
-                              width: 120,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(40),
-                                color: Colors.white.withOpacity(0.4),
+                            GestureDetector(
+                              onTap: (){
+                                Get.toNamed(AppRoutes.sessionDetails);
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: 60,
+                                width: 120,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(40),
+                                  color: Colors.white.withOpacity(0.4),
+                                ),
+                                child: Text("Boxing",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelMedium
+                                        ?.copyWith(
+                                            color: AppColors.impgrey,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600)),
                               ),
-                              child: Text("Boxing",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .labelMedium
-                                      ?.copyWith(
-                                          color: AppColors.impgrey,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600)),
                             ),
                           ],
                         ).paddingOnly(left: 10, right: 10),

@@ -504,7 +504,7 @@ class BookingRequsetUi extends StatelessWidget {
                                     Icon(
                                       Icons.star,
                                       color: AppColors.yellow,
-                                    ),
+                                    ).paddingOnly(right: 5),
                                     Text(
                                       '4.78',
                                       style: Theme.of(context)
