@@ -1,7 +1,9 @@
 import 'dart:developer';
 import 'package:endoorphin_trainer/controllers/booking_request_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../bindings/booking_request_binding.dart';
 import '../utils/exports.dart';
@@ -16,6 +18,7 @@ class BookingRequsetUi extends StatelessWidget {
         bottomSheet: BottomSheet(
           shape: const ContinuousRectangleBorder(),
           enableDrag: true,
+          backgroundColor: AppColors.black,
           onClosing: () {},
           builder: (BuildContext context) {
             return Obx(
@@ -24,26 +27,60 @@ class BookingRequsetUi extends StatelessWidget {
 
                         ?
                  SingleChildScrollView(
-                   child: Column(
+                   child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                      children: [
+                       Image.asset(ImagesPaths.hammer).paddingOnly(bottom: Get.height*0.02),
                        Text(
-                         "Confirm Your Address at 10/16, MMB Rd, Buroshibtalla, Behala",
+                         "Type your “icebreaker” given by your\ncustomer to start your Fitness session!",
                          style: Theme.of(context).textTheme.headlineSmall,
-                       ).paddingOnly(bottom: 30),
-                       InkButton(
-                           width: 150,
-                           child: Text(
-                             "Confirm Address",
-                             style: Theme.of(context)
-                                 .textTheme
-                                 .headlineSmall
-                                 ?.copyWith(color: AppColors.black),
+                       ).paddingOnly(bottom: Get.height*0.03),
+                       PinCodeTextField(
+                           textStyle: Theme.of(context)
+                               .textTheme
+                               .headlineLarge!
+                               .copyWith(fontWeight: FontWeight.w600, fontSize: 30),
+                           animationCurve: Curves.easeInCubic,
+                           pinTheme: PinTheme(
+                               shape: PinCodeFieldShape.underline,
+                               borderRadius: BorderRadius.circular(5),
+                               fieldHeight: 50,
+                               fieldWidth: 40,
+                               inactiveColor: AppColors.lightGrey,
+                               selectedColor: AppColors.yellow,
+                               activeColor: AppColors.yellow,
+                               inactiveBorderWidth: 1,
+                               selectedBorderWidth: 1,
+                               activeBorderWidth: 1
+
                            ),
-                           onTap: () {
-                             // Get.toNamed(AppRoutes.findingTrainerMap);
-                           })
+                           autoDisposeControllers: true,
+                           enablePinAutofill: true,
+                           appContext: context,
+                           hintStyle: TextStyle(color: AppColors.grey,fontSize: 22),
+                           hintCharacter: '●',
+                           blinkWhenObscuring: true,
+                           cursorColor: AppColors.yellow,
+                           keyboardType: TextInputType.number,
+                           backgroundColor: AppColors.backgroundBlack,
+                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                           length: 4).paddingOnly(bottom: Get.height*0.03),
+                       Row(
+                         children: [
+                           CircleAvatar(
+                             radius: 25,backgroundColor: AppColors.black,
+                             backgroundImage: AssetImage(ImagesPaths.telephone,), // Your profile image
+                           ),
+                         ],
+                       ).paddingOnly(bottom: Get.height*0.02),
+                      Text('Customer Address',style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.w500,color: AppColors.yellow)).paddingOnly(bottom: Get.height*0.015),
+                       Row(
+                         children: [
+                           Icon(Icons.circle,size: 15,color: AppColors.impgrey,).paddingOnly(right: 20),
+                           Text('54, route Gue banquet',style: Theme.of(context).textTheme.labelMedium!.copyWith(fontWeight: FontWeight.w500),)
+                         ],
+                       )
                      ],
-                   ).paddingOnly(top: 50, left: 25, right: 20,bottom: 50),
+                   ).paddingOnly(top: 20,bottom: 50,left: 25,right: 25),
                  )
 
                 : controller.selectedIndex.value == 1
@@ -197,38 +234,124 @@ class BookingRequsetUi extends StatelessWidget {
                             ),
                             Row(
                               children: [
-                                Icon(Icons.star,color: AppColors.yellow,),
+                                Icon(Icons.star,color: AppColors.yellow,).paddingOnly(right: 5),
                                 Text('4.78',style: Theme.of(context).textTheme.labelMedium,)
                               ],
                             ),
 
                           ],
-                        ).paddingOnly(bottom: 15),
+                        ).paddingOnly(bottom: 15,),
                           Container(
                             height: 1,
                             width: Get.width,
                             color: AppColors.grey3,
                           ),
 
-                          Container(
-                            height: 35,
-                            width: 125,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              border: Border.all(
-                                color: AppColors.yellow,
-                              )
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                height: 35,
+                                width: 125,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(
+                                    color: AppColors.yellow,
+                                  )
+                                ),
+                                child: Row(
+                                  children: [
+                                    Image.asset(ImagesPaths.arrow_1,scale: 3.5,).paddingOnly(right: 10),
+                                    Text("Share ETA",style: Theme.of(context).textTheme.labelLarge!.copyWith(fontWeight: FontWeight.w500),)
+                                  ],
+                                ).paddingOnly(left: 10),
+                              ),
+                              CircleAvatar(
+                                radius: 20,backgroundColor: AppColors.black,
+                                backgroundImage: AssetImage(ImagesPaths.telephone,), // Your profile image
+                              ),
+                            ],
+                          ).paddingOnly(top: 20),
+                          Transform.translate(
+                            offset: const Offset(-12,0),
                             child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Image(image: AssetImage(ImagesPaths.arrow_1,)),
-                                Text("Share ETA")
+                                Transform.translate(
+                                    offset:Offset(0,25),
+                                    child: Text('4\nmin',style: Theme.of(context).textTheme.labelMedium!.copyWith(fontWeight: FontWeight.w500,color: AppColors.Black2),textAlign: TextAlign.center,)),
+                                Column(
+                                  children: [
+                                    Container(
+                                      height: Get.height*0.025,
+                                      width: Get.width*0.035,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(color: AppColors.white),
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                    Container(
+                                      height: Get.height*0.044,
+                                      width: 1,
+                                      color: AppColors.white,
+                                    ).paddingOnly(top: 3,bottom: 3),
+                                    const Icon(
+                                      Icons.circle,
+                                      color: AppColors.yellow,
+                                      size: 22,
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: Get.width*0.014,
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "54, route Gue banquet",
+                                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                                          color: AppColors.impgrey, fontWeight: FontWeight.w600),
+                                    ).paddingOnly(bottom: 5),
+                                    SizedBox(
+                                        width: Get.width * .77,
+                                        child: Text(
+                                          "1.2 Km",
+                                          style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                                            color: AppColors.impgrey,
+                                          ),
+                                        )).paddingOnly(bottom: 5),
 
+                                    Container(
+                                      width: Get.width*.77,
+                                      height: 1,
+                                      color: AppColors.grey,
+                                    ).paddingOnly(top: 10,bottom: 15),
+                                    Text(
+                                      "66, route Gue banquet",
+                                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                                          color: AppColors.impgrey, fontWeight: FontWeight.w600),
+                                    ).paddingOnly(bottom: 5),
+
+                                  ],
+                                )
                               ],
-                            ),
+                            ).paddingOnly(top: Get.height*0.035,bottom: Get.height*0.035),
+                          ),
+    Center(
+    child: InkButton(
+    child: Text('Start',
+    style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black),),
+    onTap:() {
+      controller.selectedIndex.value = 2;
+    })),
+                          SizedBox(
+                            height: Get.height*0.02,
                           )
-]
-                      ).paddingOnly(top: 20),
+    ]
+                      ).paddingOnly(top: 20,left: 20,right: 20,bottom: 20),
                     )
                         :                  SingleChildScrollView(
                    child: Column(crossAxisAlignment: CrossAxisAlignment.start,
@@ -274,7 +397,6 @@ class BookingRequsetUi extends StatelessWidget {
                        Center(child: InkButton(child: Text('Accept',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black),), onTap:(){                             controller.selectedIndex.value = 1;
                        })).paddingOnly(top: 30,bottom: 30),
                        //
-
                      ],
                    ).paddingOnly(left: 15,right: 15),
                  )
@@ -288,7 +410,7 @@ class BookingRequsetUi extends StatelessWidget {
         //       .paddingOnly(bottom: 300)
         //       :
         SizedBox(
-          height: Get.height*.6,
+          height: Get.height*.8,
           child: GoogleMap(
             mapType: MapType.normal,
 
@@ -309,3 +431,4 @@ class BookingRequsetUi extends StatelessWidget {
   }
 
 }
+//
