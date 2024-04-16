@@ -21,6 +21,11 @@ class AppRoutes{
   static const String letverified="/letverified";
   static const String trainerPassport="/trainerPassport";
   static const String bookingrequest="/bookingrequest";
+  static const String error="/error";
+  static const String noInternet="/noInternet";
+  static const String bookingdetails="/bookingdetails";
+
+
 
 
 

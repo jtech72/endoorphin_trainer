@@ -32,6 +32,11 @@ class ImagesPaths {
   static const String arrow_1 = "${baseUrl}img_arrow_1.png";
   static const String telephone = "${baseUrl}img_telephone_1.png";
   static const String hammer = "${baseUrl}img_hammer.png";
+  static const String send2 = "${baseUrl}img_send_2.png";
+  static const String light= "${baseUrl}light.png";
+  static const String noInternet= "${baseUrl}noInternet.png";
+
+
 
 
 
