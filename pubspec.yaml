@@ -53,6 +53,7 @@ dependencies:
   stories_for_flutter: ^1.2.1
   location:
   image_picker:
+  slide_to_act:
 
 
 dev_dependencies:
