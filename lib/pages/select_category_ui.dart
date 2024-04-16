@@ -13,14 +13,7 @@ class SelectCategoryUI extends StatelessWidget {
   Widget build(BuildContext context) {
     SelectCategoryController controller = Get.find();
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Select Category',
-          style: Theme.of(context).textTheme.headlineLarge,
-        ).paddingOnly(left: 15),
-        centerTitle: false,
-        automaticallyImplyLeading: false,
-      ),
+     appBar: myAppBar(title: Text('Select Category',style: Theme.of(context).textTheme.headlineSmall,), context: context),
       body: SingleChildScrollView(
         child: Column(
           children: [

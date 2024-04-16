@@ -1,12 +1,18 @@
 import 'package:endoorphin_trainer/bindings/booking_request_binding.dart';
+import 'package:endoorphin_trainer/bindings/document_binding.dart';
 import 'package:endoorphin_trainer/bindings/profile_binding.dart';
+import 'package:endoorphin_trainer/bindings/support_binding.dart';
 import 'package:endoorphin_trainer/bindings/trainer_passport_binding.dart';
+import 'package:endoorphin_trainer/bindings/withdraw_binding.dart';
+import 'package:endoorphin_trainer/pages/document_ui.dart';
 import 'package:endoorphin_trainer/pages/profile_ui.dart';
 import 'package:endoorphin_trainer/bindings/earning_binding.dart';
 import 'package:endoorphin_trainer/bindings/home_binding.dart';
 import 'package:endoorphin_trainer/pages/earning_ui.dart';
 import 'package:endoorphin_trainer/pages/home_ui.dart';
+import 'package:endoorphin_trainer/pages/support_ui.dart';
 import 'package:endoorphin_trainer/pages/trainer_passport_ui.dart';
+import 'package:endoorphin_trainer/pages/withdraw_ui.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 
 
@@ -21,7 +27,7 @@ import '../utils/exports.dart';
 
 
 class AppPages {
-  static  const initialRoute = AppRoutes.bookingrequest;
+  static  const initialRoute = AppRoutes.splash;
 
   static List<GetPage> routes =[
     GetPage(
@@ -115,5 +121,17 @@ GetPage(
         name: AppRoutes.bookingrequest,
         page: () => const BookingRequsetUi(),
         binding: BookingRequestBinding()),
+    GetPage(
+        name: AppRoutes.withdraw,
+        page: () => const WithdrawUI(),
+        binding: WithdrawBinding()),
+    GetPage(
+        name: AppRoutes.document,
+        page: () => const DocumentUI(),
+        binding: DocumentBinding()),
+    GetPage(
+        name: AppRoutes.support,
+        page: () => const SupportUI(),
+        binding: SupportBinding()),
   ];
 }

@@ -1,5 +1,4 @@
 import 'package:endoorphin_trainer/controllers/home_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../utils/exports.dart';
 class HomeUi extends StatelessWidget {
@@ -14,10 +13,15 @@ class HomeUi extends StatelessWidget {
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         centerTitle: true,
-        leading: const Icon(
-          Icons.menu,
-          size: 28,
-        ).paddingOnly(left: 15),
+        leading:  GestureDetector(
+          onTap: (){
+            Get.toNamed(AppRoutes.bookingrequest);
+          },
+          child: Icon(
+            Icons.menu,
+            size: 28,
+          ).paddingOnly(left: 15),
+        ),
         actions: [
           Obx(
             () => InkWell(
@@ -96,7 +100,7 @@ class HomeUi extends StatelessWidget {
                     return Column(
                       children: [
                         Container(
-                          height: Get.height*.18,
+                          height: Get.height*.16,
                           width: Get.width*.42,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),

@@ -7,13 +7,7 @@ class MoreAboutYouUi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Select Category',
-          style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 16),
-        ).paddingOnly(left: 15),
-        centerTitle: false,
-      ),
+      appBar: myAppBar(title: Text('More about you',style: Theme.of(context).textTheme.headlineSmall,), context: context),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18),
         child: Column(

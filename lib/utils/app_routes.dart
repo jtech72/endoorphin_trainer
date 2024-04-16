@@ -21,6 +21,9 @@ class AppRoutes{
   static const String letverified="/letverified";
   static const String trainerPassport="/trainerPassport";
   static const String bookingrequest="/bookingrequest";
+  static const String withdraw="/withdraw";
+  static const String document="/document";
+  static const String support="/support";
 
 
 
