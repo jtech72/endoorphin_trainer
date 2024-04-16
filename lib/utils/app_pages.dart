@@ -21,7 +21,7 @@ import '../utils/exports.dart';
 
 
 class AppPages {
-  static  const initialRoute = AppRoutes.bookingrequest;
+  static  const initialRoute = AppRoutes.splash;
 
   static List<GetPage> routes =[
     GetPage(
