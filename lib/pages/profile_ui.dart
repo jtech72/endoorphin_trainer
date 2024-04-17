@@ -18,7 +18,7 @@ class ProfileUI extends StatelessWidget {
           children: [
             Row(
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 42,
                   backgroundColor: AppColors.yellow,
                   child: CircleAvatar(
@@ -26,7 +26,7 @@ class ProfileUI extends StatelessWidget {
                     backgroundImage: AssetImage(ImagesPaths.profilePic),
                   ),
                 ).paddingOnly(left: 30),
-                SizedBox(width: 30,),
+                const SizedBox(width: 30,),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

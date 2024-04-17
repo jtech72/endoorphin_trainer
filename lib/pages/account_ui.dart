@@ -1,12 +1,7 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../controllers/account_controller.dart';
-import '../custom_Widgets/common_widgets.dart';
-import '../utils/app_colors.dart';
 
 class AccountUI extends StatelessWidget {
   const AccountUI({super.key});

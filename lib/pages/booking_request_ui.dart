@@ -1,12 +1,9 @@
-import 'dart:developer';
 import 'package:endoorphin_trainer/controllers/booking_request_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:slide_to_act/slide_to_act.dart';
 
-import '../bindings/booking_request_binding.dart';
 import '../utils/exports.dart';
 
 class BookingRequsetUi extends StatelessWidget {
@@ -55,7 +52,7 @@ class BookingRequsetUi extends StatelessWidget {
                                 autoDisposeControllers: true,
                                 enablePinAutofill: true,
                                 appContext: context,
-                                hintStyle: TextStyle(
+                                hintStyle: const TextStyle(
                                     color: AppColors.grey, fontSize: 22),
                                 hintCharacter: '●',
                                 blinkWhenObscuring: true,
@@ -69,7 +66,7 @@ class BookingRequsetUi extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
+                            SizedBox(
                               width: Get.width*.6,
                               child: SlideAction(
                                 sliderButtonYOffset:-4,
@@ -93,11 +90,12 @@ class BookingRequsetUi extends StatelessWidget {
                                 ).paddingOnly(left: Get.width*.07),
                                 onSubmit: (){
                                   Get.toNamed(AppRoutes.sessionRunning);
+                                  return null;
                                 },
 
                               ).paddingOnly(right: 20),
                             ),
-                            CircleAvatar(
+                            const CircleAvatar(
                               radius: 20,
                               backgroundColor: Colors.black,
                               backgroundImage: AssetImage(
@@ -116,7 +114,7 @@ class BookingRequsetUi extends StatelessWidget {
                             .paddingOnly(bottom: Get.height * 0.015),
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.circle,
                               size: 15,
                               color: AppColors.impgrey,
@@ -261,7 +259,7 @@ class BookingRequsetUi extends StatelessWidget {
                                 children: [
                                   Row(
                                     children: [
-                                      CircleAvatar(
+                                      const CircleAvatar(
                                         radius: 32,
                                         backgroundColor: AppColors.yellow,
                                         child: CircleAvatar(
@@ -270,7 +268,7 @@ class BookingRequsetUi extends StatelessWidget {
                                               .profilePic), // Your profile image
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 10,
                                       ),
                                       RichText(
@@ -292,7 +290,7 @@ class BookingRequsetUi extends StatelessWidget {
                                   ),
                                   Row(
                                     children: [
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: AppColors.yellow,
                                       ).paddingOnly(right: 5),
@@ -343,7 +341,7 @@ class BookingRequsetUi extends StatelessWidget {
                                       ],
                                     ).paddingOnly(left: 10),
                                   ),
-                                  CircleAvatar(
+                                  const CircleAvatar(
                                     radius: 20,
                                     backgroundColor: AppColors.black,
                                     backgroundImage: AssetImage(
@@ -358,7 +356,7 @@ class BookingRequsetUi extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Transform.translate(
-                                        offset: Offset(0, 25),
+                                        offset: const Offset(0, 25),
                                         child: Text(
                                           '4\nmin',
                                           style: Theme.of(context)
@@ -470,7 +468,7 @@ class BookingRequsetUi extends StatelessWidget {
                               children: [
                                 Row(
                                   children: [
-                                    CircleAvatar(
+                                    const CircleAvatar(
                                       radius: 32,
                                       backgroundColor: AppColors.yellow,
                                       child: CircleAvatar(
@@ -479,7 +477,7 @@ class BookingRequsetUi extends StatelessWidget {
                                             .profilePic), // Your profile image
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
                                     RichText(
@@ -501,7 +499,7 @@ class BookingRequsetUi extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.star,
                                       color: AppColors.yellow,
                                     ).paddingOnly(right: 5),

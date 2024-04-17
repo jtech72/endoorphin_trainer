@@ -1,8 +1,6 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-import '../custom_Widgets/common_widgets.dart';
 
 class CreateNewPasswordUI extends StatelessWidget {
   const CreateNewPasswordUI({super.key});

@@ -22,7 +22,7 @@ class NoInternetUI extends StatelessWidget {
                 fontSize: 25,
                 color: AppColors.yellow),
           ).paddingOnly(top: Get.height * 0.08, bottom: Get.height * .035),
-          Center(
+          const Center(
             child: Text(
               "Oops! Looks like you're flying solo without\n internet. Hang tight, and we'll reconnect to our\n adventure as soon as we find our way back to\n the digital world.",
               style: TextStyle(

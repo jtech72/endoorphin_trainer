@@ -55,6 +55,8 @@ class LoginUi extends StatelessWidget {
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: TextField(
+                  obscureText: true,
+                  obscuringCharacter: '*',
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(64),
                     FilteringTextInputFormatter.deny(RegExp(r'\s')),

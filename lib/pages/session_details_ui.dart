@@ -9,7 +9,7 @@ class SessionDetailsUi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar(title: Text(''), context: context,),
+      appBar: myAppBar(title: const Text(''), context: context,),
 
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +64,7 @@ class SessionDetailsUi extends StatelessWidget {
             ),
             child: Row(
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   maxRadius: 35,
                   backgroundColor: AppColors.black,
                   backgroundImage: AssetImage(ImagesPaths.profilePic),
@@ -103,7 +103,7 @@ class SessionDetailsUi extends StatelessWidget {
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500),
                           ),
-                          TextSpan(
+                          const TextSpan(
                             text: ' ',
                             style: TextStyle(
                                 color: AppColors.impgrey,
@@ -116,7 +116,7 @@ class SessionDetailsUi extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.star,
                           color: AppColors.yellow,
                           size: 18,
