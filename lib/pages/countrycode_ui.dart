@@ -1,6 +1,5 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
-import 'countrycode_ui.dart';
 
 
 class CountryCodeUI extends StatelessWidget {
@@ -48,13 +47,13 @@ class CountryCodeUI extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                       width: 112,
                       child: CountryCodePicker(
-                         searchDecoration: InputDecoration(
+                         searchDecoration: const InputDecoration(
 
                            hintText: "search your country code",
                              hintStyle: TextStyle(fontWeight: FontWeight.w300,fontSize: 12,color: Colors.white),
                              filled: true,fillColor:  Colors.black54),
                           dialogSize: Size(Get.width, Get.height),
-                          boxDecoration: BoxDecoration(),
+                          boxDecoration: const BoxDecoration(),
                           barrierColor: AppColors.blackShade,
                           searchStyle: const TextStyle(fontWeight: FontWeight.w400,fontSize: 15,color: Colors.white),
                         dialogTextStyle: const TextStyle(color: Colors.white),
@@ -70,8 +69,8 @@ class CountryCodeUI extends StatelessWidget {
 
 
                       )),
-                  Transform.translate(offset: Offset(-30,0),
-                  child: Icon(Icons.keyboard_arrow_down_rounded,color: AppColors.greyButton,)),
+                  Transform.translate(offset: const Offset(-30,0),
+                  child: const Icon(Icons.keyboard_arrow_down_rounded,color: AppColors.greyButton,)),
                   Transform.translate(
                     offset: const Offset(-20, 0),
                     child: SizedBox(

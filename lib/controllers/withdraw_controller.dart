@@ -1,31 +1,24 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
+import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 class WithdrawController extends GetxController{
-  int selectedMembership = 0;
-  void selectItem2(int index) {
-    selectedMembership = index;
-    update();
+  var isChecked1 = false.obs;
+  var isChecked2 = false.obs;
+  var isChecked3 = false.obs;
+
+  void toggleCheckbox1() {
+    isChecked1.value = !isChecked1.value;
   }
-  List<Items2> items2 = [ ];
-  List<String>cardname =['Mastercard','Visa','Paypal'];
-  @override
-  void onInit() {
-    items2.add(Items2(
-      imagePath: ImagesPaths.mastercard,));
-    items2.add(Items2(
-      imagePath: ImagesPaths.visa,));
-    items2.add(Items2(
-      imagePath: ImagesPaths.paypal,));
 
+  void toggleCheckbox2() {
+    isChecked2.value = !isChecked2.value;
+  }
 
-    // TODO: implement onInit
-    super.onInit();
+  void toggleCheckbox3() {
+    isChecked3.value = !isChecked3.value;
   }
 
 }
-class Items2 {
 
-
-  String? imagePath;
-  Items2({required this.imagePath});
-}

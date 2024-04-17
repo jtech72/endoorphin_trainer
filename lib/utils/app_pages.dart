@@ -26,7 +26,7 @@ import '../pages/no_internet_ui.dart';
 
 
 class AppPages {
-  static  const initialRoute = AppRoutes.splash;
+  static  const initialRoute = AppRoutes.registration;
 
   static List<GetPage> routes =[
     GetPage(
@@ -64,7 +64,7 @@ class AppPages {
         binding: VerifyPhoneNumberBinding()),
     GetPage(
         name: AppRoutes.registration,
-        page: ()=>  const RegistrationUi(),
+        page: ()=>   RegistrationUi(),
         binding: RegistrationBinding()),
     GetPage(
         name: AppRoutes.selectcategory,
@@ -122,7 +122,7 @@ GetPage(
         binding: BookingRequestBinding()),
     GetPage(
         name: AppRoutes.withdraw,
-        page: () => const WithdrawUI(),
+        page: () =>  WithdrawUI(),
         binding: WithdrawBinding()),
     GetPage(
         name: AppRoutes.document,

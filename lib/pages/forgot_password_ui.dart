@@ -1,9 +1,5 @@
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-import '../controllers/countrycode_controller.dart';
-import '../custom_Widgets/common_widgets.dart';
 import '../utils/exports.dart';
 
 class ForgotPasswordUI extends StatelessWidget {

@@ -1,7 +1,6 @@
+
 import 'package:endoorphin_trainer/controllers/home_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import '../utils/exports.dart';
 class HomeUi extends StatelessWidget {
   const HomeUi({super.key});
@@ -24,7 +23,7 @@ class HomeUi extends StatelessWidget {
           onTap: (){
             Get.toNamed(AppRoutes.bookingrequest);
           },
-          child: Icon(
+          child: const Icon(
             Icons.menu,
             size: 28,
           ).paddingOnly(left: 15),
@@ -177,6 +176,14 @@ class HomeUi extends StatelessWidget {
                         splashColor: Colors.transparent,
                         onTap: (){
                           controller.selectedIndex.value = index;
+                          // Use Get.toNamed to navigate to the desired routes based on the selected index
+                          if (controller.selectedIndex.value == 0) {
+                            Get.toNamed(AppRoutes.profile);
+                          } else if (controller.selectedIndex.value == 1) {
+                            Get.toNamed(AppRoutes.earning);
+                          } else {
+                            Get.toNamed(AppRoutes.document);
+                          }
                         },
                         child: Column(
                           children: [

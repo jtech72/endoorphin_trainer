@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../controllers/otp_controller.dart';
-import '../custom_Widgets/common_widgets.dart';
 
 
 class OtpUI extends StatelessWidget {
@@ -54,7 +53,7 @@ class OtpUI extends StatelessWidget {
                 autoDisposeControllers: true,
                 enablePinAutofill: true,
                 appContext: context,
-                hintStyle: TextStyle(color: AppColors.grey,fontSize: 22),
+                hintStyle: const TextStyle(color: AppColors.grey,fontSize: 22),
                 hintCharacter: '●',
                 blinkWhenObscuring: true,
                 cursorColor: AppColors.yellow,

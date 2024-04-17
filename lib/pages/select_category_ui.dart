@@ -1,9 +1,6 @@
-import 'package:endoorphin_trainer/utils/app_pages.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../controllers/select_category_controller.dart';
-import '../custom_Widgets/common_widgets.dart';
 import '../utils/exports.dart';
 
 class SelectCategoryUI extends StatelessWidget {

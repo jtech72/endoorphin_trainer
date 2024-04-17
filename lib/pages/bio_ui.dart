@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../custom_Widgets/common_widgets.dart';
 import '../utils/exports.dart';
 
 class BioUi extends StatelessWidget {
@@ -35,7 +34,7 @@ class BioUi extends StatelessWidget {
                   style: const TextStyle(color: AppColors.impgrey, fontSize: 10),
                   decoration: InputDecoration(
                     contentPadding:
-                    EdgeInsets.only(bottom: 10, left: 10, right: 10),
+                    const EdgeInsets.only(bottom: 10, left: 10, right: 10),
                     fillColor: AppColors.yellowishWhite,
                     hintText: 'Enter Your Reason',
                     hintStyle: Theme.of(context).textTheme.labelMedium,

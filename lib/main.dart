@@ -1,3 +1,4 @@
+import 'package:endoorphin_trainer/utils/app_colors.dart';
 import 'package:endoorphin_trainer/utils/app_pages.dart';
 import 'package:endoorphin_trainer/utils/app_strings.dart';
 import 'package:endoorphin_trainer/utils/app_themes.dart';
@@ -19,7 +20,6 @@ class EndoorphinTrainer extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: AppStrings.appName,
       theme: AppThemes.appTheme,
-      themeMode: ThemeMode.dark,
     );
   }
 }

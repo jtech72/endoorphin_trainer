@@ -1,9 +1,7 @@
-import 'package:endoorphin_trainer/custom_Widgets/common_widgets.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import '../utils/app_colors.dart';
 
 class BookingDetailsUi extends StatefulWidget {
   const BookingDetailsUi({super.key});
@@ -34,7 +32,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
               ),
               child: Row(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     maxRadius: 35,
                     backgroundColor: AppColors.black,
                     backgroundImage: AssetImage(ImagesPaths.profilePic),
@@ -70,7 +68,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500),
                             ),
-                            TextSpan(
+                            const TextSpan(
                               text: ' ',
                               style: TextStyle(
                                   color: AppColors.impgrey,
@@ -83,7 +81,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.star,
                             color: AppColors.yellow,
                             size: 18,
@@ -358,14 +356,14 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                       borderRadius: BorderRadius.circular(50),
                       color: firstButtonSelected ? AppColors.yellow: Colors.transparent,
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     child: Text(
                       "Accept",
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: firstButtonSelected ? AppColors.black : AppColors.yellow),
                     ),
                   ),
                 ),
-                SizedBox(width: 20),
+                const SizedBox(width: 20),
                 GestureDetector(
                   onTap: () {
                     setState(() {
@@ -379,7 +377,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                       borderRadius: BorderRadius.circular(50),
                       color: secondButtonSelected ? AppColors.yellow : Colors.transparent,
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     child: Text(
                       "Reject",
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: secondButtonSelected ? AppColors.black : AppColors.yellow),
