@@ -26,7 +26,7 @@ import '../pages/no_internet_ui.dart';
 
 
 class AppPages {
-  static  const initialRoute = AppRoutes.registration;
+  static  const initialRoute = AppRoutes.splash;
 
   static List<GetPage> routes =[
     GetPage(

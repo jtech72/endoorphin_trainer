@@ -28,6 +28,7 @@ class MoreAboutYouUi extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5)
               ),
               child: ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: 4,
                 itemBuilder: (context,index){
                   return Row(
@@ -49,7 +50,7 @@ class MoreAboutYouUi extends StatelessWidget {
               height: Get.height*0.03,
             ),
             Container(
-              height: Get.height*0.3,
+              height: Get.height*0.33,
 
              color: AppColors.black,
               child: ListView.builder(
@@ -69,7 +70,7 @@ class MoreAboutYouUi extends StatelessWidget {
                       }
                     },
                     child: Container(
-                      height: 78,
+                      height: 70,
                       width: Get.width,
                       decoration: BoxDecoration(
                           color: AppColors.greyButton,

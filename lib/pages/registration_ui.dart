@@ -41,10 +41,7 @@ class RegistrationUi extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: TextField(
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(64),
-                        FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                      ],
+
                       enableInteractiveSelection: true,
                       style: Theme.of(context).textTheme.labelMedium,
                       cursorColor: AppColors.grey,
