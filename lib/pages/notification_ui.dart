@@ -26,7 +26,7 @@ class NotificationUi extends StatelessWidget {
                     alignment: Alignment.center,
                     height: Get.height*.1,
                     width: Get.width*.15,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: AppColors.blackShade,
                     ),
@@ -66,7 +66,7 @@ class NotificationUi extends StatelessWidget {
                     alignment: Alignment.center,
                     height: Get.height*.1,
                     width: Get.width*.15,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: AppColors.blackShade,
                     ),
@@ -106,7 +106,7 @@ class NotificationUi extends StatelessWidget {
                     alignment: Alignment.center,
                     height: Get.height*.1,
                     width: Get.width*.15,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: AppColors.blackShade,
                     ),

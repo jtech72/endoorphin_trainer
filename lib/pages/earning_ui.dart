@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:endoorphin_trainer/custom_Widgets/common_widgets.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
@@ -59,16 +60,11 @@ class EarningUi extends StatelessWidget {
                     ],
                   ),
                 ),
-                InkButton(
-                  child: Text(
-                    "WITHDRAW",
-                    style: Theme.of(context)
-                        .textTheme
-                        .displayLarge
-                        ?.copyWith(color: AppColors.black),
-                  ),
-                  onTap: () {},
-                ),
+                InkButton(child: Text("WITHDRAW",style: Theme.of(context).textTheme.displayLarge?.copyWith(color: AppColors.black),
+                ), onTap: (){
+                  Get.toNamed(AppRoutes.withdraw);
+                })
+
               ],
             ),
           ),

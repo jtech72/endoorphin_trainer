@@ -1,8 +1,5 @@
 import 'dart:developer';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../controllers/session_running_controller.dart';
 import '../utils/exports.dart';
@@ -223,7 +220,7 @@ class SessionRunningUi extends StatelessWidget {
                         width: 30,
                         decoration: const BoxDecoration(
                             shape: BoxShape.circle, color: AppColors.impgrey),
-                        child: Icon(
+                        child: const Icon(
                           Icons.arrow_back,
                           size: 25,
                           color: AppColors.black,
@@ -232,7 +229,7 @@ class SessionRunningUi extends StatelessWidget {
                 ),
                 Center(
                   child: Transform.translate(
-                    offset: Offset(0, -20),
+                    offset: const Offset(0, -20),
                     child: Container(
                       alignment: Alignment.center,
                       height: 43,
@@ -274,7 +271,7 @@ class SessionRunningUi extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      CircleAvatar(
+                      const CircleAvatar(
                         maxRadius: 35,
                         backgroundColor: AppColors.black,
                         backgroundImage: AssetImage(ImagesPaths.profilePic),
@@ -313,7 +310,7 @@ class SessionRunningUi extends StatelessWidget {
                                       fontSize: 14,
                                       fontWeight: FontWeight.w500),
                                 ),
-                                TextSpan(
+                                const TextSpan(
                                   text: ' ',
                                   style: TextStyle(
                                       color: AppColors.impgrey,
@@ -326,7 +323,7 @@ class SessionRunningUi extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.star,
                                 color: AppColors.yellow,
                                 size: 18,

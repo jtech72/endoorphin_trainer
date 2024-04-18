@@ -1,9 +1,6 @@
-import 'package:endoorphin_trainer/utils/app_pages.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../controllers/select_category_controller.dart';
-import '../custom_Widgets/common_widgets.dart';
 import '../utils/exports.dart';
 
 class SelectCategoryUI extends StatelessWidget {
@@ -71,33 +68,18 @@ class SelectCategoryUI extends StatelessWidget {
                 Container(
                   height: 45,
                   decoration: BoxDecoration(
+                    color: AppColors.yellowishWhite,
                     border: Border.all(color: AppColors.impgrey),
                     shape: BoxShape.rectangle,
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: TextField(
-                    inputFormatters: [
-                      LengthLimitingTextInputFormatter(64),
-                      FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Select',style: Theme.of(context).textTheme.labelMedium,),
+                      Image.asset(ImagesPaths.upload,scale: 5,),
+
                     ],
-                    enableInteractiveSelection: true,
-                    style: Theme.of(context).textTheme.labelMedium,
-                    cursorColor: AppColors.grey,
-                    cursorHeight: 18,
-                    decoration: InputDecoration(
-
-                      filled: true,
-                      fillColor: AppColors.yellowishWhite,
-                      border: InputBorder.none,
-                      hintStyle: Theme.of(context).textTheme.labelMedium,
-                      contentPadding:
-                      const EdgeInsets.only(bottom: 3, left: 15,top: 10),
-
-                      hintText: "Select document",
-                      alignLabelWithHint: true, // Center the hintText
-                      suffixIcon: Image.asset(ImagesPaths.upload,scale: 5,).paddingOnly(right: 15),
-                    ),
-                  ),
+                  ).paddingOnly(left:15,right: 15 ),
                 ),
                 SizedBox(
                   height: Get.height * 0.029,

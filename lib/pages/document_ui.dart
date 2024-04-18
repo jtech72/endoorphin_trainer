@@ -1,7 +1,4 @@
-import 'package:endoorphin_trainer/custom_Widgets/common_widgets.dart';
-import 'package:endoorphin_trainer/utils/app_colors.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DocumentUI extends StatelessWidget {
@@ -86,7 +83,7 @@ class DocumentUI extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                     border: Border.all(color: AppColors.lightWhite),
                   ),
-                  child:   Icon(Icons.add_circle_outline_outlined,color: AppColors.black,),
+                  child:   const Icon(Icons.add_circle_outline_outlined,color: AppColors.black,),
         
                 ),
               ],
@@ -137,7 +134,7 @@ class DocumentUI extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                     border: Border.all(color: AppColors.lightWhite),
                   ),
-                  child:   Icon(Icons.add_circle_outline_outlined,color: AppColors.black,),
+                  child:   const Icon(Icons.add_circle_outline_outlined,color: AppColors.black,),
         
                 ),
               ],
@@ -188,7 +185,7 @@ class DocumentUI extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                     border: Border.all(color: AppColors.lightWhite),
                   ),
-                  child:   Icon(Icons.add_circle_outline_outlined,color: AppColors.black,),
+                  child:   const Icon(Icons.add_circle_outline_outlined,color: AppColors.black,),
         
                 ),
               ],

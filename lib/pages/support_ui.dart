@@ -1,9 +1,6 @@
-import 'package:endoorphin_trainer/custom_Widgets/common_widgets.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
 
-import '../utils/app_colors.dart';
 
 class SupportUI extends StatelessWidget {
   const SupportUI({super.key});
@@ -33,7 +30,7 @@ class SupportUI extends StatelessWidget {
                   color: AppColors.grey3,fontSize: 10
               ),
               decoration: InputDecoration(filled: true,
-                contentPadding: EdgeInsets.only(bottom: 10,left: 10,right: 10),
+                contentPadding: const EdgeInsets.only(bottom: 10,left: 10,right: 10),
                 fillColor: AppColors.greyButton,
                 hintText: 'Enter Email description',
                 hintStyle: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.lightGrey,fontWeight: FontWeight.w400),

@@ -19,7 +19,7 @@ void printResult({
 
 void showSnackBar(message) {
   Get.snackbar(
-      duration: Duration(seconds: 6),
+      duration: const Duration(seconds: 6),
       colorText: AppColors.black,
       AppStrings.appName,
       "${message ?? "Something went wrong Status Code"}",

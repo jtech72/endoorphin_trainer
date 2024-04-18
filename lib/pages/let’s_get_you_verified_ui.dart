@@ -1,5 +1,4 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LetGetYouVerifiedUi extends StatelessWidget {
@@ -47,7 +46,7 @@ class LetGetYouVerifiedUi extends StatelessWidget {
                     Row(
                       children: [
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 15,vertical: 20),
+                          padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 20),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             color: AppColors.black,
@@ -66,7 +65,7 @@ class LetGetYouVerifiedUi extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Icon(Icons.arrow_forward_ios_outlined,color: AppColors.impgrey,).paddingOnly(right: 15)
+                        const Icon(Icons.arrow_forward_ios_outlined,color: AppColors.impgrey,).paddingOnly(right: 15)
                       ],
                     )
                   ],
@@ -88,7 +87,7 @@ class LetGetYouVerifiedUi extends StatelessWidget {
                           Row(
                             children: [
                               Container(
-                                padding: EdgeInsets.symmetric(horizontal: 15,vertical: 20),
+                                padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 20),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
                                   color: AppColors.black,
@@ -107,7 +106,7 @@ class LetGetYouVerifiedUi extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              Icon(Icons.arrow_forward_ios_outlined,color: AppColors.impgrey,).paddingOnly(right: 15)
+                              const Icon(Icons.arrow_forward_ios_outlined,color: AppColors.impgrey,).paddingOnly(right: 15)
                             ],
                           )
                         ],
@@ -126,7 +125,7 @@ class LetGetYouVerifiedUi extends StatelessWidget {
                         Row(
                           children: [
                             Container(
-                              padding: EdgeInsets.symmetric(horizontal: 15,vertical: 20),
+                              padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 20),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 color: AppColors.black,
@@ -145,7 +144,7 @@ class LetGetYouVerifiedUi extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            Icon(Icons.arrow_forward_ios_outlined,color: AppColors.impgrey,).paddingOnly(right: 15)
+                            const Icon(Icons.arrow_forward_ios_outlined,color: AppColors.impgrey,).paddingOnly(right: 15)
                           ],
                         )
                       ],
