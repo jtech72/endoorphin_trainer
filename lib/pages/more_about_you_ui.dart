@@ -67,12 +67,14 @@ class MoreAboutYouUi extends StatelessWidget {
                       controller.selectedIndex.value = index;
                       // Use Get.toNamed to navigate to the desired routes based on the selected index
                       if (controller.selectedIndex.value == 0) {
+                        controller.isButtonVisible.value = true;
                         Get.toNamed(AppRoutes.trainerPassport);
                       } else if (controller.selectedIndex.value == 1) {
                         controller.isButtonVisible.value = true;
                         log(controller.isButtonVisible.value.toString());
                         Get.toNamed(AppRoutes.trainerPassport);
                       } else {
+                        controller.isButtonVisible.value = true;
                         Get.toNamed(AppRoutes.trainerPassport);
                       }
                     },

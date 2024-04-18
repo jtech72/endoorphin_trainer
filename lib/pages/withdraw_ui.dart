@@ -47,7 +47,7 @@ class WithdrawUI extends StatelessWidget {
                         border: Border.all(color: AppColors.yellow),
                         borderRadius: BorderRadius.circular(5)
                       ),
-                      child: Center(child: Text('Paid',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.yellow),)),
+                      child: Center(child: Text('Unpaid',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.yellow),)),
                     ),
                     SizedBox(width: Get.width*0.1,),
                     Container(
@@ -58,7 +58,7 @@ class WithdrawUI extends StatelessWidget {
                           border: Border.all(color: AppColors.yellow),
                           borderRadius: BorderRadius.circular(5)
                       ),
-                      child: Center(child: Text('Unpaid',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black),)),
+                      child: Center(child: Text('Paid',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black),)),
                     ),
                    ],
                 ).paddingOnly(bottom: Get.height*0.02)

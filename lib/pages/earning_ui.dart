@@ -130,6 +130,7 @@ class EarningUi extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
 children: [
+
   Row(
 mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [

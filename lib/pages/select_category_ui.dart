@@ -29,7 +29,9 @@ class SelectCategoryUI extends StatelessWidget {
                           scale: 1.3,
                           child: Checkbox(
                             checkColor: Colors.black,
-                            hoverColor: Colors.yellow,
+                            activeColor: AppColors.yellow,side: BorderSide(
+                            color: AppColors.grey2,width: 2
+                          ),
                             value: controller.selectedReason.value ==
                                 index, // Compare with index
                             onChanged: (value) {

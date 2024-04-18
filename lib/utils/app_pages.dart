@@ -13,22 +13,14 @@ import 'package:endoorphin_trainer/pages/withdraw_ui.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 
 
-import 'package:endoorphin_trainer/bindings/let%E2%80%99s_get_you_verified_binding.dart';
-import 'package:endoorphin_trainer/bindings/more_about_you_binding.dart';
-import 'package:endoorphin_trainer/pages/let%E2%80%99s_get_you_verified_ui.dart';
-import 'package:endoorphin_trainer/pages/more_about_you_ui.dart';
 
-import '../bindings/error_binding.dart';
-import '../bindings/no_internet_bindings.dart';
-import '../pages/booking_details_ui.dart';
-import '../pages/booking_request_ui.dart';
-import '../pages/error_ui.dart';
-import '../pages/no_internet_ui.dart';
+
+
 
 
 
 class AppPages {
-  static  const initialRoute = AppRoutes.moreaboutyou;
+  static  const initialRoute = AppRoutes.splash;
 
   static List<GetPage> routes =[
     GetPage(
@@ -150,5 +142,9 @@ GetPage(
         name: AppRoutes.sessionComplete,
         page: ()=>  const SessionCompleteUI(),
         binding: SessionCompleteBinding()),
+  GetPage(
+        name: AppRoutes.booking,
+        page: ()=>    BookingUi(),
+        binding: BookingBinding()),
   ];
 }

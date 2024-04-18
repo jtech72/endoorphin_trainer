@@ -28,6 +28,7 @@ class AppRoutes{
   static const String noInternet="/noInternet";
   static const String bookingdetails="/bookingdetails";
   static const String sessionComplete="/sessionComplete";
+  static const String booking="/booking";
 
 
 

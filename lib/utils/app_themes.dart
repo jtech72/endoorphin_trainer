@@ -86,6 +86,11 @@ class AppThemes {
             fontFamily: "Roboto",
             color: AppColors.impgrey,
             fontSize: 14),
+        displayMedium: TextStyle(
+            fontWeight: FontWeight.w300,
+            fontFamily: "Roboto",
+            color: AppColors.impgrey,
+            fontSize: 12),
 
       ));
 }
