@@ -9,14 +9,9 @@ class HomeUi extends StatelessWidget {
     HomeController controller = Get.find();
     return Scaffold(
       appBar: AppBar(
-        title: GestureDetector(
-          onTap: (){
-            Get.toNamed(AppRoutes.notification);
-          },
-          child: Text(
-            'Offline',
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
+        title: Text(
+          'Offline',
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
         centerTitle: true,
         leading:  GestureDetector(
@@ -26,6 +21,7 @@ class HomeUi extends StatelessWidget {
           child: const Icon(
             Icons.menu,
             size: 28,
+            color: Colors.white,
           ).paddingOnly(left: 15),
         ),
         actions: [
@@ -38,10 +34,10 @@ class HomeUi extends StatelessWidget {
     },
               child: SizedBox(
                 height: 15,
-                width: 50,
+                width: 43,
                 child: Container(
                   height: 15,
-                  width: 25,
+                  width: 15,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       border: Border.all(color: AppColors.white)),
@@ -62,10 +58,11 @@ class HomeUi extends StatelessWidget {
                               !controller.isTrainerOnline.value;
                         }),
                   ),
-                ).paddingOnly(right: 15,left: 10),
-              ).paddingOnly(right: 15),
+                ).paddingOnly(left: 20),
+              ),
             ),
-          )
+          ),
+          IconButton(onPressed: (){Get.toNamed(AppRoutes.notification);}, icon: Image.asset(ImagesPaths.bell,scale: 4,))
         ],
       ),
       body: SingleChildScrollView(
@@ -105,9 +102,22 @@ class HomeUi extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
-                        GestureDetector(
+                        InkWell(
+                          splashColor: Colors.transparent,
                           onTap: (){
-                            Get.toNamed(AppRoutes.account);
+                            controller.selectedIndex.value = index;
+                            // Use Get.toNamed to navigate to the desired routes based on the selected index
+                            if (controller.selectedIndex.value == 0) {
+                              Get.toNamed(AppRoutes.bookingdetails);
+                            } else if (controller.selectedIndex.value == 1) {
+                              Get.toNamed(AppRoutes.bookingdetails);
+                            }  else if (controller.selectedIndex.value == 2) {
+                              Get.toNamed(AppRoutes.bookingdetails);
+                            }  else if (controller.selectedIndex.value == 3) {
+                              Get.toNamed(AppRoutes.bookingdetails);
+                            } else {
+                              Get.toNamed(AppRoutes.booking);
+                            }
                           },
                           child: Container(
                             height: Get.height*.16,

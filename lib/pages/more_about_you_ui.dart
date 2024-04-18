@@ -1,5 +1,4 @@
 import 'package:endoorphin_trainer/controllers/more_about_you_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../utils/exports.dart';
 
@@ -28,7 +27,7 @@ class MoreAboutYouUi extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5)
               ),
               child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: 4,
                 itemBuilder: (context,index){
                   return Row(

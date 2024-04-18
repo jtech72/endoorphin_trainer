@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:endoorphin_trainer/custom_Widgets/common_widgets.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -12,7 +11,7 @@ class _SalesData {
 }
 
 class EarningUi extends StatelessWidget {
-  const EarningUi({Key? key}) : super(key: key);
+  const EarningUi({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -82,20 +81,20 @@ class EarningUi extends StatelessWidget {
                 child:
                 SfCartesianChart(
 
-                  primaryYAxis: NumericAxis(
+                  primaryYAxis: const NumericAxis(
                     isVisible: false,
                     majorTickLines: MajorTickLines(size: 0), // Remove major tick lines for y-axis
                   ),
-                  primaryXAxis: CategoryAxis(
+                  primaryXAxis: const CategoryAxis(
                     isVisible: true,
                     labelPlacement: LabelPlacement.onTicks, // Set labelPlacement here
                     majorTickLines: MajorTickLines(size: 0,),
                     // Remove major tick lines
                   ),
                   // Chart title
-                  title: ChartTitle(text: 'Week Earnings'),
+                  title: const ChartTitle(text: 'Week Earnings'),
                   // Enable legend
-                  legend: Legend(isVisible: false),
+                  legend: const Legend(isVisible: false),
 
                   // Enable tooltip
 
@@ -110,7 +109,7 @@ class EarningUi extends StatelessWidget {
                       yValueMapper: (_SalesData sales, _) => sales.amount,
                       name: 'Earnings', // You can set any name here
                       // Enable data label
-                      dataLabelSettings: DataLabelSettings(isVisible: false),
+                      dataLabelSettings: const DataLabelSettings(isVisible: false),
                       color: Colors.transparent,
                       borderColor: AppColors.yellow,
                       borderRadius: BorderRadius.circular(10),

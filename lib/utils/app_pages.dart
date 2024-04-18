@@ -1,32 +1,14 @@
-import 'package:endoorphin_trainer/bindings/booking_details_binding.dart';
-import 'package:endoorphin_trainer/bindings/booking_request_binding.dart';
-import 'package:endoorphin_trainer/bindings/document_binding.dart';
-import 'package:endoorphin_trainer/bindings/support_binding.dart';
-import 'package:endoorphin_trainer/bindings/trainer_passport_binding.dart';
-import 'package:endoorphin_trainer/bindings/withdraw_binding.dart';
-import 'package:endoorphin_trainer/pages/document_ui.dart';
-import 'package:endoorphin_trainer/pages/support_ui.dart';
-import 'package:endoorphin_trainer/pages/trainer_passport_ui.dart';
-import 'package:endoorphin_trainer/pages/withdraw_ui.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 
 
-import 'package:endoorphin_trainer/bindings/let%E2%80%99s_get_you_verified_binding.dart';
-import 'package:endoorphin_trainer/bindings/more_about_you_binding.dart';
-import 'package:endoorphin_trainer/pages/let%E2%80%99s_get_you_verified_ui.dart';
-import 'package:endoorphin_trainer/pages/more_about_you_ui.dart';
 
-import '../bindings/error_binding.dart';
-import '../bindings/no_internet_bindings.dart';
-import '../pages/booking_details_ui.dart';
-import '../pages/booking_request_ui.dart';
-import '../pages/error_ui.dart';
-import '../pages/no_internet_ui.dart';
+
+
 
 
 
 class AppPages {
-  static  const initialRoute = AppRoutes.splash;
+  static  const initialRoute = AppRoutes.booking;
 
   static List<GetPage> routes =[
     GetPage(
@@ -64,7 +46,7 @@ class AppPages {
         binding: VerifyPhoneNumberBinding()),
     GetPage(
         name: AppRoutes.registration,
-        page: ()=>   RegistrationUi(),
+        page: ()=>   const RegistrationUi(),
         binding: RegistrationBinding()),
     GetPage(
         name: AppRoutes.selectcategory,
@@ -122,7 +104,7 @@ GetPage(
         binding: BookingRequestBinding()),
     GetPage(
         name: AppRoutes.withdraw,
-        page: () =>  WithdrawUI(),
+        page: () =>  const WithdrawUI(),
         binding: WithdrawBinding()),
     GetPage(
         name: AppRoutes.document,
@@ -144,5 +126,9 @@ GetPage(
         name: AppRoutes.bookingdetails,
         page: ()=>  const BookingDetailsUi(),
         binding: BookingDetailsBinding()),
+    GetPage(
+        name: AppRoutes.booking,
+        page: ()=>    BookingUi(),
+        binding: BookingBinding()),
   ];
 }

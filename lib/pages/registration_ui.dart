@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../utils/exports.dart';
 
 class RegistrationUi extends StatelessWidget {
-   RegistrationUi({super.key});
+   const RegistrationUi({super.key});
 
   @override
   Widget build(BuildContext context) {
