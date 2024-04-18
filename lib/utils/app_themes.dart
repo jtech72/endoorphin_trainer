@@ -15,8 +15,8 @@ class AppThemes {
       colorScheme: const ColorScheme.dark(
         primary: AppColors.yellow,
         onPrimary: AppColors.impgrey,
-        background: AppColors.backgroundBlack,
-        onBackground: AppColors.backgroundBlack,
+        surface: AppColors.backgroundBlack,
+        onSurface: AppColors.backgroundBlack,
         primaryContainer: AppColors.impgrey,
         onPrimaryContainer: AppColors.impgrey,
       ),
@@ -86,6 +86,11 @@ class AppThemes {
             fontFamily: "Roboto",
             color: AppColors.impgrey,
             fontSize: 14),
+        displayMedium: TextStyle(
+            fontWeight: FontWeight.w300,
+            fontFamily: "Roboto",
+            color: AppColors.impgrey,
+            fontSize: 12),
 
       ));
 }

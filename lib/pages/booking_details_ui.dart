@@ -344,6 +344,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
               children: [
                 GestureDetector(
                   onTap: () {
+                    Get.toNamed(AppRoutes.bookingrequest);
                     print("object");
                     setState(() {
                       firstButtonSelected = !firstButtonSelected;
@@ -386,6 +387,14 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                 ),
               ],
             ).paddingOnly(top: 30),
+
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     InkButton(child: Text("Cancelled"), onTap: (){}),
+            //   ],
+            // )
+
           ],
         ).paddingOnly(left: 18, right: 18),
       ),

@@ -1,8 +1,6 @@
 import 'package:endoorphin_trainer/controllers/withdraw_controller.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 
 
 class WithdrawUI extends StatelessWidget {
@@ -66,7 +64,7 @@ class WithdrawUI extends StatelessWidget {
                 ).paddingOnly(bottom: Get.height*0.02)
               ],
                 ).paddingOnly(left: Get.width*0.02,right: Get.width*0.02),
-            Container(
+            SizedBox(
               height: Get.height*.4,
               width: Get.width,
               child: Column(
@@ -84,7 +82,7 @@ class WithdrawUI extends StatelessWidget {
                           Obx(
                                 () => Checkbox(
                                   checkColor: AppColors.yellow,activeColor: Colors.transparent,
-                                  side: BorderSide(
+                                  side: const BorderSide(
                                       color: AppColors.grey3,width: 2
                                   ),
                               value: controller.isChecked1.value,
@@ -93,7 +91,7 @@ class WithdrawUI extends StatelessWidget {
                               },
                             ),
                           ),
-                          Column(
+                          const Column(
                             children: [
                               Text('Yoga session with Richard'),
                               Text('21 Dec . 1.39 pm '),
@@ -101,7 +99,7 @@ class WithdrawUI extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Text('AED 500'),
+                      const Text('AED 500'),
                     ],
                   ).paddingOnly(right: Get.width*0.03,top: Get.height*.01,bottom: Get.height*.01),
                   Container(
@@ -117,7 +115,7 @@ class WithdrawUI extends StatelessWidget {
                           Obx(
                                 () => Checkbox(
                                   checkColor: AppColors.yellow,activeColor: Colors.transparent,
-                                  side: BorderSide(
+                                  side: const BorderSide(
                                       color: AppColors.grey3,width: 2
                                   ),
                               value: controller.isChecked2.value,
@@ -126,7 +124,7 @@ class WithdrawUI extends StatelessWidget {
                               },
                             ),
                           ),
-                          Column(
+                          const Column(
                             children: [
                               Text('Another session'),
                               Text('Some other time'),
@@ -134,7 +132,7 @@ class WithdrawUI extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Text('AED 700'),
+                      const Text('AED 700'),
                     ],
                   ).paddingOnly(right: Get.width*0.03,top: Get.height*.01,bottom: Get.height*.01),
                   Container(
@@ -149,7 +147,7 @@ class WithdrawUI extends StatelessWidget {
                         children: [
                           Obx(
                                 () => Checkbox(checkColor: AppColors.yellow,activeColor: Colors.transparent,
-                                  side: BorderSide(
+                                  side: const BorderSide(
                                   color: AppColors.grey3,width: 2
                                 ),
                               value: controller.isChecked3.value,
@@ -158,7 +156,7 @@ class WithdrawUI extends StatelessWidget {
                               },
                             ),
                           ),
-                          Column(
+                          const Column(
                             children: [
                               Text('Yet Another session'),
                               Text('Some other time'),
@@ -166,7 +164,7 @@ class WithdrawUI extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Text('AED 900'),
+                      const Text('AED 900'),
                     ],
                   ).paddingOnly(right: Get.width*0.03,top: Get.height*.01,bottom: Get.height*.01),
                   Container(
