@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 class AppThemes {
   static ThemeData appTheme = ThemeData(
-
+    scaffoldBackgroundColor: AppColors.backgroundBlack,
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.backgroundBlack,
       ),

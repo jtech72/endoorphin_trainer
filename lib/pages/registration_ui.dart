@@ -1,3 +1,4 @@
+
 import 'package:endoorphin_trainer/controllers/registration_controller.dart';
 import 'package:flutter/material.dart';
 
@@ -159,39 +160,79 @@ class RegistrationUi extends StatelessWidget {
                     ),
                   ),
                   Text("Category",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
-                  Container(
-                    height: 45,
-                    decoration: BoxDecoration(
-                      color: AppColors.yellowishWhite,
-                      border: Border.all(color: AppColors.impgrey),
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Swimming',style: Theme.of(context).textTheme.labelMedium,),
-                       Image.asset(ImagesPaths.dropdown,scale: 5,),
+                  Obx(() {
+                    return Container(
+                      height: 45,
+                      decoration: BoxDecoration(
+                        color: AppColors.yellowishWhite,
+                        border: Border.all(color: AppColors.impgrey),
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            controller.selectedOption.value,
+                            style: Theme.of(context).textTheme.subtitle1,
+                          ),
+                          DropdownButton<String>(
+                            icon: Icon(Icons.keyboard_arrow_down,size: 25,color: AppColors.black,),
 
-                      ],
-                    ).paddingOnly(left:15,right: 15 ),
-                  ),
+                            underline: SizedBox(),
+                            dropdownColor: AppColors.yellowishWhite,
+                            onChanged: (selectedValue) {
+                              controller.selectedOption.value = selectedValue!;
+
+                            },
+                            items: controller.items.map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
+                        ],
+                      ).paddingOnly(left: 15, right: 15),
+                    );
+                  }),
                   Text("Gender",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
-                  Container(
-                    height: 45,
-                    decoration: BoxDecoration(
-                      color: AppColors.yellowishWhite,
-                      border: Border.all(color: AppColors.impgrey),
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Select',style: Theme.of(context).textTheme.labelMedium,),
-                        Image.asset(ImagesPaths.dropdown,scale: 5,),
+                  Obx(() {
+                    return Container(
+                      height: 45,
+                      decoration: BoxDecoration(
+                        color: AppColors.yellowishWhite,
+                        border: Border.all(color: AppColors.impgrey),
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            controller.selectedOption1.value,
+                            style: Theme.of(context).textTheme.subtitle1,
+                          ),
+                          DropdownButton<String>(
+                            icon: Icon(Icons.keyboard_arrow_down,size: 25,color: AppColors.black,),
 
-                      ],
-                    ).paddingOnly(left:15,right: 15 ),
-                  ),
+                            underline: SizedBox(),
+                            dropdownColor: AppColors.yellowishWhite,
+                            onChanged: (selectedValue) {
+                              controller.selectedOption1.value = selectedValue!;
+
+                            },
+                            items: controller.items2.map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
+                        ],
+                      ).paddingOnly(left: 15, right: 15),
+                    );
+                  }),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -209,4 +250,29 @@ class RegistrationUi extends StatelessWidget {
 
     );
   }
+}
+
+void _showDropdown(BuildContext context) {
+  RegistrationController controller =Get.find();
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Select an Option'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: controller.dataList.map((String option) {
+            return ListTile(
+              title: Text(option),
+              onTap: () {
+                // Update the selected option
+                controller.selectedOption.value = option;
+                Navigator.of(context).pop();
+              },
+            );
+          }).toList(),
+        ),
+      );
+    },
+  );
 }

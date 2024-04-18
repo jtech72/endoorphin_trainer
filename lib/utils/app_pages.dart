@@ -1,3 +1,15 @@
+import 'package:endoorphin_trainer/bindings/booking_details_binding.dart';
+import 'package:endoorphin_trainer/bindings/booking_request_binding.dart';
+import 'package:endoorphin_trainer/bindings/document_binding.dart';
+import 'package:endoorphin_trainer/bindings/session_complete_binding.dart';
+import 'package:endoorphin_trainer/bindings/support_binding.dart';
+import 'package:endoorphin_trainer/bindings/trainer_passport_binding.dart';
+import 'package:endoorphin_trainer/bindings/withdraw_binding.dart';
+import 'package:endoorphin_trainer/pages/document_ui.dart';
+import 'package:endoorphin_trainer/pages/session_complete_ui.dart';
+import 'package:endoorphin_trainer/pages/support_ui.dart';
+import 'package:endoorphin_trainer/pages/trainer_passport_ui.dart';
+import 'package:endoorphin_trainer/pages/withdraw_ui.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 
 
@@ -8,7 +20,7 @@ import 'package:endoorphin_trainer/utils/exports.dart';
 
 
 class AppPages {
-  static  const initialRoute = AppRoutes.booking;
+  static  const initialRoute = AppRoutes.splash;
 
   static List<GetPage> routes =[
     GetPage(
@@ -88,7 +100,7 @@ class AppPages {
         binding: ReviewBinding()),
     GetPage(
         name: AppRoutes.moreaboutyou,
-        page: () => const MoreAboutYouUi(),
+        page: () =>  MoreAboutYouUi(),
         binding: MoreAboutYouBinding()),
     GetPage(
         name: AppRoutes.letverified,
@@ -96,7 +108,7 @@ class AppPages {
         binding: LetGetYouVerifiedBinding()),
 GetPage(
         name: AppRoutes.trainerPassport,
-        page: () => const TrainerPassportUI(),
+        page: () =>  TrainerPassportUI(),
         binding: TrainerPassportBinding()),
     GetPage(
         name: AppRoutes.bookingrequest,
@@ -127,6 +139,10 @@ GetPage(
         page: ()=>  const BookingDetailsUi(),
         binding: BookingDetailsBinding()),
     GetPage(
+        name: AppRoutes.sessionComplete,
+        page: ()=>  const SessionCompleteUI(),
+        binding: SessionCompleteBinding()),
+  GetPage(
         name: AppRoutes.booking,
         page: ()=>    BookingUi(),
         binding: BookingBinding()),

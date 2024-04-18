@@ -3,12 +3,14 @@ import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
 
 class TrainerPassportUI extends StatelessWidget {
-  const TrainerPassportUI({super.key});
+
+
+   TrainerPassportUI({super.key});
 
   @override
   Widget build(BuildContext context) {
     TrainerPassportController controller = Get.find();
-
+    String? username;
     return Scaffold(
       appBar: myAppBar(
           title: Text(
@@ -33,7 +35,7 @@ class TrainerPassportUI extends StatelessWidget {
               color: AppColors.grey3,
             ),
             Text(
-              "Passport Name",
+              'Passport name',
               style: Theme.of(context)
                   .textTheme
                   .labelLarge!
@@ -162,7 +164,7 @@ class TrainerPassportUI extends StatelessWidget {
                           .copyWith(color: AppColors.black),
                     ),
                     onTap: () {
-                      Get.toNamed(AppRoutes.selectcategory);
+                      Get.back();
                     }),
               ),
             )
