@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:endoorphin_trainer/utils/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -30,6 +31,7 @@ class SessionRunningController extends GetxController {
       if (!isPaused.value) {
         if (remainingSeconds == 0) {
           timer.cancel();
+          Get.toNamed(AppRoutes.sessionComplete);
         } else {
           int minutes = remainingSeconds ~/ 60;
           int seconds = (remainingSeconds % 60);

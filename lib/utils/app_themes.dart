@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 class AppThemes {
   static ThemeData appTheme = ThemeData(
-
+    scaffoldBackgroundColor: AppColors.backgroundBlack,
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.backgroundBlack,
       ),
@@ -15,8 +15,8 @@ class AppThemes {
       colorScheme: const ColorScheme.dark(
         primary: AppColors.yellow,
         onPrimary: AppColors.impgrey,
-        background: AppColors.backgroundBlack,
-        onBackground: AppColors.backgroundBlack,
+        surface: AppColors.backgroundBlack,
+        onSurface: AppColors.backgroundBlack,
         primaryContainer: AppColors.impgrey,
         onPrimaryContainer: AppColors.impgrey,
       ),

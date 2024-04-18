@@ -60,7 +60,7 @@ class ProfileUI extends StatelessWidget {
                 child:
                 InkWell(
                   onTap: (){
-                    // Get.toNamed(AppRoutes.account);
+                    Get.toNamed(AppRoutes.account);
                   },
                   child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -88,7 +88,7 @@ class ProfileUI extends StatelessWidget {
             ),
             InkWell(
               onTap: (){
-                // Get.toNamed(AppRoutes.selectPaymentMethod);
+                Get.toNamed(AppRoutes.document);
               },
               child: Container(
                   height: Get.height*0.05,
@@ -165,7 +165,7 @@ class ProfileUI extends StatelessWidget {
                 ),
                 child: InkWell(
                   onTap: (){
-                    // Get.toNamed(AppRoutes.wallet);
+                    Get.toNamed(AppRoutes.support);
                   },
                   child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -200,7 +200,7 @@ class ProfileUI extends StatelessWidget {
                 ),
                 child: InkWell(
                   onTap: (){
-                    // Get.toNamed(AppRoutes.previousSessions);
+                    Get.toNamed(AppRoutes.earning);
                   },
                   child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

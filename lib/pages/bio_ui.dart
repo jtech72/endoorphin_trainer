@@ -75,69 +75,7 @@ class BioUi extends StatelessWidget {
               ),
               onTap: () {
 
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      backgroundColor: AppColors.white,
-                      title: Column(
-                        children: [
-                          SizedBox(
-                            height: Get.height * 0.03,
-                          ),
-                          Image.asset(
-                            ImagesPaths.cooltick,
-                            scale: 4,
-                          ),
-                          SizedBox(
-                            height: Get.height * 0.02,
-                          ),
-                          // Text(
-                          //   'Cancellation Successful',
-                          //   style: Theme.of(context)
-                          //       .textTheme
-                          //       .headlineSmall!
-                          //       .copyWith(color: AppColors.black),
-                          // )
-                        ],
-                      ),
-                      content: SizedBox(
-                          width: Get
-                              .width, // Set width as per your requirement
-                          height: Get.height *
-                              0.07, // Set height as per your requirement
-                          child: Text(
-                            "Your onboarding process has been successfully completed. You’ll get notified for further action.",
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelMedium!
-                                .copyWith(color: AppColors.black),
-                            textAlign: TextAlign.center,
-                          )),
-                      actions: [
-                        Center(
-                          child: InkButton(
-                              child: Text(
-                                'OK',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineSmall!
-                                    .copyWith(color: AppColors.black),
-                              ),
-                              onTap: () {
-                                Get.offAllNamed(AppRoutes.login);
-                              },
-                              height: 35,
-                              width: 95),
-                        ),
-                      ],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    );
-                  },
-                );
-                Get.toNamed(AppRoutes.bio);
+                Get.toNamed(AppRoutes.selectcategory);
               }).paddingOnly(bottom: 30)
         ],
       ).paddingOnly(left: 18,right: 18),

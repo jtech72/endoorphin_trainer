@@ -1,10 +1,15 @@
+import 'dart:developer';
+
 import 'package:endoorphin_trainer/controllers/more_about_you_controller.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:endoorphin_trainer/pages/trainer_passport_ui.dart';
 import 'package:flutter/material.dart';
 import '../utils/exports.dart';
 
 class MoreAboutYouUi extends StatelessWidget {
-  const MoreAboutYouUi({super.key});
+  List<String>categoryname=['Emirates ID','Passport','Certification'];
+
+
+   MoreAboutYouUi({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +33,7 @@ class MoreAboutYouUi extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5)
               ),
               child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: 4,
                 itemBuilder: (context,index){
                   return Row(
@@ -62,11 +67,13 @@ class MoreAboutYouUi extends StatelessWidget {
                       controller.selectedIndex.value = index;
                       // Use Get.toNamed to navigate to the desired routes based on the selected index
                       if (controller.selectedIndex.value == 0) {
-                        print('1');
+                        Get.toNamed(AppRoutes.trainerPassport);
                       } else if (controller.selectedIndex.value == 1) {
+                        controller.isButtonVisible.value = true;
+                        log(controller.isButtonVisible.value.toString());
                         Get.toNamed(AppRoutes.trainerPassport);
                       } else {
-                        print('3');
+                        Get.toNamed(AppRoutes.trainerPassport);
                       }
                     },
                     child: Container(
@@ -103,14 +110,31 @@ class MoreAboutYouUi extends StatelessWidget {
                             children: [
                               const Icon(Icons.arrow_forward_ios_outlined,color: AppColors.impgrey,).paddingOnly(right: 15),
                             ],
-                          )
+                          ),
                         ],
                       ),
                     ).paddingOnly(bottom: Get.height*0.02),
                   );
 
               },itemCount: controller.categoryname.length,)
-            )
+            ),
+
+            Center(child: Obx(
+              ()=> Visibility(
+                visible: controller.isButtonVisible.value,
+                child: InkButton(
+                    child: Text('Continue',
+                      style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black),),
+                    onTap: (){
+                    Get.back(result: true);
+                    Get.toNamed(AppRoutes.bio)?.then((result) {
+                      if (result != null && result == true) {
+                        controller.showButton(true); // Show the button when returning from another page
+                      }
+                    });
+                    }),
+              ),
+            ))
           ],
         ),
       ),

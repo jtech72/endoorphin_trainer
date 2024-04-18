@@ -7,6 +7,16 @@ List<String>item =[
   'Correct Naming: Upload each document with its respective name.',
   'Alignment: Properly align the camera for accurate capture.',
   'Review & Submit: Double-check all documents before submitting.'];
-  List<String>categoryname=['Certification','Passport','Emirates ID'];
-List<String>categorysubname=['Upload your Certification ...','Upload your passport ...','Upload your Emirates ID ...'];
+  List<String>categoryname=['Emirates ID','Passport','Certification'];
+List<String>categorysubname=['Upload your Emirates ID ...','Upload your passport ...','Upload your Certification ...'];
+
+
+
+
+  RxBool isButtonVisible = false.obs;
+
+  void showButton(bool value) {
+    isButtonVisible.value = value;
+  }
 }
+

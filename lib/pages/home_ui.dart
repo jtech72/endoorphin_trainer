@@ -105,46 +105,41 @@ class HomeUi extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
-                        GestureDetector(
-                          onTap: (){
-                            Get.toNamed(AppRoutes.account);
-                          },
-                          child: Container(
-                            height: Get.height*.16,
-                            width: Get.width*.42,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: AppColors.greyButton,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  alignment: Alignment.center,
-                                  height: 50,
-                                  width: 50,
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: AppColors.lightBlack,
-                                  ),
-                                  child: Text(
-                                    "50",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineLarge
-                                        ?.copyWith(
-                                            color: AppColors.yellow,
-                                            fontWeight: FontWeight.w600),
-                                  ),
+                        Container(
+                          height: Get.height*.16,
+                          width: Get.width*.42,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: AppColors.greyButton,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                alignment: Alignment.center,
+                                height: 50,
+                                width: 50,
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColors.lightBlack,
                                 ),
-                                Text(index == 3 ? "Upcoming" : "Total",
-                                    style: Theme.of(context).textTheme.titleLarge),
-                                Text(controller.quickGlanceList[index],
-                                    style: Theme.of(context).textTheme.titleLarge),
+                                child: Text(
+                                  "50",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineLarge
+                                      ?.copyWith(
+                                          color: AppColors.yellow,
+                                          fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                              Text(index == 3 ? "Upcoming" : "Total",
+                                  style: Theme.of(context).textTheme.titleLarge),
+                              Text(controller.quickGlanceList[index],
+                                  style: Theme.of(context).textTheme.titleLarge),
 
-                              ],
-                            ),
+                            ],
                           ),
                         ),
                       ],
