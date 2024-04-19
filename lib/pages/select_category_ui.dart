@@ -218,7 +218,7 @@ class SelectCategoryUI extends StatelessWidget {
                                         .copyWith(color: AppColors.black),
                                   ),
                                   onTap: () {
-                                    Get.offAllNamed(AppRoutes.login);
+                                    Get.back();
                                   },
                                   height: 35,
                                   width: 95),

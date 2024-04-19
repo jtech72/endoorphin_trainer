@@ -123,7 +123,7 @@ class ReviewUi extends StatelessWidget {
                              .headlineSmall
                              ?.copyWith(color: AppColors.black),
                        ), onTap: (){
-                         Get.offAllNamed(AppRoutes.home);
+                         Get.offAllNamed(AppRoutes.bottomNavigation);
 
                        }),
                      )

@@ -12,6 +12,9 @@ import 'package:endoorphin_trainer/pages/trainer_passport_ui.dart';
 import 'package:endoorphin_trainer/pages/withdraw_ui.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 
+import '../bindings/bottom_navigation_bar_binding.dart';
+import '../pages/bottom_navigation_bar_ui.dart';
+
 
 
 
@@ -146,5 +149,9 @@ GetPage(
         name: AppRoutes.booking,
         page: ()=>    BookingUi(),
         binding: BookingBinding()),
+    GetPage(
+        name: AppRoutes.bottomNavigation,
+        page: () => BottomNavigationBarUI(),
+        binding: BottomNavigationBarBinding()),
   ];
 }

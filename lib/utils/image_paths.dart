@@ -43,6 +43,14 @@ class ImagesPaths {
   static const String bell= "${baseUrl}img_bell_dot.png";
   static const String yoga= "${baseUrl}img_yoga.png";
   static const String eye= "${baseUrl}img_eye.png";
+  static const String homecard= "${baseUrl}img_home_card.png";
+  static const String home = "${baseUrl}home.png";
+  static const String achiv= "${baseUrl}achiv.png";
+  static const String finger = "${baseUrl}finger.png";
+  static const String men = "${baseUrl}men.png";
+  static const String menu= "${baseUrl}menu.png";
+
+
 
 
 

@@ -182,6 +182,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
+  flutter_page_view_indicator:
+    dependency: "direct main"
+    description:
+      name: flutter_page_view_indicator
+      sha256: "4f7bb81f58a35abe67f2710d2d15d6d1f2d4750d120dc6e4ece5d9a91225e3bb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.5"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -857,10 +865,10 @@ packages:
     dependency: transitive
     description:
       name: vm_service
-      sha256: a2662fb1f114f4296cf3f5a50786a2d888268d7776cf681aa17d660ffa23b246
+      sha256: a75f83f14ad81d5fe4b3319710b90dec37da0e22612326b696c9e1b8f34bbf48
       url: "https://pub.dev"
     source: hosted
-    version: "14.0.0"
+    version: "14.2.0"
   web:
     dependency: transitive
     description:
