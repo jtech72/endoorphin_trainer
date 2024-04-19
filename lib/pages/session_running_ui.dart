@@ -1,5 +1,7 @@
 import 'dart:developer';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../controllers/session_running_controller.dart';
 import '../utils/exports.dart';
@@ -11,6 +13,7 @@ class SessionRunningUi extends StatelessWidget {
     SessionRunningController controller = Get.find();
     return Scaffold(
         body: SlidingUpPanel(
+          minHeight: 100,
      controller: controller.panelController,
       maxHeight: Get.height,
       color: Colors.transparent,
@@ -155,34 +158,37 @@ class SessionRunningUi extends StatelessWidget {
                     ),
                   ),
                 ),
-              )
+              ).paddingOnly(bottom: 6)
             ],
           ),
         ],),
       collapsed: Container(
         color: AppColors.black,
-        height: Get.height * .11,
+        height: Get.height * .15,
         width: Get.width,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+
           children: [
-            Transform.translate(
-                offset: const Offset(0, 21),
-                child: const Icon(
-                  Icons.keyboard_arrow_up_outlined,
-                  size: 30,
-                )),
-            const Icon(
-              Icons.keyboard_arrow_up_outlined,
-              size: 30,
-            ).paddingOnly(bottom: 0),
+            Transform.rotate(angle:  11.0,
+            child: Image.asset("assets/images/giphy.gif",scale: 9,)).paddingOnly(bottom: 8),
+            // Icon(
+            //   Icons.keyboard_arrow_up_outlined,
+            //   size: 30,
+            // ),
+            //  Icon(
+            //   Icons.keyboard_arrow_up_outlined,
+            //   size: 30,
+            //              ),
+            //  Icon(
+            //   Icons.keyboard_arrow_up_outlined,
+            //   size: 30,
+            //              ),
             Text(
               "Swipe up for Details",
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: AppColors.lightGrey1),
             )
           ],
-        ).paddingOnly(bottom: 20),
+        ).paddingOnly(bottom: 10),
       ),
       panelBuilder: (c) {
         return Container(
@@ -213,7 +219,7 @@ class SessionRunningUi extends StatelessWidget {
                     onTap: (){
                       log("message");
                       controller.panelController.close();
-            
+
                     },
                     child: Container(
                         height: 30,
@@ -441,4 +447,4 @@ class SessionRunningUi extends StatelessWidget {
       },
     ));
   }
-}
+}//

@@ -24,8 +24,6 @@ class BookingRequsetUi extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Image.asset(ImagesPaths.hammer)
-                            .paddingOnly(bottom: Get.height * 0.02),
                         Text(
                           "Type your “icebreaker” given by your\ncustomer to start your Fitness session!",
                           style: Theme.of(context).textTheme.headlineSmall,
@@ -70,6 +68,7 @@ class BookingRequsetUi extends StatelessWidget {
                               width: Get.width*.6,
                               child: SlideAction(
                                 sliderButtonYOffset:-4,
+                                animationDuration: Durations.medium4,
                                 innerColor: AppColors.black,
                                 sliderButtonIcon: Image.asset(
                                   ImagesPaths.send2,
