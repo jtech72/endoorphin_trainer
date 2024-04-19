@@ -1,15 +1,5 @@
-import 'package:endoorphin_trainer/bindings/booking_details_binding.dart';
-import 'package:endoorphin_trainer/bindings/booking_request_binding.dart';
-import 'package:endoorphin_trainer/bindings/document_binding.dart';
 import 'package:endoorphin_trainer/bindings/session_complete_binding.dart';
-import 'package:endoorphin_trainer/bindings/support_binding.dart';
-import 'package:endoorphin_trainer/bindings/trainer_passport_binding.dart';
-import 'package:endoorphin_trainer/bindings/withdraw_binding.dart';
-import 'package:endoorphin_trainer/pages/document_ui.dart';
 import 'package:endoorphin_trainer/pages/session_complete_ui.dart';
-import 'package:endoorphin_trainer/pages/support_ui.dart';
-import 'package:endoorphin_trainer/pages/trainer_passport_ui.dart';
-import 'package:endoorphin_trainer/pages/withdraw_ui.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 
 import '../bindings/bottom_navigation_bar_binding.dart';
@@ -111,7 +101,7 @@ class AppPages {
         binding: LetGetYouVerifiedBinding()),
 GetPage(
         name: AppRoutes.trainerPassport,
-        page: () =>  TrainerPassportUI(),
+        page: () =>  const TrainerPassportUI(),
         binding: TrainerPassportBinding()),
     GetPage(
         name: AppRoutes.bookingrequest,
@@ -147,7 +137,7 @@ GetPage(
         binding: SessionCompleteBinding()),
   GetPage(
         name: AppRoutes.booking,
-        page: ()=>    BookingUi(),
+        page: ()=>    const BookingUi(),
         binding: BookingBinding()),
     GetPage(
         name: AppRoutes.bottomNavigation,

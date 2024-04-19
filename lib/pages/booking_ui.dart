@@ -8,7 +8,7 @@ import '../utils/app_routes.dart';
 import '../utils/image_paths.dart'; // assuming this file contains myTabBar function
 
 class BookingUi extends StatefulWidget {
-  const BookingUi({Key? key}) : super(key: key);
+  const BookingUi({super.key});
 
   @override
   State<BookingUi> createState() => _BookingUiState();
