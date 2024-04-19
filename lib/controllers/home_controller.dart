@@ -4,4 +4,6 @@ class HomeController extends GetxController {
   RxBool isTrainerOnline = false.obs;
   List<String> quickGlanceList = ["Bookings","Sessions","Sessions","Sessions","Revenue"];
   RxInt selectedIndex = (-1).obs;
+
+
 }

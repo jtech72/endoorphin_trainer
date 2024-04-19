@@ -2,6 +2,9 @@ import 'package:endoorphin_trainer/bindings/session_complete_binding.dart';
 import 'package:endoorphin_trainer/pages/session_complete_ui.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 
+import '../bindings/bottom_navigation_bar_binding.dart';
+import '../pages/bottom_navigation_bar_ui.dart';
+
 
 
 
@@ -136,5 +139,9 @@ GetPage(
         name: AppRoutes.booking,
         page: ()=>    const BookingUi(),
         binding: BookingBinding()),
+    GetPage(
+        name: AppRoutes.bottomNavigation,
+        page: () => BottomNavigationBarUI(),
+        binding: BottomNavigationBarBinding()),
   ];
 }

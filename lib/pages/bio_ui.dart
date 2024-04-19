@@ -75,7 +75,7 @@ class BioUi extends StatelessWidget {
               ),
               onTap: () {
 
-                Get.toNamed(AppRoutes.selectcategory);
+                Get.toNamed(AppRoutes.login);
               }).paddingOnly(bottom: 30)
         ],
       ).paddingOnly(left: 18,right: 18),

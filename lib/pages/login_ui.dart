@@ -99,7 +99,7 @@ class LoginUi extends StatelessWidget {
                   .textTheme
                   .headlineSmall!
                   .copyWith(color: AppColors.black),), onTap: (){
-                Get.toNamed(AppRoutes.home);
+                Get.toNamed(AppRoutes.bottomNavigation);
               }),
             ],
           )

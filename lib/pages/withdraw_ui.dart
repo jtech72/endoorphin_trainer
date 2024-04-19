@@ -238,7 +238,7 @@ class WithdrawUI extends StatelessWidget {
                                               .copyWith(color: AppColors.black),
                                         ),
                                         onTap: () {
-                                          Get.offAllNamed(AppRoutes.home);
+                                          Get.offAllNamed(AppRoutes.bottomNavigation);
                                         },
                                         height: 35,
                                         width: 95),
