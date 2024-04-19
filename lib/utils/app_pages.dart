@@ -8,7 +8,7 @@ import 'package:endoorphin_trainer/utils/exports.dart';
 
 
 class AppPages {
-  static  const initialRoute = AppRoutes.booking;
+  static  const initialRoute = AppRoutes.splash;
 
   static List<GetPage> routes =[
     GetPage(
