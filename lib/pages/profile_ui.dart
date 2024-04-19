@@ -123,7 +123,7 @@ class ProfileUI extends StatelessWidget {
             ),
             InkWell(
               onTap: (){
-                // Get.toNamed(AppRoutes.memberShip);
+                Get.toNamed(AppRoutes.bookingrequest);
               },
               child: Container(
                   height: Get.height*0.05,

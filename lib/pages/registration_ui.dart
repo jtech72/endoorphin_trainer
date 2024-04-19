@@ -174,7 +174,7 @@ class RegistrationUi extends StatelessWidget {
                         children: [
                           Text(
                             controller.selectedOption.value,
-                            style: Theme.of(context).textTheme.subtitle1,
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                           DropdownButton<String>(
                             icon: Icon(Icons.keyboard_arrow_down,size: 25,color: AppColors.black,),
@@ -211,7 +211,7 @@ class RegistrationUi extends StatelessWidget {
                         children: [
                           Text(
                             controller.selectedOption1.value,
-                            style: Theme.of(context).textTheme.subtitle1,
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                           DropdownButton<String>(
                             icon: Icon(Icons.keyboard_arrow_down,size: 25,color: AppColors.black,),
