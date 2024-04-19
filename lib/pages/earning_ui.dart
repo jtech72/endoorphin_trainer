@@ -151,7 +151,7 @@ mainAxisAlignment: MainAxisAlignment.spaceBetween,
             ),
           ).paddingOnly( top: 15),
         ],
-      ).paddingOnly(left: 25, right: 20, top: 15),
+      ).paddingOnly(left: 25, right: 25, top: 15),
     );
   }
 }

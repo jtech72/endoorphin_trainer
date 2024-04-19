@@ -29,7 +29,7 @@ class SelectCategoryUI extends StatelessWidget {
                           scale: 1.3,
                           child: Checkbox(
                             checkColor: Colors.black,
-                            activeColor: AppColors.yellow,side: BorderSide(
+                            activeColor: AppColors.yellow,side: const BorderSide(
                             color: AppColors.grey2,width: 2
                           ),
                             value: controller.selectedReason.value ==

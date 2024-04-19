@@ -1,6 +1,5 @@
 
 import 'package:endoorphin_trainer/controllers/home_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../utils/exports.dart';
 class HomeUi extends StatelessWidget {
@@ -67,7 +66,7 @@ class HomeUi extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Transform.translate(
-              offset: Offset(10,0),
+              offset: const Offset(10,0),
               child: RichText(
                   text: TextSpan(
                       text: "Quick ",
@@ -82,7 +81,7 @@ class HomeUi extends StatelessWidget {
                         )
                       ])).paddingOnly(bottom: 15),
             ),
-            Container(
+            SizedBox(
               height: Get.height * 0.53,
               width: Get.width,
               child: Padding(
@@ -141,12 +140,12 @@ class HomeUi extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 8), // Adjust the gap here
+                            const SizedBox(height: 8), // Adjust the gap here
                             Text(
                               index == 3 ? "Upcoming" : "Total",
                               style: Theme.of(context).textTheme.titleLarge,
                             ),
-                            SizedBox(height: 4), // Adjust the gap here
+                            const SizedBox(height: 4), // Adjust the gap here
                             Text(
                               controller.quickGlanceList[index],
                               style: Theme.of(context).textTheme.titleLarge,

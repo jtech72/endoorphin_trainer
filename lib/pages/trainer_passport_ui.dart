@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class TrainerPassportUI extends StatelessWidget {
 
 
-   TrainerPassportUI({super.key});
+   const TrainerPassportUI({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,3 @@
-import 'package:endoorphin_trainer/utils/app_colors.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
 

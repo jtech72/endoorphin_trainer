@@ -10,10 +10,10 @@ myTabBar (TabController tabController ,BuildContext context){
         indicatorSize: TabBarIndicatorSize.label,
         indicatorWeight: 1,
         tabs:  [
-          Text("Upcoming",style: TextStyle(fontSize: 10),).paddingOnly(bottom: 10),
-          Text("Ongoing",style: TextStyle(fontSize: 10)).paddingOnly(bottom: 10),
-          Text("Completed",style: TextStyle(fontSize: 10)).paddingOnly(bottom: 10),
-          Text("Canceled",style: TextStyle(fontSize: 10)).paddingOnly(bottom: 10),
+          const Text("Upcoming",style: TextStyle(fontSize: 10),).paddingOnly(bottom: 10),
+          const Text("Ongoing",style: TextStyle(fontSize: 10)).paddingOnly(bottom: 10),
+          const Text("Completed",style: TextStyle(fontSize: 10)).paddingOnly(bottom: 10),
+          const Text("Canceled",style: TextStyle(fontSize: 10)).paddingOnly(bottom: 10),
         ],
 
       ));
