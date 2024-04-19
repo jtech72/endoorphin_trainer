@@ -40,16 +40,11 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         centerTitle: true,
-        leading: GestureDetector(
-          onTap: () {
-            Get.toNamed(AppRoutes.bookingrequest); // assuming you have AppRoutes defined
-          },
-          child: const Icon(
-            Icons.menu,
-            size: 28,
-            color: Colors.white,
-          ).paddingOnly(left: 15),
-        ),
+        leading: const Icon(
+          Icons.menu,
+          size: 28,
+          color: Colors.white,
+        ).paddingOnly(left: 15),
         actions: [
           Obx(
                 () => InkWell(
