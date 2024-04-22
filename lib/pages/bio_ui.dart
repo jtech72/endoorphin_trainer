@@ -36,7 +36,7 @@ class BioUi extends StatelessWidget {
                     contentPadding:
                     const EdgeInsets.only(bottom: 10, left: 10, right: 10),
                     fillColor: AppColors.yellowishWhite,
-                    hintText: 'Enter Your Reason',
+                    hintText: 'Tell us something about yourself',
                     hintStyle: Theme.of(context).textTheme.labelMedium,
                     border: InputBorder.none,
                     enabledBorder: OutlineInputBorder(

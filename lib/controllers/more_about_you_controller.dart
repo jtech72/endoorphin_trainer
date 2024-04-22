@@ -12,7 +12,6 @@ List<String>categorysubname=['Upload your Emirates ID ...','Upload your passport
 
 
 
-
   RxBool isButtonVisible = false.obs;
 
   void showButton(bool value) {

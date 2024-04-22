@@ -101,7 +101,7 @@ class AppPages {
         binding: LetGetYouVerifiedBinding()),
 GetPage(
         name: AppRoutes.trainerPassport,
-        page: () =>  const TrainerPassportUI(),
+        page: () =>   TrainerPassportUI(),
         binding: TrainerPassportBinding()),
     GetPage(
         name: AppRoutes.bookingrequest,

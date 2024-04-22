@@ -184,7 +184,7 @@ class HomeUiState extends State<HomeUi> {
                             } else if (controller.selectedIndex.value == 3) {
                               Get.toNamed(AppRoutes.bookingdetails);
                             } else {
-                              Get.toNamed(AppRoutes.booking);
+                              Get.toNamed(AppRoutes.bookingdetails);
                             }
                           },
                           child: Container(
@@ -193,6 +193,7 @@ class HomeUiState extends State<HomeUi> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: AppColors.greyButton,
+
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -216,7 +217,7 @@ class HomeUiState extends State<HomeUi> {
                                 ),
                                 SizedBox(height: 8), // Adjust the gap here
                                 Text(
-                                  index == 3 ? "Upcoming" : "Total",
+                                  index == 3 ? "Upcoming" :index == 2 ? "Current" :"Total",
                                   style: Theme.of(context).textTheme.titleLarge,
                                 ),
                                 SizedBox(height: 4), // Adjust the gap here
