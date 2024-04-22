@@ -15,7 +15,7 @@ class LoginUi extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Username/Phone Number",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+              Text("phone number/email",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
               Container(
                 height: 45,
                 decoration: BoxDecoration(
@@ -41,7 +41,7 @@ class LoginUi extends StatelessWidget {
                     contentPadding:
                     const EdgeInsets.only(bottom: 3, left: 15),
 
-                    hintText: "Enter username/phone number",
+                    hintText: "Enter phone number/email",
                     alignLabelWithHint: true, // Center the hintText
                   ),
                 ),
@@ -86,7 +86,7 @@ class LoginUi extends StatelessWidget {
                       onTap: (){
                         Get.toNamed(AppRoutes.forgotPassword);
                       },
-                      child: Text("Forgot password ?",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 12),).paddingOnly(top: 8,bottom: 8)),
+                      child: Text("Forgot password?",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 12),).paddingOnly(top: 8,bottom: 8)),
                 ],
               ),
 

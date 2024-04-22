@@ -1,5 +1,6 @@
 
 import 'package:endoorphin_trainer/controllers/registration_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/exports.dart';
@@ -18,15 +19,18 @@ class RegistrationUi extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Row(
-              children: [
-                Text("Welcome to ", style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: Colors.white),),
-                Transform.translate(
-                  offset: const Offset(0, -2),
-                  child: Image.asset(ImagesPaths.logoimg,scale: 4.2,),
-                ),
-        
-              ],
+            Transform.translate(
+              offset: Offset(0,0),
+              child: Row(
+                children: [
+                  Text("Welcome to ", style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: Colors.white),),
+                  Transform.translate(
+                    offset: const Offset(0, -2),
+                    child: Image.asset(ImagesPaths.logoimg,scale: 4.2,),
+                  ),
+
+                ],
+              ),
             ),
              Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry.",style: Theme.of(context).textTheme.displayLarge,).paddingOnly(bottom: 30),
             Container(

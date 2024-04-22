@@ -29,7 +29,7 @@ class OtpUI extends StatelessWidget {
               style: Theme.of(context).textTheme.labelLarge,
             ),
             SizedBox(
-              height: Get.height * 0.04,
+              height: Get.height * 0.08,
             ),
             PinCodeTextField(
                 textStyle: Theme.of(context)
@@ -61,14 +61,15 @@ class OtpUI extends StatelessWidget {
                 backgroundColor: AppColors.backgroundBlack,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 length: 6),
-            // Center(
-            //   child: Obx(
-            //     ()=> Text(
-            //       '${controller.time.value} ',
-            //       style: Theme.of(context).textTheme.subtitle1!.copyWith(color: AppColors.yellow, fontSize:14,fontWeight: FontWeight.w700),
-            //     ),
-            //   ),
-            // ),
+            Center(
+              child: Obx(
+                    ()=> Text(
+                  controller.time.value == "00:01"?"00:00":controller.time.value.toString(),
+                  style: Theme.of(context).textTheme.subtitle1!.copyWith(color: AppColors.yellow, fontSize:14,fontWeight: FontWeight.w700),
+                ),
+              ),
+            ),
+
             SizedBox(
               height: Get.height * 0.15,
             ),
@@ -87,7 +88,8 @@ class OtpUI extends StatelessWidget {
             Center(
               child: InkButton(
                 onTap: () {
-                  Get.toNamed(AppRoutes.registration);
+
+                  Get.offAllNamed(AppRoutes.registration);
                   // controller.onVerify();
                 },
                 child: Text('Verify',

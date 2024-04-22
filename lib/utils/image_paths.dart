@@ -8,6 +8,7 @@ class ImagesPaths {
   static const String upload = "${baseUrl}img_upload.png";
   static const String dropdown = "${baseUrl}img_drop_down.png";
   static const String cooltick = "${baseUrl}ic_cooltick.png";
+  static const String cooltick1 = "${baseUrl}cooltick1.png";
   static const String profile = "${baseUrl}img_profile.png";
   static const String boxing = "${baseUrl}img_boxing.png";
   static const String profilePic = "${baseUrl}img_profilepic.png";

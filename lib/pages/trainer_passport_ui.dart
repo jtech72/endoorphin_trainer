@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 
 class TrainerPassportUI extends StatelessWidget {
 
-
-   const TrainerPassportUI({super.key});
+    TrainerPassportUI({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +13,7 @@ class TrainerPassportUI extends StatelessWidget {
     return Scaffold(
       appBar: myAppBar(
           title: Text(
-            'Passport',
+            controller.documentIndex == 0? "Emirates ID":controller.documentIndex == 1?'Passport':"Certification",
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           context: context),
@@ -35,7 +34,8 @@ class TrainerPassportUI extends StatelessWidget {
               color: AppColors.grey3,
             ),
             Text(
-              'Passport name',
+              controller.documentIndex == 0? "Emirates ID name":controller.documentIndex == 1?'Passport name':"Certification name",
+
               style: Theme.of(context)
                   .textTheme
                   .labelLarge!
@@ -64,7 +64,7 @@ class TrainerPassportUI extends StatelessWidget {
                   hintStyle: Theme.of(context).textTheme.labelMedium,
                   contentPadding: const EdgeInsets.only(bottom: 3, left: 15),
 
-                  hintText: "Enter Passport Name",
+                  hintText: controller.documentIndex == 0? " Enter Emirates ID name":controller.documentIndex == 1?'Enter Passport name':"Enter Certification name",
                   alignLabelWithHint: true, // Center the hintText
                 ),
               ),
@@ -73,7 +73,7 @@ class TrainerPassportUI extends StatelessWidget {
               height: Get.height * 0.01,
             ),
             Text(
-              "Passport Number",
+                controller.documentIndex == 0? "Emirates ID Number":controller.documentIndex == 1?'Passport Number':"Certification Number",
               style: Theme.of(context)
                   .textTheme
                   .labelLarge!
@@ -102,7 +102,7 @@ class TrainerPassportUI extends StatelessWidget {
                   hintStyle: Theme.of(context).textTheme.labelMedium,
                   contentPadding: const EdgeInsets.only(bottom: 3, left: 15),
 
-                  hintText: "Enter Passport Number",
+                  hintText: controller.documentIndex == 0? " Enter Emirates ID Number":controller.documentIndex == 1?'Enter Passport Number':"Enter Certification Number",
                   alignLabelWithHint: true, // Center the hintText
                 ),
               ),
@@ -111,7 +111,7 @@ class TrainerPassportUI extends StatelessWidget {
               height: Get.height * 0.01,
             ),
             Text(
-              "Upload Passport Photo",
+                controller.documentIndex == 0? " Upload Emirates ID Photo":controller.documentIndex == 1?'Upload Passport Photo':"Upload Certification Photo",
               style: Theme.of(context)
                   .textTheme
                   .labelLarge!
