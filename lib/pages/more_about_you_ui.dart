@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:endoorphin_trainer/controllers/more_about_you_controller.dart';
-import 'package:endoorphin_trainer/pages/trainer_passport_ui.dart';
 import 'package:flutter/material.dart';
 import '../utils/exports.dart';
 

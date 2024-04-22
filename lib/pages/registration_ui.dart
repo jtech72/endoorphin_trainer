@@ -229,9 +229,9 @@ class RegistrationUi extends StatelessWidget {
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                           DropdownButton<String>(
-                            icon: Icon(Icons.keyboard_arrow_down,size: 25,color: AppColors.black,),
+                            icon: const Icon(Icons.keyboard_arrow_down,size: 25,color: AppColors.black,),
 
-                            underline: SizedBox(),
+                            underline: const SizedBox(),
                             dropdownColor: AppColors.yellowishWhite,
                             onChanged: (selectedValue) {
                               controller.selectedOption.value = selectedValue!;
@@ -272,7 +272,8 @@ class RegistrationUi extends StatelessWidget {
                           DropdownButton<String>(
                              icon: Icon(Icons.keyboard_arrow_down,size: 25,color: AppColors.black,),
 
-                            underline: SizedBox(),
+
+                            underline: const SizedBox(),
                             dropdownColor: AppColors.yellowishWhite,
                             onChanged: (selectedValue) {
                               controller.selectedOption1.value = selectedValue!;
@@ -314,7 +315,7 @@ void _showDropdown(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Select an Option'),
+        title: const Text('Select an Option'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: controller.dataList.map((String option) {

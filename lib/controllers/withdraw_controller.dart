@@ -5,6 +5,7 @@ class WithdrawController extends GetxController{
   var isChecked1 = false.obs;
   var isChecked2 = false.obs;
   var isChecked3 = false.obs;
+  RxInt selectedIndex = 0.obs;
 
   void toggleCheckbox1() {
     isChecked1.value = !isChecked1.value;
