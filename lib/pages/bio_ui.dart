@@ -8,20 +8,38 @@ class BioUi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar:  myAppBar(
+          title: Text('Bio',
+            style: Theme.of(context).textTheme.headlineSmall,),
+          context: context),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Column(
             children: [
+
               Image.asset(ImagesPaths.profile,scale: 4,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Text("User Name:-",textAlign: TextAlign.start,),
+                      Text("Kunal Thakur",textAlign: TextAlign.start,).paddingOnly(left: 10),
+                    ],
+                  ),
+                  Icon(Icons.edit)
+
+                ],
+              ).paddingOnly(top: 20),
               Row(
                 children: [
                   Text(
                     'Bio',
-                    style: Theme.of(context).textTheme.displayLarge,
+                    // style: Theme.of(context).textTheme.displayLarge,
                   ).paddingOnly(bottom: 12,),
                 ],
-              ),
+              ).paddingOnly(top: 20),
               Container(
                 height: Get.height * 0.15,
                 width: Get.width,
@@ -36,7 +54,7 @@ class BioUi extends StatelessWidget {
                     contentPadding:
                     const EdgeInsets.only(bottom: 10, left: 10, right: 10),
                     fillColor: AppColors.yellowishWhite,
-                    hintText: 'Enter Your Reason',
+                    hintText: 'Tell us something about yourself ',
                     hintStyle: Theme.of(context).textTheme.labelMedium,
                     border: InputBorder.none,
                     enabledBorder: OutlineInputBorder(
