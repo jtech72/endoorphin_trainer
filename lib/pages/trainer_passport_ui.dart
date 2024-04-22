@@ -65,7 +65,28 @@ class TrainerPassportUI extends StatelessWidget {
                   contentPadding: const EdgeInsets.only(bottom: 3, left: 15),
 
                   hintText: controller.documentIndex == 0? " Enter Emirates ID name":controller.documentIndex == 1?'Enter Passport name':"Enter Certification name",
-                  alignLabelWithHint: true, // Center the hintText
+                  alignLabelWithHint: true,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4),
+                    borderSide: const BorderSide(
+                      color: AppColors.yellowishWhite,
+                      width: 1,
+                    ),
+                  ),
+                  disabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4),
+                    borderSide: const BorderSide(
+                      color: AppColors.yellowishWhite,
+                      width: 1,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4),
+                    borderSide: const BorderSide(
+                      color: AppColors.yellowishWhite,
+                      width: 1,
+                    ),
+                  ),/// Center the hintText
                 ),
               ),
             ),
@@ -103,7 +124,28 @@ class TrainerPassportUI extends StatelessWidget {
                   contentPadding: const EdgeInsets.only(bottom: 3, left: 15),
 
                   hintText: controller.documentIndex == 0? " Enter Emirates ID Number":controller.documentIndex == 1?'Enter Passport Number':"Enter Certification Number",
-                  alignLabelWithHint: true, // Center the hintText
+                  alignLabelWithHint: true,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4),
+                    borderSide: const BorderSide(
+                      color: AppColors.yellowishWhite,
+                      width: 1,
+                    ),
+                  ),
+                  disabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4),
+                    borderSide: const BorderSide(
+                      color: AppColors.yellowishWhite,
+                      width: 1,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4),
+                    borderSide: const BorderSide(
+                      color: AppColors.yellowishWhite,
+                      width: 1,
+                    ),
+                  ),/// Center the hintText
                 ),
               ),
             ),

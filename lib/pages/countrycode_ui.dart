@@ -45,7 +45,7 @@ class CountryCodeUI extends StatelessWidget {
                 children: [
                   Container(
                     alignment: Alignment.centerLeft,
-                      width: 121,
+                      width: 119,
                       child: CountryCodePicker(
                          searchDecoration: const InputDecoration(
 
