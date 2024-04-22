@@ -65,10 +65,13 @@ class OtpUI extends StatelessWidget {
               child: Obx(
                     ()=> Text(
                   controller.time.value == "00:01"?"00:00":controller.time.value.toString(),
-                  style: Theme.of(context).textTheme.subtitle1!.copyWith(color: AppColors.yellow, fontSize:14,fontWeight: FontWeight.w700),
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: AppColors.yellow, fontSize:14,fontWeight: FontWeight.w700),
                 ),
               ),
             ),
+            //
+            //
+
 
             SizedBox(
               height: Get.height * 0.15,
