@@ -1,6 +1,5 @@
 
 import 'package:endoorphin_trainer/controllers/registration_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/exports.dart';
@@ -13,26 +12,26 @@ class RegistrationUi extends StatelessWidget {
     RegistrationController controller = Get.find();
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 50,
+        leadingWidth: Get.width * 0.17,
+        centerTitle: false,
         surfaceTintColor: AppColors.black,
         automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Transform.translate(
-              offset: Offset(0,0),
-              child: Row(
-                children: [
-                  Text("Welcome to ", style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: Colors.white),),
-                  Transform.translate(
-                    offset: const Offset(0, -2),
-                    child: Image.asset(ImagesPaths.logoimg,scale: 4.2,),
-                  ),
+            Row(
+              children: [
+                Text("Welcome to ", style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: Colors.white),),
+                Transform.translate(
+                  offset: const Offset(0, -2),
+                  child: Image.asset(ImagesPaths.logoimg,scale: 4.2,),
+                ),
 
-                ],
-              ),
-            ),
-             Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry.",style: Theme.of(context).textTheme.displayLarge,).paddingOnly(bottom: 30),
+              ],
+            ).paddingOnly(bottom: Get.height*0.01),
+             Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry.",style: Theme.of(context).textTheme.displayLarge,).paddingOnly(bottom: Get.height*0.025),
             Container(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,6 +50,10 @@ class RegistrationUi extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: TextField(
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(64),
+                        FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                      ],
 
                       enableInteractiveSelection: true,
                       style: Theme.of(context).textTheme.labelMedium,
@@ -65,8 +68,29 @@ class RegistrationUi extends StatelessWidget {
                         contentPadding:
                         const EdgeInsets.only(bottom: 3, left: 15),
         
-                        hintText: "Enter user name",
-                        alignLabelWithHint: true, // Center the hintText
+                        hintText: "Enter first name",
+                        alignLabelWithHint: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide: const BorderSide(
+                            color: AppColors.yellowishWhite,
+                            width: 1,
+                          ),
+                        ),
+                        disabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide: const BorderSide(
+                            color: AppColors.yellowishWhite,
+                            width: 1,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide: const BorderSide(
+                            color: AppColors.yellowishWhite,
+                            width: 1,
+                          ),
+                        ),// Center the hintText
                       ),
                     ),
                   ),
@@ -84,7 +108,10 @@ class RegistrationUi extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: TextField(
-
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(64),
+                        FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                      ],
                       enableInteractiveSelection: true,
                       style: Theme.of(context).textTheme.labelMedium,
                       cursorColor: AppColors.grey,
@@ -98,8 +125,29 @@ class RegistrationUi extends StatelessWidget {
                         contentPadding:
                         const EdgeInsets.only(bottom: 3, left: 15),
 
-                        hintText: "Enter user name",
-                        alignLabelWithHint: true, // Center the hintText
+                        hintText: "Enter last name",
+                        alignLabelWithHint: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide: const BorderSide(
+                            color: AppColors.yellowishWhite,
+                            width: 1,
+                          ),
+                        ),
+                        disabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide: const BorderSide(
+                            color: AppColors.yellowishWhite,
+                            width: 1,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide: const BorderSide(
+                            color: AppColors.yellowishWhite,
+                            width: 1,
+                          ),
+                        ),// Cen// Center the hintText
                       ),
                     ),
                   ),
@@ -135,7 +183,28 @@ class RegistrationUi extends StatelessWidget {
                         const EdgeInsets.only(bottom: 3, left: 15),
         
                         hintText: "Enter email address",
-                        alignLabelWithHint: true, // Center the hintText
+                        alignLabelWithHint: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide: const BorderSide(
+                            color: AppColors.yellowishWhite,
+                            width: 1,
+                          ),
+                        ),
+                        disabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide: const BorderSide(
+                            color: AppColors.yellowishWhite,
+                            width: 1,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide: const BorderSide(
+                            color: AppColors.yellowishWhite,
+                            width: 1,
+                          ),
+                        ),// Cen// Center the hintText
                       ),
                     ),
                   ),
@@ -171,7 +240,28 @@ class RegistrationUi extends StatelessWidget {
                         const EdgeInsets.only(bottom: 3, left: 15),
         
                         hintText: "Enter password",
-                        alignLabelWithHint: true, // Center the hintText
+                        alignLabelWithHint: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide: const BorderSide(
+                            color: AppColors.yellowishWhite,
+                            width: 1,
+                          ),
+                        ),
+                        disabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide: const BorderSide(
+                            color: AppColors.yellowishWhite,
+                            width: 1,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide: const BorderSide(
+                            color: AppColors.yellowishWhite,
+                            width: 1,
+                          ),
+                        ),// Cen/ Center the hintText
                       ),
                     ),
                   ),
@@ -207,7 +297,28 @@ class RegistrationUi extends StatelessWidget {
                         const EdgeInsets.only(bottom: 3, left: 15),
         
                         hintText: "Enter Confirm password",
-                        alignLabelWithHint: true, // Center the hintText
+                        alignLabelWithHint: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide: const BorderSide(
+                            color: AppColors.yellowishWhite,
+                            width: 1,
+                          ),
+                        ),
+                        disabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide: const BorderSide(
+                            color: AppColors.yellowishWhite,
+                            width: 1,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide: const BorderSide(
+                            color: AppColors.yellowishWhite,
+                            width: 1,
+                          ),
+                        ),// Cen// Center the hintText
                       ),
                     ),
                   ),
@@ -233,7 +344,7 @@ class RegistrationUi extends StatelessWidget {
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                           DropdownButton<String>(
-                            icon: const Icon(Icons.keyboard_arrow_down,size: 25,color: AppColors.black,),
+                            icon: const Icon(Icons.keyboard_arrow_down,size: 32,color: AppColors.black,),
 
                             underline: const SizedBox(),
                             dropdownColor: AppColors.yellowishWhite,
@@ -274,7 +385,7 @@ class RegistrationUi extends StatelessWidget {
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                           DropdownButton<String>(
-                             icon: Icon(Icons.keyboard_arrow_down,size: 25,color: AppColors.black,),
+                             icon: Icon(Icons.keyboard_arrow_down,size: 32,color: AppColors.black,),
 
 
                             underline: const SizedBox(),

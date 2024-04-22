@@ -54,7 +54,7 @@ class ForgotPasswordUI extends StatelessWidget {
                   children: [
                     Container(
                         alignment: Alignment.centerLeft,
-                        width: 112,
+                        width: 119,
                         child: CountryCodePicker(
                             searchDecoration: const InputDecoration(
 
@@ -90,7 +90,7 @@ class ForgotPasswordUI extends StatelessWidget {
                               LengthLimitingTextInputFormatter(64),
                               FilteringTextInputFormatter.deny(RegExp(r'\s')),
                             ],
-                            maxLength: 10,
+                            maxLength: 12,
                             controller: controller.phoneNumber,
                             style: Theme.of(context)
                                 .textTheme

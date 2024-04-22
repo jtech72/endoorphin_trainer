@@ -42,7 +42,28 @@ class LoginUi extends StatelessWidget {
                     const EdgeInsets.only(bottom: 3, left: 15),
 
                     hintText: "Enter phone number/email",
-                    alignLabelWithHint: true, // Center the hintText
+                    alignLabelWithHint: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: const BorderSide(
+                        color: AppColors.yellowishWhite,
+                        width: 1,
+                      ),
+                    ),
+                    disabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: const BorderSide(
+                        color: AppColors.yellowishWhite,
+                        width: 1,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: const BorderSide(
+                        color: AppColors.yellowishWhite,
+                        width: 1,
+                      ),
+                    ),/// Center the hintText
                   ),
                 ),
               ),
@@ -75,7 +96,28 @@ class LoginUi extends StatelessWidget {
                     const EdgeInsets.only(bottom: 3, left: 15),
 
                     hintText: "Enter password ",
-                    alignLabelWithHint: true, // Center the hintText
+                    alignLabelWithHint: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: const BorderSide(
+                        color: AppColors.yellowishWhite,
+                        width: 1,
+                      ),
+                    ),
+                    disabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: const BorderSide(
+                        color: AppColors.yellowishWhite,
+                        width: 1,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: const BorderSide(
+                        color: AppColors.yellowishWhite,
+                        width: 1,
+                      ),
+                    ),/// Center the hintText
                   ),
                 ),
               ),

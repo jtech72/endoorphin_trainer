@@ -52,7 +52,7 @@ class MoreAboutYouUi extends StatelessWidget {
                         ),
                       ),
                     ],
-                  ).paddingOnly(left: 22,right: 15,top: 15,bottom: 22);
+                  ).paddingOnly(left: Get.width*0.06,right: Get.width*0.02,top: Get.height*0.02,bottom: Get.height*0.01);
                 },
               ),
             ).paddingOnly(top: Get.height*.01),
