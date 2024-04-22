@@ -1,7 +1,37 @@
 
+import 'dart:async';
+
 import 'package:endoorphin_trainer/utils/exports.dart';
 
 class OtpController extends GetxController {
+  Timer? _timer;
+  int remainingSeconds = 60;
+  final time = '00.00'.obs;
+  RxBool isPaused = false.obs;
+
+  void startTimer(int seconds) {
+    const duration = Duration(seconds: 1);
+    remainingSeconds = seconds;
+    _timer = Timer.periodic(duration, (Timer timer) {
+      if (!isPaused.value) {
+        if (remainingSeconds == 0) {
+          timer.cancel();
+        } else {
+          int minutes = remainingSeconds ~/ 60;
+          int seconds = (remainingSeconds % 60);
+          time.value = "${minutes.toString().padLeft(2, "0")}:${seconds.toString().padLeft(2, "0")}";
+          remainingSeconds--;
+        }
+      }
+    });
+  }
+
+  @override
+  void onInit() {
+    startTimer(60);
+    // TODO: implement onInit
+    super.onInit();
+  }
   // CountryCodeController countryCodeController = Get.put(CountryCodeController());
   //
   // final otpController = TextEditingController();

@@ -8,6 +8,7 @@ import '../pages/bottom_navigation_bar_ui.dart';
 class AppPages {
   static  const initialRoute = AppRoutes.bio;
 
+
   static List<GetPage> routes =[
     GetPage(
         name: AppRoutes.splash,
@@ -94,7 +95,7 @@ class AppPages {
         binding: LetGetYouVerifiedBinding()),
 GetPage(
         name: AppRoutes.trainerPassport,
-        page: () =>  const TrainerPassportUI(),
+        page: () =>   TrainerPassportUI(),
         binding: TrainerPassportBinding()),
     GetPage(
         name: AppRoutes.bookingrequest,
