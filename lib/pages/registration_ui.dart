@@ -1,5 +1,6 @@
 
 import 'package:endoorphin_trainer/controllers/registration_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/exports.dart';
@@ -18,22 +19,30 @@ class RegistrationUi extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Row(
-              children: [
-                Text("Welcome to ", style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: Colors.white),),
-                Transform.translate(
-                  offset: const Offset(0, -2),
-                  child: Image.asset(ImagesPaths.logoimg,scale: 4.2,),
-                ),
-        
-              ],
+            Transform.translate(
+              offset: Offset(0,0),
+              child: Row(
+                children: [
+                  Text("Welcome to ", style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: Colors.white),),
+                  Transform.translate(
+                    offset: const Offset(0, -2),
+                    child: Image.asset(ImagesPaths.logoimg,scale: 4.2,),
+                  ),
+
+                ],
+              ),
             ),
-            const Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
+             Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry.",style: Theme.of(context).textTheme.displayLarge,).paddingOnly(bottom: 30),
             Container(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("User Name",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                  Row(
+                    children: [
+                      Text("First Name",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                      Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
+                    ],
+                  ),
                   Container(
                     height: 45,
                     decoration: BoxDecoration(
@@ -56,6 +65,39 @@ class RegistrationUi extends StatelessWidget {
                         contentPadding:
                         const EdgeInsets.only(bottom: 3, left: 15),
         
+                        hintText: "Enter user name",
+                        alignLabelWithHint: true, // Center the hintText
+                      ),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Text("Last Name",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                      Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
+                    ],
+                  ),
+                  Container(
+                    height: 45,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.impgrey),
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: TextField(
+
+                      enableInteractiveSelection: true,
+                      style: Theme.of(context).textTheme.labelMedium,
+                      cursorColor: AppColors.grey,
+                      cursorHeight: 18,
+                      decoration: InputDecoration(
+
+                        filled: true,
+                        fillColor: AppColors.yellowishWhite,
+                        border: InputBorder.none,
+                        hintStyle: Theme.of(context).textTheme.labelMedium,
+                        contentPadding:
+                        const EdgeInsets.only(bottom: 3, left: 15),
+
                         hintText: "Enter user name",
                         alignLabelWithHint: true, // Center the hintText
                       ),
@@ -97,7 +139,12 @@ class RegistrationUi extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Text("Password",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                  Row(
+                    children: [
+                      Text("Password",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                      Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
+                    ],
+                  ),
                   Container(
                     height: 45,
                     decoration: BoxDecoration(
@@ -128,7 +175,12 @@ class RegistrationUi extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Text("Confirm Password",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                  Row(
+                    children: [
+                      Text("Confirm Password",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                      Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
+                    ],
+                  ),
                   Container(
                     height: 45,
                     decoration: BoxDecoration(
@@ -159,8 +211,12 @@ class RegistrationUi extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Text("Category",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
-                  Obx(() {
+                  Row(
+                    children: [
+                      Text("Category",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                      Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
+                    ],
+                  ),                  Obx(() {
                     return Container(
                       height: 45,
                       decoration: BoxDecoration(
@@ -196,8 +252,12 @@ class RegistrationUi extends StatelessWidget {
                       ).paddingOnly(left: 15, right: 15),
                     );
                   }),
-                  Text("Gender",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
-                  Obx(() {
+                  Row(
+                    children: [
+                      Text("Gender",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                      Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
+                    ],
+                  ),                  Obx(() {
                     return Container(
                       height: 45,
                       decoration: BoxDecoration(
@@ -214,7 +274,8 @@ class RegistrationUi extends StatelessWidget {
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                           DropdownButton<String>(
-                            icon: const Icon(Icons.keyboard_arrow_down,size: 25,color: AppColors.black,),
+                             icon: Icon(Icons.keyboard_arrow_down,size: 25,color: AppColors.black,),
+
 
                             underline: const SizedBox(),
                             dropdownColor: AppColors.yellowishWhite,
@@ -240,7 +301,7 @@ class RegistrationUi extends StatelessWidget {
                           child: Text("Continue",style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: AppColors.black),), onTap: (){Get.toNamed(AppRoutes.moreaboutyou);}),
                     ],
                   ).paddingOnly(top: 30,bottom: 30),
-                  
+
                 ],
               ),
             ).paddingOnly(top: 15)
