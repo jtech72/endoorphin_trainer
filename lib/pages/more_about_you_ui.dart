@@ -60,11 +60,10 @@ class MoreAboutYouUi extends StatelessWidget {
               height: Get.height*0.03,
             ),
             Container(
-              height: Get.height*0.33,
+              height: Get.height*0.40,
 
              color: AppColors.black,
               child: ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context,index){
                 return InkWell(
                     splashColor: Colors.transparent,
@@ -111,8 +110,8 @@ class MoreAboutYouUi extends StatelessWidget {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(controller.categoryname[index],style:Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColors.yellow),).paddingOnly(top: 12),
-                                  Text(controller.categorysubname[index],style:Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 12),).paddingOnly(top: 10),
+                                  Text(controller.newList[index],style:Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColors.yellow),).paddingOnly(top: 12),
+                                  Text(index ==0?"Upload your Emirates ID ...":index ==1?"Upload your passport ...":"Upload your Certification ...",style:Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 12),).paddingOnly(top: 10),
 
                                 ],
                               ),
@@ -128,7 +127,7 @@ class MoreAboutYouUi extends StatelessWidget {
                     ).paddingOnly(bottom: Get.height*0.02),
                   );
 
-              },itemCount: controller.categoryname.length,)
+              },itemCount: controller.newList.length,)
             ),
 
             Center(child: Obx(
