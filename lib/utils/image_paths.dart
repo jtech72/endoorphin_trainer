@@ -50,6 +50,11 @@ class ImagesPaths {
   static const String finger = "${baseUrl}finger.png";
   static const String men = "${baseUrl}men.png";
   static const String menu= "${baseUrl}menu.png";
+  static const String myearning= "${baseUrl}img_my_earning.png";
+  static const String myprofile= "${baseUrl}img_my_profile.png";
+  static const String mysupport= "${baseUrl}img_my_support.png";
+  static const String myprivacy= "${baseUrl}img_privacy_policy.png";
+  static const String myconditions= "${baseUrl}img_terms_conditions.png";
 
 
 

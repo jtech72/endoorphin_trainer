@@ -11,7 +11,7 @@ class LoginUi extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Hello There",style: Theme.of(context).textTheme.headlineMedium,),
+          Text("Login",style: Theme.of(context).textTheme.headlineMedium,),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
