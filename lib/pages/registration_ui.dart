@@ -377,7 +377,8 @@ class RegistrationUi extends StatelessWidget {
                         shape: BoxShape.rectangle,
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      child: Row(
+                      child:
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(

@@ -5,6 +5,8 @@ import '../utils/exports.dart';
 import 'package:get/get.dart';
 import 'package:endoorphin_trainer/controllers/home_controller.dart';
 
+import 'drawer.dart';
+
 class HomeUi extends StatefulWidget {
   const HomeUi({Key? key}) : super(key: key);
 
@@ -48,16 +50,12 @@ class HomeUiState extends State<HomeUi> {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: AppColors.impgrey),
         title: Text(
           'Offline',
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         centerTitle: true,
-        leading: Icon(
-          Icons.menu,
-          size: 28,
-          color: Colors.white,
-        ).paddingOnly(left: 15),
         actions: [
           Obx(
                 () => InkWell(
@@ -103,6 +101,7 @@ class HomeUiState extends State<HomeUi> {
               icon: Image.asset(ImagesPaths.bell, scale: 4,))
         ],
       ),
+      drawer: MyDrawer(),
       body: SingleChildScrollView(
         child: Column(
 
@@ -139,21 +138,58 @@ class HomeUiState extends State<HomeUi> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
 
-                Transform.translate(
-                  offset: Offset(10,0),
-                  child: RichText(
-                      text: TextSpan(
-                          text: "Quick ",
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineLarge
-                              ?.copyWith(color: AppColors.yellow),
-                          children: [
-                            TextSpan(
-                              text: "Glance",
-                              style: Theme.of(context).textTheme.headlineMedium,
-                            )
-                          ])).paddingOnly(bottom: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    RichText(
+                        text: TextSpan(
+                            text: "Quick ",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineLarge
+                                ?.copyWith(color: AppColors.yellow),
+                            children: [
+                              TextSpan(
+                                text: "Glance",
+                                style: Theme.of(context).textTheme.headlineMedium,
+                              )
+                            ])).paddingOnly(bottom: 15),
+                    Container(
+                      height: 30,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: AppColors.yellow
+                      ),
+                      borderRadius: BorderRadius.circular(5)
+                    ),
+                    child:  Row(
+
+                      children: [
+                        Text(
+                          controller.selectedOption1.value,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        DropdownButton<String>(
+                          icon: Icon(Icons.keyboard_arrow_down,size: 18,color: AppColors.lightGrey,),
+
+
+                          underline: const SizedBox(),
+                          dropdownColor: AppColors.yellowishWhite,
+                          onChanged: (selectedValue) {
+                            controller.selectedOption1.value = selectedValue!;
+
+                          },
+                          items: controller.items2.map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ).paddingOnly(left: 10,)
+                    )
+                  ],
                 ),
                 Container(
                   height: Get.height * 0.53,
@@ -217,9 +253,12 @@ class HomeUiState extends State<HomeUi> {
                                 ),
                                 SizedBox(height: 8), // Adjust the gap here
                                 Text(
-                                  index == 3 ? "Upcoming" :index == 2 ? "Current" :"Total",
+                                  index == 2 ? "Current" :
+                                  index == 0 ? "Total" :
+                                  index == 3 ? "Upcoming" : "Total",
                                   style: Theme.of(context).textTheme.titleLarge,
                                 ),
+
                                 SizedBox(height: 4), // Adjust the gap here
                                 Text(
                                   controller.quickGlanceList[index],

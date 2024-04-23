@@ -28,13 +28,13 @@ HomeController homeController = Get.put(HomeController());
 BookingController bookingController = Get.put(BookingController());
 SelectCategoryController selectCategoryController = Get.put(SelectCategoryController());
 ProfileController profileController = Get.put(ProfileController());
-BookingRequestController bookingRequestController = Get.put(BookingRequestController());
+// BookingRequestController bookingRequestController = Get.put(BookingRequestController());
   List<Widget> pages = [
     const HomeUi(),
     const BookingUi(),
     const SelectCategoryUI(),
     const ProfileUI(),
-    const BookingRequsetUi()
+    // const BookingRequsetUi()
   ];
 
   void initializePages() {
@@ -80,9 +80,9 @@ BookingRequestController bookingRequestController = Get.put(BookingRequestContro
             child:
               Image.asset(ImagesPaths.men,scale: 5,),
             ),
-           CurvedNavigationBarItem(
-            child: Image.asset(ImagesPaths.menu,scale: 5,),
-          ),
+          //  CurvedNavigationBarItem(
+          //   child: Image.asset(ImagesPaths.menu,scale: 5,),
+          // ),
         ],
       ),
       body: IndexedStack(
