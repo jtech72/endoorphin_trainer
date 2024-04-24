@@ -1,3 +1,4 @@
+import 'package:endoorphin_trainer/controllers/banking_details_controller.dart';
 import 'package:endoorphin_trainer/custom_Widgets/common_widgets.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,6 +10,7 @@ class BankingDetailsUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BankingDetailsController controller = Get.put(BankingDetailsController());
     return Scaffold(
       appBar: myAppBar(title: Text('Banking Details',style: Theme.of(context).textTheme.bodyMedium,), context: context),
       body: SingleChildScrollView(
@@ -19,7 +21,7 @@ class BankingDetailsUI extends StatelessWidget {
             ),
             Text('Bank Information',style: Theme.of(context).textTheme.bodyMedium,).paddingOnly(bottom: Get.height*0.01),
             Container(
-              height: Get.height*0.25,
+              height: Get.height*0.29,
               width: Get.width,
               decoration: BoxDecoration(
                 color: AppColors.blackShade,
@@ -154,7 +156,7 @@ class BankingDetailsUI extends StatelessWidget {
             ),
             Text('Account Information',style: Theme.of(context).textTheme.bodyMedium,).paddingOnly(bottom: Get.height*0.01),
             Container(
-                height: Get.height*0.25,
+                height: Get.height*0.29,
                 width: Get.width,
                 decoration: BoxDecoration(
                     color: AppColors.blackShade,
@@ -261,35 +263,55 @@ class BankingDetailsUI extends StatelessWidget {
                                 Row(
                                   children: [
                                     Container(
-                                      width: 100,
-                                      child: TextField(
-                                        enabled: false,
-                                        inputFormatters: [
-                                          LengthLimitingTextInputFormatter(64),
-                                          FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                                        ],
-                                        enableInteractiveSelection: true,
-                                        style: Theme.of(context).textTheme.labelMedium,
-                                        cursorColor: AppColors.grey,
-                                        cursorHeight: 18,
-                                        decoration: InputDecoration(
+                                      width: Get.width*0.25,
+                                      child: Obx(
+                                        ()=> TextField(
+                                          enabled: false,
+                                          inputFormatters: [
+                                            LengthLimitingTextInputFormatter(64),
+                                            FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                                          ],
+                                          enableInteractiveSelection: true,
+                                          style: Theme.of(context).textTheme.labelMedium,
+                                          cursorColor: AppColors.lightGrey,
+                                          cursorHeight: 18,
+                                          decoration: InputDecoration(
 
-                                            filled: true,
-                                            fillColor: AppColors.blackShade,
-                                            border: OutlineInputBorder(),
-                                            hintStyle: Theme.of(context).textTheme.labelMedium,
-                                            contentPadding:
-                                            const EdgeInsets.only(bottom: 0, left: 0),
+                                              filled: true,
+                                              fillColor: AppColors.blackShade,
+                                              border: OutlineInputBorder(),
+                                              hintStyle: Theme.of(context).textTheme.labelMedium,
+                                              contentPadding:
+                                              const EdgeInsets.only(bottom: 0, left: 0),
 
-                                            hintText: "ACCOUNT TYPE",
-                                            alignLabelWithHint: true,
-                                            enabledBorder: InputBorder.none,
-                                            disabledBorder: InputBorder.none,
-                                            focusedBorder: InputBorder.none
+                                              hintText: controller.selectedOption1.value,
+                                              alignLabelWithHint: true,
+                                              enabledBorder: InputBorder.none,
+                                              disabledBorder: InputBorder.none,
+                                              focusedBorder: InputBorder.none
+                                          ),
                                         ),
                                       ),
                                     ),
-                                    Icon(Icons.keyboard_arrow_down,color: AppColors.lightGrey,size: 32,)
+                                    PopupMenuButton<String>(
+                                      icon: Icon(Icons.keyboard_arrow_down, size: 30, color: AppColors.lightGrey),
+                                      color: AppColors.blackShade, // Set the background color of the dropdown menu
+                                      itemBuilder: (BuildContext context) {
+                                        return controller.items2.map<PopupMenuEntry<String>>((String value) {
+                                          return PopupMenuItem<String>(
+                                            value: value,
+                                            child: Text(
+                                              value,
+                                              style: TextStyle(color: AppColors.lightGrey), // Set the text color of each item
+                                            ),
+                                          );
+                                        }).toList();
+                                      },
+                                      onSelected: (selectedValue) {
+                                        controller.selectedOption1.value = selectedValue;
+                                      },
+                                    ),
+                                   // Icon(Icons.keyboard_arrow_down,color: AppColors.lightGrey,size: 32,)
                                   ],
                                 ),
                                 Container(

@@ -327,6 +327,49 @@ class RegistrationUi extends StatelessWidget {
                   ),
                   Row(
                     children: [
+                      Text("Gender",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                      Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
+                    ],
+                  ),
+                  Obx(() {
+                    return Container(
+                      height: 45,
+                      decoration: BoxDecoration(
+                        color: AppColors.yellowishWhite,
+                        border: Border.all(color: AppColors.impgrey),
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            controller.selectedOption1.value,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                          DropdownButton<String>(
+                             icon: Icon(Icons.keyboard_arrow_down,size: 32,color: AppColors.black,),
+
+
+                            underline: const SizedBox(),
+                            dropdownColor: AppColors.yellowishWhite,
+                            onChanged: (selectedValue) {
+                              controller.selectedOption1.value = selectedValue!;
+
+                            },
+                            items: controller.items2.map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
+                        ],
+                      ).paddingOnly(left: 15, right: 15),
+                    );
+                  }),
+                  Row(
+                    children: [
                       Text("Category",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
                       Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
                     ],),
@@ -377,9 +420,53 @@ class RegistrationUi extends StatelessWidget {
                         );
                       },
                     ),
-
-
-                  ),
+                  //         DropdownButton<String>(
+                  //           icon: const Icon(Icons.keyboard_arrow_down,size: 32,color: AppColors.black,),
+                  //
+                  //           underline: const SizedBox(),
+                  //           dropdownColor: AppColors.yellowishWhite,
+                  //           onChanged: (selectedValue) {
+                  //             controller.selectedOption.value = selectedValue!;
+                  //
+                  //           },
+                  //           items: controller.items.map<DropdownMenuItem<String>>((String value) {
+                  //             return DropdownMenuItem<String>(
+                  //               value: value,
+                  //               child: Text(value),
+                  //             );
+                  //           }).toList(),
+                  //         ),
+                  //       ],
+                  //     ).paddingOnly(left: 15, right: 15),
+                  //   );
+                  // }),
+                  // Row(
+                  //   children: [
+                  //     Text("Gender",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                  //     Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
+                  //   ],
+                  // ),                  Obx(() {
+                  //   return Container(
+                  //     height: 45,
+                  //     decoration: BoxDecoration(
+                  //       color: AppColors.yellowishWhite,
+                  //       border: Border.all(color: AppColors.impgrey),
+                  //       shape: BoxShape.rectangle,
+                  //       borderRadius: BorderRadius.circular(5),
+                  //     ),
+                  //     child:
+                  //     Row(
+                  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //       children: [
+                  //         Text(
+                  //           controller.selectedOption1.value,
+                  //           style: Theme.of(context).textTheme.titleMedium,
+                  //         ),
+                  //         DropdownButton<String>(
+                  //            icon: Icon(Icons.keyboard_arrow_down,size: 32,color: AppColors.black,),
+                  //
+                  //
+                  // ),
 
                   // ),                  Obx(() {
                   //   return Container(
@@ -460,7 +547,7 @@ class RegistrationUi extends StatelessWidget {
                   //     ).paddingOnly(left: 15, right: 15),
                   //   );
                   // }),
-                  Row(
+                  ),Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       InkButton(

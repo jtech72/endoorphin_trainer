@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 import '../controllers/booking_controller.dart';
 import '../custom_widgets/tabbar_widgets.dart';
 import '../utils/app_routes.dart';
-import '../utils/image_paths.dart'; // assuming this file contains myTabBar function
+import '../utils/image_paths.dart';
+import '../utils/app_drawer.dart'; // assuming this file contains myTabBar function
 
 class BookingUi extends StatefulWidget {
   const BookingUi({super.key});
@@ -40,11 +41,6 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         centerTitle: true,
-        leading: const Icon(
-          Icons.menu,
-          size: 28,
-          color: Colors.white,
-        ).paddingOnly(left: 15),
         actions: [
           Obx(
                 () => InkWell(
@@ -88,8 +84,11 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
             icon: Image.asset(ImagesPaths.bell, scale: 4,),
           )
         ],
-        bottom: myTabBar(tabController, context), // assuming you import myTabBar from tabbar_widgets.dart
+        bottom: myTabBar(tabController, context),
+        iconTheme: IconThemeData(color: AppColors.impgrey),
+
       ),
+      drawer: MyDrawer(),
       body: TabBarView(
         controller: tabController,
         children: [
