@@ -1,20 +1,19 @@
 import 'dart:developer';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../controllers/session_running_controller.dart';
 import '../utils/exports.dart';
 
 class SessionRunningUi extends StatelessWidget {
   const SessionRunningUi({super.key});
+
   @override
   Widget build(BuildContext context) {
     SessionRunningController controller = Get.find();
     return Scaffold(
         body: SlidingUpPanel(
-          minHeight: 100,
-     controller: controller.panelController,
+      minHeight: 100,
+      controller: controller.panelController,
       maxHeight: Get.height,
       color: Colors.transparent,
       body: Column(
@@ -53,7 +52,7 @@ class SessionRunningUi extends StatelessWidget {
                 ),
               ),
               Container(
-                height: Get.height * .3,
+                height: Get.height * .35,
                 width: Get.width,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [
@@ -80,7 +79,7 @@ class SessionRunningUi extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             InkWell(
-                              onTap: (){
+                              onTap: () {
                                 Get.toNamed(AppRoutes.sessionDetails);
                               },
                               child: Container(
@@ -131,7 +130,7 @@ class SessionRunningUi extends StatelessWidget {
                                   size: 75,
                                 )),
                             GestureDetector(
-                              onTap: (){
+                              onTap: () {
                                 Get.toNamed(AppRoutes.sessionDetails);
                               },
                               child: Container(
@@ -161,16 +160,20 @@ class SessionRunningUi extends StatelessWidget {
               ).paddingOnly(bottom: 6)
             ],
           ),
-        ],),
+        ],
+      ),
       collapsed: Container(
         color: AppColors.black,
         height: Get.height * .15,
         width: Get.width,
         child: Column(
-
           children: [
-            Transform.rotate(angle:  11.0,
-            child: Image.asset("assets/images/giphy.gif",scale: 16,)).paddingOnly(bottom: 8),
+            Transform.rotate(
+                angle: 11.0,
+                child: Image.asset(
+                  "assets/images/giphy.gif",
+                  scale: 16,
+                )).paddingOnly(bottom: 8),
             // Icon(
             //   Icons.keyboard_arrow_up_outlined,
             //   size: 30,
@@ -185,7 +188,10 @@ class SessionRunningUi extends StatelessWidget {
             //              ),
             Text(
               "Swipe up for Details",
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: AppColors.lightGrey1),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyLarge
+                  ?.copyWith(color: AppColors.lightGrey1),
             )
           ],
         ).paddingOnly(bottom: 10),
@@ -255,7 +261,8 @@ class SessionRunningUi extends StatelessWidget {
                     ),
                   ),
                 ),
-                Text("Boxing", style: Theme.of(context).textTheme.headlineLarge),
+                Text("Boxing",
+                    style: Theme.of(context).textTheme.headlineLarge),
                 Text(
                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,",
                   style: Theme.of(context)
@@ -447,4 +454,4 @@ class SessionRunningUi extends StatelessWidget {
       },
     ));
   }
-}//
+}

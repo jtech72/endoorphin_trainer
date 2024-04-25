@@ -48,7 +48,6 @@ class CountryCodeUI extends StatelessWidget {
                       width: 112,
                       child: CountryCodePicker(
                          searchDecoration: const InputDecoration(
-
                            hintText: "search your country code",
                              hintStyle: TextStyle(fontWeight: FontWeight.w300,fontSize: 12,color: Colors.white),
                              filled: true,fillColor:  Colors.black54),
@@ -65,8 +64,6 @@ class CountryCodeUI extends StatelessWidget {
                         onChanged: (CountryCode v) {
                           controller.countryCode = v.dialCode!;
                         }
-
-
 
                       )),
                   Transform.translate(offset: const Offset(-30,0),
