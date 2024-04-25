@@ -42,7 +42,7 @@ Widget InkButton({
     borderRadius: BorderRadius.circular(borderRadius ?? 36),
     color: backGroundColor,
     child: InkWell(
-      splashColor: rippleColor ?? AppColors.lightGrey,
+      splashColor: rippleColor ?? Colors.transparent,
       borderRadius: BorderRadius.circular(borderRadius ?? 30),
       onTap: () {
         if (Get.isSnackbarOpen) {
