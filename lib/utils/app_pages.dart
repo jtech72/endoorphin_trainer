@@ -145,4 +145,3 @@ GetPage(
         binding: BankingDetailsBinding()),
   ];
 }
-//
