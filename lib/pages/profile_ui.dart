@@ -104,9 +104,9 @@ class ProfileUI extends StatelessWidget {
                           SizedBox(
                             width: Get.width*0.04,
                           ),
-                          Image.asset(ImagesPaths.document,width: 16,color: AppColors.lightGrey1,),
+                          Image.asset(ImagesPaths.document,width: 17,color: AppColors.lightGrey1,),
                           SizedBox(
-                            width: Get.width*0.06,
+                            width: Get.width*0.057,
                           ),
                           Text('Document',style: Theme.of(context).textTheme.labelLarge!.copyWith(fontWeight: FontWeight.w600,color: AppColors.lightGrey1),),
                         ],
@@ -139,9 +139,9 @@ class ProfileUI extends StatelessWidget {
                           SizedBox(
                             width: Get.width*0.04,
                           ),
-                          Image.asset(ImagesPaths.mysession,width: 16,color: AppColors.lightGrey1,),
+                          Image.asset(ImagesPaths.mysession,width: 17,color: AppColors.lightGrey1,),
                           SizedBox(
-                            width: Get.width*0.06,
+                            width: Get.width*0.057,
                           ),
                           Text('My Sessions',style: Theme.of(context).textTheme.labelLarge!.copyWith(fontWeight: FontWeight.w600,color: AppColors.lightGrey1),),
                         ],
@@ -209,9 +209,9 @@ class ProfileUI extends StatelessWidget {
                           SizedBox(
                             width: Get.width*0.04,
                           ),
-                          Image.asset(ImagesPaths.my_earning,width: 16,color: AppColors.lightGrey1,),
+                          Image.asset(ImagesPaths.my_earning,width: 15,color: AppColors.lightGrey1,),
                           SizedBox(
-                            width: Get.width*0.06,
+                            width: Get.width*0.057,
                           ),
                           Text('My Earnings',style: Theme.of(context).textTheme.labelLarge!.copyWith(fontWeight: FontWeight.w600,color: AppColors.lightGrey1),),
                         ],
@@ -219,6 +219,47 @@ class ProfileUI extends StatelessWidget {
                        Transform.translate(
                            offset: const Offset(-10,0),
                            child: const Icon(Icons.arrow_forward_ios,color: AppColors.lightGrey1,size: 20,))
+                    ],
+                  ),
+                )
+            ),
+            SizedBox(
+              height: Get.height*0.02,
+            ),
+            Container(
+                height: Get.height*0.05,
+                width: Get.width,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: AppColors.greyButton
+                ),
+                child: InkWell(
+                  onTap: (){
+                    Get.toNamed(AppRoutes.bankingDetails);
+                  },
+                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: Get.width*0.04,
+                          ),
+                          Image.asset(ImagesPaths.bank,width: 16,color: AppColors.lightGrey1,),
+                          SizedBox(
+                            width: Get.width*0.057,
+                          ),
+                          Text('Bank Information',style: Theme.of(context).textTheme.labelLarge!.copyWith(fontWeight: FontWeight.w600,color: AppColors.lightGrey1),),
+                        ],
+                      ),
+                      Transform.translate(
+                          offset: const Offset(-10,0),
+                          child:  PopupMenuItem(
+
+                              child: Icon(Icons.arrow_forward_ios,color: AppColors.lightGrey1,size: 20,),
+
+                          )
+
+                      )
                     ],
                   ),
                 )

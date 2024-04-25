@@ -6,7 +6,7 @@ import '../controllers/booking_controller.dart';
 import '../custom_widgets/tabbar_widgets.dart';
 import '../utils/app_routes.dart';
 import '../utils/image_paths.dart';
-import 'drawer.dart'; // assuming this file contains myTabBar function
+import '../utils/app_drawer.dart'; // assuming this file contains myTabBar function
 
 class BookingUi extends StatefulWidget {
   const BookingUi({super.key});

@@ -2,11 +2,17 @@ import 'dart:io';
 
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
+import 'package:endoorphin_trainer/bindings/booking_request_binding.dart';
 import 'package:endoorphin_trainer/controllers/booking_controller.dart';
+import 'package:endoorphin_trainer/controllers/booking_details_controller.dart';
 import 'package:endoorphin_trainer/controllers/booking_request_controller.dart';
+import 'package:endoorphin_trainer/controllers/earning_controller.dart';
 import 'package:endoorphin_trainer/controllers/home_controller.dart';
 import 'package:endoorphin_trainer/controllers/profile_controller.dart';
 import 'package:endoorphin_trainer/controllers/select_category_controller.dart';
+import 'package:endoorphin_trainer/controllers/session_details_controller.dart';
+import 'package:endoorphin_trainer/controllers/session_running_controller.dart';
+import 'package:endoorphin_trainer/pages/booking_request_ui.dart';
 import 'package:endoorphin_trainer/pages/select_category_ui.dart';
 import 'package:flutter/material.dart';
 
@@ -25,16 +31,15 @@ class BottomNavigationBarUI extends StatefulWidget {
 class _BottomNavigationBarUIState extends State<BottomNavigationBarUI> {
   late Widget currentPage;
 HomeController homeController = Get.put(HomeController());
-BookingController bookingController = Get.put(BookingController());
-SelectCategoryController selectCategoryController = Get.put(SelectCategoryController());
+EarningController earningController = Get.put(EarningController());
+BookingRequestController bookingRequestController = Get.put(BookingRequestController());
 ProfileController profileController = Get.put(ProfileController());
 // BookingRequestController bookingRequestController = Get.put(BookingRequestController());
   List<Widget> pages = [
     const HomeUi(),
-    const BookingUi(),
-    const SelectCategoryUI(),
+    const EarningUi(),
+    const BookingRequsetUi(),
     const ProfileUI(),
-    // const BookingRequsetUi()
   ];
 
   void initializePages() {
@@ -71,10 +76,10 @@ ProfileController profileController = Get.put(ProfileController());
             child:    Image.asset(ImagesPaths.home,scale: 5,),
           ),
            CurvedNavigationBarItem(
-            child:  Image.asset(ImagesPaths.achiv,scale: 5,),
+            child:  Image.asset(ImagesPaths.earningHome,scale: 6,),
           ),
            CurvedNavigationBarItem(
-            child: Image.asset(ImagesPaths.finger,scale: 5,),
+            child: Image.asset(ImagesPaths.mysession,scale: 5,color: AppColors.black,),
           ),
           CurvedNavigationBarItem(
             child:

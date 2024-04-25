@@ -27,7 +27,7 @@ class CountryCodeUI extends StatelessWidget {
               height: Get.height * 0.05,
             ),
             Text(
-              'Phone Number',
+              'Enter Your Phone Number',
               style: Theme.of(context).textTheme.labelLarge,
             ),
             SizedBox(
@@ -45,7 +45,7 @@ class CountryCodeUI extends StatelessWidget {
                 children: [
                   Container(
                     alignment: Alignment.centerLeft,
-                      width: 119,
+                      width: 112,
                       child: CountryCodePicker(
                          searchDecoration: const InputDecoration(
 
@@ -91,7 +91,7 @@ class CountryCodeUI extends StatelessWidget {
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.only(top: Get.height*.004),
                               counterText: "",
-                              hintText: 'Enter Phone Number',
+                              hintText: 'Enter Your Phone Number',
                               hintStyle:
                                   Theme.of(context).textTheme.labelMedium,
                               border: InputBorder.none,

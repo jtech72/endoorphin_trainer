@@ -1,11 +1,14 @@
 
+import 'dart:developer';
+
 import 'package:endoorphin_trainer/controllers/registration_controller.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/exports.dart';
 
 class RegistrationUi extends StatelessWidget {
-   const RegistrationUi({super.key});
+
+    RegistrationUi({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -324,10 +327,11 @@ class RegistrationUi extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Text("Category",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                      Text("Gender",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
                       Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
                     ],
-                  ),                  Obx(() {
+                  ),
+                  Obx(() {
                     return Container(
                       height: 45,
                       decoration: BoxDecoration(
@@ -337,48 +341,6 @@ class RegistrationUi extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            controller.selectedOption.value,
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          DropdownButton<String>(
-                            icon: const Icon(Icons.keyboard_arrow_down,size: 32,color: AppColors.black,),
-
-                            underline: const SizedBox(),
-                            dropdownColor: AppColors.yellowishWhite,
-                            onChanged: (selectedValue) {
-                              controller.selectedOption.value = selectedValue!;
-
-                            },
-                            items: controller.items.map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                        ],
-                      ).paddingOnly(left: 15, right: 15),
-                    );
-                  }),
-                  Row(
-                    children: [
-                      Text("Gender",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
-                      Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
-                    ],
-                  ),                  Obx(() {
-                    return Container(
-                      height: 45,
-                      decoration: BoxDecoration(
-                        color: AppColors.yellowishWhite,
-                        border: Border.all(color: AppColors.impgrey),
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child:
-                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
@@ -407,10 +369,190 @@ class RegistrationUi extends StatelessWidget {
                     );
                   }),
                   Row(
+                    children: [
+                      Text("Category",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                      Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
+                    ],),
+                  Container(
+                    height: 283,
+                    width: Get.width,
+                    decoration: BoxDecoration(
+                      color: AppColors.yellowishWhite,
+                      border: Border.all(color: AppColors.impgrey),
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child:
+                    ListView.builder(
+                      itemCount: controller.dataList.length,
+                      itemBuilder: (context, index) {
+                        final item = controller.dataList[index];
+                        return Obx(
+                              () => Row(
+                            children: [
+                              Checkbox(activeColor: AppColors.yellow,checkColor: AppColors.black,
+                                value: controller.checkedList.length > index ? controller.checkedList[index] : false, // Use checkedList to determine checkbox state
+                                onChanged: (value) {
+                                  controller.toggleItem(item, index);
+                                  // Check if the checkbox is checked
+                                  if (value ?? false) {
+                                    // Add the item to selectedOne2 list
+                                    controller.selectedOne2.add(item);
+                                    log("Added value ==>${controller.selectedOne2.toString()}");
+                                  } else {
+                                    // Remove the item from selectedOne2 list
+                                    controller.selectedOne2.remove(item);
+                                    log("Added value ==>${controller.selectedOne2.toString()}");
+
+                                  }
+                                }
+                              ),
+                              Expanded(
+                                child: ListTile(
+                                  title: Text(item),
+                                  onTap: () {
+                                    controller.toggleItem(item, index); // Toggle item selection
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  //         DropdownButton<String>(
+                  //           icon: const Icon(Icons.keyboard_arrow_down,size: 32,color: AppColors.black,),
+                  //
+                  //           underline: const SizedBox(),
+                  //           dropdownColor: AppColors.yellowishWhite,
+                  //           onChanged: (selectedValue) {
+                  //             controller.selectedOption.value = selectedValue!;
+                  //
+                  //           },
+                  //           items: controller.items.map<DropdownMenuItem<String>>((String value) {
+                  //             return DropdownMenuItem<String>(
+                  //               value: value,
+                  //               child: Text(value),
+                  //             );
+                  //           }).toList(),
+                  //         ),
+                  //       ],
+                  //     ).paddingOnly(left: 15, right: 15),
+                  //   );
+                  // }),
+                  // Row(
+                  //   children: [
+                  //     Text("Gender",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                  //     Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
+                  //   ],
+                  // ),                  Obx(() {
+                  //   return Container(
+                  //     height: 45,
+                  //     decoration: BoxDecoration(
+                  //       color: AppColors.yellowishWhite,
+                  //       border: Border.all(color: AppColors.impgrey),
+                  //       shape: BoxShape.rectangle,
+                  //       borderRadius: BorderRadius.circular(5),
+                  //     ),
+                  //     child:
+                  //     Row(
+                  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //       children: [
+                  //         Text(
+                  //           controller.selectedOption1.value,
+                  //           style: Theme.of(context).textTheme.titleMedium,
+                  //         ),
+                  //         DropdownButton<String>(
+                  //            icon: Icon(Icons.keyboard_arrow_down,size: 32,color: AppColors.black,),
+                  //
+                  //
+                  // ),
+
+                  // ),                  Obx(() {
+                  //   return Container(
+                  //     height: 45,
+                  //     decoration: BoxDecoration(
+                  //       color: AppColors.yellowishWhite,
+                  //       border: Border.all(color: AppColors.impgrey),
+                  //       shape: BoxShape.rectangle,
+                  //       borderRadius: BorderRadius.circular(5),
+                  //     ),
+                  //     child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //       children: [
+                  //         Text(
+                  //           controller.selectedOption.value,
+                  //           style: Theme.of(context).textTheme.titleMedium,
+                  //         ),
+                  //         DropdownButton<String>(
+                  //           icon: const Icon(Icons.keyboard_arrow_down,size: 32,color: AppColors.black,),
+                  //
+                  //           underline: const SizedBox(),
+                  //           dropdownColor: AppColors.yellowishWhite,
+                  //           onChanged: (selectedValue) {
+                  //             controller.selectedOption.value = selectedValue!;
+                  //
+                  //           },
+                  //           items: controller.items.map<DropdownMenuItem<String>>((String value) {
+                  //             return DropdownMenuItem<String>(
+                  //               value: value,
+                  //               child: Text(value),
+                  //             );
+                  //           }).toList(),
+                  //         ),
+                  //       ],
+                  //     ).paddingOnly(left: 15, right: 15),
+                  //   );
+                  // }),
+                  // Row(
+                  //   children: [
+                  //     Text("Gender",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                  //     Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
+                  //   ],
+                  // ),
+                  // Obx(() {
+                  //   return Container(
+                  //     height: 45,
+                  //     decoration: BoxDecoration(
+                  //       color: AppColors.yellowishWhite,
+                  //       border: Border.all(color: AppColors.impgrey),
+                  //       shape: BoxShape.rectangle,
+                  //       borderRadius: BorderRadius.circular(5),
+                  //     ),
+                  //     child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //       children: [
+                  //         Text(
+                  //           controller.selectedOption1.value,
+                  //           style: Theme.of(context).textTheme.titleMedium,
+                  //         ),
+                  //         DropdownButton<String>(
+                  //            icon: Icon(Icons.keyboard_arrow_down,size: 32,color: AppColors.black,),
+                  //
+                  //
+                  //           underline: const SizedBox(),
+                  //           dropdownColor: AppColors.yellowishWhite,
+                  //           onChanged: (selectedValue) {
+                  //             controller.selectedOption1.value = selectedValue!;
+                  //
+                  //           },
+                  //           items: controller.items2.map<DropdownMenuItem<String>>((String value) {
+                  //             return DropdownMenuItem<String>(
+                  //               value: value,
+                  //               child: Text(value),
+                  //             );
+                  //           }).toList(),
+                  //         ),
+                  //       ],
+                  //     ).paddingOnly(left: 15, right: 15),
+                  //   );
+                  // }),
+                  ),Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       InkButton(
-                          child: Text("Continue",style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: AppColors.black),), onTap: (){Get.toNamed(AppRoutes.moreaboutyou);}),
+                          child: Text("Continue",style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: AppColors.black),),
+                          onTap: (){Get.toNamed(AppRoutes.moreaboutyou ,arguments: controller.selectedOne2);}),
                     ],
                   ).paddingOnly(top: 30,bottom: 30),
 
@@ -425,27 +567,3 @@ class RegistrationUi extends StatelessWidget {
   }
 }
 
-void _showDropdown(BuildContext context) {
-  RegistrationController controller =Get.find();
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text('Select an Option'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: controller.dataList.map((String option) {
-            return ListTile(
-              title: Text(option),
-              onTap: () {
-                // Update the selected option
-                controller.selectedOption.value = option;
-                Navigator.of(context).pop();
-              },
-            );
-          }).toList(),
-        ),
-      );
-    },
-  );
-}

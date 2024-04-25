@@ -1,11 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_page_view_indicator/flutter_page_view_indicator.dart';
+import '../utils/app_drawer.dart';
 import '../utils/exports.dart';
-import 'package:get/get.dart';
 import 'package:endoorphin_trainer/controllers/home_controller.dart';
 
-import 'drawer.dart';
 
 class HomeUi extends StatefulWidget {
   const HomeUi({Key? key}) : super(key: key);
@@ -51,9 +50,11 @@ class HomeUiState extends State<HomeUi> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: AppColors.impgrey),
-        title: Text(
-          'Offline',
-          style: Theme.of(context).textTheme.bodyMedium,
+        title: Obx(
+              () => Text(
+            controller.isTrainerOnline.value ? 'Offline' : 'Online',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
         ),
         centerTitle: true,
         actions: [
@@ -61,8 +62,7 @@ class HomeUiState extends State<HomeUi> {
                 () => InkWell(
               splashColor: Colors.transparent,
               onTap: () {
-                controller.isTrainerOnline.value =
-                !controller.isTrainerOnline.value;
+                controller.isTrainerOnline.value = !controller.isTrainerOnline.value;
               },
               child: SizedBox(
                 height: 15,
@@ -72,23 +72,22 @@ class HomeUiState extends State<HomeUi> {
                   width: 15,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
-                      border: Border.all(color: Colors.white)),
+                      border: Border.all(color: Colors.white)
+                  ),
                   child: Transform.scale(
                     scale: 0.4,
                     child: Switch(
                         activeTrackColor: Colors.black,
                         activeColor: Colors.transparent,
-                        inactiveThumbImage:
-                        AssetImage(ImagesPaths.trainerOnline),
-                        activeThumbImage:
-                        AssetImage(ImagesPaths.trainerOnline),
+                        inactiveThumbImage: AssetImage(ImagesPaths.trainerOnline),
+                        activeThumbImage: AssetImage(ImagesPaths.trainerOnline),
                         inactiveThumbColor: Colors.transparent,
                         inactiveTrackColor: Colors.black,
                         value: controller.isTrainerOnline.value,
                         onChanged: (v) {
-                          controller.isTrainerOnline.value =
-                          !controller.isTrainerOnline.value;
-                        }),
+                          controller.isTrainerOnline.value = !controller.isTrainerOnline.value;
+                        }
+                    ),
                   ),
                 ).paddingOnly(left: 20),
               ),
@@ -98,16 +97,18 @@ class HomeUiState extends State<HomeUi> {
               onPressed: () {
                 Get.toNamed(AppRoutes.notification);
               },
-              icon: Image.asset(ImagesPaths.bell, scale: 4,))
+              icon: Image.asset(ImagesPaths.bell, scale: 4,)
+          )
         ],
       ),
+
       drawer: MyDrawer(),
       body: SingleChildScrollView(
         child: Column(
 
           children: [
             Container(
-              height: 201,
+              height: Get.height*0.22,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
@@ -126,9 +127,12 @@ class HomeUiState extends State<HomeUi> {
                 ],
               ),
             ),
+            SizedBox(
+              height: Get.height*0.01,
+            ),
             PageViewIndicator(
-              currentSize: 5,
-              otherSize: 5,
+              currentSize: 10,
+              otherSize: 10,
               length: 3,
               currentColor: AppColors.yellow,
               currentIndex: _currentPage,
@@ -153,43 +157,47 @@ class HomeUiState extends State<HomeUi> {
                                 text: "Glance",
                                 style: Theme.of(context).textTheme.headlineMedium,
                               )
-                            ])).paddingOnly(bottom: 15),
-                    Container(
-                      height: 30,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: AppColors.yellow
+                            ])),
+
+                    Obx(
+                      ()=> Container(
+                        height: Get.height * 0.035,
+                        width: Get.height * 0.14,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: AppColors.yellow),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(controller.selectedOption1.value,style: Theme.of(context).textTheme.labelSmall,),
+                            PopupMenuButton<String>(
+                              icon: Transform.translate(
+                                  offset: Offset(0,-8),
+                                  child: Icon(Icons.keyboard_arrow_down, size: 28, color: AppColors.lightGrey)),
+                              color: AppColors.blackShade, // Set the background color of the dropdown menu
+                              itemBuilder: (BuildContext context) {
+                                return controller.items2.map<PopupMenuEntry<String>>((String value) {
+                                  return PopupMenuItem<String>(
+                                    value: value,
+                                    child: Text(
+                                      value,
+                                      style: TextStyle(color: AppColors.lightGrey), // Set the text color of each item
+                                    ),
+                                  );
+                                }).toList();
+                              },
+                              onSelected: (selectedValue) {
+                                controller.selectedOption1.value = selectedValue;
+                              },
+                            ),
+                          ],
+                        )
                       ),
-                      borderRadius: BorderRadius.circular(5)
                     ),
-                    child:  Row(
-
-                      children: [
-                        Text(
-                          controller.selectedOption1.value,
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        DropdownButton<String>(
-                          icon: Icon(Icons.keyboard_arrow_down,size: 18,color: AppColors.lightGrey,),
-
-
-                          underline: const SizedBox(),
-                          dropdownColor: AppColors.yellowishWhite,
-                          onChanged: (selectedValue) {
-                            controller.selectedOption1.value = selectedValue!;
-
-                          },
-                          items: controller.items2.map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        ),
-                      ],
-                    ).paddingOnly(left: 10,)
-                    )
                   ],
+                ),
+                SizedBox(
+                  height: Get.height*0.02,
                 ),
                 Container(
                   height: Get.height * 0.53,
@@ -201,9 +209,9 @@ class HomeUiState extends State<HomeUi> {
                       itemCount: controller.quickGlanceList.length,
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        crossAxisSpacing: 15,
+                        crossAxisSpacing: 10,
                         mainAxisSpacing: 20,
-                        mainAxisExtent: 130,
+                        mainAxisExtent: 155,
                       ),
                       itemBuilder: (context, index) {
                         return InkWell(

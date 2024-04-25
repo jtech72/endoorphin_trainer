@@ -297,42 +297,43 @@ class AccountUI extends StatelessWidget {
             SizedBox(
               height: Get.height*0.011,
             ),
-            SizedBox(
-              height: 45,
-              child: TextField(
-                inputFormatters: [
-                  LengthLimitingTextInputFormatter(64),
-                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                ],maxLength: 10,
-
-                style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.lightGrey1),
-                decoration: InputDecoration(
-                  counterText: "",
-                  filled: true,
-                  contentPadding: const EdgeInsets.only(top: 6, left:20),
-
-                  fillColor: AppColors.greyButton,
-                  hintText: 'Select',
-                  hintStyle: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.lightGrey1),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: const BorderSide(
-                      color: Colors.transparent,
-                      width: 1,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: const BorderSide(
-                      color: Colors.transparent,
-                      width: 1,
-                    ),
-                  ),
-                  disabledBorder: InputBorder.none,
-                  suffixIcon: const Icon(Icons.keyboard_arrow_down,color: AppColors.lightGrey1).paddingOnly(left: 20,right: 20),
+            Obx(() {
+              return Container(
+                height: 45,
+                decoration: BoxDecoration(
+                  color: AppColors.greyButton,
+                  border: Border.all(color: AppColors.greyButton),
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(5),
                 ),
-              ),
-            ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      controller.selectedOption1.value,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    DropdownButton<String>(
+                      icon: Icon(Icons.keyboard_arrow_down,size: 32,color: AppColors.impgrey,),
+
+
+                      underline: const SizedBox(),
+                      dropdownColor: AppColors.greyButton,
+                      onChanged: (selectedValue) {
+                        controller.selectedOption1.value = selectedValue!;
+
+                      },
+                      items: controller.items2.map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                  ],
+                ).paddingOnly(left: 15, right: 15),
+              );
+            }),
             SizedBox(
               height: Get.height*0.01,
             ),
@@ -341,7 +342,7 @@ class AccountUI extends StatelessWidget {
               height: Get.height*0.011,
             ),
             Container(
-              height: 145,
+              height: Get.height*0.16,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 color: AppColors.greyButton,
@@ -352,12 +353,12 @@ class AccountUI extends StatelessWidget {
                   // LengthLimitingTextInputFormatter(64),
                   FilteringTextInputFormatter.deny(RegExp(r'\s')),
                 ],
-maxLines:10 ,
+                maxLines:10 ,
                 style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.lightGrey1),
                 decoration: InputDecoration(
                   counterText: "",
                   filled: true,
-                  contentPadding: const EdgeInsets.only(top: 6, left:20),
+                  contentPadding: const EdgeInsets.all(20),
 
                   fillColor: AppColors.greyButton,
                   hintText: 'Write about trainer',

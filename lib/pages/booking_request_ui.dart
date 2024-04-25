@@ -1,4 +1,5 @@
 import 'package:endoorphin_trainer/controllers/booking_request_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -393,47 +394,49 @@ class BookingRequsetUi extends StatelessWidget {
                                     SizedBox(
                                       width: Get.width * 0.014,
                                     ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "54, route Gue banquet",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelLarge
-                                              ?.copyWith(
-                                                  color: AppColors.impgrey,
-                                                  fontWeight: FontWeight.w600),
-                                        ).paddingOnly(bottom: 5),
-                                        SizedBox(
-                                            width: Get.width * .77,
-                                            child: Text(
-                                              "1.2 Km",
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .labelMedium
-                                                  ?.copyWith(
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "54, route Gue banquet",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelLarge
+                                                ?.copyWith(
                                                     color: AppColors.impgrey,
-                                                  ),
-                                            )).paddingOnly(bottom: 5),
-                                        Container(
-                                          width: Get.width * .77,
-                                          height: 1,
-                                          color: AppColors.grey,
-                                        ).paddingOnly(top: 10, bottom: 15),
-                                        Text(
-                                          "66, route Gue banquet",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelLarge
-                                              ?.copyWith(
-                                                  color: AppColors.impgrey,
-                                                  fontWeight: FontWeight.w600),
-                                        ).paddingOnly(bottom: 5),
-                                      ],
+                                                    fontWeight: FontWeight.w600),
+                                          ).paddingOnly(bottom: 5),
+                                          SizedBox(
+                                              width: Get.width * .77,
+                                              child: Text(
+                                                "1.2 Km",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelMedium
+                                                    ?.copyWith(
+                                                      color: AppColors.impgrey,
+                                                    ),
+                                              )).paddingOnly(bottom: 5),
+                                          Container(
+                                            width: Get.width * .77,
+                                            height: 1,
+                                            color: AppColors.grey,
+                                          ).paddingOnly(top: 10, bottom: 15),
+                                          Text(
+                                            "66, route Gue banquet",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelLarge
+                                                ?.copyWith(
+                                                    color: AppColors.impgrey,
+                                                    fontWeight: FontWeight.w600),
+                                          ).paddingOnly(bottom: 5),
+                                        ],
+                                      ),
                                     )
                                   ],
                                 ).paddingOnly(
