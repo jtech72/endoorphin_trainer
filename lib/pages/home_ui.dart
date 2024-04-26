@@ -169,7 +169,7 @@ class HomeUiState extends State<HomeUi> {
                         ),
                         child: Row(mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Text(controller.selectedOption1.value,style: Theme.of(context).textTheme.labelSmall,),
+                            Text(controller.selectedOption1.value,style: Theme.of(context).textTheme.labelSmall!.copyWith(color: AppColors.yellow),),
                             PopupMenuButton<String>(
                               icon: Transform.translate(
                                   offset: Offset(0,-8),

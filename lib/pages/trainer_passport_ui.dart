@@ -27,20 +27,26 @@ class TrainerPassportUI extends StatelessWidget {
                   .textTheme
                   .labelLarge!
                   .copyWith(fontWeight: FontWeight.w500),
-            ).paddingOnly(bottom: Get.height * 0.02),
+            ).paddingOnly(bottom: Get.height * 0.035),
             Container(
               height: 1,
               width: Get.width,
               color: AppColors.grey3,
             ),
-            Text(
-              controller.documentIndex == 0? "Emirates ID name":controller.documentIndex == 1?'Passport name':"Certification name",
+            Row(
+              children: [
+                Text(
+                  controller.documentIndex == 0? "Emirates ID Name":controller.documentIndex == 1?'Passport Name':"Certification Name",
 
-              style: Theme.of(context)
-                  .textTheme
-                  .labelLarge!
-                  .copyWith(fontWeight: FontWeight.w500),
-            ).paddingOnly(bottom: Get.height * .008, top: Get.height * .04),
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelLarge!
+                      .copyWith(fontWeight: FontWeight.w500),
+                ).paddingOnly(bottom: Get.height * .008, top: Get.height * .04),
+                Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: Get.height * .03,bottom: 0),
+
+              ],
+            ),
             Container(
               height: 45,
               decoration: BoxDecoration(
@@ -93,13 +99,19 @@ class TrainerPassportUI extends StatelessWidget {
             SizedBox(
               height: Get.height * 0.01,
             ),
-            Text(
-                controller.documentIndex == 0? "Emirates ID Number":controller.documentIndex == 1?'Passport Number':"Certification Number",
-              style: Theme.of(context)
-                  .textTheme
-                  .labelLarge!
-                  .copyWith(fontWeight: FontWeight.w500),
-            ).paddingOnly(bottom: Get.height * .008, top: Get.height * .02),
+            Row(
+              children: [
+                Text(
+                    controller.documentIndex == 0? "Emirates ID Number":controller.documentIndex == 1?'Passport Number':"Certification Number",
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelLarge!
+                      .copyWith(fontWeight: FontWeight.w500),
+                ).paddingOnly(bottom: Get.height * .008, top: Get.height * .02),
+                Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
+
+              ],
+            ),
             Container(
               height: 45,
               decoration: BoxDecoration(
@@ -152,13 +164,19 @@ class TrainerPassportUI extends StatelessWidget {
             SizedBox(
               height: Get.height * 0.01,
             ),
-            Text(
-                controller.documentIndex == 0? " Upload Emirates ID Photo":controller.documentIndex == 1?'Upload Passport Photo':"Upload Certification Photo",
-              style: Theme.of(context)
-                  .textTheme
-                  .labelLarge!
-                  .copyWith(fontWeight: FontWeight.w500),
-            ).paddingOnly(bottom: Get.height * .008, top: Get.height * .02),
+            Row(
+              children: [
+                Text(
+                    controller.documentIndex == 0? " Upload Emirates ID Photo":controller.documentIndex == 1?'Upload Passport Photo':"Upload Certification Photo",
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelLarge!
+                      .copyWith(fontWeight: FontWeight.w500),
+                ).paddingOnly(bottom: Get.height * .008, top: Get.height * .02),
+                Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: Get.height * .01,bottom: 0),
+
+              ],
+            ),
             GestureDetector(
               onTap: () {
                 controller.openCamera();

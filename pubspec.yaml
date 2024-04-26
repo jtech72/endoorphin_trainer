@@ -57,7 +57,7 @@ dependencies:
   syncfusion_flutter_charts: ^25.1.40
   flutter_page_view_indicator:
   multi_select_flutter: ^4.0.0
-  
+  dotted_border: ^2.1.0
 
 
 

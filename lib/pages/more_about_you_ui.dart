@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:endoorphin_trainer/controllers/more_about_you_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../utils/exports.dart';
 
 class MoreAboutYouUi extends StatelessWidget {
@@ -111,7 +113,12 @@ class MoreAboutYouUi extends StatelessWidget {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(controller.newList[index],style:Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColors.yellow),).paddingOnly(top: 12),
+                                    Container(
+
+                                        width: Get.width*.55,
+                                        child: Text(
+                                          overflow: TextOverflow.ellipsis,
+                                          index==0||index == 1?controller.newList[index]:"${controller.newList[index]} Certification",style:Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColors.yellow),).paddingOnly(top: 12)),
                                     Text(index ==0?"Upload your Emirates ID ...":index ==1?"Upload your passport ...":"Upload your Certification ...",style:Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 12),).paddingOnly(top: 10),
 
                                   ],

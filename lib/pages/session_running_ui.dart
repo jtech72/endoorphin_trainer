@@ -271,7 +271,7 @@ class SessionRunningUi extends StatelessWidget {
                       ?.copyWith(fontWeight: FontWeight.w300),
                 ).paddingOnly(top: 10, bottom: Get.height * .03),
                 Text(
-                  "Trainer Details",
+                  "Customer Details",
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium
@@ -279,7 +279,7 @@ class SessionRunningUi extends StatelessWidget {
                 ).paddingOnly(bottom: 12),
                 Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(10),
                     color: AppColors.black,
                   ),
                   child: Row(
@@ -302,7 +302,7 @@ class SessionRunningUi extends StatelessWidget {
                                   .labelMedium!
                                   .copyWith(
                                     fontWeight: FontWeight.w700,
-                                    color: AppColors.impgrey,
+                                    color: AppColors.yellow,
                                     fontSize: 16,
                                   ),
                               children: <TextSpan>[
@@ -339,10 +339,10 @@ class SessionRunningUi extends StatelessWidget {
                               const Icon(
                                 Icons.star,
                                 color: AppColors.yellow,
-                                size: 18,
+                                size: 16,
                               ),
                               Text(
-                                "4.86 (49)",
+                                " 4.86 (49)",
                                 style: Theme.of(context)
                                     .textTheme
                                     .titleMedium
@@ -364,7 +364,7 @@ class SessionRunningUi extends StatelessWidget {
                 ).paddingOnly(bottom: 12, top: 12),
                 Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(10),
                     color: AppColors.black,
                   ),
                   child: Column(
@@ -384,6 +384,11 @@ class SessionRunningUi extends StatelessWidget {
                                   ?.copyWith(fontWeight: FontWeight.w500)),
                         ],
                       ).paddingOnly(left: 13, right: 10),
+                      Container(
+                        height: 1,
+                        width: Get.width,
+                        color: AppColors.grey,
+                      ).paddingOnly(left: 12,right: 5),
                       Row(
                         children: [
                           Text("Session Duration:",
@@ -399,6 +404,11 @@ class SessionRunningUi extends StatelessWidget {
                                   ?.copyWith(fontWeight: FontWeight.w500)),
                         ],
                       ).paddingOnly(left: 13, right: 10),
+                      Container(
+                        height: 1,
+                        width: Get.width,
+                        color: AppColors.grey,
+                      ).paddingOnly(left: 12,right: 5),
                       Row(
                         children: [
                           Text("Booking Date:",
@@ -414,6 +424,11 @@ class SessionRunningUi extends StatelessWidget {
                                   ?.copyWith(fontWeight: FontWeight.w500)),
                         ],
                       ).paddingOnly(left: 13, right: 10),
+                      Container(
+                        height: 1,
+                        width: Get.width,
+                        color: AppColors.grey,
+                      ).paddingOnly(left: 12,right: 5),
                       Row(
                         children: [
                           Text("Session Start time:",
@@ -429,6 +444,11 @@ class SessionRunningUi extends StatelessWidget {
                                   ?.copyWith(fontWeight: FontWeight.w500)),
                         ],
                       ).paddingOnly(left: 13, right: 10),
+                      Container(
+                        height: 1,
+                        width: Get.width,
+                        color: AppColors.grey,
+                      ).paddingOnly(left: 12,right: 5),
                       Row(
                         children: [
                           Text("Session End time:",

@@ -59,7 +59,7 @@ class SessionDetailsUi extends StatelessWidget {
           ),
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
+              borderRadius: BorderRadius.circular(10),
               color: AppColors.greyButton,
             ),
             child: Row(
@@ -152,7 +152,7 @@ class SessionDetailsUi extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      height: Get.height*0.073,
+                      height: Get.height*0.091,
                       width: 1,
                       color: AppColors.yellow,
                     ).paddingOnly(top: 3,bottom: 3),
@@ -189,7 +189,7 @@ class SessionDetailsUi extends StatelessWidget {
                       width: Get.width*.77,
                       height: 1,
                       color: AppColors.grey,
-                    ).paddingOnly(top: 6,bottom: 6),
+                    ).paddingOnly(top: 6,bottom: 12),
                     Text(
                       "Aryarup Comples",
                       style: Theme.of(context).textTheme.labelLarge?.copyWith(

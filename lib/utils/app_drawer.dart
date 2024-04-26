@@ -58,7 +58,7 @@ class _MyDrawerState extends State<MyDrawer> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('John',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.lightGrey1),),
+                      Text('John',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.yellow),).paddingOnly(bottom: 5),
                       Text('+91 000-111-5555',style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.lightGrey1),),
                     ],
                   ),
@@ -72,7 +72,7 @@ class _MyDrawerState extends State<MyDrawer> {
             title: Row(
               children: [
                 Image.asset(ImagesPaths.home,
-                    scale: 5,
+                    scale: 4.5,
                     color: AppColors.impgrey),
             SizedBox(
               width: Get.width*0.05,
@@ -94,7 +94,7 @@ class _MyDrawerState extends State<MyDrawer> {
             title: Row(
               children: [
                 Image.asset(ImagesPaths.mysession,
-                    scale: 5,
+                    scale: 4.5,
                     color: AppColors.impgrey),
                 SizedBox(
                   width: Get.width*0.05,
@@ -138,7 +138,7 @@ class _MyDrawerState extends State<MyDrawer> {
             title: Row(
               children: [
                 Image.asset(ImagesPaths.document,
-                    scale: 5,
+                    scale: 4.5,
                     color: AppColors.impgrey),
                 SizedBox(
                   width: Get.width*0.05,
@@ -160,7 +160,7 @@ class _MyDrawerState extends State<MyDrawer> {
             title: Row(
               children: [
                 Image.asset(ImagesPaths.men,
-                    scale: 5,
+                    scale: 4.5,
                     color: AppColors.impgrey),
                 SizedBox(
                   width: Get.width*0.05,
@@ -182,7 +182,7 @@ class _MyDrawerState extends State<MyDrawer> {
             title: Row(
               children: [
                 Image.asset(ImagesPaths.support,
-                    scale: 5,
+                    scale: 4.5,
                     color: AppColors.impgrey),
                 SizedBox(
                   width: Get.width*0.05,
@@ -204,7 +204,7 @@ class _MyDrawerState extends State<MyDrawer> {
             title: Row(
               children: [
                 Image.asset(ImagesPaths.term,
-                    scale: 5,
+                    scale: 4.5,
                     color: AppColors.impgrey),
                 SizedBox(
                   width: Get.width*0.05,
@@ -226,7 +226,7 @@ class _MyDrawerState extends State<MyDrawer> {
             title: Row(
               children: [
                 Image.asset(ImagesPaths.privacy,
-                    scale: 5,
+                    scale: 4.5,
                     color: AppColors.impgrey),
                 SizedBox(
                   width: Get.width*0.05,
