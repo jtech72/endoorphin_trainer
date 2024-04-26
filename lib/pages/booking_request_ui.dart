@@ -291,7 +291,7 @@ class BookingRequsetUi extends StatelessWidget {
                                   Row(
                                     children: [
                                       const Icon(
-                                        Icons.star,
+                                        Icons.star,size: 19,
                                         color: AppColors.yellow,
                                       ).paddingOnly(right: 5),
                                       Text(
@@ -371,7 +371,7 @@ class BookingRequsetUi extends StatelessWidget {
                                       children: [
                                         Container(
                                           height: Get.height * 0.025,
-                                          width: Get.width * 0.035,
+                                          width: Get.width * 0.030,
                                           decoration: BoxDecoration(
                                             color: Colors.white,
                                             border: Border.all(
@@ -380,19 +380,45 @@ class BookingRequsetUi extends StatelessWidget {
                                           ),
                                         ),
                                         Container(
-                                          height: Get.height * 0.044,
-                                          width: 1,
+                                          height: 3,
+                                          width: 2,
                                           color: AppColors.white,
                                         ).paddingOnly(top: 3, bottom: 3),
+                                        Container(
+                                          height: 3,
+                                          width: 2,
+                                          color: AppColors.white,
+                                        ).paddingOnly(top: 3, bottom: 3),
+                                        Container(
+                                          height: 3,
+                                          width: 2,
+                                          color: AppColors.white,
+                                        ).paddingOnly(top: 3, bottom: 3),
+                                        Container(
+                                          height: 3,
+                                          width: 2,
+                                          color: AppColors.white,
+                                        ).paddingOnly(top: 3, bottom: 3),
+                                        Container(
+                                          height: 3,
+                                          width: 2,
+                                          color: AppColors.white,
+                                        ).paddingOnly(top: 3, bottom: 3),
+                                        Container(
+                                          height: 3,
+                                          width: 2,
+                                          color: AppColors.white,
+                                        ).paddingOnly(top: 3,bottom: 3),
+
                                         const Icon(
                                           Icons.circle,
                                           color: AppColors.yellow,
-                                          size: 22,
+                                          size: 14,
                                         )
                                       ],
                                     ),
                                     SizedBox(
-                                      width: Get.width * 0.014,
+                                      width: Get.width * 0.024,
                                     ),
                                     Expanded(
                                       child: Column(
@@ -422,7 +448,7 @@ class BookingRequsetUi extends StatelessWidget {
                                                     ),
                                               )).paddingOnly(bottom: 5),
                                           Container(
-                                            width: Get.width * .77,
+                                            width: Get.width * .80,
                                             height: 1,
                                             color: AppColors.grey,
                                           ).paddingOnly(top: 10, bottom: 15),
@@ -502,7 +528,7 @@ class BookingRequsetUi extends StatelessWidget {
                                 Row(
                                   children: [
                                     const Icon(
-                                      Icons.star,
+                                      Icons.star,size: 19,
                                       color: AppColors.yellow,
                                     ).paddingOnly(right: 5),
                                     Text(

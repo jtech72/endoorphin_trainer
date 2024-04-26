@@ -6,9 +6,13 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 class _SalesData {
   final String day;
   final int amount;
+
   // final int time;
 
-  _SalesData(this.day, this.amount,);
+  _SalesData(
+    this.day,
+    this.amount,
+  );
 }
 
 class EarningUi extends StatelessWidget {
@@ -18,12 +22,12 @@ class EarningUi extends StatelessWidget {
   Widget build(BuildContext context) {
     EarningController controller = Get.put(EarningController());
     List<_SalesData> data = [
-      _SalesData(' S', 35,),
+      _SalesData(' S' , 35,),
       _SalesData(' M ', 21,),
-      _SalesData(' T', 40,),
+      _SalesData(' T' , 60,),
       _SalesData(' W ', 30,),
       _SalesData(' T ', 40,),
-      _SalesData(' F ', 49,),
+      _SalesData(' F ', 30,),
       _SalesData(' S ', 54,),
     ];
     return Scaffold(
@@ -84,33 +88,40 @@ class EarningUi extends StatelessWidget {
                   color: AppColors.blackShade,
                 ),
                 child: SfCartesianChart(
+                    plotAreaBorderWidth: 0,
                     borderWidth: 5,
                     legend: Legend(
-                        textStyle: TextStyle(
-                            color: AppColors.impgrey),
-                            isVisible: true),
+                        textStyle: TextStyle(color: AppColors.impgrey),
+                        isVisible: true),
                     tooltipBehavior: TooltipBehavior(
+                        canShowMarker: false,
                         textStyle: TextStyle(color: AppColors.black),
-                        enable: true,color: Colors.grey),
-
-                    primaryXAxis: CategoryAxis(),
-                    primaryYAxis: NumericAxis(minimum: 0, maximum: 70, interval: 10),
+                        enable: true,
+                        color: AppColors.lightGrey),
+                    primaryXAxis: CategoryAxis(
+                      labelStyle: TextStyle(color: AppColors.impgrey),
+                      majorGridLines: MajorGridLines(width: 0),
+                    ),
+                    primaryYAxis: NumericAxis(
+                        isVisible: false,
+                        labelStyle: TextStyle(color: AppColors.impgrey),
+                        majorGridLines: MajorGridLines(width: 0),
+                        minimum: 0,
+                        maximum: 70,
+                        interval: 10),
                     series: <CartesianSeries<_SalesData, String>>[
                       ColumnSeries<_SalesData, String>(
-
-                          dataSource: data,
-                          xValueMapper: (_SalesData data, _) => data.day,
-                          yValueMapper: (_SalesData data, _) => data.amount,
-                          name:'Dec 7 - 14',
-
-                          color: AppColors.yellow,
-                        borderColor: AppColors.grey,
+                        dataSource: data,
+                        xValueMapper: (_SalesData data, _) => data.day,
+                        yValueMapper: (_SalesData data, _) => data.amount,
+                        name: 'Dec 7 - 14',
+                        color: AppColors.yellow,
+                        borderColor: AppColors.grey,borderWidth: 1,
                         borderRadius: BorderRadius.circular(10),
                       )
-                    ])
-
-            ).paddingOnly(top: 15,),
-
+                    ])).paddingOnly(
+              top: 15,
+            ),
             Container(
               height: Get.height * .09,
               width: Get.width,
@@ -159,7 +170,10 @@ class EarningUi extends StatelessWidget {
               ),
             ).paddingOnly(top: 15),
           ],
-        ).paddingOnly( left:Get.width*0.01,right:Get.width*0.01,top: Get.height*0.02),
+        ).paddingOnly(
+            left: Get.width * 0.01,
+            right: Get.width * 0.01,
+            top: Get.height * 0.02),
       ),
     );
   }

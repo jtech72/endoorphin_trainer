@@ -27,7 +27,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
           children: [
             Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
+                borderRadius: BorderRadius.circular(10),
                 color: AppColors.greyButton,
               ),
               child: Row(
@@ -47,7 +47,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                           style:
                               Theme.of(context).textTheme.labelMedium!.copyWith(
                                     fontWeight: FontWeight.w700,
-                                    color: AppColors.impgrey,
+                                    color: AppColors.yellow,
                                     fontSize: 16,
                                   ),
                           children: <TextSpan>[
@@ -83,7 +83,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                         children: [
                           const Icon(
                             Icons.star,
-                            color: AppColors.yellow,
+                            color: AppColors.impgrey,
                             size: 18,
                           ),
                           Text(
@@ -91,7 +91,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
-                                ?.copyWith(color: AppColors.yellow),
+                                ?.copyWith(color: AppColors.impgrey),
                           )
                         ],
                       )
@@ -116,7 +116,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                         ),
                       ),
                       Container(
-                        height: Get.height * 0.073,
+                        height: Get.height * 0.101,
                         width: 1,
                         color: AppColors.yellow,
                       ).paddingOnly(top: 3, bottom: 3),
@@ -162,7 +162,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                         width: Get.width * .77,
                         height: 1,
                         color: AppColors.grey,
-                      ).paddingOnly(top: 6, bottom: 6),
+                      ).paddingOnly(top: 6, bottom: 12),
                       Text(
                         "Aryarup Comples",
                         style: Theme.of(context).textTheme.labelLarge?.copyWith(
@@ -203,7 +203,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: AppColors.black,
+                color: AppColors.blackShade,
               ),
               child: Column(
                 children: [
@@ -214,14 +214,14 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                                   .textTheme
                                   .labelLarge
                                   ?.copyWith(fontWeight: FontWeight.w500))
-                          .paddingOnly(right: Get.width * .146),
+                          .paddingOnly(right: Get.width * .150),
                       Text("26 March 2024 at 07:00:00",
                           style: Theme.of(context)
                               .textTheme
                               .labelLarge
                               ?.copyWith(fontWeight: FontWeight.w500)),
                     ],
-                  ).paddingOnly(left: 10, right: 10),
+                  ).paddingOnly(left: 10, right: 10,bottom: 5),
                   Container(
                     height: 1,
                     width: Get.width,
@@ -234,14 +234,14 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                                   .textTheme
                                   .labelLarge
                                   ?.copyWith(fontWeight: FontWeight.w500))
-                          .paddingOnly(right: Get.width * .050),
+                          .paddingOnly(right: Get.width * .045),
                       Text("60 Mins",
                           style: Theme.of(context)
                               .textTheme
                               .labelLarge
                               ?.copyWith(fontWeight: FontWeight.w500)),
                     ],
-                  ).paddingOnly(left: 10, right: 10),
+                  ).paddingOnly(left: 10, right: 10,bottom: 5,top: 5),
                   Container(
                     height: 1,
                     width: Get.width,
@@ -254,14 +254,14 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                                   .textTheme
                                   .labelLarge
                                   ?.copyWith(fontWeight: FontWeight.w500))
-                          .paddingOnly(right: Get.width * .1),
+                          .paddingOnly(right: Get.width * .10),
                       Text("26 07:00:00",
                           style: Theme.of(context)
                               .textTheme
                               .labelLarge
                               ?.copyWith(fontWeight: FontWeight.w500)),
                     ],
-                  ).paddingOnly(left: 10, right: 10),
+                  ).paddingOnly(left: 10, right: 10,bottom: 5,top: 5),
                   Container(
                     height: 1,
                     width: Get.width,
@@ -274,14 +274,14 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                                   .textTheme
                                   .labelLarge
                                   ?.copyWith(fontWeight: FontWeight.w500))
-                          .paddingOnly(right: Get.width * .02),
+                          .paddingOnly(right: Get.width * .016),
                       Text("26 March 2024 at 07:00:00",
                           style: Theme.of(context)
                               .textTheme
                               .labelLarge
                               ?.copyWith(fontWeight: FontWeight.w500)),
                     ],
-                  ).paddingOnly(left: 10, right: 10),
+                  ).paddingOnly(left: 10, right: 10,bottom: 5,top: 5),
                   Container(
                     height: 1,
                     width: Get.width,
@@ -294,17 +294,17 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                                   .textTheme
                                   .labelLarge
                                   ?.copyWith(fontWeight: FontWeight.w500))
-                          .paddingOnly(right: Get.width * .04),
+                          .paddingOnly(right: Get.width * .035),
                       Text("26 March",
                           style: Theme.of(context)
                               .textTheme
                               .labelLarge
                               ?.copyWith(fontWeight: FontWeight.w500)),
                     ],
-                  ).paddingOnly(left: 10, right: 10),
+                  ).paddingOnly(left: 10, right: 10,top: 5),
                 ],
               ).paddingOnly(top: 10, bottom: 10),
-            ),
+            ).paddingOnly(bottom:Get.height*0.02),
             Container(
               height: Get.height * 0.12,
               width: Get.width,
@@ -401,3 +401,4 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
     );
   }
 }
+//

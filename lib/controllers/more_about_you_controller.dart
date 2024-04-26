@@ -12,7 +12,7 @@ class MoreAboutYouController extends GetxController{
   'Correct Naming: Upload each document with its respective name.',
   'Alignment: Properly align the camera for accurate capture.',
   'Review & Submit: Double-check all documents before submitting.'];
-  List<String>categoryname=['Emirates','Passport'];
+  List<String>categoryname=['Emirates ID','Passport'];
 
 
 

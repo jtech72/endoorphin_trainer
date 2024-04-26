@@ -33,14 +33,11 @@ class VerifyPhoneNumberUI extends StatelessWidget {
                 height: Get.height*0.05,
               ),
               Center(child: Text(
-                'Please Enter The 4 Digit Code Sent to\nyour phone number',style: Theme.of(context).textTheme.labelLarge!.copyWith(fontWeight: FontWeight.w500),textAlign: TextAlign.center,)),
+                'Please Enter The 6 Digit Code Sent to\nyour phone number',style: Theme.of(context).textTheme.labelLarge!.copyWith(fontWeight: FontWeight.w500),textAlign: TextAlign.center,)),
               SizedBox(
                 height: Get.height*0.07,
               ),
-              Text(
-                'Phone Number',
-                style: Theme.of(context).textTheme.labelLarge,
-              ),
+
               SizedBox(
                 height: Get.height * 0.01,
               ),
