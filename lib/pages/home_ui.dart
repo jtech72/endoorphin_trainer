@@ -22,7 +22,7 @@ class HomeUiState extends State<HomeUi> {
   void initState() {
     super.initState();
     _pageController = PageController();
-    _timer = Timer.periodic(Duration(seconds: 3), (Timer timer) {
+    _timer = Timer.periodic(Duration(seconds: 100), (Timer timer) {
       if (_currentPage < 2) {
         _currentPage++;
       } else {
