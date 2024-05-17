@@ -1,14 +1,16 @@
 import 'package:endoorphin_trainer/bindings/banking_details_binding.dart';
 import 'package:endoorphin_trainer/bindings/session_complete_binding.dart';
+import 'package:endoorphin_trainer/bindings/sign_in_option_binding.dart';
 import 'package:endoorphin_trainer/pages/banking_details_ui.dart';
 import 'package:endoorphin_trainer/pages/session_complete_ui.dart';
+import 'package:endoorphin_trainer/pages/sign_in_option_ui.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 
 import '../bindings/bottom_navigation_bar_binding.dart';
 import '../pages/bottom_navigation_bar_ui.dart';
 
 class AppPages {
-  static  const initialRoute = AppRoutes.home;
+  static  const initialRoute = AppRoutes.review;
 
 
   static List<GetPage> routes =[
@@ -59,7 +61,7 @@ class AppPages {
         binding: BioBinding()),
     GetPage(
         name: AppRoutes.login,
-        page: ()=>  const LoginUi(),
+        page: ()=>   LoginUi(),
         binding: LoginBinding()),
     GetPage(
         name: AppRoutes.notification,
@@ -143,5 +145,9 @@ GetPage(
         name: AppRoutes.bankingDetails,
         page: () => BankingDetailsUI(),
         binding: BankingDetailsBinding()),
+    GetPage(
+        name: AppRoutes.signinoption,
+        page: () => SignInOptionUi(),
+        binding: SignInOptionBinding()),
   ];
 }

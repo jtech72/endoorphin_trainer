@@ -49,9 +49,14 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
       Row(
                 children: [
-                    CircleAvatar(
-                      radius: 30,
-                      backgroundImage: AssetImage(ImagesPaths.profilePic),
+                    GestureDetector(
+                      onTap: (){
+                        Get.toNamed(AppRoutes.profile);
+                      },
+                      child: CircleAvatar(
+                        radius: 30,
+                        backgroundImage: AssetImage(ImagesPaths.profilePic),
+                      ),
                     ),
                   SizedBox(width: Get.width*0.06,),
                   Column(

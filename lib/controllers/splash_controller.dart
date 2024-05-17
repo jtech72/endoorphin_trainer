@@ -6,7 +6,7 @@ class SplashController extends GetxController {
   void onInit() {
     Future.delayed(const Duration(seconds: 3), () {
       // if(storage.read('token')==null){
-        Get.offAllNamed(AppRoutes.countrycode);
+        Get.offAllNamed(AppRoutes.signinoption);
 
       // }else{
       //   // Get.offAllNamed(AppRoutes.bottomNavigation);

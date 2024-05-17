@@ -35,6 +35,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
     BookingController controller = Get.find();
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
           'Offline',
@@ -92,7 +93,13 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
       body: TabBarView(
         controller: tabController,
         children: [
-          Container(child: SingleChildScrollView(
+          Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(ImagesPaths.bgBlackShade)
+                )
+            ),
+            child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -294,7 +301,13 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
             
             ],),
           ),), // Example tab content
-          Container(child: SingleChildScrollView(
+          Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(ImagesPaths.bgBlackShade)
+                )
+            ),
+            child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -492,7 +505,13 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
 
               ],),
           ),), // Example tab content
-          Container(child: SingleChildScrollView(
+          Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(ImagesPaths.bgBlackShade)
+                )
+            ),
+            child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -690,7 +709,13 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
 
               ],),
           ),), // Example tab content
-           Container(child: SingleChildScrollView(
+           Container(
+             decoration: BoxDecoration(
+                 image: DecorationImage(
+                     image: AssetImage(ImagesPaths.bgBlackShade)
+                 )
+             ),
+             child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
