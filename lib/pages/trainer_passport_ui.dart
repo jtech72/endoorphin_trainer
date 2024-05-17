@@ -11,228 +11,264 @@ class TrainerPassportUI extends StatelessWidget {
     TrainerPassportController controller = Get.find();
     String? username;
     return Scaffold(
-      appBar: myAppBar(
-          title: Text(
-            controller.documentIndex == 0? "Emirates ID":controller.documentIndex == 1?'Passport':"Certification",
-            style: Theme.of(context).textTheme.headlineSmall,
-          ),
-          context: context),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Lorem Ipsum is simply dummy text of the\nprinting and typesetting industry.',
-              style: Theme.of(context)
-                  .textTheme
-                  .labelLarge!
-                  .copyWith(fontWeight: FontWeight.w500),
-            ).paddingOnly(bottom: Get.height * 0.035),
-            Container(
-              height: 1,
-              width: Get.width,
-              color: AppColors.grey3,
-            ),
-            Row(
+      resizeToAvoidBottomInset: false,
+      // appBar: myAppBar(
+      //     title: Text(
+      //       controller.documentIndex == 0? "Emirates ID":controller.documentIndex == 1?'Passport':"Certification",
+      //       style: Theme.of(context).textTheme.headlineSmall,
+      //     ),
+      //     context: context),
+      body: Stack(
+        children: [
+          Transform.scale(
+              scaleX: 1.1,
+              scaleY: 1,
+              child: Image.asset(ImagesPaths.bgBlackShade,)),
+          SingleChildScrollView(physics: NeverScrollableScrollPhysics(),
+            child: Column(
               children: [
-                Text(
-                  controller.documentIndex == 0? "Emirates ID Name":controller.documentIndex == 1?'Passport Name':"Certification Name",
-
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelLarge!
-                      .copyWith(fontWeight: FontWeight.w500),
-                ).paddingOnly(bottom: Get.height * .008, top: Get.height * .04),
-                Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: Get.height * .03,bottom: 0),
-
-              ],
-            ),
-            Container(
-              height: 45,
-              decoration: BoxDecoration(
-                border: Border.all(color: AppColors.lightWhite),
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: TextField(
-                inputFormatters: [
-                  LengthLimitingTextInputFormatter(64),
-                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                ],
-                enableInteractiveSelection: true,
-                style: Theme.of(context).textTheme.labelMedium,
-                cursorColor: AppColors.grey,
-                cursorHeight: 18,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: AppColors.yellowishWhite,
-                  border: InputBorder.none,
-                  hintStyle: Theme.of(context).textTheme.labelMedium,
-                  contentPadding: const EdgeInsets.only(bottom: 3, left: 15),
-
-                  hintText: controller.documentIndex == 0? " Enter Emirates ID name":controller.documentIndex == 1?'Enter Passport name':"Enter Certification name",
-                  alignLabelWithHint: true,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(4),
-                    borderSide: const BorderSide(
-                      color: AppColors.yellowishWhite,
-                      width: 1,
-                    ),
-                  ),
-                  disabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(4),
-                    borderSide: const BorderSide(
-                      color: AppColors.yellowishWhite,
-                      width: 1,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(4),
-                    borderSide: const BorderSide(
-                      color: AppColors.yellowishWhite,
-                      width: 1,
-                    ),
-                  ),/// Center the hintText
-                ),
-              ),
-            ),
-            SizedBox(
-              height: Get.height * 0.01,
-            ),
-            Row(
-              children: [
-                Text(
-                    controller.documentIndex == 0? "Emirates ID Number":controller.documentIndex == 1?'Passport Number':"Certification Number",
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelLarge!
-                      .copyWith(fontWeight: FontWeight.w500),
-                ).paddingOnly(bottom: Get.height * .008, top: Get.height * .02),
-                Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
-
-              ],
-            ),
-            Container(
-              height: 45,
-              decoration: BoxDecoration(
-                border: Border.all(color: AppColors.lightWhite),
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: TextField(
-                inputFormatters: [
-                  LengthLimitingTextInputFormatter(64),
-                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                ],
-                enableInteractiveSelection: true,
-                style: Theme.of(context).textTheme.labelMedium,
-                cursorColor: AppColors.grey,
-                cursorHeight: 18,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: AppColors.yellowishWhite,
-                  border: InputBorder.none,
-                  hintStyle: Theme.of(context).textTheme.labelMedium,
-                  contentPadding: const EdgeInsets.only(bottom: 3, left: 15),
-
-                  hintText: controller.documentIndex == 0? " Enter Emirates ID Number":controller.documentIndex == 1?'Enter Passport Number':"Enter Certification Number",
-                  alignLabelWithHint: true,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(4),
-                    borderSide: const BorderSide(
-                      color: AppColors.yellowishWhite,
-                      width: 1,
-                    ),
-                  ),
-                  disabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(4),
-                    borderSide: const BorderSide(
-                      color: AppColors.yellowishWhite,
-                      width: 1,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(4),
-                    borderSide: const BorderSide(
-                      color: AppColors.yellowishWhite,
-                      width: 1,
-                    ),
-                  ),/// Center the hintText
-                ),
-              ),
-            ),
-            SizedBox(
-              height: Get.height * 0.01,
-            ),
-            Row(
-              children: [
-                Text(
-                    controller.documentIndex == 0? " Upload Emirates ID Photo":controller.documentIndex == 1?'Upload Passport Photo':"Upload Certification Photo",
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelLarge!
-                      .copyWith(fontWeight: FontWeight.w500),
-                ).paddingOnly(bottom: Get.height * .008, top: Get.height * .02),
-                Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: Get.height * .01,bottom: 0),
-
-              ],
-            ),
-            GestureDetector(
-              onTap: () {
-                controller.openCamera();
-              },
-              child: Container(
-                height: 45,
-                width: Get.width,
-                decoration: BoxDecoration(
-                  color: AppColors.yellowishWhite,
-                  border: Border.all(color: AppColors.lightWhite),
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                SizedBox(height: Get.height*0.078,),
+                Row(
                   children: [
-                    Image.asset(
-                      ImagesPaths.upload,
-                      scale: 5,
-                    ),
-                    const SizedBox(
-                      width: 10,
+                    GestureDetector(
+                      onTap: (){
+                        Get.back();
+                      },
+                      child: Container(
+                          height: 30,
+                          width: 30,
+                          child: Icon(Icons.arrow_back_ios,size: 18,).paddingOnly(right: Get.width*0.02)),
                     ),
                     Text(
-                      'Add a File',
-                      style: Theme.of(context).textTheme.labelMedium,
+                      controller.documentIndex == 0? "Emirates ID":controller.documentIndex == 1?'Passport':"Certification",
+                      style: Theme.of(context).textTheme.headlineSmall,
                     ),
                   ],
+                ).paddingOnly(left: Get.width*0.05),
+                Container(
+                  height: Get.height,
+                  width: Get.width,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Lorem Ipsum is simply dummy text of the\nprinting and typesetting industry.',
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelLarge!
+                              .copyWith(fontWeight: FontWeight.w500),
+                        ).paddingOnly(bottom: Get.height * 0.035),
+                        Container(
+                          height: 1,
+                          width: Get.width,
+                          color: AppColors.grey3,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              controller.documentIndex == 0? "Emirates ID Name":controller.documentIndex == 1?'Passport Name':"Certification Name",
+
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge!
+                                  .copyWith(fontWeight: FontWeight.w500),
+                            ).paddingOnly(bottom: Get.height * .008, top: Get.height * .04),
+                            Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: Get.height * .03,bottom: 0),
+
+                          ],
+                        ),
+                        Container(
+                          height: 45,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: AppColors.lightWhite),
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: TextField(
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(64),
+                              FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                            ],
+                            enableInteractiveSelection: true,
+                            style: Theme.of(context).textTheme.labelMedium,
+                            cursorColor: AppColors.grey,
+                            cursorHeight: 18,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: AppColors.yellowishWhite,
+                              border: InputBorder.none,
+                              hintStyle: Theme.of(context).textTheme.labelMedium,
+                              contentPadding: const EdgeInsets.only(bottom: 3, left: 15),
+
+                              hintText: controller.documentIndex == 0? " Enter Emirates ID name":controller.documentIndex == 1?'Enter Passport name':"Enter Certification name",
+                              alignLabelWithHint: true,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: const BorderSide(
+                                  color: AppColors.yellowishWhite,
+                                  width: 1,
+                                ),
+                              ),
+                              disabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: const BorderSide(
+                                  color: AppColors.yellowishWhite,
+                                  width: 1,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: const BorderSide(
+                                  color: AppColors.yellowishWhite,
+                                  width: 1,
+                                ),
+                              ),/// Center the hintText
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: Get.height * 0.01,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                                controller.documentIndex == 0? "Emirates ID Number":controller.documentIndex == 1?'Passport Number':"Certification Number",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge!
+                                  .copyWith(fontWeight: FontWeight.w500),
+                            ).paddingOnly(bottom: Get.height * .008, top: Get.height * .02),
+                            Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
+
+                          ],
+                        ),
+                        Container(
+                          height: 45,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: AppColors.lightWhite),
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: TextField(
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(64),
+                              FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                            ],
+                            enableInteractiveSelection: true,
+                            style: Theme.of(context).textTheme.labelMedium,
+                            cursorColor: AppColors.grey,
+                            cursorHeight: 18,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: AppColors.yellowishWhite,
+                              border: InputBorder.none,
+                              hintStyle: Theme.of(context).textTheme.labelMedium,
+                              contentPadding: const EdgeInsets.only(bottom: 3, left: 15),
+
+                              hintText: controller.documentIndex == 0? " Enter Emirates ID Number":controller.documentIndex == 1?'Enter Passport Number':"Enter Certification Number",
+                              alignLabelWithHint: true,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: const BorderSide(
+                                  color: AppColors.yellowishWhite,
+                                  width: 1,
+                                ),
+                              ),
+                              disabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: const BorderSide(
+                                  color: AppColors.yellowishWhite,
+                                  width: 1,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: const BorderSide(
+                                  color: AppColors.yellowishWhite,
+                                  width: 1,
+                                ),
+                              ),/// Center the hintText
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: Get.height * 0.01,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                                controller.documentIndex == 0? " Upload Emirates ID Photo":controller.documentIndex == 1?'Upload Passport Photo':"Upload Certification Photo",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge!
+                                  .copyWith(fontWeight: FontWeight.w500),
+                            ).paddingOnly(bottom: Get.height * .008, top: Get.height * .02),
+                            Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: Get.height * .01,bottom: 0),
+
+                          ],
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            controller.openCamera();
+                          },
+                          child: Container(
+                            height: 45,
+                            width: Get.width,
+                            decoration: BoxDecoration(
+                              color: AppColors.yellowishWhite,
+                              border: Border.all(color: AppColors.lightWhite),
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  ImagesPaths.upload,
+                                  scale: 5,
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  'Add a File',
+                                  style: Theme.of(context).textTheme.labelMedium,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: Get.height * .25,
+                        ),
+                        Center(
+                          child: SizedBox(
+                            child: InkButton(
+                                child: Text(
+                                  'Submit for Review',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineSmall!
+                                      .copyWith(color: AppColors.black,fontSize: 20,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                onTap: () {
+                                  Get.back();
+                                }),
+                          ),
+                        )
+                      ],
+                    ).paddingOnly(
+                        left: Get.width * 0.03,
+                        right: Get.width * 0.03,
+                        top: Get.height * .02),
+                  ),
                 ),
-              ),
+              ],
             ),
-            SizedBox(
-              height: Get.height * .25,
-            ),
-            Center(
-              child: SizedBox(
-                height: 35,
-                width: 201,
-                child: InkButton(
-                    child: Text(
-                      'Submit for Review',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineSmall!
-                          .copyWith(color: AppColors.black),
-                    ),
-                    onTap: () {
-                      Get.back();
-                    }),
-              ),
-            )
-          ],
-        ).paddingOnly(
-            left: Get.width * 0.03,
-            right: Get.width * 0.03,
-            top: Get.height * .02),
+          ),
+        ],
       ),
     );
   }

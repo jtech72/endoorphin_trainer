@@ -108,7 +108,7 @@ class HomeUiState extends State<HomeUi> {
 
           children: [
             Container(
-              height: Get.height*0.22,
+              height: Get.height*0.24,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
@@ -121,9 +121,9 @@ class HomeUiState extends State<HomeUi> {
                   });
                 },
                 children: [
-                  Image.asset(ImagesPaths.homecard, fit: BoxFit.contain),
-                  Image.asset(ImagesPaths.homecard, fit: BoxFit.contain),
-                  Image.asset(ImagesPaths.homecard, fit: BoxFit.contain),
+                  Image.asset(ImagesPaths.homepackage, fit: BoxFit.fill),
+                  Image.asset(ImagesPaths.homepackage, fit: BoxFit.fill),
+                  Image.asset(ImagesPaths.homepackage, fit: BoxFit.fill),
                 ],
               ),
             ),
