@@ -65,7 +65,7 @@ class BookingRequsetUi extends StatelessWidget {
                                   blinkWhenObscuring: true,
                                   cursorColor: AppColors.yellow,
                                   keyboardType: TextInputType.number,
-                                  backgroundColor: AppColors.backgroundBlack,
+                                  backgroundColor:Colors.transparent,
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   length: 4)

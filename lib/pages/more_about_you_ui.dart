@@ -79,7 +79,6 @@ class MoreAboutYouUi extends StatelessWidget {
                         splashColor: Colors.transparent,
                         onTap: (){
                           controller.selectedIndex.value = index;
-                            controller.isButtonVisible.value = true;
                             Get.toNamed(AppRoutes.trainerPassport,arguments: index);
                           // Use Get.toNamed to navigate to the desired routes based on the selected index
                           // if (controller.selectedIndex.value == 0) {
@@ -145,23 +144,21 @@ class MoreAboutYouUi extends StatelessWidget {
                   },itemCount: controller.newList.length,)
                 ),
                             
-                Center(child: Obx(
-                  ()=> Visibility(
-                    visible: controller.isButtonVisible.value,
-                    child: InkButton(
-                        child: Text('Continue',
-                          style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 20,
-                              fontWeight: FontWeight.w500),),
-                        onTap: (){
-                        Get.back(result: true);
-                        Get.toNamed(AppRoutes.bio)?.then((result) {
-                          if (result != null && result == true) {
-                            controller.showButton(true); // Show the button when returning from another page
-                          }
-                        });
-                        }),
-                  ),
-                )),
+                Center(child:
+
+                      InkButton(
+                      child: Text('Continue',
+                        style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 20,
+                            fontWeight: FontWeight.w500),),
+                      onTap: (){
+                      Get.back(result: true);
+                      Get.toNamed(AppRoutes.bio)?.then((result) {
+                        if (result != null && result == true) {
+                          controller.showButton(true); // Show the button when returning from another page
+                        }
+                      });
+                      }),
+                ),
                             SizedBox(height: Get.height*0.1,)
               ],
             ),

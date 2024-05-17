@@ -66,6 +66,7 @@ class ImagesPaths {
   static const String appLogo= "${baseUrl}app_logo.png";
   static const String loginImage= "${baseUrl}login_image.png";
   static const String homepackage= "${baseUrl}home_package_image.png";
+  static const String restart= "${baseUrl}restart.png";
 
 
 
