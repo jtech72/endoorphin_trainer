@@ -32,6 +32,7 @@ class AppRoutes{
   static const String bottomNavigation="/bottomnavigationbar";
   static const String bankingDetails="/bankingDetails";
   static const String signinoption="/signinoption";
+  static const String uploadimage="/uploadimage";
 
 
 

@@ -61,6 +61,7 @@ class RegistrationUi extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 child: TextField(
+                                  keyboardType: TextInputType.text,
                                   inputFormatters: [
                                     LengthLimitingTextInputFormatter(64),
                                     FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -119,6 +120,7 @@ class RegistrationUi extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 child: TextField(
+                                  keyboardType: TextInputType.text,
                                   inputFormatters: [
                                     LengthLimitingTextInputFormatter(64),
                                     FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -176,6 +178,7 @@ class RegistrationUi extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 child: TextField(
+                                  keyboardType: TextInputType.emailAddress,
                                   inputFormatters: [
                                     LengthLimitingTextInputFormatter(64),
                                     FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -233,6 +236,7 @@ class RegistrationUi extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 child: TextField(
+                                  keyboardType: TextInputType.text,
                                   inputFormatters: [
                                     LengthLimitingTextInputFormatter(64),
                                     FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -292,6 +296,7 @@ class RegistrationUi extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 child: TextField(
+                                  keyboardType: TextInputType.text,
                                   inputFormatters: [
                                     LengthLimitingTextInputFormatter(64),
                                     FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -464,7 +469,7 @@ class RegistrationUi extends StatelessWidget {
                             ],
                           ),
                         ).paddingOnly(top: 15),
-                        SizedBox(height: Get.height*0.3,)
+                        SizedBox(height: Get.height*0.1,)
                       ],
                     ).paddingOnly(left: 18,right: 18),
                   ),

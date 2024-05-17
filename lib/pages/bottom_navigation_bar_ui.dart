@@ -32,13 +32,13 @@ class _BottomNavigationBarUIState extends State<BottomNavigationBarUI> {
   late Widget currentPage;
 HomeController homeController = Get.put(HomeController());
 EarningController earningController = Get.put(EarningController());
-BookingRequestController bookingRequestController = Get.put(BookingRequestController());
+BookingController bookingController = Get.put(BookingController());
 ProfileController profileController = Get.put(ProfileController());
 // BookingRequestController bookingRequestController = Get.put(BookingRequestController());
   List<Widget> pages = [
     const HomeUi(),
     const EarningUi(),
-    const BookingRequsetUi(),
+    const BookingUi(),
     const ProfileUI(),
   ];
 

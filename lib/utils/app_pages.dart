@@ -1,16 +1,18 @@
 import 'package:endoorphin_trainer/bindings/banking_details_binding.dart';
 import 'package:endoorphin_trainer/bindings/session_complete_binding.dart';
 import 'package:endoorphin_trainer/bindings/sign_in_option_binding.dart';
+import 'package:endoorphin_trainer/bindings/upload_images_binding.dart';
 import 'package:endoorphin_trainer/pages/banking_details_ui.dart';
 import 'package:endoorphin_trainer/pages/session_complete_ui.dart';
 import 'package:endoorphin_trainer/pages/sign_in_option_ui.dart';
+import 'package:endoorphin_trainer/pages/upload_images_ui.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 
 import '../bindings/bottom_navigation_bar_binding.dart';
 import '../pages/bottom_navigation_bar_ui.dart';
 
 class AppPages {
-  static  const initialRoute = AppRoutes.review;
+  static  const initialRoute = AppRoutes.splash;
 
 
   static List<GetPage> routes =[
@@ -149,5 +151,9 @@ GetPage(
         name: AppRoutes.signinoption,
         page: () => SignInOptionUi(),
         binding: SignInOptionBinding()),
+    GetPage(
+        name: AppRoutes.uploadimage,
+        page: () => UploadImagesUi(),
+        binding: UploadImagesBinding()),
   ];
 }

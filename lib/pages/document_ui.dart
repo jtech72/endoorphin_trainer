@@ -9,131 +9,119 @@ class DocumentUI extends StatelessWidget {
   Widget build(BuildContext context) {
     DocumentController controller = Get.put(DocumentController());
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      // appBar: myAppBar(
-      //     title: Text('Documents',
-      //       style: Theme.of(context).textTheme.bodyMedium,),
-      //     context: context
-      // ),
+      appBar: myAppBar(
+          title: Text('Documents',
+            style: Theme.of(context).textTheme.bodyMedium,),
+          context: context
+      ),
 
-      body: Stack(
-        children: [
-          Transform.scale(
-              scaleX: 1.1,
-              scaleY: 1,
-              child: Image.asset(ImagesPaths.bgBlackShade,)),
-          SingleChildScrollView(
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: Get.height*0.075,),
-                Row(
-                  children: [
-                    GestureDetector(
-                      onTap: (){
-                        Get.back();
-                      },
+      body: Container(
+        height: Get.height,
+        width: Get.width,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(ImagesPaths.bgBlackShade,),fit: BoxFit.cover
+            )
+        ),
+        child: SingleChildScrollView(
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Transform.translate(
+                  offset: Offset(10,0),
+                  child: Text('Uploaded Documents',style: Theme.of(context).textTheme.headlineSmall,).paddingOnly(bottom: Get.height*0.03,top: Get.height*0.01)),
+              ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                  itemBuilder: (context,index){
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: Container(
-                          height: 30,
-                          width: 30,
-                          child: Icon(Icons.arrow_back_ios,size: 18,).paddingOnly(right: Get.width*0.02)),
-                    ),
-                    Text('Documents',
-                      style: Theme.of(context).textTheme.headlineSmall,),
-                  ],
-                ).paddingOnly(left: Get.width*0.082,bottom: Get.height*0.02),
-                Transform.translate(
-                    offset: Offset(10,0),
-                    child: Text('Uploaded Documents',style: Theme.of(context).textTheme.headlineSmall,).paddingOnly(bottom: Get.height*0.03)),
-                ListView.builder(padding: EdgeInsets.zero,
-                  shrinkWrap: true,
-                    itemBuilder: (context,index){
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          height: 215,
-                          width: Get.width,
-                          decoration: BoxDecoration(
-                              color: AppColors.greyButton,
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Column(
-                            children: [
-                              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(controller.newList[index],style: Theme.of(context).textTheme.titleLarge!.copyWith(color: AppColors.yellow),),
-                                  Row(
-                                    children: [
-                                      InkButton(borderRadius: 5,
-                                          backGroundColor: AppColors.black,
-                                          height: 22,
-                                          width: 52,
-                                          child: Text('SAVED',style: Theme.of(context).textTheme.labelSmall!.copyWith(color: Colors.white),), onTap: (){}).paddingOnly(right: Get.width*0.03),
-                                      CircleAvatar(
-                                        backgroundColor: AppColors.yellow,
-                                        radius: 11,
-                                        child: Image.asset(ImagesPaths.tick,color: AppColors.black,width: 12,),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ).paddingOnly(bottom: Get.height*0.01),
-                              Container(
-                                height: 1,
-                                width: Get.width,
-                                color: AppColors.lightyGrey,
-                              ).paddingOnly(bottom: Get.height*0.02),
-                              Row(
-                                children: [
-                                  Container(
+                        height: 215,
+                        width: Get.width,
+                        decoration: BoxDecoration(
+                            color: AppColors.greyButton,
+                            borderRadius: BorderRadius.circular(5)),
+                        child: Column(
+                          children: [
+                            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(controller.newList[index],style: Theme.of(context).textTheme.titleLarge!.copyWith(color: AppColors.yellow),),
+                                Row(
+                                  children: [
+                                    InkButton(borderRadius: 5,
+                                        backGroundColor: AppColors.black,
+                                        height: 22,
+                                        width: 52,
+                                        child: Text('SAVED',style: Theme.of(context).textTheme.labelSmall!.copyWith(color: Colors.white),), onTap: (){}).paddingOnly(right: Get.width*0.03),
+                                    CircleAvatar(
+                                      backgroundColor: AppColors.yellow,
+                                      radius: 11,
+                                      child: Image.asset(ImagesPaths.tick,color: AppColors.black,width: 12,),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ).paddingOnly(bottom: Get.height*0.01),
+                            Container(
+                              height: 1,
+                              width: Get.width,
+                              color: AppColors.lightyGrey,
+                            ).paddingOnly(bottom: Get.height*0.02),
+                            Row(
+                              children: [
+                                Flexible(
+                                  child: Container(
                                     height: 131,
                                     width: 204,
                                     child: Image.asset(ImagesPaths.passportPhoto),
                                   ),
-                                  Column(crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Text('Institute  Name',style: Theme.of(context).textTheme.labelMedium,).paddingOnly(bottom: 2),
-                                      Text('john abc',style: Theme.of(context).textTheme.labelSmall,).paddingOnly(bottom: 8),
-                                      Text('Certification Year',style: Theme.of(context).textTheme.labelMedium,).paddingOnly(bottom: 2),
-                                      Text('john abc',style: Theme.of(context).textTheme.labelSmall,),
-                                      SizedBox(
-                                        height: Get.height*0.02,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            height: 27,
-                                            width: 27,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(color: AppColors.yellow,width: 1),
-                                              borderRadius: BorderRadius.circular(40)
-                                            ),
-                                            child: Image.asset(ImagesPaths.trash,scale: 4,),
-                                          ).paddingOnly(right: Get.width*0.05),
-                                          Container(
-                                            height: 27,
-                                            width: 27,
-                                            decoration: BoxDecoration(
-                                                color: AppColors.yellow,
-                                                borderRadius: BorderRadius.circular(40)
-                                            ),
-                                            child: Image.asset(ImagesPaths.pencil,scale: 4,),
+                                ),
+                                Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text('Institute  Name',style: Theme.of(context).textTheme.labelMedium,).paddingOnly(bottom: 2),
+                                    Text('john abc',style: Theme.of(context).textTheme.labelSmall,).paddingOnly(bottom: 8),
+                                    Text('Certification Year',style: Theme.of(context).textTheme.labelMedium,).paddingOnly(bottom: 2),
+                                    Text('john abc',style: Theme.of(context).textTheme.labelSmall,),
+                                    SizedBox(
+                                      height: Get.height*0.02,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Container(
+                                          height: 27,
+                                          width: 27,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(color: AppColors.yellow,width: 1),
+                                            borderRadius: BorderRadius.circular(40)
                                           ),
-                                        ],
-                                      )
-                                    ],
-                                  ).paddingOnly(left: Get.width*0.04)
-                                ],
-                              )
-                            ],
-                          ).paddingAll(15),
-                        ),
-                      );
-                    },itemCount:  controller.newList.length,
-                ),
-              ],
-            ),
+                                          child: Image.asset(ImagesPaths.trash,scale: 4,),
+                                        ).paddingOnly(right: Get.width*0.05),
+                                        Container(
+                                          height: 27,
+                                          width: 27,
+                                          decoration: BoxDecoration(
+                                              color: AppColors.yellow,
+                                              borderRadius: BorderRadius.circular(40)
+                                          ),
+                                          child: Image.asset(ImagesPaths.pencil,scale: 4,),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ).paddingOnly(left: Get.width*0.04)
+                              ],
+                            )
+                          ],
+                        ).paddingAll(15),
+                      ),
+                    );
+                  },itemCount:  controller.newList.length,
+              ),
+            ],
           ),
-        ],
+        ),
       ),
       // body: SingleChildScrollView(
       //   child: Column(crossAxisAlignment: CrossAxisAlignment.start,
