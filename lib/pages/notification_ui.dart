@@ -8,33 +8,21 @@ class NotificationUi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      // appBar: myAppBar(title:Text('Notification',style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColors.lightGrey1),), context: context, ),
-      body: Stack(
-        children: [
-          Transform.scale(
-              scaleX: 1.1,
-              scaleY: 1,
-              child: Image.asset(ImagesPaths.bgBlackShade,)),
-          Column(
+    appBar: myAppBar(title:Text('Notification',style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColors.lightGrey1),), context: context, ),
+      body: SingleChildScrollView(
+
+        child: Container(
+          height: Get.height,
+          width: Get.width,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(ImagesPaths.bgBlackShade)
+              )
+          ),
+
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: Get.height*0.075,),
-              Row(
-                children: [
-                  GestureDetector(
-                    onTap: (){
-                      Get.back();
-                    },
-                    child: Container(
-                        height: 30,
-                        width: 30,
-                        child: Icon(Icons.arrow_back_ios,size: 18,).paddingOnly(right: Get.width*0.02)),
-                  ),
-                  Text('Notification',
-                    style: Theme.of(context).textTheme.headlineSmall,),
-                ],
-              ).paddingOnly(left: Get.width*0.04,bottom: Get.height*0.02),
               Text("Today",style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.yellow,fontWeight: FontWeight.w400),).paddingOnly(bottom: 4),
               Container(
                 alignment: Alignment.topLeft,
@@ -157,7 +145,7 @@ class NotificationUi extends StatelessWidget {
               ),
             ],
           ).paddingOnly(left: 25,right: 0,top: 2),
-        ],
+        ),
       ),
     );
   }
