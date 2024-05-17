@@ -61,6 +61,11 @@ class ImagesPaths {
   static const String myprivacy= "${baseUrl}img_privacy_policy.png";
   static const String myconditions= "${baseUrl}img_terms_conditions.png";
   static const String passportPhoto= "${baseUrl}img_passport.png";
+  static const String bgBlackShade= "${baseUrl}img_bg.png";
+  static const String imgSignInOption= "${baseUrl}bg_img_sign_in.png";
+  static const String appLogo= "${baseUrl}app_logo.png";
+  static const String loginImage= "${baseUrl}login_image.png";
+  static const String homepackage= "${baseUrl}home_package_image.png";
 
 
 

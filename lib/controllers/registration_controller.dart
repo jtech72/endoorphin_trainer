@@ -34,5 +34,5 @@ class RegistrationController extends GetxController{
 
   // Define an observable variable to track the selected option
   final selectedOption = 'Yoga''Tennis'.obs;
-  final selectedOption1 = 'Select'.obs;
+  final selectedOption1 = 'Select Gender'.obs;
 }

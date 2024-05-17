@@ -33,14 +33,14 @@ Widget InkButton({
   double? borderRadius,
   double? height,
   double? width,
-  Color backGroundColor = AppColors.yellow,
+  Color? backGroundColor ,
   Color? rippleColor,
   required Widget child,
   required Function onTap,
 }) {
   return Material(
     borderRadius: BorderRadius.circular(borderRadius ?? 36),
-    color: backGroundColor,
+    color: backGroundColor?? AppColors.yellow,
     child: InkWell(
       splashColor: rippleColor ?? Colors.transparent,
       borderRadius: BorderRadius.circular(borderRadius ?? 30),
@@ -52,14 +52,18 @@ Widget InkButton({
         }
       },
       child: Container(
-          decoration: const BoxDecoration(),
+          decoration:  BoxDecoration(
+              borderRadius: BorderRadius.circular(36),
+              border: Border.all(color: AppColors.yellow,)
+          ),
           alignment: Alignment.center,
-          height: height ?? 35,
-          width: width ?? Get.width * .3,
+          height: height ?? 50,
+          width: width ?? 300,
           child: child),
     ),
   );
 }
+
 
 
 

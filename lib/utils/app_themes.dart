@@ -91,6 +91,11 @@ class AppThemes {
             fontFamily: "Roboto",
             color: AppColors.impgrey,
             fontSize: 12),
+        displaySmall: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontFamily: "Roboto",
+            color: AppColors.Black3,
+            fontSize: 20),
 
       ));
 }

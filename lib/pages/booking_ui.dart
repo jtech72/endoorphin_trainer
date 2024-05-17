@@ -35,6 +35,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
     BookingController controller = Get.find();
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
           'Offline',
