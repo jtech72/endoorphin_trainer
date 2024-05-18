@@ -50,7 +50,7 @@ class SignInOptionUi extends StatelessWidget {
                         style: Theme.of(context)
                             .textTheme
                             .labelLarge
-                            ?.copyWith(fontWeight: FontWeight.w700,color: AppColors.whiteShade),
+                            ?.copyWith(fontWeight: FontWeight.w400,color: AppColors.whiteShade),
                         children: [
                           TextSpan(
                             text: "\n      thrive! With over ",
