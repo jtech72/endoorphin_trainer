@@ -106,8 +106,8 @@ class MoreAboutYouUi extends StatelessWidget {
                                   Transform.translate(
                                     offset: Offset(-10,2),
                                     child: Container(
-                                      height: 59,
-                                      width: 59,
+                                      height: Get.width*0.14,
+                                      width: Get.width*0.14,
                                       padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 17),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(5),

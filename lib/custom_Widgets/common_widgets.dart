@@ -57,8 +57,8 @@ Widget InkButton({
               border: Border.all(color: AppColors.yellow,)
           ),
           alignment: Alignment.center,
-          height: height ?? 50,
-          width: width ?? 300,
+          height: height ?? Get.height*0.05,
+          width: width ?? Get.width*0.7,
           child: child),
     ),
   );

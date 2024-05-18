@@ -54,8 +54,8 @@ class UploadImagesUi extends StatelessWidget {
                   onTap: (){
                   },
                   child: Container(
-                    height: 196,
-                    width: 329,
+                    height: Get.height*0.21,
+                    width: Get.width*0.76,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(color: AppColors.yellow)
@@ -70,10 +70,10 @@ class UploadImagesUi extends StatelessWidget {
                 ),
                 SizedBox(height:Get.height*0.2),
                 Text('Check Quality',style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 20),).paddingOnly(bottom: Get.height*0.02),
-                Text('Lorem Ipsum is simply dummy text of the printing\nand typesetting industry.',style: Theme.of(context).textTheme.displayLarge,textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.015),
+                Text('Lorem Ipsum is simply dummy text of the printing\nand typesetting industry.',style: Theme.of(context).textTheme.displayLarge,textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.024),
                 InkButton(child: Text('Looks great! Continue',style: Theme.of(context).textTheme.displaySmall,), onTap: (){
                   controller.selectedoption.value=1;
-                }).paddingOnly(bottom: Get.height*0.015),
+                }).paddingOnly(bottom: Get.height*0.024),
                 GestureDetector(
                     onTap: (){
                       controller.removeImage(true);
@@ -104,8 +104,8 @@ class UploadImagesUi extends StatelessWidget {
                   children: [
                     SizedBox(height: Get.height*0.03,),
                     Container(
-                      height: 196,
-                      width: 329,
+                        height: Get.height*0.21,
+                        width: Get.width*0.76,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(color: AppColors.yellow)
@@ -119,10 +119,10 @@ class UploadImagesUi extends StatelessWidget {
                     ),
                     SizedBox(height:Get.height*0.2),
                     Text('Check Quality',style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 20),).paddingOnly(bottom: Get.height*0.02),
-                    Text('Lorem Ipsum is simply dummy text of the printing\nand typesetting industry.',style: Theme.of(context).textTheme.displayLarge,textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.015),
+                    Text('Lorem Ipsum is simply dummy text of the printing\nand typesetting industry.',style: Theme.of(context).textTheme.displayLarge,textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.024),
                     InkButton(child: Text('Looks great! Continue',style: Theme.of(context).textTheme.displaySmall,), onTap: (){
                       controller.selectedoption.value=3;
-                    }).paddingOnly(bottom: Get.height*0.015),
+                    }).paddingOnly(bottom: Get.height*0.024),
                     GestureDetector(
                       onTap: (){
                         controller.openCamera(false);

@@ -35,7 +35,7 @@ class BioUi extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Text("First Name",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                          Text("Nick Name",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
                           Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
                         ],
                       ),
@@ -65,7 +65,7 @@ class BioUi extends StatelessWidget {
                             contentPadding:
                             const EdgeInsets.only(bottom: 3, left: 15),
 
-                            hintText: "Enter First Name",
+                            hintText: "Enter Nick Name",
                             alignLabelWithHint: true,
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(4),
@@ -91,63 +91,63 @@ class BioUi extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Row(
-                        children: [
-                          Text("Last Name",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
-                          Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
-                        ],
-                      ),
-                      Container(
-                        height: 45,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: AppColors.impgrey),
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: TextField(
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(64),
-                            FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                          ],
-                          enableInteractiveSelection: true,
-                          style: Theme.of(context).textTheme.labelMedium,
-                          cursorColor: AppColors.grey,
-                          cursorHeight: 18,
-                          decoration: InputDecoration(
-
-                            filled: true,
-                            fillColor: AppColors.yellowishWhite,
-                            border: InputBorder.none,
-                            hintStyle: Theme.of(context).textTheme.labelMedium,
-                            contentPadding:
-                            const EdgeInsets.only(bottom: 3, left: 15),
-
-                            hintText: "Enter Last Name",
-                            alignLabelWithHint: true,
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(4),
-                              borderSide: const BorderSide(
-                                color: AppColors.yellowishWhite,
-                                width: 1,
-                              ),
-                            ),
-                            disabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(4),
-                              borderSide: const BorderSide(
-                                color: AppColors.yellowishWhite,
-                                width: 1,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(4),
-                              borderSide: const BorderSide(
-                                color: AppColors.yellowishWhite,
-                                width: 1,
-                              ),
-                            ),// Cen// Center the hintText
-                          ),
-                        ),
-                      ),
+                      // Row(
+                      //   children: [
+                      //     Text("Last Name",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                      //     Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
+                      //   ],
+                      // ),
+                      // Container(
+                      //   height: 45,
+                      //   decoration: BoxDecoration(
+                      //     border: Border.all(color: AppColors.impgrey),
+                      //     shape: BoxShape.rectangle,
+                      //     borderRadius: BorderRadius.circular(5),
+                      //   ),
+                      //   child: TextField(
+                      //     inputFormatters: [
+                      //       LengthLimitingTextInputFormatter(64),
+                      //       FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                      //     ],
+                      //     enableInteractiveSelection: true,
+                      //     style: Theme.of(context).textTheme.labelMedium,
+                      //     cursorColor: AppColors.grey,
+                      //     cursorHeight: 18,
+                      //     decoration: InputDecoration(
+                      //
+                      //       filled: true,
+                      //       fillColor: AppColors.yellowishWhite,
+                      //       border: InputBorder.none,
+                      //       hintStyle: Theme.of(context).textTheme.labelMedium,
+                      //       contentPadding:
+                      //       const EdgeInsets.only(bottom: 3, left: 15),
+                      //
+                      //       hintText: "Enter Last Name",
+                      //       alignLabelWithHint: true,
+                      //       enabledBorder: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(4),
+                      //         borderSide: const BorderSide(
+                      //           color: AppColors.yellowishWhite,
+                      //           width: 1,
+                      //         ),
+                      //       ),
+                      //       disabledBorder: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(4),
+                      //         borderSide: const BorderSide(
+                      //           color: AppColors.yellowishWhite,
+                      //           width: 1,
+                      //         ),
+                      //       ),
+                      //       focusedBorder: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(4),
+                      //         borderSide: const BorderSide(
+                      //           color: AppColors.yellowishWhite,
+                      //           width: 1,
+                      //         ),
+                      //       ),// Cen// Center the hintText
+                      //     ),
+                      //   ),
+                      // ),
                       Row(
                         children: [
                           Text(
@@ -163,9 +163,12 @@ class BioUi extends StatelessWidget {
                             color: AppColors.yellowishWhite,
                             borderRadius: BorderRadius.circular(7)),
                         child: TextField(
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(400),
+                          ],
                           keyboardType: TextInputType.text,
                           minLines: 1,
-                          maxLines: 8,
+                          maxLines: 10,
                           style: Theme.of(context).textTheme.labelMedium,
                           decoration: InputDecoration(
                             contentPadding:
