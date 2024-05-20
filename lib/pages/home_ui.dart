@@ -239,12 +239,14 @@ class HomeUiState extends State<HomeUi> {
                                 Get.toNamed(AppRoutes.bookingdetails);
                               }
                             },
-                            child: Container(
+                            child:Obx(
+                            () => Container(
                               height: Get.height * 0.15,
                               width: Get.width * 0.42,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                color: AppColors.greyButton,
+                                color: controller.selectedIndex.value ==index?
+                                AppColors.yellow: AppColors.greyButton,
 
                               ),
                               child: Column(
@@ -282,6 +284,7 @@ class HomeUiState extends State<HomeUi> {
                                   ),
                                 ],
                               ),
+                            ),
                             ),
                           );
                         },
