@@ -37,9 +37,11 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text(
-          'Offline',
-          style: Theme.of(context).textTheme.bodyMedium,
+        title: Obx(
+              () => Text(
+            controller.isTrainerOnline.value ? 'Offline' : 'Online',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
         ),
         centerTitle: true,
         actions: [

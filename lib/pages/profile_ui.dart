@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import '../utils/exports.dart';
+import 'bottom_navigation_bar_ui.dart';
 
 class ProfileUI extends StatelessWidget {
   const ProfileUI({super.key});
@@ -9,8 +10,35 @@ class ProfileUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:myAppBar(
-          title: Text("Profile",style: Theme.of(context).textTheme.bodyMedium), context: context, ),
+      appBar: AppBar(
+        toolbarHeight: 50,
+        leadingWidth: Get.width * 0.17,
+        centerTitle: false,
+        surfaceTintColor: Colors.transparent,
+        backgroundColor: AppColors.black,
+        elevation: 3,
+        titleSpacing: -10,
+        leading: GestureDetector(
+            onTap: () {
+              Get.offAllNamed(AppRoutes.bottomNavigation);
+            },
+            child: Container(
+                height: 30,
+                width: 40,
+                decoration: const BoxDecoration(
+                    color: Colors.transparent, shape: BoxShape.circle),
+                child: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: AppColors.white,
+                  size: 18,
+                ))),
+        title: Text(
+          "Profile",
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
+      ),
+      // appBar:myAppBar(
+      //     title: Text("Profile",style: Theme.of(context).textTheme.bodyMedium), context: context, ),
       body: Container(
         height: Get.height,
         width: Get.width,

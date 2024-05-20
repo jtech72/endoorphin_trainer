@@ -31,13 +31,40 @@ class EarningUi extends StatelessWidget {
       _SalesData(' S ', 54,),
     ];
     return Scaffold(
-      appBar: myAppBar(
+      appBar: AppBar(
+        toolbarHeight: 50,
+        leadingWidth: Get.width * 0.17,
+        centerTitle: false,
+        surfaceTintColor: Colors.transparent,
+        backgroundColor: AppColors.black,
+        elevation: 3,
+        titleSpacing: -10,
+        leading: GestureDetector(
+            onTap: () {
+              Get.offAllNamed(AppRoutes.bottomNavigation);
+            },
+            child: Container(
+                height: 30,
+                width: 40,
+                decoration: const BoxDecoration(
+                    color: Colors.transparent, shape: BoxShape.circle),
+                child: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: AppColors.white,
+                  size: 18,
+                ))),
         title: Text(
           "My Earnings",
           style: Theme.of(context).textTheme.bodyMedium,
         ),
-        context: context,
       ),
+      // appBar: myAppBar(
+      //   title: Text(
+      //     "My Earnings",
+      //     style: Theme.of(context).textTheme.bodyMedium,
+      //   ),
+      //   context: context,
+      // ),
       body: Container(
         height:Get.height,
         width: Get.width,
