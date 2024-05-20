@@ -1,3 +1,4 @@
+import 'package:endoorphin_trainer/controllers/booking_details_controller.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -15,6 +16,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
   bool secondButtonSelected = false;
   @override
   Widget build(BuildContext context) {
+    BookingDetailsController controller = Get.put(BookingDetailsController());
 
     return Scaffold(
       appBar: myAppBar(
@@ -313,40 +315,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                   ],
                 ).paddingOnly(top: 10, bottom: 10),
               ).paddingOnly(bottom:Get.height*0.02),
-              Container(
-                height: Get.height * 0.12,
-                width: Get.width,
-                decoration: BoxDecoration(
-                    color: AppColors.blackShade,
-                    borderRadius: BorderRadius.circular(5)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Center(
-                        child: Text("How was your session with John ?",
-                            style: Theme.of(context).textTheme.labelLarge)),
-                    RatingBar.builder(
-                      initialRating: -1,
-                      minRating: 0,
-                      direction: Axis.horizontal,
-                      allowHalfRating: true,
-                      itemCount: 5,
-                      itemPadding: const EdgeInsets.symmetric(horizontal: 6.0),
-                      itemBuilder: (context, _) => InkWell(
-                          onTap: () {
-                            Get.toNamed(AppRoutes.review);
-                          },
-                          child: const Icon(
-                            Icons.star_border,
-                            color: AppColors.yellow,
-                          )),
-                      onRatingUpdate: (rating) {
-                        Get.toNamed(AppRoutes.review);
-                      },
-                    ).paddingOnly(top: Get.height * 0.02),
-                  ],
-                ),
-              ),
+              controller.bookingType.value=="Upcomming"?
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -394,14 +363,50 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                     ),
                   ),
                 ],
-              ).paddingOnly(top: 30),
-
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     InkButton(child: Text("Cancelled"), onTap: (){}),
-              //   ],
-              // )
+              ).paddingOnly(top: 30):
+                  controller.bookingType.value=="Completed"?
+                  Container(
+                    height: Get.height * 0.12,
+                    width: Get.width,
+                    decoration: BoxDecoration(
+                        color: AppColors.blackShade,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Center(
+                            child: Text("How was your session with John ?",
+                                style: Theme.of(context).textTheme.labelLarge)),
+                        RatingBar.builder(
+                          initialRating: -1,
+                          minRating: 0,
+                          direction: Axis.horizontal,
+                          allowHalfRating: true,
+                          itemCount: 5,
+                          itemPadding: const EdgeInsets.symmetric(horizontal: 6.0),
+                          itemBuilder: (context, _) => InkWell(
+                              onTap: () {
+                                Get.toNamed(AppRoutes.review);
+                              },
+                              child: const Icon(
+                                Icons.star_border,
+                                color: AppColors.yellow,
+                              )),
+                          onRatingUpdate: (rating) {
+                            Get.toNamed(AppRoutes.review);
+                          },
+                        ).paddingOnly(top: Get.height * 0.02),
+                      ],
+                    ),
+                  ):
+                  controller.bookingType.value=="Cancel"?
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkButton(child: Text("Cancelled", style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.black),), onTap: (){}),
+                ],
+              ):
+                      SizedBox.shrink()
 
             ],
           ).paddingOnly(left: 18, right: 18),

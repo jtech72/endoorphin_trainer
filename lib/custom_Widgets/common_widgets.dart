@@ -57,8 +57,8 @@ Widget InkButton({
               border: Border.all(color: AppColors.yellow,)
           ),
           alignment: Alignment.center,
-          height: height ?? 50,
-          width: width ?? 300,
+          height: height ?? Get.height*0.05,
+          width: width ?? Get.width*0.7,
           child: child),
     ),
   );
@@ -85,7 +85,7 @@ AppBar myAppBar({
         child: const SizedBox(
             height: 30,
             width: 40,
-            child: Icon(Icons.arrow_back_ios_new_rounded,color: AppColors.lightGrey1,size: 18,))),
+            child: Icon(Icons.arrow_back_ios_new_rounded,color: AppColors.white,size: 18,))),
     title: title,
     surfaceTintColor: Colors.transparent,
     backgroundColor: backGroundColor??AppColors.black,
@@ -94,6 +94,8 @@ AppBar myAppBar({
     actions: action,
   );
 }
+
+
 
 
 // Drawer myDrawer() {

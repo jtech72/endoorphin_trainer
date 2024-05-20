@@ -228,13 +228,13 @@ class HomeUiState extends State<HomeUi> {
                               controller.selectedIndex.value = index;
                               // Use Get.toNamed to navigate to the desired routes based on the selected index
                               if (controller.selectedIndex.value == 0) {
-                                Get.toNamed(AppRoutes.bookingdetails);
+
                               } else if (controller.selectedIndex.value == 1) {
-                                Get.toNamed(AppRoutes.bookingdetails);
+
                               } else if (controller.selectedIndex.value == 2) {
-                                Get.toNamed(AppRoutes.bookingdetails);
+
                               } else if (controller.selectedIndex.value == 3) {
-                                Get.toNamed(AppRoutes.bookingdetails);
+
                               } else {
                                 Get.toNamed(AppRoutes.bookingdetails);
                               }

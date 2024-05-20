@@ -37,9 +37,11 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text(
-          'Offline',
-          style: Theme.of(context).textTheme.bodyMedium,
+        title: Obx(
+              () => Text(
+            controller.isTrainerOnline.value ? 'Offline' : 'Online',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
         ),
         centerTitle: true,
         actions: [
@@ -104,198 +106,51 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-              GestureDetector(
-                  onTap: (){
-                    Get.toNamed(AppRoutes.bookingdetails);
-                  },
-                  child: Text("Upcoming",style: Theme.of(context).textTheme.headlineSmall,).paddingOnly(left: 18,right: 18,top: 15)),
+              Text("Upcoming",style: Theme.of(context).textTheme.headlineSmall,).paddingOnly(left: 18,right: 18,top: 15),
               Column(
                 children: [
                   Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                              height: 50,
-                              width: 50,
-                              decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-            
-                              child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                            Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                            Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                          ],).paddingOnly(left: 15)
-                        ],
-                      ),
-                      Image.asset(ImagesPaths.eye, scale: 4,),
-                    ],
-                  ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
+                  Container(
+                    height: Get.height*.68,
+                    child: ListView.builder(
+                        itemCount: 10,
+                        itemBuilder: (context,index){
+                      return GestureDetector(
+                        onTap: (){
+                          Get.toNamed(AppRoutes.bookingdetails,arguments: "Upcomming");
+                        },
+                        child: Column(
                           children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-            
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
+                                Row(
+                                  children: [
+                                    Container(
+                                        height: 50,
+                                        width: 50,
+                                        decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
+
+                                        child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
+                                        Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
+                                      ],).paddingOnly(left: 15)
+                                  ],
+                                ),
+                                Image.asset(ImagesPaths.eye, scale: 4,),
+                              ],
+                            ).paddingOnly(top: 15,left: 18,right: 18),
+                            Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
                           ],
                         ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-            
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-            
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-            
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-            
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-            
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-            
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
+                      );
+                    }),
+                  )
+
+
                 ],
               ),
             
@@ -316,190 +171,44 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                 Column(
                   children: [
                     Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
+                    Container(
+                      height: Get.height*.68,
+                      child: ListView.builder(itemBuilder: (context,index){
+                        return GestureDetector(
+                          onTap: (){
+                            Get.toNamed(AppRoutes.bookingdetails,arguments: "");
+                          },
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                          height: 50,
+                                          width: 50,
+                                          decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
+                                                
+                                          child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
+                                          Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
+                                        ],).paddingOnly(left: 15)
+                                    ],
+                                  ),
+                                  Image.asset(ImagesPaths.eye, scale: 4,),
+                                ],
+                              ).paddingOnly(top: 15,left: 18,right: 18),
+                              Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
+                            ],
+                          ),
+                        );
+                      }),
+                    )
+                
                   ],
                 ),
 
@@ -520,190 +229,42 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                 Column(
                   children: [
                     Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
+                    Container( height: Get.height*.68,
+                      child: ListView.builder(itemBuilder: (context,index){
+                        return GestureDetector(
+                          onTap: (){
+                            Get.toNamed(AppRoutes.bookingdetails,arguments: "Completed");
+                          },
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                          height: 50,
+                                          width: 50,
+                                          decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
 
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
+                                          child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
+                                          Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
+                                        ],).paddingOnly(left: 15)
+                                    ],
+                                  ),
+                                  Image.asset(ImagesPaths.eye, scale: 4,),
+                                ],
+                              ).paddingOnly(top: 15,left: 18,right: 18),
+                              Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
+                            ],
+                          ),
+                        );
+                      }),
+                    )
                   ],
                 ),
 
@@ -724,190 +285,42 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                 Column(
                   children: [
                     Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
+                    Container( height: Get.height*.68,
+                      child: ListView.builder(itemBuilder: (context,index){
+                        return GestureDetector(
+                          onTap: (){
+                            Get.toNamed(AppRoutes.bookingdetails,arguments: "Cancel");
+                          },
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                          height: 50,
+                                          width: 50,
+                                          decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
 
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
-
-                                child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                              ],).paddingOnly(left: 15)
-                          ],
-                        ),
-                        Image.asset(ImagesPaths.eye, scale: 4,),
-                      ],
-                    ).paddingOnly(top: 15,left: 18,right: 18),
-                    Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
+                                          child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
+                                          Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
+                                        ],).paddingOnly(left: 15)
+                                    ],
+                                  ),
+                                  Image.asset(ImagesPaths.eye, scale: 4,),
+                                ],
+                              ).paddingOnly(top: 15,left: 18,right: 18),
+                              Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
+                            ],
+                          ),
+                        );
+                      }),
+                    )
                   ],
                 ),
 

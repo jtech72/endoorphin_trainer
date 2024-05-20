@@ -59,11 +59,12 @@ class CountryCodeUI extends StatelessWidget {
                             CountryCodePicker(
                               showDropDownButton: false,
                               showFlag: false,
-                              searchDecoration: const InputDecoration(
+                              searchDecoration: const InputDecoration(contentPadding: EdgeInsets.all(16),
+                                prefixIcon: Icon(CupertinoIcons.search,color: Colors.white,size: 18,),
                                 hintText: "Search your country code",
                                 hintStyle: TextStyle(
                                     fontWeight: FontWeight.w300,
-                                    fontSize: 12,
+                                    fontSize: 13,
                                     color: Colors.white),
                                 filled: true,
                                 fillColor: Colors.black54,

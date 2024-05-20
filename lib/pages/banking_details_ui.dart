@@ -12,47 +12,35 @@ class BankingDetailsUI extends StatelessWidget {
   Widget build(BuildContext context) {
     BankingDetailsController controller = Get.put(BankingDetailsController());
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      // appBar: myAppBar(title: Text('Banking Details',style: Theme.of(context).textTheme.bodyMedium,), context: context),
-      body: Stack(
-        children: [
-          Transform.scale(
-              scaleX: 1.1,
-              scaleY: 1,
-              child: Image.asset(ImagesPaths.bgBlackShade,)),
-          SingleChildScrollView(
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: Get.height*0.075,),
-                Row(
-                  children: [
-                    GestureDetector(
-                      onTap: (){
-                        Get.back();
-                      },
-                      child: Container(
-                          height: 30,
-                          width: 30,
-                          child: Icon(Icons.arrow_back_ios,size: 18,).paddingOnly(right: Get.width*0.02)),
-                    ),
-                    Text('Banking Details',
-                      style: Theme.of(context).textTheme.headlineSmall,),
-                  ],
-                ).paddingOnly(left: Get.width*0.04),
-                SizedBox(
-                  height: Get.height*0.03,
+      appBar: myAppBar(title: Text('Banking Details',style: Theme.of(context).textTheme.bodyMedium,), context: context),
+      body: Container(
+        height: Get.height,
+        width: Get.width,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(ImagesPaths.bgBlackShade,),fit: BoxFit.cover
+            )
+        ),
+        child: SingleChildScrollView(
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: Get.height*0.03,
+              ),
+              Text('Bank Information',style: Theme.of(context).textTheme.bodyMedium,).paddingOnly(bottom: Get.height*0.01),
+              Container(
+                height: Get.height*0.26,
+                width: Get.width,
+                decoration: BoxDecoration(
+                  color: AppColors.blackShade,
+                  borderRadius: BorderRadius.circular(10)
                 ),
-                Text('Bank Information',style: Theme.of(context).textTheme.bodyMedium,).paddingOnly(bottom: Get.height*0.01),
-                Container(
-                  height: Get.height*0.29,
-                  width: Get.width,
-                  decoration: BoxDecoration(
-                    color: AppColors.blackShade,
-                    borderRadius: BorderRadius.circular(10)
-                  ),
-                  child: Column(
-                    children: [
-                      TextField(
+                child: Column(
+                  children: [
+                    Container(
+                      height: Get.height*0.05,
+                      width: Get.width,
+                      child: TextField(
                       inputFormatters: [
                         LengthLimitingTextInputFormatter(64),
                         FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -77,12 +65,16 @@ class BankingDetailsUI extends StatelessWidget {
                         focusedBorder: InputBorder.none
                         ),
                       ),
-                      Container(
-                        height: 2,
-                        width: Get.width,
-                        color: AppColors.darkGrey,
-                      ),
-                      TextField(
+                    ),
+                    Container(
+                      height: 2,
+                      width: Get.width,
+                      color: AppColors.darkGrey,
+                    ),
+                    Container(
+                      height: Get.height*0.05,
+                      width: Get.width,
+                      child: TextField(
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(64),
                           FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -107,12 +99,15 @@ class BankingDetailsUI extends StatelessWidget {
                             focusedBorder: InputBorder.none
                         ),
                       ),
-                      Container(
-                        height: 2,
-                        width: Get.width,
-                        color: AppColors.darkGrey,
-                      ),
-                      TextField(
+                    ),
+                    Container(
+                      height: 2,
+                      width: Get.width,
+                      color: AppColors.darkGrey,
+                    ),
+                    Container(height: Get.height*0.05,
+                      width: Get.width,
+                      child: TextField(
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(64),
                           FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -137,12 +132,15 @@ class BankingDetailsUI extends StatelessWidget {
                             focusedBorder: InputBorder.none
                         ),
                       ),
-                      Container(
-                        height: 2,
-                        width: Get.width,
-                        color: AppColors.darkGrey,
-                      ),
-                      TextField(
+                    ),
+                    Container(
+                      height: 2,
+                      width: Get.width,
+                      color: AppColors.darkGrey,
+                    ),
+                    Container(height: Get.height*0.05,
+                      width: Get.width,
+                      child: TextField(
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(64),
                           FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -167,27 +165,30 @@ class BankingDetailsUI extends StatelessWidget {
                             focusedBorder: InputBorder.none
                         ),
                       ),
-                      Container(
-                        height: 2,
-                        width: Get.width,
-                        color: AppColors.darkGrey,
-                      ),
-                  ]).paddingOnly(left: Get.width*0.04,right: Get.width*0.04,top: Get.height*0.01,bottom: Get.height*0.01)
-                  ),
-                SizedBox(
-                  height: Get.height*0.04,
-                ),
-                Text('Account Information',style: Theme.of(context).textTheme.bodyMedium,).paddingOnly(bottom: Get.height*0.01),
-                Container(
-                    height: Get.height*0.29,
-                    width: Get.width,
-                    decoration: BoxDecoration(
-                        color: AppColors.blackShade,
-                        borderRadius: BorderRadius.circular(10)
                     ),
-                    child: Column(
-                        children: [
-                          TextField(
+                    Container(
+                      height: 2,
+                      width: Get.width,
+                      color: AppColors.darkGrey,
+                    ),
+                ]).paddingOnly(left: Get.width*0.04,right: Get.width*0.04,top: Get.height*0.01,bottom: Get.height*0.01)
+                ),
+              SizedBox(
+                height: Get.height*0.04,
+              ),
+              Text('Account Information',style: Theme.of(context).textTheme.bodyMedium,).paddingOnly(bottom: Get.height*0.01),
+              Container(
+                  height: Get.height*0.26,
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                      color: AppColors.blackShade,
+                      borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Column(
+                      children: [
+                        Container(height: Get.height*0.05,
+                          width: Get.width,
+                          child: TextField(
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(64),
                               FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -212,12 +213,15 @@ class BankingDetailsUI extends StatelessWidget {
                                 focusedBorder: InputBorder.none
                             ),
                           ),
-                          Container(
-                            height: 2,
-                            width: Get.width,
-                            color: AppColors.darkGrey,
-                          ),
-                          TextField(
+                        ),
+                        Container(
+                          height: 2,
+                          width: Get.width,
+                          color: AppColors.darkGrey,
+                        ),
+                        Container(height: Get.height*0.05,
+                          width: Get.width,
+                          child: TextField(
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(64),
                               FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -242,12 +246,15 @@ class BankingDetailsUI extends StatelessWidget {
                                 focusedBorder: InputBorder.none
                             ),
                           ),
-                          Container(
-                            height: 2,
-                            width: Get.width,
-                            color: AppColors.darkGrey,
-                          ),
-                          TextField(
+                        ),
+                        Container(
+                          height: 2,
+                          width: Get.width,
+                          color: AppColors.darkGrey,
+                        ),
+                        Container(height: Get.height*0.05,
+                          width: Get.width,
+                          child: TextField(
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(64),
                               FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -272,23 +279,26 @@ class BankingDetailsUI extends StatelessWidget {
                                 focusedBorder: InputBorder.none
                             ),
                           ),
-                          Container(
-                            height: 2,
-                            width: Get.width,
-                            color: AppColors.darkGrey,
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                flex:5,
-                                child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Container(
-                                          width: Get.width*0.25,
-                                          child: Obx(
-                                            ()=> TextField(
+                        ),
+                        Container(
+                          height: 2,
+                          width: Get.width,
+                          color: AppColors.darkGrey,
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex:5,
+                              child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width: Get.width*0.25,
+                                        child: Obx(
+                                          ()=> Container(height: Get.height*0.05,
+                                            width: Get.width,
+                                            child: TextField(
                                               enabled: false,
                                               inputFormatters: [
                                                 LengthLimitingTextInputFormatter(64),
@@ -316,43 +326,46 @@ class BankingDetailsUI extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                        PopupMenuButton<String>(
-                                          icon: Icon(Icons.keyboard_arrow_down, size: 30, color: AppColors.lightGrey),
-                                          color: AppColors.blackShade, // Set the background color of the dropdown menu
-                                          itemBuilder: (BuildContext context) {
-                                            return controller.items2.map<PopupMenuEntry<String>>((String value) {
-                                              return PopupMenuItem<String>(
-                                                value: value,
-                                                child: Text(
-                                                  value,
-                                                  style: TextStyle(color: AppColors.lightGrey), // Set the text color of each item
-                                                ),
-                                              );
-                                            }).toList();
-                                          },
-                                          onSelected: (selectedValue) {
-                                            controller.selectedOption1.value = selectedValue;
-                                          },
-                                        ),
-                                       // Icon(Icons.keyboard_arrow_down,color: AppColors.lightGrey,size: 32,)
-                                      ],
-                                    ),
-                                    Container(
-                                      height: 2,
-                                      width: Get.width,
-                                      color: AppColors.darkGrey,
-                                    ),
-                                  ],
-                                ),
+                                      ),
+                                      PopupMenuButton<String>(
+                                        icon: Icon(Icons.keyboard_arrow_down, size: 30, color: AppColors.lightGrey),
+                                        color: AppColors.blackShade, // Set the background color of the dropdown menu
+                                        itemBuilder: (BuildContext context) {
+                                          return controller.items2.map<PopupMenuEntry<String>>((String value) {
+                                            return PopupMenuItem<String>(
+                                              value: value,
+                                              child: Text(
+                                                value,
+                                                style: TextStyle(color: AppColors.lightGrey), // Set the text color of each item
+                                              ),
+                                            );
+                                          }).toList();
+                                        },
+                                        onSelected: (selectedValue) {
+                                          controller.selectedOption1.value = selectedValue;
+                                        },
+                                      ),
+                                     // Icon(Icons.keyboard_arrow_down,color: AppColors.lightGrey,size: 32,)
+                                    ],
+                                  ),
+                                  Container(
+                                    height: 2,
+                                    width: Get.width,
+                                    color: AppColors.darkGrey,
+                                  ),
+                                ],
                               ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Expanded(
-                                flex: 5,
-                                child: Column(
-                                  children: [
-                                    TextField(
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              flex: 5,
+                              child: Column(
+                                children: [
+                                  Container(height: Get.height*0.05,
+                                    width: Get.width,
+                                    child: TextField(
                                       inputFormatters: [
                                         LengthLimitingTextInputFormatter(64),
                                         FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -377,27 +390,27 @@ class BankingDetailsUI extends StatelessWidget {
                                           focusedBorder: InputBorder.none
                                       ),
                                     ),
-                                    Container(
-                                      height: 2,
-                                      width: Get.width,
-                                      color: AppColors.darkGrey,
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                  Container(
+                                    height: 2,
+                                    width: Get.width,
+                                    color: AppColors.darkGrey,
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        ]).paddingOnly(left: Get.width*0.04,right: Get.width*0.04,top: Get.height*0.01,bottom: Get.height*0.01)
-                ),
-                SizedBox(
-                  height: Get.height*.06,
-                ),
-                Center(child: InkButton(child: Text('Save',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 20,fontWeight: FontWeight.w500),), onTap: (){}))
+                            ),
+                          ],
+                        ),
+                      ]).paddingOnly(left: Get.width*0.04,right: Get.width*0.04,top: Get.height*0.01,bottom: Get.height*0.01)
+              ),
+              SizedBox(
+                height: Get.height*.06,
+              ),
+              Center(child: InkButton(child: Text('Save',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 20,fontWeight: FontWeight.w500),), onTap: (){}))
 
-              ],
-            ).paddingOnly(left: Get.width*0.05,right: Get.width*0.05),
-          ),
-        ],
+            ],
+          ).paddingOnly(left: Get.width*0.05,right: Get.width*0.05),
+        ),
       ),
     );
   }
