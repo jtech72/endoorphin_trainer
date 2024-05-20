@@ -235,32 +235,34 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                           onTap: (){
                             Get.toNamed(AppRoutes.bookingdetails,arguments: "Completed");
                           },
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                          height: 50,
-                                          width: 50,
-                                          decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
+                          child: Container(height: Get.height*.11,
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Container(
+                                            height: 50,
+                                            width: 50,
+                                            decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
 
-                                          child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                          Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                                        ],).paddingOnly(left: 15)
-                                    ],
-                                  ),
-                                  Image.asset(ImagesPaths.eye, scale: 4,),
-                                ],
-                              ).paddingOnly(top: 15,left: 18,right: 18),
-                              Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
-                            ],
+                                            child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
+                                            Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
+                                          ],).paddingOnly(left: 15)
+                                      ],
+                                    ),
+                                    Image.asset(ImagesPaths.eye, scale: 4,),
+                                  ],
+                                ).paddingOnly(top: 15,left: 18,right: 18),
+                                Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
+                              ],
+                            ),
                           ),
                         );
                       }),
