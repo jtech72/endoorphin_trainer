@@ -32,9 +32,11 @@ class ProfileUI extends StatelessWidget {
                   color: AppColors.white,
                   size: 18,
                 ))),
-        title: Text(
-          "Profile",
-          style: Theme.of(context).textTheme.bodyMedium,
+        title: GestureDetector(onTap: (){Get.offAllNamed(AppRoutes.bottomNavigation);},
+          child: Text(
+            "Profile",
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
         ),
       ),
       // appBar:myAppBar(
@@ -160,7 +162,7 @@ class ProfileUI extends StatelessWidget {
               ),
               InkWell(
                 onTap: (){
-                  Get.toNamed(AppRoutes.bookingrequest);
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => BottomNavigationBarUI(currentTabIndex: 2,)));
                 },
                 child: Container(
                     height: Get.height*0.05,

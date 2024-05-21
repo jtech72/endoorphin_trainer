@@ -5,6 +5,8 @@ import '../utils/app_drawer.dart';
 import '../utils/exports.dart';
 import 'package:endoorphin_trainer/controllers/home_controller.dart';
 
+import 'bottom_navigation_bar_ui.dart';
+
 
 class HomeUi extends StatefulWidget {
   const HomeUi({Key? key}) : super(key: key);
@@ -52,8 +54,8 @@ class HomeUiState extends State<HomeUi> {
         iconTheme: IconThemeData(color: AppColors.impgrey),
         title: Obx(
               () => Text(
-            controller.isTrainerOnline.value ? 'Offline' : 'Online',
-            style: Theme.of(context).textTheme.bodyMedium,
+            controller.isTrainerOnline.value ? 'Online' : 'Offline',
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
         centerTitle: true,
@@ -71,22 +73,23 @@ class HomeUiState extends State<HomeUi> {
                   height: 15,
                   width: 15,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      border: Border.all(color: Colors.white)
+                    borderRadius: BorderRadius.circular(30),
+                    border: Border.all(color: Colors.white),
+                    color: controller.isTrainerOnline.value ? Colors.yellow : Colors.grey.withOpacity(0.5), // Change container color conditionally
                   ),
                   child: Transform.scale(
                     scale: 0.4,
                     child: Switch(
-                        activeTrackColor: Colors.black,
-                        activeColor: Colors.transparent,
-                        inactiveThumbImage: AssetImage(ImagesPaths.trainerOnline),
-                        activeThumbImage: AssetImage(ImagesPaths.trainerOnline),
-                        inactiveThumbColor: Colors.transparent,
-                        inactiveTrackColor: Colors.black,
-                        value: controller.isTrainerOnline.value,
-                        onChanged: (v) {
-                          controller.isTrainerOnline.value = !controller.isTrainerOnline.value;
-                        }
+                      activeTrackColor: Colors.black,
+                      activeColor: controller.isTrainerOnline.value ? Colors.yellow : Colors.grey.withOpacity(0.5), // Change switch button color conditionally
+                      inactiveThumbImage: AssetImage(ImagesPaths.trainerOnline),
+                      activeThumbImage: AssetImage(ImagesPaths.trainerOnline),
+                      inactiveThumbColor: Colors.transparent,
+                      inactiveTrackColor: Colors.black,
+                      value: controller.isTrainerOnline.value,
+                      onChanged: (v) {
+                        controller.isTrainerOnline.value = !controller.isTrainerOnline.value;
+                      },
                     ),
                   ),
                 ).paddingOnly(left: 20),
@@ -94,14 +97,13 @@ class HomeUiState extends State<HomeUi> {
             ),
           ),
           IconButton(
-              onPressed: () {
-                Get.toNamed(AppRoutes.notification);
-              },
-              icon: Image.asset(ImagesPaths.bell, scale: 4,)
-          )
+            onPressed: () {
+              Get.toNamed(AppRoutes.notification);
+            },
+            icon: Image.asset(ImagesPaths.bell, scale: 4,),
+          ),
         ],
       ),
-
       drawer: MyDrawer(),
       body: SingleChildScrollView(
         child: Container(
@@ -189,7 +191,7 @@ class HomeUiState extends State<HomeUi> {
                                       value: value,
                                       child: Text(
                                         value,
-                                        style: TextStyle(color: AppColors.lightGrey), // Set the text color of each item
+                                        style: TextStyle(color: AppColors.white), // Set the text color of each item
                                       ),
                                     );
                                   }).toList();
@@ -228,23 +230,25 @@ class HomeUiState extends State<HomeUi> {
                               controller.selectedIndex.value = index;
                               // Use Get.toNamed to navigate to the desired routes based on the selected index
                               if (controller.selectedIndex.value == 0) {
-
+                                Get.toNamed(AppRoutes.earning);
                               } else if (controller.selectedIndex.value == 1) {
-
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => BottomNavigationBarUI(currentTabIndex: 2,)));
                               } else if (controller.selectedIndex.value == 2) {
-
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => BottomNavigationBarUI(currentTabIndex: 2,)));
                               } else if (controller.selectedIndex.value == 3) {
-
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => BottomNavigationBarUI(currentTabIndex: 2,)));
                               } else {
                                 Get.toNamed(AppRoutes.bookingdetails);
                               }
                             },
-                            child: Container(
+                            child:Obx(
+                            () => Container(
                               height: Get.height * 0.15,
                               width: Get.width * 0.42,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                color: AppColors.greyButton,
+                                color: controller.selectedIndex.value ==index?
+                                AppColors.yellow: AppColors.greyButton,
 
                               ),
                               child: Column(
@@ -254,7 +258,7 @@ class HomeUiState extends State<HomeUi> {
                                   Container(
                                     alignment: Alignment.center,
                                     height: Get.height * 0.06,
-                                    width: Get.width * 0.12,
+                                    width: Get.width * 0.14,
                                     decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: AppColors.lightBlack,
@@ -282,6 +286,7 @@ class HomeUiState extends State<HomeUi> {
                                   ),
                                 ],
                               ),
+                            ),
                             ),
                           );
                         },
@@ -360,7 +365,7 @@ class HomeUiState extends State<HomeUi> {
                   //       }),
                   // )
                 ],
-              ).paddingOnly(left: Get.width*0.04, right:Get.width*0.04, top: 0,bottom: 5),
+              ).paddingOnly(left: Get.width*0.04, right:Get.width*0.04, top: Get.height*0.02,bottom: 5),
             ],
           ),
         ),

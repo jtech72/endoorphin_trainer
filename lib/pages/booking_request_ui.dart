@@ -14,6 +14,10 @@ class BookingRequsetUi extends StatelessWidget {
   Widget build(BuildContext context) {
     BookingRequestController controller = Get.find();
     return Scaffold(
+        // appBar: myAppBar(
+        //     title: Text("",
+        //         style: Theme.of(context).textTheme.bodyMedium),
+        //     context: context),
         bottomSheet: BottomSheet(
           shape: const ContinuousRectangleBorder(),
           enableDrag: true,
@@ -35,9 +39,12 @@ class BookingRequsetUi extends StatelessWidget {
                         children: [
                           Text(
                             "Type your “icebreaker” given by your\ncustomer to start your Fitness session!",
-                            style: Theme.of(context).textTheme.headlineSmall,
+                            style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.w400),
                           ).paddingOnly(bottom: Get.height * 0.03),
                           PinCodeTextField(
+                              inputFormatters: <TextInputFormatter>[
+                                FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                              ],
                                   textStyle: Theme.of(context)
                                       .textTheme
                                       .headlineLarge!
@@ -69,7 +76,7 @@ class BookingRequsetUi extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   length: 4)
-                              .paddingOnly(bottom: Get.height * 0.03),
+                              .paddingOnly(bottom: Get.height * 0.01),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -94,7 +101,7 @@ class BookingRequsetUi extends StatelessWidget {
                                     style: Theme.of(context)
                                         .textTheme
                                         .labelMedium
-                                        ?.copyWith(color: Colors.black,fontSize: 12),
+                                        ?.copyWith(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w500),
                                   ).paddingOnly(left: Get.width*.07),
                                   onSubmit: (){
                                     Get.toNamed(AppRoutes.sessionRunning);
@@ -102,7 +109,7 @@ class BookingRequsetUi extends StatelessWidget {
                                   },
 
                                 ).paddingOnly(right: 20),
-                              ),
+                              ).paddingOnly(left: Get.width*0.01),
                               const CircleAvatar(
                                 radius: 20,
                                 backgroundColor: Colors.black,
@@ -132,7 +139,7 @@ class BookingRequsetUi extends StatelessWidget {
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelMedium!
-                                    .copyWith(fontWeight: FontWeight.w500),
+                                    .copyWith(fontWeight: FontWeight.w500,color: Colors.white),
                               )
                             ],
                           )
@@ -155,123 +162,7 @@ class BookingRequsetUi extends StatelessWidget {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                //   Text(
-                                //     "Address Information",
-                                //     style: Theme.of(context)
-                                //         .textTheme
-                                //         .labelLarge
-                                //         ?.copyWith(fontWeight: FontWeight.w500),
-                                //   ).paddingOnly(left: 25, right: 20, bottom: 20),
-                                //   InkWell(
-                                //     onTap: () {
-                                //       controller.selectedIndex.value = 2;
-                                //     },
-                                //     child: Container(
-                                //       height: 48,
-                                //       width: Get.width,
-                                //       decoration: const BoxDecoration(
-                                //         color: AppColors.blackShade,
-                                //         border: Border(
-                                //           top: BorderSide(
-                                //               width: 1.0, color: AppColors.yellow),
-                                //           // Top white border
-                                //           bottom: BorderSide(
-                                //               width: 1.0,
-                                //               color: AppColors
-                                //                   .yellow), // Bottom white border
-                                //         ),
-                                //       ),
-                                //       child: Row(
-                                //         mainAxisAlignment:
-                                //         MainAxisAlignment.spaceBetween,
-                                //         children: [
-                                //           Text(
-                                //             "Address Type",
-                                //             style: Theme.of(context)
-                                //                 .textTheme
-                                //                 .labelLarge
-                                //                 ?.copyWith(
-                                //                 fontWeight: FontWeight.w500),
-                                //           ),
-                                //           Text(
-                                //             "Home",
-                                //             style: Theme.of(context)
-                                //                 .textTheme
-                                //                 .labelLarge
-                                //                 ?.copyWith(
-                                //                 fontWeight: FontWeight.w500),
-                                //           )
-                                //         ],
-                                //       ).paddingOnly(left: 25, right: 20),
-                                //     ),
-                                //   ),
-                                //   Column(
-                                //     crossAxisAlignment: CrossAxisAlignment.start,
-                                //     mainAxisAlignment: MainAxisAlignment.start,
-                                //     children: [
-                                //       Text(
-                                //         "Anglesey Rd. Enfield EN3 4HY, UA ",
-                                //         style: Theme.of(context)
-                                //             .textTheme
-                                //             .labelLarge
-                                //             ?.copyWith(fontWeight: FontWeight.w500),
-                                //       ),
-                                //       Container(
-                                //         height: 1,
-                                //         width: Get.width,
-                                //         color: AppColors.grey,
-                                //       ).paddingOnly(bottom: 20, top: 15),
-                                //       Text(
-                                //         "Zero High Inc.",
-                                //         style: Theme.of(context)
-                                //             .textTheme
-                                //             .labelLarge
-                                //             ?.copyWith(fontWeight: FontWeight.w500),
-                                //       ),
-                                //       Container(
-                                //         height: 1,
-                                //         width: Get.width,
-                                //         color: AppColors.grey,
-                                //       ).paddingOnly(bottom: 20, top: 15),
-                                //       Text(
-                                //         "4",
-                                //         style: Theme.of(context)
-                                //             .textTheme
-                                //             .labelLarge
-                                //             ?.copyWith(fontWeight: FontWeight.w500),
-                                //       ),
-                                //       Container(
-                                //         height: 1,
-                                //         width: Get.width,
-                                //         color: AppColors.grey,
-                                //       ).paddingOnly(bottom: 20, top: 15),
-                                //       Text(
-                                //         "Anglesey Road",
-                                //         style: Theme.of(context)
-                                //             .textTheme
-                                //             .labelLarge
-                                //             ?.copyWith(fontWeight: FontWeight.w500),
-                                //       ),
-                                //       Container(
-                                //         height: 1,
-                                //         width: Get.width,
-                                //         color: AppColors.grey,
-                                //       ).paddingOnly(bottom: 20, top: 15),
-                                //       Text(
-                                //         "En3 4hy",
-                                //         style: Theme.of(context)
-                                //             .textTheme
-                                //             .labelLarge
-                                //             ?.copyWith(fontWeight: FontWeight.w500),
-                                //       ),
-                                //       Container(
-                                //         height: 1,
-                                //         width: Get.width,
-                                //         color: AppColors.grey,
-                                //       ).paddingOnly(bottom: 20, top: 15),
-                                //     ],
-                                //   ).paddingOnly(top: 18, left: 25, right: 20)
-
+                                SizedBox(height: Get.height*0.01,),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -302,7 +193,7 @@ class BookingRequsetUi extends StatelessWidget {
                                             text: '\n3kms away | 12 min',
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .labelMedium,
+                                                .labelMedium!.copyWith(color: Colors.white),
                                           ),
                                         ])),
                                       ],
@@ -317,13 +208,13 @@ class BookingRequsetUi extends StatelessWidget {
                                           '4.78',
                                           style: Theme.of(context)
                                               .textTheme
-                                              .labelMedium,
+                                              .labelMedium!.copyWith(color: Colors.white),
                                         )
                                       ],
                                     ),
                                   ],
                                 ).paddingOnly(
-                                  bottom: 15,
+                                  bottom: 15,left: Get.width*0.04,right: Get.width*0.04
                                 ),
                                 Container(
                                   height: 1,
@@ -368,126 +259,123 @@ class BookingRequsetUi extends StatelessWidget {
                                       ), // Your profile image
                                     ),
                                   ],
-                                ).paddingOnly(top: 20),
-                                Transform.translate(
-                                  offset: const Offset(-12, 0),
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Transform.translate(
-                                          offset: const Offset(0, 25),
-                                          child: Text(
-                                            '4\nmin',
+                                ).paddingOnly(top: Get.height*0.015),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Transform.translate(
+                                        offset: const Offset(0, 25),
+                                        child: Text(
+                                          '4\nmin',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelMedium!
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w500,
+                                                  color: AppColors.Black2),
+                                          textAlign: TextAlign.center,
+                                        )),
+                                    Column(
+                                      children: [
+                                        Container(
+                                          height: Get.height * 0.025,
+                                          width: Get.width * 0.030,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            border: Border.all(
+                                                color: AppColors.white),
+                                            shape: BoxShape.circle,
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 3,
+                                          width: 2,
+                                          color: AppColors.white,
+                                        ).paddingOnly(top: 3, bottom: 3),
+                                        Container(
+                                          height: 3,
+                                          width: 2,
+                                          color: AppColors.white,
+                                        ).paddingOnly(top: 3, bottom: 3),
+                                        Container(
+                                          height: 3,
+                                          width: 2,
+                                          color: AppColors.white,
+                                        ).paddingOnly(top: 3, bottom: 3),
+                                        Container(
+                                          height: 3,
+                                          width: 2,
+                                          color: AppColors.white,
+                                        ).paddingOnly(top: 3, bottom: 3),
+                                        Container(
+                                          height: 3,
+                                          width: 2,
+                                          color: AppColors.white,
+                                        ).paddingOnly(top: 3, bottom: 3),
+                                        Container(
+                                          height: 3,
+                                          width: 2,
+                                          color: AppColors.white,
+                                        ).paddingOnly(top: 3,bottom: 3),
+
+                                        const Icon(
+                                          Icons.circle,
+                                          color: AppColors.yellow,
+                                          size: 14,
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: Get.width * 0.024,
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "54, route Gue banquet",
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .labelMedium!
-                                                .copyWith(
-                                                    fontWeight: FontWeight.w500,
-                                                    color: AppColors.Black2),
-                                            textAlign: TextAlign.center,
-                                          )),
-                                      Column(
-                                        children: [
+                                                .labelLarge
+                                                ?.copyWith(
+                                                    color: AppColors.impgrey,
+                                                    fontWeight: FontWeight.w600),
+                                          ).paddingOnly(bottom: 5),
+                                          SizedBox(
+                                              width: Get.width * .77,
+                                              child: Text(
+                                                "1.2 Km",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelMedium
+                                                    ?.copyWith(
+                                                      color: AppColors.impgrey,
+                                                    ),
+                                              )).paddingOnly(bottom: 5),
                                           Container(
-                                            height: Get.height * 0.025,
-                                            width: Get.width * 0.030,
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              border: Border.all(
-                                                  color: AppColors.white),
-                                              shape: BoxShape.circle,
-                                            ),
-                                          ),
-                                          Container(
-                                            height: 3,
-                                            width: 2,
-                                            color: AppColors.white,
-                                          ).paddingOnly(top: 3, bottom: 3),
-                                          Container(
-                                            height: 3,
-                                            width: 2,
-                                            color: AppColors.white,
-                                          ).paddingOnly(top: 3, bottom: 3),
-                                          Container(
-                                            height: 3,
-                                            width: 2,
-                                            color: AppColors.white,
-                                          ).paddingOnly(top: 3, bottom: 3),
-                                          Container(
-                                            height: 3,
-                                            width: 2,
-                                            color: AppColors.white,
-                                          ).paddingOnly(top: 3, bottom: 3),
-                                          Container(
-                                            height: 3,
-                                            width: 2,
-                                            color: AppColors.white,
-                                          ).paddingOnly(top: 3, bottom: 3),
-                                          Container(
-                                            height: 3,
-                                            width: 2,
-                                            color: AppColors.white,
-                                          ).paddingOnly(top: 3,bottom: 3),
-
-                                          const Icon(
-                                            Icons.circle,
-                                            color: AppColors.yellow,
-                                            size: 14,
-                                          )
+                                            width: Get.width * .80,
+                                            height: 1,
+                                            color: AppColors.grey,
+                                          ).paddingOnly(top: 10, bottom: 15),
+                                          Text(
+                                            "66, route Gue banquet",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelLarge
+                                                ?.copyWith(
+                                                    color: AppColors.impgrey,
+                                                    fontWeight: FontWeight.w600),
+                                          ).paddingOnly(bottom: 5),
                                         ],
                                       ),
-                                      SizedBox(
-                                        width: Get.width * 0.024,
-                                      ),
-                                      Expanded(
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "54, route Gue banquet",
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .labelLarge
-                                                  ?.copyWith(
-                                                      color: AppColors.impgrey,
-                                                      fontWeight: FontWeight.w600),
-                                            ).paddingOnly(bottom: 5),
-                                            SizedBox(
-                                                width: Get.width * .77,
-                                                child: Text(
-                                                  "1.2 Km",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .labelMedium
-                                                      ?.copyWith(
-                                                        color: AppColors.impgrey,
-                                                      ),
-                                                )).paddingOnly(bottom: 5),
-                                            Container(
-                                              width: Get.width * .80,
-                                              height: 1,
-                                              color: AppColors.grey,
-                                            ).paddingOnly(top: 10, bottom: 15),
-                                            Text(
-                                              "66, route Gue banquet",
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .labelLarge
-                                                  ?.copyWith(
-                                                      color: AppColors.impgrey,
-                                                      fontWeight: FontWeight.w600),
-                                            ).paddingOnly(bottom: 5),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ).paddingOnly(
-                                      top: Get.height * 0.035,
-                                      bottom: Get.height * 0.035),
-                                ),
+                                    )
+                                  ],
+                                ).paddingOnly(
+                                    top: Get.height * 0.035,
+                                    bottom: Get.height * 0.035),
                                 Center(
                                     child: InkButton(
                                         child: Text(
@@ -519,64 +407,69 @@ class BookingRequsetUi extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              SizedBox(height: Get.height*0.03,),
+                              Column(crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      const CircleAvatar(
-                                        radius: 32,
-                                        backgroundColor: AppColors.yellow,
-                                        child: CircleAvatar(
-                                          radius: 30,
-                                          backgroundImage: AssetImage(ImagesPaths
-                                              .profilePic), // Your profile image
-                                        ),
+                                      Row(
+                                        children: [
+                                          const CircleAvatar(
+                                            radius: 32,
+                                            backgroundColor: AppColors.yellow,
+                                            child: CircleAvatar(
+                                              radius: 30,
+                                              backgroundImage: AssetImage(ImagesPaths
+                                                  .profilePic), // Your profile image
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          RichText(
+                                              text: TextSpan(children: [
+                                            TextSpan(
+                                              text: 'John Doe',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headlineSmall,
+                                            ),
+                                            TextSpan(
+                                              text: '\n3kms away | 12 min',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelMedium!.copyWith(color: Colors.white),
+                                            ),
+                                          ])),
+                                        ],
                                       ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      RichText(
-                                          text: TextSpan(children: [
-                                        TextSpan(
-                                          text: 'John Doe',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headlineSmall,
-                                        ),
-                                        TextSpan(
-                                          text: '\n3kms away | 12 min',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelMedium,
-                                        ),
-                                      ])),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      const Icon(
-                                        Icons.star,size: 19,
-                                        color: AppColors.yellow,
-                                      ).paddingOnly(right: 5),
-                                      Text(
-                                        '4.78',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelMedium,
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.star,size: 19,
+                                            color: AppColors.yellow,
+                                          ).paddingOnly(right: 5),
+                                          Text(
+                                            '4.78',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelMedium!.copyWith(color: Colors.white),
+                                          )
+                                        ],
                                       )
                                     ],
-                                  )
+                                  ).paddingOnly(top: 15, bottom: 15),
+                                  Text(
+                                    'Client address',
+                                    style: Theme.of(context).textTheme.headlineSmall,
+                                  ),
+                                  Text(
+                                    'Malviya Nagar, Near LB hospital, Jaipur, Rajthan',
+                                    style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.white),
+                                  ),
                                 ],
-                              ).paddingOnly(top: 15, bottom: 15),
-                              Text(
-                                'Client address',
-                                style: Theme.of(context).textTheme.headlineSmall,
-                              ),
-                              Text(
-                                'Malviya Nagar, Near LB hospital, Jaipur, Rajthan',
-                                style: Theme.of(context).textTheme.labelMedium,
-                              ),
+                              ).paddingOnly(left: Get.width*0.04,right: Get.width*0.04,bottom: Get.height*0.01),
                               Center(
                                   child: InkButton(
                                       child: Text(
@@ -589,6 +482,7 @@ class BookingRequsetUi extends StatelessWidget {
                                       onTap: () {
                                         controller.selectedIndex.value = 1;
                                       })).paddingOnly(top: 30, bottom: 30),
+                              SizedBox(height: Get.height*0.02,),
                               //
                             ],
                           ).paddingOnly(left: 15, right: 15),
@@ -602,25 +496,44 @@ class BookingRequsetUi extends StatelessWidget {
             //       ? const Center(child: CircularProgressIndicator())
             //       .paddingOnly(bottom: 300)
             //       :
-            SizedBox(
-          height: Get.height * .8,
-          child: GoogleMap(
-            mapType: MapType.normal,
+            Stack(
+              children: [
+                SizedBox(
+                          height: Get.height * .8,
+                          child: GoogleMap(
+                mapType: MapType.normal,
 
-            onMapCreated: controller.onMapCreated,
-            initialCameraPosition: const CameraPosition(
-              target: LatLng(37.43296265331129, -122.08832357078792),
-              zoom: 15.0,
-            ),
-            // markers: {
-            //   Marker(
-            //     markerId: const MarkerId('current_location'),
-            //     position: controller.currentLocation.value!,
-            //     infoWindow: const InfoWindow(title: 'Current Location'),
-            //   ),
-            // },
-          ),
-        ));
+                onMapCreated: controller.onMapCreated,
+                initialCameraPosition: const CameraPosition(
+                  target: LatLng(37.43296265331129, -122.08832357078792),
+                  zoom: 15.0,
+                ),
+                // markers: {
+                //   Marker(
+                //     markerId: const MarkerId('current_location'),
+                //     position: controller.currentLocation.value!,
+                //     infoWindow: const InfoWindow(title: 'Current Location'),
+                //   ),
+                // },
+                          ),
+                        ),
+                Positioned(
+                    left: Get.width*0.041,
+                    top: Get.height*0.061,
+                    child: IconButton(
+                        onPressed: (){
+                          Get.back();
+                          // if (controller.selectedIndex.value == 2) {
+                          //   controller.selectedIndex.value = 1;
+                          // } else if (controller.selectedIndex.value == 1) {
+                          //   controller.selectedIndex.value = 0;
+                          // }else{
+                          //   Get.back();
+                          // }
+                        },
+                        icon: Icon(Icons.arrow_back_ios,size: 18,color: Colors.black,)))
+              ],
+            ));
   }
 }
 //

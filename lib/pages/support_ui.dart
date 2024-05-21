@@ -9,8 +9,11 @@ class SupportUI extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: myAppBar(
-          title: Text('Support',
-            style: Theme.of(context).textTheme.headlineSmall,),
+          title: GestureDetector(
+            onTap: (){Get.back();},
+            child: Text('Support',
+              style: Theme.of(context).textTheme.headlineSmall,),
+          ),
           context: context),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start,
         children: [

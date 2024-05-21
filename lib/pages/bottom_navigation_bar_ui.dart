@@ -1,24 +1,10 @@
-import 'dart:io';
-
-import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
-import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
-import 'package:endoorphin_trainer/bindings/booking_request_binding.dart';
-import 'package:endoorphin_trainer/controllers/booking_controller.dart';
-import 'package:endoorphin_trainer/controllers/booking_details_controller.dart';
-import 'package:endoorphin_trainer/controllers/booking_request_controller.dart';
-import 'package:endoorphin_trainer/controllers/earning_controller.dart';
-import 'package:endoorphin_trainer/controllers/home_controller.dart';
-import 'package:endoorphin_trainer/controllers/profile_controller.dart';
-import 'package:endoorphin_trainer/controllers/select_category_controller.dart';
-import 'package:endoorphin_trainer/controllers/session_details_controller.dart';
-import 'package:endoorphin_trainer/controllers/session_running_controller.dart';
-import 'package:endoorphin_trainer/pages/booking_request_ui.dart';
-import 'package:endoorphin_trainer/pages/select_category_ui.dart';
 import 'package:flutter/material.dart';
 
-import '../controllers/otp_controller.dart';
+import '../controllers/booking_controller.dart';
+import '../controllers/earning_controller.dart';
+import '../controllers/home_controller.dart';
+import '../controllers/profile_controller.dart';
 import '../utils/exports.dart';
-
 
 class BottomNavigationBarUI extends StatefulWidget {
   BottomNavigationBarUI({Key? key, this.currentTabIndex = 0}) : super(key: key);
@@ -30,16 +16,23 @@ class BottomNavigationBarUI extends StatefulWidget {
 
 class _BottomNavigationBarUIState extends State<BottomNavigationBarUI> {
   late Widget currentPage;
-HomeController homeController = Get.put(HomeController());
-EarningController earningController = Get.put(EarningController());
-BookingController bookingController = Get.put(BookingController());
-ProfileController profileController = Get.put(ProfileController());
-// BookingRequestController bookingRequestController = Get.put(BookingRequestController());
+  HomeController homeController = Get.put(HomeController());
+  EarningController earningController = Get.put(EarningController());
+  BookingController bookingController = Get.put(BookingController());
+  ProfileController profileController = Get.put(ProfileController());
+
   List<Widget> pages = [
     const HomeUi(),
     const EarningUi(),
-    const BookingUi(),
+    const BookingUi(initialIndex: 0,),
     const ProfileUI(),
+  ];
+
+  List<Color> iconColors = [
+    Colors.black,
+    Colors.black,
+    Colors.black,
+    Colors.black
   ];
 
   void initializePages() {
@@ -47,7 +40,6 @@ ProfileController profileController = Get.put(ProfileController());
   }
 
   @override
-  ////
   void initState() {
     initializePages();
     super.initState();
@@ -71,22 +63,18 @@ ProfileController profileController = Get.put(ProfileController());
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
-
-
         ),
-
-        child:
-        BottomNavigationBar(
+        child: BottomNavigationBar(
           elevation: 100,
-          currentIndex: 0,
+          currentIndex: widget.currentTabIndex ?? 0,
           selectedItemColor: AppColors.black,
           unselectedItemColor: Colors.black,
           backgroundColor: Colors.transparent,
           type: BottomNavigationBarType.fixed,
-          selectedFontSize: 12,
+          selectedFontSize: 14,
           unselectedFontSize: 12,
-          selectedLabelStyle: TextStyle(color: AppColors.black),
-          unselectedLabelStyle: TextStyle(color: AppColors.black),
+          selectedLabelStyle: TextStyle(color: AppColors.white),
+          unselectedLabelStyle: const TextStyle(color: AppColors.black,),
           onTap: (index) {
             setState(() {
               widget.currentTabIndex = index;
@@ -95,64 +83,45 @@ ProfileController profileController = Get.put(ProfileController());
           },
           items: [
             BottomNavigationBarItem(
-              backgroundColor: Colors.transparent,
-              icon: Image.asset(ImagesPaths.home, scale: 5),
+              icon: Image.asset(
+                  ImagesPaths.home,
+              scale :widget.currentTabIndex ==0 ? 4.5 : 5.8
+              ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Image.asset(ImagesPaths.earningHome, scale: 7),
+              icon: Image.asset(
+                ImagesPaths.earningHome,
+                scale: widget.currentTabIndex == 1 ? 6 : 7,
+                color: iconColors[1],
+              ),
               label: 'Earnings',
             ),
             BottomNavigationBarItem(
-              icon: Image.asset(ImagesPaths.mysession, color: Colors.black,scale: 5),
+              icon: Image.asset(
+                ImagesPaths.mysession,
+                scale: widget.currentTabIndex == 2 ? 4 : 5, // Increase scale when selected
+                color: iconColors[2],
+              ),
               label: 'History',
             ),
             BottomNavigationBarItem(
-              icon: Image.asset(ImagesPaths.men, scale: 5),
-              label: 'Account',
+              icon: Image.asset(
+                ImagesPaths.men,
+                scale: widget.currentTabIndex == 3 ? 4 : 5, // Increase scale when selected
+                color: iconColors[3],
+              ),
+              label: 'Profile',
             ),
+
           ],
         ),
       ),
-    // return Scaffold(
-    //   backgroundColor: AppColors.backgroundBlack,
-    //   bottomNavigationBar: CurvedNavigationBar(
-    //     index: 0,
-    //     height: Platform.isIOS ? 75 : 60,
-    //     buttonBackgroundColor: AppColors.yellow,
-    //     animationCurve: Curves.fastEaseInToSlowEaseOut,
-    //     backgroundColor: AppColors.backgroundBlack,
-    //     color: AppColors.yellow,
-    //     animationDuration: const Duration(milliseconds: 500),
-    //     onTap: (index) {
-    //       setState(() {
-    //         widget.currentTabIndex = index;
-    //         currentPage = pages[widget.currentTabIndex!];
-    //       });
-    //     },
-    //     items: [
-    //       CurvedNavigationBarItem(
-    //         child:    Image.asset(ImagesPaths.home,scale: 5,),
-    //       ),
-    //        CurvedNavigationBarItem(
-    //         child:  Image.asset(ImagesPaths.earningHome,scale: 6,),
-    //       ),
-    //        CurvedNavigationBarItem(
-    //         child: Image.asset(ImagesPaths.mysession,scale: 5,color: AppColors.black,),
-    //       ),
-    //       CurvedNavigationBarItem(
-    //         child:
-    //           Image.asset(ImagesPaths.men,scale: 5,),
-    //         ),
-    //       //  CurvedNavigationBarItem(
-    //       //   child: Image.asset(ImagesPaths.menu,scale: 5,),
-    //       // ),
-    //     ],
-    //   ),
       body: IndexedStack(
-        index: widget.currentTabIndex,
+        index: widget.currentTabIndex ?? 0,
         children: pages,
       ),
     );
   }
+
 }

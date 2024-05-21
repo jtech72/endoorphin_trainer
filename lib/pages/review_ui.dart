@@ -11,7 +11,7 @@ class ReviewUi extends StatelessWidget {
   Widget build(BuildContext context) {
     ReviewController controller= Get.find();
     return Scaffold(
-     appBar: myAppBar(title: Text('Review Your Booking/Trainer',style: Theme.of(context).textTheme.bodyMedium,), context: context,),
+     appBar: myAppBar(title: GestureDetector(onTap: (){Get.back();},child: Text('Review Your Booking/Trainer',style: Theme.of(context).textTheme.headlineSmall,)), context: context,),
       body:
       SingleChildScrollView(
         child: Center(

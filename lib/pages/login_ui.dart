@@ -15,27 +15,35 @@ class LoginUi extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
                     children: [
-                      Container(
-                        alignment: Alignment.bottomLeft,
-                        height: Get.height * .49,
-                        width: Get.width * 9,
-                        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Colors.transparent,
-          image: DecorationImage(
-            image: AssetImage(
-              ImagesPaths.loginImage,
-            ),
-            fit: BoxFit.fill,
-          ),
-                        ),
-                        child: Transform.translate(
-          offset: const Offset(0, -20),
-          child: Text(
-            'Nice to see you again,\nLet’s Begin ...',
-            style: Theme.of(context).textTheme.headlineMedium,
-          ).paddingOnly(bottom: 50, left: Get.width * .05),
-                        ),
+                      Stack(
+                        children: [
+                          Container(
+                            alignment: Alignment.bottomLeft,
+                            height: Get.height * .49,
+                            width: Get.width * 9,
+                            decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                    color: Colors.transparent,
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                        ImagesPaths.loginImage,
+                                      ),
+                                      fit: BoxFit.fill,
+                                    ),
+                            ),
+                            child: Transform.translate(
+                                    offset: const Offset(0, -20),
+                                    child: Text(
+                                      'Nice to see you again,\nLet’s Begin ...',
+                                      style: Theme.of(context).textTheme.headlineMedium,
+                                    ).paddingOnly(bottom: 50, left: Get.width * .05),
+                            ),
+                          ),
+                          Positioned(
+                              left: Get.width*0.03,
+                              top: Get.height*0.04,
+                              child: IconButton(icon: Icon(Icons.arrow_back_ios,size: 18,color: Colors.black,), onPressed: () { Get.back(); },))
+                        ],
                       ),
                       Container(
                         alignment: Alignment.topCenter,

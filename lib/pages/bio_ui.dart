@@ -8,7 +8,7 @@ class BioUi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar(title: Text('Bio',style: Theme.of(context).textTheme.headlineSmall,), context: context),
+      appBar: myAppBar(title: GestureDetector(onTap: (){Get.back();},child: Text('Bio',style: Theme.of(context).textTheme.headlineSmall,)), context: context),
       body: Container(
         height: Get.height,
         width: Get.width,

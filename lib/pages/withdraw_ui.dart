@@ -14,8 +14,11 @@ class WithdrawUI extends StatelessWidget {
     WithdrawController controller = Get.put(WithdrawController());
     return Scaffold(
         appBar: myAppBar(
-         title: Text('Withdraw',
-           style: Theme.of(context).textTheme.headlineSmall,),
+         title: GestureDetector(
+           onTap: (){Get.back();},
+           child: Text('Withdraw',
+             style: Theme.of(context).textTheme.headlineSmall,),
+         ),
          context: context
      ),
       body: Container(
