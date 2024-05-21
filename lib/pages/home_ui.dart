@@ -24,12 +24,10 @@ class HomeUiState extends State<HomeUi> {
   void initState() {
     super.initState();
     _pageController = PageController();
-    _timer = Timer.periodic(Duration(seconds: 100), (Timer timer) {
-      if (_currentPage < 2) {
-        _currentPage++;
-      } else {
-        _currentPage = 0;
-      }
+    _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
+      setState(() {
+        _currentPage = (_currentPage + 1) % 3;
+      });
       _pageController.animateToPage(
         _currentPage,
         duration: Duration(milliseconds: 500),
@@ -119,7 +117,7 @@ class HomeUiState extends State<HomeUi> {
             children: [
               Container(
                 height: Get.height*0.24,
-                width: MediaQuery.of(context).size.width,
+                width: Get.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                 ),

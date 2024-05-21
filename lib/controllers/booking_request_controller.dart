@@ -1,12 +1,16 @@
 
+import 'dart:developer';
+
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
+import '../utils/exports.dart';
+
 class BookingRequestController extends GetxController{
   late GoogleMapController mapController;
-  // Rx<LatLng?> currentLocation = Rx<LatLng?>(null);
+  Rx<LatLng?> currentLocation = Rx<LatLng?>(null);
   Location location = Location();
   RxInt selectedIndex = 0.obs;
 
@@ -23,7 +27,12 @@ class BookingRequestController extends GetxController{
     // TODO: implement onClose
     super.onClose();
   }
-
+  void setMapStyle() async {
+    String style = await DefaultAssetBundle.of(Get.context!)
+        .loadString('assets/dark_map_style.json');
+    log("message1111");
+    mapController.setMapStyle(style);
+  }
   // void getCurrentLocation() async {
   //   try {
   //     LocationData currentLocationData = await location.getLocation();

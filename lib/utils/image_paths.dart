@@ -67,6 +67,10 @@ class ImagesPaths {
   static const String loginImage= "${baseUrl}login_image.png";
   static const String homepackage= "${baseUrl}home_package_image.png";
   static const String restart= "${baseUrl}restart.png";
+  static const String location= "${baseUrl}img_location.png";
+  static const String star= "${baseUrl}ic_star.png";
+  static const String star2= "${baseUrl}ic_star2.png";
+  static const String plus= "${baseUrl}ic_plus.png";
 
 
 

@@ -1,6 +1,7 @@
 import 'package:endoorphin_trainer/controllers/booking_request_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:slide_to_act/slide_to_act.dart';
@@ -101,7 +102,7 @@ class BookingRequsetUi extends StatelessWidget {
                                     style: Theme.of(context)
                                         .textTheme
                                         .labelMedium
-                                        ?.copyWith(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w500),
+                                        ?.copyWith(color: Colors.black,fontSize: 14,fontWeight: FontWeight.w500),
                                   ).paddingOnly(left: Get.width*.07),
                                   onSubmit: (){
                                     Get.toNamed(AppRoutes.sessionRunning);
@@ -139,7 +140,7 @@ class BookingRequsetUi extends StatelessWidget {
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelMedium!
-                                    .copyWith(fontWeight: FontWeight.w500,color: Colors.white),
+                                    .copyWith(fontWeight: FontWeight.w500),
                               )
                             ],
                           )
@@ -200,10 +201,7 @@ class BookingRequsetUi extends StatelessWidget {
                                     ),
                                     Row(
                                       children: [
-                                        const Icon(
-                                          Icons.star,size: 19,
-                                          color: AppColors.yellow,
-                                        ).paddingOnly(right: 5),
+                                      Image.asset(ImagesPaths.star2,scale: 4,).paddingOnly(right: 5),
                                         Text(
                                           '4.78',
                                           style: Theme.of(context)
@@ -446,10 +444,7 @@ class BookingRequsetUi extends StatelessWidget {
                                       ),
                                       Row(
                                         children: [
-                                          const Icon(
-                                            Icons.star,size: 19,
-                                            color: AppColors.yellow,
-                                          ).paddingOnly(right: 5),
+                                          Image.asset(ImagesPaths.star2,scale: 4,).paddingOnly(right: 5),
                                           Text(
                                             '4.78',
                                             style: Theme.of(context)
@@ -501,9 +496,15 @@ class BookingRequsetUi extends StatelessWidget {
                 SizedBox(
                           height: Get.height * .8,
                           child: GoogleMap(
-                mapType: MapType.normal,
-
-                onMapCreated: controller.onMapCreated,
+                            mapType: MapType.normal,
+                            myLocationButtonEnabled: true,
+                            myLocationEnabled: true,
+                            zoomControlsEnabled: true,
+                            scrollGesturesEnabled:true,
+                            onMapCreated: (GoogleMapController onMapCreatedController) {
+                              controller.mapController = onMapCreatedController;
+                              controller.setMapStyle();
+                            },
                 initialCameraPosition: const CameraPosition(
                   target: LatLng(37.43296265331129, -122.08832357078792),
                   zoom: 15.0,

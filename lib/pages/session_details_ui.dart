@@ -136,11 +136,7 @@ class SessionDetailsUi extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const Icon(
-                              Icons.star,
-                              color: AppColors.yellow,
-                              size: 18,
-                            ),
+                            Image.asset(ImagesPaths.star2,scale: 3.8,).paddingOnly(right: Get.width*0.01),
                             Text(
                               "4.86 (49)",
                               style: Theme.of(context)
@@ -156,37 +152,32 @@ class SessionDetailsUi extends StatelessWidget {
                 ).paddingOnly(top: 10, bottom: 10),
               ).paddingOnly(top: 15,bottom: 0),
 
-              Transform.translate(
-                offset: const Offset(-12,0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      children: [
-                        Container(
-                          height: Get.height*0.025,
-                          width: Get.width*0.035,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.yellow),
-                            shape: BoxShape.circle,
-                          ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        height: Get.height*0.025,
+                        width: Get.width*0.035,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: AppColors.yellow),
+                          shape: BoxShape.circle,
                         ),
-                        Container(
-                          height: Get.height*0.091,
-                          width: 1,
-                          color: AppColors.yellow,
-                        ).paddingOnly(top: 3,bottom: 3),
-                        const Icon(
-                          Icons.location_on_outlined,
-                          color: AppColors.yellow,
-                          size: 22,
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      width: Get.width*0.014,
-                    ),
-                    Column(
+                      ),
+                      Container(
+                        height: Get.height*0.091,
+                        width: 1,
+                        color: AppColors.yellow,
+                      ).paddingOnly(top: 3,bottom: 3),
+                   Image.asset(ImagesPaths.location,scale: 5,)
+                    ],
+                  ),
+                  SizedBox(
+                    width: Get.width*0.02,
+                  ),
+                  Expanded(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -206,7 +197,7 @@ class SessionDetailsUi extends StatelessWidget {
                         Text("9:54 AM",style: Theme.of(context).textTheme.labelMedium?.copyWith(
                             color: AppColors.yellow,),).paddingOnly(bottom: 8),
                         Container(
-                          width: Get.width*.77,
+                          width: Get.width*.82,
                           height: 1,
                           color: AppColors.grey,
                         ).paddingOnly(top: 6,bottom: 12),
@@ -225,10 +216,10 @@ class SessionDetailsUi extends StatelessWidget {
                         Text("9:54 AM",style: Theme.of(context).textTheme.labelMedium?.copyWith(
                             color: AppColors.yellow,),),
                       ],
-                    )
-                  ],
-                ).paddingOnly(top: Get.height*0.035,bottom: Get.height*0.055),
-              ),
+                    ),
+                  )
+                ],
+              ).paddingOnly(top: Get.height*0.035,bottom: Get.height*0.055),
               Container(
                 height: Get.height*0.11,
                 width: Get.width,
@@ -247,14 +238,12 @@ class SessionDetailsUi extends StatelessWidget {
                       allowHalfRating: true,
                       itemCount: 5,
                       itemPadding:
-                      const EdgeInsets.symmetric(horizontal: 6.0),
+                      const EdgeInsets.symmetric(horizontal: 9.0),
                       itemBuilder: (context, _) => InkWell(
                         onTap: (){
                           Get.toNamed(AppRoutes.review);
                         },
-                        child: const Icon(
-                          Icons.star_border,color: AppColors.yellow,
-                        )
+                        child:Image.asset(ImagesPaths.star,scale: 5,)
                       ),
                       onRatingUpdate: (rating) {
                         Get.toNamed(AppRoutes.review);
