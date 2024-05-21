@@ -18,7 +18,11 @@ class MoreAboutYouUi extends StatelessWidget {
     return Scaffold(
       appBar: myAppBar(title: Transform.translate(
           offset: Offset(0,-3),
-          child: Image.asset(ImagesPaths.logoimg,height: 36,width: 146,)), context: context),
+          child: GestureDetector(
+            onTap: (){
+              Get.back();
+            },
+              child: Image.asset(ImagesPaths.logoimg,height: 36,width: 146,))), context: context),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18),
         child: Container(

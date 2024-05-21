@@ -15,7 +15,7 @@ class ForgotPasswordUI extends StatelessWidget {
 
     return Scaffold(
       appBar: myAppBar(
-        title: Text('Forgot Password',style: Theme.of(context).textTheme.bodyMedium,),
+        title: GestureDetector(onTap: (){Get.back();},child: Text('Forgot Password',style: Theme.of(context).textTheme.headlineSmall,)),
         context: context,),
       body: Container(
         height: Get.height,

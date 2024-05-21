@@ -10,7 +10,7 @@ class CreateNewPasswordUI extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: myAppBar(
-        title: Text('Create New Password',style: Theme.of(context).textTheme.bodyMedium,),
+        title: GestureDetector(onTap: (){Get.back();},child: Text('Create New Password',style: Theme.of(context).textTheme.headlineSmall,)),
         context: context,),
       body: Container(
         height: Get.height,
@@ -51,7 +51,7 @@ class CreateNewPasswordUI extends StatelessWidget {
               SizedBox(
                 height: Get.height*0.07,
               ),
-              Text('New Password',style: Theme.of(context).textTheme.labelLarge!.copyWith(color: AppColors.white),textAlign: TextAlign.start,),
+              Text('New Password',style: Theme.of(context).textTheme.labelLarge!.copyWith(color: AppColors.white,fontSize: 14),textAlign: TextAlign.start,),
 
               SizedBox(
                 height: Get.height * 0.01,
@@ -91,7 +91,7 @@ class CreateNewPasswordUI extends StatelessWidget {
               SizedBox(
                 height: Get.height * 0.01,
               ),
-              Text('Confirm Password',style: Theme.of(context).textTheme.labelLarge!.copyWith(color: AppColors.white),textAlign: TextAlign.start,),
+              Text('Confirm Password',style: Theme.of(context).textTheme.labelLarge!.copyWith(color: AppColors.white,fontSize: 14),textAlign: TextAlign.start,),
 
               SizedBox(
                 height: Get.height * 0.01,
@@ -123,7 +123,7 @@ class CreateNewPasswordUI extends StatelessWidget {
                     contentPadding:
                     const EdgeInsets.only(bottom: 3, left: 25),
 
-                    hintText: "Confirm password",
+                    hintText: "Enter Confirm password",
                     alignLabelWithHint: true, // Center the hintText
                   ),
                 ),

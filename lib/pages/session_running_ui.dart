@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../controllers/session_running_controller.dart';
 import '../utils/exports.dart';
+import 'bottom_navigation_bar_ui.dart';
 
 class SessionRunningUi extends StatelessWidget {
   const SessionRunningUi({super.key});
@@ -26,26 +27,34 @@ class SessionRunningUi extends StatelessWidget {
                 width: Get.width,
                 child: Stack(
                   children: [
-                    Image.asset(
-                      ImagesPaths.sessionType,
-                      height: Get.height,
-                      width: Get.width,
-                    ).paddingOnly(bottom: 50),
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed(AppRoutes.sessionDetails);
+                      },
+                      child: Image.asset(
+                        ImagesPaths.sessionType,
+                        height: Get.height,
+                        width: Get.width,
+                      ).paddingOnly(bottom: 50),
+                    ),
                     Row(
                       children: [
                         InkWell(
                             onTap: () {
-                              Get.back();
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => BottomNavigationBarUI(currentTabIndex: 2,)));
                             },
                             child: const Icon(
                               Icons.arrow_back_ios_new_rounded,
                               color: AppColors.impgrey,
                               size: 18,
                             )),
-                        Text(
-                          "Boxing",
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ).paddingOnly(left: 20)
+                        GestureDetector(
+                          onTap: (){Get.back();},
+                          child: Text(
+                            "Boxing",
+                            style: Theme.of(context).textTheme.headlineSmall,
+                          ).paddingOnly(left: 20),
+                        )
                       ],
                     ).paddingOnly(top: Get.height * .06, left: Get.width * .06),
                   ],
@@ -56,6 +65,7 @@ class SessionRunningUi extends StatelessWidget {
                 width: Get.width,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [
+
                   Colors.black.withOpacity(0.6),
                   AppColors.black,
                 ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
@@ -125,7 +135,7 @@ class SessionRunningUi extends StatelessWidget {
                                 child: Icon(
                                   controller.isPaused.value == true
                                       ? Icons.stop_circle_sharp
-                                      : Icons.pause_circle,
+                                      : Icons.pause_circle_rounded,
                                   color: AppColors.yellow,
                                   size: 75,
                                 )),
@@ -191,7 +201,7 @@ class SessionRunningUi extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .bodyLarge
-                  ?.copyWith(color: AppColors.lightGrey1),
+                  ?.copyWith(color: AppColors.white),
             )
           ],
         ).paddingOnly(bottom: 10),
@@ -268,7 +278,7 @@ class SessionRunningUi extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .labelSmall
-                      ?.copyWith(fontWeight: FontWeight.w300),
+                      ?.copyWith(fontWeight: FontWeight.w300,fontSize: 12),
                 ).paddingOnly(top: 10, bottom: Get.height * .03),
                 Text(
                   "Customer Details",

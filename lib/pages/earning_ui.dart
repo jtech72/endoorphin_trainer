@@ -53,9 +53,11 @@ class EarningUi extends StatelessWidget {
                   color: AppColors.white,
                   size: 18,
                 ))),
-        title: Text(
-          "My Earnings",
-          style: Theme.of(context).textTheme.bodyMedium,
+        title: GestureDetector(onTap: (){Get.offAllNamed(AppRoutes.bottomNavigation);},
+          child: Text(
+            "My Earnings",
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
         ),
       ),
       // appBar: myAppBar(

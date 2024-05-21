@@ -12,9 +12,14 @@ class TrainerPassportUI extends StatelessWidget {
     String? username;
     return Scaffold(
       appBar: myAppBar(
-          title: Text(
-            controller.documentIndex == 0? "Emirates ID":controller.documentIndex == 1?'Passport':"Certification",
-            style: Theme.of(context).textTheme.headlineSmall,
+          title: GestureDetector(
+            onTap: (){
+              Get.back();
+            },
+            child: Text(
+              controller.documentIndex == 0? "Emirates ID":controller.documentIndex == 1?'Passport':"Certification",
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
           ),
           context: context),
       body: Container(
@@ -55,7 +60,7 @@ class TrainerPassportUI extends StatelessWidget {
                     Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: Get.height * .03,bottom: 0),
 
                   ],
-                ),
+                ).paddingOnly(top:Get.height*0.02),
                 Container(
                   height: 45,
                   decoration: BoxDecoration(

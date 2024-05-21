@@ -9,7 +9,8 @@ import '../utils/image_paths.dart';
 import '../utils/app_drawer.dart'; // assuming this file contains myTabBar function
 
 class BookingUi extends StatefulWidget {
-  const BookingUi({super.key});
+  final initialIndex;
+  const BookingUi({super.key,required this.initialIndex});
 
   @override
   State<BookingUi> createState() => _BookingUiState();
@@ -21,7 +22,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 4, vsync: this);
+    tabController = TabController(length: 4, vsync: this,initialIndex:widget.initialIndex??0);
   }
 
   @override
@@ -37,10 +38,11 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: AppColors.impgrey),
         title: Obx(
               () => Text(
-            controller.isTrainerOnline.value ? 'Offline' : 'Online',
-            style: Theme.of(context).textTheme.bodyMedium,
+            controller.isTrainerOnline.value ? 'Online' : 'Offline',
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
         centerTitle: true,
@@ -60,14 +62,15 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     border: Border.all(color: Colors.white),
+                    color: controller.isTrainerOnline.value ? Colors.yellow : Colors.grey.withOpacity(0.5), // Change container color conditionally
                   ),
                   child: Transform.scale(
                     scale: 0.4,
                     child: Switch(
                       activeTrackColor: Colors.black,
-                      activeColor: Colors.transparent,
-                      inactiveThumbImage: const AssetImage(ImagesPaths.trainerOnline),
-                      activeThumbImage: const AssetImage(ImagesPaths.trainerOnline),
+                      activeColor: controller.isTrainerOnline.value ? Colors.yellow : Colors.grey.withOpacity(0.5), // Change switch button color conditionally
+                      inactiveThumbImage: AssetImage(ImagesPaths.trainerOnline),
+                      activeThumbImage: AssetImage(ImagesPaths.trainerOnline),
                       inactiveThumbColor: Colors.transparent,
                       inactiveTrackColor: Colors.black,
                       value: controller.isTrainerOnline.value,
@@ -82,14 +85,12 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
           ),
           IconButton(
             onPressed: () {
-              Get.toNamed(AppRoutes.notification); // assuming you have AppRoutes defined
+              Get.toNamed(AppRoutes.notification);
             },
             icon: Image.asset(ImagesPaths.bell, scale: 4,),
-          )
+          ),
         ],
         bottom: myTabBar(tabController, context),
-        iconTheme: IconThemeData(color: AppColors.impgrey),
-
       ),
       drawer: MyDrawer(),
       body: TabBarView(
@@ -98,7 +99,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
           Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage(ImagesPaths.bgBlackShade)
+                    image: AssetImage(ImagesPaths.bgBlackShade),fit: BoxFit.cover
                 )
             ),
             child: SingleChildScrollView(
@@ -106,7 +107,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-              Text("Upcoming",style: Theme.of(context).textTheme.headlineSmall,).paddingOnly(left: 18,right: 18,top: 15),
+              Text("Upcoming Sessions",style: Theme.of(context).textTheme.headlineSmall,).paddingOnly(left: 18,right: 18,top: 15),
               Column(
                 children: [
                   Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
@@ -159,7 +160,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
           Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage(ImagesPaths.bgBlackShade)
+                    image: AssetImage(ImagesPaths.bgBlackShade),fit: BoxFit.cover
                 )
             ),
             child: SingleChildScrollView(
@@ -167,7 +168,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text("Ongoing",style: Theme.of(context).textTheme.headlineSmall,).paddingOnly(left: 18,right: 18,top: 15),
+                Text("Ongoing Sessions",style: Theme.of(context).textTheme.headlineSmall,).paddingOnly(left: 18,right: 18,top: 15),
                 Column(
                   children: [
                     Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
@@ -217,7 +218,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
           Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage(ImagesPaths.bgBlackShade)
+                    image: AssetImage(ImagesPaths.bgBlackShade),fit: BoxFit.cover
                 )
             ),
             child: SingleChildScrollView(
@@ -225,7 +226,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text("Completed",style: Theme.of(context).textTheme.headlineSmall,).paddingOnly(left: 18,right: 18,top: 15),
+                Text("Completed Sessions",style: Theme.of(context).textTheme.headlineSmall,).paddingOnly(left: 18,right: 18,top: 15),
                 Column(
                   children: [
                     Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
@@ -237,28 +238,30 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                           },
                           child: Column(
                             children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                          height: 50,
-                                          width: 50,
-                                          decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
+                              Container(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Container(
+                                            height: 50,
+                                            width: 50,
+                                            decoration: BoxDecoration(color: AppColors.grey,borderRadius: BorderRadius.circular(100)),
 
-                                          child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
-                                          Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
-                                        ],).paddingOnly(left: 15)
-                                    ],
-                                  ),
-                                  Image.asset(ImagesPaths.eye, scale: 4,),
-                                ],
-                              ).paddingOnly(top: 15,left: 18,right: 18),
+                                            child: Center(child: Image.asset(ImagesPaths.yoga,scale: 3,))),
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Yoga session with Richard", style: Theme.of(context).textTheme.displayLarge,),
+                                            Text("21 Dec . 1.39 pm ",style: Theme.of(context).textTheme.displayMedium,).paddingOnly(top: 10),
+                                          ],).paddingOnly(left: 15)
+                                      ],
+                                    ),
+                                    Image.asset(ImagesPaths.eye, scale: 4,),
+                                  ],
+                                ).paddingOnly(top: 15,left: 18,right: 18),
+                              ),
                               Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),
                             ],
                           ),
@@ -273,7 +276,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
            Container(
              decoration: BoxDecoration(
                  image: DecorationImage(
-                     image: AssetImage(ImagesPaths.bgBlackShade)
+                     image: AssetImage(ImagesPaths.bgBlackShade),fit: BoxFit.cover
                  )
              ),
              child: SingleChildScrollView(
@@ -281,7 +284,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text("Canceled",style: Theme.of(context).textTheme.headlineSmall,).paddingOnly(left: 18,right: 18,top: 15),
+                Text("Canceled Sessions",style: Theme.of(context).textTheme.headlineSmall,).paddingOnly(left: 18,right: 18,top: 15),
                 Column(
                   children: [
                     Container(height: 1,width: Get.width,color: AppColors.grey,).paddingOnly(top: 15,),

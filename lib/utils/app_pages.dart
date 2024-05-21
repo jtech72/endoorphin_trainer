@@ -12,7 +12,7 @@ import '../bindings/bottom_navigation_bar_binding.dart';
 import '../pages/bottom_navigation_bar_ui.dart';
 
 class AppPages {
-  static  const initialRoute = AppRoutes.home;
+  static  const initialRoute = AppRoutes.splash;
 
 
   static List<GetPage> routes =[
@@ -137,7 +137,7 @@ GetPage(
         binding: SessionCompleteBinding()),
   GetPage(
         name: AppRoutes.booking,
-        page: ()=>    const BookingUi(),
+        page: ()=>    const BookingUi(initialIndex: 0,),
         binding: BookingBinding()),
     GetPage(
         name: AppRoutes.bottomNavigation,

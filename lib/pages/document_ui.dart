@@ -10,8 +10,11 @@ class DocumentUI extends StatelessWidget {
     DocumentController controller = Get.put(DocumentController());
     return Scaffold(
       appBar: myAppBar(
-          title: Text('Documents',
-            style: Theme.of(context).textTheme.bodyMedium,),
+          title: GestureDetector(
+            onTap: (){Get.back();},
+            child: Text('Documents',
+              style: Theme.of(context).textTheme.headlineSmall,),
+          ),
           context: context
       ),
 

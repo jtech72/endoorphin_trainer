@@ -52,7 +52,7 @@ class SessionDetailsUi extends StatelessWidget {
               SizedBox(
                   width: Get.width * .8,
                   child: Text(
-                    "We Hope you enjoyed your session .",
+                    "We Hope you enjoyed your session.",
                     style: Theme.of(context).textTheme.labelLarge?.copyWith(
                         color: AppColors.lightyGrey, fontWeight: FontWeight.w500),
                   )).paddingOnly(bottom: 15),
