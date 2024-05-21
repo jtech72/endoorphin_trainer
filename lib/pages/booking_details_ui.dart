@@ -96,11 +96,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const Icon(
-                              Icons.star,
-                              color: AppColors.impgrey,
-                              size: 18,
-                            ).paddingOnly(right: Get.width*0.02),
+                            Image.asset(ImagesPaths.star2,scale: 3.8,color: AppColors.white,).paddingOnly(right: Get.width*0.01),
                             Text(
                               "4.86 (49)",
                               style: Theme.of(context)
@@ -133,74 +129,72 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                         width: 1,
                         color: AppColors.yellow,
                       ).paddingOnly(top: 3, bottom: 3),
-                      const Icon(
-                        Icons.location_on_outlined,
-                        color: AppColors.yellow,
-                        size: 22,
-                      )
+                      Image.asset(ImagesPaths.location,scale: 5,)
                     ],
                   ),
                   SizedBox(
                     width: Get.width * 0.014,
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Aryarup Comples",
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            color: AppColors.impgrey,
-                            fontWeight: FontWeight.w600),
-                      ).paddingOnly(bottom: 5),
-                      SizedBox(
-                          width: Get.width * .77,
-                          child: Text(
-                            "221b Baker St, Marylebone, Dubai NW! 6xE, United Arabia - 25m",
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelMedium
-                                ?.copyWith(
-                                  color: AppColors.impgrey,
-                                ),
-                          )).paddingOnly(bottom: 5),
-                      Text(
-                        "9:54 AM",
-                        style:
-                            Theme.of(context).textTheme.labelMedium?.copyWith(
-                                  color: AppColors.yellow,
-                                ),
-                      ).paddingOnly(bottom: 8),
-                      Container(
-                        width: Get.width * .77,
-                        height: 1,
-                        color: AppColors.grey,
-                      ).paddingOnly(top: 6, bottom: 12),
-                      Text(
-                        "Aryarup Comples",
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            color: AppColors.impgrey,
-                            fontWeight: FontWeight.w600),
-                      ).paddingOnly(bottom: 5),
-                      SizedBox(
-                          width: Get.width * .77,
-                          child: Text(
-                            "221b Baker St, Marylebone, Dubai NW! 6xE, United Arabia - 25m",
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelMedium
-                                ?.copyWith(
-                                  color: AppColors.impgrey,
-                                ),
-                          )).paddingOnly(bottom: 5),
-                      Text(
-                        "9:54 AM",
-                        style:
-                            Theme.of(context).textTheme.labelMedium?.copyWith(
-                                  color: AppColors.yellow,
-                                ),
-                      ),
-                    ],
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Aryarup Comples",
+                          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                              color: AppColors.impgrey,
+                              fontWeight: FontWeight.w600),
+                        ).paddingOnly(bottom: 5),
+                        SizedBox(
+                            width: Get.width * .77,
+                            child: Text(
+                              "221b Baker St, Marylebone, Dubai NW! 6xE, United Arabia - 25m",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium
+                                  ?.copyWith(
+                                    color: AppColors.impgrey,
+                                  ),
+                            )).paddingOnly(bottom: 5),
+                        Text(
+                          "9:54 AM",
+                          style:
+                              Theme.of(context).textTheme.labelMedium?.copyWith(
+                                    color: AppColors.yellow,
+                                  ),
+                        ).paddingOnly(bottom: 8),
+                        Container(
+                          width: Get.width * .83,
+                          height: 1,
+                          color: AppColors.grey,
+                        ).paddingOnly(top: 6, bottom: 12),
+                        Text(
+                          "Aryarup Comples",
+                          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                              color: AppColors.impgrey,
+                              fontWeight: FontWeight.w600),
+                        ).paddingOnly(bottom: 5),
+                        SizedBox(
+                            width: Get.width * .77,
+                            child: Text(
+                              "221b Baker St, Marylebone, Dubai NW! 6xE, United Arabia - 25m",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium
+                                  ?.copyWith(
+                                    color: AppColors.impgrey,
+                                  ),
+                            )).paddingOnly(bottom: 5),
+                        Text(
+                          "9:54 AM",
+                          style:
+                              Theme.of(context).textTheme.labelMedium?.copyWith(
+                                    color: AppColors.yellow,
+                                  ),
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ).paddingOnly(
@@ -541,15 +535,12 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                               direction: Axis.horizontal,
                               allowHalfRating: true,
                               itemCount: 5,
-                              itemPadding: const EdgeInsets.symmetric(horizontal: 6.0),
+                              itemPadding: const EdgeInsets.symmetric(horizontal: 9.0),
                               itemBuilder: (context, _) => InkWell(
                                   onTap: () {
                                     Get.toNamed(AppRoutes.review);
                                   },
-                                  child: const Icon(
-                                    Icons.star_border,
-                                    color: AppColors.yellow,
-                                  )),
+                                  child: Image.asset(ImagesPaths.star,scale: 5,)),
                               onRatingUpdate: (rating) {
                                 Get.toNamed(AppRoutes.review);
                               },

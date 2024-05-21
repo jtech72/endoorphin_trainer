@@ -397,8 +397,7 @@ class RegistrationUi extends StatelessWidget {
                                   Text("Categories",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
                                   Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
                                 ],),
-                              Scrollbar(
-                                child: Container(padding: EdgeInsets.zero,
+                             Container(padding: EdgeInsets.zero,
                                   height: 263,
                                   width: Get.width,
                                   decoration: BoxDecoration(
@@ -409,50 +408,56 @@ class RegistrationUi extends StatelessWidget {
                                   ),
                                   child: Padding(
                                     padding: EdgeInsets.zero,
-                                    child: ListView.builder(
-                                      padding: EdgeInsets.zero,
-                                      shrinkWrap: true,
-                                      itemCount: controller.dataList.length,
-                                      itemBuilder: (context, index) {
-                                        final item = controller.dataList[index];
-                                        return Obx(
-                                              () => Row(
-                                            children: [
-                                              Checkbox(
-                                                activeColor: AppColors.yellow,
-                                                checkColor: AppColors.black,
-                                                value: controller.checkedList.length > index ? controller.checkedList[index] : false, // Use checkedList to determine checkbox state
-                                                onChanged: (value) {
-                                                  controller.toggleItem(item, index);
-                                                  // Check if the checkbox is checked
-                                                  if (value ?? false) {
-                                                    // Add the item to selectedOne2 list
-                                                    controller.selectedOne2.add(item);
-                                                    log("Added value ==>${controller.selectedOne2.toString()}");
-                                                  } else {
-                                                    // Remove the item from selectedOne2 list
-                                                    controller.selectedOne2.remove(item);
-                                                    log("Added value ==>${controller.selectedOne2.toString()}");
-                                                  }
-                                                },
-                                              ),
-                                              Expanded(
-                                                child: ListTile(
-                                                  contentPadding: EdgeInsets.zero, // Remove ListTile padding
-                                                  title: Text(item,style: Theme.of(context).textTheme.displayLarge!.copyWith(fontWeight: FontWeight.w400,color: Colors.black),),
-                                                  onTap: () {
-                                                    controller.toggleItem(item, index); // Toggle item selection
+                                    child: RawScrollbar(padding: EdgeInsets.zero,
+                                      trackVisibility: true,
+                                      trackRadius: Radius.circular(50),thickness: 10,
+                                      interactive: true,
+                                      thumbColor: AppColors.yellow,timeToFade: Duration(seconds: 2),
+                                      child: ListView.builder(
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        itemCount: controller.dataList.length,
+                                        itemBuilder: (context, index) {
+                                          final item = controller.dataList[index];
+                                          return Obx(
+                                                () => Row(
+                                                                                              children: [
+                                                Checkbox(
+                                                  activeColor: AppColors.yellow,
+                                                  checkColor: AppColors.black,
+                                                  value: controller.checkedList.length > index ? controller.checkedList[index] : false, // Use checkedList to determine checkbox state
+                                                  onChanged: (value) {
+                                                    controller.toggleItem(item, index);
+                                                    // Check if the checkbox is checked
+                                                    if (value ?? false) {
+                                                      // Add the item to selectedOne2 list
+                                                      controller.selectedOne2.add(item);
+                                                      log("Added value ==>${controller.selectedOne2.toString()}");
+                                                    } else {
+                                                      // Remove the item from selectedOne2 list
+                                                      controller.selectedOne2.remove(item);
+                                                      log("Added value ==>${controller.selectedOne2.toString()}");
+                                                    }
                                                   },
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      },
+                                                Expanded(
+                                                  child: ListTile(
+                                                    contentPadding: EdgeInsets.zero, // Remove ListTile padding
+                                                    title: Text(item,style: Theme.of(context).textTheme.displayLarge!.copyWith(fontWeight: FontWeight.w400,color: Colors.black),),
+                                                    onTap: () {
+                                                      controller.toggleItem(item, index); // Toggle item selection
+                                                    },
+                                                  ),
+                                                ),
+                                                                                              ],
+                                                                                            ).paddingZero,
+                                          );
+                                        },
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
+                          
 
 
 

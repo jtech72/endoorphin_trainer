@@ -59,11 +59,8 @@ class ReviewUi extends StatelessWidget {
                   allowHalfRating: true,
                   itemCount: 5,
                   itemPadding:
-                  const EdgeInsets.symmetric(horizontal: 4.0),
-                  itemBuilder: (context, _) => const Icon(
-                    Icons.star,
-                    color: AppColors.yellow,
-                  ),
+                  const EdgeInsets.symmetric(horizontal: 9.0),
+                  itemBuilder: (context, _) => Image.asset(ImagesPaths.star,scale: 5,),
                   onRatingUpdate: (rating) {
                     controller.writeReviewVisible.value = true;
                   },

@@ -41,8 +41,7 @@ class SessionRunningUi extends StatelessWidget {
                       children: [
                         InkWell(
                             onTap: () {
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => BottomNavigationBarUI(currentTabIndex: 2,)));
-                            },
+                                    Get.back();   },
                             child: const Icon(
                               Icons.arrow_back_ios_new_rounded,
                               color: AppColors.impgrey,

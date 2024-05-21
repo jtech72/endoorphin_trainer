@@ -1,3 +1,4 @@
+import 'package:endoorphin_trainer/controllers/bio_controller.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/exports.dart';
@@ -25,12 +26,33 @@ class BioUi extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      Image.asset(ImagesPaths.profile,scale: 4,),
-                      Transform.translate(
-                          offset: Offset(0, -10),
-                          child: Text("Uploading clear image increases the chances of getting bookings",style: Theme.of(context).textTheme.labelSmall,).paddingOnly(bottom: 15)),
+                      SizedBox(height: Get.height*0.02,),
+                      Stack(
+                        children: [
+                          CircleAvatar(
+                            radius: 60,
+                            backgroundImage: AssetImage(ImagesPaths.profilePic),
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            right: 10,
+                            child: GestureDetector(
+                              onTap: (){
+                                Get.find<BioController>().openCamera();
+                              },
+                              child: CircleAvatar(
+                                radius: 15,
+                                backgroundColor: AppColors.greyButton,
+                                child: Image.asset(ImagesPaths.plus,color: Colors.white,scale: 4,),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(height: Get.height*0.02,),
+                      Text("Uploading clear image increases the chances of getting bookings",style: Theme.of(context).textTheme.labelSmall,).paddingOnly(bottom: 15),
                     ],
-                  ),
+                  ).paddingOnly(bottom: Get.height*0.02),
                   Column(
                     children: [
                       Row(
