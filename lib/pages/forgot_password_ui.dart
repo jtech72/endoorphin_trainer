@@ -97,7 +97,8 @@ class ForgotPasswordUI extends StatelessWidget {
               Center(
                   child: InkButton(
                       child: Text('Send',
-                        style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 20,fontWeight: FontWeight.w500),),
+                        style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 18,
+                            fontFamily: 'Montserrat'),),
                       onTap: () {
                         showDialog(
                           context: context,
@@ -125,8 +126,10 @@ class ForgotPasswordUI extends StatelessWidget {
                               actions: [
                                 Center(
                                   child: InkButton(
-                                      child: Text('OK',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black),),
+                                      child: Text('OK',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 18,
+                                          fontFamily: 'Montserrat'),),
                                       onTap: (){
+                                        Get.back();
                                         Get.toNamed(AppRoutes.createNewPassword);
                                       },height: 35,width: Get.width*.35),
                                 ),

@@ -204,7 +204,8 @@ class WithdrawUI extends StatelessWidget {
                         ],
                       ).paddingOnly(bottom: Get.height*0.35),
                       InkButton(
-                          child: Text('Sent Request',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontWeight: FontWeight.w500,fontSize: 20),),
+                          child: Text('Sent Request',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 18,
+                              fontFamily: 'Montserrat'),),
                           onTap: (){
                             showDialog(
                               context: context,
@@ -245,7 +246,8 @@ class WithdrawUI extends StatelessWidget {
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headlineSmall!
-                                                .copyWith(color: AppColors.black),
+                                                .copyWith(color: AppColors.black,fontSize: 18,
+                                                fontFamily: 'Montserrat'),
                                           ),
                                           onTap: () {
                                             Get.offAllNamed(AppRoutes.bottomNavigation);

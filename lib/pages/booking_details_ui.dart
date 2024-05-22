@@ -355,7 +355,8 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                             child: Text(
                               "Reject",textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight:FontWeight.w500,fontSize: 20,color: secondButtonSelected ? AppColors.black : AppColors.yellow),
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 18,
+                                  fontFamily: 'Montserrat',color: secondButtonSelected ? AppColors.black : AppColors.yellow),
                             ),
                           ),
                         ),
@@ -380,7 +381,8 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                             child: Text(
                               "Accept",textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 20,fontWeight:FontWeight.w500,color: firstButtonSelected ? AppColors.black : AppColors.yellow),
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 18,
+                                  fontFamily: 'Montserrat',color: firstButtonSelected ? AppColors.black : AppColors.yellow),
                             ),
                           ),
                         ),

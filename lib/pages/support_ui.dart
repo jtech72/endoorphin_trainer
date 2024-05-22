@@ -55,7 +55,8 @@ class SupportUI extends StatelessWidget {
               ),
             ),
           ).paddingOnly(bottom: Get.height*0.08),
-          Center(child: InkButton(child: Text('Submit',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black),), onTap: (){}))
+          Center(child: InkButton(child: Text('Submit',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 18,
+              fontFamily: 'Montserrat'),), onTap: (){}))
         ],
       ).paddingOnly(left: Get.width*0.03,right: Get.width*0.03,top: Get.height*0.02),
     );

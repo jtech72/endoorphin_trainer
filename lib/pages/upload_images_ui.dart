@@ -71,7 +71,8 @@ class UploadImagesUi extends StatelessWidget {
                 SizedBox(height:Get.height*0.2),
                 Text('Check Quality',style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 20),).paddingOnly(bottom: Get.height*0.02),
                 Text('Lorem Ipsum is simply dummy text of the printing\nand typesetting industry.',style: Theme.of(context).textTheme.displayLarge,textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.024),
-                InkButton(child: Text('Looks great! Continue',style: Theme.of(context).textTheme.displaySmall,), onTap: (){
+                InkButton(child: Text('Looks great! Continue',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
+                    fontFamily: 'Montserrat'),), onTap: (){
                   controller.selectedoption.value=1;
                 }).paddingOnly(bottom: Get.height*0.024),
                 GestureDetector(
@@ -90,7 +91,8 @@ class UploadImagesUi extends StatelessWidget {
                     Image.asset(ImagesPaths.restart,height: 35,width: 35,).paddingOnly(bottom: Get.height*0.02),
                     Text('Flip your card',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.w700,color: Colors.white),).paddingOnly(bottom: Get.height*0.02),
                     Text('Lorem Ipsum is simply dummy text of the printing\nand typesetting industry.',style: Theme.of(context).textTheme.displayLarge,textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.015).paddingOnly(bottom: Get.height*0.1),
-                    InkButton(child: Text('Continue',style: Theme.of(context).textTheme.displaySmall,), onTap: (){
+                    InkButton(child: Text('Continue',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
+                        fontFamily: 'Montserrat'),), onTap: (){
                       controller.selectedoption.value=2;
                       controller.openCamera(false);
 
@@ -120,7 +122,8 @@ class UploadImagesUi extends StatelessWidget {
                     SizedBox(height:Get.height*0.2),
                     Text('Check Quality',style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 20),).paddingOnly(bottom: Get.height*0.02),
                     Text('Lorem Ipsum is simply dummy text of the printing\nand typesetting industry.',style: Theme.of(context).textTheme.displayLarge,textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.024),
-                    InkButton(child: Text('Looks great! Continue',style: Theme.of(context).textTheme.displaySmall,), onTap: (){
+                    InkButton(child: Text('Looks great! Continue',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
+                        fontFamily: 'Montserrat'),), onTap: (){
                       controller.selectedoption.value=3;
                     }).paddingOnly(bottom: Get.height*0.024),
                     GestureDetector(
@@ -166,7 +169,8 @@ class UploadImagesUi extends StatelessWidget {
                             child: Image.file(controller.backImagePicked.value!,fit: BoxFit.cover,)),
                       ).paddingOnly(bottom: Get.height*0.07),
                       Center(
-                        child: InkButton(child: Text('Save',style: Theme.of(context).textTheme.displaySmall,),
+                        child: InkButton(child: Text('Save',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
+                            fontFamily: 'Montserrat'),),
                             onTap: (){
                          Get.offAllNamed(AppRoutes.moreaboutyou,arguments: [""]);
                         }).paddingOnly(bottom: Get.height*0.02),
@@ -174,7 +178,8 @@ class UploadImagesUi extends StatelessWidget {
                       Center(
                         child: InkButton(
                             backGroundColor: Colors.transparent,
-                            child: Text('Try Again',style: Theme.of(context).textTheme.displaySmall!.copyWith(color: AppColors.yellow),),
+                            child: Text('Try Again',style: Theme.of(context).textTheme.displaySmall!.copyWith(color: AppColors.yellow,fontSize: 18,
+                                fontFamily: 'Montserrat'),),
                             onTap: (){
                               controller.selectedoption.value=0;
                               controller.removeImage(true);

@@ -31,7 +31,7 @@ class AppPages {
     ),
     GetPage(
         name: AppRoutes.countrycode,
-        page: () => const CountryCodeUI(),
+        page: () =>  CountryCodeUI(),
         binding: CountryCodeBinding()),
     GetPage(
         name: AppRoutes.otp,

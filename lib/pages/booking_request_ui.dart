@@ -102,7 +102,8 @@ class BookingRequsetUi extends StatelessWidget {
                                     style: Theme.of(context)
                                         .textTheme
                                         .labelMedium
-                                        ?.copyWith(color: Colors.black,fontSize: 14,fontWeight: FontWeight.w500),
+                                        ?.copyWith(color: Colors.black,fontSize: 14,
+                                        fontFamily: 'Montserrat'),
                                   ).paddingOnly(left: Get.width*.07),
                                   onSubmit: (){
                                     Get.toNamed(AppRoutes.sessionRunning);
@@ -381,7 +382,8 @@ class BookingRequsetUi extends StatelessWidget {
                                           style: Theme.of(context)
                                               .textTheme
                                               .headlineSmall!
-                                              .copyWith(color: AppColors.black),
+                                              .copyWith(color: AppColors.black,fontSize: 18,
+                                              fontFamily: 'Montserrat'),
                                         ),
                                         onTap: () {
                                           controller.selectedIndex.value = 2;
@@ -472,7 +474,8 @@ class BookingRequsetUi extends StatelessWidget {
                                         style: Theme.of(context)
                                             .textTheme
                                             .headlineSmall!
-                                            .copyWith(color: AppColors.black),
+                                            .copyWith(color: AppColors.black,fontSize: 18,
+                                            fontFamily: 'Montserrat'),
                                       ),
                                       onTap: () {
                                         controller.selectedIndex.value = 1;

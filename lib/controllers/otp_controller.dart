@@ -1,13 +1,12 @@
-
 import 'dart:async';
-
 import 'package:endoorphin_trainer/utils/exports.dart';
 
 class OtpController extends GetxController {
   Timer? _timer;
   int remainingSeconds = 60;
-  final time = '00.00'.obs;
+  final time = '00:00'.obs;
   RxBool isPaused = false.obs;
+  RxBool showResendText = false.obs;
 
   void startTimer(int seconds) {
     const duration = Duration(seconds: 1);
@@ -16,6 +15,7 @@ class OtpController extends GetxController {
       if (!isPaused.value) {
         if (remainingSeconds == 0) {
           timer.cancel();
+          showResendText.value = true;  // Show resend text when timer reaches 00:00
         } else {
           int minutes = remainingSeconds ~/ 60;
           int seconds = (remainingSeconds % 60);
@@ -29,58 +29,14 @@ class OtpController extends GetxController {
   @override
   void onInit() {
     startTimer(60);
-    // TODO: implement onInit
     super.onInit();
   }
-  // CountryCodeController countryCodeController = Get.put(CountryCodeController());
-  //
-  // final otpController = TextEditingController();
-  // Timer? _timer;
-  // int remainingSeconds = 60;
-  // final time = '00.00'.obs;
-  // RxBool isPaused = false.obs;
-  //
-  // void startTimer(int seconds) {
-  //   const duration = Duration(seconds: 1);
-  //   remainingSeconds = seconds;
-  //   _timer = Timer.periodic(duration, (Timer timer) {
-  //     if (!isPaused.value) {
-  //       if (remainingSeconds == 0) {
-  //         timer.cancel();
-  //       } else {
-  //         int minutes = remainingSeconds ~/ 60;
-  //         int seconds = (remainingSeconds % 60);
-  //         time.value = "${minutes.toString().padLeft(2, "0")}:${seconds.toString().padLeft(2, "0")}";
-  //         remainingSeconds--;
-  //       }
-  //     }
-  //   });
-  // }
-  // @override
-  // void onReady() {
-  //   startTimer(60);
-  //   super.onReady();
-  // }
-  // @override
-  // void onClose() {
-  //   if (_timer != null) {
-  //     _timer!.cancel();
-  //   }
-  //   super.onClose();
-  // }
-  // void onVerify() {
-  //   if (otpController.text.trim().isNotEmpty) {
-  //     if (otpController.text.trim().length == 6) {
-  //       if (countryCodeController.finalOTP ==
-  //           int.parse(otpController.text.trim())) {
-  //         Get.offAllNamed(AppRoutes.signup);
-  //         printResult(screenName: "OTP SCREEN", msg: "OTP VERIFIED");
-  //       } else {
-  //         showSnackBar("Invalid OTP");
-  //       }
-  //     }
-  //   } else {
-  //     showSnackBar("Please enter a valid OTP");
-  //   }
-  //}
+
+  @override
+  void onClose() {
+    if (_timer != null) {
+      _timer!.cancel();
+    }
+    super.onClose();
+  }
 }

@@ -77,8 +77,9 @@ class SignInOptionUi extends StatelessWidget {
                       "Create Account",
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           color: AppColors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500),
+                          fontSize: 18,
+                          fontFamily: 'Montserrat'
+                      ),
                     ),
                     onTap: () {
                       controller.onCreateAccount();
@@ -88,8 +89,9 @@ class SignInOptionUi extends StatelessWidget {
                     backGroundColor: Colors.transparent,
                     child: Text("Sign In",  style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         color: AppColors.yellow,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500),),
+                        fontSize: 18,
+                        fontFamily: 'Montserrat'
+                    ),),
 
                     onTap: () {
                       controller.onSignIn();

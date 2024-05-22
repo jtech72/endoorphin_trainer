@@ -45,16 +45,16 @@ class ErrorUi extends StatelessWidget {
                   backGroundColor: Colors.transparent,
                   child: Text("Go back",  style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       color: AppColors.yellow,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500),),
+                      fontSize: 18,
+                      fontFamily: 'Montserrat'),),
 
                   onTap: () {
                   }).paddingOnly(top: Get.height*0.02,bottom: Get.height*0.02),
               InkButton(
                   child: Text(
                     "Reload",
-                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 20,
-                        fontWeight: FontWeight.w500),
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 18,
+                        fontFamily: 'Montserrat'),
                   ),
                   onTap: () {
 
