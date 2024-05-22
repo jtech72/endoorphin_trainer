@@ -110,7 +110,8 @@ class EarningUi extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .displayLarge
-                              ?.copyWith(color: AppColors.black,fontSize: 14,fontWeight: FontWeight.w500),
+                              ?.copyWith(color: AppColors.black,fontSize: 14,
+                              fontFamily: 'Montserrat'),
                         ),
                         onTap: () {
                           Get.toNamed(AppRoutes.withdraw);
@@ -207,17 +208,17 @@ class EarningUi extends StatelessWidget {
                   ],
                 ),
               ).paddingOnly(top: 15,bottom: Get.height*0.04),
-              InkButton(
-                  child: Text(
-                    "Logout",
-                    style: Theme.of(context)
-                        .textTheme
-                        .displayLarge
-                        ?.copyWith(color: AppColors.black,fontWeight: FontWeight.w500,fontSize: 20),
-                  ),
-                  onTap: () {
-                    Get.offAllNamed(AppRoutes.bottomNavigation);
-                  })
+              // InkButton(
+              //     child: Text(
+              //       "Logout",
+              //       style: Theme.of(context)
+              //           .textTheme
+              //           .displayLarge
+              //           ?.copyWith(color: AppColors.black,fontWeight: FontWeight.w500,fontSize: 20),
+              //     ),
+              //     onTap: () {
+              //       Get.offAllNamed(AppRoutes.signinoption);
+              //     })
             ],
           ).paddingOnly(
               left: Get.width * 0.05,

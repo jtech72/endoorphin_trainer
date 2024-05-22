@@ -134,7 +134,8 @@ class CreateNewPasswordUI extends StatelessWidget {
               Center(
                   child: InkButton(
                       child: Text('Submit',
-                        style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 20,fontWeight: FontWeight.w500),),
+                        style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 18,
+                            fontFamily: 'Montserrat'),),
                       onTap: () {
                         showDialog(
                           context: context,
@@ -162,8 +163,9 @@ class CreateNewPasswordUI extends StatelessWidget {
                               actions: [
                                 Center(
                                   child: InkButton(
-                                      child: Text('Continue to login',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black),), onTap: (){
-                                    Get.toNamed(AppRoutes.login);
+                                      child: Text('Continue to login',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,
+                                          fontFamily: 'Montserrat'),), onTap: (){
+                                    Get.offAllNamed(AppRoutes.signinoption);
                                   },height: 40,width: 150),
                                 ),
                               ],shape: RoundedRectangleBorder(

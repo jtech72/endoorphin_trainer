@@ -303,10 +303,11 @@ class ProfileUI extends StatelessWidget {
                 height: Get.height*0.12,
               ),
               InkButton(
-                  child: Text('Logout',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Colors.black,fontWeight: FontWeight.w500,fontSize: 20),),
+                  child: Text('Logout',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Colors.black,fontSize: 18,
+                      fontFamily: 'Montserrat'),),
                   onTap: (){
                     // storage.erase();
-                    Get.offAllNamed(AppRoutes.login);
+                    Get.offAllNamed(AppRoutes.signinoption);
                   })
             ],
           ).paddingOnly(left: Get.width*0.05,right: Get.width*0.05),

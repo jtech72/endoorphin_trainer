@@ -126,7 +126,8 @@ class ReviewUi extends StatelessWidget {
                            style: Theme.of(context)
                                .textTheme
                                .headlineSmall
-                               ?.copyWith(color: AppColors.black,fontSize: 20,fontWeight: FontWeight.w500),
+                               ?.copyWith(color: AppColors.black,fontSize: 18,
+                               fontFamily: 'Montserrat'),
                          ), onTap: (){
                            Get.offAllNamed(AppRoutes.bottomNavigation);
 

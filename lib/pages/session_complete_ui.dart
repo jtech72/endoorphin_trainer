@@ -42,7 +42,8 @@ class SessionCompleteUI extends StatelessWidget {
                     )
                   ]
                 )).paddingOnly(bottom: Get.height*0.15),
-                InkButton(child: Text('View Details',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontWeight: FontWeight.w500,fontSize: 20),),
+                InkButton(child: Text('View Details',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 18,
+                    fontFamily: 'Montserrat'),),
                     onTap: (){
                   Get.toNamed(AppRoutes.sessionDetails);
                     })

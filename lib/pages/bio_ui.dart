@@ -233,8 +233,8 @@ class BioUi extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .headlineSmall!
-                        .copyWith(color: AppColors.black,fontSize: 20,
-                        fontWeight: FontWeight.w500),
+                        .copyWith(color: AppColors.black,fontSize: 18,
+                        fontFamily: 'Montserrat'),
                   ),
                   onTap: () {
                       showDialog(
@@ -262,7 +262,8 @@ class BioUi extends StatelessWidget {
                             actions: [
                               Center(
                                 child: InkButton(
-                                    child: Text('OK',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,),), onTap: (){
+                                    child: Text('OK',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 18,
+                                        fontFamily: 'Montserrat'),), onTap: (){
                                   Get.offAllNamed(AppRoutes.bottomNavigation);
                                 },height: 35,width: 95),
                               ),

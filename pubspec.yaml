@@ -58,7 +58,7 @@ dependencies:
   flutter_page_view_indicator:
   multi_select_flutter: ^4.0.0
   dotted_border: ^2.1.0
-
+  motion_tab_bar: ^2.0.4
 
 
 
@@ -109,6 +109,12 @@ flutter:
           weight: 700
         - asset: assets/fonts/Roboto-Medium.ttf
           weight: 500
+
+
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Bold.ttf
+          weight: 700
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

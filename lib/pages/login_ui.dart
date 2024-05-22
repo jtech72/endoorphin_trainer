@@ -31,34 +31,35 @@ class LoginUi extends StatelessWidget {
                                       fit: BoxFit.fill,
                                     ),
                             ),
-                            child: Transform.translate(
-                                    offset: const Offset(0, -20),
-                                    child: Text(
-                                      'Nice to see you again,\nLet’s Begin ...',
-                                      style: Theme.of(context).textTheme.headlineMedium,
-                                    ).paddingOnly(bottom: 50, left: Get.width * .05),
-                            ),
+                          ),
+                          Image.asset(ImagesPaths.imagelogin),
+                          Transform.translate(
+                            offset: const Offset(0, 300),
+                            child: Text(
+                              'Nice to see you again,\nLet’s Begin ...',
+                              style: Theme.of(context).textTheme.headlineMedium,
+                            ).paddingOnly(bottom: 50, left: Get.width * .05),
                           ),
                           Positioned(
                               left: Get.width*0.03,
                               top: Get.height*0.04,
-                              child: IconButton(icon: Icon(Icons.arrow_back_ios,size: 18,color: Colors.black,), onPressed: () { Get.back(); },))
+                              child: IconButton(icon: Icon(Icons.arrow_back_ios,size: 18,color: Colors.white,), onPressed: () { Get.back(); },))
                         ],
                       ),
                       Container(
                         alignment: Alignment.topCenter,
                         decoration: const BoxDecoration(
-          color: Colors.black,
-          boxShadow: [
-            BoxShadow(
-                color: Colors.black,
-                blurRadius: 50,
-                spreadRadius: 50,
-                offset: Offset(0, 0)),
-          ],
+                    color: Colors.black,
+          //         boxShadow: [
+          //           BoxShadow(
+          //       color: Colors.black,
+          //       blurRadius: 50,
+          //       spreadRadius: 0,
+          //       offset: Offset(0, 0)),
+          // ],
                         ),
                         child: Transform.translate(
-          offset: const Offset(0, -30),
+          offset: const Offset(0, -70),
           child: Padding(
             padding: EdgeInsets.only(
                 left: Get.width * .05, right: Get.width * .05),
@@ -233,7 +234,7 @@ class LoginUi extends StatelessWidget {
                                     .copyWith(color: AppColors.yellow),
                                 children: const [
                                   TextSpan(
-                                    text: 'Forget ',
+                                    text: 'Forgot ',
                                     style: TextStyle(
                                         color: AppColors.white,
                                         fontSize: 12,
@@ -269,8 +270,8 @@ class LoginUi extends StatelessWidget {
                                   .textTheme
                                   .headlineSmall!
                                   .copyWith(
-                                      color: AppColors.black,fontSize: 20,
-                                  fontWeight: FontWeight.w500),
+                                      color: AppColors.black,fontSize: 18,
+                                  fontFamily: 'Montserrat'),
                             ),
                             onTap: () {
                               Get.offAllNamed(AppRoutes.bottomNavigation);

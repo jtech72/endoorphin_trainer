@@ -19,6 +19,7 @@ class ImagesPaths {
   static const String history = "${baseUrl}ic_history.png";
   static const String document = "${baseUrl}ic_document.png";
   static const String mysession = "${baseUrl}ic_my_sessions.png";
+  static const String mysessionhome = "${baseUrl}ic_my_sessions_home.png";
   static const String support = "${baseUrl}ic_support.png";
   static const String my_earning = "${baseUrl}ic_my_earning.png";
   static const String sessionType = "${baseUrl}img_session_boxing.png";
@@ -71,6 +72,7 @@ class ImagesPaths {
   static const String star= "${baseUrl}ic_star.png";
   static const String star2= "${baseUrl}ic_star2.png";
   static const String plus= "${baseUrl}ic_plus.png";
+  static const String imagelogin= "${baseUrl}imagelogin.png";
 
 
 

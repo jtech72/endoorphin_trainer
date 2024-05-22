@@ -152,8 +152,9 @@ class MoreAboutYouUi extends StatelessWidget {
 
                       InkButton(
                       child: Text('Continue',
-                        style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 20,
-                            fontWeight: FontWeight.w500),),
+                        style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 18,
+                            fontFamily: 'Montserrat',
+                            ),),
                       onTap: (){
                       Get.back(result: true);
                       Get.toNamed(AppRoutes.bio)?.then((result) {
