@@ -102,7 +102,7 @@ class BookingRequsetUi extends StatelessWidget {
                                     style: Theme.of(context)
                                         .textTheme
                                         .labelMedium
-                                        ?.copyWith(color: Colors.black,fontSize: 14,
+                                        ?.copyWith(color: Colors.black,fontSize: 12,
                                         fontFamily: 'Montserrat'),
                                   ).paddingOnly(left: Get.width*.07),
                                   onSubmit: (){

@@ -5,6 +5,8 @@ import 'package:endoorphin_trainer/utils/app_strings.dart';
 import 'package:endoorphin_trainer/utils/app_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 
 void main() {
   runApp(const EndoorphinTrainer());
@@ -85,10 +87,21 @@ class EndoorphinTrainer extends StatelessWidget {
         Locale("ur"),
         Locale("uz"),
         Locale("vi"),
-        Locale("zh")
+        Locale("zh"),
+
+        Locale('en', ''),
+        Locale('zh', ''),
+        Locale('he', ''),
+        Locale('es', ''),
+        Locale('ru', ''),
+        Locale('ko', ''),
+        Locale('hi', ''),
       ],
       localizationsDelegates: const [
         CountryLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
       ],
 
       initialRoute: AppPages.initialRoute,

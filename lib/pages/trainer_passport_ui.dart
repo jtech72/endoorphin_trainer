@@ -116,7 +116,7 @@ class TrainerPassportUI extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                        controller.documentIndex == 0? "Emirates ID Number":controller.documentIndex == 1?'Passport Number':"Certification Number",
+                        controller.documentIndex == 0? "Emirates ID Number":controller.documentIndex == 1?'Passport Number':"Qualifications",
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge!
@@ -222,7 +222,43 @@ class TrainerPassportUI extends StatelessWidget {
                     ),
                   ),
                 ),
-
+                // controller.documentIndex==2?
+                // Column(
+                //   children: [
+                //     SizedBox(height: Get.height*0.03,),
+                //     GestureDetector(
+                //       onTap: () {
+                //         Get.toNamed(AppRoutes.uploadimage,arguments: controller.documentIndex);
+                //       },
+                //       child: Container(
+                //         height: 45,
+                //         width: Get.width,
+                //         decoration: BoxDecoration(
+                //           color: AppColors.yellowishWhite,
+                //           border: Border.all(color: AppColors.lightWhite),
+                //           shape: BoxShape.rectangle,
+                //           borderRadius: BorderRadius.circular(5),
+                //         ),
+                //         child: Row(
+                //           mainAxisAlignment: MainAxisAlignment.center,
+                //           children: [
+                //             Image.asset(
+                //               ImagesPaths.upload,
+                //               scale: 5,
+                //             ),
+                //             const SizedBox(
+                //               width: 10,
+                //             ),
+                //             Text(
+                //               'Add a File',
+                //               style: Theme.of(context).textTheme.labelMedium,
+                //             ),
+                //           ],
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ):SizedBox()
                 // SizedBox(
                 //   height: Get.height * .25,
                 // ),

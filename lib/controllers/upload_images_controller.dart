@@ -9,6 +9,8 @@ RxInt selectedoption = 0.obs;
 int?  documentIndex ;
 Rx<File?> fontImagePicked = Rx<File?>(null);
 Rx<File?> backImagePicked = Rx<File?>(null);
+var defaultImage = File("path_to_your_default_image");
+
 Future<void> openCamera(bool isFrontImage) async {
   final picker = ImagePicker();
   final pickedFile = await picker.pickImage(source: ImageSource.camera);

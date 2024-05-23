@@ -416,6 +416,7 @@ class AccountUI extends StatelessWidget {
                         fontFamily: 'Montserrat'),),
                     onTap: (){}),
               ),
+              SizedBox(height: Get.height*0.05,)
             ],
           ).paddingOnly(left: Get.width*0.05,right: Get.width*0.05),
         ),
