@@ -58,7 +58,6 @@ class BioUi extends StatelessWidget {
                       Row(
                         children: [
                           Text("Nick Name",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
-                          Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
                         ],
                       ),
                       Container(
@@ -113,6 +112,292 @@ class BioUi extends StatelessWidget {
                           ),
                         ),
                       ),
+                      Row(
+                        children: [
+                          Text("Professional Title",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                        ],
+                      ),
+                      Container(
+                        height: 45,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: AppColors.impgrey),
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: TextField(
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(64),
+                            FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                          ],
+
+                          enableInteractiveSelection: true,
+                          style: Theme.of(context).textTheme.labelMedium,
+                          cursorColor: AppColors.grey,
+                          cursorHeight: 18,
+                          decoration: InputDecoration(
+
+                            filled: true,
+                            fillColor: AppColors.yellowishWhite,
+                            border: InputBorder.none,
+                            hintStyle: Theme.of(context).textTheme.labelMedium,
+                            contentPadding:
+                            const EdgeInsets.only(bottom: 3, left: 15),
+
+                            hintText: "Enter Professional Title",
+                            alignLabelWithHint: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4),
+                              borderSide: const BorderSide(
+                                color: AppColors.yellowishWhite,
+                                width: 1,
+                              ),
+                            ),
+                            disabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4),
+                              borderSide: const BorderSide(
+                                color: AppColors.yellowishWhite,
+                                width: 1,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4),
+                              borderSide: const BorderSide(
+                                color: AppColors.yellowishWhite,
+                                width: 1,
+                              ),
+                            ),// Center the hintText
+                          ),
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text("Years of Experience",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                        ],
+                      ),
+                      Container(
+                        height: 45,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: AppColors.impgrey),
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: TextField(
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(64),
+                            FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                          ],
+
+                          enableInteractiveSelection: true,
+                          style: Theme.of(context).textTheme.labelMedium,
+                          cursorColor: AppColors.grey,
+                          cursorHeight: 18,
+                          decoration: InputDecoration(
+
+                            filled: true,
+                            fillColor: AppColors.yellowishWhite,
+                            border: InputBorder.none,
+                            hintStyle: Theme.of(context).textTheme.labelMedium,
+                            contentPadding:
+                            const EdgeInsets.only(bottom: 3, left: 15),
+
+                            hintText: "Enter Years of Experience",
+                            alignLabelWithHint: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4),
+                              borderSide: const BorderSide(
+                                color: AppColors.yellowishWhite,
+                                width: 1,
+                              ),
+                            ),
+                            disabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4),
+                              borderSide: const BorderSide(
+                                color: AppColors.yellowishWhite,
+                                width: 1,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4),
+                              borderSide: const BorderSide(
+                                color: AppColors.yellowishWhite,
+                                width: 1,
+                              ),
+                            ),// Center the hintText
+                          ),
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text("Areas of Expertise",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                        ],
+                      ),
+                      Container(
+                        height: 45,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: AppColors.impgrey),
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: TextField(
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(64),
+                            FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                          ],
+
+                          enableInteractiveSelection: true,
+                          style: Theme.of(context).textTheme.labelMedium,
+                          cursorColor: AppColors.grey,
+                          cursorHeight: 18,
+                          decoration: InputDecoration(
+
+                            filled: true,
+                            fillColor: AppColors.yellowishWhite,
+                            border: InputBorder.none,
+                            hintStyle: Theme.of(context).textTheme.labelMedium,
+                            contentPadding:
+                            const EdgeInsets.only(bottom: 3, left: 15),
+
+                            hintText: "Enter Areas of Expertise",
+                            alignLabelWithHint: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4),
+                              borderSide: const BorderSide(
+                                color: AppColors.yellowishWhite,
+                                width: 1,
+                              ),
+                            ),
+                            disabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4),
+                              borderSide: const BorderSide(
+                                color: AppColors.yellowishWhite,
+                                width: 1,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4),
+                              borderSide: const BorderSide(
+                                color: AppColors.yellowishWhite,
+                                width: 1,
+                              ),
+                            ),// Center the hintText
+                          ),
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text("Fun Fact/Personal Anecdote",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                        ],
+                      ),
+                      Container(
+                        height: 45,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: AppColors.impgrey),
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: TextField(
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(64),
+                            FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                          ],
+
+                          enableInteractiveSelection: true,
+                          style: Theme.of(context).textTheme.labelMedium,
+                          cursorColor: AppColors.grey,
+                          cursorHeight: 18,
+                          decoration: InputDecoration(
+
+                            filled: true,
+                            fillColor: AppColors.yellowishWhite,
+                            border: InputBorder.none,
+                            hintStyle: Theme.of(context).textTheme.labelMedium,
+                            contentPadding:
+                            const EdgeInsets.only(bottom: 3, left: 15),
+
+                            hintText: "Enter Fun Fact/Personal Anecdote",
+                            alignLabelWithHint: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4),
+                              borderSide: const BorderSide(
+                                color: AppColors.yellowishWhite,
+                                width: 1,
+                              ),
+                            ),
+                            disabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4),
+                              borderSide: const BorderSide(
+                                color: AppColors.yellowishWhite,
+                                width: 1,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4),
+                              borderSide: const BorderSide(
+                                color: AppColors.yellowishWhite,
+                                width: 1,
+                              ),
+                            ),// Center the hintText
+                          ),
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text("Motivational Quote",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                        ],
+                      ),
+                      Container(
+                        height: 45,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: AppColors.impgrey),
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: TextField(
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(64),
+                            FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                          ],
+
+                          enableInteractiveSelection: true,
+                          style: Theme.of(context).textTheme.labelMedium,
+                          cursorColor: AppColors.grey,
+                          cursorHeight: 18,
+                          decoration: InputDecoration(
+
+                            filled: true,
+                            fillColor: AppColors.yellowishWhite,
+                            border: InputBorder.none,
+                            hintStyle: Theme.of(context).textTheme.labelMedium,
+                            contentPadding:
+                            const EdgeInsets.only(bottom: 3, left: 15),
+
+                            hintText: "Enter Motivational Quote",
+                            alignLabelWithHint: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4),
+                              borderSide: const BorderSide(
+                                color: AppColors.yellowishWhite,
+                                width: 1,
+                              ),
+                            ),
+                            disabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4),
+                              borderSide: const BorderSide(
+                                color: AppColors.yellowishWhite,
+                                width: 1,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4),
+                              borderSide: const BorderSide(
+                                color: AppColors.yellowishWhite,
+                                width: 1,
+                              ),
+                            ),// Center the hintText
+                          ),
+                        ),
+                      ),
+
                       // Row(
                       //   children: [
                       //     Text("Last Name",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
@@ -272,7 +557,8 @@ class BioUi extends StatelessWidget {
                           ),);
                         },
                       );
-                  }).paddingOnly(top: 30)
+                  }).paddingOnly(top: 30),
+              SizedBox(height: Get.height*0.05,)
             ],
           ).paddingOnly(left: 18,right: 18),
         ),

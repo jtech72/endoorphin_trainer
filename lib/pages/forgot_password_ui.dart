@@ -126,8 +126,8 @@ class ForgotPasswordUI extends StatelessWidget {
                               actions: [
                                 Center(
                                   child: InkButton(
-                                      child: Text('OK',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 18,
-                                          fontFamily: 'Montserrat'),),
+                                      child: Text('OK',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 14,
+                                          fontFamily: 'Montserrat',),),
                                       onTap: (){
                                         Get.back();
                                         Get.toNamed(AppRoutes.createNewPassword);

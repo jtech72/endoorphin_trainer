@@ -52,11 +52,15 @@ class DocumentUI extends StatelessWidget {
                                 Text(controller.newList[index],style: Theme.of(context).textTheme.titleLarge!.copyWith(color: AppColors.yellow),),
                                 Row(
                                   children: [
-                                    InkButton(borderRadius: 5,
-                                        backGroundColor: AppColors.black,
-                                        height: 22,
-                                        width: 52,
-                                        child: Text('SAVED',style: Theme.of(context).textTheme.labelSmall!.copyWith(color: Colors.white),), onTap: (){}).paddingOnly(right: Get.width*0.03),
+                                    Container(
+                                      height: 22,
+                                      width: 52,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Colors.black
+                                      ),
+                                      child: Center(child: Text('SAVED',style: TextStyle(fontSize: 10,fontFamily: 'Roboto',fontWeight: FontWeight.w400,color: Colors.white))),
+                                    ).paddingOnly(right: Get.width*0.03),
                                     CircleAvatar(
                                       backgroundColor: AppColors.yellow,
                                       radius: 11,

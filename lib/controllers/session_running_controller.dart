@@ -8,12 +8,12 @@ class SessionRunningController extends GetxController {
 
   Timer? _timer;
   int remainingSeconds = 60;
-  final time = '60.00'.obs;
+  final time = '00.03'.obs;
   RxBool isPaused = false.obs;
 
   @override
   void onReady() {
-    startTimer(3600);
+    startTimer(3);
     super.onReady();
   }
   @override

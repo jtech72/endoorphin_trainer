@@ -284,7 +284,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                                     .labelLarge
                                     ?.copyWith(fontWeight: FontWeight.w500))
                                 .paddingOnly(right: Get.width * .016),
-                            Text("26 March 2024 at 07:00:00",
+                            Text("26 March at 07:00:00",
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelLarge
@@ -323,7 +323,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                                     .textTheme
                                     .labelLarge
                                     ?.copyWith(fontWeight: FontWeight.w500))
-                                .paddingOnly(right: Get.width * .21),
+                                .paddingOnly(right: Get.width * .23),
                             Text("Upcoming",
                                 style: Theme.of(context)
                                     .textTheme
@@ -469,7 +469,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                                         .labelLarge
                                         ?.copyWith(fontWeight: FontWeight.w500))
                                     .paddingOnly(right: Get.width * .016),
-                                Text("26 March 2024 at 07:00:00",
+                                Text("26 March at 07:00:00",
                                     style: Theme.of(context)
                                         .textTheme
                                         .labelLarge
@@ -508,7 +508,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                                         .textTheme
                                         .labelLarge
                                         ?.copyWith(fontWeight: FontWeight.w500))
-                                    .paddingOnly(right: Get.width * .21),
+                                    .paddingOnly(right: Get.width * .23),
                                 Text("Completed",
                                     style: Theme.of(context)
                                         .textTheme
@@ -630,7 +630,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                                     .labelLarge
                                     ?.copyWith(fontWeight: FontWeight.w500))
                                 .paddingOnly(right: Get.width * .016),
-                            Text("26 March 2024 at 07:00:00",
+                            Text("26 March at 07:00:00",
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelLarge
@@ -669,7 +669,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                                     .textTheme
                                     .labelLarge
                                     ?.copyWith(fontWeight: FontWeight.w500))
-                                .paddingOnly(right: Get.width * .21),
+                                .paddingOnly(right: Get.width * .23),
                             Text("Cancel",
                                 style: Theme.of(context)
                                     .textTheme
@@ -767,7 +767,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                                       .labelLarge
                                       ?.copyWith(fontWeight: FontWeight.w500))
                                   .paddingOnly(right: Get.width * .016),
-                              Text("26 March 2024 at 07:00:00",
+                              Text("26 March at 07:00:00",
                                   style: Theme.of(context)
                                       .textTheme
                                       .labelLarge
@@ -806,7 +806,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                                       .textTheme
                                       .labelLarge
                                       ?.copyWith(fontWeight: FontWeight.w500))
-                                  .paddingOnly(right: Get.width * .21),
+                                  .paddingOnly(right: Get.width * .23),
                               Text("On going",
                                   style: Theme.of(context)
                                       .textTheme
@@ -820,7 +820,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                   ),
 
             ],
-          ).paddingOnly(left: 18, right: 18),
+          ).paddingOnly(left: Get.width*0.06, right: Get.width*0.06),
         ),
       ),
     );

@@ -14,7 +14,8 @@ class MoreAboutYouUi extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MoreAboutYouController controller = Get.find();
+    MoreAboutYouController controller = Get.put(MoreAboutYouController());
+
     return Scaffold(
       appBar: myAppBar(title: Transform.translate(
           offset: Offset(0,-3),
@@ -23,6 +24,7 @@ class MoreAboutYouUi extends StatelessWidget {
               Get.back();
             },
               child: Image.asset(ImagesPaths.logoimg,height: 36,width: 146,))), context: context),
+
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18),
         child: Container(
@@ -124,13 +126,13 @@ class MoreAboutYouUi extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                            
+
                                           width: Get.width*.55,
                                           child: Text(
                                             overflow: TextOverflow.ellipsis,
                                             index==0||index == 1?controller.newList[index]:"${controller.newList[index]} Certification",style:Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColors.yellow),).paddingOnly(top: 12)),
                                       Text(index ==0?"Upload your Emirates ID ...":index ==1?"Upload your passport ...":"Upload your Certification ...",style:Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 12),).paddingOnly(top: 10),
-                            
+
                                     ],
                                   ),
                                 ],
@@ -144,10 +146,51 @@ class MoreAboutYouUi extends StatelessWidget {
                           ).paddingOnly(left: 0),
                         ).paddingOnly(bottom: Get.height*0.02),
                       );
-                            
+
                   },itemCount: controller.newList.length,)
                 ),
-                            
+                SizedBox(height: Get.height*0.02,),
+                Column(crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+
+                    Obx(() => Material(
+                      type: MaterialType.transparency,
+                      child: Theme(
+                        data: ThemeData(
+                          unselectedWidgetColor: Colors.white,
+                        ),
+                        child:
+                          Row(
+                            children: [
+                              Checkbox(
+                                activeColor: AppColors.yellow,
+                                checkColor: Colors.black,
+                                value: controller.isChecked.value,
+                                onChanged: (value) {
+                                  controller.isChecked.value = value!;
+                                },
+                              ),
+                              Text('I accept the terms and conditions', style: TextStyle(color: Colors.white,fontSize: 12)),
+
+                            ],
+                          )
+                        // CheckboxListTile(
+                        //   activeColor: AppColors.yellow,
+                        //   checkColor: Colors.black,
+                        //   title: Text('I accept the terms and conditions', style: TextStyle(color: Colors.white,fontSize: 12)),
+                        //   value: controller.isChecked.value,
+                        //   onChanged: (value) {
+                        //     controller.isChecked.value = value!;
+                        //   },
+                        // ),
+                      ),
+                    )),
+
+
+
+                  ],
+                ),
+                SizedBox(height: Get.height*0.01),
                 Center(child:
 
                       InkButton(

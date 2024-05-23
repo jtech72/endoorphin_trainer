@@ -117,8 +117,8 @@ class UploadImagesUi extends StatelessWidget {
                         const SizedBox.shrink():
                         ClipRRect(
                             borderRadius: BorderRadius.circular(10),
-                            child: Image.file(controller.backImagePicked.value!,fit: BoxFit.cover,))
-                    ),
+                            child: Image.file(controller.backImagePicked.value ?? controller.defaultImage, fit: BoxFit.cover,)
+                    ),),
                     SizedBox(height:Get.height*0.2),
                     Text('Check Quality',style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 20),).paddingOnly(bottom: Get.height*0.02),
                     Text('Lorem Ipsum is simply dummy text of the printing\nand typesetting industry.',style: Theme.of(context).textTheme.displayLarge,textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.024),
@@ -172,7 +172,7 @@ class UploadImagesUi extends StatelessWidget {
                         child: InkButton(child: Text('Save',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
                             fontFamily: 'Montserrat'),),
                             onTap: (){
-                         Get.offAllNamed(AppRoutes.moreaboutyou,arguments: [""]);
+                         Get.toNamed(AppRoutes.moreaboutyou,arguments: [""]);
                         }).paddingOnly(bottom: Get.height*0.02),
                       ),
                       Center(

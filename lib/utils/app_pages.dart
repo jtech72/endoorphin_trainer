@@ -137,7 +137,7 @@ GetPage(
         binding: SessionCompleteBinding()),
   GetPage(
         name: AppRoutes.booking,
-        page: ()=>    const BookingUi(initialIndex: 0,),
+        page: ()=>     BookingUi(initialIndex: 0,),
         binding: BookingBinding()),
     GetPage(
         name: AppRoutes.bottomNavigation,
