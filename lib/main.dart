@@ -6,9 +6,12 @@ import 'package:endoorphin_trainer/utils/app_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get_storage/get_storage.dart';
 
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  GetStorage.init();
   runApp(const EndoorphinTrainer());
 }
 

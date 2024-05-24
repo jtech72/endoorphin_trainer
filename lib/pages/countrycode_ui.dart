@@ -200,7 +200,7 @@ class CountryCodeUI extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Get.toNamed(AppRoutes.otp);
+                    controller.onNext();
                   },
                 ),
               )
