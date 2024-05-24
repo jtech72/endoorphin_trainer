@@ -287,7 +287,7 @@ class BankingDetailsUI extends StatelessWidget {
                           height: 2,
                           width: Get.width,
                           color: AppColors.darkGrey,
-                        ),
+                        ).paddingOnly(bottom: 2),
                         Row(
                           children: [
                             Expanded(
@@ -299,47 +299,45 @@ class BankingDetailsUI extends StatelessWidget {
                                       Container(
                                         width: Get.width*0.25,
                                         child: Obx(
-                                          ()=> Container(height: Get.height*0.05,
-                                            width: Get.width,
-                                            child: TextField(
-                                              enabled: false,
-                                              inputFormatters: [
-                                                LengthLimitingTextInputFormatter(64),
-                                                FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                                              ],
-                                              enableInteractiveSelection: true,
-                                              style: Theme.of(context).textTheme.labelMedium,
-                                              cursorColor: AppColors.lightGrey,
-                                              cursorHeight: 18,
-                                              decoration: InputDecoration(
+                                          ()=> TextField(
+                                            enabled: false,
+                                            inputFormatters: [
+                                              LengthLimitingTextInputFormatter(64),
+                                              FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                                            ],
+                                            enableInteractiveSelection: true,
+                                            style: Theme.of(context).textTheme.labelMedium,
+                                            cursorColor: AppColors.lightGrey,
+                                            cursorHeight: 18,
+                                            decoration: InputDecoration(
 
-                                                  filled: true,
-                                                  fillColor: AppColors.blackShade,
-                                                  border: OutlineInputBorder(),
-                                                  hintStyle: Theme.of(context).textTheme.labelMedium,
-                                                  contentPadding:
-                                                  const EdgeInsets.only(bottom: 0, left: 0),
+                                                filled: true,
+                                                fillColor: AppColors.blackShade,
+                                                border: OutlineInputBorder(),
+                                                hintStyle: Theme.of(context).textTheme.labelMedium,
+                                                contentPadding:
+                                                const EdgeInsets.only(bottom: 0, left: 0),
 
-                                                  hintText: controller.selectedOption1.value,
-                                                  alignLabelWithHint: true,
-                                                  enabledBorder: InputBorder.none,
-                                                  disabledBorder: InputBorder.none,
-                                                  focusedBorder: InputBorder.none
-                                              ),
+                                                hintText: controller.selectedOption1.value,
+                                                alignLabelWithHint: true,
+                                                enabledBorder: InputBorder.none,
+                                                disabledBorder: InputBorder.none,
+                                                focusedBorder: InputBorder.none
                                             ),
                                           ),
                                         ),
                                       ),
                                       PopupMenuButton<String>(
-                                        icon: Icon(Icons.keyboard_arrow_down, size: 30, color: AppColors.lightGrey),
-                                        color: AppColors.blackShade, // Set the background color of the dropdown menu
+                                        icon: Icon(Icons.keyboard_arrow_down, size: 24, color: AppColors.lightGrey),
+                                        color: AppColors.blackShade,
+
                                         itemBuilder: (BuildContext context) {
                                           return controller.items2.map<PopupMenuEntry<String>>((String value) {
                                             return PopupMenuItem<String>(
                                               value: value,
                                               child: Text(
                                                 value,
-                                                style: TextStyle(color: AppColors.lightGrey), // Set the text color of each item
+                                                style: TextStyle(color: AppColors.lightGrey),
                                               ),
                                             );
                                           }).toList();
@@ -355,7 +353,7 @@ class BankingDetailsUI extends StatelessWidget {
                                     height: 2,
                                     width: Get.width,
                                     color: AppColors.darkGrey,
-                                  ),
+                                  ).paddingOnly(bottom: 0),
                                 ],
                               ),
                             ),
@@ -366,32 +364,29 @@ class BankingDetailsUI extends StatelessWidget {
                               flex: 5,
                               child: Column(
                                 children: [
-                                  Container(height: Get.height*0.05,
-                                    width: Get.width,
-                                    child: TextField(
-                                      inputFormatters: [
-                                        LengthLimitingTextInputFormatter(64),
-                                        FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                                      ],
-                                      enableInteractiveSelection: true,
-                                      style: Theme.of(context).textTheme.labelMedium,
-                                      cursorColor: AppColors.grey,
-                                      cursorHeight: 18,
-                                      decoration: InputDecoration(
+                                  TextField(
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(64),
+                                      FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                                    ],
+                                    enableInteractiveSelection: true,
+                                    style: Theme.of(context).textTheme.labelMedium,
+                                    cursorColor: AppColors.grey,
+                                    cursorHeight: 18,
+                                    decoration: InputDecoration(
 
-                                          filled: true,
-                                          fillColor: AppColors.blackShade,
-                                          border: OutlineInputBorder(),
-                                          hintStyle: Theme.of(context).textTheme.labelMedium,
-                                          contentPadding:
-                                          const EdgeInsets.only(bottom: 0, left: 0),
+                                        filled: true,
+                                        fillColor: AppColors.blackShade,
+                                        border: OutlineInputBorder(),
+                                        hintStyle: Theme.of(context).textTheme.labelMedium,
+                                        contentPadding:
+                                        const EdgeInsets.only(bottom: 0, left: 0),
 
-                                          hintText: "EFFECTIVE DATA",
-                                          alignLabelWithHint: true,
-                                          enabledBorder: InputBorder.none,
-                                          disabledBorder: InputBorder.none,
-                                          focusedBorder: InputBorder.none
-                                      ),
+                                        hintText: "EFFECTIVE DATA",
+                                        alignLabelWithHint: true,
+                                        enabledBorder: InputBorder.none,
+                                        disabledBorder: InputBorder.none,
+                                        focusedBorder: InputBorder.none
                                     ),
                                   ),
                                   Container(

@@ -33,8 +33,9 @@ class LoginUi extends StatelessWidget {
                             ),
                           ),
                           Image.asset(ImagesPaths.imagelogin),
-                          Transform.translate(
-                            offset: const Offset(0, 300),
+                          Positioned(
+                            left: Get.width*0.03,
+                            bottom: Get.height*0.05,
                             child: Text(
                               'Nice to see you again,\nLet’s Begin ...',
                               style: Theme.of(context).textTheme.headlineMedium,
