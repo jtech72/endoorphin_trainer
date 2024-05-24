@@ -1,6 +1,7 @@
 
 
 
+import '../services/network_services/api_call.dart';
 import '../utils/exports.dart';
 
 class CountryCodeController extends GetxController {
@@ -9,22 +10,27 @@ class CountryCodeController extends GetxController {
   dynamic finalOTP;
 
   void onNext() async {
-    // if (phoneNumber.text.isNotEmpty) {
-    //   if (phoneNumber.text.length < 9) {
-    //     showSnackBar("Please enter valid phone number");
-    //   } else {
-    //     await CallAPI.sentOTP(request: {
-    //       "phoneNumber": "$countryCode${phoneNumber.text.trim()}"
-    //     }).then((value) {
-    //       if (value.status == 200) {
-    //         finalOTP = value.otp;
-    //         showSnackBar("${value.otp}");
-    //         Get.toNamed(AppRoutes.otp);
-    //       }
-    //     });
-    //   }
-    // } else {
-    //   showSnackBar("Please enter your phone number");
-    // }
+    showLoader(color: AppColors.yellow);
+    if (phoneNumber.text.isNotEmpty) {
+      if (phoneNumber.text.length < 9) {
+        dismissLoader();
+        showSnackBar("Please enter valid phone number");
+      } else {
+        await CallAPI.sentOTP(request: {
+          "phoneNumber": "$countryCode${phoneNumber.text.trim()}"
+        }).then((value) {
+          if (value.status == 200) {
+            dismissLoader();
+            finalOTP = value.otp;
+            showSnackBar("${value.otp}");
+            Get.toNamed(AppRoutes.otp,arguments:phoneNumber.text.toString() );
+          }
+        });
+      }
+    } else {
+      dismissLoader();
+      showSnackBar("Please enter your phone number");
+
+    }
   }
 }

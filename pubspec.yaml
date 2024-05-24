@@ -47,7 +47,7 @@ dependencies:
   flutter_spinkit:
   curved_labeled_navigation_bar: ^2.0.2
   flutter_rating_bar: ^4.0.1
-  table_calendar: ^3.1.1
+  table_calendar:
   time_picker_spinner: ^0.0.1
   story_view: ^0.16.5
   stories_for_flutter: ^1.2.1
@@ -60,6 +60,7 @@ dependencies:
   dotted_border: ^2.1.0
   motion_tab_bar: ^2.0.4
   calendar_date_picker2: ^1.0.2
+  get_storage:
 
 
 dev_dependencies:

@@ -1,10 +1,6 @@
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
 import '../controllers/login_controller.dart';
 import '../utils/exports.dart';
-
 class LoginUi extends StatelessWidget {
   const LoginUi({super.key});
 
@@ -143,12 +139,13 @@ class LoginUi extends StatelessWidget {
                                 height: 50,
                                 width: Get.width * 0.52,
                                 child: TextField(
+                                  controller: controller.phoneNumberController,
                                     inputFormatters: [
                                       LengthLimitingTextInputFormatter(64),
                                       FilteringTextInputFormatter.deny(
                                           RegExp(r'\s')),
                                     ],
-                                    maxLength: 9,
+                                    maxLength: 10,
                                     style: Theme.of(context)
                                         .textTheme
                                         .labelMedium!
@@ -189,6 +186,7 @@ class LoginUi extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: TextField(
+                          controller: controller.passwordController,
                           obscureText: true,
                           obscuringCharacter: "*",
                           inputFormatters: [
@@ -275,7 +273,7 @@ class LoginUi extends StatelessWidget {
                                   fontFamily: 'Montserrat'),
                             ),
                             onTap: () {
-                              Get.offAllNamed(AppRoutes.bottomNavigation);
+                              controller.onLogin();
                             }).paddingOnly(top: Get.height * .17),
                       ),
                     ],

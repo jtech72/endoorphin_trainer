@@ -1,10 +1,13 @@
 import 'dart:developer';
-import 'package:endoorphin_trainer/utils/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_strings.dart';
-import '../utils/image_paths.dart';
+
+GetStorage storage=GetStorage();
+
 void printResult({
   required String screenName,
   String? msg,
@@ -98,7 +101,41 @@ AppBar myAppBar({
     actions: action,
   );
 }
+//SHOW LOADER
+showLoader({Color color =AppColors.yellow, double? topMargin = 0,}) {
+  showDialog(
+      barrierColor: Colors.transparent,
+      barrierDismissible: true,
+      context: Get.context!,
+      builder: (context) {
+        return AlertDialog(
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            content: Transform.translate(
+              offset: Offset(0, -topMargin!),
+              child: Container(
+                  width: Get.width,
+                  height: Get.height,
+                  alignment: Alignment.center,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.transparent,
+                  ),
+                  child: SpinKitCircle(
+                    color: color,
+                    size: 70.0,
+                  )),
+            ));
+      });
+}
 
+
+
+//DISMISS LOADER
+void dismissLoader() {
+  log("Loader has been closed");
+  Get.back();
+}
 
 
 
