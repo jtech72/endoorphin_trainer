@@ -206,7 +206,7 @@ class ProfileUI extends StatelessWidget {
                   ),
                   child: InkWell(
                     onTap: (){
-                      Get.toNamed(AppRoutes.support);
+                      // Get.toNamed(AppRoutes.support);
                     },
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

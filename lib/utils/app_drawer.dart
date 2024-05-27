@@ -226,7 +226,8 @@ class _MyDrawerState extends State<MyDrawer> {
                 setState(() {
                   selectedTile = 5;
                 });
-                Get.toNamed(AppRoutes.support);
+                Get.back();
+
                 // Add functionality here
 
               },
