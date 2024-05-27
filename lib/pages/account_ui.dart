@@ -414,7 +414,9 @@ class AccountUI extends StatelessWidget {
                 child: InkButton(
                     child: Text('Update',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 18,
                         fontFamily: 'Montserrat'),),
-                    onTap: (){}),
+                    onTap: (){
+                      Get.back();
+                    }),
               ),
               SizedBox(height: Get.height*0.05,)
             ],

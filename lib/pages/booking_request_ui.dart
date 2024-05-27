@@ -5,8 +5,10 @@ import 'package:flutter/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:slide_to_act/slide_to_act.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../utils/exports.dart';
+import 'bottom_navigation_bar_ui.dart';
 
 class BookingRequsetUi extends StatelessWidget {
   const BookingRequsetUi({super.key});
@@ -112,13 +114,18 @@ class BookingRequsetUi extends StatelessWidget {
 
                                 ).paddingOnly(right: 20),
                               ).paddingOnly(left: Get.width*0.01),
-                              const CircleAvatar(
-                                radius: 20,
-                                backgroundColor: Colors.black,
-                                backgroundImage: AssetImage(
-                                  ImagesPaths.telephone,
-                                ), // Your profile image
-                              ),
+                               GestureDetector(
+                                 onTap: (){
+                                   _launchTelephone();
+                                 },
+                                 child: CircleAvatar(
+                                  radius: 20,
+                                  backgroundColor: Colors.black,
+                                  backgroundImage: AssetImage(
+                                    ImagesPaths.telephone,
+                                  ), // Your profile image
+                                                               ),
+                               ),
                             ],
                           ).paddingOnly(bottom: Get.height * 0.02),
                           Text('Customer Address',
@@ -250,13 +257,18 @@ class BookingRequsetUi extends StatelessWidget {
                                         ],
                                       ).paddingOnly(left: 10),
                                     ),
-                                    const CircleAvatar(
-                                      radius: 20,
-                                      backgroundColor: AppColors.black,
-                                      backgroundImage: AssetImage(
-                                        ImagesPaths.telephone,
-                                      ), // Your profile image
-                                    ),
+                                     GestureDetector(
+                                       onTap: (){
+                                         _launchTelephone();
+                                       },
+                                       child: CircleAvatar(
+                                        radius: 20,
+                                        backgroundColor: AppColors.black,
+                                        backgroundImage: AssetImage(
+                                          ImagesPaths.telephone,
+                                        ), // Your profile image
+                                       ),
+                                     ),
                                   ],
                                 ).paddingOnly(top: Get.height*0.015),
                                 Row(
@@ -526,18 +538,22 @@ class BookingRequsetUi extends StatelessWidget {
                     top: Get.height*0.061,
                     child: IconButton(
                         onPressed: (){
-                          Get.back();
-                          // if (controller.selectedIndex.value == 2) {
-                          //   controller.selectedIndex.value = 1;
-                          // } else if (controller.selectedIndex.value == 1) {
-                          //   controller.selectedIndex.value = 0;
-                          // }else{
-                          //   Get.back();
-                          // }
+                          // Get.back();
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => BottomNavigationBarUI(currentTabIndex: 2,)));
+
                         },
-                        icon: Icon(Icons.arrow_back_ios,size: 18,color: Colors.black,)))
+                        icon: Icon(Icons.arrow_back_ios,size: 18,color: Colors.white,)))
               ],
             ));
   }
 }
 //
+
+_launchTelephone() async {
+  const telephoneNumber = 'tel:+1234567890';
+  if (await canLaunch(telephoneNumber)) {
+    await launch(telephoneNumber);
+  } else {
+    throw 'Could not launch $telephoneNumber';
+  }
+}

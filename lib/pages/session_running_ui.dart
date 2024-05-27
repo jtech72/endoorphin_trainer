@@ -87,39 +87,34 @@ class SessionRunningUi extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            InkWell(
-                              onTap: () {
-                                Get.toNamed(AppRoutes.sessionDetails);
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                height: 60,
-                                width: 120,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(40),
-                                  color: Colors.white.withOpacity(0.4),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Text("Time",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelMedium
-                                            ?.copyWith(
-                                                color: AppColors.impgrey,
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w600)),
-                                    Text("60 Min",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelMedium
-                                            ?.copyWith(
-                                                color: AppColors.impgrey,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w600)),
-                                  ],
-                                ).paddingOnly(top: 9),
+                            Container(
+                              alignment: Alignment.center,
+                              height: 60,
+                              width: 120,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(40),
+                                color: Colors.white.withOpacity(0.4),
                               ),
+                              child: Column(
+                                children: [
+                                  Text("Time",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelMedium
+                                          ?.copyWith(
+                                              color: AppColors.impgrey,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600)),
+                                  Text("60 Min",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelMedium
+                                          ?.copyWith(
+                                              color: AppColors.impgrey,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600)),
+                                ],
+                              ).paddingOnly(top: 9),
                             ),
                             InkWell(
                                 onTap: () {
@@ -138,27 +133,22 @@ class SessionRunningUi extends StatelessWidget {
                                   color: AppColors.yellow,
                                   size: 75,
                                 )),
-                            GestureDetector(
-                              onTap: () {
-                                Get.toNamed(AppRoutes.sessionDetails);
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                height: 60,
-                                width: 120,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(40),
-                                  color: Colors.white.withOpacity(0.4),
-                                ),
-                                child: Text("Boxing",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelMedium
-                                        ?.copyWith(
-                                            color: AppColors.impgrey,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600)),
+                            Container(
+                              alignment: Alignment.center,
+                              height: 60,
+                              width: 120,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(40),
+                                color: Colors.white.withOpacity(0.4),
                               ),
+                              child: Text("Boxing",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelMedium
+                                      ?.copyWith(
+                                          color: AppColors.impgrey,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600)),
                             ),
                           ],
                         ).paddingOnly(left: 10, right: 10),
@@ -230,23 +220,24 @@ class SessionRunningUi extends StatelessWidget {
                         alignment: Alignment.topCenter,
                         image: AssetImage(ImagesPaths.sessionType),
                       )),
-                  // child: InkWell(
-                  //   onTap: (){
-                  //     log("message");
-                  //     controller.panelController.close();
-                  //
-                  //   },
-                  //   // child: Container(
-                  //   //     height: 30,
-                  //   //     width: 30,
-                  //   //     decoration: const BoxDecoration(
-                  //   //         shape: BoxShape.circle, color: AppColors.impgrey),
-                  //   //     child: const Icon(
-                  //   //       Icons.arrow_back,
-                  //   //       size: 25,
-                  //   //       color: AppColors.black,
-                  //   //     )).paddingOnly(top: Get.height * .05, left: 10),
-                  // ),
+                  child:
+                  GestureDetector(
+                    onTap: (){
+                      log("message");
+                      controller.panelController.close();
+
+                    },
+                    child: Container(
+                        height: 30,
+                        width: 30,
+                        decoration: const BoxDecoration(
+                            shape: BoxShape.circle, color: AppColors.impgrey),
+                        child: const Icon(
+                          Icons.arrow_back,
+                          size: 25,
+                          color: AppColors.black,
+                        )).paddingOnly(top: Get.height * .05, left: 10),
+                  ),
                 ),
                 Center(
                   child: Transform.translate(

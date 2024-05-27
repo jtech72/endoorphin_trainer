@@ -250,7 +250,9 @@ class WithdrawUI extends StatelessWidget {
                                                 fontFamily: 'Montserrat'),
                                           ),
                                           onTap: () {
-                                            Get.offAllNamed(AppRoutes.bottomNavigation);
+                                            Get.back();
+                                            controller.selectedIndex.value=1;
+
                                           },
                                           height: 35,
                                           width: 95),

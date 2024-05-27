@@ -63,7 +63,7 @@ class _MyDrawerState extends State<MyDrawer> {
 
               ).paddingOnly(top: Get.height*0.05,left: Get.width*0.09,bottom: Get.height*0.05),
 
-          Container(color: selectedTile == 0 ? AppColors.yellow : Colors.transparent,height: 50,width: Get.width,
+          Container(color: selectedTile == 0 ? AppColors.yellow : Colors.transparent,height: 55,width: Get.width,
             child: ListTile(
               selectedColor: AppColors.yellow,
               title: Row(
@@ -91,7 +91,7 @@ class _MyDrawerState extends State<MyDrawer> {
             ).paddingOnly(left: Get.width*0.05),
           ),
           Container(
-            color: selectedTile == 1 ? AppColors.yellow : Colors.transparent,height: 50,width: Get.width,
+            color: selectedTile == 1 ? AppColors.yellow : Colors.transparent,height: 55,width: Get.width,
             child: ListTile(
 
               selectedColor: AppColors.yellow,
@@ -119,7 +119,7 @@ class _MyDrawerState extends State<MyDrawer> {
             ).paddingOnly(left: Get.width*0.05),
           ),
           Container(
-            color: selectedTile == 2 ? AppColors.yellow : Colors.transparent,height: 50,width: Get.width,
+            color: selectedTile == 2 ? AppColors.yellow : Colors.transparent,height: 55,width: Get.width,
             child: ListTile(
 
               selectedColor: AppColors.yellow,
@@ -147,7 +147,7 @@ class _MyDrawerState extends State<MyDrawer> {
             ).paddingOnly(left: Get.width*0.05),
           ),
           Container(
-            color: selectedTile == 3 ? AppColors.yellow : Colors.transparent,height: 50,width: Get.width,
+            color: selectedTile == 3 ? AppColors.yellow : Colors.transparent,height: 55,width: Get.width,
             child: ListTile(
 
               selectedColor: AppColors.yellow,
@@ -175,7 +175,7 @@ class _MyDrawerState extends State<MyDrawer> {
             ).paddingOnly(left: Get.width*0.05),
           ),
           Container(
-            color: selectedTile == 4 ? AppColors.yellow : Colors.transparent,height: 50,width: Get.width,
+            color: selectedTile == 4 ? AppColors.yellow : Colors.transparent,height: 55,width: Get.width,
 
             child: ListTile(
 
@@ -204,7 +204,7 @@ class _MyDrawerState extends State<MyDrawer> {
             ).paddingOnly(left: Get.width*0.05),
           ),
           Container(
-            color: selectedTile == 5 ? AppColors.yellow : Colors.transparent,height: 50,width: Get.width,
+            color: selectedTile == 5 ? AppColors.yellow : Colors.transparent,height: 55,width: Get.width,
 
             child: ListTile(
 
@@ -233,7 +233,7 @@ class _MyDrawerState extends State<MyDrawer> {
             ).paddingOnly(left: Get.width*0.05),
           ),
           Container(
-            color: selectedTile == 6 ? AppColors.yellow : Colors.transparent,height: 50,width: Get.width,
+            color: selectedTile == 6 ? AppColors.yellow : Colors.transparent,height: 55,width: Get.width,
 
             child: ListTile(
 
@@ -262,7 +262,7 @@ class _MyDrawerState extends State<MyDrawer> {
             ).paddingOnly(left: Get.width*0.05),
           ),
           Container(
-            color: selectedTile == 7 ? AppColors.yellow : Colors.transparent,height: 50,width: Get.width,
+            color: selectedTile == 7 ? AppColors.yellow : Colors.transparent,height: 55,width: Get.width,
 
             child: ListTile(
 

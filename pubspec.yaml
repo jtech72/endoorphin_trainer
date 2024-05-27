@@ -60,6 +60,8 @@ dependencies:
   dotted_border: ^2.1.0
   motion_tab_bar: ^2.0.4
   calendar_date_picker2: ^1.0.2
+  url_launcher: ^6.2.6
+  intl:
   get_storage:
 
 
