@@ -125,7 +125,7 @@ class _BookingDetailsUiState extends State<BookingDetailsUi> {
                         ),
                       ),
                       Container(
-                        height: Get.height * 0.101,
+                        height: Get.height * 0.105,
                         width: 1,
                         color: AppColors.yellow,
                       ).paddingOnly(top: 3, bottom: 3),

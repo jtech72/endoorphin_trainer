@@ -40,7 +40,7 @@ class LoginUi extends StatelessWidget {
                           Positioned(
                               left: Get.width*0.03,
                               top: Get.height*0.04,
-                              child: IconButton(icon: Icon(Icons.arrow_back_ios,size: 18,color: Colors.white,), onPressed: () { Get.back(); },))
+                              child: IconButton(icon: Icon(Icons.arrow_back_ios,size: 18,color: Colors.white,), onPressed: () { Get.offAllNamed(AppRoutes.signinoption); },))
                         ],
                       ),
                       Container(
