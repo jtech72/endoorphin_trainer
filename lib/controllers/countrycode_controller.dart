@@ -21,6 +21,7 @@ class CountryCodeController extends GetxController {
         }).then((value) {
           if (value.status == 200) {
             dismissLoader();
+            storage.write("phoneNumber", phoneNumber.text.trim());
             finalOTP = value.otp;
             showSnackBar("${value.otp}");
             Get.toNamed(AppRoutes.otp,arguments:phoneNumber.text.toString() );
