@@ -130,7 +130,7 @@ class EarningUi extends StatelessWidget {
                   child: SfCartesianChart(
                       plotAreaBorderWidth: 0,
                       borderWidth: 4, title: ChartTitle(text: 'Dec 7 - 14',textStyle: TextStyle(color: Colors.white,fontSize: 14,fontWeight: FontWeight.w500)),
-                      legend: Legend(
+                      legend: Legend(toggleSeriesVisibility: false,
                           textStyle: TextStyle(color: AppColors.yellow,fontWeight: FontWeight.w700,fontSize: 24),
                           isVisible: true),
                       tooltipBehavior: TooltipBehavior(
@@ -156,7 +156,7 @@ class EarningUi extends StatelessWidget {
                           xValueMapper: (_SalesData data, _) => data.day,
                           yValueMapper: (_SalesData data, _) => data.amount,
                           name: 'AED 1959.90',
-                          color: (isSelected) ? AppColors.yellow : Colors.transparent,
+                          color: (isSelected) ? AppColors.yellow : AppColors.yellow,
 
                           borderColor: AppColors.yellow,borderWidth: 1,
                           borderRadius: BorderRadius.circular(10),

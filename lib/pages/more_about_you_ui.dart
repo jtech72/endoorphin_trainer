@@ -199,7 +199,6 @@ class MoreAboutYouUi extends StatelessWidget {
                             fontFamily: 'Montserrat',
                             ),),
                       onTap: (){
-                      Get.back(result: true);
                       Get.toNamed(AppRoutes.bio)?.then((result) {
                         if (result != null && result == true) {
                           controller.showButton(true); // Show the button when returning from another page

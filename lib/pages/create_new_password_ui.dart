@@ -165,7 +165,7 @@ class CreateNewPasswordUI extends StatelessWidget {
                                   child: InkButton(
                                       child: Text('Continue to login',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,
                                           fontFamily: 'Montserrat',fontSize: 12),), onTap: (){
-                                    Get.offAllNamed(AppRoutes.signinoption);
+                                    Get.offAllNamed(AppRoutes.login);
                                   },height: 35,width: 150),
                                 ),
                               ],shape: RoundedRectangleBorder(

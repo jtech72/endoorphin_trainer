@@ -49,76 +49,106 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      // appBar: AppBar(
+      //   iconTheme: IconThemeData(color: AppColors.impgrey),
+      //   title: Obx(
+      //         () =>
+      //         Text(
+      //           controller.isTrainerOnline.value ? 'Online' : 'Offline',
+      //           style: Theme
+      //               .of(context)
+      //               .textTheme
+      //               .headlineSmall,
+      //         ),
+      //   ),
+      //   centerTitle: true,
+      //   actions: [
+      //     Obx(
+      //           () =>
+      //           InkWell(
+      //             splashColor: Colors.transparent,
+      //             onTap: () {
+      //               controller.isTrainerOnline.value =
+      //               !controller.isTrainerOnline.value;
+      //             },
+      //             child: SizedBox(
+      //               height: 15,
+      //               width: 43,
+      //               child: Container(
+      //                 height: 15,
+      //                 width: 15,
+      //                 decoration: BoxDecoration(
+      //                   borderRadius: BorderRadius.circular(30),
+      //                   border: Border.all(color: Colors.white),
+      //                   color: controller.isTrainerOnline.value
+      //                       ? Colors.yellow
+      //                       : Colors.grey.withOpacity(
+      //                       0.5), // Change container color conditionally
+      //                 ),
+      //                 child: Transform.scale(
+      //                   scale: 0.4,
+      //                   child: Switch(
+      //                     activeTrackColor: AppColors.yellow,
+      //                     activeColor: controller.isTrainerOnline.value ? Colors
+      //                         .yellow : Colors.grey.withOpacity(0.5),
+      //                     // Change switch button color conditionally
+      //                     inactiveThumbImage: AssetImage(
+      //                         ImagesPaths.trainerOnline),
+      //                     activeThumbImage: AssetImage(
+      //                         ImagesPaths.trainerOnline),
+      //                     inactiveThumbColor: Colors.transparent,
+      //                     inactiveTrackColor: Colors.black,
+      //                     value: controller.isTrainerOnline.value,
+      //                     onChanged: (v) {
+      //                       controller.isTrainerOnline.value = !controller
+      //                           .isTrainerOnline.value;
+      //                     },
+      //                   ),
+      //                 ),
+      //               ).paddingOnly(left: 20),
+      //             ),
+      //           ),
+      //     ),
+      //     IconButton(
+      //       onPressed: () {
+      //         Get.toNamed(AppRoutes.notification);
+      //       },
+      //       icon: Image.asset(ImagesPaths.bell, scale: 4,),
+      //     ),
+      //   ],
+      //   bottom: myTabBar(tabController, context),
+      // ),
+      // drawer: MyDrawer(),
       appBar: AppBar(
-        iconTheme: IconThemeData(color: AppColors.impgrey),
-        title: Obx(
-              () =>
-              Text(
-                controller.isTrainerOnline.value ? 'Online' : 'Offline',
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .headlineSmall,
-              ),
-        ),
-        centerTitle: true,
-        actions: [
-          Obx(
-                () =>
-                InkWell(
-                  splashColor: Colors.transparent,
-                  onTap: () {
-                    controller.isTrainerOnline.value =
-                    !controller.isTrainerOnline.value;
-                  },
-                  child: SizedBox(
-                    height: 15,
-                    width: 43,
-                    child: Container(
-                      height: 15,
-                      width: 15,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        border: Border.all(color: Colors.white),
-                        color: controller.isTrainerOnline.value
-                            ? Colors.yellow
-                            : Colors.grey.withOpacity(
-                            0.5), // Change container color conditionally
-                      ),
-                      child: Transform.scale(
-                        scale: 0.4,
-                        child: Switch(
-                          activeTrackColor: AppColors.yellow,
-                          activeColor: controller.isTrainerOnline.value ? Colors
-                              .yellow : Colors.grey.withOpacity(0.5),
-                          // Change switch button color conditionally
-                          inactiveThumbImage: AssetImage(
-                              ImagesPaths.trainerOnline),
-                          activeThumbImage: AssetImage(
-                              ImagesPaths.trainerOnline),
-                          inactiveThumbColor: Colors.transparent,
-                          inactiveTrackColor: Colors.black,
-                          value: controller.isTrainerOnline.value,
-                          onChanged: (v) {
-                            controller.isTrainerOnline.value = !controller
-                                .isTrainerOnline.value;
-                          },
-                        ),
-                      ),
-                    ).paddingOnly(left: 20),
-                  ),
-                ),
-          ),
-          IconButton(
-            onPressed: () {
-              Get.toNamed(AppRoutes.notification);
+        toolbarHeight: 50,
+        leadingWidth: Get.width * 0.17,
+        centerTitle: false,
+        surfaceTintColor: Colors.transparent,
+        backgroundColor: AppColors.black,
+        elevation: 3,
+        titleSpacing: -10,
+        leading: GestureDetector(
+            onTap: () {
+              Get.offAllNamed(AppRoutes.bottomNavigation);
             },
-            icon: Image.asset(ImagesPaths.bell, scale: 4,),
+            child: Container(
+                height: 30,
+                width: 40,
+                decoration: const BoxDecoration(
+                    color: Colors.transparent, shape: BoxShape.circle),
+                child: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: AppColors.white,
+                  size: 18,
+                ))),
+        title: GestureDetector(onTap: (){Get.offAllNamed(AppRoutes.bottomNavigation);},
+          child: Text(
+            "Booking History",
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
-        ],
+        ),
         bottom: myTabBar(tabController, context),
       ),
-      drawer: MyDrawer(),
       body: TabBarView(
         controller: tabController,
         children: [
@@ -135,40 +165,34 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Transform.translate(
-                    offset: Offset(0,-Get.height*0.04),
+                    offset: Offset(0,-Get.height*0.035),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("Upcoming Sessions", style: Theme
                             .of(context)
                             .textTheme
                             .headlineSmall,).paddingOnly(
-                            left: 18,),
-                        Expanded(
-                          child: Transform.translate(
-                            offset: Offset(-10,0),
-                            child: Row(
-                              children: [
-                                Transform.translate(
-                                  offset: Offset(20,0),
-                                  child: Container(
-                                    height: 30,
-                                    width: 150,
-                                    decoration: BoxDecoration(
-                                      color: AppColors.black,
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        '${_selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')}',
-                                        style: TextStyle(color: Colors.white, fontSize: 10),
-                                      ),
-                                    ),
-                                  ),
+                          left: 18,),
+                        Row(mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              height: 30,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                color: Colors.black, // AppColors.black,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  _selectedDates.isNotEmpty
+                                      ? '${_selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')}'
+                                      : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
+                                  style: TextStyle(color: Colors.white, fontSize: 10),
                                 ),
-                                _buildCalendarDialogButton()
-                              ],
+                              ),
                             ),
-                          ),
+                            _buildCalendarDialogButton(),
+                          ],
                         ),
 
 
@@ -266,7 +290,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Transform.translate(
-                    offset: Offset(0,-Get.height*0.02),
+                    offset: Offset(0,-Get.height*0.015),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("Ongoing Sessions", style: Theme
@@ -274,7 +298,27 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                             .textTheme
                             .headlineSmall,).paddingOnly(
                             left: 18,),
-                        _buildCalendarDialogButton()
+                        Row(mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              height: 30,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                color: Colors.black, // AppColors.black,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  _selectedDates.isNotEmpty
+                                      ? '${_selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')}'
+                                      : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
+                                  style: TextStyle(color: Colors.white, fontSize: 10),
+                                ),
+                              ),
+                            ),
+                            _buildCalendarDialogButton(),
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -361,7 +405,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Transform.translate(
-                    offset: Offset(0,-Get.height*0.02),
+                    offset: Offset(0,-Get.height*0.015),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("Completed Sessions", style: Theme
@@ -369,7 +413,27 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                             .textTheme
                             .headlineSmall,).paddingOnly(
                             left: 18,),
-                        _buildCalendarDialogButton()
+                        Row(mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              height: 30,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                color: Colors.black, // AppColors.black,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  _selectedDates.isNotEmpty
+                                      ? '${_selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')}'
+                                      : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
+                                  style: TextStyle(color: Colors.white, fontSize: 10),
+                                ),
+                              ),
+                            ),
+                            _buildCalendarDialogButton(),
+                          ],
+                        ),
 
                       ],
                     ),
@@ -464,7 +528,27 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                             .textTheme
                             .headlineSmall,).paddingOnly(
                             left: 18,),
-                        _buildCalendarDialogButton()
+                        Row(mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              height: 30,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                color: Colors.black, // AppColors.black,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  _selectedDates.isNotEmpty
+                                      ? '${_selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')}'
+                                      : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
+                                  style: TextStyle(color: Colors.white, fontSize: 10),
+                                ),
+                              ),
+                            ),
+                            _buildCalendarDialogButton(),
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -703,39 +787,33 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
     );
 
     return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButton(
-            onPressed: () async {
-              List<DateTime?> _dialogCalendarPickerValue = [DateTime.now()];
+      padding: const EdgeInsets.only(left:0,right: 0,top: 10,bottom: 10),
+      child: IconButton(
+           onPressed: () async {
+             List<DateTime?> _dialogCalendarPickerValue = [DateTime.now()];
 
-              final values = await showCalendarDatePicker2Dialog(
-                context: context,
-                config: config,
-                dialogSize: const Size(325, 400),
-                borderRadius: BorderRadius.circular(15),
-                value: _dialogCalendarPickerValue,
-                dialogBackgroundColor: AppColors.greyButton,
-              );
-              if (values != null) {
-                // ignore: avoid_print
-                print(_getValueText(
-                  config.calendarType,
-                  values,
-                ));
-                setState(() {
-                  _dialogCalendarPickerValue = values;
-                  _selectedDates = values;
+             final values = await showCalendarDatePicker2Dialog(
+               context: context,
+               config: config,
+               dialogSize: const Size(325, 400),
+               borderRadius: BorderRadius.circular(15),
+               value: _dialogCalendarPickerValue,
+               dialogBackgroundColor: AppColors.greyButton,
+             );
+             if (values != null) {
+               // ignore: avoid_print
+               print(_getValueText(
+                 config.calendarType,
+                 values,
+               ));
+               setState(() {
+                 _dialogCalendarPickerValue = values;
+                 _selectedDates = values;
 
-                });
-              }
-            },
-            child: Icon(Icons.calendar_month, size: 18,color: AppColors.yellow,),
-          ),
-        ],
-      ),
+               });
+             }
+           },
+           icon:Icon(Icons.calendar_month, size: 18,color: AppColors.yellow,)),
     );
   }
 
