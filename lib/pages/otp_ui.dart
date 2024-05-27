@@ -1,4 +1,5 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -41,6 +42,7 @@ class OtpUI extends StatelessWidget {
                   height: Get.height * 0.08,
                 ),
                 PinCodeTextField(
+                  controller: controller.otpController,
                   textStyle: Theme.of(context)
                       .textTheme
                       .headlineLarge!
@@ -84,17 +86,22 @@ class OtpUI extends StatelessWidget {
                 SizedBox(
                   height: Get.height * 0.08,
                 ),
-                Center(
-                  child: Obx(
-                        () => controller.showResendText.value
-                        ? Text(
-                      'Resend the code if not received?',
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelLarge!
-                          .copyWith(color: AppColors.yellow, fontWeight: FontWeight.w500),
-                    )
-                        : Container(),
+                GestureDetector(
+                  onTap: (){
+                    controller.resendOtp();
+                  },
+                  child: Center(
+                    child: Obx(
+                          () => controller.showResendText.value
+                          ? Text(
+                        'Resend the code if not received?',
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelLarge!
+                            .copyWith(color: AppColors.yellow, fontWeight: FontWeight.w500),
+                      )
+                          : Container(),
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -103,7 +110,7 @@ class OtpUI extends StatelessWidget {
                 Center(
                   child: InkButton(
                     onTap: () {
-                      Get.offAllNamed(AppRoutes.registration);
+                      controller.onVerify();
                     },
                     child: Text('Verify', textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Colors.black,fontSize: 18,

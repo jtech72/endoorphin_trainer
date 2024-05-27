@@ -306,7 +306,7 @@ class ProfileUI extends StatelessWidget {
                   child: Text('Logout',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Colors.black,fontSize: 18,
                       fontFamily: 'Montserrat'),),
                   onTap: (){
-                    // storage.erase();
+                    storage.erase();
                     Get.offAllNamed(AppRoutes.signinoption);
                   })
             ],
