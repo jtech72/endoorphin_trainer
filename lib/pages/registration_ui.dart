@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:endoorphin_trainer/controllers/registration_controller.dart';
+import 'package:endoorphin_trainer/services/network_services/api_call.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/exports.dart';
@@ -80,6 +81,7 @@ class RegistrationUi extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: TextField(
+                          controller: controller.firstNameController,
                           keyboardType: TextInputType.text,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(64),
@@ -139,6 +141,7 @@ class RegistrationUi extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: TextField(
+                          controller: controller.lastNameController,
                           keyboardType: TextInputType.text,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(64),
@@ -197,6 +200,7 @@ class RegistrationUi extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: TextField(
+                          controller: controller.emailController,
                           keyboardType: TextInputType.emailAddress,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(64),
@@ -255,6 +259,7 @@ class RegistrationUi extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: TextField(
+                          controller: controller.passwordController,
                           keyboardType: TextInputType.text,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(64),
@@ -315,6 +320,7 @@ class RegistrationUi extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: TextField(
+                          controller: controller.confirmPasswordController,
                           keyboardType: TextInputType.text,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(64),
@@ -367,9 +373,10 @@ class RegistrationUi extends StatelessWidget {
                           Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
                         ],
                       ),
-                                        Obx(
+              Obx(
                     () => PopupMenuButton<String>(
-                  offset: Offset(1, 45),color: Colors.white,
+                  offset: Offset(1, 45),
+                  color: Colors.white,
                   onSelected: (selectedValue) {
                     controller.selectedOption1.value = selectedValue;
                   },
@@ -377,7 +384,10 @@ class RegistrationUi extends StatelessWidget {
                     return controller.items2.map((String value) {
                       return PopupMenuItem<String>(
                         value: value,
-                        child: Text(value,style: TextStyle(color: AppColors.lightGrey),),
+                        child: Text(
+                          value,
+                          style: TextStyle(color: AppColors.lightGrey),
+                        ),
                       );
                     }).toList();
                   },
@@ -394,9 +404,11 @@ class RegistrationUi extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Transform.translate(
-                          offset: Offset(5,0),
+                          offset: Offset(5, 0),
                           child: Text(
-                            controller.selectedOption1.value,
+                            controller.selectedOption1.value.isEmpty
+                                ? "Select Gender" // Default text when nothing is selected
+                                : controller.selectedOption1.value,
                             style: TextStyle(
                               color: AppColors.lightGrey,
                               fontSize: 12,
@@ -407,10 +419,10 @@ class RegistrationUi extends StatelessWidget {
                         ),
                         Icon(Icons.keyboard_arrow_down, size: 32, color: AppColors.grey4),
                       ],
-                    ).paddingOnly(left: Get.width*0.035, right: Get.width*0.030),
+                    ).paddingOnly(left: Get.width * 0.035, right: Get.width * 0.030),
                   ),
-                                          ),
-                                        ),
+                ),
+              ),
                       Row(
                         children: [
                           Text("Categories",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
@@ -425,57 +437,74 @@ class RegistrationUi extends StatelessWidget {
                             shape: BoxShape.rectangle,
                             borderRadius: BorderRadius.circular(5),
                           ),
-                          child: Padding(
-                            padding: EdgeInsets.zero,
-                            child: RawScrollbar(padding: EdgeInsets.zero,
-                              trackVisibility: true,
-                              trackRadius: Radius.circular(50),thickness: 5,
-                              interactive: true,
-                              thumbColor: AppColors.grey4,timeToFade: Duration(seconds: 2),
-                              child: ListView.builder(
+                          child:                     FutureBuilder(
+                            future: CallAPI.getCategory(),
+                            builder: (BuildContext context, snapshot) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                ).paddingOnly(top: 20);
+                              }
+                              if (snapshot.hasError) {
+                                return Center(
+                                  child: Text('Error: ${snapshot.error}'),
+                                );
+                              }
+                              return  Padding(
                                 padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                itemCount: controller.dataList.length,
-                                itemBuilder: (context, index) {
-                                  final item = controller.dataList[index];
-                                  return Obx(
-                                        () => Row(
-                                          children: [
-                                        Checkbox(
-                                          activeColor: AppColors.yellow,
-                                          checkColor: AppColors.black,
-                                          value: controller.checkedList.length > index ? controller.checkedList[index] : false, // Use checkedList to determine checkbox state
-                                          onChanged: (value) {
-                                            controller.toggleItem(item, index);
-                                            // Check if the checkbox is checked
-                                            if (value ?? false) {
-                                              // Add the item to selectedOne2 list
-                                              controller.selectedOne2.add(item);
-                                              log("Added value ==>${controller.selectedOne2.toString()}");
-                                            } else {
-                                              // Remove the item from selectedOne2 list
-                                              controller.selectedOne2.remove(item);
-                                              log("Added value ==>${controller.selectedOne2.toString()}");
-                                            }
-                                          },
-                                        ),
-                                        Expanded(
-                                          child: ListTile(
-                                            contentPadding: EdgeInsets.zero, // Remove ListTile padding
-                                            title: Text(item,style: Theme.of(context).textTheme.displayLarge!.copyWith(fontWeight: FontWeight.w400,color: Colors.black),),
-                                            onTap: () {
-                                              controller.toggleItem(item, index); // Toggle item selection
-                                            },
-                                          ),
-                                        ),
-                                          ]
+                                child: RawScrollbar(padding: EdgeInsets.zero,
+                                  trackVisibility: true,
+                                  trackRadius: Radius.circular(50),thickness: 5,
+                                  interactive: true,
+                                  thumbColor: AppColors.grey4,timeToFade: Duration(seconds: 2),
+                                  child: ListView.builder(
+                                    padding: EdgeInsets.zero,
+                                    shrinkWrap: true,
+                                    itemCount: snapshot.data!.result!.length,
+                                    itemBuilder: (context, index) {
+                                      final item = snapshot.data!.result![index].id.toString();
+                                      return Obx(
+                                            () => Row(
+                                            children: [
+                                              Checkbox(
+                                                activeColor: AppColors.yellow,
+                                                checkColor: AppColors.black,
+                                                value: controller.checkedList.length > index ? controller.checkedList[index] : false, // Use checkedList to determine checkbox state
+                                                onChanged: (value) {
+                                                  controller.toggleItem(item, index);
+                                                  // Check if the checkbox is checked
+                                                  if (value ?? false) {
+                                                    // Add the item to selectedOne2 list
+                                                    controller.selectedOne2.add(item);
+                                                    log("Added value ==>${controller.selectedOne2.toString()}");
+                                                  } else {
+                                                    // Remove the item from selectedOne2 list
+                                                    controller.selectedOne2.remove(item);
+                                                    log("Added value ==>${controller.selectedOne2.toString()}");
+                                                  }
+                                                },
+                                              ),
+                                              Expanded(
+                                                child: ListTile(
+                                                  contentPadding: EdgeInsets.zero, // Remove ListTile padding
+                                                  title: Text(snapshot.data!.result![index].name.toString(),style: Theme.of(context).textTheme.displayLarge!.copyWith(fontWeight: FontWeight.w400,color: Colors.black),),
+                                                  onTap: () {
+                                                    controller.toggleItem(item, index); // Toggle item selection
+                                                  },
+                                                ),
+                                              ),
+                                            ]
                                         ).paddingZero,
-                                  );
-                                },
-                              ),
-                            ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              );
+
+                            },
                           ),
-                        ),
+
+                     ),
                     ],
                   ).paddingOnly(top: 15,bottom: Get.height*0.05),
                   Row(
@@ -484,7 +513,9 @@ class RegistrationUi extends StatelessWidget {
                       InkButton(
                           child: Text("Continue",style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: AppColors.black,fontSize: 18,
                               fontFamily: 'Montserrat'),),
-                          onTap: (){Get.toNamed(AppRoutes.moreaboutyou ,arguments: controller.selectedOne2);}),
+                          onTap: (){
+                            controller.onContinueButton();
+                          }),
                     ],
                   ).paddingOnly(top: 30,bottom: 30),
                 ],
