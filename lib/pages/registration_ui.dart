@@ -411,9 +411,9 @@ class RegistrationUi extends StatelessWidget {
                                 : controller.selectedOption1.value,
                             style: TextStyle(
                               color: AppColors.lightGrey,
-                              fontSize: 14,
+                              fontSize: 12,
                               fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w200,
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
                         ),
