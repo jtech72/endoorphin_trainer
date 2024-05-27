@@ -468,22 +468,14 @@ class RegistrationUi extends StatelessWidget {
                                             },
                                           ),
                                         ),
-                                                                                      ],
-                                                                                    ).paddingZero,
+                                          ]
+                                        ).paddingZero,
                                   );
                                 },
                               ),
                             ),
                           ),
                         ),
-
-
-
-
-
-
-
-
                     ],
                   ).paddingOnly(top: 15,bottom: Get.height*0.05),
                   Row(
