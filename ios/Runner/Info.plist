@@ -28,7 +28,11 @@
     <true/>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>We need access to your photo library to upload images for profile pictures.</string>
-
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>sms</string>
+      <string>tel</string>
+    </array>
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
     <string>We require your location to provide location-based services and improve user experience.</string>
 

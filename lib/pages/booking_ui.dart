@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:endoorphin_trainer/utils/app_colors.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../controllers/booking_controller.dart';
 import '../custom_widgets/tabbar_widgets.dart';
@@ -25,42 +26,9 @@ class BookingUi extends StatefulWidget {
 class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMixin {
   late TabController tabController;
   bool showCalendar = false;
-  List<DateTime?> _dialogCalendarPickerValue = [
-    DateTime(2021, 8, 10),
-    DateTime(2021, 8, 13),
-  ];
-  List<DateTime?> _singleDatePickerValueWithDefaultValue = [
-    DateTime.now().add(const Duration(days: 1)),
-  ];
-  List<DateTime?> _multiDatePickerValueWithDefaultValue = [
-    DateTime(today.year, today.month, 1),
-    DateTime(today.year, today.month, 5),
-    DateTime(today.year, today.month, 14),
-    DateTime(today.year, today.month, 17),
-    DateTime(today.year, today.month, 25),
-  ];
-  List<DateTime?> _rangeDatePickerValueWithDefaultValue = [
-    DateTime(1999, 5, 6),
-    DateTime(1999, 5, 21),
-  ];
+  List<DateTime?> _selectedDates = [];
+  late CalendarDatePicker2WithActionButtonsConfig config;
 
-  List<DateTime?> _rangeDatePickerWithActionButtonsWithValue = [
-    DateTime.now(),
-    DateTime.now().add(const Duration(days: 5)),
-  ];
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2021),
-      lastDate: DateTime(2025),
-    );
-    if (picked != null) {
-      setState(() {
-        // Update your date value or perform any action with picked date
-      });
-    }
-  }
 
   @override
   void initState() {
@@ -120,7 +88,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                       child: Transform.scale(
                         scale: 0.4,
                         child: Switch(
-                          activeTrackColor: Colors.black,
+                          activeTrackColor: AppColors.yellow,
                           activeColor: controller.isTrainerOnline.value ? Colors
                               .yellow : Colors.grey.withOpacity(0.5),
                           // Change switch button color conditionally
@@ -175,7 +143,35 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                             .textTheme
                             .headlineSmall,).paddingOnly(
                             left: 18,),
-                        _buildCalendarDialogButton()
+                        Expanded(
+                          child: Transform.translate(
+                            offset: Offset(-10,0),
+                            child: Row(
+                              children: [
+                                Transform.translate(
+                                  offset: Offset(20,0),
+                                  child: Container(
+                                    height: 30,
+                                    width: 150,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.black,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        '${_selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')}',
+                                        style: TextStyle(color: Colors.white, fontSize: 10),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                _buildCalendarDialogButton()
+                              ],
+                            ),
+                          ),
+                        ),
+
+
 
 
                       ],
@@ -188,17 +184,17 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                         Container(
                           height: 1, width: Get.width, color: AppColors.grey,)
                             .paddingOnly(top: 15,),
-                        Container(
-                          height: Get.height * .68,
-                          child: ListView.builder(
-                              itemCount: 10,
-                              itemBuilder: (context, index) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    Get.toNamed(AppRoutes.bookingdetails,
-                                        arguments: "Upcomming");
-                                  },
-                                  child: Column(
+                        GestureDetector(
+                          onTap: (){
+                            Get.toNamed(AppRoutes.bookingdetails,
+                                arguments: "Upcomming");
+                          },
+                          child: Container(
+                            height: Get.height * .68,
+                            child: ListView.builder(
+                                itemCount: 10,
+                                itemBuilder: (context, index) {
+                                  return Column(
                                     children: [
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment
@@ -245,9 +241,9 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                         color: AppColors.grey,).paddingOnly(
                                         top: 15,),
                                     ],
-                                  ),
-                                );
-                              }),
+                                  );
+                                }),
+                          ),
                         )
 
 
@@ -290,15 +286,15 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                         Container(
                           height: 1, width: Get.width, color: AppColors.grey,)
                             .paddingOnly(top: 15,),
-                        Container(
-                          height: Get.height * .68,
-                          child: ListView.builder(itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                Get.toNamed(
-                                    AppRoutes.bookingdetails, arguments: "");
-                              },
-                              child: Column(
+                        GestureDetector(
+                          onTap: (){
+                            Get.toNamed(
+                                AppRoutes.bookingdetails, arguments: "");
+                          },
+                          child: Container(
+                            height: Get.height * .68,
+                            child: ListView.builder(itemBuilder: (context, index) {
+                              return Column(
                                 children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment
@@ -341,9 +337,9 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                     width: Get.width,
                                     color: AppColors.grey,).paddingOnly(top: 15,),
                                 ],
-                              ),
-                            );
-                          }),
+                              );
+                            }),
+                          ),
                         )
 
                       ],
@@ -385,14 +381,14 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                         Container(
                           height: 1, width: Get.width, color: AppColors.grey,)
                             .paddingOnly(top: 15,),
-                        Container(height: Get.height * .68,
-                          child: ListView.builder(itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                Get.toNamed(AppRoutes.bookingdetails,
-                                    arguments: "Completed");
-                              },
-                              child: Column(
+                        GestureDetector(
+                          onTap: (){
+                            Get.toNamed(AppRoutes.bookingdetails,
+                                arguments: "Completed");
+                          },
+                          child: Container(height: Get.height * .68,
+                            child: ListView.builder(itemBuilder: (context, index) {
+                              return Column(
                                 children: [
                                   Container(
                                     child: Row(
@@ -437,9 +433,9 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                     width: Get.width,
                                     color: AppColors.grey,).paddingOnly(top: 15,),
                                 ],
-                              ),
-                            );
-                          }),
+                              );
+                            }),
+                          ),
                         )
                       ],
                     ),
@@ -479,14 +475,14 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                         Container(
                           height: 1, width: Get.width, color: AppColors.grey,)
                             .paddingOnly(top: 15,),
-                        Container(height: Get.height * .68,
-                          child: ListView.builder(itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                Get.toNamed(AppRoutes.bookingdetails,
-                                    arguments: "Cancel");
-                              },
-                              child: Column(
+                        GestureDetector(
+                          onTap: (){
+                            Get.toNamed(AppRoutes.bookingdetails,
+                                arguments: "Cancel");
+                          },
+                          child: Container(height: Get.height * .68,
+                            child: ListView.builder(itemBuilder: (context, index) {
+                              return Column(
                                 children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment
@@ -529,9 +525,9 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                     width: Get.width,
                                     color: AppColors.grey,).paddingOnly(top: 15,),
                                 ],
-                              ),
-                            );
-                          }),
+                              );
+                            }),
+                          ),
                         )
                       ],
                     ),
@@ -575,15 +571,15 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
   }
 
   _buildCalendarDialogButton() {
-    const dayTextStyle = TextStyle(color: Colors.black, fontWeight: FontWeight.w700);
+    const dayTextStyle = TextStyle(color: Colors.white, fontWeight: FontWeight.w700);
     final weekendTextStyle = TextStyle(color: Colors.grey[500], fontWeight: FontWeight.w600);
     final anniversaryTextStyle = TextStyle(
-      color: Colors.red[400],
+      color: Colors.white,
       fontWeight: FontWeight.w700,
-      decoration: TextDecoration.underline,
+
     );
     final currentDayTextStyle = TextStyle(
-      color: Colors.green, // Green color for the current date
+      color: Colors.green,
       fontWeight: FontWeight.w700,
     );
 
@@ -593,15 +589,20 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
       calendarViewScrollPhysics: const NeverScrollableScrollPhysics(),
       dayTextStyle: dayTextStyle,
       calendarType: CalendarDatePicker2Type.range,
-      selectedDayHighlightColor: Colors.purple[800],
+      selectedDayHighlightColor: AppColors.yellow,
       closeDialogOnCancelTapped: true,
       firstDayOfWeek: 1,
       weekdayLabelTextStyle: const TextStyle(
-        color: Colors.black87,
+        color: AppColors.yellow,
         fontWeight: FontWeight.bold,
       ),
+      selectedMonthTextStyle: TextStyle(color: Colors.black),
+      selectedYearTextStyle: TextStyle(color: Colors.black),
+      monthTextStyle: TextStyle(color: Colors.white),
+      yearTextStyle: TextStyle(color: Colors.white),
+      selectedRangeDayTextStyle: TextStyle(color: Colors.white),
       controlsTextStyle: const TextStyle(
-        color: Colors.black,
+        color: AppColors.yellow,
         fontSize: 15,
         fontWeight: FontWeight.bold,
       ),
@@ -610,8 +611,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
       selectedDayTextStyle: dayTextStyle.copyWith(color: Colors.white),
       dayTextStylePredicate: ({required date}) {
         TextStyle? textStyle;
-        if (date.weekday == DateTime.saturday ||
-            date.weekday == DateTime.sunday) {
+        if (date.weekday == DateTime.saturday || date.weekday == DateTime.sunday) {
           textStyle = weekendTextStyle;
         }
         if (DateUtils.isSameDay(date, DateTime.now())) {
@@ -649,9 +649,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                       width: 4,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
-                        color: isSelected == true
-                            ? Colors.white
-                            : Colors.grey[500],
+                        color: isSelected == true ? Colors.white : Colors.grey[500],
                       ),
                     ),
                   ),
@@ -705,19 +703,21 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
     );
 
     return Padding(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ElevatedButton(
             onPressed: () async {
+              List<DateTime?> _dialogCalendarPickerValue = [DateTime.now()];
+
               final values = await showCalendarDatePicker2Dialog(
                 context: context,
                 config: config,
                 dialogSize: const Size(325, 400),
                 borderRadius: BorderRadius.circular(15),
                 value: _dialogCalendarPickerValue,
-                dialogBackgroundColor: Colors.white,
+                dialogBackgroundColor: AppColors.greyButton,
               );
               if (values != null) {
                 // ignore: avoid_print
@@ -727,51 +727,18 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                 ));
                 setState(() {
                   _dialogCalendarPickerValue = values;
+                  _selectedDates = values;
+
                 });
               }
             },
-            child: Icon(Icons.calendar_month,size: 18,),
+            child: Icon(Icons.calendar_month, size: 18,color: AppColors.yellow,),
           ),
         ],
       ),
     );
   }
-  // Widget _buildCalendarWithActionButtons() {
-  //   final config = CalendarDatePicker2WithActionButtonsConfig(
-  //     calendarType: CalendarDatePicker2Type.range,
-  //     disableModePicker: true,
-  //   );
-  //   return Column(
-  //     mainAxisSize: MainAxisSize.min,
-  //     children: [
-  //       const SizedBox(height: 10),
-  //       const Text('Date Picker With Action Buttons'),
-  //       CalendarDatePicker2WithActionButtons(
-  //         config: config,
-  //         value: _rangeDatePickerWithActionButtonsWithValue,
-  //         onValueChanged: (dates) => setState(
-  //                 () => _rangeDatePickerWithActionButtonsWithValue = dates),
-  //       ),
-  //       const SizedBox(height: 10),
-  //       Row(
-  //         mainAxisSize: MainAxisSize.min,
-  //         children: [
-  //           const Text('Selection(s):  '),
-  //           const SizedBox(width: 10),
-  //           Flexible(
-  //             child: Text(
-  //               _getValueText(
-  //                 config.calendarType,
-  //                 _rangeDatePickerWithActionButtonsWithValue,
-  //               ),
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //       const SizedBox(height: 25),
-  //     ],
-  //   );
-  // }
+
 
 
 

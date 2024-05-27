@@ -405,7 +405,10 @@ class BankingDetailsUI extends StatelessWidget {
                 height: Get.height*.06,
               ),
               Center(child: InkButton(child: Text('Save',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 18,
-                  fontFamily: 'Montserrat'),), onTap: (){}))
+                  fontFamily: 'Montserrat'),),
+                  onTap: (){
+                     Get.back();
+                  }))
 
             ],
           ).paddingOnly(left: Get.width*0.05,right: Get.width*0.05),

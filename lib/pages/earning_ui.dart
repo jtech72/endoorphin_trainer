@@ -20,6 +20,7 @@ class EarningUi extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSelected = false;
     EarningController controller = Get.put(EarningController());
     List<_SalesData> data = [
       _SalesData(' S' , 35,),
@@ -120,7 +121,7 @@ class EarningUi extends StatelessWidget {
                 ),
               ),
               Container(
-                  height: 432,
+                  height: Get.height*0.55,
                   width: Get.width,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -128,9 +129,9 @@ class EarningUi extends StatelessWidget {
                   ),
                   child: SfCartesianChart(
                       plotAreaBorderWidth: 0,
-                      borderWidth: 5,
+                      borderWidth: 4, title: ChartTitle(text: 'Dec 7 - 14',textStyle: TextStyle(color: Colors.white,fontSize: 14,fontWeight: FontWeight.w500)),
                       legend: Legend(
-                          textStyle: TextStyle(color: AppColors.impgrey),
+                          textStyle: TextStyle(color: AppColors.yellow,fontWeight: FontWeight.w700,fontSize: 24),
                           isVisible: true),
                       tooltipBehavior: TooltipBehavior(
                           canShowMarker: false,
@@ -141,6 +142,7 @@ class EarningUi extends StatelessWidget {
                         labelStyle: TextStyle(color: AppColors.impgrey),
                         majorGridLines: MajorGridLines(width: 0),
                       ),
+
                       primaryYAxis: NumericAxis(
                           isVisible: false,
                           labelStyle: TextStyle(color: AppColors.impgrey),
@@ -153,12 +155,15 @@ class EarningUi extends StatelessWidget {
                           dataSource: data,
                           xValueMapper: (_SalesData data, _) => data.day,
                           yValueMapper: (_SalesData data, _) => data.amount,
-                          name: 'Dec 7 - 14',
-                          color: AppColors.yellow,
-                          borderColor: AppColors.grey,borderWidth: 1,
+                          name: 'AED 1959.90',
+                          color: (isSelected) ? AppColors.yellow : Colors.transparent,
+
+                          borderColor: AppColors.yellow,borderWidth: 1,
                           borderRadius: BorderRadius.circular(10),
+
                         )
-                      ])).paddingOnly(
+                      ])
+              ).paddingOnly(
                 top: 15,
               ),
               Container(

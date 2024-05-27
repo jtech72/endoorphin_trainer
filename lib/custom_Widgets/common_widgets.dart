@@ -86,7 +86,7 @@ AppBar myAppBar({
         onTap: (){
           Get.back();
         },
-        child: const SizedBox(
+        child:  Container(color: Colors.transparent,
             height: 30,
             width: 40,
             child: Icon(Icons.arrow_back_ios_new_rounded,color: AppColors.white,size: 18,))),

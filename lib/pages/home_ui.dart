@@ -78,7 +78,7 @@ class HomeUiState extends State<HomeUi> {
                   child: Transform.scale(
                     scale: 0.4,
                     child: Switch(
-                      activeTrackColor: Colors.black,
+                      activeTrackColor: AppColors.yellow,
                       activeColor: controller.isTrainerOnline.value ? Colors.yellow : Colors.grey.withOpacity(0.5), // Change switch button color conditionally
                       inactiveThumbImage: AssetImage(ImagesPaths.trainerOnline),
                       activeThumbImage: AssetImage(ImagesPaths.trainerOnline),
