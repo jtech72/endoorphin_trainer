@@ -450,7 +450,8 @@ class RegistrationUi extends StatelessWidget {
                                   child: Text('Error: ${snapshot.error}'),
                                 );
                               }
-                              return  Padding(
+                              return
+                                Padding(
                                 padding: EdgeInsets.zero,
                                 child: RawScrollbar(padding: EdgeInsets.zero,
                                   trackVisibility: true,
@@ -462,7 +463,7 @@ class RegistrationUi extends StatelessWidget {
                                     shrinkWrap: true,
                                     itemCount: snapshot.data!.result!.length,
                                     itemBuilder: (context, index) {
-                                      final item = snapshot.data!.result![index].id.toString();
+                                      final item = snapshot.data!.result![index].id;
                                       return Obx(
                                             () => Row(
                                             children: [
@@ -475,7 +476,7 @@ class RegistrationUi extends StatelessWidget {
                                                   // Check if the checkbox is checked
                                                   if (value ?? false) {
                                                     // Add the item to selectedOne2 list
-                                                    controller.selectedOne2.add(item);
+                                                    controller.selectedOne2.add(item!);
                                                     log("Added value ==>${controller.selectedOne2.toString()}");
                                                   } else {
                                                     // Remove the item from selectedOne2 list

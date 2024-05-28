@@ -4,7 +4,7 @@ import 'package:endoorphin_trainer/utils/exports.dart';
 import '../services/network_services/api_call.dart';
 class RegistrationController extends GetxController{
   final items2 = ['Male','Female',];
-  RxList<String> selectedOne2 = <String>[].obs;
+  RxList<int> selectedOne2 = <int>[].obs;
   RxList<bool> checkedList = <bool>[].obs;
   final selectedOption1 = 'Select Gender'.obs;
   TextEditingController firstNameController = TextEditingController();
@@ -45,7 +45,7 @@ class RegistrationController extends GetxController{
         "role": "trainer",
         "gender":"male",
         "lastName":lastNameController.text.trim(),
-        "categoryId":selectedOne2
+        "categoryId": selectedOne2.value
       };
       log("DATA FOR PROFILE INFO $request");
       try {
@@ -53,9 +53,14 @@ class RegistrationController extends GetxController{
         await CallAPI.uploadUserdata(request: request).then((value) {
           if (value.status == 200) {
             dismissLoader();
+            storage.write("userId", value.userId.toString());
 
+            log("Success");
+            Get.toNamed(AppRoutes.moreaboutyou ,arguments: value.userId.toString());
           } else {
             dismissLoader();
+            log("failed");
+            showSnackBar(value.message);
           }
           //
         });

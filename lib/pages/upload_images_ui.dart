@@ -1,7 +1,5 @@
-import 'package:endoorphin_trainer/controllers/more_about_you_controller.dart';
 import 'package:endoorphin_trainer/controllers/upload_images_controller.dart';
 import 'package:flutter/material.dart';
-import '../controllers/trainer_passport_controller.dart';
 import '../utils/exports.dart';
 class UploadImagesUi extends StatelessWidget {
   const UploadImagesUi({super.key});

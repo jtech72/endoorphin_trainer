@@ -13,9 +13,11 @@ class APIManager {
   Future<Map<dynamic, dynamic>> postAPICall({required Map<String, dynamic> request, required String endpoint}) async {
     var responseJson = {};
     try {
+      log('Request Body: ${jsonEncode(request)}');
       final response = await http.post(
         Uri.parse(baseUrl + endpoint),
         headers: {"Content-Type": "application/json"},
+
         body: jsonEncode(request),
       );
 
@@ -27,6 +29,7 @@ class APIManager {
       throw FetchDataException('HTTP Exception occurred');
     } catch (e, st) {
       log('Error in API Manager: $e', stackTrace: st);
+      log('Error in API Manager: $st');
       // Get.toNamed(AppRoutes.error);
       throw FetchDataException('Unexpected error occurred');
     }
@@ -59,30 +62,38 @@ class APIManager {
   }
 
 
-  Future<Map<String, dynamic>> postAPICallWithoutHeaders(
-      {required String endPoint, required Map<String, dynamic> request}) async {
+  Future<Map<String, dynamic>> postAPICallWithoutHeaders({
+    required String endPoint,
+    required Map<String, dynamic> request,
+  }) async {
     Uri urlForPut = Uri.parse("${Endpoints.baseUrl}$endPoint");
 
     log("Calling API: $urlForPut");
-
     log("Calling Request: $request");
 
     Map<String, dynamic> responseJson = {};
 
     try {
-      final response = await http.put(urlForPut, body: request);
-      log("${jsonDecode(response.body)}");
+      final response = await http.post(
+        urlForPut,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: request.map((key, value) => MapEntry(key, value.toString())),
+      );
+
+      log("Response Body: ${response.body}");
+
       responseJson = _response(response);
     } on SocketException {
-      // Get.back();
-      // showSnackBar("", "Internet not available");
       throw FetchDataException('No Internet connection');
-    } on Error catch (e, st) {
+    } catch (e, st) {
       log('Error: $e');
       log('ST: $st');
     }
+
     return responseJson;
   }
+
+
 // MULTIPART REQUEST
   Future<Map<String, dynamic>> putMultipartAPICall({required String endPoint, required String fields, required File files}) async {
     Uri urlForPut = Uri.parse("${Endpoints.baseUrl}$endPoint");
@@ -127,7 +138,9 @@ class APIManager {
       case 200:
         return jsonDecode(response.body);
       case 400:
-        throw BadRequestException(response.body.toString());
+        return jsonDecode(response.body);
+
+        // throw BadRequestException(response.body.toString());
       case 401:
       case 403:
         throw UnauthorisedException(response.body.toString());

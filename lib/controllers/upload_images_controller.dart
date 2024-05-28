@@ -2,11 +2,12 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:endoorphin_trainer/utils/exports.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UploadImagesController extends GetxController{
 RxInt selectedoption = 0.obs;
-int?  documentIndex ;
+String?   documentIndex ;
 Rx<File?> fontImagePicked = Rx<File?>(null);
 Rx<File?> backImagePicked = Rx<File?>(null);
 var defaultImage = File("path_to_your_default_image");
@@ -28,6 +29,11 @@ Future<void> openCamera(bool isFrontImage) async {
     print('User canceled');
   }
 }
+
+onSaveButton(){
+
+}
+
 void removeImage(bool isFrontImage) {
   if (isFrontImage) {
     fontImagePicked.value = null;
@@ -43,8 +49,8 @@ void removeImage(bool isFrontImage) {
 @override
   void onInit() {
   openCamera(true);
-  documentIndex = Get.arguments;
-  print(documentIndex.toString());
+  documentIndex = Get.arguments ??"";
+  log(documentIndex.toString());
     super.onInit();
   }
 }

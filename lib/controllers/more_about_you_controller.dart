@@ -1,10 +1,11 @@
 import 'dart:developer';
 
+import 'package:get/get.dart';
+
 import '../utils/exports.dart';
 
 class MoreAboutYouController extends GetxController{
   RxInt selectedIndex = (-1).obs;
-  RxList<String> getCatergory = <String>[].obs;
   List<String> newList = <String>[];
 RxBool isChecked = false.obs;
 
@@ -24,10 +25,6 @@ RxBool isChecked = false.obs;
   }
   @override
   void onInit() {
-    getCatergory.value = Get.arguments;
-    newList = List.from(categoryname)..addAll(getCatergory);
-    log("list of category${newList}");
-
     super.onInit();
   }
 }

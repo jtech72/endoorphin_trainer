@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class TrainerPassportUI extends StatelessWidget {
 
-    TrainerPassportUI({super.key});
+    const TrainerPassportUI({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class TrainerPassportUI extends StatelessWidget {
               Get.back();
             },
             child: Text(
-              controller.documentIndex == 0? "Emirates ID":controller.documentIndex == 1?'Passport':"Certification",
+              controller.certificationDetails!["categoryName"] == "Emirates ID"? "Emirates ID":controller.certificationDetails!["categoryName"] == "Passport"?'Passport':"Certification",
               style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
@@ -50,7 +50,7 @@ class TrainerPassportUI extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      controller.documentIndex == 0? "Emirates ID Name":controller.documentIndex == 1?'Passport Name':"Certification Name",
+                      controller.certificationDetails!["categoryName"] == "Emirates ID"? "Emirates ID Name":controller.certificationDetails!["categoryName"] == "Passport"?'Passport Name':"Certification Name",
 
                       style: Theme.of(context)
                           .textTheme
@@ -69,6 +69,8 @@ class TrainerPassportUI extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: TextField(
+
+                    controller: controller.certificateName,
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(64),
                       FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -84,7 +86,7 @@ class TrainerPassportUI extends StatelessWidget {
                       hintStyle: Theme.of(context).textTheme.labelMedium,
                       contentPadding: const EdgeInsets.only(bottom: 3, left: 15),
 
-                      hintText: controller.documentIndex == 0? " Enter Emirates ID name":controller.documentIndex == 1?'Enter Passport name':"Enter Certification name",
+                      hintText: controller.certificationDetails!["categoryName"] == "Emirates ID"? " Enter Emirates ID name":controller.certificationDetails!["categoryName"] == "Passport"?'Enter Passport name':"Enter Certification name",
                       alignLabelWithHint: true,
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(4),
@@ -116,7 +118,7 @@ class TrainerPassportUI extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                        controller.documentIndex == 0? "Emirates ID Number":controller.documentIndex == 1?'Passport Number':"Qualifications",
+                      controller.certificationDetails!["categoryName"] == "Emirates ID"? "Emirates ID Number":controller.certificationDetails!["categoryName"] == "Passport"?'Passport Number':"Certification Number",
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge!
@@ -134,6 +136,8 @@ class TrainerPassportUI extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: TextField(
+                    keyboardType: TextInputType.number,
+                    controller: controller.certificateNumber,
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(64),
                       FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -149,7 +153,7 @@ class TrainerPassportUI extends StatelessWidget {
                       hintStyle: Theme.of(context).textTheme.labelMedium,
                       contentPadding: const EdgeInsets.only(bottom: 3, left: 15),
 
-                      hintText: controller.documentIndex == 0? " Enter Emirates ID Number":controller.documentIndex == 1?'Enter Passport Number':"Enter Certification Number",
+                      hintText: controller.certificationDetails!["categoryName"] == "Emirates ID"? " Enter Emirates ID Number":controller.certificationDetails!["categoryName"] == "Passport"?'Enter Passport Number':"Enter Certification Number",
                       alignLabelWithHint: true,
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(4),
@@ -181,7 +185,7 @@ class TrainerPassportUI extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                        controller.documentIndex == 0? " Upload Emirates ID Photo":controller.documentIndex == 1?'Upload Passport Photo':"Upload Certification Photo",
+                      controller.certificationDetails!["categoryName"] == "Emirates ID"? " Upload Emirates ID Photo":controller.certificationDetails!["categoryName"] == "Passport"?'Upload Passport Photo':"Upload Certification Photo",
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge!
@@ -193,7 +197,7 @@ class TrainerPassportUI extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.toNamed(AppRoutes.uploadimage,arguments: controller.documentIndex);
+                    controller.onFileUpload();
                   },
                   child: Container(
                     height: 45,
