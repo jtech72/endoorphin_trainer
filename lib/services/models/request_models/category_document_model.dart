@@ -1,20 +1,17 @@
-class SignUpModel {
+class CategoryDocumentModel {
   String? message;
-  int? userId;
   int? status;
 
-  SignUpModel({this.message, this.userId, this.status});
+  CategoryDocumentModel({this.message, this.status});
 
-  SignUpModel.fromJson(Map<dynamic, dynamic> json) {
+  CategoryDocumentModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
-    userId = json['userId'];
     status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['message'] = message;
-    data['userId'] = userId;
     data['status'] = status;
     return data;
   }

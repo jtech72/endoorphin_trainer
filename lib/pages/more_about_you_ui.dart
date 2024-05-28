@@ -1,20 +1,14 @@
 import 'dart:developer';
 
 import 'package:endoorphin_trainer/controllers/more_about_you_controller.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:endoorphin_trainer/services/network_services/api_call.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import '../utils/exports.dart';
-
 class MoreAboutYouUi extends StatelessWidget {
-  // List<String>categoryname=['Emirates ID','Passport','Certification'];
-
-
    const MoreAboutYouUi({super.key});
-
-  @override
+   @override
   Widget build(BuildContext context) {
-    MoreAboutYouController controller = Get.put(MoreAboutYouController());
+     MoreAboutYouController controller = Get.put(MoreAboutYouController());
 
     return Scaffold(
       appBar: myAppBar(title: Transform.translate(
@@ -74,80 +68,133 @@ class MoreAboutYouUi extends StatelessWidget {
                 SizedBox(
                   height: Get.height*0.03,
                 ),
-                Container(
-                 color: Colors.transparent,
-                  child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    padding: EdgeInsets.zero,
-                    itemBuilder: (context,index){
-                    return InkWell(
-                        splashColor: Colors.transparent,
-                        onTap: (){
-                          controller.selectedIndex.value = index;
-                            Get.toNamed(AppRoutes.trainerPassport,arguments: index);
-                          // Use Get.toNamed to navigate to the desired routes based on the selected index
-                          // if (controller.selectedIndex.value == 0) {
-                          //   controller.isButtonVisible.value = true;
-                          //   Get.toNamed(AppRoutes.trainerPassport,);
-                          // } else if (controller.selectedIndex.value == 1) {
-                          //   controller.isButtonVisible.value = true;
-                          //   log(controller.isButtonVisible.value.toString());
-                          //   Get.toNamed(AppRoutes.trainerPassport);
-                          // } else {
-                          //   controller.isButtonVisible.value = true;
-                          //   Get.toNamed(AppRoutes.trainerPassport);
-                          // }
-                        },
-                        child: Container(
-                          height: 70,
-                          width: Get.width,
-                          decoration: BoxDecoration(
-                              color: AppColors.greyButton,
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Transform.translate(
-                                    offset: Offset(-10,2),
-                                    child: Container(
-                                      height: Get.width*0.14,
-                                      width: Get.width*0.14,
-                                      padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 17),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                        color: AppColors.black,
-                                      ),
-                                       child: Image.asset(ImagesPaths.document,height: 24,width: 24,),
-                                    ).paddingOnly(left: 20,right: 10,bottom: 5),
-                                  ),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-
-                                          width: Get.width*.55,
-                                          child: Text(
-                                            overflow: TextOverflow.ellipsis,
-                                            index==0||index == 1?controller.newList[index]:"${controller.newList[index]} Certification",style:Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColors.yellow),).paddingOnly(top: 12)),
-                                      Text(index ==0?"Upload your Emirates ID ...":index ==1?"Upload your passport ...":"Upload your Certification ...",style:Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 12),).paddingOnly(top: 10),
-
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  const Icon(Icons.arrow_forward_ios_outlined,color: AppColors.impgrey,size: 22).paddingOnly(right: 15),
-                                ],
-                              ),
-                            ],
-                          ).paddingOnly(left: 0),
-                        ).paddingOnly(bottom: Get.height*0.02),
+                FutureBuilder(
+                  future: CallAPI.getDocStatus(storage.read("userId").toString()),
+                  builder: (BuildContext context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      ).paddingOnly(top: 20);
+                    }
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Text('Error: ${snapshot.error}'),
                       );
+                    }
 
-                  },itemCount: controller.newList.length,)
+                    if (!snapshot.hasData || snapshot.data!.result!.isEmpty) {
+                      return Center(
+                        child: Text('No data available'),
+                      );
+                    }
+
+                    // Combine both lists
+                    final combinedList = [
+                      ...snapshot.data!.result!.map((result) => {'category': {'name': result.category!.name}}),
+                      ...controller.categoryname.map((name) => {'category': {'name': name}}),
+                    ];
+
+                    return
+                      ListView.builder(
+                      itemCount: combinedList.length,
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      padding: EdgeInsets.zero,
+                      itemBuilder: (context, index) {
+                        final item = combinedList[index];
+                        final categoryName = item['category']!['name'] ?? 'Unknown';
+
+                        return InkWell(
+                          splashColor: Colors.transparent,
+                          onTap: () {
+                            if (index < snapshot.data!.result!.length) {
+                              final userId = snapshot.data!.result![index].userId ?? "";
+                              final categoryId = snapshot.data!.result![index].category?.id ?? "";
+
+                              Get.toNamed(AppRoutes.trainerPassport, arguments: {
+                                "userId": userId,
+                                "categoryName": "",
+                                "categoryId": categoryId,
+                              });
+                            } else {
+                              Get.toNamed(AppRoutes.trainerPassport, arguments: {
+                                "categoryName": categoryName,
+
+                              });
+                            }
+                          },
+                          child: Container(
+                            height: 70,
+                            width: Get.width,
+                            decoration: BoxDecoration(
+                              color: AppColors.greyButton,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Transform.translate(
+                                      offset: Offset(-10, 2),
+                                      child: Container(
+                                        height: Get.width * 0.14,
+                                        width: Get.width * 0.14,
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 15, vertical: 17),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(5),
+                                          color: AppColors.black,
+                                        ),
+                                        child: Image.asset(
+                                          ImagesPaths.document,
+                                          height: 24,
+                                          width: 24,
+                                        ),
+                                      ).paddingOnly(left: 20, right: 10, bottom: 5),
+                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          width: Get.width * .55,
+                                          child: Text(
+                                            categoryName,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleLarge
+                                                ?.copyWith(color: AppColors.yellow),
+                                          ).paddingOnly(top: 12),
+                                        ),
+                                        Text(
+                                          "Upload your Certification ...",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelSmall
+                                              ?.copyWith(fontSize: 12),
+                                        ).paddingOnly(top: 10),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.arrow_forward_ios_outlined,
+                                      color: AppColors.impgrey,
+                                      size: 22,
+                                    ).paddingOnly(right: 15),
+                                  ],
+                                ),
+                              ],
+                            ).paddingOnly(left: 0),
+                          ).paddingOnly(bottom: Get.height * 0.02),
+                        );
+                      },
+                    );
+                  },
                 ),
                 SizedBox(height: Get.height*0.02,),
                 Column(crossAxisAlignment: CrossAxisAlignment.start,
@@ -173,22 +220,13 @@ class MoreAboutYouUi extends StatelessWidget {
                               Text('I accept the terms and conditions', style: TextStyle(color: Colors.white,fontSize: 12)),
 
                             ],
-                          )
-                        // CheckboxListTile(
-                        //   activeColor: AppColors.yellow,
-                        //   checkColor: Colors.black,
-                        //   title: Text('I accept the terms and conditions', style: TextStyle(color: Colors.white,fontSize: 12)),
-                        //   value: controller.isChecked.value,
-                        //   onChanged: (value) {
-                        //     controller.isChecked.value = value!;
-                        //   },
-                        // ),
+
                       ),
                     )),
 
 
 
-                  ],
+                    ) ],
                 ),
                 SizedBox(height: Get.height*0.01),
                 Center(child:

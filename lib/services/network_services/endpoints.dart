@@ -10,7 +10,8 @@ class Endpoints{
   static const String epSentOTP="sendOTP";
   /// CATEGORY
   static const String epGetCategory="getCategory?status=true&limit=10&page=0";
-
+  /// STATUS OF DOC
+  static const String epGetDocStatus="trainer/getRegisterTrainerCredentials?userId=";
 
 
 }
