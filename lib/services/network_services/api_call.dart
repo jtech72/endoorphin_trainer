@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:endoorphin_trainer/services/models/response_models/get_category_model.dart';
 
 import '../../custom_Widgets/common_widgets.dart';
+import '../models/request_models/category_document_model.dart';
 import '../models/request_models/login_model.dart';
 import '../models/request_models/send_otp_model.dart';
 import '../models/request_models/sign_up_model.dart';
@@ -13,7 +14,7 @@ import 'endpoints.dart';
 
 class CallAPI {
   /// SEND OTP
-  static   Future<SentOtpModel> sentOTP({required var request}) async {
+  static Future<SentOtpModel> sentOTP({required var request}) async {
     SentOtpModel result = SentOtpModel();
     try {
       Map<dynamic, dynamic> json = await APIManager().postAPICall(
@@ -39,8 +40,9 @@ class CallAPI {
       return result;
     }
   }
+
   /// LOGIN
-  static   Future<LoginModel> login({required var request}) async {
+  static Future<LoginModel> login({required var request}) async {
     LoginModel result = LoginModel();
     try {
       Map<dynamic, dynamic> json = await APIManager().postAPICall(
@@ -66,12 +68,14 @@ class CallAPI {
       return result;
     }
   }
+
   /// SIGN UP
-  static   Future<SignUpModel> uploadUserdata({required var request}) async {
+  static Future<SignUpModel> uploadUserdata({required var request}) async {
     SignUpModel result = SignUpModel();
     try {
       Map<dynamic, dynamic> json = await APIManager().postAPICall(
-        request: request, endpoint: Endpoints.epSignUp,
+        request: request,
+        endpoint: Endpoints.epSignUp,
       );
 
       SignUpModel responseModel = SignUpModel.fromJson(json);
@@ -97,7 +101,8 @@ class CallAPI {
   static Future<GetCategoryModel> getCategory() async {
     try {
       String endPoint = Endpoints.epGetCategory;
-      Map<String, dynamic> json = await APIManager().getAllCall(endPoint: endPoint);
+      Map<String, dynamic> json =
+          await APIManager().getAllCall(endPoint: endPoint);
       GetCategoryModel responseModel = GetCategoryModel.fromJson(json);
       if (responseModel.status == 200) {
         log("CALLING_ENDPOINT: $endPoint ,RESPONSE:  $json");
@@ -105,7 +110,7 @@ class CallAPI {
       } else {
         throw Exception("Error: ${responseModel.status}");
       }
-    } catch (e,st) {
+    } catch (e, st) {
       log(e.toString());
       log(st.toString());
       return GetCategoryModel(status: 500); // Return an error status
@@ -120,8 +125,10 @@ class CallAPI {
       String fullUrl = '$endPoint$params';
 
       // Call the API with the constructed URL
-      Map<String, dynamic> json = await APIManager().getAllCall(endPoint: fullUrl);
-      GetTrainerDocStatusModel responseModel = GetTrainerDocStatusModel.fromJson(json);
+      Map<String, dynamic> json =
+          await APIManager().getAllCall(endPoint: fullUrl);
+      GetTrainerDocStatusModel responseModel =
+          GetTrainerDocStatusModel.fromJson(json);
 
       if (responseModel.status == 200) {
         log("CALLING_ENDPOINT: $fullUrl ,RESPONSE:  $json");
@@ -137,30 +144,61 @@ class CallAPI {
   }
 
   /// UPLOAD CERTIFICATE DETAILS (CATEGORY TYPE)
-
-  /// UPLOAD CERTIFICATE DETAILS (PASSPORT & EMIRATES TYPE)
-  static   Future<SignUpModel> uploadPassportAndEmiratesId({required var request}) async {
-    SignUpModel result = SignUpModel();
+ static Future<DocumentModel> uploadCertificate({required Map<String, String> fields, required Map<String, File> files,}) async {
+    DocumentModel result = DocumentModel();
     try {
-      Map<dynamic, dynamic> json = await APIManager().postAPICall(
-        request: request, endpoint: Endpoints.epSignUp,
+      Map<String, dynamic> json = await APIManager().putMultipartAPICall(
+        endPoint: Endpoints.epUploadCertificate,
+        fields: fields,
+        files: files,
       );
 
-      SignUpModel responseModel = SignUpModel.fromJson(json);
+      DocumentModel responseModel = DocumentModel.fromJson(json);
       if (responseModel.status == 200) {
         result = responseModel;
-        printResult(
-            screenName: 'API CALL',
-            msg: "CALLING ENDPOINTS ${Endpoints.epLogin}, RESULT:$json");
-
+        print("CALLING ENDPOINTS ${Endpoints.epLogin}, RESULT: $json");
         return result;
       } else {
         result = responseModel;
         return result;
       }
     } on Exception catch (e, st) {
-      printResult(
-          screenName: 'API CALL', msg: "", error: e.toString(), stackTrace: st);
+      print("Error in API CALL: $e");
+      print(st);
+      return result;
+    }
+  }
+
+  /// UPLOAD CERTIFICATE DETAILS (PASSPORT & EMIRATES TYPE)
+  static Future<DocumentModel> uploadPassportAndEmirates({required Map<String, String> fields, required Map<String, File> files,}) async {
+    DocumentModel result = DocumentModel();
+    try {
+      // Convert File objects to List<int>
+      Map<String, List<int>> filesAsBytes = {};
+      files.forEach((key, file) {
+        List<int> bytes = file.readAsBytesSync();
+        filesAsBytes[key] = bytes;
+      });
+
+      // Call the APIManager method with converted files
+      Map<String, dynamic> json = await APIManager().putMultipartAPICall(
+        endPoint: Endpoints.epUploadPassportAndEmirates,
+        fields: fields,
+        files: files,
+      );
+
+      DocumentModel responseModel = DocumentModel.fromJson(json);
+      if (responseModel.status == 200) {
+        result = responseModel;
+        log("CALLING ENDPOINTS ${Endpoints.epLogin}, RESULT: $json");
+        return result;
+      } else {
+        result = responseModel;
+        return result;
+      }
+    } on Exception catch (e, st) {
+      print("Error in API CALL: $e");
+      print(st);
       return result;
     }
   }

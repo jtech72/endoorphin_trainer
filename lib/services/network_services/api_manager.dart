@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import '../../utils/exports.dart';
 import 'custum_exceptions.dart';
 import 'endpoints.dart';
+import 'package:http_parser/http_parser.dart';
 
 class APIManager {
   String baseUrl = Endpoints.baseUrl;
@@ -95,7 +96,8 @@ class APIManager {
 
 
 // MULTIPART REQUEST
-  Future<Map<String, dynamic>> putMultipartAPICall({required String endPoint, required String fields, required File files}) async {
+
+  Future<Map<String, dynamic>> putMultipartAPICall({required String endPoint, required Map<String, String> fields, required Map<String, File> files,}) async {
     Uri urlForPut = Uri.parse("${Endpoints.baseUrl}$endPoint");
 
     log("Calling API: $urlForPut");
@@ -105,10 +107,17 @@ class APIManager {
     try {
       final request = http.MultipartRequest('PUT', urlForPut);
 
+      // Add fields to the request
+      fields.forEach((key, value) {
+        request.fields[key] = value;
+      });
 
-      final multipartFile = buildMultipartFileFromFile(files);
-      request.files.add(multipartFile);
-      request.fields['userName']=fields;
+      // Add files to the request
+      for (var entry in files.entries) {
+        final multipartFile = await buildMultipartFileFromFile(entry.key, entry.value);
+        request.files.add(multipartFile);
+      }
+
       final response = await request.send();
       final responseString = await response.stream.bytesToString();
 
@@ -118,17 +127,17 @@ class APIManager {
       // showSnackBar("", "Internet not available");
       throw FetchDataException('No Internet connection');
     } on Error catch (e, st) {
-      log('Error in API Manager: $e', stackTrace: st);
-
+      log('Error: $e');
+      log('ST: $st');
     }
 
     return responseJson;
   }
-  http.MultipartFile buildMultipartFileFromFile(File file) {
+  Future<http.MultipartFile> buildMultipartFileFromFile(String fieldName, File file) async {
     return http.MultipartFile(
-      'file', // Field name for the file
+      fieldName, // Field name for the file
       file.openRead(),
-      file.lengthSync(),
+      await file.length(),
       filename: file.path.split('/').last, // You can customize the filename here
     );
   }

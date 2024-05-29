@@ -43,7 +43,7 @@ class RegistrationController extends GetxController{
         "phoneNumber": storage.read("phoneNumber"),
         "password": passwordController.text.trim(),
         "role": "trainer",
-        "gender":"male",
+        "gender":selectedOption1.value.toString(),
         "lastName":lastNameController.text.trim(),
         "categoryId": selectedOne2.value
       };

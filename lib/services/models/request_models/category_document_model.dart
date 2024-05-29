@@ -1,10 +1,10 @@
-class CategoryDocumentModel {
+class DocumentModel {
   String? message;
   int? status;
 
-  CategoryDocumentModel({this.message, this.status});
+  DocumentModel({this.message, this.status});
 
-  CategoryDocumentModel.fromJson(Map<String, dynamic> json) {
+  DocumentModel.fromJson(Map<dynamic, dynamic> json) {
     message = json['message'];
     status = json['status'];
   }

@@ -549,7 +549,7 @@ class BioUi extends StatelessWidget {
                                 child: InkButton(
                                     child: Text('OK',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 18,
                                         fontFamily: 'Montserrat'),), onTap: (){
-                                  Get.offAllNamed(AppRoutes.bottomNavigation);
+                                  Get.offAllNamed(AppRoutes.login);
                                 },height: 35,width: 95),
                               ),
                             ],shape: RoundedRectangleBorder(
