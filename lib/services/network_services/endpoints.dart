@@ -12,6 +12,9 @@ class Endpoints{
   static const String epGetCategory="getCategory?status=true&limit=10&page=0";
   /// STATUS OF DOC
   static const String epGetDocStatus="trainer/getRegisterTrainerCredentials?userId=";
-
+  /// UPLOAD CERTIFICATE
+  static const String epUploadCertificate="trainer/uploadDocumnetByTrainer";
+  /// UPLOAD PASSPORT AND EMIRATES
+  static const String epUploadPassportAndEmirates="trainer/uploadIdByTrainer";
 
 }

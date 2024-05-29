@@ -32,7 +32,7 @@ class UploadImagesUi extends StatelessWidget {
             height: 2,width: 2,
             child: Icon(Icons.arrow_back_ios,size: 18,color: Colors.white,)),
         ),
-        title: Text(controller.documentIndex == 0? "Emirates ID":controller.documentIndex == 1?'Passport':"Certification",style: Theme.of(context).textTheme.headlineSmall,),
+        title: Text(controller.certificationDetails == 0? "Emirates ID":controller.certificationDetails == 1?'Passport':"Certification",style: Theme.of(context).textTheme.headlineSmall,),
 
       ),
       body: Obx(
@@ -170,7 +170,7 @@ class UploadImagesUi extends StatelessWidget {
                         child: InkButton(child: Text('Save',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
                             fontFamily: 'Montserrat'),),
                             onTap: (){
-                         Get.toNamed(AppRoutes.moreaboutyou,arguments: [""]);
+                          controller.onSaveButton();
                         }).paddingOnly(bottom: Get.height*0.02),
                       ),
                       Center(

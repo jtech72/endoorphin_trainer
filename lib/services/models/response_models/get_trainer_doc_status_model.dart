@@ -12,7 +12,7 @@ class GetTrainerDocStatusModel {
     if (json['result'] != null) {
       result = <Result>[];
       json['result'].forEach((v) {
-        result!.add(new Result.fromJson(v));
+        result!.add(Result.fromJson(v));
       });
     }
     count = json['count'];
@@ -34,25 +34,28 @@ class GetTrainerDocStatusModel {
 class Result {
   int? id;
   int? userId;
-  Null? document;
-  Null? status;
-  int? categoryId;
-  Null? description;
-  Null? approveDate;
-  Null? rejectDate;
-  Null? approveStatus;
-  Null? comment;
-  Null? remark;
-  Null? passportName;
-  Null? passportNumber;
-  Null? emiratesName;
-  Null? emiratesNumber;
-  Null? passportfrontImg;
-  Null? passportbackImg;
-  Null? emiratesfrontImg;
-  Null? emiratesbackImg;
-  Null? documentForntImg;
-  Null? documentBackImg;
+  dynamic? document;
+  dynamic? status;
+  dynamic? categoryId;
+  dynamic? description;
+  dynamic? approveDate;
+  dynamic? rejectDate;
+  String? approveStatus;
+  dynamic? comment;
+  dynamic? remark;
+  dynamic? passport;
+  dynamic? passportName;
+  dynamic? passportNumber;
+  String? emiratesName;
+  String? emiratesNumber;
+  dynamic? passportfrontImg;
+  dynamic? passportbackImg;
+  String? emirates;
+  String? emiratesfrontImg;
+  String? emiratesbackImg;
+  dynamic? documentForntImg;
+  String? documentFrontImg;
+  String? documentBackImg;
   String? createdAt;
   String? updatedAt;
   User? user;
@@ -70,15 +73,18 @@ class Result {
         this.approveStatus,
         this.comment,
         this.remark,
+        this.passport,
         this.passportName,
         this.passportNumber,
         this.emiratesName,
         this.emiratesNumber,
         this.passportfrontImg,
         this.passportbackImg,
+        this.emirates,
         this.emiratesfrontImg,
         this.emiratesbackImg,
         this.documentForntImg,
+        this.documentFrontImg,
         this.documentBackImg,
         this.createdAt,
         this.updatedAt,
@@ -97,21 +103,24 @@ class Result {
     approveStatus = json['approveStatus'];
     comment = json['comment'];
     remark = json['remark'];
+    passport = json['passport'];
     passportName = json['passportName'];
     passportNumber = json['passportNumber'];
     emiratesName = json['emiratesName'];
     emiratesNumber = json['emiratesNumber'];
     passportfrontImg = json['passportfrontImg'];
     passportbackImg = json['passportbackImg'];
+    emirates = json['emirates'];
     emiratesfrontImg = json['emiratesfrontImg'];
     emiratesbackImg = json['emiratesbackImg'];
     documentForntImg = json['documentForntImg'];
+    documentFrontImg = json['documentFrontImg'];
     documentBackImg = json['documentBackImg'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
     category = json['category'] != null
-        ? new Category.fromJson(json['category'])
+        ? Category.fromJson(json['category'])
         : null;
   }
 
@@ -128,15 +137,18 @@ class Result {
     data['approveStatus'] = approveStatus;
     data['comment'] = comment;
     data['remark'] = remark;
+    data['passport'] = passport;
     data['passportName'] = passportName;
     data['passportNumber'] = passportNumber;
     data['emiratesName'] = emiratesName;
     data['emiratesNumber'] = emiratesNumber;
     data['passportfrontImg'] = passportfrontImg;
     data['passportbackImg'] = passportbackImg;
+    data['emirates'] = emirates;
     data['emiratesfrontImg'] = emiratesfrontImg;
     data['emiratesbackImg'] = emiratesbackImg;
     data['documentForntImg'] = documentForntImg;
+    data['documentFrontImg'] = documentFrontImg;
     data['documentBackImg'] = documentBackImg;
     data['createdAt'] = createdAt;
     data['updatedAt'] = updatedAt;
@@ -157,18 +169,18 @@ class User {
   String? password;
   String? email;
   String? phoneNumber;
-  Null? token;
-  Null? sessionCode;
+  dynamic? token;
+  dynamic? sessionCode;
   String? gender;
-  Null? deviceId;
-  Null? profileImg;
-  Null? creditAmount;
-  Null? activeStatus;
-  Null? otp;
+  dynamic? deviceId;
+  dynamic? profileImg;
+  dynamic? creditAmount;
+  dynamic? activeStatus;
+  dynamic? otp;
   bool? status;
   String? createdAt;
   String? updatedAt;
-  Null? roleId;
+  int? roleId;
 
   User(
       {this.id,

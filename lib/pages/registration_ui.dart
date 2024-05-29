@@ -1,5 +1,6 @@
 
 import 'dart:developer';
+import 'dart:ffi';
 
 import 'package:endoorphin_trainer/controllers/registration_controller.dart';
 import 'package:endoorphin_trainer/services/network_services/api_call.dart';
@@ -379,6 +380,7 @@ class RegistrationUi extends StatelessWidget {
                   color: Colors.white,
                   onSelected: (selectedValue) {
                     controller.selectedOption1.value = selectedValue;
+                    log(controller.selectedOption1.value);
                   },
                   itemBuilder: (BuildContext context) {
                     return controller.items2.map((String value) {

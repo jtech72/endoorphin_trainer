@@ -11,7 +11,13 @@ class TrainerPassportController extends GetxController{
    if(certificateNumber.text.isEmpty||certificateName.text.isEmpty){
      showSnackBar("Please enter a certificate number and name");
    }else{
-     Get.toNamed(AppRoutes.uploadimage,arguments: certificationDetails!["categoryName"]);
+     Get.toNamed(AppRoutes.uploadimage,arguments: {
+       "userId": certificationDetails!["userId"],
+       "categoryName": certificationDetails!["categoryName"],
+       "categoryId": certificationDetails!["categoryId"],
+       "certificateNumber": certificateNumber.text,
+       "certificateName": certificateName.text,
+     });
 
    }
  }
