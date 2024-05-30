@@ -475,7 +475,7 @@ class RegistrationUi extends StatelessWidget {
                                                 value: controller.checkedList.length > index ? controller.checkedList[index] : false, // Use checkedList to determine checkbox state
                                                 onChanged: (value) {
                                                   controller.toggleItem(item, index);
-                                                  // Check if the checkbox is checked
+                                                  log("Added value ==>${item.toString()}");
                                                   if (value ?? false) {
                                                     // Add the item to selectedOne2 list
                                                     controller.selectedOne2.add(item!);
