@@ -145,7 +145,7 @@ class LoginUi extends StatelessWidget {
                                       FilteringTextInputFormatter.deny(
                                           RegExp(r'\s')),
                                     ],
-                                    maxLength: 10,
+                                    maxLength: 9,
                                     style: Theme.of(context)
                                         .textTheme
                                         .labelMedium!

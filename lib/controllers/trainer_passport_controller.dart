@@ -1,19 +1,30 @@
 import 'dart:developer';
-import 'dart:io';
-
 import 'package:endoorphin_trainer/utils/exports.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 
 class TrainerPassportController extends GetxController{
-  int?  documentIndex ;
+  Map<String, dynamic>? certificationDetails ;
+  TextEditingController certificateName = TextEditingController();
+  TextEditingController certificateNumber = TextEditingController();
 
+ onFileUpload(){
+   if(certificateNumber.text.isEmpty||certificateName.text.isEmpty){
+     showSnackBar("Please enter a certificate number and name");
+   }else{
+     Get.toNamed(AppRoutes.uploadimage,arguments: {
+       "userId": certificationDetails!["userId"],
+       "categoryName": certificationDetails!["categoryName"],
+       "categoryId": certificationDetails!["categoryId"],
+       "certificateNumber": certificateNumber.text,
+       "certificateName": certificateName.text,
+     });
 
+   }
+ }
   @override
   void onInit() {
-    documentIndex = Get.arguments;
-    print(documentIndex.toString());
+    certificationDetails = Get.arguments ?? "";
+    log(certificationDetails.toString());
     super.onInit();
   }
 }

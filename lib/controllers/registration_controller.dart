@@ -1,29 +1,21 @@
+import 'dart:developer';
 import 'dart:ffi';
-
 import 'package:endoorphin_trainer/utils/exports.dart';
-import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
+import '../services/network_services/api_call.dart';
 class RegistrationController extends GetxController{
-  final items = [ "Yoga","Padel Tennis","Swimming","Tennis","Boxing","Personal Training"];
   final items2 = ['Male','Female',];
-  RxString selectedItem = 'Male'.obs;
-  RxList<String> selectedOne = <String>[].obs;
-  RxList<String> selectedOne2 = <String>[].obs;
-  final List<String> dataList = [
-    'Yoga',
-    'Tennis',
-    'Swimming',
-    'Boxing',
-    'Padel Tannis',
-    'Personal Training',
-    'Football',
-  ];
-  void setSelectedItem(String value) {
-    selectedItem.value = value;
-  }
+  RxList<int> selectedOne2 = <int>[].obs;
   RxList<bool> checkedList = <bool>[].obs;
+  final selectedOption1 = 'Select Gender'.obs;
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController genderController = TextEditingController();
 
-  void toggleItem(String item, int index) {
+
+  void toggleItem(dynamic item, int index) {
     if (checkedList.length <= index) {
       // Expand the list to accommodate the new item's index
       checkedList.addAll(List.filled(index - checkedList.length + 1, false));
@@ -31,8 +23,58 @@ class RegistrationController extends GetxController{
     checkedList[index] = !checkedList[index]; // Toggle the checked state
   }
 
+  /// ON CONTINUE BUTTON
+  Future<void> onContinueButton()async {
+    if (firstNameController.text.isEmpty || lastNameController.text.isEmpty || emailController.text.isEmpty  || passwordController.text.isEmpty || confirmPasswordController.text.isEmpty) {
+      showSnackBar("All fields must be filled to continue");
+      return; // Exit early as we don't need to proceed further
+    }
+    if (passwordController.text != confirmPasswordController.text) {
+      showSnackBar("Password and confirm password do not match");
+      return; // Exit early as we don't need to proceed further
+    }
+    if (selectedOne2.isEmpty) {
+      showSnackBar("Please select at least one category to continue");
+      return; // Exit early as we don't need to proceed further
+    } else{
+      Map<String, dynamic> request = {
+      "userName" : firstNameController.text.trim(),
+        "email" :  emailController.text.trim(),
+        "phoneNumber": storage.read("phoneNumber"),
+        "password": passwordController.text.trim(),
+        "role": "trainer",
+        "gender":selectedOption1.value.toString(),
+        "lastName":lastNameController.text.trim(),
+        "categoryId": selectedOne2.value
+      };
+      log("DATA FOR PROFILE INFO $request");
+      try {
+        showLoader();
+        await CallAPI.uploadUserdata(request: request).then((value) {
+          if (value.status == 200) {
+            dismissLoader();
+            storage.write("userId", value.userId.toString());
 
-  // Define an observable variable to track the selected option
-  final selectedOption = 'Yoga''Tennis'.obs;
-  final selectedOption1 = 'Select Gender'.obs;
+            log("Success");
+            Get.toNamed(AppRoutes.moreaboutyou ,arguments: value.userId.toString());
+          } else {
+            dismissLoader();
+            log("failed");
+            showSnackBar(value.message);
+          }
+          //
+        });
+      } on Exception catch (e,st) {
+        log(e.toString());
+        log(st.toString());
+        dismissLoader();
+      }
+
+
+    }
+
+
+  }
+
+
 }

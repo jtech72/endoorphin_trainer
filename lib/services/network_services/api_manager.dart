@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import '../../utils/exports.dart';
 import 'custum_exceptions.dart';
 import 'endpoints.dart';
+import 'package:http_parser/http_parser.dart';
 
 class APIManager {
   String baseUrl = Endpoints.baseUrl;
@@ -13,20 +14,23 @@ class APIManager {
   Future<Map<dynamic, dynamic>> postAPICall({required Map<String, dynamic> request, required String endpoint}) async {
     var responseJson = {};
     try {
+      log('Request Body: ${jsonEncode(request)}');
       final response = await http.post(
         Uri.parse(baseUrl + endpoint),
         headers: {"Content-Type": "application/json"},
+
         body: jsonEncode(request),
       );
 
       responseJson = _response(response);
     } on SocketException {
-      // Get.toNamed(AppRoutes.noInternet);
+      Get.toNamed(AppRoutes.error);
       throw FetchDataException('No Internet connection');
     } on HttpException {
       throw FetchDataException('HTTP Exception occurred');
     } catch (e, st) {
       log('Error in API Manager: $e', stackTrace: st);
+      log('Error in API Manager: $st');
       // Get.toNamed(AppRoutes.error);
       throw FetchDataException('Unexpected error occurred');
     }
@@ -58,49 +62,94 @@ class APIManager {
     return responseJson;
   }
 
-  // /// MULTIPART REQUEST
-  // Future<ResisterUserModel> registerUser({
-  //   required String userName,
-  //   required String password,
-  //   required String email,
-  //   required String phoneNumber,
-  //   required String role,
-  // }) async {
-  //   printResult(
-  //       screenName: "APIMANAGER",
-  //       msg: "DATA FOR POST $userName $password $email $role $phoneNumber");
-  //   var url = Uri.parse('${Endpoints.baseUrl}${Endpoints.epRegister}');
-  //   var request = http.MultipartRequest('POST', url);
-  //
-  //   request.fields['userName'] = userName;
-  //   request.fields['password'] = password;
-  //   request.fields['email'] = email;
-  //   request.fields['role'] = role;
-  //   request.fields['phoneNumber'] = phoneNumber;
-  //
-  //   try {
-  //     var streamedResponse = await request.send();
-  //     var response = await http.Response.fromStream(streamedResponse);
-  //
-  //     if (response.statusCode == 200) {
-  //       return ResisterUserModel.fromJson(json.decode(response.body));
-  //     } else {
-  //       Get.toNamed(AppRoutes.error);
-  //       throw FetchDataException('Failed to register user with StatusCode: ${response.statusCode}');
-  //     }
-  //   } catch (e, st) {
-  //     printResult(screenName: "API MANAGER", error: e.toString(), stackTrace: st, msg: "");
-  //     Get.toNamed(AppRoutes.error);
-  //     throw Exception('Failed to register user: $e');
-  //   }
-  // }
+
+  Future<Map<String, dynamic>> postAPICallWithoutHeaders({
+    required String endPoint,
+    required Map<String, dynamic> request,
+  }) async {
+    Uri urlForPut = Uri.parse("${Endpoints.baseUrl}$endPoint");
+
+    log("Calling API: $urlForPut");
+    log("Calling Request: $request");
+
+    Map<String, dynamic> responseJson = {};
+
+    try {
+      final response = await http.post(
+        urlForPut,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: request.map((key, value) => MapEntry(key, value.toString())),
+      );
+
+      log("Response Body: ${response.body}");
+
+      responseJson = _response(response);
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    } catch (e, st) {
+      log('Error: $e');
+      log('ST: $st');
+    }
+
+    return responseJson;
+  }
+
+
+// MULTIPART REQUEST
+
+  Future<Map<String, dynamic>> putMultipartAPICall({required String endPoint, required Map<String, String> fields, required Map<String, File> files,}) async {
+    Uri urlForPut = Uri.parse("${Endpoints.baseUrl}$endPoint");
+
+    log("Calling API: $urlForPut");
+
+    Map<String, dynamic> responseJson = {};
+
+    try {
+      final request = http.MultipartRequest('PUT', urlForPut);
+
+      // Add fields to the request
+      fields.forEach((key, value) {
+        request.fields[key] = value;
+      });
+
+      // Add files to the request
+      for (var entry in files.entries) {
+        final multipartFile = await buildMultipartFileFromFile(entry.key, entry.value);
+        request.files.add(multipartFile);
+      }
+
+      final response = await request.send();
+      final responseString = await response.stream.bytesToString();
+
+      responseJson = _response(http.Response(responseString, response.statusCode));
+    } on SocketException {
+      // Get.back();
+      // showSnackBar("", "Internet not available");
+      throw FetchDataException('No Internet connection');
+    } on Error catch (e, st) {
+      log('Error: $e');
+      log('ST: $st');
+    }
+
+    return responseJson;
+  }
+  Future<http.MultipartFile> buildMultipartFileFromFile(String fieldName, File file) async {
+    return http.MultipartFile(
+      fieldName, // Field name for the file
+      file.openRead(),
+      await file.length(),
+      filename: file.path.split('/').last, // You can customize the filename here
+    );
+  }
 
   dynamic _response(http.Response response) {
     switch (response.statusCode) {
       case 200:
         return jsonDecode(response.body);
       case 400:
-        throw BadRequestException(response.body.toString());
+        return jsonDecode(response.body);
+
+        // throw BadRequestException(response.body.toString());
       case 401:
       case 403:
         throw UnauthorisedException(response.body.toString());
