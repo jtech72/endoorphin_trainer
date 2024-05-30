@@ -8,12 +8,13 @@ class BioUi extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BioController controller = Get.put(BioController());
     return Scaffold(
       appBar: myAppBar(title: GestureDetector(onTap: (){Get.back();},child: Text('Bio',style: Theme.of(context).textTheme.headlineSmall,)), context: context),
       body: Container(
         height: Get.height,
         width: Get.width,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(ImagesPaths.bgBlackShade,),fit: BoxFit.cover
             )
@@ -29,10 +30,22 @@ class BioUi extends StatelessWidget {
                       SizedBox(height: Get.height*0.02,),
                       Stack(
                         children: [
-                          CircleAvatar(
-                            radius: 60,
-                            backgroundImage: AssetImage(ImagesPaths.profilePic),
+                          GestureDetector(
+                          onTap: () {
+        controller.openCamera();
+        },
+          child: Obx(
+                () => CircleAvatar(
+                  backgroundColor: AppColors.blackShade,
+              radius: 60,
+              backgroundImage: controller.profileImage.value == null
+                  ? AssetImage(ImagesPaths.profile) as ImageProvider<Object>?
+                  : FileImage(controller.profileImage.value!) as ImageProvider<Object>?,
+            ),
+          )
+
                           ),
+
                           Positioned(
                             bottom: 0,
                             right: 10,
@@ -68,6 +81,7 @@ class BioUi extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: TextField(
+                          controller: controller.nicknameController ,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(64),
                             FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -125,6 +139,7 @@ class BioUi extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: TextField(
+                          controller: controller.professionalTitleController,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(64),
                             FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -182,6 +197,7 @@ class BioUi extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: TextField(
+                          controller: controller.experienceController,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(64),
                             FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -239,6 +255,7 @@ class BioUi extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: TextField(
+                          controller: controller.expertiseController,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(64),
                             FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -296,6 +313,7 @@ class BioUi extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: TextField(
+                          controller: controller.funFactsController,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(64),
                             FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -353,6 +371,7 @@ class BioUi extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: TextField(
+                          controller: controller.motivationalQuoteController,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(64),
                             FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -457,7 +476,7 @@ class BioUi extends StatelessWidget {
                       // ),
                       Row(
                         children: [
-                          Text(
+                          const Text(
                             'Mention Bio',
                             // style: Theme.of(context).textTheme.displayLarge,
                           ).paddingOnly(bottom: 12,),
@@ -470,6 +489,7 @@ class BioUi extends StatelessWidget {
                             color: AppColors.yellowishWhite,
                             borderRadius: BorderRadius.circular(7)),
                         child: TextField(
+                          controller: controller.bioController,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(400),
                           ],
@@ -522,41 +542,8 @@ class BioUi extends StatelessWidget {
                         fontFamily: 'Montserrat'),
                   ),
                   onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
 
-                            backgroundColor: AppColors.Black3,
-                            title: Column(
-                              children: [
-                                SizedBox(height: Get.height*0.03,),
-                                Image.asset(ImagesPaths.cooltick,scale: 4,),
-                                SizedBox(
-                                  height: Get.height*0.02,
-                                ),
-                              ],
-                            ),
-                            content: SizedBox(
-                                width: Get.width, // Set width as per your requirement
-                                height: Get.height*0.07, // Set height as per your requirement
-                                child: Text(
-                                  'Your onboarding process has been\nsuccessfully completed. You’ll get\nnotified for further action.',style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.white),
-                                  textAlign: TextAlign.center,
-                                )),
-                            actions: [
-                              Center(
-                                child: InkButton(
-                                    child: Text('OK',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 18,
-                                        fontFamily: 'Montserrat'),), onTap: (){
-                                  Get.offAllNamed(AppRoutes.login);
-                                },height: 35,width: 95),
-                              ),
-                            ],shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),);
-                        },
-                      );
+                      controller.onSubmitButton(context);
                   }).paddingOnly(top: 30),
               SizedBox(height: Get.height*0.05,)
             ],

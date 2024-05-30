@@ -203,4 +203,38 @@ class CallAPI {
     }
   }
 
+  /// UPLOAD PROFILE DETAILS
+  static Future<DocumentModel> uploadProfileDetails({required Map<String, String> fields, required Map<String, File> files,}) async {
+    DocumentModel result = DocumentModel();
+    try {
+      // Convert File objects to List<int>
+      Map<String, List<int>> filesAsBytes = {};
+      files.forEach((key, file) {
+        List<int> bytes = file.readAsBytesSync();
+        filesAsBytes[key] = bytes;
+      });
+
+      // Call the APIManager method with converted files
+      Map<String, dynamic> json = await APIManager().putMultipartAPICall(
+        endPoint: Endpoints.epUploadProfileDetails,
+        fields: fields,
+        files: files,
+      );
+
+      DocumentModel responseModel = DocumentModel.fromJson(json);
+      if (responseModel.status == 200) {
+        result = responseModel;
+        log("CALLING ENDPOINTS ${Endpoints.epLogin}, RESULT: $json");
+        return result;
+      } else {
+        result = responseModel;
+        return result;
+      }
+    } on Exception catch (e, st) {
+      print("Error in API CALL: $e");
+      print(st);
+      return result;
+    }
+  }
+
 }

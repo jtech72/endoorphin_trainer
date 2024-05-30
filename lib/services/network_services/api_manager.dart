@@ -14,6 +14,7 @@ class APIManager {
   Future<Map<dynamic, dynamic>> postAPICall({required Map<String, dynamic> request, required String endpoint}) async {
     var responseJson = {};
     try {
+      log('calling api ${baseUrl+endpoint}');
       log('Request Body: ${jsonEncode(request)}');
       final response = await http.post(
         Uri.parse(baseUrl + endpoint),

@@ -51,6 +51,7 @@ class UploadImagesController extends GetxController {
       );
       if(result.status == 200){
         dismissLoader();
+        storage.write("Passport","true");
         log("Successfully uploaded");
         Get.offAllNamed(AppRoutes.moreaboutyou);
       }else{
@@ -84,6 +85,7 @@ class UploadImagesController extends GetxController {
       );
       if(result.status == 200){
         dismissLoader();
+        storage.write("Emirates ID","true");
         log("Successfully uploaded");
         Get.offAllNamed(AppRoutes.moreaboutyou);
       }else{

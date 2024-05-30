@@ -104,33 +104,24 @@ class MoreAboutYouUi extends StatelessWidget {
                         child: Text('No data available'),
                       );
                     }
-
                     // Combine both lists
                     final combinedList = [
                       ...snapshot.data!.result!.map((result) => {
-                            'category': {'name': result.category?.name}
+                            'category': {'name': result.category?.name},
                           }),
                       ...controller.categoryname.map((name) => {
-                            'category': {'name': name}
+                            'category': {'name': name},
                           }),
                     ];
 
-                    return
-                      ListView.builder(
-                      itemCount: combinedList.length +
-                          2, // Adjusted itemCount to include the additional widgets
+                    return ListView.builder(
+                      itemCount: snapshot.data!.result!.length +
+                          4, // Adjusted itemCount to include the additional widgets
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       padding: EdgeInsets.zero,
                       itemBuilder: (context, index) {
-                        if (index < combinedList.length) {
-                          final item = combinedList[index];
-                          final categoryName =
-                              item['category']?['name'] ?? 'Unknown';
-
-                          // if (categoryName == 'Unknown') {
-                          //   return const SizedBox.shrink();
-                          // }
+                        if (index < snapshot.data!.result!.length) {
                           return index < snapshot.data!.result!.length &&
                                   snapshot.data!.result![index]
                                           .documentBackImg !=
@@ -810,36 +801,23 @@ class MoreAboutYouUi extends StatelessWidget {
                                       : InkWell(
                                           splashColor: Colors.transparent,
                                           onTap: () {
-                                            if (index <
-                                                snapshot.data!.result!.length) {
-                                              final userId = snapshot.data!
-                                                      .result![index].userId ??
-                                                  "";
-                                              final categoryId = snapshot
-                                                      .data!
-                                                      .result![index]
-                                                      .category
-                                                      ?.id ??
-                                                  "";
+                                            final userId = snapshot.data!
+                                                    .result![index].userId ??
+                                                "";
+                                            final categoryId = snapshot
+                                                    .data!
+                                                    .result![index]
+                                                    .category
+                                                    ?.id ??
+                                                "";
 
-                                              Get.toNamed(
-                                                  AppRoutes.trainerPassport,
-                                                  arguments: {
-                                                    "userId": userId,
-                                                    "categoryName": "",
-                                                    "categoryId": categoryId,
-                                                  });
-                                            } else {
-                                              Get.toNamed(
-                                                  AppRoutes.trainerPassport,
-                                                  arguments: {
-                                                    "userId": storage
-                                                        .read("userId")
-                                                        .toString(),
-                                                    "categoryName":
-                                                        categoryName,
-                                                  });
-                                            }
+                                            Get.toNamed(
+                                                AppRoutes.trainerPassport,
+                                                arguments: {
+                                                  "userId": userId,
+                                                  "categoryName": "",
+                                                  "categoryId": categoryId,
+                                                });
                                           },
                                           child: Container(
                                             height: 70,
@@ -897,7 +875,16 @@ class MoreAboutYouUi extends StatelessWidget {
                                                           width:
                                                               Get.width * .55,
                                                           child: Text(
-                                                            categoryName,
+                                                              snapshot
+                                                                  .data!
+                                                                  .result![index]
+                                                                  .category == null ?"":
+                                                            snapshot
+                                                                .data!
+                                                                .result![index]
+                                                                .category!
+                                                                .name
+                                                                .toString(),
                                                             overflow:
                                                                 TextOverflow
                                                                     .ellipsis,
@@ -940,7 +927,175 @@ class MoreAboutYouUi extends StatelessWidget {
                                           ).paddingOnly(
                                               bottom: Get.height * 0.02),
                                         );
-                        } else if (index == combinedList.length) {
+                        } else if (index == snapshot.data!.result!.length && storage.read("Emirates ID") != "true") {
+                          return
+                            InkWell(
+                            onTap: () {
+                              Get.toNamed(AppRoutes.trainerPassport,
+                                  arguments: {
+                                    "userId": storage.read("userId").toString(),
+                                    "categoryName": "Emirates ID",
+                                  });
+                            },
+                            child: Container(
+                              height: 70,
+                              width: Get.width,
+                              decoration: BoxDecoration(
+                                color: AppColors.greyButton,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Transform.translate(
+                                        offset: const Offset(-10, 2),
+                                        child: Container(
+                                          height: Get.width * 0.14,
+                                          width: Get.width * 0.14,
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 15, vertical: 17),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            color: AppColors.black,
+                                          ),
+                                          child: Image.asset(
+                                            ImagesPaths.document,
+                                            height: 24,
+                                            width: 24,
+                                          ),
+                                        ).paddingOnly(
+                                            left: 20, right: 10, bottom: 5),
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            width: Get.width * .55,
+                                            child: Text(
+                                              "Emirates ID",
+                                              overflow: TextOverflow.ellipsis,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleLarge
+                                                  ?.copyWith(
+                                                      color: AppColors.yellow),
+                                            ).paddingOnly(top: 12),
+                                          ),
+                                          Text(
+                                            "Upload your emirates id...",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelSmall
+                                                ?.copyWith(fontSize: 12),
+                                          ).paddingOnly(top: 10),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.arrow_forward_ios_outlined,
+                                        color: AppColors.impgrey,
+                                        size: 22,
+                                      ).paddingOnly(right: 15),
+                                    ],
+                                  ),
+                                ],
+                              ).paddingOnly(left: 0),
+                            ).paddingOnly(bottom: Get.height * 0.02),
+                          );
+                        } else if (index == snapshot.data!.result!.length + 1 &&
+                            storage.read("Passport") != "true") {
+                          return InkWell(
+                            onTap: () {
+                              Get.toNamed(AppRoutes.trainerPassport,
+                                  arguments: {
+                                    "userId": storage.read("userId").toString(),
+                                    "categoryName": "Passport",
+                                  });
+                            },
+                            child: Container(
+                              height: 70,
+                              width: Get.width,
+                              decoration: BoxDecoration(
+                                color: AppColors.greyButton,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Transform.translate(
+                                        offset: const Offset(-10, 2),
+                                        child: Container(
+                                          height: Get.width * 0.14,
+                                          width: Get.width * 0.14,
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 15, vertical: 17),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            color: AppColors.black,
+                                          ),
+                                          child: Image.asset(
+                                            ImagesPaths.document,
+                                            height: 24,
+                                            width: 24,
+                                          ),
+                                        ).paddingOnly(
+                                            left: 20, right: 10, bottom: 5),
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            width: Get.width * .55,
+                                            child: Text(
+                                              "Passport",
+                                              overflow: TextOverflow.ellipsis,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleLarge
+                                                  ?.copyWith(
+                                                      color: AppColors.yellow),
+                                            ).paddingOnly(top: 12),
+                                          ),
+                                          Text(
+                                            "Upload your passport...",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelSmall
+                                                ?.copyWith(fontSize: 12),
+                                          ).paddingOnly(top: 10),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.arrow_forward_ios_outlined,
+                                        color: AppColors.impgrey,
+                                        size: 22,
+                                      ).paddingOnly(right: 15),
+                                    ],
+                                  ),
+                                ],
+                              ).paddingOnly(left: 0),
+                            ).paddingOnly(bottom: Get.height * 0.02),
+                          );
+                        } else if (index == snapshot.data!.result!.length + 2) {
                           return Obx(
                             () => Material(
                               type: MaterialType.transparency,
@@ -969,7 +1124,7 @@ class MoreAboutYouUi extends StatelessWidget {
                               ),
                             ),
                           );
-                        } else if (index == combinedList.length + 1) {
+                        } else if (index == snapshot.data!.result!.length + 3) {
                           return Center(
                             child: InkButton(
                               child: Text(
@@ -984,11 +1139,17 @@ class MoreAboutYouUi extends StatelessWidget {
                                     ),
                               ),
                               onTap: () {
-                                Get.toNamed(AppRoutes.bio)?.then((result) {
-                                  if (result != null && result == true) {
-                                    controller.showButton(true); // Show the button when returning from another page
-                                  }
-                                });
+                                if (controller.isChecked.value == true) {
+                                  Get.toNamed(AppRoutes.bio)?.then((result) {
+                                    if (result != null && result == true) {
+                                      controller.showButton(
+                                          true); // Show the button when returning from another page
+                                    }
+                                  });
+                                } else {
+                                  showSnackBar(
+                                      "Please accept terms and conditions");
+                                }
                               },
                             ),
                           ).paddingOnly(bottom: 15, top: 5);
