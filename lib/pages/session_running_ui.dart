@@ -220,24 +220,24 @@ class SessionRunningUi extends StatelessWidget {
                         alignment: Alignment.topCenter,
                         image: AssetImage(ImagesPaths.sessionType),
                       )),
-                  child:
-                  GestureDetector(
-                    onTap: (){
-                      log("message");
-                      controller.panelController.close();
 
-                    },
-                    child: Container(
-                        height: 30,
-                        width: 30,
-                        decoration: const BoxDecoration(
-                            shape: BoxShape.circle, color: AppColors.impgrey),
-                        child: const Icon(
-                          Icons.arrow_back,
-                          size: 25,
-                          color: AppColors.black,
-                        )).paddingOnly(top: Get.height * .05, left: 10),
-                  ),
+                  // GestureDetector(
+                  //   onTap: (){
+                  //     log("message");
+                  //     controller.panelController.close();
+                  //
+                  //   },
+                  //   child: Container(
+                  //       height: 30,
+                  //       width: 30,
+                  //       decoration: const BoxDecoration(
+                  //           shape: BoxShape.circle, color: AppColors.impgrey),
+                  //       child: const Icon(
+                  //         Icons.arrow_back,
+                  //         size: 25,
+                  //         color: AppColors.black,
+                  //       )).paddingOnly(top: Get.height * .05, left: 10),
+                  // ),
                 ),
                 Center(
                   child: Transform.translate(

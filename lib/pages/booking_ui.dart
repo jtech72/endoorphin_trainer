@@ -274,7 +274,33 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                             .textTheme
                             .headlineSmall,).paddingOnly(
                             left: 18,),
-                        _buildCalendarDialogButton()
+                        Expanded(
+                          child: Transform.translate(
+                            offset: Offset(0,0),
+                            child: Row(
+                              children: [
+                                Transform.translate(
+                                  offset: Offset(20,0),
+                                  child: Container(
+                                    height: 30,
+                                    width: 150,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.black,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        '${_selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')}',
+                                        style: TextStyle(color: Colors.white, fontSize: 10),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                _buildCalendarDialogButton()
+                              ],
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -369,7 +395,33 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                             .textTheme
                             .headlineSmall,).paddingOnly(
                             left: 18,),
-                        _buildCalendarDialogButton()
+                        Expanded(
+                          child: Transform.translate(
+                            offset: Offset(-10,0),
+                            child: Row(
+                              children: [
+                                Transform.translate(
+                                  offset: Offset(20,0),
+                                  child: Container(
+                                    height: 30,
+                                    width: 150,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.black,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        '${_selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')}',
+                                        style: TextStyle(color: Colors.white, fontSize: 10),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                _buildCalendarDialogButton()
+                              ],
+                            ),
+                          ),
+                        ),
 
                       ],
                     ),
@@ -464,7 +516,33 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                             .textTheme
                             .headlineSmall,).paddingOnly(
                             left: 18,),
-                        _buildCalendarDialogButton()
+                        Expanded(
+                          child: Transform.translate(
+                            offset: Offset(-4,0),
+                            child: Row(
+                              children: [
+                                Transform.translate(
+                                  offset: Offset(20,0),
+                                  child: Container(
+                                    height: 30,
+                                    width: 150,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.black,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        '${_selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')}',
+                                        style: TextStyle(color: Colors.white, fontSize: 10),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                _buildCalendarDialogButton()
+                              ],
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
