@@ -1,10 +1,8 @@
 import 'dart:developer';
-
 import 'package:endoorphin_trainer/controllers/more_about_you_controller.dart';
 import 'package:endoorphin_trainer/services/network_services/api_call.dart';
 import 'package:flutter/material.dart';
 import '../utils/exports.dart';
-
 class MoreAboutYouUi extends StatelessWidget {
   const MoreAboutYouUi({super.key});
   @override
@@ -114,7 +112,8 @@ class MoreAboutYouUi extends StatelessWidget {
                           }),
                     ];
 
-                    return ListView.builder(
+                    return
+                      ListView.builder(
                       itemCount: snapshot.data!.result!.length +
                           4, // Adjusted itemCount to include the additional widgets
                       physics: const NeverScrollableScrollPhysics(),
@@ -207,7 +206,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                                       ? snapshot
                                                           .data!
                                                           .result![index]
-                                                          .documentForntImg
+                                                          .documentFrontImg
                                                           .toString()
                                                       : snapshot
                                                           .data!
