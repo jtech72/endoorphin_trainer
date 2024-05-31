@@ -16,5 +16,6 @@ class Endpoints{
   static const String epUploadCertificate="trainer/uploadDocumnetByTrainer";
   /// UPLOAD PASSPORT AND EMIRATES
   static const String epUploadPassportAndEmirates="trainer/uploadIdByTrainer";
-
+  /// UPLOAD TRAINER PROFILE DETAILS
+  static const String epUploadProfileDetails="trainer/updateTrainerProfile";
 }
