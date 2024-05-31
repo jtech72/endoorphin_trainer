@@ -16,6 +16,7 @@ class RegistrationUi extends StatelessWidget {
   Widget build(BuildContext context) {
     RegistrationController controller = Get.put(RegistrationController());
     return Scaffold(
+      resizeToAvoidBottomInset: false,
      appBar: AppBar(
        toolbarHeight: 50,
        leadingWidth: Get.width * 0.14,
