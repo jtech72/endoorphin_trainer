@@ -2,6 +2,8 @@ import 'package:endoorphin_trainer/controllers/document_controller.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
 
+import '../services/network_services/api_call.dart';
+
 class DocumentUI extends StatelessWidget {
   const DocumentUI({super.key});
 
@@ -9,6 +11,7 @@ class DocumentUI extends StatelessWidget {
   Widget build(BuildContext context) {
     DocumentController controller = Get.put(DocumentController());
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: myAppBar(
           title: GestureDetector(
             onTap: (){Get.back();},
@@ -32,100 +35,145 @@ class DocumentUI extends StatelessWidget {
               Transform.translate(
                   offset: Offset(10,0),
                   child: Text('Uploaded Documents',style: Theme.of(context).textTheme.headlineSmall,).paddingOnly(bottom: Get.height*0.03,top: Get.height*0.01)),
-              ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                  itemBuilder: (context,index){
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 215,
-                        width: Get.width,
-                        decoration: BoxDecoration(
-                            color: AppColors.greyButton,
-                            borderRadius: BorderRadius.circular(5)),
-                        child: Column(
-                          children: [
-                            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(controller.newList[index],style: Theme.of(context).textTheme.titleLarge!.copyWith(color: AppColors.yellow),),
-                                Row(
-                                  children: [
-                                    Container(
-                                      height: 22,
-                                      width: 52,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                        color: Colors.black
-                                      ),
-                                      child: Center(child: Text('SAVED',style: TextStyle(fontSize: 10,fontFamily: 'Roboto',fontWeight: FontWeight.w400,color: Colors.white))),
-                                    ).paddingOnly(right: Get.width*0.03),
-                                    CircleAvatar(
-                                      backgroundColor: AppColors.yellow,
-                                      radius: 11,
-                                      child: Image.asset(ImagesPaths.tick,color: AppColors.black,width: 12,),
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ).paddingOnly(bottom: Get.height*0.01),
-                            Container(
-                              height: 1,
-                              width: Get.width,
-                              color: AppColors.lightyGrey,
-                            ).paddingOnly(bottom: Get.height*0.02),
-                            Row(
-                              children: [
-                                Flexible(
-                                  child: Container(
-                                    height: 131,
-                                    width: 204,
-                                    child: Image.asset(ImagesPaths.passportPhoto),
-                                  ),
-                                ),
-                                Column(crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text('Institute  Name',style: Theme.of(context).textTheme.labelMedium,).paddingOnly(bottom: 2),
-                                    Text('john abc',style: Theme.of(context).textTheme.labelSmall,).paddingOnly(bottom: 8),
-                                    Text('Certification Year',style: Theme.of(context).textTheme.labelMedium,).paddingOnly(bottom: 2),
-                                    Text('john abc',style: Theme.of(context).textTheme.labelSmall,),
-                                    SizedBox(
-                                      height: Get.height*0.02,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          height: 27,
-                                          width: 27,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(color: AppColors.yellow,width: 1),
-                                            borderRadius: BorderRadius.circular(40)
-                                          ),
-                                          child: Image.asset(ImagesPaths.trash,scale: 4,),
-                                        ).paddingOnly(right: Get.width*0.05),
-                                        Container(
-                                          height: 27,
-                                          width: 27,
-                                          decoration: BoxDecoration(
-                                              color: AppColors.yellow,
-                                              borderRadius: BorderRadius.circular(40)
-                                          ),
-                                          child: Image.asset(ImagesPaths.pencil,scale: 4,),
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ).paddingOnly(left: Get.width*0.04)
-                              ],
-                            )
-                          ],
-                        ).paddingAll(15),
-                      ),
+              FutureBuilder(
+                future:
+                CallAPI.getDocStatus(storage.read("userId").toString()),
+                builder: (BuildContext context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    ).paddingOnly(top: 20);
+                  }
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text('Error: ${snapshot.error}'),
                     );
-                  },itemCount:  controller.newList.length,
+                  }
+
+                  if (!snapshot.hasData || snapshot.data!.result == null) {
+                    return const Center(
+                      child: Text('No data available',style: TextStyle(color: AppColors.white),),
+                    );
+                  }
+
+                  return   SizedBox(
+                    height: Get.height-150,
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: snapshot.data!.result!.length,
+                        itemBuilder: (context,index){
+                          return
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 215,
+                          width: Get.width,
+                          decoration: BoxDecoration(
+                              color: AppColors.greyButton,
+                              borderRadius: BorderRadius.circular(5)),
+                          child: Column(
+                            children: [
+                              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                          snapshot.data!.result![index].category == null?
+                          snapshot.data!.result![index].emirates == null?
+                          snapshot.data!.result![index].passport.toString().toUpperCase():
+                              snapshot.data!.result![index].emirates.toString().toUpperCase():
+                                    snapshot.data!.result![index].category!.name.toString(),style: Theme.of(context).textTheme.titleLarge!.copyWith(color: AppColors.yellow),),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        height: 22,
+                                        width: 52,
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(5),
+                                            color: Colors.black
+                                        ),
+                                        child: Center(child: Text('SAVED',style: TextStyle(fontSize: 10,fontFamily: 'Roboto',fontWeight: FontWeight.w400,color: Colors.white))),
+                                      ).paddingOnly(right: Get.width*0.03),
+                                      CircleAvatar(
+                                        backgroundColor: AppColors.yellow,
+                                        radius: 11,
+                                        child: Image.asset(ImagesPaths.tick,color: AppColors.black,width: 12,),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ).paddingOnly(bottom: Get.height*0.01),
+                              Container(
+                                height: 1,
+                                width: Get.width,
+                                color: AppColors.lightyGrey,
+                              ).paddingOnly(bottom: Get.height*0.02),
+                              Row(
+                                children: [
+                                  Flexible(
+                                    child: Container(
+                                      height: 131,
+                                      width: 204,
+                                      child: Image.network(
+                                        fit: BoxFit.cover,
+                                          snapshot.data!.result![index].documentFrontImg == null?
+                                          snapshot.data!.result![index].passportfrontImg == null?
+                                          snapshot.data!.result![index].emiratesfrontImg.toString():
+                                          snapshot.data!.result![index].passportfrontImg.toString():
+                                          snapshot.data!.result![index].documentFrontImg.toString()),
+                                    ),
+                                  ),
+                                  Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text('Institute  Name',style: Theme.of(context).textTheme.labelMedium,).paddingOnly(bottom: 2),
+                                      Text(
+                                          snapshot.data!.result![index].category == null?
+                                              snapshot.data!.result![index].emirates == null?
+                                              snapshot.data!.result![index].passportName.toString().toUpperCase():
+                                              snapshot.data!.result![index].emiratesName.toString().toUpperCase():
+                                            snapshot.data!.result![index].category!.name.toString()
+                                      ,style: Theme.of(context).textTheme.labelSmall,).paddingOnly(bottom: 8),
+                                      Text('Certification Year',style: Theme.of(context).textTheme.labelMedium,).paddingOnly(bottom: 2),
+                                      Text('john abc',style: Theme.of(context).textTheme.labelSmall,),
+                                      SizedBox(
+                                        height: Get.height*0.02,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            height: 27,
+                                            width: 27,
+                                            decoration: BoxDecoration(
+                                                border: Border.all(color: AppColors.yellow,width: 1),
+                                                borderRadius: BorderRadius.circular(40)
+                                            ),
+                                            child: Image.asset(ImagesPaths.trash,scale: 4,),
+                                          ).paddingOnly(right: Get.width*0.05),
+                                          Container(
+                                            height: 27,
+                                            width: 27,
+                                            decoration: BoxDecoration(
+                                                color: AppColors.yellow,
+                                                borderRadius: BorderRadius.circular(40)
+                                            ),
+                                            child: Image.asset(ImagesPaths.pencil,scale: 4,),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ).paddingOnly(left: Get.width*0.04)
+                                ],
+                              )
+                            ],
+                          ).paddingAll(15),
+                        ),
+                      );
+
+                    }),
+                  )  ;
+
+                },
               ),
+
             ],
           ),
         ),

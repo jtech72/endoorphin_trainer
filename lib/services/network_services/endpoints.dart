@@ -18,4 +18,6 @@ class Endpoints{
   static const String epUploadPassportAndEmirates="trainer/uploadIdByTrainer";
   /// UPLOAD TRAINER PROFILE DETAILS
   static const String epUploadProfileDetails="trainer/updateTrainerProfile";
+  /// GET TRAINER PROFILE DETAILS
+  static const String epGetProfileDetails="trainer/getCurrentTrainerDeatils?trainerId=";
 }

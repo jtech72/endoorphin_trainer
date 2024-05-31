@@ -67,7 +67,7 @@ class LoginUi extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "  Country          Phone ",
+                        "Country             Phone ",
                         style: Theme.of(context)
                             .textTheme
                             .labelLarge!
@@ -90,7 +90,6 @@ class LoginUi extends StatelessWidget {
                                   child: CountryCodePicker(
                                     showDropDownButton: false,
                                     showFlag: false,
-                                    showCountryOnly: true,
                                     searchDecoration: const InputDecoration(
                                       hintText: "Search your country code",
                                       hintStyle: TextStyle(
@@ -107,18 +106,17 @@ class LoginUi extends StatelessWidget {
                                         fontWeight: FontWeight.w400,
                                         fontSize: 14,
                                         color: Colors.white),
-                                    dialogTextStyle: const TextStyle(
-                                        color: Colors.white),
+                                    dialogTextStyle: const TextStyle(color: Colors.white),
                                     dialogBackgroundColor: Colors.black54,
                                     showFlagDialog: true,
                                     textStyle: const TextStyle(
                                         color: AppColors.black,
                                         fontWeight: FontWeight.w400),
-                                    // initialSelection:
-                                    //     controller.countryCode,
-                                    // onChanged: (CountryCode v) {
-                                    //   controller.countryCode = v.dialCode!;
-                                    // },
+                                    initialSelection: controller.countryCode,
+                                    onChanged: (CountryCode v) {
+                                      controller.countryCode = v.dialCode!;
+
+                                    },
                                   ),
                                 )),
                             Container(
@@ -264,7 +262,7 @@ class LoginUi extends StatelessWidget {
                       Center(
                         child: InkButton(
                             child: Text(
-                              "LogIn",
+                              "Log In",
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineSmall!
