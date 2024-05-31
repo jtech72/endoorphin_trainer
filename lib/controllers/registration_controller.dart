@@ -28,12 +28,16 @@ class RegistrationController extends GetxController{
     if (firstNameController.text.isEmpty || lastNameController.text.isEmpty || emailController.text.isEmpty  || passwordController.text.isEmpty || confirmPasswordController.text.isEmpty) {
       showSnackBar("All fields must be filled to continue");
       return; // Exit early as we don't need to proceed further
-    }
-    if (passwordController.text != confirmPasswordController.text) {
+    }else if (!RegExp(
+        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(emailController.text.trim())) {
+      showSnackBar("Please enter valid email");
+    } else if (passwordController.text.trim().length < 8) {
+      showSnackBar("Password should be at least 8 characters");
+    } else if (passwordController.text != confirmPasswordController.text) {
       showSnackBar("Password and confirm password do not match");
       return; // Exit early as we don't need to proceed further
-    }
-    if (selectedOne2.isEmpty) {
+    } else if (selectedOne2.isEmpty) {
       showSnackBar("Please select at least one category to continue");
       return; // Exit early as we don't need to proceed further
     } else{

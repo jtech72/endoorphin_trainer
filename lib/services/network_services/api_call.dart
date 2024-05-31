@@ -9,6 +9,7 @@ import '../models/request_models/login_model.dart';
 import '../models/request_models/send_otp_model.dart';
 import '../models/request_models/sign_up_model.dart';
 import '../models/response_models/get_trainer_doc_status_model.dart';
+import '../models/response_models/profile_detail_model.dart';
 import 'api_manager.dart';
 import 'endpoints.dart';
 
@@ -101,8 +102,7 @@ class CallAPI {
   static Future<GetCategoryModel> getCategory() async {
     try {
       String endPoint = Endpoints.epGetCategory;
-      Map<String, dynamic> json =
-          await APIManager().getAllCall(endPoint: endPoint);
+      Map<String, dynamic> json = await APIManager().getAllCall(endPoint: endPoint);
       GetCategoryModel responseModel = GetCategoryModel.fromJson(json);
       if (responseModel.status == 200) {
         log("CALLING_ENDPOINT: $endPoint ,RESPONSE:  $json");
@@ -234,6 +234,29 @@ class CallAPI {
       print("Error in API CALL: $e");
       print(st);
       return result;
+    }
+  }
+
+  /// GET PROFILE DETAILS
+  static Future<ProfileDetailsModel> getProfileDetails(String params) async {
+    try {
+      String endPoint = Endpoints.epGetProfileDetails;
+      String fullUrl = '$endPoint$params';
+      Map<String, dynamic> json =
+      await APIManager().getAllCall(endPoint: fullUrl);
+      ProfileDetailsModel responseModel =
+      ProfileDetailsModel.fromJson(json);
+
+      if (responseModel.status == 200) {
+        log("CALLING_ENDPOINT: $fullUrl ,RESPONSE:  $json");
+        return responseModel;
+      } else {
+        throw Exception("Error: ${responseModel.status}");
+      }
+    } catch (e, st) {
+      log(e.toString());
+      log(st.toString());
+      return ProfileDetailsModel(status: 500); // Return an error status
     }
   }
 
