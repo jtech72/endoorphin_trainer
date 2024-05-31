@@ -73,6 +73,7 @@ class ImagesPaths {
   static const String star2= "${baseUrl}ic_star2.png";
   static const String plus= "${baseUrl}ic_plus.png";
   static const String imagelogin= "${baseUrl}imagelogin.png";
+  static const String blackimage= "${baseUrl}black_image.png";
 
 
 

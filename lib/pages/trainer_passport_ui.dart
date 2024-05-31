@@ -11,6 +11,7 @@ class TrainerPassportUI extends StatelessWidget {
     TrainerPassportController controller = Get.find();
     String? username;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: myAppBar(
           title: GestureDetector(
             onTap: (){
