@@ -4,6 +4,7 @@ import 'package:endoorphin_trainer/utils/exports.dart';
 
 import '../services/network_services/api_call.dart';
 class LoginController extends GetxController{
+  String countryCode = "+971";
   TextEditingController phoneNumberController  = TextEditingController();
   TextEditingController passwordController  = TextEditingController();
 
@@ -11,7 +12,7 @@ class LoginController extends GetxController{
     showLoader();
     if (phoneNumberController.text.trim().isEmpty) {
       dismissLoader();
-      showSnackBar("Please enter your phone/password");
+      showSnackBar("Please enter your phone number/password");
     } else if (passwordController.text.trim().isEmpty) {
       dismissLoader();
       showSnackBar("Please enter your password");
