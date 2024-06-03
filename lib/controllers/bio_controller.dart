@@ -72,37 +72,45 @@ class BioController extends GetxController {
 
   showDialogBox(BuildContext context) {
     showDialog(
+      barrierDismissible: false,
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: AppColors.Black3,
-          title: Column(
-            children: [
-              SizedBox(height: Get.height * 0.03,),
-              Image.asset(ImagesPaths.cooltick, scale: 4,),
-              SizedBox(
-                height: Get.height * 0.02,
-              ),
-            ],
-          ),
-          content: SizedBox(
-              width: Get.width, // Set width as per your requirement
-              height: Get.height * 0.07, // Set height as per your requirement
-              child: Text(
-                'Your onboarding process has been\nsuccessfully completed. You’ll get\nnotified for further action.', style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.white),
-                textAlign: TextAlign.center,
-              )),
-          actions: [
-            Center(
-              child: InkButton(
-                  child: Text('OK', style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black, fontSize: 18,
-                      fontFamily: 'Montserrat'),), onTap: () {
-                Get.offAllNamed(AppRoutes.login);
-              }, height: 35, width: 95),
+        return WillPopScope(
+          onWillPop: () async {
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                AppRoutes.bottomNavigation, (route) => false);
+            return false;
+          },
+          child: AlertDialog(
+            backgroundColor: AppColors.Black3,
+            title: Column(
+              children: [
+                SizedBox(height: Get.height * 0.03,),
+                Image.asset(ImagesPaths.cooltick, scale: 4,),
+                SizedBox(
+                  height: Get.height * 0.02,
+                ),
+              ],
             ),
-          ], shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),);
+            content: SizedBox(
+                width: Get.width, // Set width as per your requirement
+                height: Get.height * 0.07, // Set height as per your requirement
+                child: Text(
+                  'Your onboarding process has been\nsuccessfully completed. You’ll get\nnotified for further action.', style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.white),
+                  textAlign: TextAlign.center,
+                )),
+            actions: [
+              Center(
+                child: InkButton(
+                    child: Text('OK', style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black, fontSize: 18,
+                        fontFamily: 'Montserrat'),), onTap: () {
+                  Get.offAllNamed(AppRoutes.login);
+                }, height: 35, width: 95),
+              ),
+            ], shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),),
+        );
       },
     );
   }

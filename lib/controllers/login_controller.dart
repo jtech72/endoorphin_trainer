@@ -4,6 +4,10 @@ import 'package:endoorphin_trainer/utils/exports.dart';
 
 import '../services/network_services/api_call.dart';
 class LoginController extends GetxController{
+  RxBool obscureText = true.obs;
+  void toggleObscureText() {
+    obscureText.toggle(); // Toggle the RxBool value
+  }
   String countryCode = "+971";
   TextEditingController phoneNumberController  = TextEditingController();
   TextEditingController passwordController  = TextEditingController();
