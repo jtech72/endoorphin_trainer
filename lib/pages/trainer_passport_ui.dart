@@ -11,6 +11,7 @@ class TrainerPassportUI extends StatelessWidget {
     TrainerPassportController controller = Get.find();
     String? username;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: myAppBar(
           title: GestureDetector(
             onTap: (){
@@ -71,10 +72,10 @@ class TrainerPassportUI extends StatelessWidget {
                   child: TextField(
 
                     controller: controller.certificateName,
-                    inputFormatters: [
-                      LengthLimitingTextInputFormatter(64),
-                      FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                    ],
+                    // inputFormatters: [
+                    //   LengthLimitingTextInputFormatter(64),
+                    //   FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                    // ],
                     enableInteractiveSelection: true,
                     style: Theme.of(context).textTheme.labelMedium,
                     cursorColor: AppColors.grey,
@@ -86,7 +87,7 @@ class TrainerPassportUI extends StatelessWidget {
                       hintStyle: Theme.of(context).textTheme.labelMedium,
                       contentPadding: const EdgeInsets.only(bottom: 3, left: 15),
 
-                      hintText: controller.certificationDetails!["categoryName"] == "Emirates ID"? " Enter Emirates ID name":controller.certificationDetails!["categoryName"] == "Passport"?'Enter Passport name':"Enter Certification name",
+                      hintText: controller.certificationDetails!["categoryName"] == "Emirates ID"? " Enter Emirates ID name":controller.certificationDetails!["categoryName"] == "Passport"?'Enter Passport name':"Enter Certification Name",
                       alignLabelWithHint: true,
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(4),

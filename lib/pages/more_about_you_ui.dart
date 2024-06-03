@@ -162,7 +162,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                                 borderRadius:
                                                     BorderRadius.circular(5)),
                                             child: Text(
-                                              "Saved",
+                                              "SAVED",
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .labelSmall!
@@ -188,7 +188,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                       ).paddingOnly(bottom: 5),
                                       Container(
                                         height: 0.5,
-                                        color: AppColors.whiteShade,
+                                        color: AppColors.grey5,
                                       ).paddingOnly(bottom: 15, top: 5),
                                       Row(
                                         crossAxisAlignment:
@@ -196,8 +196,8 @@ class MoreAboutYouUi extends StatelessWidget {
                                         children: [
                                           Obx(
                                             () => SizedBox(
-                                              width: 204,
-                                              height: 131,
+                                              width: Get.width*0.55,
+                                              height: Get.height*0.17,
                                               child: Image.network(
                                                   fit: BoxFit.cover,
                                                   controller.isFrontImageVisible
@@ -215,120 +215,122 @@ class MoreAboutYouUi extends StatelessWidget {
                                                           .toString()),
                                             ),
                                           ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Certificate Name",
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .labelSmall!
-                                                    .copyWith(
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.w400),
-                                              ),
-                                              Text(
-                                                snapshot.data!.result![index]
-                                                    .category!.name
-                                                    .toString(),
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .labelSmall!
-                                                    .copyWith(
-                                                        fontSize: 10,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: AppColors
-                                                            .whiteShade),
-                                              ).paddingOnly(bottom: 7),
-                                              Text(
-                                                "Certificate Number",
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .labelSmall!
-                                                    .copyWith(
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.w400),
-                                              ),
-                                              Text(
-                                                snapshot.data!.result![index]
-                                                    .category!.name
-                                                    .toString(),
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .labelSmall!
-                                                    .copyWith(
-                                                        fontSize: 10,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: AppColors
-                                                            .whiteShade),
-                                              ),
-                                              Obx(
-                                                () => Row(
-                                                  children: [
-                                                    InkWell(
-                                                      onTap: () {
-                                                        controller
-                                                            .isFrontImageVisible
-                                                            .value = true;
-                                                      },
-                                                      child: Container(
-                                                        height: 25,
-                                                        width: 30,
-                                                        decoration: BoxDecoration(
-                                                            border: Border.all(
-                                                                color: AppColors
-                                                                    .yellow),
-                                                            color: controller
-                                                                        .isFrontImageVisible
-                                                                        .value !=
-                                                                    false
-                                                                ? AppColors
-                                                                    .yellow
-                                                                : Colors
-                                                                    .transparent,
-                                                            shape: BoxShape
-                                                                .circle),
-                                                      ).paddingOnly(right: 9),
-                                                    ),
-                                                    InkWell(
-                                                      onTap: () {
-                                                        controller
-                                                            .isFrontImageVisible
-                                                            .value = false;
-                                                        log(controller
-                                                            .isFrontImageVisible
-                                                            .value
-                                                            .toString());
-                                                      },
-                                                      child: Container(
-                                                        height: 25,
-                                                        width: 30,
-                                                        decoration: BoxDecoration(
-                                                            border: Border.all(
-                                                                color: AppColors
-                                                                    .yellow),
-                                                            color: controller
-                                                                        .isFrontImageVisible
-                                                                        .value ==
-                                                                    false
-                                                                ? AppColors
-                                                                    .yellow
-                                                                : Colors
-                                                                    .transparent,
-                                                            shape: BoxShape
-                                                                .circle),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "Certificate Name",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelSmall!
+                                                      .copyWith(
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                ),
+                                                Text(
+                                                  snapshot.data!.result![index]
+                                                      .category!.name
+                                                      .toString(),
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelSmall!
+                                                      .copyWith(
+                                                          fontSize: 10,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: AppColors
+                                                              .whiteShade),overflow: TextOverflow.ellipsis,
+                                                ).paddingOnly(bottom: 7),
+                                                Text(
+                                                  "Certificate Number",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelSmall!
+                                                      .copyWith(
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                ),
+                                                Text(
+                                                  snapshot.data!.result![index]
+                                                      .category!.name
+                                                      .toString(),
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelSmall!
+                                                      .copyWith(
+                                                          fontSize: 10,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: AppColors
+                                                              .whiteShade),overflow: TextOverflow.ellipsis,
+                                                ),
+                                                Obx(
+                                                  () => Row(
+                                                    children: [
+                                                      InkWell(
+                                                        onTap: () {
+                                                          controller
+                                                              .isFrontImageVisible
+                                                              .value = true;
+                                                        },
+                                                        child: Container(
+                                                          height: 25,
+                                                          width: 30,
+                                                          decoration: BoxDecoration(
+                                                              border: Border.all(
+                                                                  color: AppColors
+                                                                      .yellow),
+                                                              color: controller
+                                                                          .isFrontImageVisible
+                                                                          .value !=
+                                                                      false
+                                                                  ? AppColors
+                                                                      .yellow
+                                                                  : Colors
+                                                                      .transparent,
+                                                              shape: BoxShape
+                                                                  .circle),
+                                                        ).paddingOnly(right: 9),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ).paddingOnly(top: 7),
-                                              )
-                                            ],
-                                          ).paddingOnly(left: 10)
+                                                      InkWell(
+                                                        onTap: () {
+                                                          controller
+                                                              .isFrontImageVisible
+                                                              .value = false;
+                                                          log(controller
+                                                              .isFrontImageVisible
+                                                              .value
+                                                              .toString());
+                                                        },
+                                                        child: Container(
+                                                          height: 25,
+                                                          width: 30,
+                                                          decoration: BoxDecoration(
+                                                              border: Border.all(
+                                                                  color: AppColors
+                                                                      .yellow),
+                                                              color: controller
+                                                                          .isFrontImageVisible
+                                                                          .value ==
+                                                                      false
+                                                                  ? AppColors
+                                                                      .yellow
+                                                                  : Colors
+                                                                      .transparent,
+                                                              shape: BoxShape
+                                                                  .circle),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ).paddingOnly(top: 7),
+                                                )
+                                              ],
+                                            ).paddingOnly(left: 10),
+                                          )
                                         ],
                                       )
                                     ],
@@ -352,9 +354,8 @@ class MoreAboutYouUi extends StatelessWidget {
                                           Row(
                                             children: [
                                               Text(
-                                                snapshot.data!.result![index]!
-                                                    .emirates
-                                                    .toString(),
+                                                snapshot.data!.result![index]!.emirates.toString().toUpperCase().substring(0, 1) +
+                                                    snapshot.data!.result![index]!.emirates.toString().toLowerCase().substring(1),
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .labelSmall!
@@ -377,7 +378,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                                         BorderRadius.circular(
                                                             5)),
                                                 child: Text(
-                                                  "Saved",
+                                                  "SAVED",
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .labelSmall!
@@ -404,7 +405,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                           ).paddingOnly(bottom: 5),
                                           Container(
                                             height: 0.5,
-                                            color: AppColors.whiteShade,
+                                            color: AppColors.grey5,
                                           ).paddingOnly(bottom: 15, top: 5),
                                           Row(
                                             crossAxisAlignment:
@@ -412,8 +413,8 @@ class MoreAboutYouUi extends StatelessWidget {
                                             children: [
                                               Obx(
                                                 () => SizedBox(
-                                                  width: 204,
-                                                  height: 131,
+                                                  width: Get.width*0.55,
+                                                  height: Get.height*0.17,
                                                   child: Image.network(
                                                       fit: BoxFit.cover,
                                                       controller.isFrontImageVisible
@@ -431,127 +432,129 @@ class MoreAboutYouUi extends StatelessWidget {
                                                               .toString()),
                                                 ),
                                               ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    "Certificate Name",
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelSmall!
-                                                        .copyWith(
-                                                            fontSize: 12,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w400),
-                                                  ),
-                                                  Text(
-                                                    snapshot
-                                                        .data!
-                                                        .result![index]
-                                                        .emiratesName
-                                                        .toString(),
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelSmall!
-                                                        .copyWith(
-                                                            fontSize: 10,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: AppColors
-                                                                .whiteShade),
-                                                  ).paddingOnly(bottom: 7),
-                                                  Text(
-                                                    "Certificate Number",
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelSmall!
-                                                        .copyWith(
-                                                            fontSize: 12,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w400),
-                                                  ),
-                                                  Text(
-                                                    snapshot
-                                                        .data!
-                                                        .result![index]
-                                                        .emiratesNumber
-                                                        .toString(),
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelSmall!
-                                                        .copyWith(
-                                                            fontSize: 10,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: AppColors
-                                                                .whiteShade),
-                                                  ),
-                                                  Obx(
-                                                    () => Row(
-                                                      children: [
-                                                        InkWell(
-                                                          onTap: () {
-                                                            controller
-                                                                .isFrontImageVisible
-                                                                .value = true;
-                                                          },
-                                                          child: Container(
-                                                            height: 25,
-                                                            width: 30,
-                                                            decoration: BoxDecoration(
-                                                                border: Border.all(
-                                                                    color: AppColors
-                                                                        .yellow),
-                                                                color: controller
-                                                                            .isFrontImageVisible
-                                                                            .value !=
-                                                                        false
-                                                                    ? AppColors
-                                                                        .yellow
-                                                                    : Colors
-                                                                        .transparent,
-                                                                shape: BoxShape
-                                                                    .circle),
-                                                          ).paddingOnly(
-                                                              right: 9),
-                                                        ),
-                                                        InkWell(
-                                                          onTap: () {
-                                                            controller
-                                                                .isFrontImageVisible
-                                                                .value = false;
-                                                            log(controller
-                                                                .isFrontImageVisible
-                                                                .value
-                                                                .toString());
-                                                          },
-                                                          child: Container(
-                                                            height: 25,
-                                                            width: 30,
-                                                            decoration: BoxDecoration(
-                                                                border: Border.all(
-                                                                    color: AppColors
-                                                                        .yellow),
-                                                                color: controller
-                                                                            .isFrontImageVisible
-                                                                            .value ==
-                                                                        false
-                                                                    ? AppColors
-                                                                        .yellow
-                                                                    : Colors
-                                                                        .transparent,
-                                                                shape: BoxShape
-                                                                    .circle),
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "Certificate Name",
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .labelSmall!
+                                                          .copyWith(
+                                                              fontSize: 12,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                    ),
+                                                    Text(
+                                                      snapshot
+                                                          .data!
+                                                          .result![index]
+                                                          .emiratesName
+                                                          .toString(),
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .labelSmall!
+                                                          .copyWith(
+                                                              fontSize: 10,
+                                                              fontWeight:
+                                                                  FontWeight.w400,
+                                                              color: AppColors
+                                                                  .whiteShade),overflow: TextOverflow.ellipsis,
+                                                    ).paddingOnly(bottom: 7),
+                                                    Text(
+                                                      "Certificate Number",
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .labelSmall!
+                                                          .copyWith(
+                                                              fontSize: 12,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                    ),
+                                                    Text(
+                                                      snapshot
+                                                          .data!
+                                                          .result![index]
+                                                          .emiratesNumber
+                                                          .toString(),
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .labelSmall!
+                                                          .copyWith(
+                                                              fontSize: 10,
+                                                              fontWeight:
+                                                                  FontWeight.w400,
+                                                              color: AppColors
+                                                                  .whiteShade),overflow: TextOverflow.ellipsis,
+                                                    ),
+                                                    Obx(
+                                                      () => Row(
+                                                        children: [
+                                                          InkWell(
+                                                            onTap: () {
+                                                              controller
+                                                                  .isFrontImageVisible
+                                                                  .value = true;
+                                                            },
+                                                            child: Container(
+                                                              height: 25,
+                                                              width: 30,
+                                                              decoration: BoxDecoration(
+                                                                  border: Border.all(
+                                                                      color: AppColors
+                                                                          .yellow),
+                                                                  color: controller
+                                                                              .isFrontImageVisible
+                                                                              .value !=
+                                                                          false
+                                                                      ? AppColors
+                                                                          .yellow
+                                                                      : Colors
+                                                                          .transparent,
+                                                                  shape: BoxShape
+                                                                      .circle),
+                                                            ).paddingOnly(
+                                                                right: 9),
                                                           ),
-                                                        ),
-                                                      ],
-                                                    ).paddingOnly(top: 7),
-                                                  )
-                                                ],
-                                              ).paddingOnly(left: 10)
+                                                          InkWell(
+                                                            onTap: () {
+                                                              controller
+                                                                  .isFrontImageVisible
+                                                                  .value = false;
+                                                              log(controller
+                                                                  .isFrontImageVisible
+                                                                  .value
+                                                                  .toString());
+                                                            },
+                                                            child: Container(
+                                                              height: 25,
+                                                              width: 30,
+                                                              decoration: BoxDecoration(
+                                                                  border: Border.all(
+                                                                      color: AppColors
+                                                                          .yellow),
+                                                                  color: controller
+                                                                              .isFrontImageVisible
+                                                                              .value ==
+                                                                          false
+                                                                      ? AppColors
+                                                                          .yellow
+                                                                      : Colors
+                                                                          .transparent,
+                                                                  shape: BoxShape
+                                                                      .circle),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ).paddingOnly(top: 7),
+                                                    )
+                                                  ],
+                                                ).paddingOnly(left: 10),
+                                              )
                                             ],
                                           )
                                         ],
@@ -579,23 +582,15 @@ class MoreAboutYouUi extends StatelessWidget {
                                             children: [
                                               Row(
                                                 children: [
-                                                  Text(
-                                                    snapshot
-                                                        .data!
-                                                        .result![index]!
-                                                        .passport
-                                                        .toString(),
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelSmall!
-                                                        .copyWith(
-                                                            color: AppColors
-                                                                .yellow,
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w600),
-                                                  ),
+                                          Text(
+                                          snapshot.data!.result![index]!.passport.toString().toUpperCase().substring(0, 1) +
+                                              snapshot.data!.result![index]!.passport.toString().toLowerCase().substring(1),
+                            style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                              color: AppColors.yellow,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                                                   const Spacer(
                                                     flex: 1,
                                                   ),
@@ -609,7 +604,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                                             BorderRadius
                                                                 .circular(5)),
                                                     child: Text(
-                                                      "Saved",
+                                                      "SAVED",
                                                       style: Theme.of(context)
                                                           .textTheme
                                                           .labelSmall!
@@ -639,7 +634,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                               ).paddingOnly(bottom: 5),
                                               Container(
                                                 height: 0.5,
-                                                color: AppColors.whiteShade,
+                                                color: AppColors.grey5,
                                               ).paddingOnly(bottom: 15, top: 5),
                                               Row(
                                                 crossAxisAlignment:
@@ -647,8 +642,8 @@ class MoreAboutYouUi extends StatelessWidget {
                                                 children: [
                                                   Obx(
                                                     () => SizedBox(
-                                                      width: 204,
-                                                      height: 131,
+                                                      width: Get.width*0.55,
+                                                      height: Get.height*0.17,
                                                       child: Image.network(
                                                           fit: BoxFit.cover,
                                                           controller.isFrontImageVisible
@@ -668,126 +663,128 @@ class MoreAboutYouUi extends StatelessWidget {
                                                                   .toString()),
                                                     ),
                                                   ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        "Certificate Name",
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .labelSmall!
-                                                            .copyWith(
-                                                                fontSize: 12,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400),
-                                                      ),
-                                                      Text(
-                                                        snapshot
-                                                            .data!
-                                                            .result![index]
-                                                            .passportName
-                                                            .toString(),
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .labelSmall!
-                                                            .copyWith(
-                                                                fontSize: 10,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                color: AppColors
-                                                                    .whiteShade),
-                                                      ).paddingOnly(bottom: 7),
-                                                      Text(
-                                                        "Certificate Number",
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .labelSmall!
-                                                            .copyWith(
-                                                                fontSize: 12,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400),
-                                                      ),
-                                                      Text(
-                                                        snapshot
-                                                            .data!
-                                                            .result![index]
-                                                            .passportNumber
-                                                            .toString(),
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .labelSmall!
-                                                            .copyWith(
-                                                                fontSize: 10,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                color: AppColors
-                                                                    .whiteShade),
-                                                      ),
-                                                      Obx(
-                                                        () => Row(
-                                                          children: [
-                                                            InkWell(
-                                                              onTap: () {
-                                                                controller
-                                                                    .isFrontImageVisible
-                                                                    .value = true;
-                                                              },
-                                                              child: Container(
-                                                                height: 25,
-                                                                width: 30,
-                                                                decoration: BoxDecoration(
-                                                                    border: Border.all(
-                                                                        color: AppColors
-                                                                            .yellow),
-                                                                    color: controller.isFrontImageVisible.value !=
-                                                                            false
-                                                                        ? AppColors
-                                                                            .yellow
-                                                                        : Colors
-                                                                            .transparent,
-                                                                    shape: BoxShape
-                                                                        .circle),
-                                                              ).paddingOnly(
-                                                                  right: 9),
-                                                            ),
-                                                            InkWell(
-                                                              onTap: () {
-                                                                controller
-                                                                    .isFrontImageVisible
-                                                                    .value = false;
-                                                                log(controller
-                                                                    .isFrontImageVisible
-                                                                    .value
-                                                                    .toString());
-                                                              },
-                                                              child: Container(
-                                                                height: 25,
-                                                                width: 30,
-                                                                decoration: BoxDecoration(
-                                                                    border: Border.all(
-                                                                        color: AppColors
-                                                                            .yellow),
-                                                                    color: controller.isFrontImageVisible.value ==
-                                                                            false
-                                                                        ? AppColors
-                                                                            .yellow
-                                                                        : Colors
-                                                                            .transparent,
-                                                                    shape: BoxShape
-                                                                        .circle),
+                                                  Expanded(
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          "Certificate Name",
+                                                          style: Theme.of(context)
+                                                              .textTheme
+                                                              .labelSmall!
+                                                              .copyWith(
+                                                                  fontSize: 12,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400),
+                                                        ),
+                                                        Text(
+                                                          snapshot
+                                                              .data!
+                                                              .result![index]
+                                                              .passportName
+                                                              .toString(),
+                                                          style: Theme.of(context)
+                                                              .textTheme
+                                                              .labelSmall!
+                                                              .copyWith(
+                                                                  fontSize: 10,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color: AppColors
+                                                                      .whiteShade),overflow: TextOverflow.ellipsis,
+                                                        ).paddingOnly(bottom: 7),
+                                                        Text(
+                                                          "Certificate Number",
+                                                          style: Theme.of(context)
+                                                              .textTheme
+                                                              .labelSmall!
+                                                              .copyWith(
+                                                                  fontSize: 12,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400),
+                                                        ),
+                                                        Text(
+                                                          snapshot
+                                                              .data!
+                                                              .result![index]
+                                                              .passportNumber
+                                                              .toString(),
+                                                          style: Theme.of(context)
+                                                              .textTheme
+                                                              .labelSmall!
+                                                              .copyWith(
+                                                                  fontSize: 10,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color: AppColors
+                                                                      .whiteShade),overflow: TextOverflow.ellipsis,
+                                                        ),
+                                                        Obx(
+                                                          () => Row(
+                                                            children: [
+                                                              InkWell(
+                                                                onTap: () {
+                                                                  controller
+                                                                      .isFrontImageVisible
+                                                                      .value = true;
+                                                                },
+                                                                child: Container(
+                                                                  height: 25,
+                                                                  width: 30,
+                                                                  decoration: BoxDecoration(
+                                                                      border: Border.all(
+                                                                          color: AppColors
+                                                                              .yellow),
+                                                                      color: controller.isFrontImageVisible.value !=
+                                                                              false
+                                                                          ? AppColors
+                                                                              .yellow
+                                                                          : Colors
+                                                                              .transparent,
+                                                                      shape: BoxShape
+                                                                          .circle),
+                                                                ).paddingOnly(
+                                                                    right: 9),
                                                               ),
-                                                            ),
-                                                          ],
-                                                        ).paddingOnly(top: 7),
-                                                      )
-                                                    ],
-                                                  ).paddingOnly(left: 10)
+                                                              InkWell(
+                                                                onTap: () {
+                                                                  controller
+                                                                      .isFrontImageVisible
+                                                                      .value = false;
+                                                                  log(controller
+                                                                      .isFrontImageVisible
+                                                                      .value
+                                                                      .toString());
+                                                                },
+                                                                child: Container(
+                                                                  height: 25,
+                                                                  width: 30,
+                                                                  decoration: BoxDecoration(
+                                                                      border: Border.all(
+                                                                          color: AppColors
+                                                                              .yellow),
+                                                                      color: controller.isFrontImageVisible.value ==
+                                                                              false
+                                                                          ? AppColors
+                                                                              .yellow
+                                                                          : Colors
+                                                                              .transparent,
+                                                                      shape: BoxShape
+                                                                          .circle),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ).paddingOnly(top: 7),
+                                                        )
+                                                      ],
+                                                    ).paddingOnly(left: 10),
+                                                  )
                                                 ],
                                               )
                                             ],
