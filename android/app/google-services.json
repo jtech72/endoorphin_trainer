@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "246631045861",
+    "project_id": "endoorphin-trainer",
+    "storage_bucket": "endoorphin-trainer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:246631045861:android:0ce8602b8c55308a16920c",
+        "android_client_info": {
+          "package_name": "com.endoorphin.trainer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVg1F16UaWxxZ7MQXHye0EQ69B0PhUYn0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
