@@ -228,7 +228,7 @@ class ProfileUI extends StatelessWidget {
                               width: Get.width * 0.057,
                             ),
                             Text(
-                              'Document',
+                              'Documents',
                               style: Theme.of(context)
                                   .textTheme
                                   .labelLarge!
