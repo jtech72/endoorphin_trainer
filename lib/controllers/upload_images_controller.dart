@@ -17,7 +17,7 @@ class UploadImagesController extends GetxController {
 
   Future<void> openCamera(bool isFrontImage) async {
     final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+    final pickedFile = await picker.pickImage(source: ImageSource.camera,imageQuality:50);
     if (pickedFile != null) {
       File image = File(pickedFile.path);
       if (isFrontImage) {

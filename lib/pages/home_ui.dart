@@ -271,7 +271,7 @@ class HomeUiState extends State<HomeUi> {
                                   ),
                                   SizedBox(height: 8), // Adjust the gap here
                                   Text(
-                                    index == 2 ? "Current" :
+                                    index == 2 ? "Reward" :
                                     index == 0 ? "Total" :
                                     index == 3 ? "Upcoming" : "Total",
                                     style: Theme.of(context).textTheme.titleLarge,

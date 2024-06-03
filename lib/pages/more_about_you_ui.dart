@@ -3,6 +3,7 @@ import 'package:endoorphin_trainer/controllers/more_about_you_controller.dart';
 import 'package:endoorphin_trainer/services/network_services/api_call.dart';
 import 'package:flutter/material.dart';
 import '../utils/exports.dart';
+
 class MoreAboutYouUi extends StatelessWidget {
   const MoreAboutYouUi({super.key});
   @override
@@ -15,7 +16,7 @@ class MoreAboutYouUi extends StatelessWidget {
               offset: const Offset(0, -3),
               child: GestureDetector(
                   onTap: () {
-                    Get.back();
+                    Get.toNamed(AppRoutes.registration);
                   },
                   child: Image.asset(
                     ImagesPaths.logoimg,
@@ -34,9 +35,24 @@ class MoreAboutYouUi extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Upload your Documents",
-                  style: Theme.of(context).textTheme.headlineSmall,
+                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Upload your Documents",
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    GestureDetector(
+                      onTap: (){
+                        Get.toNamed(AppRoutes.bio);
+                      },
+                      child: Row(
+                        children: [
+                          Text('Skip',style: Theme.of(context).textTheme.titleMedium!.copyWith(color: AppColors.yellow),),
+                          Icon(Icons.arrow_forward_ios,size: 14,color: AppColors.yellow,)
+                        ],
+                      ),
+                    )
+                  ],
                 ).paddingOnly(top: Get.height * .02, bottom: Get.height * .02),
                 Text(
                   "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
@@ -112,8 +128,7 @@ class MoreAboutYouUi extends StatelessWidget {
                           }),
                     ];
 
-                    return
-                      ListView.builder(
+                    return ListView.builder(
                       itemCount: snapshot.data!.result!.length +
                           4, // Adjusted itemCount to include the additional widgets
                       physics: const NeverScrollableScrollPhysics(),
@@ -138,9 +153,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                       Row(
                                         children: [
                                           Text(
-                                            snapshot.data!.result![index]!
-                                                .category!.name
-                                                .toString(),
+                                            snapshot.data!.result![index]!.category!.name.toString(),
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .labelSmall!
@@ -196,8 +209,8 @@ class MoreAboutYouUi extends StatelessWidget {
                                         children: [
                                           Obx(
                                             () => SizedBox(
-                                              width: Get.width*0.55,
-                                              height: Get.height*0.17,
+                                              width: Get.width * 0.55,
+                                              height: Get.height * 0.17,
                                               child: Image.network(
                                                   fit: BoxFit.cover,
                                                   controller.isFrontImageVisible
@@ -242,7 +255,9 @@ class MoreAboutYouUi extends StatelessWidget {
                                                           fontWeight:
                                                               FontWeight.w400,
                                                           color: AppColors
-                                                              .whiteShade),overflow: TextOverflow.ellipsis,
+                                                              .whiteShade),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                 ).paddingOnly(bottom: 7),
                                                 Text(
                                                   "Certificate Number",
@@ -266,7 +281,9 @@ class MoreAboutYouUi extends StatelessWidget {
                                                           fontWeight:
                                                               FontWeight.w400,
                                                           color: AppColors
-                                                              .whiteShade),overflow: TextOverflow.ellipsis,
+                                                              .whiteShade),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                 ),
                                                 Obx(
                                                   () => Row(
@@ -354,8 +371,18 @@ class MoreAboutYouUi extends StatelessWidget {
                                           Row(
                                             children: [
                                               Text(
-                                                snapshot.data!.result![index]!.emirates.toString().toUpperCase().substring(0, 1) +
-                                                    snapshot.data!.result![index]!.emirates.toString().toLowerCase().substring(1),
+                                                snapshot.data!.result![index]!
+                                                        .emirates
+                                                        .toString()
+                                                        .toUpperCase()
+                                                        .substring(0, 1) +
+                                                    snapshot
+                                                        .data!
+                                                        .result![index]!
+                                                        .emirates
+                                                        .toString()
+                                                        .toLowerCase()
+                                                        .substring(1),
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .labelSmall!
@@ -413,8 +440,8 @@ class MoreAboutYouUi extends StatelessWidget {
                                             children: [
                                               Obx(
                                                 () => SizedBox(
-                                                  width: Get.width*0.55,
-                                                  height: Get.height*0.17,
+                                                  width: Get.width * 0.55,
+                                                  height: Get.height * 0.17,
                                                   child: Image.network(
                                                       fit: BoxFit.cover,
                                                       controller.isFrontImageVisible
@@ -460,9 +487,12 @@ class MoreAboutYouUi extends StatelessWidget {
                                                           .copyWith(
                                                               fontSize: 10,
                                                               fontWeight:
-                                                                  FontWeight.w400,
+                                                                  FontWeight
+                                                                      .w400,
                                                               color: AppColors
-                                                                  .whiteShade),overflow: TextOverflow.ellipsis,
+                                                                  .whiteShade),
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
                                                     ).paddingOnly(bottom: 7),
                                                     Text(
                                                       "Certificate Number",
@@ -487,9 +517,12 @@ class MoreAboutYouUi extends StatelessWidget {
                                                           .copyWith(
                                                               fontSize: 10,
                                                               fontWeight:
-                                                                  FontWeight.w400,
+                                                                  FontWeight
+                                                                      .w400,
                                                               color: AppColors
-                                                                  .whiteShade),overflow: TextOverflow.ellipsis,
+                                                                  .whiteShade),
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
                                                     ),
                                                     Obx(
                                                       () => Row(
@@ -582,15 +615,32 @@ class MoreAboutYouUi extends StatelessWidget {
                                             children: [
                                               Row(
                                                 children: [
-                                          Text(
-                                          snapshot.data!.result![index]!.passport.toString().toUpperCase().substring(0, 1) +
-                                              snapshot.data!.result![index]!.passport.toString().toLowerCase().substring(1),
-                            style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                              color: AppColors.yellow,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
+                                                  Text(
+                                                    snapshot
+                                                            .data!
+                                                            .result![index]!
+                                                            .passport
+                                                            .toString()
+                                                            .toUpperCase()
+                                                            .substring(0, 1) +
+                                                        snapshot
+                                                            .data!
+                                                            .result![index]!
+                                                            .passport
+                                                            .toString()
+                                                            .toLowerCase()
+                                                            .substring(1),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .labelSmall!
+                                                        .copyWith(
+                                                          color:
+                                                              AppColors.yellow,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                  ),
                                                   const Spacer(
                                                     flex: 1,
                                                   ),
@@ -642,8 +692,8 @@ class MoreAboutYouUi extends StatelessWidget {
                                                 children: [
                                                   Obx(
                                                     () => SizedBox(
-                                                      width: Get.width*0.55,
-                                                      height: Get.height*0.17,
+                                                      width: Get.width * 0.55,
+                                                      height: Get.height * 0.17,
                                                       child: Image.network(
                                                           fit: BoxFit.cover,
                                                           controller.isFrontImageVisible
@@ -671,7 +721,8 @@ class MoreAboutYouUi extends StatelessWidget {
                                                       children: [
                                                         Text(
                                                           "Certificate Name",
-                                                          style: Theme.of(context)
+                                                          style: Theme.of(
+                                                                  context)
                                                               .textTheme
                                                               .labelSmall!
                                                               .copyWith(
@@ -686,7 +737,8 @@ class MoreAboutYouUi extends StatelessWidget {
                                                               .result![index]
                                                               .passportName
                                                               .toString(),
-                                                          style: Theme.of(context)
+                                                          style: Theme.of(
+                                                                  context)
                                                               .textTheme
                                                               .labelSmall!
                                                               .copyWith(
@@ -695,11 +747,15 @@ class MoreAboutYouUi extends StatelessWidget {
                                                                       FontWeight
                                                                           .w400,
                                                                   color: AppColors
-                                                                      .whiteShade),overflow: TextOverflow.ellipsis,
-                                                        ).paddingOnly(bottom: 7),
+                                                                      .whiteShade),
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        ).paddingOnly(
+                                                            bottom: 7),
                                                         Text(
                                                           "Certificate Number",
-                                                          style: Theme.of(context)
+                                                          style: Theme.of(
+                                                                  context)
                                                               .textTheme
                                                               .labelSmall!
                                                               .copyWith(
@@ -714,7 +770,8 @@ class MoreAboutYouUi extends StatelessWidget {
                                                               .result![index]
                                                               .passportNumber
                                                               .toString(),
-                                                          style: Theme.of(context)
+                                                          style: Theme.of(
+                                                                  context)
                                                               .textTheme
                                                               .labelSmall!
                                                               .copyWith(
@@ -723,7 +780,9 @@ class MoreAboutYouUi extends StatelessWidget {
                                                                       FontWeight
                                                                           .w400,
                                                                   color: AppColors
-                                                                      .whiteShade),overflow: TextOverflow.ellipsis,
+                                                                      .whiteShade),
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                         ),
                                                         Obx(
                                                           () => Row(
@@ -734,7 +793,8 @@ class MoreAboutYouUi extends StatelessWidget {
                                                                       .isFrontImageVisible
                                                                       .value = true;
                                                                 },
-                                                                child: Container(
+                                                                child:
+                                                                    Container(
                                                                   height: 25,
                                                                   width: 30,
                                                                   decoration: BoxDecoration(
@@ -750,7 +810,8 @@ class MoreAboutYouUi extends StatelessWidget {
                                                                       shape: BoxShape
                                                                           .circle),
                                                                 ).paddingOnly(
-                                                                    right: 9),
+                                                                        right:
+                                                                            9),
                                                               ),
                                                               InkWell(
                                                                 onTap: () {
@@ -762,7 +823,8 @@ class MoreAboutYouUi extends StatelessWidget {
                                                                       .value
                                                                       .toString());
                                                                 },
-                                                                child: Container(
+                                                                child:
+                                                                    Container(
                                                                   height: 25,
                                                                   width: 30,
                                                                   decoration: BoxDecoration(
@@ -871,16 +933,20 @@ class MoreAboutYouUi extends StatelessWidget {
                                                           width:
                                                               Get.width * .55,
                                                           child: Text(
-                                                              snapshot
-                                                                  .data!
-                                                                  .result![index]
-                                                                  .category == null ?"":
                                                             snapshot
-                                                                .data!
-                                                                .result![index]
-                                                                .category!
-                                                                .name
-                                                                .toString(),
+                                                                        .data!
+                                                                        .result![
+                                                                            index]
+                                                                        .category ==
+                                                                    null
+                                                                ? ""
+                                                                : snapshot
+                                                                    .data!
+                                                                    .result![
+                                                                        index]
+                                                                    .category!
+                                                                    .name
+                                                                    .toString(),
                                                             overflow:
                                                                 TextOverflow
                                                                     .ellipsis,
@@ -923,9 +989,9 @@ class MoreAboutYouUi extends StatelessWidget {
                                           ).paddingOnly(
                                               bottom: Get.height * 0.02),
                                         );
-                        } else if (index == snapshot.data!.result!.length && storage.read("Emirates ID") != "true") {
-                          return
-                            InkWell(
+                        } else if (index == snapshot.data!.result!.length &&
+                            storage.read("Emirates ID") != "true") {
+                          return InkWell(
                             onTap: () {
                               Get.toNamed(AppRoutes.trainerPassport,
                                   arguments: {
@@ -1091,7 +1157,8 @@ class MoreAboutYouUi extends StatelessWidget {
                               ).paddingOnly(left: 0),
                             ).paddingOnly(bottom: Get.height * 0.02),
                           );
-                        } else if (index == snapshot.data!.result!.length + 2) {
+                        } else if (index == snapshot.data!.result!.length + 2
+                         ) {
                           return Obx(
                             () => Material(
                               type: MaterialType.transparency,
@@ -1164,3 +1231,4 @@ class MoreAboutYouUi extends StatelessWidget {
     );
   }
 }
+

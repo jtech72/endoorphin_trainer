@@ -44,9 +44,10 @@ class AccountUI extends StatelessWidget {
              controller.lastNameController.text = snapshot.data!.result!.lastName!.toString();
              controller.emailController.text = snapshot.data!.result!.email!.toString();
              controller.phoneNumberController.text = snapshot.data!.result!.phoneNumber!.toString();
-             controller.bioController.text = snapshot.data!.result!.bio!.toString();
+             controller.bioController.text =snapshot.data!.result!.bio == null?"": snapshot.data!.result!.bio!.toString();
              controller.selectedOption1.value = snapshot.data!.result!.gender!.toString();
-              return          Column(crossAxisAlignment: CrossAxisAlignment.start,
+              return
+                Column(crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Center(
                     child: Stack(

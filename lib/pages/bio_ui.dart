@@ -543,7 +543,6 @@ class BioUi extends StatelessWidget {
                         fontFamily: 'Montserrat'),
                   ),
                   onTap: () {
-
                       controller.onSubmitButton(context);
                   }).paddingOnly(top: 30),
               SizedBox(height: Get.height*0.05,)

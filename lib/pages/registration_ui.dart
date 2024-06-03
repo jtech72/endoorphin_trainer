@@ -253,58 +253,68 @@ class RegistrationUi extends StatelessWidget {
                           Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
                         ],
                       ),
-                      Container(
-                        height: 45,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: AppColors.impgrey),
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: TextField(
-                          controller: controller.passwordController,
-                          keyboardType: TextInputType.text,
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(64),
-                            FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                          ],
-                          obscureText: true,
-                          obscuringCharacter: '*',
-                          enableInteractiveSelection: true,
-                          style: Theme.of(context).textTheme.labelMedium,
-                          cursorColor: AppColors.grey,
-                          cursorHeight: 18,
-                          decoration: InputDecoration(
+                      Obx(
+                        ()=> Container(
+                          height: 45,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: AppColors.impgrey),
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: TextField(
+                            controller: controller.passwordController,
+                            keyboardType: TextInputType.text,
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(64),
+                              FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                            ],
+                            obscureText: controller.obscureText.value,
+                            obscuringCharacter: '*',
+                            enableInteractiveSelection: true,
+                            style: Theme.of(context).textTheme.labelMedium,
+                            cursorColor: AppColors.grey,
+                            cursorHeight: 18,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(highlightColor: Colors.transparent,
+                                icon: Icon(
+                                  controller.obscureText.value ? Icons.visibility_off_rounded : Icons.visibility_rounded,
+                                  color: Colors.grey,
+                                  size: 18,
+                                ),
+                                onPressed: () {
+                                  controller.toggleObscureText();
+                                },),
+                                filled: true,
+                              fillColor: AppColors.yellowishWhite,
+                              border: InputBorder.none,
+                              hintStyle: Theme.of(context).textTheme.labelMedium,
+                              contentPadding:
+                              const EdgeInsets.only(bottom: 3, left: 15),
 
-                            filled: true,
-                            fillColor: AppColors.yellowishWhite,
-                            border: InputBorder.none,
-                            hintStyle: Theme.of(context).textTheme.labelMedium,
-                            contentPadding:
-                            const EdgeInsets.only(bottom: 3, left: 15),
-
-                            hintText: "Enter your Password",
-                            alignLabelWithHint: true,
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(4),
-                              borderSide: const BorderSide(
-                                color: AppColors.yellowishWhite,
-                                width: 1,
+                              hintText: "Enter your Password",
+                              alignLabelWithHint: true,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: const BorderSide(
+                                  color: AppColors.yellowishWhite,
+                                  width: 1,
+                                ),
                               ),
+                              disabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: const BorderSide(
+                                  color: AppColors.yellowishWhite,
+                                  width: 1,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: const BorderSide(
+                                  color: AppColors.yellowishWhite,
+                                  width: 1,
+                                ),
+                              ),// Cen/ Center the hintText
                             ),
-                            disabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(4),
-                              borderSide: const BorderSide(
-                                color: AppColors.yellowishWhite,
-                                width: 1,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(4),
-                              borderSide: const BorderSide(
-                                color: AppColors.yellowishWhite,
-                                width: 1,
-                              ),
-                            ),// Cen/ Center the hintText
                           ),
                         ),
                       ),
@@ -314,56 +324,66 @@ class RegistrationUi extends StatelessWidget {
                           Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
                         ],
                       ),
-                      Container(
-                        height: 45,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: AppColors.impgrey),
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: TextField(
-                          controller: controller.confirmPasswordController,
-                          keyboardType: TextInputType.text,
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(64),
-                            FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                          ],
-                          obscureText: true,
-                          obscuringCharacter: '*',
-                          enableInteractiveSelection: true,
-                          style: Theme.of(context).textTheme.labelMedium,
-                          cursorColor: AppColors.grey,
-                          cursorHeight: 18,
-                          decoration: InputDecoration(
+                      Obx(
+                        ()=> Container(
+                          height: 45,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: AppColors.impgrey),
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: TextField(
+                            controller: controller.confirmPasswordController,
+                            keyboardType: TextInputType.text,
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(64),
+                              FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                            ],
+                            obscureText: controller.obscureText1.value,
+                            obscuringCharacter: '*',
+                            enableInteractiveSelection: true,
+                            style: Theme.of(context).textTheme.labelMedium,
+                            cursorColor: AppColors.grey,
+                            cursorHeight: 18,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(highlightColor: Colors.transparent,
+                                icon: Icon(
+                                  controller.obscureText1.value ? Icons.visibility_off_rounded : Icons.visibility_rounded,
+                                  color: Colors.grey,
+                                  size: 18,
+                                ),
+                                onPressed: () {
+                                  controller.toggleObscureText1();
+                                },),
+                              filled: true,
+                              fillColor: AppColors.yellowishWhite,
+                              border: InputBorder.none,
+                              hintStyle: Theme.of(context).textTheme.labelMedium,
+                              contentPadding:
+                              const EdgeInsets.only(bottom: 3, left: 15),
 
-                            filled: true,
-                            fillColor: AppColors.yellowishWhite,
-                            border: InputBorder.none,
-                            hintStyle: Theme.of(context).textTheme.labelMedium,
-                            contentPadding:
-                            const EdgeInsets.only(bottom: 3, left: 15),
-
-                            hintText: "Enter your Confirm Password",
-                            alignLabelWithHint: true,
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(4),
-                              borderSide: const BorderSide(
-                                color: AppColors.yellowishWhite,
-                                width: 1,
+                              hintText: "Enter your Confirm Password",
+                              alignLabelWithHint: true,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: const BorderSide(
+                                  color: AppColors.yellowishWhite,
+                                  width: 1,
+                                ),
                               ),
-                            ),
-                            disabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(4),
-                              borderSide: const BorderSide(
-                                color: AppColors.yellowishWhite,
-                                width: 1,
+                              disabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: const BorderSide(
+                                  color: AppColors.yellowishWhite,
+                                  width: 1,
+                                ),
                               ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(4),
-                              borderSide: const BorderSide(
-                                color: AppColors.yellowishWhite,
-                                width: 1,
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: const BorderSide(
+                                  color: AppColors.yellowishWhite,
+                                  width: 1,
+                                ),
                               ),
                             ),
                           ),

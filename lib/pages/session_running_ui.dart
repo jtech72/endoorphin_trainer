@@ -41,14 +41,14 @@ class SessionRunningUi extends StatelessWidget {
                       children: [
                         InkWell(
                             onTap: () {
-                                    Get.back();   },
+                                    Get.offAllNamed(AppRoutes.bottomNavigation);   },
                             child: const Icon(
                               Icons.arrow_back_ios_new_rounded,
                               color: AppColors.impgrey,
                               size: 18,
                             )),
                         GestureDetector(
-                          onTap: (){Get.back();},
+                          onTap: (){Get.offAllNamed(AppRoutes.bottomNavigation);},
                           child: Text(
                             "Boxing",
                             style: Theme.of(context).textTheme.headlineSmall,
@@ -220,24 +220,24 @@ class SessionRunningUi extends StatelessWidget {
                         alignment: Alignment.topCenter,
                         image: AssetImage(ImagesPaths.sessionType),
                       )),
-                  child:
-                  GestureDetector(
-                    onTap: (){
-                      log("message");
-                      controller.panelController.close();
-
-                    },
-                    child: Container(
-                        height: 30,
-                        width: 30,
-                        decoration: const BoxDecoration(
-                            shape: BoxShape.circle, color: AppColors.impgrey),
-                        child: const Icon(
-                          Icons.arrow_back,
-                          size: 25,
-                          color: AppColors.black,
-                        )).paddingOnly(top: Get.height * .05, left: 10),
-                  ),
+                  // child:
+                  // GestureDetector(
+                  //   onTap: (){
+                  //     log("message");
+                  //     controller.panelController.close();
+                  //
+                  //   },
+                  //   child: Container(
+                  //       height: 30,
+                  //       width: 30,
+                  //       decoration: const BoxDecoration(
+                  //           shape: BoxShape.circle, color: AppColors.impgrey),
+                  //       child: const Icon(
+                  //         Icons.arrow_back,
+                  //         size: 25,
+                  //         color: AppColors.black,
+                  //       )).paddingOnly(top: Get.height * .05, left: 10),
+                  // ),
                 ),
                 Center(
                   child: Transform.translate(
