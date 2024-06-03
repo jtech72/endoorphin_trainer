@@ -9,7 +9,7 @@ class BookingDetailsUi extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BookingDetailsController controller = Get.find();
+    BookingDetailsController controller = Get.put(BookingDetailsController());
     return       Scaffold(
       appBar: myAppBar(
           title: GestureDetector(

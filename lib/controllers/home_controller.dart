@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   RxBool isTrainerOnline = false.obs;
-  List<String> quickGlanceList = ["Earnings", "Sessions","Sessions","Sessions",];
+  List<String> quickGlanceList = ["Earnings", "Sessions","Points","Sessions",];
   RxInt selectedIndex = (-1).obs;
 
   final items = [ "Yoga","Padel Tennis","Swimming","Tennis","Boxing","Personal Training"];

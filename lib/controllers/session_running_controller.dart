@@ -13,7 +13,7 @@ class SessionRunningController extends GetxController {
 
   @override
   void onReady() {
-    startTimer(3);
+    startTimer(60);
     super.onReady();
   }
   @override
