@@ -176,43 +176,54 @@ class LoginUi extends StatelessWidget {
                             .copyWith(fontWeight: FontWeight.w500),
                       ).paddingOnly(
                           bottom: Get.height * .008, top: Get.height * .02),
-                      Container(
-                        height: 45,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: AppColors.impgrey),
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: TextField(
-                          controller: controller.passwordController,
-                          obscureText: true,
-                          obscuringCharacter: "*",
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(64),
-                            FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                          ],
-                          enableInteractiveSelection: true,
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelMedium
-                              ?.copyWith(color: AppColors.black),
-                          cursorColor: AppColors.grey,
-                          cursorHeight: 18,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: AppColors.yellowishWhite,
-                            border: InputBorder.none,
-                            hintStyle: Theme.of(context)
+                      Obx(
+                        ()=> Container(
+                          height: 45,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: AppColors.impgrey),
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: TextField(
+                            controller: controller.passwordController,
+                            obscureText: controller.obscureText.value,
+                            obscuringCharacter: "*",
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(64),
+                              FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                            ],
+                            enableInteractiveSelection: true,
+                            style: Theme.of(context)
                                 .textTheme
-                                .labelMedium!
-                                .copyWith(
-                                    color: AppColors.lightGrey, fontSize: 14),
-                            contentPadding:
-                                const EdgeInsets.only(bottom: 4, left: 15),
+                                .labelMedium
+                                ?.copyWith(color: AppColors.black),
+                            cursorColor: AppColors.grey,
+                            cursorHeight: 18,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(highlightColor: Colors.transparent,
+                                icon: Icon(
+                                  controller.obscureText.value ? Icons.visibility_off_rounded : Icons.visibility_rounded,
+                                  color: Colors.grey,
+                                  size: 18,
+                                ),
+                                onPressed: () {
+                                  controller.toggleObscureText();
+                                },),
+                              filled: true,
+                              fillColor: AppColors.yellowishWhite,
+                              border: InputBorder.none,
+                              hintStyle: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium!
+                                  .copyWith(
+                                      color: AppColors.lightGrey, fontSize: 14),
+                              contentPadding:
+                                  const EdgeInsets.only(top: 8, left: 15),
 
-                            hintText: "Enter your password",
+                              hintText: "Enter your password",
 
-                            alignLabelWithHint: true, // Center the hintText
+                              alignLabelWithHint: true, // Center the hintText
+                            ),
                           ),
                         ),
                       ),

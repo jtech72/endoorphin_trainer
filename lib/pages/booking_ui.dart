@@ -1,28 +1,19 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
-
 import 'package:endoorphin_trainer/utils/app_colors.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
 import '../controllers/booking_controller.dart';
 import '../custom_widgets/tabbar_widgets.dart';
 import '../utils/app_routes.dart';
 import '../utils/image_paths.dart';
-import '../utils/app_drawer.dart'; // as
 final today = DateUtils.dateOnly(DateTime.now());
-// suming this file contains myTabBar function
-
 class BookingUi extends StatefulWidget {
   final initialIndex;
-
-
    BookingUi({super.key,required this.initialIndex});
-
   @override
   State<BookingUi> createState() => _BookingUiState();
 }
-
 class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMixin {
   late TabController tabController;
   bool showCalendar = false;

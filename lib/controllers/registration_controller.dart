@@ -1,8 +1,17 @@
 import 'dart:developer';
 import 'dart:ffi';
 import 'package:endoorphin_trainer/utils/exports.dart';
+import 'package:get/get.dart';
 import '../services/network_services/api_call.dart';
 class RegistrationController extends GetxController{
+  RxBool obscureText = true.obs;
+  RxBool obscureText1 = true.obs;
+  void toggleObscureText() {
+    obscureText.toggle(); // Toggle the RxBool value
+  }
+  void toggleObscureText1() {
+    obscureText1.toggle(); // Toggle the RxBool value
+  }
   final items2 = ['Male','Female',];
   RxList<int> selectedOne2 = <int>[].obs;
   RxList<bool> checkedList = <bool>[].obs;

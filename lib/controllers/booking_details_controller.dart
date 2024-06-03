@@ -1,8 +1,11 @@
 import 'dart:developer';
 
 import 'package:endoorphin_trainer/utils/exports.dart';
+import 'package:get/get.dart';
 class BookingDetailsController extends GetxController{
 RxString bookingType = ''.obs;
+RxBool firstButtonSelected = false.obs;
+RxBool secondButtonSelected = false.obs;
 @override
   void onInit() {
     bookingType.value=Get.arguments;
