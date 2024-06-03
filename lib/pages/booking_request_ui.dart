@@ -1,7 +1,5 @@
 import 'package:endoorphin_trainer/controllers/booking_request_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:slide_to_act/slide_to_act.dart';
