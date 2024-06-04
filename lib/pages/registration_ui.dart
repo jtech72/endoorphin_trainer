@@ -1,6 +1,5 @@
 
 import 'dart:developer';
-import 'dart:ffi';
 
 import 'package:endoorphin_trainer/controllers/registration_controller.dart';
 import 'package:endoorphin_trainer/services/network_services/api_call.dart';

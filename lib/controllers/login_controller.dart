@@ -3,7 +3,10 @@ import 'dart:developer';
 import 'package:endoorphin_trainer/utils/exports.dart';
 
 import '../services/network_services/api_call.dart';
+import '../services/network_services/notification_servies.dart';
 class LoginController extends GetxController{
+  NotificationServices notificationServices=NotificationServices();
+
   RxBool obscureText = true.obs;
   void toggleObscureText() {
     obscureText.toggle(); // Toggle the RxBool value
@@ -11,7 +14,12 @@ class LoginController extends GetxController{
   String countryCode = "+971";
   TextEditingController phoneNumberController  = TextEditingController();
   TextEditingController passwordController  = TextEditingController();
-
+  @override
+  void onInit() {
+    notificationServices.getDeviceToken();
+    notificationServices.isDeviceTokenRefresh();
+    super.onInit();
+  }
   void onLogin() async {
     showLoader();
     if (phoneNumberController.text.trim().isEmpty) {
@@ -23,7 +31,8 @@ class LoginController extends GetxController{
     } else {
       Map<String, dynamic> request = {
         "loginData": phoneNumberController.text.trim(),
-        "password": passwordController.text.trim()
+        "password": passwordController.text.trim(),
+        "deviceId": notificationServices.deviceToken ??""
       };
       try {
         await CallAPI.login(request: request).then((value) {
