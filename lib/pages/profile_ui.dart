@@ -1,3 +1,4 @@
+import 'package:endoorphin_trainer/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 
 import '../services/network_services/api_call.dart';
@@ -9,6 +10,7 @@ class ProfileUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProfileController controller = Get.put(ProfileController());
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 50,
@@ -468,8 +470,7 @@ class ProfileUI extends StatelessWidget {
                         fontFamily: 'Montserrat'),
                   ),
                   onTap: () {
-                    storage.erase();
-                    Get.offAllNamed(AppRoutes.signinoption);
+                    controller.onLogoutButton();
                   })
             ],
           ).paddingOnly(left: Get.width * 0.05, right: Get.width * 0.05),

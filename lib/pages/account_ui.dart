@@ -58,7 +58,8 @@ class AccountUI extends StatelessWidget {
                             onTap: (){
                               controller.openCamera();
                             },
-                            child:  CircleAvatar(
+                            child:
+                            CircleAvatar(
                               radius: 42,
                               backgroundColor: AppColors.yellow,
                               child:
