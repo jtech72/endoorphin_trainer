@@ -26,28 +26,30 @@
     <string>$(FLUTTER_BUILD_NUMBER)</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
+
+    <!-- Permissions for Camera and Photo Library -->
+    <key>NSCameraUsageDescription</key>
+    <string>We need access to your camera to take photos for profile pictures.</string>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>We need access to your photo library to upload images for profile pictures.</string>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-      <string>sms</string>
-      <string>tel</string>
-    </array>
+
+    <!-- Location Permissions -->
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
     <string>We require your location to provide location-based services and improve user experience.</string>
-
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>Location access is needed to display nearby points of interest.</string>
 
-    <key>NSCameraUsageDescription</key>
-    <string>We need access to your camera to take photos for profile pictures.</string>
-
+    <!-- Indirect Input Events -->
     <key>UIApplicationSupportsIndirectInputEvents</key>
     <true/>
+
+    <!-- Launch and Main Storyboards -->
     <key>UILaunchStoryboardName</key>
     <string>LaunchScreen</string>
     <key>UIMainStoryboardFile</key>
     <string>Main</string>
+
+    <!-- Supported Orientations -->
     <key>UISupportedInterfaceOrientations</key>
     <array>
         <string>UIInterfaceOrientationPortrait</string>
@@ -61,5 +63,32 @@
         <string>UIInterfaceOrientationLandscapeLeft</string>
         <string>UIInterfaceOrientationLandscapeRight</string>
     </array>
+
+    <!-- Background Modes for Notifications -->
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>fetch</string>
+        <string>remote-notification</string>
+    </array>
+
+    <!-- Firebase and Push Notifications -->
+    <key>FirebaseAppDelegateProxyEnabled</key>
+    <false/>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
+
+    <!-- Application Queries Schemes -->
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>sms</string>
+        <string>tel</string>
+    </array>
+
+    <!-- Tracking Usage Description -->
+    <key>NSUserTrackingUsageDescription</key>
+    <string>$(PRODUCT_NAME) user tracking</string>
 </dict>
 </plist>

@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:ffi';
 import 'dart:io';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';

@@ -19,15 +19,15 @@ class ForgotPasswordUI extends StatelessWidget {
         appBar: myAppBar(
           title: GestureDetector(onTap: (){Get.back();},child: Text('Forgot Password',style: Theme.of(context).textTheme.headlineSmall,)),
           context: context,),
-        body: SingleChildScrollView(
-          child: Container(
-            height: Get.height,
-            width: Get.width,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(ImagesPaths.bgBlackShade,),fit: BoxFit.cover
-                )
-            ),
+        body: Container(
+          height: Get.height,
+          width: Get.width,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(ImagesPaths.bgBlackShade,),fit: BoxFit.cover
+              )
+          ),
+          child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -53,7 +53,7 @@ class ForgotPasswordUI extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: AppColors.yellowishWhite,
                       borderRadius: BorderRadius.circular(5)),
-
+            
                   height: 50,
                   width: Get.width,
                   child: Row(
@@ -62,8 +62,8 @@ class ForgotPasswordUI extends StatelessWidget {
                         height: 40,
                         width: Get.width *.9,
                         child: TextField(
-
-
+            
+            
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(64),
                               FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -86,9 +86,6 @@ class ForgotPasswordUI extends StatelessWidget {
                     ],
                   ),
                 ).paddingOnly(top: Get.height*0.01),
-                SizedBox(
-                  height: Get.height*0.2,
-                ),
                 Center(
                     child: InkButton(
                         child: Text('Send',
@@ -99,7 +96,7 @@ class ForgotPasswordUI extends StatelessWidget {
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
-
+            
                                 backgroundColor: AppColors.greyButton,
                                 title: Column(
                                   children: [
@@ -133,7 +130,7 @@ class ForgotPasswordUI extends StatelessWidget {
                               ),);
                             },
                           );
-                        })
+                        }).paddingOnly(top: Get.height*0.2),
                 ),
               ],
             ).paddingOnly(left: Get.width*0.035,right: Get.width*0.035),
