@@ -100,7 +100,9 @@ class NotificationServices {
         priority: Priority.high,
         ticker: "ticker"
     );
-    DarwinNotificationDetails darwinNotificationDetails=const DarwinNotificationDetails(presentAlert: true,
+    DarwinNotificationDetails darwinNotificationDetails=const DarwinNotificationDetails(
+      presentBanner: true,
+        presentAlert: true,
         presentBadge: true,presentSound: true);
     NotificationDetails notificationDetails=NotificationDetails(
         android: androidNotificationDetails,
