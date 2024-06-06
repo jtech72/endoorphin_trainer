@@ -440,7 +440,7 @@ class BookingRequsetUi extends StatelessWidget {
                                           RichText(
                                               text: TextSpan(children: [
                                             TextSpan(
-                                              text: 'John Doe',
+                                              text: controller.notificationData["name"],
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .headlineSmall,
@@ -472,7 +472,7 @@ class BookingRequsetUi extends StatelessWidget {
                                     style: Theme.of(context).textTheme.headlineSmall,
                                   ),
                                   Text(
-                                    'Malviya Nagar, Near LB hospital, Jaipur, Rajthan',
+                                    controller.notificationData["address"].toString(),
                                     style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.white),
                                   ),
                                 ],
