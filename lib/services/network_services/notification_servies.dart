@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:endoorphin_trainer/utils/app_routes.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -94,16 +96,18 @@ class NotificationServices {
     AndroidNotificationChannel channel=const AndroidNotificationChannel( "high_importance_channel", "high_importance_channel",importance: Importance.max);
     AndroidNotificationDetails androidNotificationDetails =
     AndroidNotificationDetails(
-        channel.id.toString(), channel.name.toString(),
+        channel.id.toString(),
+        channel.name.toString(),
         channelDescription: "Description",
-        importance: Importance.high,
+        importance: Importance.max,
         priority: Priority.high,
-        ticker: "ticker"
+        ticker: "ticker",
     );
     DarwinNotificationDetails darwinNotificationDetails=const DarwinNotificationDetails(
       presentBanner: true,
         presentAlert: true,
-        presentBadge: true,presentSound: true);
+        presentBadge: true,
+        presentSound: true);
     NotificationDetails notificationDetails=NotificationDetails(
         android: androidNotificationDetails,
         iOS: darwinNotificationDetails
@@ -113,10 +117,47 @@ class NotificationServices {
           .show(0, message.notification!.title.toString(), message.notification!.body.toString(), notificationDetails);
     });
   }
-  void handleNotification(RemoteMessage message){
-    log("NOTIFICATION DATA: ${message.data.toString()}");
 
+  void handleNotification(RemoteMessage message) {
+    final notificationBody = message.notification?.body;
+
+    if (notificationBody != null) {
+      log("NOTIFICATION DATA: $notificationBody");
+
+      try {
+        // Splitting the notification body by commas to separate key-value pairs
+        final keyValuePairs = notificationBody.split(',');
+
+        // Initialize an empty map to hold the parsed key-value pairs
+        final Map<String, String> data = {};
+
+        for (var pair in keyValuePairs) {
+          // Splitting each pair by the colon to separate key and value
+          final keyValue = pair.split(':');
+          if (keyValue.length == 2) {
+            final key = keyValue[0].trim();
+            final value = keyValue[1].trim();
+            data[key] = value;
+          }
+        }
+
+        final name = data['Name'] ?? '';
+        final address = data['Address'] ?? '';
+        final contact = data['Contact'] ?? '';
+
+        Get.toNamed(AppRoutes.bookingrequest, arguments: {
+          "name": name,
+          "address": address,
+          "contact": contact,
+        });
+      } catch (e) {
+        log("Error parsing notification data: $e");
+      }
+    } else {
+      log("Notification body is null");
+    }
   }
+
   Future foregroundMessage()async{
     await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
         alert: true,
