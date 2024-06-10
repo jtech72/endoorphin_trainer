@@ -103,17 +103,17 @@ class HomeUiState extends State<HomeUi> {
         ],
       ),
       drawer: MyDrawer(),
-      body: SingleChildScrollView(
-        child: Container(
-          height: Get.height,
-          width: Get.width,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(ImagesPaths.bgBlackShade)
-            )
-          ),
+      body: Container(
+        height: Get.height,
+        width: Get.width,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(ImagesPaths.bgBlackShade),fit: BoxFit.cover
+          )
+        ),
+        child: SingleChildScrollView(
           child: Column(
-
+          
             children: [
               Container(
                 height: Get.height*0.24,
@@ -149,7 +149,7 @@ class HomeUiState extends State<HomeUi> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-
+          
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -166,7 +166,7 @@ class HomeUiState extends State<HomeUi> {
                                   style: Theme.of(context).textTheme.headlineMedium,
                                 )
                               ])),
-
+          
                       Obx(
                         ()=> Container(
                           height: Get.height * 0.035,
@@ -247,7 +247,7 @@ class HomeUiState extends State<HomeUi> {
                                 borderRadius: BorderRadius.circular(20),
                                 color: controller.selectedIndex.value ==index?
                                 AppColors.yellow: AppColors.greyButton,
-
+          
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -276,7 +276,7 @@ class HomeUiState extends State<HomeUi> {
                                     index == 3 ? "Upcoming" : "Total",
                                     style: Theme.of(context).textTheme.titleLarge,
                                   ),
-
+          
                                   SizedBox(height: 4), // Adjust the gap here
                                   Text(
                                     controller.quickGlanceList[index],
@@ -291,79 +291,9 @@ class HomeUiState extends State<HomeUi> {
                       ),
                     ),
                   ),
-                  // RichText(
-                  //     text: TextSpan(
-                  //         text: "Quick ",
-                  //         style: Theme.of(context)
-                  //             .textTheme
-                  //             .headlineLarge
-                  //             ?.copyWith(color: AppColors.yellow),
-                  //         children: [
-                  //           TextSpan(
-                  //             text: "Access",
-                  //             style: Theme.of(context).textTheme.headlineMedium,
-                  //           )
-                  //         ])).paddingOnly(bottom: 15),
-                  // SizedBox(
-                  //   height: Get.height * .18,
-                  //   width: Get.width,
-                  //   child: ListView.builder(
-                  //       itemCount: 3,
-                  //       scrollDirection: Axis.horizontal,
-                  //       itemBuilder: (context, index) {
-                  //         return Obx(
-                  //               ()=> InkWell(
-                  //             splashColor: Colors.transparent,
-                  //             onTap: (){
-                  //               controller.selectedIndex.value = index;
-                  //               if (controller.selectedIndex.value == 0) {
-                  //                 Get.toNamed(AppRoutes.profile);
-                  //               } else if (controller.selectedIndex.value == 1) {
-                  //                 Get.toNamed(AppRoutes.earning);
-                  //               } else {
-                  //                 Get.toNamed(AppRoutes.document);
-                  //               }
-                  //             },
-                  //             child: Column(
-                  //               children: [
-                  //                 Container(
-                  //                   height: Get.height * .14,
-                  //                   width: Get.width * .29,
-                  //                   decoration: BoxDecoration(
-                  //                     borderRadius: BorderRadius.circular(10),
-                  //                     color:
-                  //                     controller.selectedIndex.value ==index?
-                  //                     AppColors.yellow: AppColors.greyButton,
-                  //                   ),
-                  //                   child: Image.asset(
-                  //                     index == 0
-                  //                         ? ImagesPaths.profileHome
-                  //                         : index == 1
-                  //                         ? ImagesPaths.earningHome
-                  //                         : ImagesPaths.documentHome,
-                  //                     scale: 3,
-                  //                     color:controller.selectedIndex.value==index?AppColors.black: AppColors.white,
-                  //                   ),
-                  //                 ),
-                  //                 Text(
-                  //                   index == 0
-                  //                       ? "Profile"
-                  //                       : index == 1
-                  //                       ? "Earning"
-                  //                       : "Documents",
-                  //                   style: Theme.of(context)
-                  //                       .textTheme
-                  //                       .displayLarge
-                  //                       ?.copyWith(fontWeight: FontWeight.w400),
-                  //                 ).paddingOnly(top: 9)
-                  //               ],
-                  //             ).paddingOnly(right: 20),
-                  //           ),
-                  //         );
-                  //       }),
-                  // )
+          
                 ],
-              ).paddingOnly(left: Get.width*0.04, right:Get.width*0.04, top: Get.height*0.02,bottom: 5),
+              ).paddingOnly(left: Get.width*0.04, right:Get.width*0.04, top: Get.height*0.02,),
             ],
           ),
         ),

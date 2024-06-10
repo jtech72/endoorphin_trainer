@@ -9,7 +9,7 @@ class LoginController extends GetxController{
 
   RxBool obscureText = true.obs;
   void toggleObscureText() {
-    obscureText.toggle(); // Toggle the RxBool value
+    obscureText.toggle();
   }
   String countryCode = "+971";
   TextEditingController phoneNumberController  = TextEditingController();
@@ -22,13 +22,17 @@ class LoginController extends GetxController{
   }
   void onLogin() async {
     showLoader();
-    if (phoneNumberController.text.trim().isEmpty) {
+    if (phoneNumberController.text.trim().isEmpty && passwordController.text.trim().isEmpty) {
       dismissLoader();
       showSnackBar("Please enter your phone number/password");
     } else if (passwordController.text.trim().isEmpty) {
       dismissLoader();
       showSnackBar("Please enter your password");
-    } else {
+    }else if (phoneNumberController.text.trim().isEmpty) {
+      dismissLoader();
+      showSnackBar("Please enter your phone number");
+    }
+    else {
       Map<String, dynamic> request = {
         "loginData": phoneNumberController.text.trim(),
         "password": passwordController.text.trim(),

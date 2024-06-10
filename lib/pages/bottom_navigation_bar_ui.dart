@@ -54,7 +54,8 @@ class _BottomNavigationBarUIState extends State<BottomNavigationBarUI> {
     return Scaffold(
       backgroundColor: AppColors.backgroundBlack,
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
+
           gradient: LinearGradient(
             colors: [
               Color(0XFFFDF7B9),
@@ -66,6 +67,10 @@ class _BottomNavigationBarUIState extends State<BottomNavigationBarUI> {
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
+          ),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15),
+            topRight: Radius.circular(15),
           ),
         ),
         child:
