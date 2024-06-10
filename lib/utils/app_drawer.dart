@@ -45,7 +45,7 @@ class _MyDrawerState extends State<MyDrawer> {
                       onTap: (){
                         Get.toNamed(AppRoutes.profile);
                       },
-                      child: CircleAvatar(
+                      child: const CircleAvatar(
                         radius: 30,
                         backgroundImage: AssetImage(ImagesPaths.profilePic),
                       ),

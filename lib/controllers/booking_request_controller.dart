@@ -13,13 +13,14 @@ class BookingRequestController extends GetxController{
   Rx<LatLng?> currentLocation = Rx<LatLng?>(null);
   Location location = Location();
   RxInt selectedIndex = 0.obs;
-
+  Map<dynamic,dynamic> notificationData = {};
   void onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
   @override
   void onInit() {
-    // getCurrentLocation();
+    notificationData = Get.arguments??{};
+    log("notification data ===>$notificationData");
   }
   @override
   void onClose() {
