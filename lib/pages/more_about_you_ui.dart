@@ -1073,7 +1073,8 @@ class MoreAboutYouUi extends StatelessWidget {
                               ).paddingOnly(left: 0),
                             ).paddingOnly(bottom: Get.height * 0.02),
                           );
-                        } else if (index == snapshot.data!.result!.length + 1 &&
+                        }
+                        else if (index == snapshot.data!.result!.length + 1 &&
                             storage.read("Passport") != "true") {
                           return InkWell(
                             onTap: () {
@@ -1157,7 +1158,8 @@ class MoreAboutYouUi extends StatelessWidget {
                               ).paddingOnly(left: 0),
                             ).paddingOnly(bottom: Get.height * 0.02),
                           );
-                        } else if (index == snapshot.data!.result!.length + 2
+                        }
+                        else if (index == snapshot.data!.result!.length + 2
                          ) {
                           return Obx(
                             () => Material(
@@ -1206,7 +1208,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                   Get.toNamed(AppRoutes.bio)?.then((result) {
                                     if (result != null && result == true) {
                                       controller.showButton(
-                                          true); // Show the button when returning from another page
+                                          true);
                                     }
                                   });
                                 } else {
