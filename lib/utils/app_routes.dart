@@ -33,6 +33,7 @@ class AppRoutes{
   static const String bankingDetails="/bankingDetails";
   static const String signinoption="/signinoption";
   static const String uploadimage="/uploadimage";
+  static const String bioEdit="/bioEdit";
 
 
 

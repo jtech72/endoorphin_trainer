@@ -459,7 +459,56 @@ class ProfileUI extends StatelessWidget {
                     ),
                   )),
               SizedBox(
-                height: Get.height * 0.12,
+                height: Get.height * 0.02,
+              ),
+              Container(
+                  height: Get.height * 0.05,
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(color: AppColors.grey3),
+                      color: AppColors.greyButton),
+                  child: InkWell(
+                    onTap: () {
+                      Get.toNamed(AppRoutes.bioEdit);
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: Get.width * 0.04,
+                            ),
+                            Image.asset(
+                              ImagesPaths.document,
+                              width: 22,
+                              color: AppColors.white,
+                            ),
+                            SizedBox(
+                              width: Get.width * 0.057,
+                            ),
+                            Text(
+                              'Bio',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge!
+                                  .copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.white),
+                            ),
+                          ],
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          color: AppColors.white,
+                          size: 20,
+                        ).paddingOnly(right: Get.width * 0.028)
+                      ],
+                    ),
+                  )),
+              SizedBox(
+                height: Get.height * 0.1,
               ),
               InkButton(
                   child: Text(

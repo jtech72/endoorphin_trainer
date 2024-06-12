@@ -1,8 +1,10 @@
 import 'package:endoorphin_trainer/bindings/banking_details_binding.dart';
+import 'package:endoorphin_trainer/bindings/bio_edit_binding.dart';
 import 'package:endoorphin_trainer/bindings/session_complete_binding.dart';
 import 'package:endoorphin_trainer/bindings/sign_in_option_binding.dart';
 import 'package:endoorphin_trainer/bindings/upload_images_binding.dart';
 import 'package:endoorphin_trainer/pages/banking_details_ui.dart';
+import 'package:endoorphin_trainer/pages/bio_edit_ui.dart';
 import 'package:endoorphin_trainer/pages/session_complete_ui.dart';
 import 'package:endoorphin_trainer/pages/sign_in_option_ui.dart';
 import 'package:endoorphin_trainer/pages/upload_images_ui.dart';
@@ -155,5 +157,9 @@ GetPage(
         name: AppRoutes.uploadimage,
         page: () => UploadImagesUi(),
         binding: UploadImagesBinding()),
+    GetPage(
+        name: AppRoutes.bioEdit,
+        page: () => BioEditUi(),
+        binding: BioEditBinding()),
   ];
 }
