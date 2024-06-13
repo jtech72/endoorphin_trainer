@@ -1,14 +1,11 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:endoorphin_trainer/utils/app_routes.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
-
-
 class NotificationServices {
   String? deviceToken;
   static String notificationType="";
@@ -41,7 +38,6 @@ class NotificationServices {
 
     return token;
   }
-
   Future<String?> isDeviceTokenRefresh() async {
     messaging.onTokenRefresh.listen((event) {
       event.toString();
@@ -50,7 +46,6 @@ class NotificationServices {
     });
     return deviceToken;
   }
-
   void initLocationNotification(BuildContext context, RemoteMessage message) async {
     var androidInitializations =
     const AndroidInitializationSettings('@mipmap/ic_launcher');

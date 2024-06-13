@@ -1,4 +1,5 @@
 import 'package:endoorphin_trainer/controllers/booking_request_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -15,6 +16,7 @@ class BookingRequsetUi extends StatelessWidget {
   Widget build(BuildContext context) {
     BookingRequestController controller = Get.find();
     return Scaffold(
+      resizeToAvoidBottomInset: false,
         // appBar: myAppBar(
         //     title: Text("",
         //         style: Theme.of(context).textTheme.bodyMedium),
@@ -227,8 +229,7 @@ class BookingRequsetUi extends StatelessWidget {
                                 ),
 
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+
                                   children: [
                                     Container(
                                       height: 35,
@@ -255,6 +256,7 @@ class BookingRequsetUi extends StatelessWidget {
                                         ],
                                       ).paddingOnly(left: 10),
                                     ),
+                                     Spacer(flex: 1,),
                                      GestureDetector(
                                        onTap: (){
                                          _launchTelephone();
@@ -266,7 +268,22 @@ class BookingRequsetUi extends StatelessWidget {
                                           ImagesPaths.telephone,
                                         ), // Your profile image
                                        ),
-                                     ),
+                                     ).paddingOnly(right: 10),
+                                    GestureDetector(
+                                      onTap: (){
+                                        showModalBottomSheet(
+                                          context: context,
+                                          isScrollControlled: true,
+                                          builder: (context) => ChatBottomSheet(),
+                                        );
+                                      },
+                                      child: CircleAvatar(
+                                        radius: 20,
+                                        backgroundColor: AppColors.yellow,
+                                        child: Icon(Icons.message_outlined,color: AppColors.black,),
+                                        // Your profile image
+                                      ),
+                                    ),
                                   ],
                                 ).paddingOnly(top: Get.height*0.015),
                                 Row(
@@ -553,5 +570,86 @@ _launchTelephone() async {
     await launch(telephoneNumber);
   } else {
     throw 'Could not launch $telephoneNumber';
+  }
+}
+
+
+class ChatBottomSheet extends StatelessWidget {
+  final BookingRequestController chatController = Get.put(BookingRequestController());
+
+  @override
+  Widget build(BuildContext context) {
+    return
+      DraggableScrollableSheet(
+      expand: false,
+      builder: (context, scrollController) {
+        return Container(
+          padding: EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                child: Obx(() {
+                  return ListView.builder(
+                    controller: scrollController,
+                    itemCount: chatController.messages.length,
+                    itemBuilder: (context, index) {
+                      return Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                            margin: EdgeInsets.symmetric(vertical: 5.0),
+                            padding: EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              color: AppColors.blackShade,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),                            child: Text(
+                              textAlign: TextAlign.right,
+                              chatController.messages[index],style: TextStyle(color: AppColors.white),)),
+                      );
+                    },
+                  );
+                }),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: chatController.messageController,
+                        decoration: InputDecoration(
+                          hintText: 'Type a message...',
+                          fillColor: AppColors.blackShade,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                        ),
+                        onSubmitted: (value) => chatController.sendMessage(),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => chatController.sendMessage(),
+                      child: Container(
+                        height: 45,
+                        width: 45,
+                        decoration: BoxDecoration(
+                          color: AppColors.yellow,
+                          shape: BoxShape.circle
+                        ),
+                        child:Icon(Icons.send_sharp,color: AppColors.blackShade,),
+                      ),
+                    ).paddingOnly(left: 10),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
