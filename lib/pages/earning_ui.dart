@@ -4,15 +4,10 @@ import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class _SalesData {
-  final String day;
-  final int amount;
+  final String period; // This could be 'day' for weekly data and 'month' for monthly data
+  final double amount;
 
-  // final int time;
-
-  _SalesData(
-    this.day,
-    this.amount,
-  );
+  _SalesData(this.period, this.amount);
 }
 
 class EarningUi extends StatelessWidget {
@@ -22,14 +17,43 @@ class EarningUi extends StatelessWidget {
   Widget build(BuildContext context) {
     final isSelected = false;
     EarningController controller = Get.put(EarningController());
-    List<_SalesData> data = [
-      _SalesData(' S' , 35,),
-      _SalesData(' M ', 21,),
-      _SalesData(' T' , 60,),
-      _SalesData(' W ', 30,),
-      _SalesData(' T ', 40,),
-      _SalesData(' F ', 30,),
-      _SalesData(' S ', 54,),
+    // List<_SalesData> data = [
+    //   _SalesData(' S' , 35,),
+    //   _SalesData(' M ', 21,),
+    //   _SalesData(' T' , 60,),
+    //   _SalesData(' W ', 30,),
+    //   _SalesData(' T ', 40,),
+    //   _SalesData(' F ', 30,),
+    //   _SalesData(' S ', 54,),
+    // ];
+    bool isWeekly = true;
+
+    // Example weekly data
+    final List<_SalesData> weeklyData = [
+      _SalesData('Sun', 30),
+      _SalesData('Mon', 42),
+      _SalesData('Tue', 54),
+      _SalesData('Wed', 70),
+      _SalesData('Thu', 35),
+      _SalesData('Fri', 50),
+      _SalesData('Sat', 40),
+
+    ];
+
+    // Example monthly data
+    final List<_SalesData> monthlyData = [
+      _SalesData('Jan', 300),
+      _SalesData('Feb', 420),
+      _SalesData('Mar', 540),
+      _SalesData('Apr', 200),
+      _SalesData('May', 350),
+      _SalesData('Jun', 500),
+      _SalesData('Jul', 400),
+      _SalesData('Aug', 450),
+      _SalesData('Sep', 480),
+      _SalesData('Oct', 420),
+      _SalesData('Nov', 510),
+      _SalesData('Dec', 600),
     ];
     return Scaffold(
       appBar: AppBar(
@@ -127,42 +151,86 @@ class EarningUi extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     color: AppColors.blackShade,
                   ),
-                  child: SfCartesianChart(
-                      plotAreaBorderWidth: 0,
-                      borderWidth: 4, title: ChartTitle(text: 'Dec 7 - 14',textStyle: TextStyle(color: Colors.white,fontSize: 14,fontWeight: FontWeight.w500)),
-                      legend: Legend(toggleSeriesVisibility: false,
-                          textStyle: TextStyle(color: AppColors.yellow,fontWeight: FontWeight.w700,fontSize: 24),
-                          isVisible: true),
-                      tooltipBehavior: TooltipBehavior(
-                          canShowMarker: false,
-                          textStyle: TextStyle(color: AppColors.black),
-                          enable: true,
-                          color: AppColors.yellow),
-                      primaryXAxis: CategoryAxis(
-                        labelStyle: TextStyle(color: AppColors.impgrey),
-                        majorGridLines: MajorGridLines(width: 0),
+                  child:Column(
+                    children: [
+                      // Dropdown to switch between weekly and monthly data
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Obx(() => DropdownButton<String>(
+                          value: controller.isWeekly.value ? 'Weekly' : 'Monthly',
+                          items: [
+                            DropdownMenuItem(
+                              value: 'Weekly',
+                              child: Text('Weekly'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'Monthly',
+                              child: Text('Monthly'),
+                            ),
+                          ],
+                          onChanged: (value) {
+                            controller.toggleView();
+                          },
+                        )),
                       ),
-
-                      primaryYAxis: NumericAxis(
-                          isVisible: false,
-                          labelStyle: TextStyle(color: AppColors.impgrey),
-                          majorGridLines: MajorGridLines(width: 0),
-                          minimum: 0,
-                          maximum: 70,
-                          interval: 10),
-                      series: <CartesianSeries<_SalesData, String>>[
-                        ColumnSeries<_SalesData, String>(
-                          dataSource: data,
-                          xValueMapper: (_SalesData data, _) => data.day,
-                          yValueMapper: (_SalesData data, _) => data.amount,
-                          name: 'AED 1959.90',
-                          color: (isSelected) ? AppColors.yellow : AppColors.yellow,
-
-                          borderColor: AppColors.yellow,borderWidth: 1,
-                          borderRadius: BorderRadius.circular(10),
-
-                        )
-                      ])
+                      Expanded(
+                        child: Obx(() {
+                          final List<CartesianSeries<dynamic, dynamic>> seriesList = [
+                            ColumnSeries<_SalesData, String>(
+                              dataSource: controller.isWeekly.value ? weeklyData : monthlyData,
+                              xValueMapper: (_SalesData data, _) => data.period,
+                              yValueMapper: (_SalesData data, _) => data.amount,
+                              name: controller.isWeekly.value ? 'AED 1959.90' : 'AED 1959.90',
+                              color: AppColors.yellow,
+                              borderColor: AppColors.yellow,
+                              borderWidth: 1,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ];
+                          return SfCartesianChart(
+                            plotAreaBorderWidth: 0,
+                            borderWidth: 4,
+                            title: ChartTitle(
+                              text: controller.isWeekly.value ? 'Dec 7 - 14' : '2024',
+                              textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            legend: Legend(
+                              toggleSeriesVisibility: false,
+                              textStyle: TextStyle(
+                                color: AppColors.yellow,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 24,
+                              ),
+                              isVisible: true,
+                            ),
+                            tooltipBehavior: TooltipBehavior(
+                              canShowMarker: false,
+                              textStyle: TextStyle(color: AppColors.black),
+                              enable: true,
+                              color: AppColors.yellow,
+                            ),
+                            primaryXAxis: CategoryAxis(
+                              labelStyle: TextStyle(color: AppColors.impgrey),
+                              majorGridLines: MajorGridLines(width: 0),
+                            ),
+                            primaryYAxis: NumericAxis(
+                              isVisible: false,
+                              labelStyle: TextStyle(color: AppColors.impgrey),
+                              majorGridLines: MajorGridLines(width: 0),
+                              minimum: 0,
+                              maximum: controller.isWeekly.value ? 70 : 700,
+                              interval: controller.isWeekly.value ? 10 : 100,
+                            ),
+                            series: seriesList,
+                          );
+                        }),
+                      ),
+                    ],
+                  ),
               ).paddingOnly(
                 top: 15,
               ),
@@ -226,11 +294,12 @@ class EarningUi extends StatelessWidget {
               //     })
             ],
           ).paddingOnly(
-              left: Get.width * 0.05,
-              right: Get.width * 0.05,
+              left: Get.width * 0.0,
+              right: Get.width * 0.0,
               top: Get.height * 0.02),
         ),
       ),
     );
   }
 }
+//

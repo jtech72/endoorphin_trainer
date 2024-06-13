@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
 import '../controllers/account_controller.dart';
@@ -19,8 +21,7 @@ class AccountUI extends StatelessWidget {
             )
         ),
         child: SingleChildScrollView(
-          child:
-          FutureBuilder(
+          child: FutureBuilder(
             future:
             CallAPI.getProfileDetails(storage.read("userId").toString()),
             builder: (BuildContext context, snapshot) {
@@ -278,54 +279,6 @@ class AccountUI extends StatelessWidget {
                     SizedBox(
                       height: Get.height*0.01,
                     ),
-                    Text('Password',style: Theme.of(context).textTheme.labelLarge!.copyWith(color: AppColors.white),textAlign: TextAlign.start,),
-                    SizedBox(
-                      height: Get.height*0.011,
-                    ),
-                    Container(
-                      height: 45,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: AppColors.grey3),
-                          borderRadius: BorderRadius.circular(5)
-                      ),
-                      child: TextField(
-                        controller: controller.passwordController,
-
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(64),
-                          FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                        ],
-                        style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.white),
-                        keyboardType: TextInputType.text,
-                        decoration: InputDecoration(
-                          filled: true,
-                          contentPadding: const EdgeInsets.only(top: 6,left: 20),
-
-                          fillColor: Colors.transparent,
-                          hintText: 'Enter Password',
-                          hintStyle: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.white),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                            borderSide: const BorderSide(
-                              color: Colors.transparent,
-                              width: 1,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                            borderSide: const BorderSide(
-                              color: Colors.transparent,
-                              width: 1,
-                            ),
-                          ),
-                          disabledBorder: InputBorder.none,
-                          // prefixIcon: const Icon(Icons.lock_outlined,color: AppColors.lightGrey1,).paddingOnly(left: 20,right: 20),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: Get.height*0.01,
-                    ),
                     Text('Phone Number',style: Theme.of(context).textTheme.labelLarge!.copyWith(color: AppColors.white),textAlign: TextAlign.start,),
                     SizedBox(
                       height: Get.height*0.011,
@@ -378,45 +331,61 @@ class AccountUI extends StatelessWidget {
                     SizedBox(
                       height: Get.height*0.011,
                     ),
-                    Obx(() {
-                      return Container(
-                        height: 45,
-                        decoration: BoxDecoration(
+                    Obx(
+                          () => PopupMenuButton<String>(
+                        offset: Offset(1, 45),
+                        color: AppColors.greyButton,
+                        onSelected: (selectedValue) {
+                          controller.selectedOption1.value = selectedValue;
+                          log(controller.selectedOption1.value);
+                        },
+                        itemBuilder: (BuildContext context) {
+                          return controller.items2.map((String value) {
+                            return PopupMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: TextStyle(color: AppColors.white),
+                              ),
+                            );
+                          }).toList();
+                        },
+                        child: Container(
+                          height: 45,
+                          width: Get.width,
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
                             border: Border.all(color: AppColors.grey3),
-                            borderRadius: BorderRadius.circular(5)
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Transform.translate(
+                                offset: Offset(5, 0),
+                                child: Text(
+                                  controller.selectedOption1.value.isEmpty
+                                      ? "Select Gender"
+                                      : controller.selectedOption1.value,
+                                  style: TextStyle(
+                                    color: AppColors.white,
+                                    fontSize: 12,
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                              Icon(Icons.keyboard_arrow_down, size: 32, color: AppColors.grey4),
+                            ],
+                          ).paddingOnly(left: Get.width * 0.035, right: Get.width * 0.030),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              controller.selectedOption1.value,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            DropdownButton<String>(
-                              icon: const Icon(Icons.keyboard_arrow_down,size: 32,color: AppColors.impgrey,),
-
-
-                              underline: const SizedBox(),
-                              dropdownColor: AppColors.greyButton,
-                              onChanged: (selectedValue) {
-                                controller.selectedOption1.value = selectedValue!;
-
-                              },
-                              items: controller.items2.map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            ),
-                          ],
-                        ).paddingOnly(left: 15, right: 15),
-                      );
-                    }),
+                      ),
+                    ),
                     SizedBox(
                       height: Get.height*0.01,
                     ),
-                    Text('Bio',style: Theme.of(context).textTheme.labelLarge!.copyWith(color: AppColors.white),textAlign: TextAlign.start,),
+                    Text('Description',style: Theme.of(context).textTheme.labelLarge!.copyWith(color: AppColors.white),textAlign: TextAlign.start,),
                     SizedBox(
                       height: Get.height*0.011,
                     ),
@@ -441,7 +410,7 @@ class AccountUI extends StatelessWidget {
                           contentPadding: const EdgeInsets.all(20),
 
                           fillColor: Colors.transparent,
-                          hintText: 'Write about trainer',
+                          hintText: 'Write something',
                           hintStyle: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.white),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
