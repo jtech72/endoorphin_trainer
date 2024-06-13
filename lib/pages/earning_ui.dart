@@ -302,4 +302,3 @@ class EarningUi extends StatelessWidget {
     );
   }
 }
-//
