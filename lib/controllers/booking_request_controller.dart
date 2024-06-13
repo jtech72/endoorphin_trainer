@@ -14,6 +14,16 @@ class BookingRequestController extends GetxController{
   Location location = Location();
   RxInt selectedIndex = 0.obs;
   Map<dynamic,dynamic> notificationData = {};
+
+  var messages = <String>[].obs;
+  final TextEditingController messageController = TextEditingController();
+
+  void sendMessage() {
+    if (messageController.text.trim().isNotEmpty) {
+      messages.add(messageController.text.trim());
+      messageController.clear();
+    }
+  }
   void onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }

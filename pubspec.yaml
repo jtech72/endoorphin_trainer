@@ -67,6 +67,7 @@ dependencies:
   firebase_messaging:
   flutter_local_notifications:
   logger:
+  uni_links2:
 dev_dependencies:
   flutter_test:
     sdk: flutter
