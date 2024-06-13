@@ -48,7 +48,7 @@ class MoreAboutYouUi extends StatelessWidget {
                       child: Row(
                         children: [
                           Text('Skip',style: Theme.of(context).textTheme.titleMedium!.copyWith(color: AppColors.yellow),),
-                          Icon(Icons.arrow_forward_ios,size: 14,color: AppColors.yellow,)
+                          const Icon(Icons.arrow_forward_ios,size: 14,color: AppColors.yellow,)
                         ],
                       ),
                     )
@@ -311,6 +311,16 @@ class MoreAboutYouUi extends StatelessWidget {
                                                                       .transparent,
                                                               shape: BoxShape
                                                                   .circle),
+                                                          child: Transform.translate(
+                                                            offset: const Offset(-1,0),
+                                                            child: Image.asset(
+                                                              ImagesPaths.arrowback,scale: 5,
+                                                              color: controller.isFrontImageVisible.value != false
+                                                                  ? AppColors
+                                                                  .black
+                                                                  : AppColors.yellow,
+                                                              alignment: Alignment.center,),
+                                                          ),
                                                         ).paddingOnly(right: 9),
                                                       ),
                                                       InkWell(
@@ -340,6 +350,16 @@ class MoreAboutYouUi extends StatelessWidget {
                                                                       .transparent,
                                                               shape: BoxShape
                                                                   .circle),
+                                                          child: Transform.translate(
+                                                            offset: const Offset(1,0),
+                                                            child: Image.asset(
+                                                              ImagesPaths.arrowforword,scale: 5,
+                                                              color: controller.isFrontImageVisible.value != false
+                                                                  ? AppColors
+                                                                  .yellow
+                                                                  : AppColors.black,
+                                                              alignment: Alignment.center,),
+                                                          ),
                                                         ),
                                                       ),
                                                     ],
@@ -550,6 +570,16 @@ class MoreAboutYouUi extends StatelessWidget {
                                                                           .transparent,
                                                                   shape: BoxShape
                                                                       .circle),
+                                                              child: Transform.translate(
+                                                                offset: const Offset(-1,0),
+                                                                child: Image.asset(
+                                                                  ImagesPaths.arrowback,scale: 5,
+                                                                  color: controller.isFrontImageVisible.value != false
+                                                                      ? AppColors
+                                                                      .black
+                                                                      : AppColors.yellow,
+                                                                  alignment: Alignment.center,),
+                                                              ),
                                                             ).paddingOnly(
                                                                 right: 9),
                                                           ),
@@ -580,6 +610,16 @@ class MoreAboutYouUi extends StatelessWidget {
                                                                           .transparent,
                                                                   shape: BoxShape
                                                                       .circle),
+                                                              child: Transform.translate(
+                                                                offset: const Offset(1,0),
+                                                                child: Image.asset(
+                                                                  ImagesPaths.arrowforword,scale: 5,
+                                                                  color: controller.isFrontImageVisible.value != false
+                                                                      ? AppColors
+                                                                      .yellow
+                                                                      : AppColors.black,
+                                                                  alignment: Alignment.center,),
+                                                              ),
                                                             ),
                                                           ),
                                                         ],
@@ -801,14 +841,23 @@ class MoreAboutYouUi extends StatelessWidget {
                                                                       border: Border.all(
                                                                           color: AppColors
                                                                               .yellow),
-                                                                      color: controller.isFrontImageVisible.value !=
-                                                                              false
+                                                                      color: controller.isFrontImageVisible.value != false
                                                                           ? AppColors
                                                                               .yellow
                                                                           : Colors
                                                                               .transparent,
                                                                       shape: BoxShape
                                                                           .circle),
+                                                                      child: Transform.translate(
+                                                                        offset: const Offset(-1,0),
+                                                                        child: Image.asset(
+                                                                          ImagesPaths.arrowback,scale: 5,
+                                                                          color: controller.isFrontImageVisible.value != false
+                                                                              ? AppColors
+                                                                              .black
+                                                                              : AppColors.yellow,
+                                                                          alignment: Alignment.center,),
+                                                                      ),
                                                                 ).paddingOnly(
                                                                         right:
                                                                             9),
@@ -839,6 +888,16 @@ class MoreAboutYouUi extends StatelessWidget {
                                                                               .transparent,
                                                                       shape: BoxShape
                                                                           .circle),
+                                                                      child: Transform.translate(
+                                                                        offset: const Offset(1,0),
+                                                                        child: Image.asset(
+                                                                          ImagesPaths.arrowforword,scale: 5,
+                                                                          color: controller.isFrontImageVisible.value != false
+                                                                              ? AppColors
+                                                                              .yellow
+                                                                              : AppColors.black,
+                                                                          alignment: Alignment.center,),
+                                                                      ),
                                                                 ),
                                                               ),
                                                             ],
