@@ -103,7 +103,7 @@ class BioController extends GetxController {
                 child: InkButton(
                     child: Text('OK', style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black, fontSize: 18,
                         fontFamily: 'Montserrat'),), onTap: () {
-                  Get.offAllNamed(AppRoutes.login);
+                  Get.offAllNamed(AppRoutes.bottomNavigation);
                 }, height: 35, width: 95),
               ),
             ], shape: RoundedRectangleBorder(

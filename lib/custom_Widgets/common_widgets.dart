@@ -137,7 +137,11 @@ void dismissLoader() {
   Get.back();
 }
 
-
+ UploadImage? uploadImage;
+enum UploadImage{
+  byInitically,
+  byProfile
+}
 
 // Drawer myDrawer() {
 //   return Drawer(

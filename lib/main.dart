@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-import 'package:endoorphin_trainer/services/network_services/notification_servies.dart';
 import 'package:endoorphin_trainer/utils/app_pages.dart';
 import 'package:endoorphin_trainer/utils/app_strings.dart';
 import 'package:endoorphin_trainer/utils/app_themes.dart';
@@ -12,8 +11,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:uni_links2/uni_links.dart';
 import 'firebase_options.dart';
-
-
 void main() async {
   try {
     await configure();
