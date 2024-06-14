@@ -63,6 +63,7 @@ class ImagesPaths {
   static const String myconditions= "${baseUrl}img_terms_conditions.png";
   static const String passportPhoto= "${baseUrl}img_passport.png";
   static const String bgBlackShade= "${baseUrl}img_bg.png";
+  static const String bgBlackShade1= "${baseUrl}img_bg2.png";
   static const String imgSignInOption= "${baseUrl}bg_img_sign_in.png";
   static const String appLogo= "${baseUrl}app_logo.png";
   static const String loginImage= "${baseUrl}login_image.png";
@@ -76,6 +77,7 @@ class ImagesPaths {
   static const String blackimage= "${baseUrl}black_image.png";
   static const String arrowback= "${baseUrl}ic_arrow_back.png";
   static const String arrowforword= "${baseUrl}ic_arrow_forword.png";
+  static const String bio= "${baseUrl}ic_bio.png";
 
 
 

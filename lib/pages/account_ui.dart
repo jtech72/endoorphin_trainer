@@ -413,7 +413,7 @@ class AccountUI extends StatelessWidget {
                           contentPadding: const EdgeInsets.all(20),
 
                           fillColor: Colors.transparent,
-                          hintText: 'Write something',
+                          hintText: 'Write something about yourself',
                           hintStyle: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.white),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),

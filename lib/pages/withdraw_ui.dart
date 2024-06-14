@@ -130,7 +130,7 @@ class WithdrawUI extends StatelessWidget {
                               ),
                               const Text('AED 500',style: TextStyle(color: AppColors.yellow,fontWeight: FontWeight.w700,fontSize: 12),),
                             ],
-                          ).paddingOnly(right: Get.width*0.03,top: Get.height*.01,bottom: Get.height*.01),
+                          ).paddingOnly(right: Get.width*0.03,top: Get.height*.02,bottom: Get.height*.02),
                           Container(
                             height: 1,
                             width: Get.width,
@@ -163,7 +163,7 @@ class WithdrawUI extends StatelessWidget {
                               ),
                               const Text('AED 700',style: TextStyle(color: AppColors.yellow,fontWeight: FontWeight.w700,fontSize: 12),),
                             ],
-                          ).paddingOnly(right: Get.width*0.03,top: Get.height*.01,bottom: Get.height*.01),
+                          ).paddingOnly(right: Get.width*0.03,top: Get.height*.02,bottom: Get.height*.02),
                           Container(
                             height: 1,
                             width: Get.width,
@@ -195,7 +195,7 @@ class WithdrawUI extends StatelessWidget {
                               ),
                               const Text('AED 900',style: TextStyle(color: AppColors.yellow,fontWeight: FontWeight.w700,fontSize: 12),),
                             ],
-                          ).paddingOnly(right: Get.width*0.03,top: Get.height*.01,bottom: Get.height*.01),
+                          ).paddingOnly(right: Get.width*0.03,top: Get.height*.02,bottom: Get.height*.02),
                           Container(
                             height: 1,
                             width: Get.width,
@@ -208,6 +208,7 @@ class WithdrawUI extends StatelessWidget {
                               fontFamily: 'Montserrat'),),
                           onTap: (){
                             showDialog(
+                              barrierDismissible: false,
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
@@ -287,7 +288,7 @@ class WithdrawUI extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Column(
+                                const Column(
                                   children: [
                                     Text('Yoga session with Richard',style: TextStyle(color: Colors.white,fontSize: 14,fontWeight: FontWeight.w500),),
                                     Text('21 Dec . 1.39 pm ',style: TextStyle(color: Colors.white,fontSize: 12,fontWeight: FontWeight.w300),),
@@ -297,7 +298,7 @@ class WithdrawUI extends StatelessWidget {
                             ),
                              Text('AED 500',style: TextStyle(color: AppColors.yellow,fontWeight: FontWeight.w700,fontSize: 12),),
                           ],
-                        ).paddingOnly(right: Get.width*0.03,top: Get.height*.01,bottom: Get.height*.01),
+                        ).paddingOnly(right: Get.width*0.03,top: Get.height*.026,bottom: Get.height*.026),
                         Container(
                           height: 1,
                           width: Get.width,
@@ -318,7 +319,7 @@ class WithdrawUI extends StatelessWidget {
                             ),
                              Text('AED 700',style: TextStyle(color: AppColors.yellow,fontWeight: FontWeight.w700,fontSize: 12),),
                           ],
-                        ).paddingOnly(right: Get.width*0.03,top: Get.height*.01,bottom: Get.height*.01),
+                        ).paddingOnly(right: Get.width*0.03,top: Get.height*.026,bottom: Get.height*.026),
                         Container(
                           height: 1,
                           width: Get.width,
@@ -339,7 +340,7 @@ class WithdrawUI extends StatelessWidget {
                             ),
                              Text('AED 900',style: TextStyle(color: AppColors.yellow,fontWeight: FontWeight.w700,fontSize: 12),),
                           ],
-                        ).paddingOnly(right: Get.width*0.03,top: Get.height*.01,bottom: Get.height*.01),
+                        ).paddingOnly(right: Get.width*0.03,top: Get.height*.026,bottom: Get.height*.026),
                         Container(
                           height: 1,
                           width: Get.width,
