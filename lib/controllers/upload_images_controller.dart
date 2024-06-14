@@ -54,6 +54,8 @@ class UploadImagesController extends GetxController {
         storage.write("Passport","true");
         log("Successfully uploaded");
         Get.offAllNamed(AppRoutes.moreaboutyou);
+        showSnackBar(result.message.toString());
+
       }else{
         dismissLoader();
         showSnackBar(result.message.toString());
@@ -88,6 +90,8 @@ class UploadImagesController extends GetxController {
         storage.write("Emirates ID","true");
         log("Successfully uploaded");
         Get.offAllNamed(AppRoutes.moreaboutyou);
+        showSnackBar(result.message.toString());
+
       }else{
         dismissLoader();
         showSnackBar(result.message.toString());
@@ -118,7 +122,12 @@ class UploadImagesController extends GetxController {
       if(result.status == 200){
         dismissLoader();
         log("Successfully uploaded");
+        uploadImage == UploadImage.byProfile?
+            Get.offAllNamed(AppRoutes.bottomNavigation):
         Get.offAllNamed(AppRoutes.moreaboutyou);
+        showSnackBar(result.message.toString());
+
+
       }else{
         dismissLoader();
         showSnackBar(result.message.toString());
@@ -132,6 +141,7 @@ class UploadImagesController extends GetxController {
 
    void onSaveButton() {
     if (certificationDetails!["categoryName"] == "") {
+      log("sadfghgfds");
       onCertification();
     } else if(certificationDetails!["categoryName"] == "Passport") {
       onPassport();

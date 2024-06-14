@@ -34,28 +34,32 @@ class DocumentUI extends StatelessWidget {
             children: [
               Transform.translate(
                   offset: Offset(10,0),
-                  child: Text('Uploaded Documents',style: Theme.of(context).textTheme.headlineSmall,).paddingOnly(bottom: Get.height*0.03,top: Get.height*0.01)),
+                  child: Text('Uploaded Documents',style: Theme.of(context).textTheme.headlineSmall,).paddingOnly(bottom: Get.height*0.03,top: Get.height*0.01,left: 10)),
               FutureBuilder(
                 future:
                 CallAPI.getDocStatus(storage.read("userId").toString()),
                 builder: (BuildContext context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    ).paddingOnly(top: 20);
+                    return Container(
+                      height: Get.height*.7,
+                      child: const Center(
+                        child: CircularProgressIndicator(),
+                      ).paddingOnly(top: 20),
+                    );
                   }
                   if (snapshot.hasError) {
                     return Center(
                       child: Text('Error: ${snapshot.error}'),
                     );
                   }
-
                   if (!snapshot.hasData || snapshot.data!.result == null) {
-                    return const Center(
-                      child: Text('No data available',style: TextStyle(color: AppColors.white),),
+                    return Container(
+                      height: Get.height*.7,
+                      child: const Center(
+                        child: Text('No data available',style: TextStyle(color: AppColors.white),),
+                      ),
                     );
                   }
-
                   return   SizedBox(
                     height: Get.height-150,
                     child: ListView.builder(
@@ -66,12 +70,13 @@ class DocumentUI extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          height: 215,
                           width: Get.width,
                           decoration: BoxDecoration(
                               color: AppColors.greyButton,
                               borderRadius: BorderRadius.circular(5)),
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
@@ -88,7 +93,9 @@ class DocumentUI extends StatelessWidget {
                                         width: 52,
                                         decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(5),
-                                            color: Colors.black
+                                            color:
+                                            snapshot.data!.result![index].approveStatus =="pending"?
+                                            AppColors.backgroundcolor2:AppColors.black
                                         ),
                                         child: Center(child: Text('SAVED',style: TextStyle(fontSize: 10,fontFamily: 'Roboto',fontWeight: FontWeight.w400,color: Colors.white))),
                                       ).paddingOnly(right: Get.width*0.03),
@@ -137,34 +144,63 @@ class DocumentUI extends StatelessWidget {
                                       SizedBox(
                                         height: Get.height*0.02,
                                       ),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            height: 27,
-                                            width: 27,
-                                            decoration: BoxDecoration(
-                                                border: Border.all(color: AppColors.yellow,width: 1),
-                                                borderRadius: BorderRadius.circular(40)
-                                            ),
-                                            child: Image.asset(ImagesPaths.trash,scale: 4,),
-                                          ).paddingOnly(right: Get.width*0.05),
-                                          Container(
-                                            height: 27,
-                                            width: 27,
-                                            decoration: BoxDecoration(
-                                                color: AppColors.yellow,
-                                                borderRadius: BorderRadius.circular(40)
-                                            ),
-                                            child: Image.asset(ImagesPaths.pencil,scale: 4,),
-                                          ),
-                                        ],
+                                      snapshot.data!.result![index].approveStatus == "approved"?
+                                           Container(
+                                             height: 22,
+                                             width: 64,
+                                             decoration:BoxDecoration(
+                                               color: AppColors.yellow,
+                                               borderRadius: BorderRadius.circular(5)
+                                             ) ,
+                                             child: Center(child: Text('Approved',style: TextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: AppColors.black))),
+                                           ):
+                                      snapshot.data!.result![index].approveStatus == "pending"?
+
+                                      Container(
+                                        height: 22,
+                                        width: 100,
+                                        decoration:BoxDecoration(
+                                            color: AppColors.backgroundcolor2,
+                                            borderRadius: BorderRadius.circular(5)
+                                        ) ,
+                                        child: Center(child: Text('Under verification',style: TextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: AppColors.whiteShade))),
+                                      ):
+                                      GestureDetector(
+                                        onTap: (){
+                                          uploadImage = UploadImage.byProfile;
+                                          Get.toNamed(AppRoutes.uploadimage,arguments: {
+                                            "userId":snapshot.data!.result![index].userId.toString() ,
+                                            "categoryName":"" ,
+                                            "categoryId":snapshot.data!.result![index].category!.id.toString() ,
+                                            "certificateNumber": "",
+                                            "certificateName": "",
+                                          });
+                                          },
+                                        child: Container(
+                                          height: 22,
+                                          width: 120,
+                                          decoration:BoxDecoration(
+                                              color: AppColors.yellow,
+                                              borderRadius: BorderRadius.circular(5)
+                                          ) ,
+                                          child: Center(child: Text('Reupload Documents',style: TextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: AppColors.black))),
+                                        ),
                                       )
                                     ],
                                   ).paddingOnly(left: Get.width*0.04)
                                 ],
-                              )
+                              ),
+                              snapshot.data!.result![index].remark == null?
+                              Text(""):
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text("Rejection Reason",style: Theme.of(context).textTheme.labelSmall!.copyWith(fontSize: 12,fontWeight: FontWeight.w400,color: AppColors.white),),
+                                      Text(snapshot.data!.result![index].remark!.toString(),style: Theme.of(context).textTheme.labelSmall!.copyWith(fontSize: 10,color: AppColors.whiteShade),),
+                                    ],
+                                  ).paddingOnly(top: 5)
                             ],
-                          ).paddingAll(15),
+                          ).paddingOnly(bottom: 5,top: 15,right: 15,left: 15),
                         ),
                       );
 

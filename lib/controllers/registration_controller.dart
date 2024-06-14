@@ -2,7 +2,10 @@ import 'dart:developer';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:get/get.dart';
 import '../services/network_services/api_call.dart';
+import '../services/network_services/notification_servies.dart';
 class RegistrationController extends GetxController{
+  NotificationServices notificationServices=NotificationServices();
+
   RxBool obscureText = true.obs;
   RxBool obscureText1 = true.obs;
   void toggleObscureText() {
@@ -12,8 +15,8 @@ class RegistrationController extends GetxController{
     obscureText1.toggle(); // Toggle the RxBool value
   }
   final items2 = ['Male','Female',];
-  RxList<int> selectedOne2 = <int>[].obs;
-  RxList<bool> checkedList = <bool>[].obs;
+  var checkedList = <bool>[].obs;
+  var selectedOne2 = <int>[].obs;
   final selectedOption1 = 'Select Gender'.obs;
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
@@ -64,29 +67,54 @@ class RegistrationController extends GetxController{
         showLoader();
         await CallAPI.uploadUserdata(request: request).then((value) {
           if (value.status == 200) {
+            onLogin();
             dismissLoader();
             storage.write("userId", value.userId.toString());
 
             log("Success");
-            Get.toNamed(AppRoutes.moreaboutyou ,arguments: value.userId.toString());
+            Get.offAllNamed(AppRoutes.moreaboutyou ,arguments: value.userId.toString());
           } else {
             dismissLoader();
             log("failed");
             showSnackBar(value.message);
           }
-          //
         });
       } on Exception catch (e,st) {
         log(e.toString());
         log(st.toString());
         dismissLoader();
       }
-
-
+    }
+  }
+  void onLogin() async {
+      Map<String, dynamic> request = {
+        "loginData": storage.read("phoneNumber"),
+        "password": passwordController.text.trim(),
+        "deviceId": notificationServices.deviceToken ??""
+      };
+      try {
+        await CallAPI.login(request: request).then((value) {
+          if (value.status == 200) {
+            storage.write("token", value.result!.accessToken);
+            storage.write("userName", value.result!.userName);
+            storage.write("userId", value.result!.id);
+            log("token==>${value.result!.accessToken}");
+            log("UserId==>${value.result!.id}");
+          } else {
+            printResult(screenName: "LOGIN CONTROLLER", msg: value.message ?? "");
+          }
+        });
+      } catch (e, st) {
+        printResult(
+            screenName: "LOGIN CONTROLLER",
+            error: e.toString(),
+            stackTrace: st);
+      }
     }
 
-
-  }
-
-
+void onInit() {
+  notificationServices.getDeviceToken();
+  notificationServices.isDeviceTokenRefresh();
+  super.onInit();
+}
 }
