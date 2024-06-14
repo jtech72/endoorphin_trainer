@@ -225,7 +225,7 @@ class HomeUiState extends State<HomeUi> {
                     height: Get.height * 0.53,
                     width: Get.width,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5), // Adjust the horizontal padding here
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
                       child: GridView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: controller.quickGlanceList.length,
@@ -240,7 +240,6 @@ class HomeUiState extends State<HomeUi> {
                             splashColor: Colors.transparent,
                             onTap: () {
                               controller.selectedIndex.value = index;
-                              // Use Get.toNamed to navigate to the desired routes based on the selected index
                               if (controller.selectedIndex.value == 0) {
                                 Get.toNamed(AppRoutes.earning);
                               } else if (controller.selectedIndex.value == 1) {
@@ -288,13 +287,15 @@ class HomeUiState extends State<HomeUi> {
                                     index == 2 ? "Reward" :
                                     index == 0 ? "Total" :
                                     index == 3 ? "Upcoming" : "Total",
-                                    style: Theme.of(context).textTheme.titleLarge,
+                                    style: Theme.of(context).textTheme.titleLarge!.copyWith(color: controller.selectedIndex.value ==index?
+                                    AppColors.black: AppColors.white,),
                                   ),
           
                                   const SizedBox(height: 4), // Adjust the gap here
                                   Text(
                                     controller.quickGlanceList[index],
-                                    style: Theme.of(context).textTheme.titleLarge,
+                                    style: Theme.of(context).textTheme.titleLarge!.copyWith(color: controller.selectedIndex.value ==index?
+                                    AppColors.black: AppColors.white,),
                                   ),
                                 ],
                               ),

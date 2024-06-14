@@ -481,8 +481,8 @@ class ProfileUI extends StatelessWidget {
                               width: Get.width * 0.04,
                             ),
                             Image.asset(
-                              ImagesPaths.document,
-                              width: 22,
+                              ImagesPaths.bio,
+                              width: 20,
                               color: AppColors.white,
                             ),
                             SizedBox(
