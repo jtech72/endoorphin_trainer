@@ -38,10 +38,10 @@ class AccountController extends GetxController {
       "bio": bioController.text.trim(),
       "gender": selectedOption1.value.toString(),
     };
-    Map<String, File> files = {
-      'profileImg': profileImage!.value!,
-    };
-    log("fields = $fields , files = $files ");
+    Map<String, File> files = {};
+    if (profileImage?.value != null) {
+      files['profileImg'] = profileImage!.value!;
+    }    log("fields = $fields , files = $files ");
     try {
       DocumentModel result = await CallAPI.uploadProfileDetails(
         fields: fields,
