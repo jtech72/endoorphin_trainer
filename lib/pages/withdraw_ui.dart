@@ -1,10 +1,6 @@
 import 'package:endoorphin_trainer/controllers/withdraw_controller.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
-
 class WithdrawUI extends StatelessWidget {
 
    const WithdrawUI({super.key,});
@@ -24,7 +20,7 @@ class WithdrawUI extends StatelessWidget {
       body: Container(
         height: Get.height,
         width: Get.width,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(ImagesPaths.bgBlackShade,),fit: BoxFit.cover
             )
@@ -296,7 +292,7 @@ class WithdrawUI extends StatelessWidget {
                                 ).paddingOnly(left: Get.width*0.05),
                               ],
                             ),
-                             Text('AED 500',style: TextStyle(color: AppColors.yellow,fontWeight: FontWeight.w700,fontSize: 12),),
+                             const Text('AED 500',style: TextStyle(color: AppColors.yellow,fontWeight: FontWeight.w700,fontSize: 12),),
                           ],
                         ).paddingOnly(right: Get.width*0.03,top: Get.height*.026,bottom: Get.height*.026),
                         Container(
@@ -309,7 +305,7 @@ class WithdrawUI extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Column(
+                                const Column(
                                   children: [
                                     Text('Yoga session with Richard',style: TextStyle(color: Colors.white,fontSize: 14,fontWeight: FontWeight.w500),),
                                     Text('21 Dec . 1.39 pm ',style: TextStyle(color: Colors.white,fontSize: 12,fontWeight: FontWeight.w300),),
@@ -317,7 +313,7 @@ class WithdrawUI extends StatelessWidget {
                                 ).paddingOnly(left: Get.width*0.05),
                               ],
                             ),
-                             Text('AED 700',style: TextStyle(color: AppColors.yellow,fontWeight: FontWeight.w700,fontSize: 12),),
+                             const Text('AED 700',style: TextStyle(color: AppColors.yellow,fontWeight: FontWeight.w700,fontSize: 12),),
                           ],
                         ).paddingOnly(right: Get.width*0.03,top: Get.height*.026,bottom: Get.height*.026),
                         Container(
@@ -330,7 +326,7 @@ class WithdrawUI extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                 Column(
+                                 const Column(
                                   children: [
                                     Text('Yoga session with Richard',style: TextStyle(color: Colors.white,fontSize: 14,fontWeight: FontWeight.w500),),
                                     Text('21 Dec . 1.39 pm ',style: TextStyle(color: Colors.white,fontSize: 12,fontWeight: FontWeight.w300),),
@@ -338,7 +334,7 @@ class WithdrawUI extends StatelessWidget {
                                 ).paddingOnly(left: Get.width*0.05),
                               ],
                             ),
-                             Text('AED 900',style: TextStyle(color: AppColors.yellow,fontWeight: FontWeight.w700,fontSize: 12),),
+                             const Text('AED 900',style: TextStyle(color: AppColors.yellow,fontWeight: FontWeight.w700,fontSize: 12),),
                           ],
                         ).paddingOnly(right: Get.width*0.03,top: Get.height*.026,bottom: Get.height*.026),
                         Container(
