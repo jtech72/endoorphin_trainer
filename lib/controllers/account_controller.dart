@@ -23,7 +23,7 @@ class AccountController extends GetxController {
       profileImage.value = File(image.path);
       log("font Image${profileImage!}");
     } else {
-      print('User canceled');
+      log('User canceled');
     }
   }
 

@@ -16,13 +16,30 @@ class MoreAboutYouUi extends StatelessWidget {
               offset: const Offset(0, -3),
               child: GestureDetector(
                   onTap: () {
-                    Get.toNamed(AppRoutes.registration);
+                    Get.back();
                   },
                   child: Image.asset(
                     ImagesPaths.logoimg,
                     height: 36,
                     width: 146,
                   ))),
+          action: [
+            IconButton(
+                onPressed: (){
+                  Get.toNamed(AppRoutes.bio);
+                },
+                icon: Container(
+                  alignment: Alignment.center,
+                  height: 24,
+                  width: 44,
+                  decoration: const BoxDecoration(
+                      color: AppColors.yellow,
+                      borderRadius: BorderRadius.all(Radius.circular(24))),
+                  child: Text('Skip',style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.black,fontWeight: FontWeight.w500),textAlign: TextAlign.center,),
+                )
+            ),
+            SizedBox(width: Get.width*0.04,)
+          ],
           context: context),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18),
@@ -35,24 +52,9 @@ class MoreAboutYouUi extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Upload your Documents",
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    GestureDetector(
-                      onTap: (){
-                        Get.toNamed(AppRoutes.bio);
-                      },
-                      child: Row(
-                        children: [
-                          Text('Skip',style: Theme.of(context).textTheme.titleMedium!.copyWith(color: AppColors.yellow),),
-                          const Icon(Icons.arrow_forward_ios,size: 14,color: AppColors.yellow,)
-                        ],
-                      ),
-                    )
-                  ],
+                Text(
+                  "Upload your Documents",
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ).paddingOnly(top: Get.height * .02, bottom: Get.height * .02),
                 Text(
                   "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
@@ -143,6 +145,8 @@ class MoreAboutYouUi extends StatelessWidget {
                                   snapshot.data!.result![index]
                                           .documentFrontImg !=
                                       null
+
+                          //Certification
                               ? Container(
                                   decoration: BoxDecoration(
                                     color: AppColors.greyButton,
@@ -208,24 +212,29 @@ class MoreAboutYouUi extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Obx(
-                                            () => SizedBox(
-                                              width: Get.width * 0.55,
-                                              height: Get.height * 0.17,
-                                              child: Image.network(
-                                                  fit: BoxFit.cover,
-                                                  controller.isFrontImageVisible
-                                                              .value ==
-                                                          true
-                                                      ? snapshot
-                                                          .data!
-                                                          .result![index]
-                                                          .documentFrontImg
-                                                          .toString()
-                                                      : snapshot
-                                                          .data!
-                                                          .result![index]
-                                                          .documentBackImg
-                                                          .toString()),
+                                            () => Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                SizedBox(
+                                                  width: Get.width * 0.55,
+                                                  height: Get.height * 0.17,
+                                                  child: Image.network(
+                                                      fit: BoxFit.cover,
+                                                      controller.isFrontImageVisible2
+                                                                  .value ==
+                                                              true
+                                                          ? snapshot
+                                                              .data!
+                                                              .result![index]
+                                                              .documentFrontImg
+                                                              .toString()
+                                                          : snapshot
+                                                              .data!
+                                                              .result![index]
+                                                              .documentBackImg
+                                                              .toString()),
+                                                ),
+                                                Text(controller.isFrontImageVisible2.value ? 'Front' : 'Back',style: Theme.of(context).textTheme.titleMedium,)
+                                              ],
                                             ),
                                           ),
                                           Expanded(
@@ -291,7 +300,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                                       InkWell(
                                                         onTap: () {
                                                           controller
-                                                              .isFrontImageVisible
+                                                              .isFrontImageVisible2
                                                               .value = true;
                                                         },
                                                         child: Container(
@@ -302,7 +311,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                                                   color: AppColors
                                                                       .yellow),
                                                               color: controller
-                                                                          .isFrontImageVisible
+                                                                          .isFrontImageVisible2
                                                                           .value !=
                                                                       false
                                                                   ? AppColors
@@ -315,7 +324,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                                             offset: const Offset(-1,0),
                                                             child: Image.asset(
                                                               ImagesPaths.arrowback,scale: 5,
-                                                              color: controller.isFrontImageVisible.value != false
+                                                              color: controller.isFrontImageVisible2.value != false
                                                                   ? AppColors
                                                                   .black
                                                                   : AppColors.yellow,
@@ -326,10 +335,10 @@ class MoreAboutYouUi extends StatelessWidget {
                                                       InkWell(
                                                         onTap: () {
                                                           controller
-                                                              .isFrontImageVisible
+                                                              .isFrontImageVisible2
                                                               .value = false;
                                                           log(controller
-                                                              .isFrontImageVisible
+                                                              .isFrontImageVisible2
                                                               .value
                                                               .toString());
                                                         },
@@ -341,7 +350,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                                                   color: AppColors
                                                                       .yellow),
                                                               color: controller
-                                                                          .isFrontImageVisible
+                                                                          .isFrontImageVisible2
                                                                           .value ==
                                                                       false
                                                                   ? AppColors
@@ -354,7 +363,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                                             offset: const Offset(1,0),
                                                             child: Image.asset(
                                                               ImagesPaths.arrowforword,scale: 5,
-                                                              color: controller.isFrontImageVisible.value != false
+                                                              color: controller.isFrontImageVisible2.value != false
                                                                   ? AppColors
                                                                   .yellow
                                                                   : AppColors.black,
@@ -381,6 +390,8 @@ class MoreAboutYouUi extends StatelessWidget {
                                       snapshot.data!.result![index]
                                               .emiratesbackImg !=
                                           null
+
+                          //Emirates Id
                                   ? Container(
                                       decoration: BoxDecoration(
                                         color: AppColors.greyButton,
@@ -459,24 +470,29 @@ class MoreAboutYouUi extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Obx(
-                                                () => SizedBox(
-                                                  width: Get.width * 0.55,
-                                                  height: Get.height * 0.17,
-                                                  child: Image.network(
-                                                      fit: BoxFit.cover,
-                                                      controller.isFrontImageVisible
-                                                                  .value ==
-                                                              true
-                                                          ? snapshot
-                                                              .data!
-                                                              .result![index]
-                                                              .emiratesfrontImg
-                                                              .toString()
-                                                          : snapshot
-                                                              .data!
-                                                              .result![index]
-                                                              .emiratesbackImg
-                                                              .toString()),
+                                                () => Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    SizedBox(
+                                                      width: Get.width * 0.55,
+                                                      height: Get.height * 0.17,
+                                                      child: Image.network(
+                                                          fit: BoxFit.cover,
+                                                          controller.isFrontImageVisible1
+                                                                      .value ==
+                                                                  true
+                                                              ? snapshot
+                                                                  .data!
+                                                                  .result![index]
+                                                                  .emiratesfrontImg
+                                                                  .toString()
+                                                              : snapshot
+                                                                  .data!
+                                                                  .result![index]
+                                                                  .emiratesbackImg
+                                                                  .toString()),
+                                                    ),
+                                                    Text(controller.isFrontImageVisible1.value ? 'Front' : 'Back',style: Theme.of(context).textTheme.titleMedium,)
+                                                  ],
                                                 ),
                                               ),
                                               Expanded(
@@ -550,7 +566,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                                           InkWell(
                                                             onTap: () {
                                                               controller
-                                                                  .isFrontImageVisible
+                                                                  .isFrontImageVisible1
                                                                   .value = true;
                                                             },
                                                             child: Container(
@@ -561,7 +577,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                                                       color: AppColors
                                                                           .yellow),
                                                                   color: controller
-                                                                              .isFrontImageVisible
+                                                                              .isFrontImageVisible1
                                                                               .value !=
                                                                           false
                                                                       ? AppColors
@@ -574,7 +590,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                                                 offset: const Offset(-1,0),
                                                                 child: Image.asset(
                                                                   ImagesPaths.arrowback,scale: 5,
-                                                                  color: controller.isFrontImageVisible.value != false
+                                                                  color: controller.isFrontImageVisible1.value != false
                                                                       ? AppColors
                                                                       .black
                                                                       : AppColors.yellow,
@@ -586,10 +602,10 @@ class MoreAboutYouUi extends StatelessWidget {
                                                           InkWell(
                                                             onTap: () {
                                                               controller
-                                                                  .isFrontImageVisible
+                                                                  .isFrontImageVisible1
                                                                   .value = false;
                                                               log(controller
-                                                                  .isFrontImageVisible
+                                                                  .isFrontImageVisible1
                                                                   .value
                                                                   .toString());
                                                             },
@@ -601,7 +617,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                                                       color: AppColors
                                                                           .yellow),
                                                                   color: controller
-                                                                              .isFrontImageVisible
+                                                                              .isFrontImageVisible1
                                                                               .value ==
                                                                           false
                                                                       ? AppColors
@@ -614,7 +630,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                                                 offset: const Offset(1,0),
                                                                 child: Image.asset(
                                                                   ImagesPaths.arrowforword,scale: 5,
-                                                                  color: controller.isFrontImageVisible.value != false
+                                                                  color: controller.isFrontImageVisible1.value != false
                                                                       ? AppColors
                                                                       .yellow
                                                                       : AppColors.black,
@@ -645,6 +661,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                           snapshot.data!.result![index]
                                                   .passportbackImg !=
                                               null
+                          //Passport
                                       ? Container(
                                           decoration: BoxDecoration(
                                             color: AppColors.greyButton,
@@ -731,26 +748,31 @@ class MoreAboutYouUi extends StatelessWidget {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Obx(
-                                                    () => SizedBox(
-                                                      width: Get.width * 0.55,
-                                                      height: Get.height * 0.17,
-                                                      child: Image.network(
-                                                          fit: BoxFit.cover,
-                                                          controller.isFrontImageVisible
-                                                                      .value ==
-                                                                  true
-                                                              ? snapshot
-                                                                  .data!
-                                                                  .result![
-                                                                      index]
-                                                                  .passportfrontImg
-                                                                  .toString()
-                                                              : snapshot
-                                                                  .data!
-                                                                  .result![
-                                                                      index]
-                                                                  .passportfrontImg
-                                                                  .toString()),
+                                                    () => Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        SizedBox(
+                                                          width: Get.width * 0.55,
+                                                          height: Get.height * 0.17,
+                                                          child: Image.network(
+                                                              fit: BoxFit.cover,
+                                                              controller.isFrontImageVisible
+                                                                          .value ==
+                                                                      true
+                                                                  ? snapshot
+                                                                      .data!
+                                                                      .result![
+                                                                          index]
+                                                                      .passportfrontImg
+                                                                      .toString()
+                                                                  : snapshot
+                                                                      .data!
+                                                                      .result![
+                                                                          index]
+                                                                      .passportfrontImg
+                                                                      .toString()),
+                                                        ),
+                                                        Text(controller.isFrontImageVisible.value ? 'Front' : 'Back',style: Theme.of(context).textTheme.titleMedium,)
+                                                      ],
                                                     ),
                                                   ),
                                                   Expanded(

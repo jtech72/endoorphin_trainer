@@ -24,7 +24,7 @@ class DocumentUI extends StatelessWidget {
       body: Container(
         height: Get.height,
         width: Get.width,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(ImagesPaths.bgBlackShade,),fit: BoxFit.cover
             )
@@ -33,14 +33,14 @@ class DocumentUI extends StatelessWidget {
           child: Column(crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Transform.translate(
-                  offset: Offset(10,0),
+                  offset: const Offset(10,0),
                   child: Text('Uploaded Documents',style: Theme.of(context).textTheme.headlineSmall,).paddingOnly(bottom: Get.height*0.03,top: Get.height*0.01,left: 10)),
               FutureBuilder(
                 future:
                 CallAPI.getDocStatus(storage.read("userId").toString()),
                 builder: (BuildContext context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Container(
+                    return SizedBox(
                       height: Get.height*.7,
                       child: const Center(
                         child: CircularProgressIndicator(),
@@ -53,7 +53,7 @@ class DocumentUI extends StatelessWidget {
                     );
                   }
                   if (!snapshot.hasData || snapshot.data!.result == null) {
-                    return Container(
+                    return SizedBox(
                       height: Get.height*.7,
                       child: const Center(
                         child: Text('No data available',style: TextStyle(color: AppColors.white),),
@@ -97,7 +97,7 @@ class DocumentUI extends StatelessWidget {
                                             snapshot.data!.result![index].approveStatus =="pending"?
                                             AppColors.backgroundcolor2:AppColors.black
                                         ),
-                                        child: Center(child: Text('SAVED',style: TextStyle(fontSize: 10,fontFamily: 'Roboto',fontWeight: FontWeight.w400,color: Colors.white))),
+                                        child: const Center(child: Text('SAVED',style: TextStyle(fontSize: 10,fontFamily: 'Roboto',fontWeight: FontWeight.w400,color: Colors.white))),
                                       ).paddingOnly(right: Get.width*0.03),
                                       CircleAvatar(
                                         backgroundColor: AppColors.yellow,
@@ -116,7 +116,7 @@ class DocumentUI extends StatelessWidget {
                               Row(
                                 children: [
                                   Flexible(
-                                    child: Container(
+                                    child: SizedBox(
                                       height: 131,
                                       width: 204,
                                       child: Image.network(
@@ -152,7 +152,7 @@ class DocumentUI extends StatelessWidget {
                                                color: AppColors.yellow,
                                                borderRadius: BorderRadius.circular(5)
                                              ) ,
-                                             child: Center(child: Text('Approved',style: TextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: AppColors.black))),
+                                             child: const Center(child: Text('Approved',style: TextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: AppColors.black))),
                                            ):
                                       snapshot.data!.result![index].approveStatus == "pending"?
 
@@ -163,7 +163,7 @@ class DocumentUI extends StatelessWidget {
                                             color: AppColors.backgroundcolor2,
                                             borderRadius: BorderRadius.circular(5)
                                         ) ,
-                                        child: Center(child: Text('Under verification',style: TextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: AppColors.whiteShade))),
+                                        child: const Center(child: Text('Under verification',style: TextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: AppColors.whiteShade))),
                                       ):
                                       GestureDetector(
                                         onTap: (){
@@ -183,7 +183,7 @@ class DocumentUI extends StatelessWidget {
                                               color: AppColors.yellow,
                                               borderRadius: BorderRadius.circular(5)
                                           ) ,
-                                          child: Center(child: Text('Reupload Documents',style: TextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: AppColors.black))),
+                                          child: const Center(child: Text('Resubmit Documents',style: TextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: AppColors.black))),
                                         ),
                                       )
                                     ],
@@ -191,7 +191,7 @@ class DocumentUI extends StatelessWidget {
                                 ],
                               ),
                               snapshot.data!.result![index].remark == null?
-                              Text(""):
+                              const Text(""):
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
