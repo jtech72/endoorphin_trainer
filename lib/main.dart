@@ -9,7 +9,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:uni_links2/uni_links.dart';
+import 'custom_Widgets/deepling_controller.dart';
 import 'firebase_options.dart';
 void main() async {
   try {
@@ -17,17 +17,14 @@ void main() async {
   } catch (e, stackTrace) {
     log('Error initializing Firebase: $e\n$stackTrace');
   }
-  await initUniLinks();
   GetStorage.init();
   runApp(const EndoorphinTrainer());
 }
-
 @pragma("vm:entry-point")
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   log("FIREBASE BG NOTIFICATION => ${message.notification.toString()}");
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 }
-
 Future<void> configure() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -38,34 +35,12 @@ Future<void> configure() async {
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 }
 
-StreamSubscription? sub;
-Future<void> initUniLinks() async {
-  try {
-    Uri? initialUri = await getInitialUri();
-    if (initialUri != null) {
-      print('Initial URI: ${initialUri.toString()}');
-      // Handle the deep link here
-    }
-  } on Exception catch (e) {
-    // Handle exception
-    print(e.toString());
-  }
-
-  sub = uriLinkStream.listen((Uri? uri) {
-    if (uri != null) {
-      print('Received URI: ${uri.toString()}');
-      // Handle the deep link here
-    }
-  }, onError: (err) {
-    // Handle error
-    print(err.toString());
-  });
-}
-
 class EndoorphinTrainer extends StatelessWidget {
   const EndoorphinTrainer({super.key});
   @override
   Widget build(BuildContext context) {
+    final DeepLinkController deepLinkController = Get.put(DeepLinkController());
+
     return GetMaterialApp(
       supportedLocales: [
         Locale("af"),
