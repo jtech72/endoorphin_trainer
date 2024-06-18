@@ -40,7 +40,7 @@ class DocumentUI extends StatelessWidget {
                 CallAPI.getDocStatus(storage.read("userId").toString()),
                 builder: (BuildContext context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Container(
+                    return SizedBox(
                       height: Get.height*.7,
                       child: const Center(
                         child: CircularProgressIndicator(),
@@ -53,7 +53,7 @@ class DocumentUI extends StatelessWidget {
                     );
                   }
                   if (!snapshot.hasData || snapshot.data!.result == null) {
-                    return Container(
+                    return SizedBox(
                       height: Get.height*.7,
                       child: const Center(
                         child: Text('No data available',style: TextStyle(color: AppColors.white),),

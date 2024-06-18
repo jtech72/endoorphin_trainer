@@ -26,7 +26,7 @@ class AccountUI extends StatelessWidget {
             CallAPI.getProfileDetails(storage.read("userId").toString()),
             builder: (BuildContext context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Container(
+                return SizedBox(
                   height: Get.height,
                   child: const Center(
                     child: CircularProgressIndicator(),
