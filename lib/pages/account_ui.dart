@@ -336,7 +336,7 @@ class AccountUI extends StatelessWidget {
                     ),
                     Obx(
                           () => PopupMenuButton<String>(
-                        offset: Offset(1, 45),
+                        offset: const Offset(1, 45),
                         color: AppColors.greyButton,
                         onSelected: (selectedValue) {
                           controller.selectedOption1.value = selectedValue;
@@ -348,7 +348,7 @@ class AccountUI extends StatelessWidget {
                               value: value,
                               child: Text(
                                 value,
-                                style: TextStyle(color: AppColors.white),
+                                style: const TextStyle(color: AppColors.white),
                               ),
                             );
                           }).toList();
@@ -366,12 +366,12 @@ class AccountUI extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Transform.translate(
-                                offset: Offset(5, 0),
+                                offset: const Offset(5, 0),
                                 child: Text(
                                   controller.selectedOption1.value.isEmpty
                                       ? "Select Gender"
                                       : controller.selectedOption1.value,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: AppColors.white,
                                     fontSize: 12,
                                     fontFamily: 'Roboto',
@@ -379,7 +379,7 @@ class AccountUI extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Icon(Icons.keyboard_arrow_down, size: 32, color: AppColors.grey4),
+                              const Icon(Icons.keyboard_arrow_down, size: 32, color: AppColors.grey4),
                             ],
                           ).paddingOnly(left: Get.width * 0.035, right: Get.width * 0.030),
                         ),
@@ -413,7 +413,7 @@ class AccountUI extends StatelessWidget {
                           contentPadding: const EdgeInsets.all(20),
 
                           fillColor: Colors.transparent,
-                          hintText: 'Write something about yourself',
+                          hintText: 'Write about yourself',
                           hintStyle: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.white),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),

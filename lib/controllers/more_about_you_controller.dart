@@ -5,8 +5,11 @@ import 'package:get/get.dart';
 import '../utils/exports.dart';
 
 class MoreAboutYouController extends GetxController{
+  RxList<String> photo = ['Front','End'].obs;
   RxInt selectedIndex = (-1).obs;
   RxBool isFrontImageVisible = true.obs;
+  RxBool isFrontImageVisible1 = true.obs;
+  RxBool isFrontImageVisible2 = true.obs;
   List<String> newList = <String>[];
 RxBool isChecked = false.obs;
 

@@ -1,5 +1,4 @@
 import 'package:endoorphin_trainer/controllers/booking_request_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -31,7 +30,7 @@ class BookingRequsetUi extends StatelessWidget {
                 ? SingleChildScrollView(
                     child: Container(
                       width: Get.width,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
 
                           image: DecorationImage(
                               image: AssetImage(ImagesPaths.bgBlackShade),fit: BoxFit.cover
@@ -41,7 +40,7 @@ class BookingRequsetUi extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Type your “icebreaker” given by your\ncustomer to start your Fitness session!",
+                            "Please Verify the pin to start the training",
                             style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.w400),
                           ).paddingOnly(bottom: Get.height * 0.03),
                           PinCodeTextField(
@@ -118,7 +117,7 @@ class BookingRequsetUi extends StatelessWidget {
                                  onTap: (){
                                    _launchTelephone();
                                  },
-                                 child: CircleAvatar(
+                                 child: const CircleAvatar(
                                   radius: 20,
                                   backgroundColor: Colors.black,
                                   backgroundImage: AssetImage(
@@ -162,7 +161,7 @@ class BookingRequsetUi extends StatelessWidget {
                         child: Container(
                           // height: Get.height,
                           width: Get.width,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
 
                               image: DecorationImage(
                                   image: AssetImage(ImagesPaths.bgBlackShade),fit: BoxFit.cover
@@ -256,12 +255,12 @@ class BookingRequsetUi extends StatelessWidget {
                                         ],
                                       ).paddingOnly(left: 10),
                                     ),
-                                     Spacer(flex: 1,),
+                                     const Spacer(flex: 1,),
                                      GestureDetector(
                                        onTap: (){
                                          _launchTelephone();
                                        },
-                                       child: CircleAvatar(
+                                       child: const CircleAvatar(
                                         radius: 20,
                                         backgroundColor: AppColors.black,
                                         backgroundImage: AssetImage(
@@ -277,7 +276,7 @@ class BookingRequsetUi extends StatelessWidget {
                                           builder: (context) => ChatBottomSheet(),
                                         );
                                       },
-                                      child: CircleAvatar(
+                                      child: const CircleAvatar(
                                         radius: 20,
                                         backgroundColor: AppColors.yellow,
                                         child: Icon(Icons.message_outlined,color: AppColors.black,),
@@ -425,7 +424,7 @@ class BookingRequsetUi extends StatelessWidget {
                     : SingleChildScrollView(
                         child: Container(
                           width: Get.width,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
 
                               image: DecorationImage(
                                   image: AssetImage(ImagesPaths.bgBlackShade),fit: BoxFit.cover
@@ -557,7 +556,7 @@ class BookingRequsetUi extends StatelessWidget {
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => BottomNavigationBarUI(currentTabIndex: 2,)));
 
                         },
-                        icon: Icon(Icons.arrow_back_ios,size: 18,color: Colors.white,)))
+                        icon: const Icon(Icons.arrow_back_ios,size: 18,color: Colors.white,)))
               ],
             ));
   }
@@ -584,8 +583,8 @@ class ChatBottomSheet extends StatelessWidget {
       expand: false,
       builder: (context, scrollController) {
         return Container(
-          padding: EdgeInsets.all(16.0),
-          decoration: BoxDecoration(
+          padding: const EdgeInsets.all(16.0),
+          decoration: const BoxDecoration(
             color: Colors.black,
             borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
           ),
@@ -600,15 +599,15 @@ class ChatBottomSheet extends StatelessWidget {
                       return Align(
                         alignment: Alignment.centerRight,
                         child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 5.0),
-                            padding: EdgeInsets.all(10.0),
+                            margin: const EdgeInsets.symmetric(vertical: 5.0),
+                            padding: const EdgeInsets.all(10.0),
                             decoration: BoxDecoration(
                               color: AppColors.blackShade,
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),                            child: Text(
                               textAlign: TextAlign.right,
-                              chatController.messages[index],style: TextStyle(color: AppColors.white),)),
+                              chatController.messages[index],style: const TextStyle(color: AppColors.white),)),
                       );
                     },
                   );
@@ -636,11 +635,11 @@ class ChatBottomSheet extends StatelessWidget {
                       child: Container(
                         height: 45,
                         width: 45,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: AppColors.yellow,
                           shape: BoxShape.circle
                         ),
-                        child:Icon(Icons.send_sharp,color: AppColors.blackShade,),
+                        child:const Icon(Icons.send_sharp,color: AppColors.blackShade,),
                       ),
                     ).paddingOnly(left: 10),
                   ],

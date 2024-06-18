@@ -1,16 +1,14 @@
+import 'dart:developer';
 import 'package:endoorphin_trainer/controllers/earning_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:get/get.dart';
-
 class EarningUi extends StatelessWidget {
   const EarningUi({super.key});
 
   @override
   Widget build(BuildContext context) {
     final EarningController controller = Get.put(EarningController());
-
     final List<_SalesData> weeklyData = [
       _SalesData('Sun', 30),
       _SalesData('Mon', 42),
@@ -53,11 +51,7 @@ class EarningUi extends StatelessWidget {
       _SalesData('30', 410),
       _SalesData('31', 600),
     ];
-
-
-
     final currentMonth = DateTime.now().month.obs; // Current month index
-
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 50,
@@ -164,29 +158,77 @@ class EarningUi extends StatelessWidget {
                     child:
                     Column(
                       children: [
-                        Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: DropdownButton<String>(
-                              value: controller.isWeekly.value ? 'Weekly' : 'Monthly',
-                              items: const [
-                                DropdownMenuItem(
-                                  value: 'Weekly',
-                                  child: Text('Weekly'),
-                                ),
-                                DropdownMenuItem(
-                                  value: 'Monthly',
-                                  child: Text('Monthly'),
-                                ),
-                              ],
-                              onChanged: (value) {
-                                if (value == 'Weekly' && !controller.isWeekly.value) {
-                                  controller.toggleView();
-                                } else if (value == 'Monthly' && controller.isWeekly.value) {
-                                  controller.toggleView();
-                                }
+                        Row(mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap:(){
+                                controller.isWeekly.value=true;
+                                log('Weekly');
                               },
-                            )
-                        ),
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: 31,
+                                width: 88,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: AppColors.yellow),
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: controller.isWeekly.value == false ? AppColors.blackShade : AppColors.yellow,
+                                ),
+                                child: Text(
+                                  textAlign: TextAlign.center,
+                                  "Weekly",
+                                  style: Theme.of(context)
+                                     .textTheme
+                                     .displayLarge!.copyWith(color: controller.isWeekly.value ==false ?  AppColors.yellow:Colors.black)
+                              ),).paddingOnly(right: Get.width*0.05),
+                            ),
+                            GestureDetector(
+                              onTap: (){
+                                controller.isWeekly.value=false;
+                                log('Monthly');
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: 31,
+                                width: 88,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: AppColors.yellow),
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: controller.isWeekly.value == true ? AppColors.blackShade : AppColors.yellow,
+                                ),
+                                child: Text(textAlign: TextAlign.center,
+                                    "Monthly",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displayLarge!.copyWith(color: controller.isWeekly.value ==true ?  AppColors.yellow:Colors.black)
+                                ),
+                              ),
+                            ),
+                          ],
+                        ).paddingOnly(top: Get.height*0.02,bottom: Get.height*0.02),
+                        // Padding(
+                        //     padding: const EdgeInsets.all(8.0),
+                        //     child: DropdownButton<String>(
+                        //       value: controller.isWeekly.value ? 'Weekly' : 'Monthly',
+                        //       items: const [
+                        //         DropdownMenuItem(
+                        //           value: 'Weekly',
+                        //           child: Text('Weekly'),
+                        //         ),
+                        //         DropdownMenuItem(
+                        //           value: 'Monthly',
+                        //           child: Text('Monthly'),
+                        //         ),
+                        //       ],
+                        //       onChanged: (value) {
+                        //         if (value == 'Weekly' && !controller.isWeekly.value) {
+                        //           controller.toggleView();
+                        //         } else if (value == 'Monthly' && controller.isWeekly.value) {
+                        //           controller.toggleView();
+                        //         }
+                        //       },
+                        //     )
+                        // ),
                         controller.isWeekly.value ==true ?
                         Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -225,39 +267,39 @@ class EarningUi extends StatelessWidget {
                                         child: const Icon(Icons.arrow_forward_ios,size: 16,).paddingOnly(left: Get.width*0.01))),
                               ],
                             ),
-                            Row(
-                              children: [
-                                GestureDetector(
-                                    onTap: () {
-                                    },
-                                    child: Container(
-                                        height: 25,
-                                        width: 25,
-                                        decoration: const BoxDecoration(
-                                            color: Colors.transparent,
-                                            shape: BoxShape.circle
-                                        ),
-                                        child: const Icon(Icons.arrow_back_ios,size: 16,).paddingOnly(right: Get.width*0.01))),
-                                Container(
-                                  width: Get.width*0.1,
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    "7 - 14",
-                                    style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w300),),
-                                ),
-                                GestureDetector(
-                                    onTap: () {
-                                    },
-                                    child: Container(
-                                        height: 25,
-                                        width: 25,
-                                        decoration: const BoxDecoration(
-                                            color: Colors.transparent,
-                                            shape: BoxShape.circle
-                                        ),
-                                        child: const Icon(Icons.arrow_forward_ios,size: 16,).paddingOnly(left: Get.width*0.01))),
-                              ],
-                            ),
+                            // Row(
+                            //   children: [
+                            //     GestureDetector(
+                            //         onTap: () {
+                            //         },
+                            //         child: Container(
+                            //             height: 25,
+                            //             width: 25,
+                            //             decoration: const BoxDecoration(
+                            //                 color: Colors.transparent,
+                            //                 shape: BoxShape.circle
+                            //             ),
+                            //             child: const Icon(Icons.arrow_back_ios,size: 16,).paddingOnly(right: Get.width*0.01))),
+                            //     Container(
+                            //       width: Get.width*0.1,
+                            //       alignment: Alignment.center,
+                            //       child: Text(
+                            //         "7 - 14",
+                            //         style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w300),),
+                            //     ),
+                            //     GestureDetector(
+                            //         onTap: () {
+                            //         },
+                            //         child: Container(
+                            //             height: 25,
+                            //             width: 25,
+                            //             decoration: const BoxDecoration(
+                            //                 color: Colors.transparent,
+                            //                 shape: BoxShape.circle
+                            //             ),
+                            //             child: const Icon(Icons.arrow_forward_ios,size: 16,).paddingOnly(left: Get.width*0.01))),
+                            //   ],
+                            // ),
 
 
                           ],
@@ -329,7 +371,7 @@ class EarningUi extends StatelessWidget {
                                   borderWidth: 1,
                                   borderRadius: BorderRadius.circular(10),
                                   onPointTap: (ChartPointDetails details) {
-                                    print('Tapped on index: ${details.pointIndex}');
+                                    log('Tapped on index: ${details.pointIndex}');
                                     controller.updateTappedIndex(details.pointIndex!);
                                   },
                                 ),
@@ -369,7 +411,7 @@ class EarningUi extends StatelessWidget {
                                           ),
                                           const SizedBox(height: 4),
                                           Text(
-                                            'Amount: ${data.amount.toStringAsFixed(2)}',
+                                            'Amount: AED ${data.amount.toStringAsFixed(2)}',
                                             style: const TextStyle(
                                               color: Colors.black,
                                             ),
@@ -398,7 +440,7 @@ class EarningUi extends StatelessWidget {
                                   ? chart
                                   : SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
-                                child: Container(
+                                child: SizedBox(
                                   width: monthlyData.length * 45.0,
                                   child: chart,
                                 ),
