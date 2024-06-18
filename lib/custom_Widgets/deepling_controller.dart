@@ -21,18 +21,10 @@ class DeepLinkController extends GetxController {
   Future<void> _initURIHandler() async {
     if (!_initialURILinkHandled) {
       _initialURILinkHandled = true;
-      Fluttertoast.showToast(
-        msg: "Invoked _initURIHandler",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.green,
-        textColor: Colors.white,
-      );
       try {
         final initialURI = await getInitialUri();
         if (initialURI != null) {
-          log("Initial URI received $initialURI");
+          log("Initial URI received: $initialURI");
           this.initialURI.value = initialURI;
           _handleIncomingLink(initialURI);
         } else {
@@ -66,8 +58,8 @@ class DeepLinkController extends GetxController {
     if (uri != null) {
       // Add your navigation logic here based on the URI
       final path = uri.path;
-      if (path == "/some_route") {
-        Get.toNamed("/some_route");
+      if (path == "/forgotPassword") {
+        Get.toNamed("/forgotPassword");
       }
       // Add more routes as necessary
     }
