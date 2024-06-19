@@ -10,7 +10,7 @@ class BookingDetailsUi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BookingDetailsController controller = Get.put(BookingDetailsController());
-    return       Scaffold(
+    return Scaffold(
       appBar: myAppBar(
           title: GestureDetector(
             onTap: (){
@@ -189,8 +189,7 @@ class BookingDetailsUi extends StatelessWidget {
                     ),
                   )
                 ],
-              ).paddingOnly(
-                  top: Get.height * 0.035, bottom: Get.height * 0.055),
+              ).paddingOnly(top: Get.height * 0.035, bottom: Get.height * 0.055),
               Text(
                 "Session Details",
                 style: Theme.of(context)
@@ -210,7 +209,7 @@ class BookingDetailsUi extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                               width: Get.width*0.37,
                               child: Text("Booked on:",
                                   style: Theme.of(context)
@@ -233,7 +232,7 @@ class BookingDetailsUi extends StatelessWidget {
                         ).paddingOnly(left: 10, right: 10),
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                               width: Get.width*0.37,
                               child: Text("Session Duration:",
                                   style: Theme.of(context)
@@ -256,7 +255,7 @@ class BookingDetailsUi extends StatelessWidget {
                         ).paddingOnly(left: 10, right: 10),
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                               width: Get.width*0.37,
                               child: Text("Booking Date:",
                                   style: Theme.of(context)
@@ -279,7 +278,7 @@ class BookingDetailsUi extends StatelessWidget {
                         ).paddingOnly(left: 10, right: 10),
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                               width: Get.width*0.37,
                               child: Text("Session Start time:",
                                   style: Theme.of(context)
@@ -302,7 +301,7 @@ class BookingDetailsUi extends StatelessWidget {
                         ).paddingOnly(left: 10, right: 10),
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                               width: Get.width*0.37,
                               child: Text("Session End time:",
                                   style: Theme.of(context)
@@ -325,7 +324,7 @@ class BookingDetailsUi extends StatelessWidget {
                         ).paddingOnly(left: 10, right: 10),
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                               width: Get.width*0.37,
                               child: Text("Status",
                                   style: Theme.of(context)
@@ -344,56 +343,56 @@ class BookingDetailsUi extends StatelessWidget {
                       ],
                     ).paddingOnly(top: 10, bottom: 10),
                   ).paddingOnly(bottom:Get.height*0.02),
-                  Center(
-                    child: Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            controller.secondButtonSelected.value = !controller.secondButtonSelected.value;
-                              if (controller.secondButtonSelected.value) controller.firstButtonSelected.value = false;
-                          },
-                          child: Container(
-                            height:  50,
-                            width:  300,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.yellow),
-                              borderRadius: BorderRadius.circular(50),
-                              color:controller.secondButtonSelected.value ? AppColors.yellow : Colors.transparent,
-                            ),
-                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                            child: Text(
-                              "Reject",textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 18,
-                                  fontFamily: 'Montserrat',color:controller.secondButtonSelected.value ? AppColors.black : AppColors.yellow),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        GestureDetector(
-                          onTap: () {
-                            Get.toNamed(AppRoutes.bookingrequest);
-                             controller.firstButtonSelected.value = !controller.firstButtonSelected.value;
-                              if (controller.firstButtonSelected.value) controller.secondButtonSelected.value = false;
-                          },
-                          child: Container(
-                            height:  50,
-                            width:  300,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.yellow),
-                              borderRadius: BorderRadius.circular(50),
-                              color:controller.firstButtonSelected.value ? AppColors.yellow: Colors.transparent,
-                            ),
-                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                            child: Text(
-                              "Accept",textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 18,
-                                  fontFamily: 'Montserrat',color: controller.firstButtonSelected.value ? AppColors.black : AppColors.yellow),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ).paddingOnly(top: 30),
-                  ),
+                  // Center(
+                  //   child: Column(
+                  //     children: [
+                  //       GestureDetector(
+                  //         onTap: () {
+                  //           controller.secondButtonSelected.value = !controller.secondButtonSelected.value;
+                  //             if (controller.secondButtonSelected.value) controller.firstButtonSelected.value = false;
+                  //         },
+                  //         child: Container(
+                  //           height:  50,
+                  //           width:  300,
+                  //           decoration: BoxDecoration(
+                  //             border: Border.all(color: AppColors.yellow),
+                  //             borderRadius: BorderRadius.circular(50),
+                  //             color:controller.secondButtonSelected.value ? AppColors.yellow : Colors.transparent,
+                  //           ),
+                  //           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  //           child: Text(
+                  //             "Reject",textAlign: TextAlign.center,
+                  //             style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 18,
+                  //                 fontFamily: 'Montserrat',color:controller.secondButtonSelected.value ? AppColors.black : AppColors.yellow),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       const SizedBox(height: 20),
+                  //       GestureDetector(
+                  //         onTap: () {
+                  //           Get.toNamed(AppRoutes.bookingrequest);
+                  //            controller.firstButtonSelected.value = !controller.firstButtonSelected.value;
+                  //             if (controller.firstButtonSelected.value) controller.secondButtonSelected.value = false;
+                  //         },
+                  //         child: Container(
+                  //           height:  50,
+                  //           width:  300,
+                  //           decoration: BoxDecoration(
+                  //             border: Border.all(color: AppColors.yellow),
+                  //             borderRadius: BorderRadius.circular(50),
+                  //             color:controller.firstButtonSelected.value ? AppColors.yellow: Colors.transparent,
+                  //           ),
+                  //           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  //           child: Text(
+                  //             "Accept",textAlign: TextAlign.center,
+                  //             style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 18,
+                  //                 fontFamily: 'Montserrat',color: controller.firstButtonSelected.value ? AppColors.black : AppColors.yellow),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ).paddingOnly(top: 30),
+                  // ),
                 ],
               ):
               controller.bookingType.value=="Completed"?
@@ -408,7 +407,7 @@ class BookingDetailsUi extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                               width: Get.width*0.37,
                               child: Text("Booked on:",
                                   style: Theme.of(context)
@@ -431,7 +430,7 @@ class BookingDetailsUi extends StatelessWidget {
                         ).paddingOnly(left: 10, right: 10),
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                               width: Get.width*0.37,
                               child: Text("Session Duration:",
                                   style: Theme.of(context)
@@ -454,7 +453,7 @@ class BookingDetailsUi extends StatelessWidget {
                         ).paddingOnly(left: 10, right: 10),
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                               width: Get.width*0.37,
                               child: Text("Booking Date:",
                                   style: Theme.of(context)
@@ -477,7 +476,7 @@ class BookingDetailsUi extends StatelessWidget {
                         ).paddingOnly(left: 10, right: 10),
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                               width: Get.width*0.37,
                               child: Text("Session Start time:",
                                   style: Theme.of(context)
@@ -500,7 +499,7 @@ class BookingDetailsUi extends StatelessWidget {
                         ).paddingOnly(left: 10, right: 10),
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                               width: Get.width*0.37,
                               child: Text("Session End time:",
                                   style: Theme.of(context)
@@ -523,7 +522,7 @@ class BookingDetailsUi extends StatelessWidget {
                         ).paddingOnly(left: 10, right: 10),
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                               width: Get.width*0.37,
                               child: Text("Status",
                                   style: Theme.of(context)
@@ -587,7 +586,7 @@ class BookingDetailsUi extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                               width: Get.width*0.37,
                               child: Text("Booked on:",
                                   style: Theme.of(context)
@@ -610,7 +609,7 @@ class BookingDetailsUi extends StatelessWidget {
                         ).paddingOnly(left: 10, right: 10),
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                               width: Get.width*0.37,
                               child: Text("Session Duration:",
                                   style: Theme.of(context)
@@ -633,7 +632,7 @@ class BookingDetailsUi extends StatelessWidget {
                         ).paddingOnly(left: 10, right: 10),
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                               width: Get.width*0.37,
                               child: Text("Booking Date:",
                                   style: Theme.of(context)
@@ -656,7 +655,7 @@ class BookingDetailsUi extends StatelessWidget {
                         ).paddingOnly(left: 10, right: 10),
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                               width: Get.width*0.37,
                               child: Text("Session Start time:",
                                   style: Theme.of(context)
@@ -679,7 +678,7 @@ class BookingDetailsUi extends StatelessWidget {
                         ).paddingOnly(left: 10, right: 10),
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                               width: Get.width*0.37,
                               child: Text("Session End time:",
                                   style: Theme.of(context)
@@ -702,7 +701,7 @@ class BookingDetailsUi extends StatelessWidget {
                         ).paddingOnly(left: 10, right: 10),
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                               width: Get.width*0.37,
                               child: Text("Status",
                                   style: Theme.of(context)
@@ -742,7 +741,7 @@ class BookingDetailsUi extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Container(
+                          SizedBox(
                             width: Get.width*0.37,
                             child: Text("Booked on:",
                                 style: Theme.of(context)
@@ -765,7 +764,7 @@ class BookingDetailsUi extends StatelessWidget {
                       ).paddingOnly(left: 10, right: 10),
                       Row(
                         children: [
-                          Container(
+                          SizedBox(
                             width: Get.width*0.37,
                             child: Text("Session Duration:",
                                 style: Theme.of(context)
@@ -788,7 +787,7 @@ class BookingDetailsUi extends StatelessWidget {
                       ).paddingOnly(left: 10, right: 10),
                       Row(
                         children: [
-                          Container(
+                          SizedBox(
                             width: Get.width*0.37,
                             child: Text("Booking Date:",
                                 style: Theme.of(context)
@@ -811,7 +810,7 @@ class BookingDetailsUi extends StatelessWidget {
                       ).paddingOnly(left: 10, right: 10),
                       Row(
                         children: [
-                          Container(
+                          SizedBox(
                             width: Get.width*0.37,
                             child: Text("Session Start time:",
                                 style: Theme.of(context)
@@ -834,7 +833,7 @@ class BookingDetailsUi extends StatelessWidget {
                       ).paddingOnly(left: 10, right: 10),
                       Row(
                         children: [
-                          Container(
+                          SizedBox(
                             width: Get.width*0.37,
                             child: Text("Session End time:",
                                 style: Theme.of(context)
@@ -857,7 +856,7 @@ class BookingDetailsUi extends StatelessWidget {
                       ).paddingOnly(left: 10, right: 10),
                       Row(
                         children: [
-                          Container(
+                          SizedBox(
                             width: Get.width*0.37,
                             child: Text("Status",
                                 style: Theme.of(context)
