@@ -13,7 +13,7 @@ class EarningUi extends StatelessWidget {
       _SalesData('Sun', 30),
       _SalesData('Mon', 42),
       _SalesData('Tue', 54),
-      _SalesData('Wed', 70),
+      _SalesData('Wed', 65),
       _SalesData('Thu', 35),
       _SalesData('Fri', 50),
       _SalesData('Sat', 40),
@@ -253,7 +253,7 @@ class EarningUi extends StatelessWidget {
                                   width: Get.width*0.29,
                                   alignment: Alignment.center,
                                   child: Text(
-                                    "${controller.days[currentDay.value - 1]}",
+                                    controller.days[currentDay.value - 1],
                                     style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w300),),
                                 ),
                                 GestureDetector(
@@ -411,7 +411,7 @@ class EarningUi extends StatelessWidget {
                                   : SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: SizedBox(
-                                  width: monthlyData.length * 45.0,
+                                  width: monthlyData.length * 50.0,
                                   child: chart,
                                 ),
                               );
