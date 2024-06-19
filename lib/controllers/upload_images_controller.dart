@@ -107,7 +107,9 @@ class UploadImagesController extends GetxController {
     showLoader();
     Map<String, String> fields = {
       'userId': certificationDetails!["userId"].toString(), // example field
-      'categoryId':certificationDetails!["categoryId"].toString() , // example field
+      'categoryId':certificationDetails!["categoryId"].toString() ,
+      'categoryName':certificationDetails!["certificateName"] , // example field
+      'categoryNumber':certificationDetails!["certificateNumber"] , // example field
     };
     Map<String, File> files = {
       'documentFrontImg': fontImagePicked!.value!,

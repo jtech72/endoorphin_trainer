@@ -48,7 +48,7 @@ class RegistrationController extends GetxController{
     } else if (passwordController.text != confirmPasswordController.text) {
       showSnackBar("Password and confirm password do not match");
       return; // Exit early as we don't need to proceed further
-    } else if (selectedOne2.isEmpty) {
+    } else if (selectedOne2 == null) {
       showSnackBar("Please select at least one category to continue");
       return; // Exit early as we don't need to proceed further
     } else{
@@ -70,7 +70,6 @@ class RegistrationController extends GetxController{
             onLogin();
             dismissLoader();
             storage.write("userId", value.userId.toString());
-
             log("Success");
             Get.offAllNamed(AppRoutes.moreaboutyou ,arguments: value.userId.toString());
           } else {

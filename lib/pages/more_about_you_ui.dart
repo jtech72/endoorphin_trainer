@@ -1284,19 +1284,27 @@ class MoreAboutYouUi extends StatelessWidget {
                                       fontFamily: 'Montserrat',
                                     ),
                               ),
-                              onTap: () {
-                                if (controller.isChecked.value == true) {
-                                  Get.toNamed(AppRoutes.bio)?.then((result) {
-                                    if (result != null && result == true) {
-                                      controller.showButton(
-                                          true);
-                                    }
-                                  });
-                                } else {
-                                  showSnackBar(
-                                      "Please accept terms and conditions");
+                                onTap: () {
+                                  bool hasMissingDocuments =
+                                      snapshot.data!.result![index].passportfrontImg == null ||
+                                          snapshot.data!.result![index].passportbackImg == null ||
+                                          snapshot.data!.result![index].emiratesfrontImg == null ||
+                                          snapshot.data!.result![index].emiratesbackImg == null ||
+                                          snapshot.data!.result![index].documentBackImg == null ||
+                                          snapshot.data!.result![index].documentFrontImg == null;
+
+                                  if (hasMissingDocuments) {
+                                    showSnackBar("Please upload all the certificates");
+                                  } else if (!controller.isChecked.value) {
+                                    showSnackBar("Please accept terms and conditions");
+                                  } else {
+                                    Get.toNamed(AppRoutes.bio)?.then((result) {
+                                      if (result != null && result == true) {
+                                        controller.showButton(true);
+                                      }
+                                    });
+                                  }
                                 }
-                              },
                             ),
                           ).paddingOnly(bottom: 15, top: 5);
                         }
