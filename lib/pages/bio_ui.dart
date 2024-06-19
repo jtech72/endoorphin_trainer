@@ -46,7 +46,7 @@ class BioUi extends StatelessWidget {
                       backgroundColor: AppColors.blackShade,
                   radius: 60,
                   backgroundImage: controller.profileImage.value == null
-                      ? AssetImage(ImagesPaths.profile) as ImageProvider<Object>?
+                      ? const AssetImage(ImagesPaths.profile) as ImageProvider<Object>?
                       : FileImage(controller.profileImage.value!) as ImageProvider<Object>?,
                 ),
               )
@@ -54,16 +54,16 @@ class BioUi extends StatelessWidget {
                               ),
 
                               Positioned(
-                                bottom: 0,
-                                right: 10,
+                                bottom: 5,
+                                right: 15,
                                 child: GestureDetector(
                                   onTap: (){
                                     Get.find<BioController>().openCamera();
                                   },
                                   child: CircleAvatar(
-                                    radius: 15,
-                                    backgroundColor: AppColors.greyButton,
-                                    child: Image.asset(ImagesPaths.plus,color: Colors.white,scale: 4,),
+                                    radius: 10,
+                                    backgroundColor: AppColors.white,
+                                    child: Image.asset(ImagesPaths.plus,color: Colors.black,scale: 4,),
                                   ),
                                 ),
                               )

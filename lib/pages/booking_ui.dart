@@ -10,7 +10,7 @@ import '../utils/image_paths.dart';
 final today = DateUtils.dateOnly(DateTime.now());
 class BookingUi extends StatefulWidget {
   final initialIndex;
-   BookingUi({super.key,required this.initialIndex});
+   const BookingUi({super.key,required this.initialIndex});
   @override
   State<BookingUi> createState() => _BookingUiState();
 }
@@ -37,7 +37,6 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     BookingController controller = Get.find();
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       // appBar: AppBar(
@@ -143,8 +142,9 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
       body: TabBarView(
         controller: tabController,
         children: [
+          // Upcoming Session ----------------------------------------------------------------
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(ImagesPaths.bgBlackShade),
                     fit: BoxFit.cover
@@ -176,9 +176,9 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                               child: Center(
                                 child: Text(
                                   _selectedDates.isNotEmpty
-                                      ? '${_selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')}'
+                                      ? _selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')
                                       : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
-                                  style: TextStyle(color: Colors.white, fontSize: 10),
+                                  style: const TextStyle(color: Colors.white, fontSize: 10),
                                 ),
                               ),
                             ),
@@ -204,7 +204,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                             Get.toNamed(AppRoutes.bookingdetails,
                                 arguments: "Upcomming");
                           },
-                          child: Container(
+                          child: SizedBox(
                             height: Get.height * .68,
                             child: ListView.builder(
                                 itemCount: 10,
@@ -267,9 +267,10 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                   ),
 
                 ],).paddingOnly(top: 18),
-            ),), // Example tab content
+            ),),
+          // Ongoing Session ----------------------------------------------------------------
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(ImagesPaths.bgBlackShade),
                     fit: BoxFit.cover
@@ -301,9 +302,9 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                               child: Center(
                                 child: Text(
                                   _selectedDates.isNotEmpty
-                                      ? '${_selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')}'
+                                      ? _selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')
                                       : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
-                                  style: TextStyle(color: Colors.white, fontSize: 10),
+                                  style: const TextStyle(color: Colors.white, fontSize: 10),
                                 ),
                               ),
                             ),
@@ -326,7 +327,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                             Get.toNamed(
                                 AppRoutes.bookingdetails, arguments: "");
                           },
-                          child: Container(
+                          child: SizedBox(
                             height: Get.height * .68,
                             child: ListView.builder(itemBuilder: (context, index) {
                               return Column(
@@ -382,9 +383,10 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                   ),
 
                 ],),
-            ),), // Example tab content
+            ),),
+          // Completed Session ----------------------------------------------------------------
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(ImagesPaths.bgBlackShade),
                     fit: BoxFit.cover
@@ -416,9 +418,9 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                               child: Center(
                                 child: Text(
                                   _selectedDates.isNotEmpty
-                                      ? '${_selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')}'
+                                      ? _selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')
                                       : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
-                                  style: TextStyle(color: Colors.white, fontSize: 10),
+                                  style: const TextStyle(color: Colors.white, fontSize: 10),
                                 ),
                               ),
                             ),
@@ -441,7 +443,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                             Get.toNamed(AppRoutes.bookingdetails,
                                 arguments: "Completed");
                           },
-                          child: Container(height: Get.height * .68,
+                          child: SizedBox(height: Get.height * .68,
                             child: ListView.builder(itemBuilder: (context, index) {
                               return Column(
                                 children: [
@@ -497,9 +499,10 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                   ),
 
                 ],),
-            ),), // Example tab content
+            ),),
+          // Canceled Session ----------------------------------------------------------------
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(ImagesPaths.bgBlackShade),
                     fit: BoxFit.cover
@@ -531,9 +534,9 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                               child: Center(
                                 child: Text(
                                   _selectedDates.isNotEmpty
-                                      ? '${_selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')}'
+                                      ? _selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')
                                       : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
-                                  style: TextStyle(color: Colors.white, fontSize: 10),
+                                  style: const TextStyle(color: Colors.white, fontSize: 10),
                                 ),
                               ),
                             ),
@@ -555,7 +558,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                             Get.toNamed(AppRoutes.bookingdetails,
                                 arguments: "Cancel");
                           },
-                          child: Container(height: Get.height * .68,
+                          child: SizedBox(height: Get.height * .68,
                             child: ListView.builder(itemBuilder: (context, index) {
                               return Column(
                                 children: [
@@ -609,7 +612,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                   ),
 
                 ],),
-            ),), // Fourth tab content
+            ),),
         ],
       ),
     );
@@ -648,12 +651,12 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
   _buildCalendarDialogButton() {
     const dayTextStyle = TextStyle(color: Colors.white, fontWeight: FontWeight.w700);
     final weekendTextStyle = TextStyle(color: Colors.grey[500], fontWeight: FontWeight.w600);
-    final anniversaryTextStyle = TextStyle(
+    const anniversaryTextStyle = TextStyle(
       color: Colors.white,
       fontWeight: FontWeight.w700,
 
     );
-    final currentDayTextStyle = TextStyle(
+    const currentDayTextStyle = TextStyle(
       color: Colors.green,
       fontWeight: FontWeight.w700,
     );
@@ -671,11 +674,11 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
         color: AppColors.yellow,
         fontWeight: FontWeight.bold,
       ),
-      selectedMonthTextStyle: TextStyle(color: Colors.black),
-      selectedYearTextStyle: TextStyle(color: Colors.black),
-      monthTextStyle: TextStyle(color: Colors.white),
-      yearTextStyle: TextStyle(color: Colors.white),
-      selectedRangeDayTextStyle: TextStyle(color: Colors.white),
+      selectedMonthTextStyle: const TextStyle(color: Colors.black),
+      selectedYearTextStyle: const TextStyle(color: Colors.black),
+      monthTextStyle: const TextStyle(color: Colors.white),
+      yearTextStyle: const TextStyle(color: Colors.white),
+      selectedRangeDayTextStyle: const TextStyle(color: Colors.white),
       controlsTextStyle: const TextStyle(
         color: AppColors.yellow,
         fontSize: 15,
@@ -804,7 +807,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                });
              }
            },
-           icon:Icon(Icons.calendar_month, size: 18,color: AppColors.yellow,)),
+           icon:const Icon(Icons.calendar_month, size: 18,color: AppColors.yellow,)),
     );
   }
 

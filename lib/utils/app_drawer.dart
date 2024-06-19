@@ -70,12 +70,12 @@ class _MyDrawerState extends State<MyDrawer> {
                 children: [
                   Image.asset(ImagesPaths.home,
                       scale: 4,
-                      color: AppColors.impgrey),
+                      color: selectedTile == 0 ? AppColors.black : AppColors.impgrey,),
               SizedBox(
                 width: Get.width*0.05,
               ),
               Text("Home",
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w400,color: AppColors.impgrey,),
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w400,color:  selectedTile == 0 ? AppColors.black : AppColors.impgrey,),
               ),
                 ],
               ),
@@ -227,9 +227,6 @@ class _MyDrawerState extends State<MyDrawer> {
                   selectedTile = 5;
                 });
                 Get.back();
-
-                // Add functionality here
-
               },
             ).paddingOnly(left: Get.width*0.05),
           ),
