@@ -264,7 +264,7 @@ class BookingDetailsUi extends StatelessWidget {
                                       ?.copyWith(fontWeight: FontWeight.w500))
                                   .paddingOnly(right: Get.width * .10),
                             ),
-                            Text("26 07:00:00",
+                            Text("26 March 2024",
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelLarge
@@ -287,7 +287,7 @@ class BookingDetailsUi extends StatelessWidget {
                                       ?.copyWith(fontWeight: FontWeight.w500))
                                   .paddingOnly(right: Get.width * .016),
                             ),
-                            Text("26 March at 07:00:00",
+                            Text("07:00 pm",
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelLarge
@@ -310,7 +310,7 @@ class BookingDetailsUi extends StatelessWidget {
                                       ?.copyWith(fontWeight: FontWeight.w500))
                                   .paddingOnly(right: Get.width * .035),
                             ),
-                            Text("26 March",
+                            Text("08:00 pm",
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelLarge
@@ -462,7 +462,7 @@ class BookingDetailsUi extends StatelessWidget {
                                       ?.copyWith(fontWeight: FontWeight.w500))
                                   .paddingOnly(right: Get.width * .10),
                             ),
-                            Text("26 07:00:00",
+                            Text("26 March 2024",
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelLarge
@@ -485,7 +485,7 @@ class BookingDetailsUi extends StatelessWidget {
                                       ?.copyWith(fontWeight: FontWeight.w500))
                                   .paddingOnly(right: Get.width * .016),
                             ),
-                            Text("26 March at 07:00:00",
+                            Text("07:00 pm",
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelLarge
@@ -508,7 +508,7 @@ class BookingDetailsUi extends StatelessWidget {
                                       ?.copyWith(fontWeight: FontWeight.w500))
                                   .paddingOnly(right: Get.width * .035),
                             ),
-                            Text("26 March",
+                            Text("08:00 pm",
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelLarge
@@ -641,7 +641,7 @@ class BookingDetailsUi extends StatelessWidget {
                                       ?.copyWith(fontWeight: FontWeight.w500))
                                   .paddingOnly(right: Get.width * .10),
                             ),
-                            Text("26 07:00:00",
+                            Text("26 March 2024",
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelLarge
@@ -664,7 +664,7 @@ class BookingDetailsUi extends StatelessWidget {
                                       ?.copyWith(fontWeight: FontWeight.w500))
                                   .paddingOnly(right: Get.width * .016),
                             ),
-                            Text("26 March at 07:00:00",
+                            Text("07:00 pm",
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelLarge
@@ -687,7 +687,7 @@ class BookingDetailsUi extends StatelessWidget {
                                       ?.copyWith(fontWeight: FontWeight.w500))
                                   .paddingOnly(right: Get.width * .035),
                             ),
-                            Text("26 March",
+                            Text("08:00 pm",
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelLarge
@@ -796,7 +796,7 @@ class BookingDetailsUi extends StatelessWidget {
                                     ?.copyWith(fontWeight: FontWeight.w500))
                                 .paddingOnly(right: Get.width * .10),
                           ),
-                          Text("26 07:00:00",
+                          Text("26 March 2024",
                               style: Theme.of(context)
                                   .textTheme
                                   .labelLarge
@@ -819,7 +819,7 @@ class BookingDetailsUi extends StatelessWidget {
                                     ?.copyWith(fontWeight: FontWeight.w500))
                                 .paddingOnly(right: Get.width * .016),
                           ),
-                          Text("26 March at 07:00:00",
+                          Text("07:00 pm",
                               style: Theme.of(context)
                                   .textTheme
                                   .labelLarge
@@ -842,7 +842,7 @@ class BookingDetailsUi extends StatelessWidget {
                                     ?.copyWith(fontWeight: FontWeight.w500))
                                 .paddingOnly(right: Get.width * .035),
                           ),
-                          Text("26 March",
+                          Text("08:00 pm",
                               style: Theme.of(context)
                                   .textTheme
                                   .labelLarge
