@@ -36,7 +36,7 @@ class Result {
   int? userId;
   dynamic? document;
   dynamic? status;
-  dynamic? categoryId;
+  int? categoryId;
   dynamic? description;
   dynamic? approveDate;
   dynamic? rejectDate;
@@ -46,16 +46,18 @@ class Result {
   dynamic? passport;
   dynamic? passportName;
   dynamic? passportNumber;
-  String? emiratesName;
-  String? emiratesNumber;
+  dynamic? emiratesName;
+  dynamic? emiratesNumber;
   dynamic? passportfrontImg;
   dynamic? passportbackImg;
-  String? emirates;
-  String? emiratesfrontImg;
-  String? emiratesbackImg;
+  dynamic? emirates;
+  dynamic? emiratesfrontImg;
+  dynamic? emiratesbackImg;
   dynamic? documentForntImg;
   String? documentFrontImg;
   String? documentBackImg;
+  String? categoryName;
+  String? categoryNumber;
   String? createdAt;
   String? updatedAt;
   User? user;
@@ -86,6 +88,8 @@ class Result {
         this.documentForntImg,
         this.documentFrontImg,
         this.documentBackImg,
+        this.categoryName,
+        this.categoryNumber,
         this.createdAt,
         this.updatedAt,
         this.user,
@@ -116,6 +120,8 @@ class Result {
     documentForntImg = json['documentForntImg'];
     documentFrontImg = json['documentFrontImg'];
     documentBackImg = json['documentBackImg'];
+    categoryName = json['categoryName'];
+    categoryNumber = json['categoryNumber'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     user = json['user'] != null ? User.fromJson(json['user']) : null;
@@ -150,6 +156,8 @@ class Result {
     data['documentForntImg'] = documentForntImg;
     data['documentFrontImg'] = documentFrontImg;
     data['documentBackImg'] = documentBackImg;
+    data['categoryName'] = categoryName;
+    data['categoryNumber'] = categoryNumber;
     data['createdAt'] = createdAt;
     data['updatedAt'] = updatedAt;
     if (user != null) {
@@ -169,15 +177,22 @@ class User {
   String? password;
   String? email;
   String? phoneNumber;
-  dynamic? token;
+  String? token;
   dynamic? sessionCode;
   String? gender;
-  dynamic? deviceId;
+  String? deviceId;
   dynamic? profileImg;
   dynamic? creditAmount;
   dynamic? activeStatus;
   dynamic? otp;
   bool? status;
+  dynamic? nickName;
+  dynamic? professionalTitle;
+  dynamic? yearExperience;
+  dynamic? areaExpertise;
+  dynamic? funFact;
+  dynamic? quote;
+  dynamic? bio;
   String? createdAt;
   String? updatedAt;
   int? roleId;
@@ -198,6 +213,13 @@ class User {
         this.activeStatus,
         this.otp,
         this.status,
+        this.nickName,
+        this.professionalTitle,
+        this.yearExperience,
+        this.areaExpertise,
+        this.funFact,
+        this.quote,
+        this.bio,
         this.createdAt,
         this.updatedAt,
         this.roleId});
@@ -218,6 +240,13 @@ class User {
     activeStatus = json['activeStatus'];
     otp = json['otp'];
     status = json['status'];
+    nickName = json['nickName'];
+    professionalTitle = json['professionalTitle'];
+    yearExperience = json['yearExperience'];
+    areaExpertise = json['areaExpertise'];
+    funFact = json['funFact'];
+    quote = json['quote'];
+    bio = json['bio'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     roleId = json['roleId'];
@@ -240,6 +269,13 @@ class User {
     data['activeStatus'] = activeStatus;
     data['otp'] = otp;
     data['status'] = status;
+    data['nickName'] = nickName;
+    data['professionalTitle'] = professionalTitle;
+    data['yearExperience'] = yearExperience;
+    data['areaExpertise'] = areaExpertise;
+    data['funFact'] = funFact;
+    data['quote'] = quote;
+    data['bio'] = bio;
     data['createdAt'] = createdAt;
     data['updatedAt'] = updatedAt;
     data['roleId'] = roleId;

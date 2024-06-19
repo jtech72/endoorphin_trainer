@@ -231,62 +231,7 @@ class TrainerPassportUI extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // controller.documentIndex==2?
-                  // Column(
-                  //   children: [
-                  //     SizedBox(height: Get.height*0.03,),
-                  //     GestureDetector(
-                  //       onTap: () {
-                  //         Get.toNamed(AppRoutes.uploadimage,arguments: controller.documentIndex);
-                  //       },
-                  //       child: Container(
-                  //         height: 45,
-                  //         width: Get.width,
-                  //         decoration: BoxDecoration(
-                  //           color: AppColors.yellowishWhite,
-                  //           border: Border.all(color: AppColors.lightWhite),
-                  //           shape: BoxShape.rectangle,
-                  //           borderRadius: BorderRadius.circular(5),
-                  //         ),
-                  //         child: Row(
-                  //           mainAxisAlignment: MainAxisAlignment.center,
-                  //           children: [
-                  //             Image.asset(
-                  //               ImagesPaths.upload,
-                  //               scale: 5,
-                  //             ),
-                  //             const SizedBox(
-                  //               width: 10,
-                  //             ),
-                  //             Text(
-                  //               'Add a File',
-                  //               style: Theme.of(context).textTheme.labelMedium,
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ):SizedBox()
-                  // SizedBox(
-                  //   height: Get.height * .25,
-                  // ),
-                  // Center(
-                  //   child: SizedBox(
-                  //     child: InkButton(
-                  //         child: Text(
-                  //           'Submit for Review',
-                  //           style: Theme.of(context)
-                  //               .textTheme
-                  //               .headlineSmall!
-                  //               .copyWith(color: AppColors.black,fontSize: 20,
-                  //               fontWeight: FontWeight.w500),
-                  //         ),
-                  //         onTap: () {
-                  //           Get.back();
-                  //         }),
-                  //   ),
-                  // )
+
                 ],
               ).paddingOnly(
                   left: Get.width * 0.03,
