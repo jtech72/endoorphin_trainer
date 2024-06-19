@@ -51,7 +51,8 @@ class EarningUi extends StatelessWidget {
       _SalesData('30', 410),
       _SalesData('31', 600),
     ];
-    final currentMonth = DateTime.now().month.obs; // Current month index
+    final currentMonth = DateTime.now().month.obs;
+    final currentDay = DateTime.now().weekday.obs;// Current month index
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 50,
@@ -236,7 +237,9 @@ class EarningUi extends StatelessWidget {
                               children: [
                                 GestureDetector(
                                     onTap: () {
-                                      currentMonth.value = (currentMonth.value - 2 + 12) % 12 + 1;
+                                      if (currentDay.value > 1) {
+                                        currentDay.value = currentDay.value - 1;
+                                      }
                                     },
                                     child: Container(
                                         height: 25,
@@ -250,12 +253,14 @@ class EarningUi extends StatelessWidget {
                                   width: Get.width*0.29,
                                   alignment: Alignment.center,
                                   child: Text(
-                                    "${controller.months[currentMonth.value - 1]} : 7 - 14",
+                                    "${controller.days[currentDay.value - 1]}",
                                     style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w300),),
                                 ),
                                 GestureDetector(
                                     onTap: () {
-                                      currentMonth.value = (currentMonth.value % 12) + 1;
+                                      if (currentDay.value < controller.days.length) {
+                                        currentDay.value = currentDay.value + 1;
+                                      }
                                     },
                                     child: Container(
                                         height: 25,
@@ -267,41 +272,6 @@ class EarningUi extends StatelessWidget {
                                         child: const Icon(Icons.arrow_forward_ios,size: 16,).paddingOnly(left: Get.width*0.01))),
                               ],
                             ),
-                            // Row(
-                            //   children: [
-                            //     GestureDetector(
-                            //         onTap: () {
-                            //         },
-                            //         child: Container(
-                            //             height: 25,
-                            //             width: 25,
-                            //             decoration: const BoxDecoration(
-                            //                 color: Colors.transparent,
-                            //                 shape: BoxShape.circle
-                            //             ),
-                            //             child: const Icon(Icons.arrow_back_ios,size: 16,).paddingOnly(right: Get.width*0.01))),
-                            //     Container(
-                            //       width: Get.width*0.1,
-                            //       alignment: Alignment.center,
-                            //       child: Text(
-                            //         "7 - 14",
-                            //         style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w300),),
-                            //     ),
-                            //     GestureDetector(
-                            //         onTap: () {
-                            //         },
-                            //         child: Container(
-                            //             height: 25,
-                            //             width: 25,
-                            //             decoration: const BoxDecoration(
-                            //                 color: Colors.transparent,
-                            //                 shape: BoxShape.circle
-                            //             ),
-                            //             child: const Icon(Icons.arrow_forward_ios,size: 16,).paddingOnly(left: Get.width*0.01))),
-                            //   ],
-                            // ),
-
-
                           ],
                         ):
                         Row(mainAxisAlignment: MainAxisAlignment.center,
@@ -473,7 +443,7 @@ class EarningUi extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "AED 1959.90",
+                              controller.isWeekly.value ? 'AED 1959.90' : 'AED 7950.90',
                               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                 color: AppColors.impgrey,
                               ),
@@ -490,7 +460,7 @@ class EarningUi extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "140",
+                              controller.isWeekly.value ?"30":"140",
                               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                 color: AppColors.impgrey,
                               ),
