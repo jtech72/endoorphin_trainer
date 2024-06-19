@@ -26,7 +26,15 @@ class MoreAboutYouUi extends StatelessWidget {
           action: [
             IconButton(
                 onPressed: (){
-                  Get.toNamed(AppRoutes.bio);
+                  bool hasMissingDocuments =
+                      storage.read("Passport") != "true"||
+                          storage.read("Emirates ID") != "true";
+
+                  if (hasMissingDocuments) {
+                    showSnackBar("Please upload Passport and Emirates ID");
+                  }else{
+                    Get.toNamed(AppRoutes.bio);
+                  }
                 },
                 icon: Container(
                   alignment: Alignment.center,
@@ -114,38 +122,23 @@ class MoreAboutYouUi extends StatelessWidget {
                         child: Text('Error: ${snapshot.error}'),
                       );
                     }
-
                     if (!snapshot.hasData || snapshot.data!.result == null) {
                       return const Center(
                         child: Text('No data available'),
                       );
                     }
-                    // Combine both lists
-                    final combinedList = [
-                      ...snapshot.data!.result!.map((result) => {
-                            'category': {'name': result.category?.name},
-                          }),
-                      ...controller.categoryname.map((name) => {
-                            'category': {'name': name},
-                          }),
-                    ];
-
-                    return ListView.builder(
-                      itemCount: snapshot.data!.result!.length +
-                          4, // Adjusted itemCount to include the additional widgets
+                    return
+                      ListView.builder(
+                      itemCount: snapshot.data!.result!.length + 4, // Adjusted itemCount to include the additional widgets
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       padding: EdgeInsets.zero,
                       itemBuilder: (context, index) {
                         if (index < snapshot.data!.result!.length) {
-                          return index < snapshot.data!.result!.length &&
-                                  snapshot.data!.result![index]
-                                          .documentBackImg !=
-                                      null &&
-                                  snapshot.data!.result![index]
-                                          .documentFrontImg !=
-                                      null
-
+                          return
+                            index < snapshot.data!.result!.length &&
+                                snapshot.data!.result![index].documentBackImg != null &&
+                                  snapshot.data!.result![index].documentFrontImg != null
                           //Certification
                               ? Container(
                                   decoration: BoxDecoration(
@@ -250,8 +243,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                                                   FontWeight.w400),
                                                     ),
                                                     Text(
-                                                      snapshot.data!.result![index]
-                                                          .category!.name
+                                                      snapshot.data!.result![index].categoryName
                                                           .toString(),
                                                       style: Theme.of(context)
                                                           .textTheme
@@ -276,8 +268,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                                                   FontWeight.w400),
                                                     ),
                                                     Text(
-                                                      snapshot.data!.result![index]
-                                                          .category!.name
+                                                      snapshot.data!.result![index].categoryNumber
                                                           .toString(),
                                                       style: Theme.of(context)
                                                           .textTheme
@@ -1100,10 +1091,12 @@ class MoreAboutYouUi extends StatelessWidget {
                                           ).paddingOnly(
                                               bottom: Get.height * 0.02),
                                         );
-                        } else if (index == snapshot.data!.result!.length &&
+                        }
+                        else if (index == snapshot.data!.result!.length &&
                             storage.read("Emirates ID") != "true") {
                           return InkWell(
                             onTap: () {
+                              uploadImage = UploadImage.byInitically;
                               Get.toNamed(AppRoutes.trainerPassport,
                                   arguments: {
                                     "userId": storage.read("userId").toString(),
@@ -1189,6 +1182,7 @@ class MoreAboutYouUi extends StatelessWidget {
                             storage.read("Passport") != "true") {
                           return InkWell(
                             onTap: () {
+                              uploadImage = UploadImage.byInitically;
                               Get.toNamed(AppRoutes.trainerPassport,
                                   arguments: {
                                     "userId": storage.read("userId").toString(),
@@ -1316,12 +1310,8 @@ class MoreAboutYouUi extends StatelessWidget {
                               ),
                                 onTap: () {
                                   bool hasMissingDocuments =
-                                      snapshot.data!.result![index].passportfrontImg == null ||
-                                          snapshot.data!.result![index].passportbackImg == null ||
-                                          snapshot.data!.result![index].emiratesfrontImg == null ||
-                                          snapshot.data!.result![index].emiratesbackImg == null ||
-                                          snapshot.data!.result![index].documentBackImg == null ||
-                                          snapshot.data!.result![index].documentFrontImg == null;
+                                         storage.read("Passport") != "true"||
+                                             storage.read("Emirates ID") != "true";
 
                                   if (hasMissingDocuments) {
                                     showSnackBar("Please upload all the certificates");
