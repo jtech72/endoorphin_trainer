@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:endoorphin_trainer/controllers/document_controller.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
@@ -199,9 +200,9 @@ class DocumentUI extends StatelessWidget {
                                                 child: SizedBox(
                                                   height: 131,
                                                   width: 204,
-                                                  child: Image.network(
+                                                  child: CachedNetworkImage(
                                                       fit: BoxFit.cover,
-                                                      snapshot
+                                                imageUrl:       snapshot
                                                                   .data!
                                                                   .result![
                                                                       index]
@@ -229,7 +230,16 @@ class DocumentUI extends StatelessWidget {
                                                               .data!
                                                               .result![index]
                                                               .documentFrontImg
-                                                              .toString()),
+                                                              .toString(),
+                                                    progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                                                      child: SizedBox(
+                                                        height: 30, // Adjust the height to make it smaller
+                                                        width: 30,  // Adjust the width to make it smaller
+                                                        child: CircularProgressIndicator(value: downloadProgress.progress),
+                                                      ),
+                                                    ),
+                                                    errorWidget: (context, url, error) => Icon(Icons.error),
+                                                  ),
                                                 ),
                                               ),
                                               Column(
@@ -246,9 +256,10 @@ class DocumentUI extends StatelessWidget {
                                                   ).paddingOnly(bottom: 2),
                                                   Text(
                                                     snapshot
-                                                                .data!
-                                                                .result![index]
-                                                                .categoryName.toString(),
+                                                        .data!
+                                                        .result![index]
+                                                        .categoryName
+                                                        .toString(),
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .labelSmall,
@@ -260,7 +271,11 @@ class DocumentUI extends StatelessWidget {
                                                         .labelMedium,
                                                   ).paddingOnly(bottom: 2),
                                                   Text(
-                                                    snapshot.data!.result![index].categoryNumber.toString(),
+                                                    snapshot
+                                                        .data!
+                                                        .result![index]
+                                                        .categoryNumber
+                                                        .toString(),
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .labelSmall,
@@ -322,7 +337,9 @@ class DocumentUI extends StatelessWidget {
                                                             )
                                                           : GestureDetector(
                                                               onTap: () {
-                                                                uploadImage = UploadImage.byProfile;
+                                                                uploadImage =
+                                                                    UploadImage
+                                                                        .byProfile;
                                                                 Get.toNamed(
                                                                     AppRoutes
                                                                         .trainerPassport,
@@ -546,9 +563,9 @@ class DocumentUI extends StatelessWidget {
                                                     child: SizedBox(
                                                       height: 131,
                                                       width: 204,
-                                                      child: Image.network(
+                                                      child: CachedNetworkImage(
                                                           fit: BoxFit.cover,
-                                                          snapshot
+                                                          imageUrl: snapshot
                                                                       .data!
                                                                       .result![
                                                                           index]
@@ -577,7 +594,16 @@ class DocumentUI extends StatelessWidget {
                                                                   .result![
                                                                       index]
                                                                   .documentFrontImg
-                                                                  .toString()),
+                                                                  .toString(),
+                                                        progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                                                          child: SizedBox(
+                                                            height: 30, // Adjust the height to make it smaller
+                                                            width: 30,  // Adjust the width to make it smaller
+                                                            child: CircularProgressIndicator(value: downloadProgress.progress),
+                                                          ),
+                                                        ),
+                                                        errorWidget: (context, url, error) => Icon(Icons.error),
+                                                      ),
                                                     ),
                                                   ),
                                                   Column(
@@ -595,10 +621,10 @@ class DocumentUI extends StatelessWidget {
                                                       ).paddingOnly(bottom: 2),
                                                       Text(
                                                         snapshot
-                                                                    .data!
-                                                                    .result![
-                                                                        index]
-                                                                    .emiratesName.toString(),
+                                                            .data!
+                                                            .result![index]
+                                                            .emiratesName
+                                                            .toString(),
                                                         style: Theme.of(context)
                                                             .textTheme
                                                             .labelSmall,
@@ -610,7 +636,11 @@ class DocumentUI extends StatelessWidget {
                                                             .labelMedium,
                                                       ).paddingOnly(bottom: 2),
                                                       Text(
-                                                          snapshot.data!.result![index].emiratesNumber.toString(),
+                                                        snapshot
+                                                            .data!
+                                                            .result![index]
+                                                            .emiratesNumber
+                                                            .toString(),
                                                         style: Theme.of(context)
                                                             .textTheme
                                                             .labelSmall,
@@ -903,9 +933,9 @@ class DocumentUI extends StatelessWidget {
                                                         child: SizedBox(
                                                           height: 131,
                                                           width: 204,
-                                                          child: Image.network(
+                                                          child: CachedNetworkImage(
                                                               fit: BoxFit.cover,
-                                                              snapshot
+                                                          imageUrl:     snapshot
                                                                           .data!
                                                                           .result![
                                                                               index]
@@ -930,7 +960,16 @@ class DocumentUI extends StatelessWidget {
                                                                       .result![
                                                                           index]
                                                                       .documentFrontImg
-                                                                      .toString()),
+                                                                      .toString(),
+                                                            progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                                                              child: SizedBox(
+                                                                height: 30, // Adjust the height to make it smaller
+                                                                width: 30,  // Adjust the width to make it smaller
+                                                                child: CircularProgressIndicator(value: downloadProgress.progress),
+                                                              ),
+                                                            ),
+                                                            errorWidget: (context, url, error) => Icon(Icons.error),
+                                                          ),
                                                         ),
                                                       ),
                                                       Column(
@@ -951,10 +990,10 @@ class DocumentUI extends StatelessWidget {
                                                               bottom: 2),
                                                           Text(
                                                             snapshot
-                                                                        .data!
-                                                                        .result![
-                                                                            index]
-                                                                        .passportName.toString(),
+                                                                .data!
+                                                                .result![index]
+                                                                .passportName
+                                                                .toString(),
                                                             style: Theme.of(
                                                                     context)
                                                                 .textTheme
@@ -970,7 +1009,11 @@ class DocumentUI extends StatelessWidget {
                                                           ).paddingOnly(
                                                               bottom: 2),
                                                           Text(
-                                                              snapshot.data!.result![index].passportNumber.toString(),
+                                                            snapshot
+                                                                .data!
+                                                                .result![index]
+                                                                .passportNumber
+                                                                .toString(),
                                                             style: Theme.of(
                                                                     context)
                                                                 .textTheme
@@ -1114,8 +1157,14 @@ class DocumentUI extends StatelessWidget {
                                         : InkWell(
                                             splashColor: Colors.transparent,
                                             onTap: () {
-                                              final userId = snapshot.data!.result![index].userId ?? "";
-                                              final categoryId = snapshot.data!.result![index].category?.id ??
+                                              final userId = snapshot.data!
+                                                      .result![index].userId ??
+                                                  "";
+                                              final categoryId = snapshot
+                                                      .data!
+                                                      .result![index]
+                                                      .category
+                                                      ?.id ??
                                                   "";
 
                                               Get.toNamed(
@@ -1426,8 +1475,7 @@ class DocumentUI extends StatelessWidget {
                           return const SizedBox
                               .shrink(); // Fallback in case index is out of bounds
                         },
-                      )
-                    );
+                      ));
                 },
               ),
             ],

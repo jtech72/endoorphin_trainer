@@ -986,8 +986,10 @@ class MoreAboutYouUi extends StatelessWidget {
                                                 AppRoutes.trainerPassport,
                                                 arguments: {
                                                   "userId": userId,
+                                                  "name" : snapshot.data!.result![index].category!.name.toString(),
                                                   "categoryName": "",
                                                   "categoryId": categoryId,
+
                                                 });
                                           },
                                           child: Container(
@@ -1327,7 +1329,9 @@ class MoreAboutYouUi extends StatelessWidget {
                                 onTap: () {
                                   bool hasMissingDocuments =
                                          storage.read("Passport") != "true"||
-                                             storage.read("Emirates ID") != "true";
+                                             storage.read("Emirates ID") != "true"||
+                                  snapshot.data!.result![0].documentFrontImg ==null
+                                  ;
 
                                   if (hasMissingDocuments) {
                                     showSnackBar("Please upload all the certificates");
