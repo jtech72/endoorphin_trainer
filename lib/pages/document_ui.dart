@@ -347,9 +347,7 @@ class DocumentUI extends StatelessWidget {
                                                             )
                                                           : GestureDetector(
                                                               onTap: () {
-                                                                uploadImage =
-                                                                    UploadImage
-                                                                        .byProfile;
+                                                                uploadImage = UploadImage.byProfile;
                                                                 Get.toNamed(
                                                                     AppRoutes
                                                                         .trainerPassport,

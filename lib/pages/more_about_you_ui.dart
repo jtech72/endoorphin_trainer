@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:endoorphin_trainer/controllers/more_about_you_controller.dart';
 import 'package:endoorphin_trainer/services/network_services/api_call.dart';
 import 'package:flutter/material.dart';
@@ -26,15 +27,7 @@ class MoreAboutYouUi extends StatelessWidget {
           action: [
             IconButton(
                 onPressed: (){
-                  bool hasMissingDocuments =
-                      storage.read("Passport") != "true"||
-                          storage.read("Emirates ID") != "true";
-
-                  if (hasMissingDocuments) {
-                    showSnackBar("Please upload Passport and Emirates ID");
-                  }else{
                     Get.toNamed(AppRoutes.bio);
-                  }
                 },
                 icon: Container(
                   alignment: Alignment.center,
@@ -205,25 +198,25 @@ class MoreAboutYouUi extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Obx(
-                                            () => SizedBox(
-                                              width: Get.width * 0.55,
-                                              height: Get.height * 0.17,
-                                              child: Image.network(
-                                                  fit: BoxFit.cover,
-                                                  controller.isFrontImageVisible2
-                                                              .value ==
-                                                          true
-                                                      ? snapshot
-                                                          .data!
-                                                          .result![index]
-                                                          .documentFrontImg
-                                                          .toString()
-                                                      : snapshot
-                                                          .data!
-                                                          .result![index]
-                                                          .documentBackImg
-                                                          .toString()),
-                                            ),
+                                            () =>
+                                                SizedBox(
+                                                  width: Get.width * 0.55,
+                                                  height: Get.height * 0.17,
+                                                  child: CachedNetworkImage(
+                                                    fit: BoxFit.cover,
+                                                    imageUrl: controller.isFrontImageVisible2.value == true
+                                                        ? snapshot.data!.result![index].documentFrontImg.toString()
+                                                        : snapshot.data!.result![index].documentBackImg.toString(),
+                                                    progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                                                      child: SizedBox(
+                                                        height: 30, // Adjust the height to make it smaller
+                                                        width: 30,  // Adjust the width to make it smaller
+                                                        child: CircularProgressIndicator(value: downloadProgress.progress),
+                                                      ),
+                                                    ),
+                                                    errorWidget: (context, url, error) => Icon(Icons.error),
+                                                  ),
+                                                ),
                                           ),
                                           Expanded(
                                             child: Column(
@@ -474,21 +467,30 @@ class MoreAboutYouUi extends StatelessWidget {
                                                 () => SizedBox(
                                                   width: Get.width * 0.55,
                                                   height: Get.height * 0.17,
-                                                  child: Image.network(
-                                                      fit: BoxFit.cover,
-                                                      controller.isFrontImageVisible1
-                                                                  .value ==
-                                                              true
-                                                          ? snapshot
-                                                              .data!
-                                                              .result![index]
-                                                              .emiratesfrontImg
-                                                              .toString()
-                                                          : snapshot
-                                                              .data!
-                                                              .result![index]
-                                                              .emiratesbackImg
-                                                              .toString()),
+                                                  child: CachedNetworkImage(
+                                                    fit: BoxFit.cover,
+                                                    imageUrl:  controller.isFrontImageVisible1
+                                                        .value ==
+                                                        true
+                                                        ? snapshot
+                                                        .data!
+                                                        .result![index]
+                                                        .emiratesfrontImg
+                                                        .toString()
+                                                        : snapshot
+                                                        .data!
+                                                        .result![index]
+                                                        .emiratesbackImg
+                                                        .toString(),
+                                                    progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                                                      child: SizedBox(
+                                                        height: 30, // Adjust the height to make it smaller
+                                                        width: 30,  // Adjust the width to make it smaller
+                                                        child: CircularProgressIndicator(value: downloadProgress.progress),
+                                                      ),
+                                                    ),
+                                                    errorWidget: (context, url, error) => Icon(Icons.error),
+                                                  ),
                                                 ),
                                               ),
                                               Expanded(
@@ -761,23 +763,32 @@ class MoreAboutYouUi extends StatelessWidget {
                                                     () => SizedBox(
                                                       width: Get.width * 0.55,
                                                       height: Get.height * 0.17,
-                                                      child: Image.network(
-                                                          fit: BoxFit.cover,
-                                                          controller.isFrontImageVisible
-                                                                      .value ==
-                                                                  true
-                                                              ? snapshot
-                                                                  .data!
-                                                                  .result![
-                                                                      index]
-                                                                  .passportfrontImg
-                                                                  .toString()
-                                                              : snapshot
-                                                                  .data!
-                                                                  .result![
-                                                                      index]
-                                                                  .passportfrontImg
-                                                                  .toString()),
+                                                      child:CachedNetworkImage(
+                                                        fit: BoxFit.cover,
+                                                        imageUrl:controller.isFrontImageVisible
+                                                            .value ==
+                                                            true
+                                                            ? snapshot
+                                                            .data!
+                                                            .result![
+                                                        index]
+                                                            .passportfrontImg
+                                                            .toString()
+                                                            : snapshot
+                                                            .data!
+                                                            .result![
+                                                        index]
+                                                            .passportfrontImg
+                                                            .toString(),
+                                                        progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                                                          child: SizedBox(
+                                                            height: 30, // Adjust the height to make it smaller
+                                                            width: 30,  // Adjust the width to make it smaller
+                                                            child: CircularProgressIndicator(value: downloadProgress.progress),
+                                                          ),
+                                                        ),
+                                                        errorWidget: (context, url, error) => Icon(Icons.error),
+                                                      ),
                                                     ),
                                                   ),
                                                   Expanded(
@@ -1289,6 +1300,11 @@ class MoreAboutYouUi extends StatelessWidget {
                                         'I accept the terms and conditions',
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 12)),
+                                    Spacer(flex: 1,),
+                                    Text(
+                                        'view all',
+                                        style: TextStyle(
+                                            color: AppColors.whiteShade, fontSize: 12))
                                   ],
                                 ),
                               ),
