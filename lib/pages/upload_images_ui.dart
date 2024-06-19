@@ -30,14 +30,14 @@ class UploadImagesUi extends StatelessWidget {
           }
         ,child: Container(
             height: 2,width: 2,
-            child: Icon(Icons.arrow_back_ios,size: 18,color: Colors.white,)),
+            child: const Icon(Icons.arrow_back_ios,size: 18,color: Colors.white,)),
         ),
         title: Text(controller.certificationDetails == 0? "Emirates ID":controller.certificationDetails == 1?'Passport':"Certification",style: Theme.of(context).textTheme.headlineSmall,),
 
       ),
       body: Obx(
         ()=> Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(ImagesPaths.bgBlackShade,),fit: BoxFit.cover
               )
@@ -50,6 +50,46 @@ class UploadImagesUi extends StatelessWidget {
                 SizedBox(height: Get.height*0.03,),
                 GestureDetector(
                   onTap: (){
+                    if (controller.fontImagePicked.value != null) {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Dialog(
+                            backgroundColor: Colors.transparent,
+                            insetPadding: const EdgeInsets.all(10),
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.file(
+                                    controller.fontImagePicked.value!,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 10,
+                                  right: 10,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const CircleAvatar(
+                                      radius: 15,
+                                      backgroundColor: AppColors.yellow,
+                                      child: Icon(
+                                        Icons.close,
+                                        color: Colors.black,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    }
                   },
                   child: Container(
                     height: Get.height*0.21,
@@ -69,7 +109,7 @@ class UploadImagesUi extends StatelessWidget {
                 SizedBox(height:Get.height*0.2),
                 Text('Check Quality',style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 20),).paddingOnly(bottom: Get.height*0.02),
                 Text('Lorem Ipsum is simply dummy text of the printing\nand typesetting industry.',style: Theme.of(context).textTheme.displayLarge,textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.024),
-                InkButton(child: Text('Looks great! Continue',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
+                InkButton(child: Text('Continue',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
                     fontFamily: 'Montserrat'),), onTap: (){
                   controller.selectedoption.value=1;
                 }).paddingOnly(bottom: Get.height*0.024),
@@ -103,24 +143,68 @@ class UploadImagesUi extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(height: Get.height*0.03,),
-                    Container(
-                        height: Get.height*0.21,
-                        width: Get.width*0.76,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: AppColors.yellow)
-                      ),
-                        child:
-                        controller.fontImagePicked.value ==null?
-                        const SizedBox.shrink():
-                        ClipRRect(
+                    GestureDetector(
+                      onTap: (){
+                        if (controller.backImagePicked.value != null) {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Dialog(
+                                backgroundColor: Colors.transparent,
+                                insetPadding: EdgeInsets.all(10),
+                                child: Stack(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.file(
+                                        controller.backImagePicked.value!,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 10,
+                                      right: 10,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: CircleAvatar(
+                                          radius: 15,
+                                          backgroundColor: AppColors.yellow,
+                                          child: Icon(
+                                            Icons.close,
+                                            color: Colors.black,
+                                            size: 20,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        }
+                      },
+                      child: Container(
+                          height: Get.height*0.21,
+                          width: Get.width*0.76,
+                        decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            child: Image.file(controller.backImagePicked.value ?? controller.defaultImage, fit: BoxFit.cover,)
-                    ),),
+                            border: Border.all(color: AppColors.yellow)
+                        ),
+                          child:
+                          controller.fontImagePicked.value ==null?
+                          const SizedBox.shrink():
+                          ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.file(controller.backImagePicked.value ?? controller.defaultImage, fit: BoxFit.cover,)
+                      ),),
+                    ),
                     SizedBox(height:Get.height*0.2),
                     Text('Check Quality',style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 20),).paddingOnly(bottom: Get.height*0.02),
                     Text('Lorem Ipsum is simply dummy text of the printing\nand typesetting industry.',style: Theme.of(context).textTheme.displayLarge,textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.024),
-                    InkButton(child: Text('Looks great! Continue',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
+                    InkButton(child: Text('Continue',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
                         fontFamily: 'Montserrat'),), onTap: (){
                       controller.selectedoption.value=3;
                     }).paddingOnly(bottom: Get.height*0.024),
@@ -138,34 +222,122 @@ class UploadImagesUi extends StatelessWidget {
                     children: [
                       SizedBox(height: Get.height*0.03,),
                       Text('Front',style: Theme.of(context).textTheme.displayLarge!.copyWith(fontWeight: FontWeight.w400),),
-                      Container(
-                        height: 196,
-                        width: 329,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: AppColors.yellow)
+                      GestureDetector(
+                        onTap: (){
+                          if (controller.fontImagePicked.value != null) {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  backgroundColor: Colors.transparent,
+                                  insetPadding: EdgeInsets.all(10),
+                                  child: Stack(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Image.file(
+                                          controller.fontImagePicked.value!,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Positioned(
+                                        top: 10,
+                                        right: 10,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: CircleAvatar(
+                                            radius: 15,
+                                            backgroundColor: AppColors.yellow,
+                                            child: Icon(
+                                              Icons.close,
+                                              color: Colors.black,
+                                              size: 20,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          }
+                        },
+                        child: Container(
+                          height: 196,
+                          width: 329,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: AppColors.yellow)
+                          ),
+                          child: controller.fontImagePicked.value ==null?
+                          const SizedBox.shrink():
+                          ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.file(controller.fontImagePicked.value!,fit: BoxFit.cover,)),
                         ),
-                        child: controller.fontImagePicked.value ==null?
-                        const SizedBox.shrink():
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.file(controller.fontImagePicked.value!,fit: BoxFit.cover,)),
                       ),
                       SizedBox(height: Get.height*0.03,),
                       Text('Back',style: Theme.of(context).textTheme.displayLarge!.copyWith(fontWeight: FontWeight.w400),),
-                      Container(
-                        height: 196,
-                        width: 329,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: AppColors.yellow)
-                        ),
-                        child: controller.backImagePicked.value ==null?
-                        const SizedBox.shrink():
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.file(controller.backImagePicked.value!,fit: BoxFit.cover,)),
-                      ).paddingOnly(bottom: Get.height*0.07),
+                      GestureDetector(
+                        onTap: (){
+                          if (controller.backImagePicked.value != null) {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  backgroundColor: Colors.transparent,
+                                  insetPadding: EdgeInsets.all(10),
+                                  child: Stack(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Image.file(
+                                          controller.backImagePicked.value!,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Positioned(
+                                        top: 10,
+                                        right: 10,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: CircleAvatar(
+                                            radius: 15,
+                                            backgroundColor: AppColors.yellow,
+                                            child: Icon(
+                                              Icons.close,
+                                              color: Colors.black,
+                                              size: 20,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          }
+                        },
+                        child: Container(
+                          height: 196,
+                          width: 329,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: AppColors.yellow)
+                          ),
+                          child: controller.backImagePicked.value ==null?
+                          const SizedBox.shrink():
+                          ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.file(controller.backImagePicked.value!,fit: BoxFit.cover,)),
+                        ).paddingOnly(bottom: Get.height*0.07),
+                      ),
                       Center(
                         child: InkButton(child: Text('Save',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
                             fontFamily: 'Montserrat'),),
@@ -189,7 +361,7 @@ class UploadImagesUi extends StatelessWidget {
                     ],
                   ).paddingOnly(left: 50,right: 50)
 
-        :SizedBox.shrink())
+        :const SizedBox.shrink())
       ),
     );
   }

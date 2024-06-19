@@ -30,19 +30,20 @@ Future<void> configure() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.white, statusBarIconBrightness: Brightness.dark));
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
   await GetStorage.init();
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 }
-
 class EndoorphinTrainer extends StatelessWidget {
   const EndoorphinTrainer({super.key});
   @override
   Widget build(BuildContext context) {
     final DeepLinkController deepLinkController = Get.put(DeepLinkController());
-
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return GetMaterialApp(
-      supportedLocales: [
+      supportedLocales: const [
         Locale("af"),
         Locale("am"),
         Locale("ar"),
@@ -128,7 +129,6 @@ class EndoorphinTrainer extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-
       initialRoute: AppPages.initialRoute,
       getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,

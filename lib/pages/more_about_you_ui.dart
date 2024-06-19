@@ -44,7 +44,7 @@ class MoreAboutYouUi extends StatelessWidget {
                       color: AppColors.yellow,
                       borderRadius: BorderRadius.all(Radius.circular(24))),
                   child: Text('Skip',style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.black,fontWeight: FontWeight.w500),textAlign: TextAlign.center,),
-                )
+                ),
             ),
             SizedBox(width: Get.width*0.04,)
           ],
