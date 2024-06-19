@@ -22,7 +22,7 @@ class TrainerPassportUI extends StatelessWidget {
                 Get.back();
               },
               child: Text(
-                controller.certificationDetails!["categoryName"] == "Emirates ID"? "Emirates ID":controller.certificationDetails!["categoryName"] == "Passport"?'Passport':"Certification",
+                controller.certificationDetails!["categoryName"] == "Emirates ID"? "Emirates ID":controller.certificationDetails!["categoryName"] == "Passport"?'Passport':controller.certificationDetails!["categoryName"].toString(),
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
             ),

@@ -55,9 +55,9 @@ class UploadImagesController extends GetxController {
         log("Successfully uploaded");
         log("dsfghfdd${uploadImage}");
 
-        uploadImage == UploadImage.byInitically?
-        Get.offAllNamed(AppRoutes.moreaboutyou):
-        Get.offAllNamed(AppRoutes.bottomNavigation);
+        uploadImage == UploadImage.byProfile?
+        Get.offAllNamed(AppRoutes.bottomNavigation):
+        Get.offAllNamed(AppRoutes.moreaboutyou);
         showSnackBar(result.message.toString());
 
       }else{
@@ -94,9 +94,9 @@ class UploadImagesController extends GetxController {
         storage.write("Emirates ID","true");
         log("Successfully uploaded");
         log("dsfghfdd${uploadImage}");
-        uploadImage == UploadImage.byInitically?
-        Get.offAllNamed(AppRoutes.moreaboutyou):
-        Get.offAllNamed(AppRoutes.bottomNavigation);
+        uploadImage == UploadImage.byProfile?
+        Get.offAllNamed(AppRoutes.bottomNavigation):
+        Get.offAllNamed(AppRoutes.moreaboutyou);
         showSnackBar(result.message.toString());
 
       }else{
@@ -132,9 +132,9 @@ class UploadImagesController extends GetxController {
         dismissLoader();
         log("Successfully uploaded");
         log("sadfgg${uploadImage}");
-        uploadImage == UploadImage.byInitically?
-            Get.offAllNamed(AppRoutes.moreaboutyou):
-        Get.offAllNamed(AppRoutes.bottomNavigation);
+        uploadImage == UploadImage.byProfile?
+            Get.offAllNamed(AppRoutes.bottomNavigation):
+        Get.offAllNamed(AppRoutes.moreaboutyou);
         showSnackBar(result.message.toString());
 
 
