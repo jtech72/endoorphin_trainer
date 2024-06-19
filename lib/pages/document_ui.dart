@@ -239,7 +239,7 @@ class DocumentUI extends StatelessWidget {
                                                     MainAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'Institute  Name',
+                                                    'Certification Name',
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .labelMedium,
@@ -248,44 +248,19 @@ class DocumentUI extends StatelessWidget {
                                                     snapshot
                                                                 .data!
                                                                 .result![index]
-                                                                .category ==
-                                                            null
-                                                        ? snapshot
-                                                                    .data!
-                                                                    .result![
-                                                                        index]
-                                                                    .emirates ==
-                                                                null
-                                                            ? snapshot
-                                                                .data!
-                                                                .result![index]
-                                                                .passportName
-                                                                .toString()
-                                                                .toUpperCase()
-                                                            : snapshot
-                                                                .data!
-                                                                .result![index]
-                                                                .emiratesName
-                                                                .toString()
-                                                                .toUpperCase()
-                                                        : snapshot
-                                                            .data!
-                                                            .result![index]
-                                                            .category!
-                                                            .name
-                                                            .toString(),
+                                                                .categoryName.toString(),
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .labelSmall,
                                                   ).paddingOnly(bottom: 8),
                                                   Text(
-                                                    'Certification Year',
+                                                    'Certification Number',
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .labelMedium,
                                                   ).paddingOnly(bottom: 2),
                                                   Text(
-                                                    'john abc',
+                                                    snapshot.data!.result![index].categoryNumber.toString(),
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .labelSmall,
@@ -615,7 +590,7 @@ class DocumentUI extends StatelessWidget {
                                                         MainAxisAlignment.start,
                                                     children: [
                                                       Text(
-                                                        'Institute  Name',
+                                                        'Emirates ID Name',
                                                         style: Theme.of(context)
                                                             .textTheme
                                                             .labelMedium,
@@ -625,46 +600,19 @@ class DocumentUI extends StatelessWidget {
                                                                     .data!
                                                                     .result![
                                                                         index]
-                                                                    .category ==
-                                                                null
-                                                            ? snapshot
-                                                                        .data!
-                                                                        .result![
-                                                                            index]
-                                                                        .emirates ==
-                                                                    null
-                                                                ? snapshot
-                                                                    .data!
-                                                                    .result![
-                                                                        index]
-                                                                    .passportName
-                                                                    .toString()
-                                                                    .toUpperCase()
-                                                                : snapshot
-                                                                    .data!
-                                                                    .result![
-                                                                        index]
-                                                                    .emiratesName
-                                                                    .toString()
-                                                                    .toUpperCase()
-                                                            : snapshot
-                                                                .data!
-                                                                .result![index]
-                                                                .category!
-                                                                .name
-                                                                .toString(),
+                                                                    .emiratesName.toString(),
                                                         style: Theme.of(context)
                                                             .textTheme
                                                             .labelSmall,
                                                       ).paddingOnly(bottom: 8),
                                                       Text(
-                                                        'Certification Year',
+                                                        'Emirates ID Number',
                                                         style: Theme.of(context)
                                                             .textTheme
                                                             .labelMedium,
                                                       ).paddingOnly(bottom: 2),
                                                       Text(
-                                                        'john abc',
+                                                          snapshot.data!.result![index].emiratesNumber.toString(),
                                                         style: Theme.of(context)
                                                             .textTheme
                                                             .labelSmall,
@@ -996,7 +944,7 @@ class DocumentUI extends StatelessWidget {
                                                                 .start,
                                                         children: [
                                                           Text(
-                                                            'Institute  Name',
+                                                            'Passport Name',
                                                             style: Theme.of(
                                                                     context)
                                                                 .textTheme
@@ -1008,35 +956,7 @@ class DocumentUI extends StatelessWidget {
                                                                         .data!
                                                                         .result![
                                                                             index]
-                                                                        .category ==
-                                                                    null
-                                                                ? snapshot
-                                                                            .data!
-                                                                            .result![
-                                                                                index]
-                                                                            .emirates ==
-                                                                        null
-                                                                    ? snapshot
-                                                                        .data!
-                                                                        .result![
-                                                                            index]
-                                                                        .passportName
-                                                                        .toString()
-                                                                        .toUpperCase()
-                                                                    : snapshot
-                                                                        .data!
-                                                                        .result![
-                                                                            index]
-                                                                        .emiratesName
-                                                                        .toString()
-                                                                        .toUpperCase()
-                                                                : snapshot
-                                                                    .data!
-                                                                    .result![
-                                                                        index]
-                                                                    .category!
-                                                                    .name
-                                                                    .toString(),
+                                                                        .passportName.toString(),
                                                             style: Theme.of(
                                                                     context)
                                                                 .textTheme
@@ -1044,7 +964,7 @@ class DocumentUI extends StatelessWidget {
                                                           ).paddingOnly(
                                                               bottom: 8),
                                                           Text(
-                                                            'Certification Year',
+                                                            'Passport Number',
                                                             style: Theme.of(
                                                                     context)
                                                                 .textTheme
@@ -1052,7 +972,7 @@ class DocumentUI extends StatelessWidget {
                                                           ).paddingOnly(
                                                               bottom: 2),
                                                           Text(
-                                                            'john abc',
+                                                              snapshot.data!.result![index].passportNumber.toString(),
                                                             style: Theme.of(
                                                                     context)
                                                                 .textTheme

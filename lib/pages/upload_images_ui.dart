@@ -117,7 +117,16 @@ class UploadImagesUi extends StatelessWidget {
                     onTap: (){
                       controller.removeImage(true);
                     },
-                    child: Text('Take a new Photo',style: Theme.of(context).textTheme.displayLarge!.copyWith(color: AppColors.yellow),))
+                    child: Column(
+                      children: [
+                        Text('Take a new Photo',style: Theme.of(context).textTheme.displayLarge!.copyWith(color: AppColors.yellow),),
+                        Container(
+                          height: 1,
+                            width: Get.width*0.3,
+                          color: AppColors.yellow,
+                        )
+                      ],
+                    ))
               ],
             ),
           ):
@@ -151,7 +160,7 @@ class UploadImagesUi extends StatelessWidget {
                             builder: (BuildContext context) {
                               return Dialog(
                                 backgroundColor: Colors.transparent,
-                                insetPadding: EdgeInsets.all(10),
+                                insetPadding: const EdgeInsets.all(10),
                                 child: Stack(
                                   children: [
                                     ClipRRect(
@@ -168,7 +177,7 @@ class UploadImagesUi extends StatelessWidget {
                                         onTap: () {
                                           Navigator.of(context).pop();
                                         },
-                                        child: CircleAvatar(
+                                        child: const CircleAvatar(
                                           radius: 15,
                                           backgroundColor: AppColors.yellow,
                                           child: Icon(
@@ -213,7 +222,16 @@ class UploadImagesUi extends StatelessWidget {
                         controller.openCamera(false);
 
                       },
-                        child: Text('Take a new Photo',style: Theme.of(context).textTheme.displayLarge!.copyWith(color: AppColors.yellow),))
+                        child: Column(
+                          children: [
+                            Text('Take a new Photo',style: Theme.of(context).textTheme.displayLarge!.copyWith(color: AppColors.yellow),),
+                            Container(
+                              height: 1,
+                              width: Get.width*0.3,
+                              color: AppColors.yellow,
+                            )
+                          ],
+                        ))
                   ],
                 ),
               ):
@@ -230,7 +248,7 @@ class UploadImagesUi extends StatelessWidget {
                               builder: (BuildContext context) {
                                 return Dialog(
                                   backgroundColor: Colors.transparent,
-                                  insetPadding: EdgeInsets.all(10),
+                                  insetPadding: const EdgeInsets.all(10),
                                   child: Stack(
                                     children: [
                                       ClipRRect(
@@ -247,7 +265,7 @@ class UploadImagesUi extends StatelessWidget {
                                           onTap: () {
                                             Navigator.of(context).pop();
                                           },
-                                          child: CircleAvatar(
+                                          child: const CircleAvatar(
                                             radius: 15,
                                             backgroundColor: AppColors.yellow,
                                             child: Icon(
@@ -289,7 +307,7 @@ class UploadImagesUi extends StatelessWidget {
                               builder: (BuildContext context) {
                                 return Dialog(
                                   backgroundColor: Colors.transparent,
-                                  insetPadding: EdgeInsets.all(10),
+                                  insetPadding: const EdgeInsets.all(10),
                                   child: Stack(
                                     children: [
                                       ClipRRect(
@@ -306,7 +324,7 @@ class UploadImagesUi extends StatelessWidget {
                                           onTap: () {
                                             Navigator.of(context).pop();
                                           },
-                                          child: CircleAvatar(
+                                          child: const CircleAvatar(
                                             radius: 15,
                                             backgroundColor: AppColors.yellow,
                                             child: Icon(
