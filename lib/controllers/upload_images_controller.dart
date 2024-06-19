@@ -53,7 +53,11 @@ class UploadImagesController extends GetxController {
         dismissLoader();
         storage.write("Passport","true");
         log("Successfully uploaded");
-        Get.offAllNamed(AppRoutes.moreaboutyou);
+        log("dsfghfdd${uploadImage}");
+
+        uploadImage == UploadImage.byInitically?
+        Get.offAllNamed(AppRoutes.moreaboutyou):
+        Get.offAllNamed(AppRoutes.bottomNavigation);
         showSnackBar(result.message.toString());
 
       }else{
@@ -89,7 +93,10 @@ class UploadImagesController extends GetxController {
         dismissLoader();
         storage.write("Emirates ID","true");
         log("Successfully uploaded");
-        Get.offAllNamed(AppRoutes.moreaboutyou);
+        log("dsfghfdd${uploadImage}");
+        uploadImage == UploadImage.byInitically?
+        Get.offAllNamed(AppRoutes.moreaboutyou):
+        Get.offAllNamed(AppRoutes.bottomNavigation);
         showSnackBar(result.message.toString());
 
       }else{
@@ -107,7 +114,9 @@ class UploadImagesController extends GetxController {
     showLoader();
     Map<String, String> fields = {
       'userId': certificationDetails!["userId"].toString(), // example field
-      'categoryId':certificationDetails!["categoryId"].toString() , // example field
+      'categoryId':certificationDetails!["categoryId"].toString() ,
+      'categoryName':certificationDetails!["certificateName"] , // example field
+      'categoryNumber':certificationDetails!["certificateNumber"] , // example field
     };
     Map<String, File> files = {
       'documentFrontImg': fontImagePicked!.value!,
@@ -122,9 +131,10 @@ class UploadImagesController extends GetxController {
       if(result.status == 200){
         dismissLoader();
         log("Successfully uploaded");
-        uploadImage == UploadImage.byProfile?
-            Get.offAllNamed(AppRoutes.bottomNavigation):
-        Get.offAllNamed(AppRoutes.moreaboutyou);
+        log("sadfgg${uploadImage}");
+        uploadImage == UploadImage.byInitically?
+            Get.offAllNamed(AppRoutes.moreaboutyou):
+        Get.offAllNamed(AppRoutes.bottomNavigation);
         showSnackBar(result.message.toString());
 
 
