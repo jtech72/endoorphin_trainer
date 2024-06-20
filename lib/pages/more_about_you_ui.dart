@@ -96,7 +96,7 @@ class MoreAboutYouUi extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineSmall,
                 ).paddingOnly(top: Get.height * .02, bottom: Get.height * .02),
                 Text(
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                  "Begin your journey by uploading your selected category certificate, passport and Emirates ID.",
                   style: Theme.of(context).textTheme.displayLarge,
                 ).paddingOnly(top: Get.height * .02, bottom: Get.height * .02),
                 Container(

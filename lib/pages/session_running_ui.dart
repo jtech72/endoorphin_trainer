@@ -1,4 +1,4 @@
-import 'dart:developer';
+simport 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../controllers/session_running_controller.dart';
@@ -264,7 +264,7 @@ class SessionRunningUi extends StatelessWidget {
                 Text("Boxing",
                     style: Theme.of(context).textTheme.headlineLarge),
                 Text(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,",
+                  "Experience the art of boxing firsthand. Train with expert coaches, sharpen your skills, and achieve your fitness goals in our dynamic boxing program.",
                   style: Theme.of(context)
                       .textTheme
                       .labelSmall

@@ -30,14 +30,14 @@ class SessionCompleteUI extends StatelessWidget {
                 RichText(textAlign:TextAlign.center,text: TextSpan(
                   children: [
                     TextSpan(
-                      text: "Lorem Ipsum has been the industry's Standard",
+                      text: "Your session has been successfully completed.",
                       style: Theme.of(context).textTheme.labelMedium,
                     ),
                     TextSpan(
-                      text: '\nLorem Ipsum ',
+                      text: '\n Please review the details and ',
                       style: Theme.of(context).textTheme.bodyLarge
                     ),TextSpan(
-                      text: 'has been the',
+                      text: 'share your feedback',
                       style: Theme.of(context).textTheme.labelMedium
                     )
                   ]

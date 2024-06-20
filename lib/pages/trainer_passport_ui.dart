@@ -41,7 +41,7 @@ class TrainerPassportUI extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Lorem Ipsum is simply dummy text of the\nprinting and typesetting industry.',
+                    'Please submit the details to continue',
                     style: Theme.of(context)
                         .textTheme
                         .labelLarge!

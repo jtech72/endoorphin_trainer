@@ -149,10 +149,6 @@ class BioUi extends StatelessWidget {
                             ),
                             child: TextField(
                               controller: controller.professionalTitleController,
-                              inputFormatters: [
-                                LengthLimitingTextInputFormatter(64),
-                                FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                              ],
 
                               enableInteractiveSelection: true,
                               style: Theme.of(context).textTheme.labelMedium,
@@ -208,10 +204,7 @@ class BioUi extends StatelessWidget {
                             ),
                             child: TextField(
                               controller: controller.experienceController,
-                              inputFormatters: [
-                                LengthLimitingTextInputFormatter(64),
-                                FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                              ],
+
 
                               enableInteractiveSelection: true,
                               style: Theme.of(context).textTheme.labelMedium,
@@ -266,10 +259,6 @@ class BioUi extends StatelessWidget {
                             ),
                             child: TextField(
                               controller: controller.expertiseController,
-                              inputFormatters: [
-                                LengthLimitingTextInputFormatter(64),
-                                FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                              ],
 
                               enableInteractiveSelection: true,
                               style: Theme.of(context).textTheme.labelMedium,
@@ -324,10 +313,7 @@ class BioUi extends StatelessWidget {
                             ),
                             child: TextField(
                               controller: controller.funFactsController,
-                              inputFormatters: [
-                                LengthLimitingTextInputFormatter(64),
-                                FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                              ],
+
 
                               enableInteractiveSelection: true,
                               style: Theme.of(context).textTheme.labelMedium,
@@ -382,10 +368,7 @@ class BioUi extends StatelessWidget {
                             ),
                             child: TextField(
                               controller: controller.motivationalQuoteController,
-                              inputFormatters: [
-                                LengthLimitingTextInputFormatter(64),
-                                FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                              ],
+
                               enableInteractiveSelection: true,
                               style: Theme.of(context).textTheme.labelMedium,
                               cursorColor: AppColors.grey,
