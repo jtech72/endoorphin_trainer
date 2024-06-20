@@ -11,9 +11,11 @@ class RegistrationUi extends StatelessWidget {
 
   const  RegistrationUi({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     RegistrationController controller = Get.put(RegistrationController());
+
     return GestureDetector(
       onTap: (){
         FocusScope.of(context).unfocus();

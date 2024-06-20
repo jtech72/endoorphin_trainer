@@ -92,7 +92,7 @@ AppBar myAppBar({
         child:  Container(color: Colors.transparent,
             height: 30,
             width: 40,
-            child: Icon(Icons.arrow_back_ios_new_rounded,color: AppColors.white,size: 18,))),
+            child: const Icon(Icons.arrow_back_ios_new_rounded,color: AppColors.white,size: 18,))),
     title: title,
     surfaceTintColor: Colors.transparent,
     backgroundColor: backGroundColor??AppColors.black,
