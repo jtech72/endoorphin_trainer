@@ -70,7 +70,7 @@ class BioUi extends StatelessWidget {
                             ],
                           ),
                           SizedBox(height: Get.height*0.02,),
-                          Text("Uploading clear image increases the chances of getting bookings",style: Theme.of(context).textTheme.labelSmall,).paddingOnly(bottom: 15),
+                          Text("Uploading a clear image increases the chances of getting bookings.",style: Theme.of(context).textTheme.labelSmall,).paddingOnly(bottom: 15),
                         ],
                       ).paddingOnly(bottom: Get.height*0.02),
                       Column(
@@ -301,7 +301,7 @@ class BioUi extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              Text("Fun Fact/Personal Anecdote",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
+                              Text("Fun Fact/Professional Anecdote",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
                             ],
                           ),
                           Container(
@@ -328,7 +328,7 @@ class BioUi extends StatelessWidget {
                                 contentPadding:
                                 const EdgeInsets.only(bottom: 3, left: 15),
 
-                                hintText: "Enter Fun Fact/Personal Anecdote",
+                                hintText: "Enter Fun Fact/Professional Anecdote",
                                 alignLabelWithHint: true,
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(4),

@@ -39,7 +39,7 @@ class SessionDetailsUi extends StatelessWidget {
                   child: RichText(
                     text: TextSpan(children: [
                       TextSpan(
-                          text: "Thanks for Fitness Session,",
+                          text: "Thanks for the Fitness Session,",
                           style: Theme.of(context).textTheme.headlineLarge),
                       TextSpan(
                           text: "\nJohn",

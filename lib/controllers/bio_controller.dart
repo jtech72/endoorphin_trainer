@@ -129,7 +129,7 @@ class BioController extends GetxController {
                 width: Get.width, // Set width as per your requirement
                 height: Get.height * 0.07, // Set height as per your requirement
                 child: Text(
-                  'Your onboarding process has been\nsuccessfully completed. You’ll get\nnotified for further action.',
+                  'Your onboarding process has been\nsuccessfully completed. You will be\nnotified for further action.',
                   style: Theme.of(context)
                       .textTheme
                       .labelMedium!

@@ -26,7 +26,7 @@ class SessionCompleteUI extends StatelessWidget {
                     child: Image.asset(ImagesPaths.tick,scale: 1.5,),
                   ),
                 ).paddingOnly(bottom: Get.height*0.02),
-                Text('Session Complete\nsuccessfully',style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: AppColors.yellow),textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.02),
+                Text('Session Completed\nsuccessfully',style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: AppColors.yellow),textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.02),
                 RichText(textAlign:TextAlign.center,text: TextSpan(
                   children: [
                     TextSpan(

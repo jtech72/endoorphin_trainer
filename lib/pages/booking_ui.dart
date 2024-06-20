@@ -517,7 +517,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                     offset: Offset(0,-Get.height*0.02),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Canceled Sessions", style: Theme
+                        Text("Cancelled Sessions", style: Theme
                             .of(context)
                             .textTheme
                             .headlineSmall,).paddingOnly(
