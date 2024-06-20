@@ -17,27 +17,51 @@ class BioController extends GetxController {
   TextEditingController motivationalQuoteController = TextEditingController();
   TextEditingController bioController = TextEditingController();
 
-  Future<void> openCamera() async {
+  Future<void> openCameraOrGallery(ImageSource source) async {
     final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    final pickedFile = await picker.pickImage(source: source, imageQuality: 50);
     if (pickedFile != null) {
       File image = File(pickedFile.path);
       profileImage.value = File(image.path);
-      log("font Image${profileImage!}");
-    } else {
-      log('User canceled');
+      log("font Image ${profileImage.value}");
+        } else {
+      print('User canceled');
     }
   }
+  Future<void> selectSource() async {
+    Get.dialog(
+        AlertDialog(
+          title: const Text("Add Your Documents"),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Camera"),
+              onPressed: () {
+                Get.back();
+                openCameraOrGallery( ImageSource.camera);
+              },
+            ),
+            TextButton(
+              child: Text("Gallery"),
+              onPressed: () {
+                Get.back();
+                openCameraOrGallery(ImageSource.gallery);
+              },
+            ),
+          ],
+        )
+
+    );
+  }
+
 
   Future<void> onSubmitButton(BuildContext context) async {
     if (profileImage.value == null) {
       showSnackBar("Please select a profile image");
-    }
-    else if (nicknameController.text.isEmpty|| professionalTitleController.text.isEmpty || experienceController.text.isEmpty){
+    } else if (nicknameController.text.isEmpty ||
+        professionalTitleController.text.isEmpty ||
+        experienceController.text.isEmpty) {
       showSnackBar("Please fill all the mandatory fields");
-
-    }
-    else {
+    } else {
       showLoader();
       Map<String, String> fields = {
         'id': storage.read("userId").toString(),
@@ -89,8 +113,13 @@ class BioController extends GetxController {
             backgroundColor: AppColors.Black3,
             title: Column(
               children: [
-                SizedBox(height: Get.height * 0.03,),
-                Image.asset(ImagesPaths.cooltick, scale: 4,),
+                SizedBox(
+                  height: Get.height * 0.03,
+                ),
+                Image.asset(
+                  ImagesPaths.cooltick,
+                  scale: 4,
+                ),
                 SizedBox(
                   height: Get.height * 0.02,
                 ),
@@ -100,20 +129,37 @@ class BioController extends GetxController {
                 width: Get.width, // Set width as per your requirement
                 height: Get.height * 0.07, // Set height as per your requirement
                 child: Text(
-                  'Your onboarding process has been\nsuccessfully completed. You’ll get\nnotified for further action.', style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.white),
+                  'Your onboarding process has been\nsuccessfully completed. You will be\nnotified for further action.',
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelMedium!
+                      .copyWith(color: AppColors.white),
                   textAlign: TextAlign.center,
                 )),
             actions: [
               Center(
                 child: InkButton(
-                    child: Text('OK', style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black, fontSize: 18,
-                        fontFamily: 'Montserrat'),), onTap: () {
-                  Get.offAllNamed(AppRoutes.bottomNavigation);
-                }, height: 35, width: 95),
+                    child: Text(
+                      'OK',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall!
+                          .copyWith(
+                              color: AppColors.black,
+                              fontSize: 18,
+                              fontFamily: 'Montserrat'),
+                    ),
+                    onTap: () {
+                      Get.offAllNamed(AppRoutes.bottomNavigation);
+                    },
+                    height: 35,
+                    width: 95),
               ),
-            ], shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),),
+            ],
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+          ),
         );
       },
     );

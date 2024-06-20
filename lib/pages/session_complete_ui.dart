@@ -26,18 +26,18 @@ class SessionCompleteUI extends StatelessWidget {
                     child: Image.asset(ImagesPaths.tick,scale: 1.5,),
                   ),
                 ).paddingOnly(bottom: Get.height*0.02),
-                Text('Session Complete\nsuccessfully',style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: AppColors.yellow),textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.02),
+                Text('Session Completed\nsuccessfully',style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: AppColors.yellow),textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.02),
                 RichText(textAlign:TextAlign.center,text: TextSpan(
                   children: [
                     TextSpan(
-                      text: "Lorem Ipsum has been the industry's Standard",
+                      text: "Your session has been successfully completed.",
                       style: Theme.of(context).textTheme.labelMedium,
                     ),
                     TextSpan(
-                      text: '\nLorem Ipsum ',
+                      text: '\n Please review the details and ',
                       style: Theme.of(context).textTheme.bodyLarge
                     ),TextSpan(
-                      text: 'has been the',
+                      text: 'share your feedback',
                       style: Theme.of(context).textTheme.labelMedium
                     )
                   ]

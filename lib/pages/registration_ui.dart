@@ -30,7 +30,7 @@ class RegistrationUi extends StatelessWidget {
              onTap: (){
                Get.offAllNamed(AppRoutes.signinoption);
              },
-             child: Icon(Icons.arrow_back_ios_new_rounded,color: AppColors.white,size: 18,)),
+             child: const Icon(Icons.arrow_back_ios_new_rounded,color: AppColors.white,size: 18,)),
 
          title: Row(
            children: [
@@ -39,7 +39,7 @@ class RegistrationUi extends StatelessWidget {
                  Get.toNamed(AppRoutes.signinoption);
                },
                child: Transform.translate(
-                 offset: Offset(-25,0),
+                 offset: const Offset(-25,0),
                  child: Text(
                    "Welcome to ",
                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: Colors.white),
@@ -47,7 +47,7 @@ class RegistrationUi extends StatelessWidget {
                ),
              ),
              Transform.translate(
-               offset: Offset(-25,-2),
+               offset: const Offset(-25,-2),
                child: Image.asset(
                  ImagesPaths.logoimg,
                  scale: 4.2,
@@ -61,7 +61,7 @@ class RegistrationUi extends StatelessWidget {
             Container(
               height: Get.height,
               width: Get.width,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage(ImagesPaths.bgBlackShade,),fit: BoxFit.cover
                   )
@@ -70,7 +70,7 @@ class RegistrationUi extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(height: Get.height*0.03,),
-                    Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry.",style: Theme.of(context).textTheme.displayLarge,).paddingOnly(bottom: Get.height*0.025,),
+                    Text("Please enter your details to create an account.",style: Theme.of(context).textTheme.displayLarge,).paddingOnly(bottom: Get.height*0.025,),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -402,7 +402,7 @@ class RegistrationUi extends StatelessWidget {
                         ),
                 Obx(
                       () => PopupMenuButton<String>(
-                    offset: Offset(1, 45),
+                    offset: const Offset(1, 45),
                     color: Colors.white,
                     onSelected: (selectedValue) {
                       controller.selectedOption1.value = selectedValue;
@@ -414,7 +414,7 @@ class RegistrationUi extends StatelessWidget {
                           value: value,
                           child: Text(
                             value,
-                            style: TextStyle(color: AppColors.lightGrey),
+                            style: const TextStyle(color: AppColors.lightGrey),
                           ),
                         );
                       }).toList();
@@ -432,12 +432,12 @@ class RegistrationUi extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Transform.translate(
-                            offset: Offset(5, 0),
+                            offset: const Offset(5, 0),
                             child: Text(
                               controller.selectedOption1.value.isEmpty
                                   ? "Select Gender" // Default text when nothing is selected
                                   : controller.selectedOption1.value,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: AppColors.lightGrey,
                                 fontSize: 12,
                                 fontFamily: 'Roboto',
@@ -445,7 +445,7 @@ class RegistrationUi extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Icon(Icons.keyboard_arrow_down, size: 32, color: AppColors.grey4),
+                          const Icon(Icons.keyboard_arrow_down, size: 32, color: AppColors.grey4),
                         ],
                       ).paddingOnly(left: Get.width * 0.035, right: Get.width * 0.030),
                     ),
@@ -483,9 +483,9 @@ class RegistrationUi extends StatelessWidget {
                                   padding: EdgeInsets.zero,
                                   child: RawScrollbar(padding: EdgeInsets.zero,
                                     trackVisibility: true,
-                                    trackRadius: Radius.circular(50),thickness: 5,
+                                    trackRadius: const Radius.circular(50),thickness: 5,
                                     interactive: true,
-                                    thumbColor: AppColors.grey4,timeToFade: Duration(seconds: 2),
+                                    thumbColor: AppColors.grey4,timeToFade: const Duration(seconds: 2),
                                     child: ListView.builder(
                                       padding: EdgeInsets.zero,
                                       shrinkWrap: true,

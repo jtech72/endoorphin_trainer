@@ -60,7 +60,7 @@ class AccountUI extends StatelessWidget {
                           Obx(
                                 ()=> GestureDetector(
                               onTap: (){
-                                controller.openCamera();
+                                controller.selectSource();
                               },
                               child:
                               CircleAvatar(
@@ -94,7 +94,7 @@ class AccountUI extends StatelessWidget {
                             right: 0,
                             child: GestureDetector(
                               onTap: () {
-                                Get.find<AccountController>().openCamera();
+                                Get.find<AccountController>().selectSource();
                               },
                               child: Container(
                                 alignment: Alignment.center,
