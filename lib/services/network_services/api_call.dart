@@ -220,7 +220,6 @@ class CallAPI {
         fields: fields,
         files: files,
       );
-
       DocumentModel responseModel = DocumentModel.fromJson(json);
       if (responseModel.status == 200) {
         result = responseModel;
