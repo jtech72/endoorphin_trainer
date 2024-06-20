@@ -5,4 +5,5 @@ class BankingDetailsController extends GetxController{
   final items2 = ['CURRENT ACCOUNT','SAVING ACCOUNT'];
   RxString selectedOption1 = 'ACCOUNT TYPE'.obs;
 
+
 }

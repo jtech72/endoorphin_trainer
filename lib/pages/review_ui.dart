@@ -43,7 +43,7 @@ class ReviewUi extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineSmall,
                 ).paddingOnly(top: 10),
                 Text(
-                  "Lorem Ipsum is simply",
+                  "Please share your experience with a quick review",
                   style: Theme.of(context)
                       .textTheme
                       .labelMedium

@@ -20,4 +20,7 @@ class Endpoints{
   static const String epUploadProfileDetails="trainer/updateTrainerProfile";
   /// GET TRAINER PROFILE DETAILS
   static const String epGetProfileDetails="trainer/getCurrentTrainerDeatils?trainerId=";
+  /// Post Bank Details
+  static const String epPostBankDetails="saveBankDetails";
+
 }
