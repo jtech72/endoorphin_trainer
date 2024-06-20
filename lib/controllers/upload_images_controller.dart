@@ -1,35 +1,58 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:endoorphin_trainer/services/network_services/api_call.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../services/models/request_models/category_document_model.dart';
-
 class UploadImagesController extends GetxController {
   RxInt selectedoption = 0.obs;
   Map<String, dynamic>? certificationDetails;
   Rx<File?> fontImagePicked = Rx<File?>(null);
   Rx<File?> backImagePicked = Rx<File?>(null);
   var defaultImage = File("path_to_your_default_image");
-
-  Future<void> openCamera(bool isFrontImage) async {
+  Future<void> openCameraOrGallery(bool isFrontImage, ImageSource source) async {
     final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.camera,imageQuality:50);
+    final pickedFile = await picker.pickImage(source: source, imageQuality: 50);
     if (pickedFile != null) {
       File image = File(pickedFile.path);
       if (isFrontImage) {
         fontImagePicked.value = File(image.path);
-        log("font Image${fontImagePicked!}");
+        log("font Image ${fontImagePicked.value}");
       } else {
         backImagePicked.value = File(image.path);
-        log("back Image${backImagePicked!}");
+        log("back Image ${backImagePicked.value}");
       }
     } else {
       print('User canceled');
     }
+  }
+  Future<void> selectSource(BuildContext context, bool isFrontImage) async {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Select Image Source"),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Camera"),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+                openCameraOrGallery(isFrontImage, ImageSource.camera);
+              },
+            ),
+            TextButton(
+              child: Text("Gallery"),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+                openCameraOrGallery(isFrontImage, ImageSource.gallery);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
   Future<void> onPassport() async {
     log("message");
@@ -148,8 +171,7 @@ class UploadImagesController extends GetxController {
       log('Error uploading certificate: $e');
     }
   }
-
-   void onSaveButton() {
+  void onSaveButton() {
     if (certificationDetails!["categoryName"] == "") {
       log("sadfghgfds");
       onCertification();
@@ -159,23 +181,22 @@ class UploadImagesController extends GetxController {
       onEmirates();
     }
   }
-
-  void removeImage(bool isFrontImage) {
+  void removeImage(BuildContext context,bool isFrontImage) {
     if (isFrontImage) {
       fontImagePicked.value = null;
       log("Front image cleared");
-      openCamera(true);
+      selectSource(context,true);
     } else {
       backImagePicked.value = null;
-      openCamera(false);
+      selectSource(context,false);
       log("Back image cleared");
     }
   }
 
   @override
   void onInit() {
-    openCamera(true);
     certificationDetails = Get.arguments ?? "";
+    // selectSource( Get.context!,true);
     log("${certificationDetails}");
     super.onInit();
   }
