@@ -6,6 +6,7 @@ class UploadImagesUi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UploadImagesController controller = Get.put(UploadImagesController());
+   controller.selectSource(true);
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,
@@ -141,7 +142,7 @@ class UploadImagesUi extends StatelessWidget {
                     InkButton(child: Text('Continue',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
                         fontFamily: 'Montserrat'),), onTap: (){
                       controller.selectedoption.value=2;
-                      controller.selectSource(context,false);
+                      controller.selectSource(false);
 
                     }).paddingOnly(bottom: Get.height*0.015),
                   ],
@@ -219,7 +220,7 @@ class UploadImagesUi extends StatelessWidget {
                     }).paddingOnly(bottom: Get.height*0.024),
                     GestureDetector(
                       onTap: (){
-                        controller.selectSource(context,false);
+                        controller.selectSource(false);
 
                       },
                         child: Column(
@@ -372,7 +373,7 @@ class UploadImagesUi extends StatelessWidget {
                               controller.selectedoption.value=0;
                               controller.removeImage(context,true);
                               controller.removeImage(context,false);
-                              controller.selectSource(context,true);
+                              controller.selectSource(true);
 
                         }).paddingOnly(bottom: Get.height*0.015),
                       ),
