@@ -1,20 +1,49 @@
-import 'package:country_code_picker/country_code_picker.dart';
+import 'dart:async';
+import 'dart:developer';
 import 'package:endoorphin_trainer/utils/app_pages.dart';
 import 'package:endoorphin_trainer/utils/app_strings.dart';
 import 'package:endoorphin_trainer/utils/app_themes.dart';
+import 'package:endoorphin_trainer/utils/exports.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-void main() {
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get_storage/get_storage.dart';
+import 'custom_Widgets/deepling_controller.dart';
+import 'firebase_options.dart';
+void main() async {
+  try {
+    await configure();
+  } catch (e, stackTrace) {
+    log('Error initializing Firebase: $e\n$stackTrace');
+  }
+  GetStorage.init();
   runApp(const EndoorphinTrainer());
 }
-
+@pragma("vm:entry-point")
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  log("FIREBASE BG NOTIFICATION => ${message.notification.toString()}");
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+}
+Future<void> configure() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.white, statusBarIconBrightness: Brightness.dark));
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await GetStorage.init();
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+}
 class EndoorphinTrainer extends StatelessWidget {
   const EndoorphinTrainer({super.key});
   @override
   Widget build(BuildContext context) {
+    final DeepLinkController deepLinkController = Get.put(DeepLinkController());
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return GetMaterialApp(
-      supportedLocales: [
+      supportedLocales: const [
         Locale("af"),
         Locale("am"),
         Locale("ar"),
@@ -84,12 +113,22 @@ class EndoorphinTrainer extends StatelessWidget {
         Locale("ur"),
         Locale("uz"),
         Locale("vi"),
-        Locale("zh")
+        Locale("zh"),
+
+        Locale('en', ''),
+        Locale('zh', ''),
+        Locale('he', ''),
+        Locale('es', ''),
+        Locale('ru', ''),
+        Locale('ko', ''),
+        Locale('hi', ''),
       ],
       localizationsDelegates: const [
         CountryLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
       ],
-
       initialRoute: AppPages.initialRoute,
       getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,

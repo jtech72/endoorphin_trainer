@@ -1,7 +1,13 @@
 import 'package:endoorphin_trainer/bindings/banking_details_binding.dart';
+import 'package:endoorphin_trainer/bindings/bio_edit_binding.dart';
 import 'package:endoorphin_trainer/bindings/session_complete_binding.dart';
+import 'package:endoorphin_trainer/bindings/sign_in_option_binding.dart';
+import 'package:endoorphin_trainer/bindings/upload_images_binding.dart';
 import 'package:endoorphin_trainer/pages/banking_details_ui.dart';
+import 'package:endoorphin_trainer/pages/bio_edit_ui.dart';
 import 'package:endoorphin_trainer/pages/session_complete_ui.dart';
+import 'package:endoorphin_trainer/pages/sign_in_option_ui.dart';
+import 'package:endoorphin_trainer/pages/upload_images_ui.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 
 import '../bindings/bottom_navigation_bar_binding.dart';
@@ -27,7 +33,7 @@ class AppPages {
     ),
     GetPage(
         name: AppRoutes.countrycode,
-        page: () => const CountryCodeUI(),
+        page: () =>  CountryCodeUI(),
         binding: CountryCodeBinding()),
     GetPage(
         name: AppRoutes.otp,
@@ -59,7 +65,7 @@ class AppPages {
         binding: BioBinding()),
     GetPage(
         name: AppRoutes.login,
-        page: ()=>  const LoginUi(),
+        page: ()=>   LoginUi(),
         binding: LoginBinding()),
     GetPage(
         name: AppRoutes.notification,
@@ -133,7 +139,7 @@ GetPage(
         binding: SessionCompleteBinding()),
   GetPage(
         name: AppRoutes.booking,
-        page: ()=>    const BookingUi(),
+        page: ()=>     BookingUi(initialIndex: 0,),
         binding: BookingBinding()),
     GetPage(
         name: AppRoutes.bottomNavigation,
@@ -143,5 +149,17 @@ GetPage(
         name: AppRoutes.bankingDetails,
         page: () => BankingDetailsUI(),
         binding: BankingDetailsBinding()),
+    GetPage(
+        name: AppRoutes.signinoption,
+        page: () => SignInOptionUi(),
+        binding: SignInOptionBinding()),
+    GetPage(
+        name: AppRoutes.uploadimage,
+        page: () => UploadImagesUi(),
+        binding: UploadImagesBinding()),
+    GetPage(
+        name: AppRoutes.bioEdit,
+        page: () => BioEditUi(),
+        binding: BioEditBinding()),
   ];
 }

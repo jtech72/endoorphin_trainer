@@ -1,10 +1,13 @@
 import 'dart:developer';
-import 'package:endoorphin_trainer/utils/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_strings.dart';
-import '../utils/image_paths.dart';
+
+GetStorage storage=GetStorage();
+
 void printResult({
   required String screenName,
   String? msg,
@@ -33,14 +36,14 @@ Widget InkButton({
   double? borderRadius,
   double? height,
   double? width,
-  Color backGroundColor = AppColors.yellow,
+  Color? backGroundColor ,
   Color? rippleColor,
   required Widget child,
   required Function onTap,
 }) {
   return Material(
     borderRadius: BorderRadius.circular(borderRadius ?? 36),
-    color: backGroundColor,
+    color: backGroundColor?? AppColors.yellow,
     child: InkWell(
       splashColor: rippleColor ?? Colors.transparent,
       borderRadius: BorderRadius.circular(borderRadius ?? 30),
@@ -52,14 +55,22 @@ Widget InkButton({
         }
       },
       child: Container(
-          decoration: const BoxDecoration(),
+          decoration:  BoxDecoration(
+              borderRadius: BorderRadius.circular(36),
+              border: Border.all(color: AppColors.yellow,)
+          ),
           alignment: Alignment.center,
-          height: height ?? 35,
-          width: width ?? Get.width * .3,
+          height: height ??
+              // 50,
+              Get.height*0.05,
+          width: width ??
+              // 300,
+              Get.width*0.7,
           child: child),
     ),
   );
 }
+
 
 
 
@@ -78,10 +89,10 @@ AppBar myAppBar({
         onTap: (){
           Get.back();
         },
-        child: const SizedBox(
+        child:  Container(color: Colors.transparent,
             height: 30,
             width: 40,
-            child: Icon(Icons.arrow_back_ios_new_rounded,color: AppColors.lightGrey1,size: 18,))),
+            child: const Icon(Icons.arrow_back_ios_new_rounded,color: AppColors.white,size: 18,))),
     title: title,
     surfaceTintColor: Colors.transparent,
     backgroundColor: backGroundColor??AppColors.black,
@@ -90,7 +101,47 @@ AppBar myAppBar({
     actions: action,
   );
 }
+//SHOW LOADER
+showLoader({Color color =AppColors.yellow, double? topMargin = 0,}) {
+  showDialog(
+      barrierColor: Colors.transparent,
+      barrierDismissible: true,
+      context: Get.context!,
+      builder: (context) {
+        return AlertDialog(
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            content: Transform.translate(
+              offset: Offset(0, -topMargin!),
+              child: Container(
+                  width: Get.width,
+                  height: Get.height,
+                  alignment: Alignment.center,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.transparent,
+                  ),
+                  child: SpinKitCircle(
+                    color: color,
+                    size: 70.0,
+                  )),
+            ));
+      });
+}
 
+
+
+//DISMISS LOADER
+void dismissLoader() {
+  log("Loader has been closed");
+  Get.back();
+}
+
+ UploadImage? uploadImage;
+enum UploadImage{
+  byInitically,
+  byProfile
+}
 
 // Drawer myDrawer() {
 //   return Drawer(

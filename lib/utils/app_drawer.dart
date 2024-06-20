@@ -2,6 +2,7 @@ import 'package:endoorphin_trainer/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../pages/bottom_navigation_bar_ui.dart';
 import 'app_colors.dart';
 import 'image_paths.dart';
 
@@ -24,20 +25,11 @@ class MyDrawer extends StatefulWidget {
 
 class _MyDrawerState extends State<MyDrawer> {
   int selectedTileIndex = 0;
-  // List<DrawerItem> drawerItems = [
-  //   DrawerItem(title: 'Home', imagePath: ImagesPaths.home, route: '/bottomNavigation'),
-  //   DrawerItem(title: 'My Sessions', imagePath: ImagesPaths.mysession, route: '/bookingdetails'),
-  //   DrawerItem(title: 'My Earnings', imagePath: ImagesPaths.my_earning, route: '/earning'),
-  //   DrawerItem(title: 'Documents', imagePath: ImagesPaths.document, route: '/document'),
-  //   DrawerItem(title: 'Profile', imagePath: ImagesPaths.myprofile, route: '/profile'),
-  //   DrawerItem(title: 'Support', imagePath: ImagesPaths.mysupport, route: '/support'),
-  //   DrawerItem(title: 'Terms & Conditions', imagePath: ImagesPaths.myconditions, route: '/page7'),
-  //   DrawerItem(title: 'Privacy Policy', imagePath: ImagesPaths.myprivacy, route: '/page8'),
-  // ];
-
+  int selectedTile =-1;
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      width: Get.width*0.78,
       backgroundColor: AppColors.blackShade,
       shadowColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
@@ -49,9 +41,14 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
       Row(
                 children: [
-                    CircleAvatar(
-                      radius: 30,
-                      backgroundImage: AssetImage(ImagesPaths.profilePic),
+                    GestureDetector(
+                      onTap: (){
+                        Get.toNamed(AppRoutes.profile);
+                      },
+                      child: const CircleAvatar(
+                        radius: 30,
+                        backgroundImage: AssetImage(ImagesPaths.profilePic),
+                      ),
                     ),
                   SizedBox(width: Get.width*0.06,),
                   Column(
@@ -64,184 +61,233 @@ class _MyDrawerState extends State<MyDrawer> {
                   ),
                 ],
 
-              ).paddingOnly(top: Get.height*0.05,left: 20,bottom: Get.height*0.05),
+              ).paddingOnly(top: Get.height*0.05,left: Get.width*0.09,bottom: Get.height*0.05),
 
-          ListTile(
+          Container(color: selectedTile == 0 ? AppColors.yellow : Colors.transparent,height: 55,width: Get.width,
+            child: ListTile(
+              selectedColor: AppColors.yellow,
+              title: Row(
+                children: [
+                  Image.asset(ImagesPaths.home,
+                      scale: 4,
+                      color: selectedTile == 0 ? AppColors.black : AppColors.impgrey,),
+              SizedBox(
+                width: Get.width*0.05,
+              ),
+              Text("Home",
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w400,color:  selectedTile == 0 ? AppColors.black : AppColors.impgrey,),
+              ),
+                ],
+              ),
+              onTap: () {
+                setState(() {
+                  selectedTile = 0;
+                });
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => BottomNavigationBarUI(currentTabIndex: 0,)));
 
-            selectedColor: AppColors.yellow,
-            title: Row(
-              children: [
-                Image.asset(ImagesPaths.home,
-                    scale: 4.5,
-                    color: AppColors.impgrey),
-            SizedBox(
-              width: Get.width*0.05,
-            ),
-            Text("Home",
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w500,color: AppColors.impgrey,),
-            ),
-              ],
-            ),
-            onTap: () {
-              Get.back();
-              // Add functionality here
+                // Add functionality here
 
-            },
-          ).paddingOnly(left: Get.width*0.05),
-          ListTile(
+              },
+            ).paddingOnly(left: Get.width*0.05),
+          ),
+          Container(
+            color: selectedTile == 1 ? AppColors.yellow : Colors.transparent,height: 55,width: Get.width,
+            child: ListTile(
 
-            selectedColor: AppColors.yellow,
-            title: Row(
-              children: [
-                Image.asset(ImagesPaths.mysession,
-                    scale: 4.5,
-                    color: AppColors.impgrey),
-                SizedBox(
-                  width: Get.width*0.05,
-                ),
-                Text("My Sessions",
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w500,color: AppColors.impgrey,),
-                ),
-              ],
-            ),
-            onTap: () {
-              Get.toNamed(AppRoutes.bookingrequest);
-              // Add functionality here
+              selectedColor: AppColors.yellow,
+              title: Row(
+                children: [
+                  Image.asset(ImagesPaths.mysession,
+                      scale: 4,
+                    color: selectedTile == 1 ? AppColors.black : AppColors.impgrey,),
+                  SizedBox(
+                    width: Get.width*0.05,
+                  ),
+                  Text("My Sessions",
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w400,color: selectedTile == 1 ? AppColors.black : AppColors.impgrey,),
+                  ),
+                ],
+              ),
+              onTap: () {
+                setState(() {
+                  selectedTile = 1; // Set selected index
+                });
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => BottomNavigationBarUI(currentTabIndex: 2,)));
+                // Add functionality here
 
-            },
-          ).paddingOnly(left: Get.width*0.05),
-          ListTile(
+              },
+            ).paddingOnly(left: Get.width*0.05),
+          ),
+          Container(
+            color: selectedTile == 2 ? AppColors.yellow : Colors.transparent,height: 55,width: Get.width,
+            child: ListTile(
 
-            selectedColor: AppColors.yellow,
-            title: Row(
-              children: [
-                Image.asset(ImagesPaths.earningHome,
-                    width: 18,
-                    color: AppColors.impgrey),
-                SizedBox(
-                  width: Get.width*0.05,
-                ),
-                Text("My Earnings",
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w500,color: AppColors.impgrey,),
-                ),
-              ],
-            ),
-            onTap: () {
-              Get.toNamed(AppRoutes.earning);
-              // Add functionality here
+              selectedColor: AppColors.yellow,
+              title: Row(
+                children: [
+                  Image.asset(ImagesPaths.earningHome,
+                      scale: 6,
+                    color: selectedTile == 2 ? AppColors.black : AppColors.impgrey,),
+                  SizedBox(
+                    width: Get.width*0.05,
+                  ),
+                  Text("My Earnings",
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w400,color: selectedTile == 2 ? AppColors.black : AppColors.impgrey,),
+                  ),
+                ],
+              ),
+              onTap: () {
+                setState(() {
+                  selectedTile = 2;
+                });
+                Get.toNamed(AppRoutes.earning);
+                // Add functionality here
 
-            },
-          ).paddingOnly(left: Get.width*0.05),
-          ListTile(
+              },
+            ).paddingOnly(left: Get.width*0.05),
+          ),
+          Container(
+            color: selectedTile == 3 ? AppColors.yellow : Colors.transparent,height: 55,width: Get.width,
+            child: ListTile(
 
-            selectedColor: AppColors.yellow,
-            title: Row(
-              children: [
-                Image.asset(ImagesPaths.document,
-                    scale: 4.5,
-                    color: AppColors.impgrey),
-                SizedBox(
-                  width: Get.width*0.05,
-                ),
-                Text("Documents",
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w500,color: AppColors.impgrey,),
-                ),
-              ],
-            ),
-            onTap: () {
-              Get.toNamed(AppRoutes.document);
-              // Add functionality here
+              selectedColor: AppColors.yellow,
+              title: Row(
+                children: [
+                  Image.asset(ImagesPaths.document,
+                      scale: 4,
+                    color: selectedTile == 3 ? AppColors.black : AppColors.impgrey,),
+                  SizedBox(
+                    width: Get.width*0.05,
+                  ),
+                  Text("Documents",
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w400,color: selectedTile == 3 ? AppColors.black : AppColors.impgrey,),
+                  ),
+                ],
+              ),
+              onTap: () {
+                setState(() {
+                  selectedTile = 3;
+                });
+                Get.toNamed(AppRoutes.document);
+                // Add functionality here
 
-            },
-          ).paddingOnly(left: Get.width*0.05),
-          ListTile(
+              },
+            ).paddingOnly(left: Get.width*0.05),
+          ),
+          Container(
+            color: selectedTile == 4 ? AppColors.yellow : Colors.transparent,height: 55,width: Get.width,
 
-            selectedColor: AppColors.yellow,
-            title: Row(
-              children: [
-                Image.asset(ImagesPaths.men,
-                    scale: 4.5,
-                    color: AppColors.impgrey),
-                SizedBox(
-                  width: Get.width*0.05,
-                ),
-                Text("Profile",
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w500,color: AppColors.impgrey,),
-                ),
-              ],
-            ),
-            onTap: () {
-              Get.toNamed(AppRoutes.profile);
-              // Add functionality here
+            child: ListTile(
 
-            },
-          ).paddingOnly(left: Get.width*0.05),
-          ListTile(
+              selectedColor: AppColors.yellow,
+              title: Row(
+                children: [
+                  Image.asset(ImagesPaths.men,
+                      scale: 4,
+                    color: selectedTile == 4 ? AppColors.black : AppColors.impgrey,),
+                  SizedBox(
+                    width: Get.width*0.05,
+                  ),
+                  Text("Profile",
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w400,color: selectedTile == 4 ? AppColors.black : AppColors.impgrey,),
+                  ),
+                ],
+              ),
+              onTap: () {
+                setState(() {
+                  selectedTile = 4;
+                });
+                Get.toNamed(AppRoutes.profile);
+                // Add functionality here
 
-            selectedColor: AppColors.yellow,
-            title: Row(
-              children: [
-                Image.asset(ImagesPaths.support,
-                    scale: 4.5,
-                    color: AppColors.impgrey),
-                SizedBox(
-                  width: Get.width*0.05,
-                ),
-                Text("Support",
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w500,color: AppColors.impgrey,),
-                ),
-              ],
-            ),
-            onTap: () {
-              Get.toNamed(AppRoutes.support);
-              // Add functionality here
+              },
+            ).paddingOnly(left: Get.width*0.05),
+          ),
+          Container(
+            color: selectedTile == 5 ? AppColors.yellow : Colors.transparent,height: 55,width: Get.width,
 
-            },
-          ).paddingOnly(left: Get.width*0.05),
-          ListTile(
+            child: ListTile(
 
-            selectedColor: AppColors.yellow,
-            title: Row(
-              children: [
-                Image.asset(ImagesPaths.term,
-                    scale: 4.5,
-                    color: AppColors.impgrey),
-                SizedBox(
-                  width: Get.width*0.05,
-                ),
-                Text("Terms & Conditions",
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w500,color: AppColors.impgrey,),
-                ),
-              ],
-            ),
-            onTap: () {
-              Get.back();
-              // Add functionality here
+              selectedColor: AppColors.yellow,
+              title: Row(
+                children: [
+                  Image.asset(ImagesPaths.support,
+                      scale: 4,
+                    color: selectedTile == 5 ? AppColors.black : AppColors.impgrey,),
+                  SizedBox(
+                    width: Get.width*0.05,
+                  ),
+                  Text("Support",
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w400,color: selectedTile == 5 ? AppColors.black : AppColors.impgrey,),
+                  ),
+                ],
+              ),
+              onTap: () {
+                setState(() {
+                  selectedTile = 5;
+                });
+                Get.back();
+              },
+            ).paddingOnly(left: Get.width*0.05),
+          ),
+          Container(
+            color: selectedTile == 6 ? AppColors.yellow : Colors.transparent,height: 55,width: Get.width,
 
-            },
-          ).paddingOnly(left: Get.width*0.05),
-          ListTile(
+            child: ListTile(
 
-            selectedColor: AppColors.yellow,
-            title: Row(
-              children: [
-                Image.asset(ImagesPaths.privacy,
-                    scale: 4.5,
-                    color: AppColors.impgrey),
-                SizedBox(
-                  width: Get.width*0.05,
-                ),
-                Text("Privacy Policy",
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w500,color: AppColors.impgrey,),
-                ),
-              ],
-            ),
-            onTap: () {
-              Get.back();
-              // Add functionality here
+              selectedColor: AppColors.yellow,
+              title: Row(
+                children: [
+                  Image.asset(ImagesPaths.term,
+                      scale: 4,
+                    color: selectedTile == 6 ? AppColors.black : AppColors.impgrey,),
+                  SizedBox(
+                    width: Get.width*0.05,
+                  ),
+                  Text("Terms & Conditions",
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w400,color: selectedTile == 6 ? AppColors.black : AppColors.impgrey,),
+                  ),
+                ],
+              ),
+              onTap: () {
+                setState(() {
+                  selectedTile = 6;
+                });
+                Get.back();
+                // Add functionality here
 
-            },
-          ).paddingOnly(left: Get.width*0.05),
+              },
+            ).paddingOnly(left: Get.width*0.05),
+          ),
+          Container(
+            color: selectedTile == 7 ? AppColors.yellow : Colors.transparent,height: 55,width: Get.width,
+
+            child: ListTile(
+
+              selectedColor: AppColors.yellow,
+              title: Row(
+                children: [
+                  Image.asset(ImagesPaths.privacy,
+                      scale: 4,
+                    color: selectedTile == 7 ? AppColors.black : AppColors.impgrey,),
+                  SizedBox(
+                    width: Get.width*0.05,
+                  ),
+                  Text("Privacy Policy",
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w400,color: selectedTile == 7 ? AppColors.black : AppColors.impgrey,),
+                  ),
+                ],
+              ),
+              onTap: () {
+                setState(() {
+                  selectedTile = 7;
+                });
+                Get.back();
+                // Add functionality here
+
+              },
+            ).paddingOnly(left: Get.width*0.05),
+          ),
 
           // Add more ListTiles for additional items
         ],
@@ -307,3 +353,4 @@ class _MyDrawerState extends State<MyDrawer> {
 }
 
 
+//

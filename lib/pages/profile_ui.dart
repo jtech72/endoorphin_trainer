@@ -1,280 +1,529 @@
-
+import 'package:endoorphin_trainer/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 
+import '../services/network_services/api_call.dart';
 import '../utils/exports.dart';
+import 'bottom_navigation_bar_ui.dart';
 
 class ProfileUI extends StatelessWidget {
   const ProfileUI({super.key});
 
   @override
   Widget build(BuildContext context) {
+    ProfileController controller = Get.put(ProfileController());
     return Scaffold(
-      appBar:myAppBar(
-          title: Text("Profile",style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColors.lightGrey1)), context: context, ),
-
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              children: [
-                const CircleAvatar(
-                  radius: 42,
-                  backgroundColor: AppColors.yellow,
-                  child: CircleAvatar(
-                    radius: 40,
-                    backgroundImage: AssetImage(ImagesPaths.profilePic),
-                  ),
-                ).paddingOnly(left: 30),
-                const SizedBox(width: 30,),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('John Doe',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.lightGrey1),),
-                    SizedBox(
-                      height: Get.height*0.003,
-                    ),
-                    Text('John.doe@gmail.com',style: Theme.of(context).textTheme.labelMedium!.copyWith(fontWeight: FontWeight.w500,color: AppColors.lightGrey1),),
-                    SizedBox(
-                      height: Get.height*0.003,
-                    ),
-                    Text('View Activity',style: Theme.of(context).textTheme.labelMedium!.copyWith(fontWeight: FontWeight.w600,color: AppColors.yellow,fontSize: 12),),
-                  ],
+      appBar: AppBar(
+        toolbarHeight: 50,
+        leadingWidth: Get.width * 0.17,
+        centerTitle: false,
+        surfaceTintColor: Colors.transparent,
+        backgroundColor: AppColors.black,
+        elevation: 3,
+        titleSpacing: -10,
+        leading: GestureDetector(
+            onTap: () {
+              Get.offAllNamed(AppRoutes.bottomNavigation);
+            },
+            child: Container(
+                height: 30,
+                width: 40,
+                decoration: const BoxDecoration(
+                    color: Colors.transparent, shape: BoxShape.circle),
+                child: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: AppColors.white,
+                  size: 18,
+                ))),
+        title: GestureDetector(
+          onTap: () {
+            Get.offAllNamed(AppRoutes.bottomNavigation);
+          },
+          child: Text(
+            "Profile",
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+        ),
+      ),
+      // appBar:myAppBar(
+      //     title: Text("Profile",style: Theme.of(context).textTheme.bodyMedium), context: context, ),
+      body: Container(
+        height: Get.height,
+        width: Get.width,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(
+                  ImagesPaths.bgBlackShade,
                 ),
-              ],
-            ),
-            Container(
-              height: 1,
-              width: Get.width,
-              color: AppColors.impgrey,
-            ).paddingOnly(left: Get.width*0.01,right: Get.width*0.01, bottom:Get.height*0.03, top:Get.height*0.03 ),
+                fit: BoxFit.cover)),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              FutureBuilder(
+                future: CallAPI.getProfileDetails(
+                    storage.read("userId").toString()),
+                builder: (BuildContext context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    ).paddingOnly(top: 20);
+                  }
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text('Error: ${snapshot.error}'),
+                    );
+                  }
 
+                  if (!snapshot.hasData || snapshot.data!.result == null) {
+                    return const Center(
+                      child: Text('No data available'),
+                    );
+                  }
 
-            Container(
-                height: Get.height*0.05,
-                width: Get.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: AppColors.greyButton
-                ),
-                child:
-                InkWell(
-                  onTap: (){
-                    Get.toNamed(AppRoutes.account);
-                  },
-                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  return Row(
                     children: [
-                      Row(
+                      snapshot.data!.result!.profileImg == null
+                          ? const CircleAvatar(
+                              radius: 42,
+                              backgroundColor: AppColors.yellow,
+                              child: CircleAvatar(
+                                radius: 40,
+                                backgroundImage:
+                                    AssetImage(ImagesPaths.profilePic),
+                              ),
+                            ).paddingOnly(left: 30)
+                          :  CircleAvatar(
+                              radius: 42,
+                              backgroundColor: AppColors.yellow,
+                              child: CircleAvatar(
+                                radius: 40,
+                                backgroundImage:
+                                    NetworkImage(snapshot.data!.result!.profileImg.toString()),
+                              ),
+                            ).paddingOnly(left: 30),
+                      const SizedBox(
+                        width: 30,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            width: Get.width*0.04,
+                          Text(
+                            snapshot.data!.result!.userName == null?'':snapshot.data!.result!.userName.toString(),
+                            style: Theme.of(context).textTheme.headlineSmall,
                           ),
-                          Image.asset(ImagesPaths.person,width: 16,color: AppColors.lightGrey1,),
                           SizedBox(
-                            width: Get.width*0.06,
+                            height: Get.height * 0.003,
                           ),
-                          Text('Account',style: Theme.of(context).textTheme.labelLarge!.copyWith(fontWeight: FontWeight.w600,color: AppColors.lightGrey1),),
+                          Text(
+                  snapshot.data!.result!.email == null?'':snapshot.data!.result!.email.toString(),
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelMedium!
+                                .copyWith(
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColors.white),
+                          ),
+                          SizedBox(
+                            height: Get.height * 0.003,
+                          ),
+                          Text(
+                            'View Activity',
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelMedium!
+                                .copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.yellow,
+                                    fontSize: 12),
+                          ),
                         ],
                       ),
-                       Transform.translate(
-                           offset: const Offset(-10,0),
-                           child: const Icon(Icons.arrow_forward_ios,color: AppColors.lightGrey1,size: 20,))
                     ],
-                  ),
-                )
-            ),
-            SizedBox(
-              height: Get.height*0.02,
-            ),
-            InkWell(
-              onTap: (){
-                Get.toNamed(AppRoutes.document);
-              },
-              child: Container(
-                  height: Get.height*0.05,
+                  );
+                },
+              ),
+              Container(
+                height: 1,
+                width: Get.width,
+                color: AppColors.grey3,
+              ).paddingOnly(
+                  left: Get.width * 0.01,
+                  right: Get.width * 0.01,
+                  bottom: Get.height * 0.03,
+                  top: Get.height * 0.03),
+              Container(
+                  height: Get.height * 0.05,
                   width: Get.width,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
-                      color: AppColors.greyButton
-                  ),
-                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: Get.width*0.04,
-                          ),
-                          Image.asset(ImagesPaths.document,width: 17,color: AppColors.lightGrey1,),
-                          SizedBox(
-                            width: Get.width*0.057,
-                          ),
-                          Text('Document',style: Theme.of(context).textTheme.labelLarge!.copyWith(fontWeight: FontWeight.w600,color: AppColors.lightGrey1),),
-                        ],
-                      ),
-                       Transform.translate(
-                           offset: const Offset(-10,0),
-                           child: const Icon(Icons.arrow_forward_ios,color: AppColors.lightGrey1,size: 20,))
-                    ],
-                  )
+                      border: Border.all(color: AppColors.grey3),
+                      color: AppColors.greyButton),
+                  child: InkWell(
+                    onTap: () {
+                      Get.toNamed(AppRoutes.account);
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: Get.width * 0.04,
+                            ),
+                            Image.asset(
+                              ImagesPaths.person,
+                              width: 19,
+                              color: AppColors.white,
+                            ),
+                            SizedBox(
+                              width: Get.width * 0.06,
+                            ),
+                            Text(
+                              'Account',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge!
+                                  .copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.white),
+                            ),
+                          ],
+                        ),
+                        Transform.translate(
+                            offset: const Offset(-10, 0),
+                            child: const Icon(
+                              Icons.arrow_forward_ios,
+                              color: AppColors.white,
+                              size: 20,
+                            ))
+                      ],
+                    ),
+                  )),
+              SizedBox(
+                height: Get.height * 0.02,
               ),
-            ),
-            SizedBox(
-              height: Get.height*0.02,
-            ),
-            InkWell(
-              onTap: (){
-                Get.toNamed(AppRoutes.bookingrequest);
-              },
-              child: Container(
-                  height: Get.height*0.05,
+              InkWell(
+                onTap: () {
+                  Get.toNamed(AppRoutes.document);
+                },
+                child: Container(
+                    height: Get.height * 0.05,
+                    width: Get.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(color: AppColors.grey3),
+                        color: AppColors.greyButton),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: Get.width * 0.04,
+                            ),
+                            Image.asset(
+                              ImagesPaths.document,
+                              width: 22,
+                              color: AppColors.white,
+                            ),
+                            SizedBox(
+                              width: Get.width * 0.057,
+                            ),
+                            Text(
+                              'Documents',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge!
+                                  .copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.white),
+                            ),
+                          ],
+                        ),
+                        Transform.translate(
+                            offset: const Offset(-10, 0),
+                            child: const Icon(
+                              Icons.arrow_forward_ios,
+                              color: AppColors.white,
+                              size: 20,
+                            ))
+                      ],
+                    )),
+              ),
+              SizedBox(
+                height: Get.height * 0.02,
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              BottomNavigationBarUI(
+                                currentTabIndex: 2,
+                              )));
+                },
+                child: Container(
+                    height: Get.height * 0.05,
+                    width: Get.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(color: AppColors.grey3),
+                        color: AppColors.greyButton),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: Get.width * 0.04,
+                            ),
+                            Image.asset(
+                              ImagesPaths.mysession,
+                              width: 22,
+                              color: AppColors.white,
+                            ),
+                            SizedBox(
+                              width: Get.width * 0.057,
+                            ),
+                            Text(
+                              'My Sessions',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge!
+                                  .copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.white),
+                            ),
+                          ],
+                        ),
+                        Transform.translate(
+                            offset: const Offset(-10, 0),
+                            child: const Icon(
+                              Icons.arrow_forward_ios,
+                              color: AppColors.white,
+                              size: 20,
+                            ))
+                      ],
+                    )),
+              ),
+              SizedBox(
+                height: Get.height * 0.02,
+              ),
+              Container(
+                  height: Get.height * 0.05,
                   width: Get.width,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
-                      color: AppColors.greyButton
-                  ),
-                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: Get.width*0.04,
-                          ),
-                          Image.asset(ImagesPaths.mysession,width: 17,color: AppColors.lightGrey1,),
-                          SizedBox(
-                            width: Get.width*0.057,
-                          ),
-                          Text('My Sessions',style: Theme.of(context).textTheme.labelLarge!.copyWith(fontWeight: FontWeight.w600,color: AppColors.lightGrey1),),
-                        ],
-                      ),
-                       Transform.translate(
-                           offset: const Offset(-10,0),
-                           child: const Icon(Icons.arrow_forward_ios,color: AppColors.lightGrey1,size: 20,))
-                    ],
-                  )
+                      border: Border.all(color: AppColors.grey3),
+                      color: AppColors.greyButton),
+                  child: InkWell(
+                    onTap: () {
+                      // Get.toNamed(AppRoutes.support);
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: Get.width * 0.04,
+                            ),
+                            Image.asset(
+                              ImagesPaths.support,
+                              width: 20,
+                              color: AppColors.white,
+                            ),
+                            SizedBox(
+                              width: Get.width * 0.06,
+                            ),
+                            Text(
+                              'Support',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge!
+                                  .copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.white),
+                            ),
+                          ],
+                        ),
+                        Transform.translate(
+                            offset: const Offset(-10, 0),
+                            child: const Icon(
+                              Icons.arrow_forward_ios,
+                              color: AppColors.white,
+                              size: 20,
+                            ))
+                      ],
+                    ),
+                  )),
+              SizedBox(
+                height: Get.height * 0.02,
               ),
-            ),
-            SizedBox(
-              height: Get.height*0.02,
-            ),
-            Container(
-                height: Get.height*0.05,
-                width: Get.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: AppColors.greyButton
-                ),
-                child: InkWell(
-                  onTap: (){
-                    Get.toNamed(AppRoutes.support);
-                  },
-                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: Get.width*0.04,
-                          ),
-                          Image.asset(ImagesPaths.support,width: 16,color: AppColors.lightGrey1,),
-                          SizedBox(
-                            width: Get.width*0.06,
-                          ),
-                          Text('Support',style: Theme.of(context).textTheme.labelLarge!.copyWith(fontWeight: FontWeight.w600,color: AppColors.lightGrey1),),
-                        ],
-                      ),
-                       Transform.translate(
-                           offset: const Offset(-10,0),
-                           child: const Icon(Icons.arrow_forward_ios,color: AppColors.lightGrey1,size: 20,))
-                    ],
+              Container(
+                  height: Get.height * 0.05,
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(color: AppColors.grey3),
+                      color: AppColors.greyButton),
+                  child: InkWell(
+                    onTap: () {
+                      Get.toNamed(AppRoutes.earning);
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: Get.width * 0.04,
+                            ),
+                            Image.asset(
+                              ImagesPaths.my_earning,
+                              width: 20,
+                              color: AppColors.white,
+                            ),
+                            SizedBox(
+                              width: Get.width * 0.057,
+                            ),
+                            Text(
+                              'My Earnings',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge!
+                                  .copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.white),
+                            ),
+                          ],
+                        ),
+                        Transform.translate(
+                            offset: const Offset(-10, 0),
+                            child: const Icon(
+                              Icons.arrow_forward_ios,
+                              color: AppColors.white,
+                              size: 20,
+                            ))
+                      ],
+                    ),
+                  )),
+              SizedBox(
+                height: Get.height * 0.02,
+              ),
+              Container(
+                  height: Get.height * 0.05,
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(color: AppColors.grey3),
+                      color: AppColors.greyButton),
+                  child: InkWell(
+                    onTap: () {
+                      Get.toNamed(AppRoutes.bankingDetails);
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: Get.width * 0.04,
+                            ),
+                            Image.asset(
+                              ImagesPaths.bank,
+                              width: 20,
+                              color: AppColors.white,
+                            ),
+                            SizedBox(
+                              width: Get.width * 0.057,
+                            ),
+                            Text(
+                              'Bank Information',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge!
+                                  .copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.white),
+                            ),
+                          ],
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          color: AppColors.white,
+                          size: 20,
+                        ).paddingOnly(right: Get.width * 0.028)
+                      ],
+                    ),
+                  )),
+              SizedBox(
+                height: Get.height * 0.02,
+              ),
+              Container(
+                  height: Get.height * 0.05,
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(color: AppColors.grey3),
+                      color: AppColors.greyButton),
+                  child: InkWell(
+                    onTap: () {
+                      Get.toNamed(AppRoutes.bioEdit);
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: Get.width * 0.04,
+                            ),
+                            Image.asset(
+                              ImagesPaths.bio,
+                              width: 20,
+                              color: AppColors.white,
+                            ),
+                            SizedBox(
+                              width: Get.width * 0.057,
+                            ),
+                            Text(
+                              'Bio',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge!
+                                  .copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.white),
+                            ),
+                          ],
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          color: AppColors.white,
+                          size: 20,
+                        ).paddingOnly(right: Get.width * 0.028)
+                      ],
+                    ),
+                  )),
+              SizedBox(
+                height: Get.height * 0.1,
+              ),
+              InkButton(
+                  child: Text(
+                    'Logout',
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontFamily: 'Montserrat'),
                   ),
-                )
-            ),
-            SizedBox(
-              height: Get.height*0.02,
-            ),
-            Container(
-                height: Get.height*0.05,
-                width: Get.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: AppColors.greyButton
-                ),
-                child: InkWell(
-                  onTap: (){
-                    Get.toNamed(AppRoutes.earning);
-                  },
-                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: Get.width*0.04,
-                          ),
-                          Image.asset(ImagesPaths.my_earning,width: 15,color: AppColors.lightGrey1,),
-                          SizedBox(
-                            width: Get.width*0.057,
-                          ),
-                          Text('My Earnings',style: Theme.of(context).textTheme.labelLarge!.copyWith(fontWeight: FontWeight.w600,color: AppColors.lightGrey1),),
-                        ],
-                      ),
-                       Transform.translate(
-                           offset: const Offset(-10,0),
-                           child: const Icon(Icons.arrow_forward_ios,color: AppColors.lightGrey1,size: 20,))
-                    ],
-                  ),
-                )
-            ),
-            SizedBox(
-              height: Get.height*0.02,
-            ),
-            Container(
-                height: Get.height*0.05,
-                width: Get.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: AppColors.greyButton
-                ),
-                child: InkWell(
-                  onTap: (){
-                    Get.toNamed(AppRoutes.bankingDetails);
-                  },
-                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: Get.width*0.04,
-                          ),
-                          Image.asset(ImagesPaths.bank,width: 16,color: AppColors.lightGrey1,),
-                          SizedBox(
-                            width: Get.width*0.057,
-                          ),
-                          Text('Bank Information',style: Theme.of(context).textTheme.labelLarge!.copyWith(fontWeight: FontWeight.w600,color: AppColors.lightGrey1),),
-                        ],
-                      ),
-                      Transform.translate(
-                          offset: const Offset(-10,0),
-                          child:  PopupMenuItem(
-
-                              child: Icon(Icons.arrow_forward_ios,color: AppColors.lightGrey1,size: 20,),
-
-                          )
-
-                      )
-                    ],
-                  ),
-                )
-            ),
-            SizedBox(
-              height: Get.height*0.12,
-            ),
-            InkButton(
-                child: Text('Logout',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Colors.black),),
-                onTap: (){
-                  // storage.erase();
-                  Get.offAllNamed(AppRoutes.login);
-                })
-          ],
-        ).paddingOnly(left: Get.width*0.05,right: Get.width*0.05),
+                  onTap: () {
+                    controller.onLogoutButton();
+                  })
+            ],
+          ).paddingOnly(left: Get.width * 0.05, right: Get.width * 0.05),
+        ),
       ),
     );
   }

@@ -19,6 +19,7 @@ class ImagesPaths {
   static const String history = "${baseUrl}ic_history.png";
   static const String document = "${baseUrl}ic_document.png";
   static const String mysession = "${baseUrl}ic_my_sessions.png";
+  static const String mysessionhome = "${baseUrl}ic_my_sessions_home.png";
   static const String support = "${baseUrl}ic_support.png";
   static const String my_earning = "${baseUrl}ic_my_earning.png";
   static const String sessionType = "${baseUrl}img_session_boxing.png";
@@ -61,6 +62,22 @@ class ImagesPaths {
   static const String myprivacy= "${baseUrl}img_privacy_policy.png";
   static const String myconditions= "${baseUrl}img_terms_conditions.png";
   static const String passportPhoto= "${baseUrl}img_passport.png";
+  static const String bgBlackShade= "${baseUrl}img_bg.png";
+  static const String bgBlackShade1= "${baseUrl}img_bg2.png";
+  static const String imgSignInOption= "${baseUrl}bg_img_sign_in.png";
+  static const String appLogo= "${baseUrl}app_logo.png";
+  static const String loginImage= "${baseUrl}login_image.png";
+  static const String homepackage= "${baseUrl}home_package_image.png";
+  static const String restart= "${baseUrl}restart.png";
+  static const String location= "${baseUrl}img_location.png";
+  static const String star= "${baseUrl}ic_star.png";
+  static const String star2= "${baseUrl}ic_star2.png";
+  static const String plus= "${baseUrl}ic_plus.png";
+  static const String imagelogin= "${baseUrl}imagelogin.png";
+  static const String blackimage= "${baseUrl}black_image.png";
+  static const String arrowback= "${baseUrl}ic_arrow_back.png";
+  static const String arrowforword= "${baseUrl}ic_arrow_forword.png";
+  static const String bio= "${baseUrl}ic_bio.png";
 
 
 

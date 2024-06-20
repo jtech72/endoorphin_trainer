@@ -1,11 +1,12 @@
 import 'package:endoorphin_trainer/controllers/booking_request_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:slide_to_act/slide_to_act.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../utils/exports.dart';
+import 'bottom_navigation_bar_ui.dart';
 
 class BookingRequsetUi extends StatelessWidget {
   const BookingRequsetUi({super.key});
@@ -14,6 +15,11 @@ class BookingRequsetUi extends StatelessWidget {
   Widget build(BuildContext context) {
     BookingRequestController controller = Get.find();
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+        // appBar: myAppBar(
+        //     title: Text("",
+        //         style: Theme.of(context).textTheme.bodyMedium),
+        //     context: context),
         bottomSheet: BottomSheet(
           shape: const ContinuousRectangleBorder(),
           enableDrag: true,
@@ -22,337 +28,264 @@ class BookingRequsetUi extends StatelessWidget {
           builder: (BuildContext context) {
             return Obx(() => controller.selectedIndex.value == 2
                 ? SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Type your “icebreaker” given by your\ncustomer to start your Fitness session!",
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ).paddingOnly(bottom: Get.height * 0.03),
-                        PinCodeTextField(
-                                textStyle: Theme.of(context)
-                                    .textTheme
-                                    .headlineLarge!
-                                    .copyWith(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 30),
-                                animationCurve: Curves.easeInCubic,
-                                pinTheme: PinTheme(
-                                    shape: PinCodeFieldShape.underline,
-                                    borderRadius: BorderRadius.circular(5),
-                                    fieldHeight: 50,
-                                    fieldWidth: 40,
-                                    inactiveColor: AppColors.lightGrey,
-                                    selectedColor: AppColors.yellow,
-                                    activeColor: AppColors.yellow,
-                                    inactiveBorderWidth: 1,
-                                    selectedBorderWidth: 1,
-                                    activeBorderWidth: 1),
-                                autoDisposeControllers: true,
-                                enablePinAutofill: true,
-                                appContext: context,
-                                hintStyle: const TextStyle(
-                                    color: AppColors.grey, fontSize: 22),
-                                hintCharacter: '●',
-                                blinkWhenObscuring: true,
-                                cursorColor: AppColors.yellow,
-                                keyboardType: TextInputType.number,
-                                backgroundColor: AppColors.backgroundBlack,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                length: 4)
-                            .paddingOnly(bottom: Get.height * 0.03),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              width: Get.width*.6,
-                              child: SlideAction(
-                                sliderButtonYOffset:-4,
-                                animationDuration: Durations.medium4,
-                                innerColor: AppColors.black,
-                                sliderButtonIcon: Image.asset(
-                                  ImagesPaths.send2,
-                                  scale: 5,
-                                ),
-                                outerColor: AppColors.yellow,
-                                height: 35,
-                                sliderButtonIconPadding: 8,
-                                borderRadius: 36,
-                                sliderRotate: false,
+                    child: Container(
+                      width: Get.width,
+                      decoration: const BoxDecoration(
 
-                                child: Text(
-                                  "Swipe to Start Session",
+                          image: DecorationImage(
+                              image: AssetImage(ImagesPaths.bgBlackShade),fit: BoxFit.cover
+                          )
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Please Verify the pin to start the training",
+                            style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.w400),
+                          ).paddingOnly(bottom: Get.height * 0.03),
+                          PinCodeTextField(
+                              inputFormatters: <TextInputFormatter>[
+                                FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                              ],
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .headlineLarge!
+                                      .copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 30),
+                                  animationCurve: Curves.easeInCubic,
+                                  pinTheme: PinTheme(
+                                      shape: PinCodeFieldShape.underline,
+                                      borderRadius: BorderRadius.circular(5),
+                                      fieldHeight: 50,
+                                      fieldWidth: 40,
+                                      inactiveColor: AppColors.lightGrey,
+                                      selectedColor: AppColors.yellow,
+                                      activeColor: AppColors.yellow,
+                                      inactiveBorderWidth: 1,
+                                      selectedBorderWidth: 1,
+                                      activeBorderWidth: 1),
+                                  autoDisposeControllers: true,
+                                  enablePinAutofill: true,
+                                  appContext: context,
+                                  hintStyle: const TextStyle(
+                                      color: AppColors.grey, fontSize: 22),
+                                  hintCharacter: '●',
+                                  blinkWhenObscuring: true,
+                                  cursorColor: AppColors.yellow,
+                                  keyboardType: TextInputType.number,
+                                  backgroundColor:Colors.transparent,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  length: 4)
+                              .paddingOnly(bottom: Get.height * 0.01),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: Get.width*.6,
+                                child: SlideAction(
+                                  sliderButtonYOffset:-4,
+                                  animationDuration: Durations.medium4,
+                                  innerColor: AppColors.black,
+                                  sliderButtonIcon: Image.asset(
+                                    ImagesPaths.send2,
+                                    scale: 5,
+                                  ),
+                                  outerColor: AppColors.yellow,
+                                  height: 35,
+                                  sliderButtonIconPadding: 8,
+                                  borderRadius: 36,
+                                  sliderRotate: false,
+
+                                  child: Text(
+                                    "Swipe to Start Session",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelMedium
+                                        ?.copyWith(color: Colors.black,fontSize: 12,
+                                        fontFamily: 'Montserrat'),
+                                  ).paddingOnly(left: Get.width*.07),
+                                  onSubmit: (){
+                                    Get.toNamed(AppRoutes.sessionRunning);
+                                    return null;
+                                  },
+
+                                ).paddingOnly(right: 20),
+                              ).paddingOnly(left: Get.width*0.01),
+                               GestureDetector(
+                                 onTap: (){
+                                   _launchTelephone();
+                                 },
+                                 child: const CircleAvatar(
+                                  radius: 20,
+                                  backgroundColor: Colors.black,
+                                  backgroundImage: AssetImage(
+                                    ImagesPaths.telephone,
+                                  ), // Your profile image
+                                                               ),
+                               ),
+                            ],
+                          ).paddingOnly(bottom: Get.height * 0.02),
+                          Text('Customer Address',
                                   style: Theme.of(context)
                                       .textTheme
-                                      .labelMedium
-                                      ?.copyWith(color: Colors.black,fontSize: 12),
-                                ).paddingOnly(left: Get.width*.07),
-                                onSubmit: (){
-                                  Get.toNamed(AppRoutes.sessionRunning);
-                                  return null;
-                                },
-
+                                      .headlineSmall!
+                                      .copyWith(
+                                          fontWeight: FontWeight.w500,
+                                          color: AppColors.yellow))
+                              .paddingOnly(bottom: Get.height * 0.015),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.circle,
+                                size: 15,
+                                color: AppColors.impgrey,
                               ).paddingOnly(right: 20),
-                            ),
-                            const CircleAvatar(
-                              radius: 20,
-                              backgroundColor: Colors.black,
-                              backgroundImage: AssetImage(
-                                ImagesPaths.telephone,
-                              ), // Your profile image
-                            ),
-                          ],
-                        ).paddingOnly(bottom: Get.height * 0.02),
-                        Text('Customer Address',
+                              Text(
+                                '54, route Gue banquet',
                                 style: Theme.of(context)
                                     .textTheme
-                                    .headlineSmall!
-                                    .copyWith(
-                                        fontWeight: FontWeight.w500,
-                                        color: AppColors.yellow))
-                            .paddingOnly(bottom: Get.height * 0.015),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.circle,
-                              size: 15,
-                              color: AppColors.impgrey,
-                            ).paddingOnly(right: 20),
-                            Text(
-                              '54, route Gue banquet',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelMedium!
-                                  .copyWith(fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        )
-                      ],
-                    ).paddingOnly(top: 20, bottom: 50, left: 25, right: 25),
+                                    .labelMedium!
+                                    .copyWith(fontWeight: FontWeight.w500),
+                              )
+                            ],
+                          )
+                        ],
+                      ).paddingOnly(top: 20, bottom: 50, left: 25, right: 25),
+                    ),
                   )
                 : controller.selectedIndex.value == 1
                     ? SingleChildScrollView(
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              //   Text(
-                              //     "Address Information",
-                              //     style: Theme.of(context)
-                              //         .textTheme
-                              //         .labelLarge
-                              //         ?.copyWith(fontWeight: FontWeight.w500),
-                              //   ).paddingOnly(left: 25, right: 20, bottom: 20),
-                              //   InkWell(
-                              //     onTap: () {
-                              //       controller.selectedIndex.value = 2;
-                              //     },
-                              //     child: Container(
-                              //       height: 48,
-                              //       width: Get.width,
-                              //       decoration: const BoxDecoration(
-                              //         color: AppColors.blackShade,
-                              //         border: Border(
-                              //           top: BorderSide(
-                              //               width: 1.0, color: AppColors.yellow),
-                              //           // Top white border
-                              //           bottom: BorderSide(
-                              //               width: 1.0,
-                              //               color: AppColors
-                              //                   .yellow), // Bottom white border
-                              //         ),
-                              //       ),
-                              //       child: Row(
-                              //         mainAxisAlignment:
-                              //         MainAxisAlignment.spaceBetween,
-                              //         children: [
-                              //           Text(
-                              //             "Address Type",
-                              //             style: Theme.of(context)
-                              //                 .textTheme
-                              //                 .labelLarge
-                              //                 ?.copyWith(
-                              //                 fontWeight: FontWeight.w500),
-                              //           ),
-                              //           Text(
-                              //             "Home",
-                              //             style: Theme.of(context)
-                              //                 .textTheme
-                              //                 .labelLarge
-                              //                 ?.copyWith(
-                              //                 fontWeight: FontWeight.w500),
-                              //           )
-                              //         ],
-                              //       ).paddingOnly(left: 25, right: 20),
-                              //     ),
-                              //   ),
-                              //   Column(
-                              //     crossAxisAlignment: CrossAxisAlignment.start,
-                              //     mainAxisAlignment: MainAxisAlignment.start,
-                              //     children: [
-                              //       Text(
-                              //         "Anglesey Rd. Enfield EN3 4HY, UA ",
-                              //         style: Theme.of(context)
-                              //             .textTheme
-                              //             .labelLarge
-                              //             ?.copyWith(fontWeight: FontWeight.w500),
-                              //       ),
-                              //       Container(
-                              //         height: 1,
-                              //         width: Get.width,
-                              //         color: AppColors.grey,
-                              //       ).paddingOnly(bottom: 20, top: 15),
-                              //       Text(
-                              //         "Zero High Inc.",
-                              //         style: Theme.of(context)
-                              //             .textTheme
-                              //             .labelLarge
-                              //             ?.copyWith(fontWeight: FontWeight.w500),
-                              //       ),
-                              //       Container(
-                              //         height: 1,
-                              //         width: Get.width,
-                              //         color: AppColors.grey,
-                              //       ).paddingOnly(bottom: 20, top: 15),
-                              //       Text(
-                              //         "4",
-                              //         style: Theme.of(context)
-                              //             .textTheme
-                              //             .labelLarge
-                              //             ?.copyWith(fontWeight: FontWeight.w500),
-                              //       ),
-                              //       Container(
-                              //         height: 1,
-                              //         width: Get.width,
-                              //         color: AppColors.grey,
-                              //       ).paddingOnly(bottom: 20, top: 15),
-                              //       Text(
-                              //         "Anglesey Road",
-                              //         style: Theme.of(context)
-                              //             .textTheme
-                              //             .labelLarge
-                              //             ?.copyWith(fontWeight: FontWeight.w500),
-                              //       ),
-                              //       Container(
-                              //         height: 1,
-                              //         width: Get.width,
-                              //         color: AppColors.grey,
-                              //       ).paddingOnly(bottom: 20, top: 15),
-                              //       Text(
-                              //         "En3 4hy",
-                              //         style: Theme.of(context)
-                              //             .textTheme
-                              //             .labelLarge
-                              //             ?.copyWith(fontWeight: FontWeight.w500),
-                              //       ),
-                              //       Container(
-                              //         height: 1,
-                              //         width: Get.width,
-                              //         color: AppColors.grey,
-                              //       ).paddingOnly(bottom: 20, top: 15),
-                              //     ],
-                              //   ).paddingOnly(top: 18, left: 25, right: 20)
 
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      const CircleAvatar(
-                                        radius: 32,
-                                        backgroundColor: AppColors.yellow,
-                                        child: CircleAvatar(
-                                          radius: 30,
-                                          backgroundImage: AssetImage(ImagesPaths
-                                              .profilePic), // Your profile image
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      RichText(
-                                          text: TextSpan(children: [
-                                        TextSpan(
-                                          text: 'John Doe',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headlineSmall,
-                                        ),
-                                        TextSpan(
-                                          text: '\n3kms away | 12 min',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelMedium,
-                                        ),
-                                      ])),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      const Icon(
-                                        Icons.star,size: 19,
-                                        color: AppColors.yellow,
-                                      ).paddingOnly(right: 5),
-                                      Text(
-                                        '4.78',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelMedium,
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ).paddingOnly(
-                                bottom: 15,
-                              ),
-                              Container(
-                                height: 1,
-                                width: Get.width,
-                                color: AppColors.grey3,
-                              ),
+                        child: Container(
+                          // height: Get.height,
+                          width: Get.width,
+                          decoration: const BoxDecoration(
 
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    height: 35,
-                                    width: 125,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(50),
-                                        border: Border.all(
-                                          color: AppColors.yellow,
-                                        )),
-                                    child: Row(
+                              image: DecorationImage(
+                                  image: AssetImage(ImagesPaths.bgBlackShade),fit: BoxFit.cover
+                              )
+                          ),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(height: Get.height*0.01,),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
                                       children: [
-                                        Image.asset(
-                                          ImagesPaths.arrow_1,
-                                          scale: 3.5,
-                                        ).paddingOnly(right: 10),
+                                        const CircleAvatar(
+                                          radius: 32,
+                                          backgroundColor: AppColors.yellow,
+                                          child: CircleAvatar(
+                                            radius: 30,
+                                            backgroundImage: AssetImage(ImagesPaths
+                                                .profilePic), // Your profile image
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        RichText(
+                                            text: TextSpan(children: [
+                                          TextSpan(
+                                            text: 'John Doe',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headlineSmall,
+                                          ),
+                                          TextSpan(
+                                            text: '\n3kms away | 12 min',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelMedium!.copyWith(color: Colors.white),
+                                          ),
+                                        ])),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                      Image.asset(ImagesPaths.star2,scale: 4,).paddingOnly(right: 5),
                                         Text(
-                                          "Share ETA",
+                                          '4.78',
                                           style: Theme.of(context)
                                               .textTheme
-                                              .labelLarge!
-                                              .copyWith(
-                                                  fontWeight: FontWeight.w500),
+                                              .labelMedium!.copyWith(color: Colors.white),
                                         )
                                       ],
-                                    ).paddingOnly(left: 10),
-                                  ),
-                                  const CircleAvatar(
-                                    radius: 20,
-                                    backgroundColor: AppColors.black,
-                                    backgroundImage: AssetImage(
-                                      ImagesPaths.telephone,
-                                    ), // Your profile image
-                                  ),
-                                ],
-                              ).paddingOnly(top: 20),
-                              Transform.translate(
-                                offset: const Offset(-12, 0),
-                                child: Row(
+                                    ),
+                                  ],
+                                ).paddingOnly(
+                                  bottom: 15,left: Get.width*0.04,right: Get.width*0.04
+                                ),
+                                Container(
+                                  height: 1,
+                                  width: Get.width,
+                                  color: AppColors.grey3,
+                                ),
+
+                                Row(
+
+                                  children: [
+                                    Container(
+                                      height: 35,
+                                      width: 125,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(50),
+                                          border: Border.all(
+                                            color: AppColors.yellow,
+                                          )),
+                                      child: Row(
+                                        children: [
+                                          Image.asset(
+                                            ImagesPaths.arrow_1,
+                                            scale: 3.5,
+                                          ).paddingOnly(right: 10),
+                                          Text(
+                                            "Share ETA",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelLarge!
+                                                .copyWith(
+                                                    fontWeight: FontWeight.w500),
+                                          )
+                                        ],
+                                      ).paddingOnly(left: 10),
+                                    ),
+                                     const Spacer(flex: 1,),
+                                     GestureDetector(
+                                       onTap: (){
+                                         _launchTelephone();
+                                       },
+                                       child: const CircleAvatar(
+                                        radius: 20,
+                                        backgroundColor: AppColors.black,
+                                        backgroundImage: AssetImage(
+                                          ImagesPaths.telephone,
+                                        ), // Your profile image
+                                       ),
+                                     ).paddingOnly(right: 10),
+                                    GestureDetector(
+                                      onTap: (){
+                                        showModalBottomSheet(
+                                          context: context,
+                                          isScrollControlled: true,
+                                          builder: (context) => ChatBottomSheet(),
+                                        );
+                                      },
+                                      child: const CircleAvatar(
+                                        radius: 20,
+                                        backgroundColor: AppColors.yellow,
+                                        child: Icon(Icons.message_outlined,color: AppColors.black,),
+                                        // Your profile image
+                                      ),
+                                    ),
+                                  ],
+                                ).paddingOnly(top: Get.height*0.015),
+                                Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Transform.translate(
@@ -468,102 +401,116 @@ class BookingRequsetUi extends StatelessWidget {
                                 ).paddingOnly(
                                     top: Get.height * 0.035,
                                     bottom: Get.height * 0.035),
-                              ),
+                                Center(
+                                    child: InkButton(
+                                        child: Text(
+                                          'Start',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headlineSmall!
+                                              .copyWith(color: AppColors.black,fontSize: 18,
+                                              fontFamily: 'Montserrat'),
+                                        ),
+                                        onTap: () {
+                                          controller.selectedIndex.value = 2;
+                                        })),
+                                SizedBox(
+                                  height: Get.height * 0.02,
+                                )
+                              ]).paddingOnly(
+                              top: 20, left: 20, right: 20, bottom: 20),
+                        ),
+                      )
+                    : SingleChildScrollView(
+                        child: Container(
+                          width: Get.width,
+                          decoration: const BoxDecoration(
+
+                              image: DecorationImage(
+                                  image: AssetImage(ImagesPaths.bgBlackShade),fit: BoxFit.cover
+                              )
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: Get.height*0.03,),
+                              Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          const CircleAvatar(
+                                            radius: 32,
+                                            backgroundColor: AppColors.yellow,
+                                            child: CircleAvatar(
+                                              radius: 30,
+                                              backgroundImage: AssetImage(ImagesPaths
+                                                  .profilePic), // Your profile image
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          RichText(
+                                              text: TextSpan(children: [
+                                            TextSpan(
+                                              text: controller.notificationData["name"],
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headlineSmall,
+                                            ),
+                                            TextSpan(
+                                              text: '\n3kms away | 12 min',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelMedium!.copyWith(color: Colors.white),
+                                            ),
+                                          ])),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Image.asset(ImagesPaths.star2,scale: 4,).paddingOnly(right: 5),
+                                          Text(
+                                            '4.78',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelMedium!.copyWith(color: Colors.white),
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ).paddingOnly(top: 15, bottom: 15),
+                                  Text(
+                                    'Client address',
+                                    style: Theme.of(context).textTheme.headlineSmall,
+                                  ),
+                                  Text(
+                                    controller.notificationData["address"].toString(),
+                                    style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.white),
+                                  ),
+                                ],
+                              ).paddingOnly(left: Get.width*0.04,right: Get.width*0.04,bottom: Get.height*0.01),
                               Center(
                                   child: InkButton(
                                       child: Text(
-                                        'Start',
+                                        'Accept',
                                         style: Theme.of(context)
                                             .textTheme
                                             .headlineSmall!
-                                            .copyWith(color: AppColors.black),
+                                            .copyWith(color: AppColors.black,fontSize: 18,
+                                            fontFamily: 'Montserrat'),
                                       ),
                                       onTap: () {
-                                        controller.selectedIndex.value = 2;
-                                      })),
-                              SizedBox(
-                                height: Get.height * 0.02,
-                              )
-                            ]).paddingOnly(
-                            top: 20, left: 20, right: 20, bottom: 20),
-                      )
-                    : SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    const CircleAvatar(
-                                      radius: 32,
-                                      backgroundColor: AppColors.yellow,
-                                      child: CircleAvatar(
-                                        radius: 30,
-                                        backgroundImage: AssetImage(ImagesPaths
-                                            .profilePic), // Your profile image
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    RichText(
-                                        text: TextSpan(children: [
-                                      TextSpan(
-                                        text: 'John Doe',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineSmall,
-                                      ),
-                                      TextSpan(
-                                        text: '\n3kms away | 12 min',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelMedium,
-                                      ),
-                                    ])),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.star,size: 19,
-                                      color: AppColors.yellow,
-                                    ).paddingOnly(right: 5),
-                                    Text(
-                                      '4.78',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelMedium,
-                                    )
-                                  ],
-                                )
-                              ],
-                            ).paddingOnly(top: 15, bottom: 15),
-                            Text(
-                              'Client address',
-                              style: Theme.of(context).textTheme.headlineSmall,
-                            ),
-                            Text(
-                              'Malviya Nagar, Near LB hospital, Jaipur, Rajthan',
-                              style: Theme.of(context).textTheme.labelMedium,
-                            ),
-                            Center(
-                                child: InkButton(
-                                    child: Text(
-                                      'Accept',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headlineSmall!
-                                          .copyWith(color: AppColors.black),
-                                    ),
-                                    onTap: () {
-                                      controller.selectedIndex.value = 1;
-                                    })).paddingOnly(top: 30, bottom: 30),
-                            //
-                          ],
-                        ).paddingOnly(left: 15, right: 15),
+                                        controller.selectedIndex.value = 1;
+                                      })).paddingOnly(top: 30, bottom: 30),
+                              SizedBox(height: Get.height*0.02,),
+                              //
+                            ],
+                          ).paddingOnly(left: 15, right: 15),
+                        ),
                       ));
           },
         ),
@@ -573,25 +520,135 @@ class BookingRequsetUi extends StatelessWidget {
             //       ? const Center(child: CircularProgressIndicator())
             //       .paddingOnly(bottom: 300)
             //       :
-            SizedBox(
-          height: Get.height * .8,
-          child: GoogleMap(
-            mapType: MapType.normal,
+            Stack(
+              children: [
+                SizedBox(
+                          height: Get.height * .8,
+                          child: GoogleMap(
+                            mapType: MapType.normal,
+                            myLocationButtonEnabled: true,
+                            myLocationEnabled: true,
+                            zoomControlsEnabled: true,
+                            scrollGesturesEnabled:true,
+                            onMapCreated: (GoogleMapController onMapCreatedController) {
+                              controller.mapController = onMapCreatedController;
+                              controller.setMapStyle();
+                            },
+                initialCameraPosition: const CameraPosition(
+                  target: LatLng(37.43296265331129, -122.08832357078792),
+                  zoom: 15.0,
+                ),
+                // markers: {
+                //   Marker(
+                //     markerId: const MarkerId('current_location'),
+                //     position: controller.currentLocation.value!,
+                //     infoWindow: const InfoWindow(title: 'Current Location'),
+                //   ),
+                // },
+                          ),
+                        ),
+                Positioned(
+                    left: Get.width*0.041,
+                    top: Get.height*0.061,
+                    child: IconButton(
+                        onPressed: (){
+                          // Get.back();
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => BottomNavigationBarUI(currentTabIndex: 2,)));
 
-            onMapCreated: controller.onMapCreated,
-            initialCameraPosition: const CameraPosition(
-              target: LatLng(37.43296265331129, -122.08832357078792),
-              zoom: 15.0,
-            ),
-            // markers: {
-            //   Marker(
-            //     markerId: const MarkerId('current_location'),
-            //     position: controller.currentLocation.value!,
-            //     infoWindow: const InfoWindow(title: 'Current Location'),
-            //   ),
-            // },
-          ),
-        ));
+                        },
+                        icon: const Icon(Icons.arrow_back_ios,size: 18,color: Colors.white,)))
+              ],
+            ));
   }
 }
 //
+
+_launchTelephone() async {
+  const telephoneNumber = 'tel:+1234567890';
+  if (await canLaunch(telephoneNumber)) {
+    await launch(telephoneNumber);
+  } else {
+    throw 'Could not launch $telephoneNumber';
+  }
+}
+
+
+class ChatBottomSheet extends StatelessWidget {
+  final BookingRequestController chatController = Get.put(BookingRequestController());
+
+  @override
+  Widget build(BuildContext context) {
+    return
+      DraggableScrollableSheet(
+      expand: false,
+      builder: (context, scrollController) {
+        return Container(
+          padding: const EdgeInsets.all(16.0),
+          decoration: const BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                child: Obx(() {
+                  return ListView.builder(
+                    controller: scrollController,
+                    itemCount: chatController.messages.length,
+                    itemBuilder: (context, index) {
+                      return Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                            margin: const EdgeInsets.symmetric(vertical: 5.0),
+                            padding: const EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              color: AppColors.blackShade,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),                            child: Text(
+                              textAlign: TextAlign.right,
+                              chatController.messages[index],style: const TextStyle(color: AppColors.white),)),
+                      );
+                    },
+                  );
+                }),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: chatController.messageController,
+                        decoration: InputDecoration(
+                          hintText: 'Type a message...',
+                          fillColor: AppColors.blackShade,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                        ),
+                        onSubmitted: (value) => chatController.sendMessage(),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => chatController.sendMessage(),
+                      child: Container(
+                        height: 45,
+                        width: 45,
+                        decoration: const BoxDecoration(
+                          color: AppColors.yellow,
+                          shape: BoxShape.circle
+                        ),
+                        child:const Icon(Icons.send_sharp,color: AppColors.blackShade,),
+                      ),
+                    ).paddingOnly(left: 10),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
