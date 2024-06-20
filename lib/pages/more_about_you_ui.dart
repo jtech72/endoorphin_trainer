@@ -17,7 +17,7 @@ class MoreAboutYouUi extends StatelessWidget {
               offset: const Offset(0, -3),
               child: GestureDetector(
                   onTap: () {
-                    Get.back();
+                    Get.toNamed(AppRoutes.registration);
                   },
                   child: Image.asset(
                     ImagesPaths.logoimg,
