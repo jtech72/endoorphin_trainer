@@ -25,6 +25,9 @@ class CountryCodeController extends GetxController {
             finalOTP = value.otp;
             showSnackBar("${value.otp}");
             Get.toNamed(AppRoutes.otp,arguments:phoneNumber.text.toString() );
+          }else{
+            dismissLoader();
+            showSnackBar("${value.message}");
           }
         });
       }
