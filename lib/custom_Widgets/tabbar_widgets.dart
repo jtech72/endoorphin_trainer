@@ -28,7 +28,7 @@ PreferredSizeWidget myTabBar(TabController tabController, BuildContext context,)
         child: Text("Completed", style: TextStyle(fontSize: 11)),
       ),
       Tab(
-        child: Text("Canceled", style: TextStyle(fontSize: 11)),
+        child: Text("Cancelled", style: TextStyle(fontSize: 11)),
       ),
     ],
   );
