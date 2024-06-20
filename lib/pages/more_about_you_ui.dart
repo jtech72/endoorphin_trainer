@@ -1329,9 +1329,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                 onTap: () {
                                   bool hasMissingDocuments =
                                          storage.read("Passport") != "true"||
-                                             storage.read("Emirates ID") != "true"||
-                                  snapshot.data!.result![0].documentFrontImg ==null
-                                  ;
+                                             storage.read("Emirates ID") != "true";
 
                                   if (hasMissingDocuments) {
                                     showSnackBar("Please upload all the certificates");
