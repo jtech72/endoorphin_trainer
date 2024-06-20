@@ -28,30 +28,28 @@ class UploadImagesController extends GetxController {
       print('User canceled');
     }
   }
-  Future<void> selectSource(BuildContext context, bool isFrontImage) async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Select Image Source"),
+  Future<void> selectSource(bool isFrontImage) async {
+    Get.dialog(
+        AlertDialog(
+          title: const Text("Add Your Documents"),
           actions: <Widget>[
             TextButton(
               child: Text("Camera"),
               onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
+                 Get.back();
                 openCameraOrGallery(isFrontImage, ImageSource.camera);
               },
             ),
             TextButton(
               child: Text("Gallery"),
               onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
+                Get.back();
                 openCameraOrGallery(isFrontImage, ImageSource.gallery);
               },
             ),
           ],
-        );
-      },
+        )
+
     );
   }
   Future<void> onPassport() async {
@@ -185,18 +183,20 @@ class UploadImagesController extends GetxController {
     if (isFrontImage) {
       fontImagePicked.value = null;
       log("Front image cleared");
-      selectSource(context,true);
+      selectSource(true);
     } else {
       backImagePicked.value = null;
-      selectSource(context,false);
+      selectSource(false);
       log("Back image cleared");
     }
   }
-
   @override
   void onInit() {
     certificationDetails = Get.arguments ?? "";
-    // selectSource( Get.context!,true);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      selectSource(true);
+
+    });
     log("${certificationDetails}");
     super.onInit();
   }
