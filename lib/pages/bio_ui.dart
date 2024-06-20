@@ -39,7 +39,7 @@ class BioUi extends StatelessWidget {
                             children: [
                               GestureDetector(
                               onTap: () {
-            controller.openCamera();
+            controller.selectSource();
             },
               child: Obx(
                     () => CircleAvatar(
@@ -58,7 +58,7 @@ class BioUi extends StatelessWidget {
                                 right: 15,
                                 child: GestureDetector(
                                   onTap: (){
-                                    Get.find<BioController>().openCamera();
+                                    Get.find<BioController>().selectSource();
                                   },
                                   child: CircleAvatar(
                                     radius: 10,

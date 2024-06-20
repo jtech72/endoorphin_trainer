@@ -815,8 +815,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                                             : snapshot
                                                             .data!
                                                             .result![
-                                                        index]
-                                                            .passportfrontImg
+                                                        index].passportbackImg
                                                             .toString(),
                                                         progressIndicatorBuilder: (context, url, downloadProgress) => Center(
                                                           child: SizedBox(

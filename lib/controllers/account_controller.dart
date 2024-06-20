@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:endoorphin_trainer/utils/exports.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../services/models/request_models/category_document_model.dart';
@@ -15,16 +16,41 @@ class AccountController extends GetxController {
   TextEditingController passwordController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController bioController = TextEditingController();
-  Future<void> openCamera() async {
+
+  Future<void> openCameraOrGallery(ImageSource source) async {
     final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    final pickedFile = await picker.pickImage(source: source, imageQuality: 50);
     if (pickedFile != null) {
       File image = File(pickedFile.path);
       profileImage.value = File(image.path);
-      log("font Image${profileImage!}");
+      log("font Image ${profileImage.value}");
     } else {
-      log('User canceled');
+      print('User canceled');
     }
+  }
+  Future<void> selectSource() async {
+    Get.dialog(
+        AlertDialog(
+          title: const Text("Add Your Documents"),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Camera"),
+              onPressed: () {
+                Get.back();
+                openCameraOrGallery( ImageSource.camera);
+              },
+            ),
+            TextButton(
+              child: Text("Gallery"),
+              onPressed: () {
+                Get.back();
+                openCameraOrGallery(ImageSource.gallery);
+              },
+            ),
+          ],
+        )
+
+    );
   }
 
   Future<void> onUpdateButton() async {

@@ -109,7 +109,7 @@ class UploadImagesUi extends StatelessWidget {
                 ),
                 SizedBox(height:Get.height*0.2),
                 Text('Check Quality',style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 20),).paddingOnly(bottom: Get.height*0.02),
-                Text('Lorem Ipsum is simply dummy text of the printing\nand typesetting industry.',style: Theme.of(context).textTheme.displayLarge,textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.024),
+                Text('Successfully captured the front side of ID..',style: Theme.of(context).textTheme.displayLarge,textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.024),
                 InkButton(child: Text('Continue',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
                     fontFamily: 'Montserrat'),), onTap: (){
                   controller.selectedoption.value=1;
@@ -138,7 +138,7 @@ class UploadImagesUi extends StatelessWidget {
                     SizedBox(height: Get.height*0.37,),
                     Image.asset(ImagesPaths.restart,height: 35,width: 35,).paddingOnly(bottom: Get.height*0.02),
                     Text('Flip your card',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.w700,color: Colors.white),).paddingOnly(bottom: Get.height*0.02),
-                    Text('Lorem Ipsum is simply dummy text of the printing\nand typesetting industry.',style: Theme.of(context).textTheme.displayLarge,textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.015).paddingOnly(bottom: Get.height*0.1),
+                    Text('Capture the backside of your ID to continue.',style: Theme.of(context).textTheme.displayLarge,textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.015).paddingOnly(bottom: Get.height*0.1),
                     InkButton(child: Text('Continue',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
                         fontFamily: 'Montserrat'),), onTap: (){
                       controller.selectedoption.value=2;
@@ -213,7 +213,7 @@ class UploadImagesUi extends StatelessWidget {
                     ),
                     SizedBox(height:Get.height*0.2),
                     Text('Check Quality',style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 20),).paddingOnly(bottom: Get.height*0.02),
-                    Text('Lorem Ipsum is simply dummy text of the printing\nand typesetting industry.',style: Theme.of(context).textTheme.displayLarge,textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.024),
+                    Text('Successfully captured the back side of ID.',style: Theme.of(context).textTheme.displayLarge,textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.024),
                     InkButton(child: Text('Continue',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
                         fontFamily: 'Montserrat'),), onTap: (){
                       controller.selectedoption.value=3;
