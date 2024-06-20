@@ -77,7 +77,8 @@ class BioUi extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              Text("Nick Name",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                              Text("Nick Name",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
+                              Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
                             ],
                           ),
                           Container(
@@ -135,7 +136,8 @@ class BioUi extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              Text("Professional Title",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                              Text("Professional Title",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
+                              Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
                             ],
                           ),
                           Container(
@@ -193,7 +195,8 @@ class BioUi extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              Text("Years of Experience",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                              Text("Years of Experience",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
+                              Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
                             ],
                           ),
                           Container(
@@ -251,7 +254,7 @@ class BioUi extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              Text("Areas of Expertise",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                              Text("Areas of Expertise",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
                             ],
                           ),
                           Container(
@@ -309,7 +312,7 @@ class BioUi extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              Text("Fun Fact/Personal Anecdote",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                              Text("Fun Fact/Personal Anecdote",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
                             ],
                           ),
                           Container(
@@ -367,7 +370,7 @@ class BioUi extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              Text("Motivational Quote",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
+                              Text("Motivational Quote",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
                             ],
                           ),
                           Container(
@@ -424,9 +427,9 @@ class BioUi extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              const Text(
+                               Text(
                                 'Mention Bio',
-                                // style: Theme.of(context).textTheme.displayLarge,
+                                style: Theme.of(context).textTheme.labelLarge!.copyWith(fontSize: 14,fontWeight: FontWeight.w500,),
                               ).paddingOnly(bottom: 12,),
                             ],
                           ).paddingOnly(top: 20),
@@ -447,7 +450,7 @@ class BioUi extends StatelessWidget {
                               style: Theme.of(context).textTheme.labelMedium,
                               decoration: InputDecoration(
                                 contentPadding:
-                                const EdgeInsets.only(bottom: 10, left: 10, right: 10),
+                                const EdgeInsets.only(bottom: 3, left: 15, right: 15),
                                 fillColor: AppColors.yellowishWhite,
                                 hintText: 'Tell us something about yourself ',
                                 hintStyle: Theme.of(context).textTheme.labelMedium,

@@ -12,36 +12,74 @@ class MoreAboutYouUi extends StatelessWidget {
     MoreAboutYouController controller = Get.put(MoreAboutYouController());
 
     return Scaffold(
-      appBar: myAppBar(
-          title: Transform.translate(
-              offset: const Offset(0, -3),
-              child: GestureDetector(
-                  onTap: () {
-                    Get.toNamed(AppRoutes.registration);
-                  },
-                  child: Image.asset(
-                    ImagesPaths.logoimg,
-                    height: 36,
-                    width: 146,
-                  ))),
-          action: [
-            IconButton(
-                onPressed: (){
-                    Get.toNamed(AppRoutes.bio);
+      // appBar: myAppBar(
+      //     title: Transform.translate(
+      //         offset: const Offset(0, -3),
+      //         child: GestureDetector(
+      //             onTap: () {
+      //               Get.toNamed(AppRoutes.registration);
+      //             },
+      //             child: Image.asset(
+      //               ImagesPaths.logoimg,
+      //               height: 36,
+      //               width: 146,
+      //             ))),
+      //     action: [
+      //       IconButton(
+      //           onPressed: (){
+      //               Get.toNamed(AppRoutes.bio);
+      //           },
+      //           icon: Container(
+      //             alignment: Alignment.center,
+      //             height: 24,
+      //             width: 44,
+      //             decoration: const BoxDecoration(
+      //                 color: AppColors.yellow,
+      //                 borderRadius: BorderRadius.all(Radius.circular(24))),
+      //             child: Text('Skip',style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.black,fontWeight: FontWeight.w500),textAlign: TextAlign.center,),
+      //           ),
+      //       ),
+      //       SizedBox(width: Get.width*0.04,)
+      //     ],
+      //     context: context),
+      appBar: AppBar(
+        toolbarHeight: 50,
+        leadingWidth: Get.width * 0.17,
+        centerTitle: false,
+        surfaceTintColor: Colors.transparent,
+        backgroundColor: AppColors.black,
+        elevation: 3,
+        titleSpacing: -10,
+        leading: const SizedBox(),
+        title: Transform.translate(
+            offset:  Offset(- Get.width*0.09, -3),
+            child: GestureDetector(
+                onTap: () {
+                  Get.toNamed(AppRoutes.registration);
                 },
-                icon: Container(
-                  alignment: Alignment.center,
-                  height: 24,
-                  width: 44,
-                  decoration: const BoxDecoration(
-                      color: AppColors.yellow,
-                      borderRadius: BorderRadius.all(Radius.circular(24))),
-                  child: Text('Skip',style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.black,fontWeight: FontWeight.w500),textAlign: TextAlign.center,),
-                ),
+                child: Image.asset(
+                  ImagesPaths.logoimg,
+                  height: 36,
+                  width: 146,
+                ))),
+        actions: [
+          IconButton(
+            onPressed: (){
+              Get.toNamed(AppRoutes.bio);
+            },
+            icon: Container(
+              alignment: Alignment.center,
+              height: 24,
+              width: 44,
+              decoration: const BoxDecoration(
+                  color: AppColors.yellow,
+                  borderRadius: BorderRadius.all(Radius.circular(24))),
+              child: Text('Skip',style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.black,fontWeight: FontWeight.w500),textAlign: TextAlign.center,),
             ),
-            SizedBox(width: Get.width*0.04,)
-          ],
-          context: context),
+          ),
+          SizedBox(width: Get.width*0.04,)
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18),
         child: Container(
@@ -214,7 +252,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                                         child: CircularProgressIndicator(value: downloadProgress.progress),
                                                       ),
                                                     ),
-                                                    errorWidget: (context, url, error) => Icon(Icons.error),
+                                                    errorWidget: (context, url, error) => const Icon(Icons.error),
                                                   ),
                                                 ),
                                           ),
@@ -489,7 +527,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                                         child: CircularProgressIndicator(value: downloadProgress.progress),
                                                       ),
                                                     ),
-                                                    errorWidget: (context, url, error) => Icon(Icons.error),
+                                                    errorWidget: (context, url, error) => const Icon(Icons.error),
                                                   ),
                                                 ),
                                               ),
@@ -787,7 +825,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                                             child: CircularProgressIndicator(value: downloadProgress.progress),
                                                           ),
                                                         ),
-                                                        errorWidget: (context, url, error) => Icon(Icons.error),
+                                                        errorWidget: (context, url, error) => const Icon(Icons.error),
                                                       ),
                                                     ),
                                                   ),
@@ -1302,8 +1340,8 @@ class MoreAboutYouUi extends StatelessWidget {
                                         'I accept the terms and conditions',
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 12)),
-                                    Spacer(flex: 1,),
-                                    Text(
+                                    const Spacer(flex: 1,),
+                                    const Text(
                                         'view all',
                                         style: TextStyle(
                                             color: AppColors.whiteShade, fontSize: 12))

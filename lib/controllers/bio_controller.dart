@@ -25,14 +25,19 @@ class BioController extends GetxController {
       profileImage.value = File(image.path);
       log("font Image${profileImage!}");
     } else {
-      print('User canceled');
+      log('User canceled');
     }
   }
 
   Future<void> onSubmitButton(BuildContext context) async {
     if (profileImage.value == null) {
       showSnackBar("Please select a profile image");
-    } else {
+    }
+    else if (nicknameController.text.isEmpty|| professionalTitleController.text.isEmpty || experienceController.text.isEmpty){
+      showSnackBar("Please fill all the mandatory fields");
+
+    }
+    else {
       showLoader();
       Map<String, String> fields = {
         'id': storage.read("userId").toString(),
