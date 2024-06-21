@@ -5,7 +5,7 @@ import '../services/network_services/api_call.dart';
 import '../services/network_services/notification_servies.dart';
 class RegistrationController extends GetxController{
   NotificationServices notificationServices=NotificationServices();
-
+ RxBool isValidVisible = false.obs;
   RxBool obscureText = true.obs;
   RxBool obscureText1 = true.obs;
   void toggleObscureText() {
@@ -36,7 +36,7 @@ class RegistrationController extends GetxController{
 
   /// ON CONTINUE BUTTON
   Future<void> onContinueButton()async {
-    if (firstNameController.text.isEmpty || lastNameController.text.isEmpty || emailController.text.isEmpty  || passwordController.text.isEmpty || confirmPasswordController.text.isEmpty) {
+    if (firstNameController.text.isEmpty || lastNameController.text.isEmpty || emailController.text.isEmpty  || passwordController.text.isEmpty || confirmPasswordController.text.isEmpty || selectedOption1.value =='Select Gender' ) {
       showSnackBar("All fields must be filled to continue");
       return; // Exit early as we don't need to proceed further
     }else if (!RegExp(
