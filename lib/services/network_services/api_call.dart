@@ -292,7 +292,7 @@ class CallAPI {
   static Future<GetBankDetailModel> getBankDetail({required String id}) async {
     try {
       String endPoint = Endpoints.epGetBankDetails;
-      Map<String, dynamic> json = await APIManager().getAllCall(endPoint: endPoint);
+      Map<String, dynamic> json = await APIManager().getAllCall(endPoint: endPoint+id);
       GetBankDetailModel responseModel = GetBankDetailModel.fromJson(json);
       if (responseModel.status == 200) {
         log("CALLING_ENDPOINT: $endPoint ,RESPONSE:  $json");
