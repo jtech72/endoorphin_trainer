@@ -34,7 +34,7 @@ class LoginController extends GetxController{
     }
     else {
       Map<String, dynamic> request = {
-        "loginData": phoneNumberController.text.trim(),
+        "loginData": "$countryCode${phoneNumberController.text.trim()}",
         "password": passwordController.text.trim(),
         "deviceId": notificationServices.deviceToken ??""
       };

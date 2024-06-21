@@ -204,7 +204,7 @@ class BioUi extends StatelessWidget {
                             ),
                             child: TextField(
                               controller: controller.experienceController,
-
+                              keyboardType: TextInputType.number,
 
                               enableInteractiveSelection: true,
                               style: Theme.of(context).textTheme.labelMedium,
