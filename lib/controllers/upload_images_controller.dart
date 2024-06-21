@@ -14,21 +14,26 @@ class UploadImagesController extends GetxController {
   var defaultImage = File("path_to_your_default_image");
   Future<void> openCameraOrGallery(bool isFrontImage, ImageSource source) async {
     final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: source, imageQuality: 50);
-    if (pickedFile != null) {
-      File image = File(pickedFile.path);
-      if (isFrontImage) {
-        fontImagePicked.value = File(image.path);
-        log("font Image ${fontImagePicked.value}");
+    try {
+      final pickedFile = await picker.pickImage(source: source, imageQuality: 50);
+      if (pickedFile != null) {
+        File image = File(pickedFile.path);
+        if (isFrontImage) {
+          fontImagePicked.value = File(image.path);
+          log("font Image ${fontImagePicked.value}");
+        } else {
+          backImagePicked.value = File(image.path);
+          log("back Image ${backImagePicked.value}");
+        }
       } else {
-        backImagePicked.value = File(image.path);
-        log("back Image ${backImagePicked.value}");
+        print('User canceled');
       }
-    } else {
-      print('User canceled');
+    } catch (e) {
+      print('Permission denied: $e');
+      selectSource(isFrontImage);
     }
-  }
-  Future<void> selectSource(bool isFrontImage) async {
+  }  Future<void> selectSource(bool isFrontImage) async {
+    log("message");
     Get.dialog(
         AlertDialog(
           title: const Text("Add Your Documents"),

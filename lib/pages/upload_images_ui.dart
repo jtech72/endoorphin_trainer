@@ -6,7 +6,6 @@ class UploadImagesUi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UploadImagesController controller = Get.put(UploadImagesController());
-   controller.selectSource(true);
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,

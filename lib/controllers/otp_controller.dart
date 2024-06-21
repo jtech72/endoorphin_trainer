@@ -4,18 +4,14 @@ import 'package:endoorphin_trainer/utils/exports.dart';
 import '../services/network_services/api_call.dart';
 class OtpController extends GetxController {
   CountryCodeController countryCodeController = Get.put(CountryCodeController());
-
   final otpController = TextEditingController();
   Timer? _timer;
   RxBool showResendText = false.obs;
-
   int remainingSeconds = 60;
   final time = '00.00'.obs;
   RxBool isPaused = false.obs;
   String ?phoneNumber;
   dynamic secondOtp;
-
-
   void startTimer(int seconds) {
     const duration = Duration(seconds: 1);
     remainingSeconds = seconds;
@@ -36,7 +32,7 @@ class OtpController extends GetxController {
   }
   @override
   void onReady() {
-    startTimer(60);
+    startTimer(59);
     super.onReady();
   }
   @override
@@ -51,7 +47,7 @@ class OtpController extends GetxController {
       await CallAPI.sentOTP(request: {
         "phoneNumber": phoneNumber
       }).then((value) {
-        startTimer(60);
+        startTimer(59);
 
         secondOtp = value.otp;
         if (value.status == 200) {
@@ -63,26 +59,34 @@ class OtpController extends GetxController {
   }
   void onVerify() {
     showLoader();
-    if (otpController.text.trim().isNotEmpty) {
-      if (otpController.text.trim().length == 6) {
-        if (countryCodeController.finalOTP == int.parse(otpController.text.trim())) {
-          dismissLoader();
-          Get.toNamed(AppRoutes.registration);
-          printResult(screenName: "OTP SCREEN", msg: "OTP VERIFIED");
-        } else if (secondOtp == int.parse(otpController.text.trim())) {
-          dismissLoader();
-          Get.toNamed(AppRoutes.registration);
-          printResult(screenName: "OTP SCREEN", msg: "OTP VERIFIED");
-        } else {
-          dismissLoader();
-          showSnackBar("Invalid OTP");
 
-        }
+    String otp = otpController.text.trim();
 
-      }
-    } else {
+    if (otp.isEmpty) {
       dismissLoader();
       showSnackBar("Please enter a valid OTP");
+      return;
+    }
+
+    if (otp.length != 6) {
+      dismissLoader();
+      showSnackBar("Invalid OTP");
+      return;
+    }
+
+    try {
+      int enteredOtp = int.parse(otp);
+      if (enteredOtp == countryCodeController.finalOTP || enteredOtp == secondOtp) {
+        dismissLoader();
+        Get.toNamed(AppRoutes.registration);
+        printResult(screenName: "OTP SCREEN", msg: "OTP VERIFIED");
+      } else {
+        dismissLoader();
+        showSnackBar("Invalid OTP");
+      }
+    } catch (e) {
+      dismissLoader();
+      showSnackBar("Invalid OTP format");
     }
   }
   @override

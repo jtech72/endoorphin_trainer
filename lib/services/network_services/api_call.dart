@@ -9,6 +9,7 @@ import '../models/request_models/login_model.dart';
 import '../models/request_models/save_bankdetail_model.dart';
 import '../models/request_models/send_otp_model.dart';
 import '../models/request_models/sign_up_model.dart';
+import '../models/response_models/get_bank_detail.dart';
 import '../models/response_models/get_trainer_doc_status_model.dart';
 import '../models/response_models/profile_detail_model.dart';
 import 'api_manager.dart';
@@ -221,7 +222,6 @@ class CallAPI {
         fields: fields,
         files: files,
       );
-
       DocumentModel responseModel = DocumentModel.fromJson(json);
       if (responseModel.status == 200) {
         result = responseModel;
@@ -288,6 +288,23 @@ class CallAPI {
     }
   }
 
-
+/// Get bank detail
+  static Future<GetBankDetailModel> getBankDetail({required String id}) async {
+    try {
+      String endPoint = Endpoints.epGetBankDetails;
+      Map<String, dynamic> json = await APIManager().getAllCall(endPoint: endPoint);
+      GetBankDetailModel responseModel = GetBankDetailModel.fromJson(json);
+      if (responseModel.status == 200) {
+        log("CALLING_ENDPOINT: $endPoint ,RESPONSE:  $json");
+        return responseModel;
+      } else {
+        throw Exception("Error: ${responseModel.status}");
+      }
+    } catch (e, st) {
+      log(e.toString());
+      log(st.toString());
+      return GetBankDetailModel(status: 500); // Return an error status
+    }
+  }
 
 }
