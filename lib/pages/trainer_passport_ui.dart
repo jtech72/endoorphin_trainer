@@ -76,10 +76,9 @@ class TrainerPassportUI extends StatelessWidget {
                     child: TextField(
 
                       controller: controller.certificateName,
-                      // inputFormatters: [
-                      //   LengthLimitingTextInputFormatter(64),
-                      //   FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                      // ],
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(64),
+                        FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))                      ],
                       enableInteractiveSelection: true,
                       style: Theme.of(context).textTheme.labelMedium,
                       cursorColor: AppColors.grey,

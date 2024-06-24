@@ -8,15 +8,22 @@ class TrainerPassportController extends GetxController {
   TextEditingController certificateNumber = TextEditingController();
 
   onFileUpload() {
-    if (certificateNumber.text.isEmpty || certificateName.text.isEmpty) {
+    // Trim the input to remove leading and trailing whitespace
+    String trimmedCertificateNumber = certificateNumber.text.trim();
+    String trimmedCertificateName = certificateName.text.trim();
+
+    // Validation: Check if the trimmed strings are empty or certificate name length is invalid
+    if (trimmedCertificateNumber.isEmpty || trimmedCertificateName.isEmpty) {
       showSnackBar("Please enter a certificate number and name");
+    } else if (trimmedCertificateName.length < 3 || trimmedCertificateName.length > 50) {
+      showSnackBar("Certificate name must be atleast 3 characters");
     } else {
       Get.toNamed(AppRoutes.uploadimage, arguments: {
         "userId": certificationDetails!["userId"],
         "categoryName": certificationDetails!["categoryName"],
         "categoryId": certificationDetails!["categoryId"],
-        "certificateNumber": certificateNumber.text,
-        "certificateName": certificateName.text,
+        "certificateNumber": trimmedCertificateNumber,
+        "certificateName": trimmedCertificateName,
       });
     }
   }

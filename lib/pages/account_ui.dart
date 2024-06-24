@@ -10,7 +10,6 @@ class AccountUI extends StatelessWidget {
   Widget build(BuildContext context) {
     AccountController controller =Get.find();
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: myAppBar(title:GestureDetector(onTap: (){Get.back();},child: Text('Accounts',style: Theme.of(context).textTheme.headlineSmall,)), context: context, ),
       body: Container(
         height: Get.height,
@@ -76,8 +75,9 @@ class AccountUI extends StatelessWidget {
                                 snapshot.data!.result!.profileImg == null?
                                 const CircleAvatar(
                                   radius: 40,
+                                  backgroundColor: AppColors.blackShade,
                                   backgroundImage:
-                                  AssetImage(ImagesPaths.profilePic), // Your profile image
+                                  AssetImage(ImagesPaths.profile), // Your profile image
                                 ):
                                 CircleAvatar(
                                   radius: 40,
@@ -293,6 +293,7 @@ class AccountUI extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5)
                       ),
                       child: TextField(
+                        enabled: false,
                         controller: controller.phoneNumberController,
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(64),

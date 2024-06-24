@@ -31,7 +31,7 @@ class BioController extends GetxController {
   Future<void> selectSource() async {
     Get.dialog(
         AlertDialog(
-          title: const Text("Add Your Documents"),
+          title: const Text("Add profile image."),
           actions: <Widget>[
             TextButton(
               child: Text("Camera"),
