@@ -6,8 +6,10 @@ import 'package:endoorphin_trainer/services/models/response_models/get_category_
 import '../../custom_Widgets/common_widgets.dart';
 import '../models/request_models/category_document_model.dart';
 import '../models/request_models/login_model.dart';
+import '../models/request_models/save_bankdetail_model.dart';
 import '../models/request_models/send_otp_model.dart';
 import '../models/request_models/sign_up_model.dart';
+import '../models/response_models/get_bank_detail.dart';
 import '../models/response_models/get_trainer_doc_status_model.dart';
 import '../models/response_models/profile_detail_model.dart';
 import 'api_manager.dart';
@@ -256,6 +258,52 @@ class CallAPI {
       log(e.toString());
       log(st.toString());
       return ProfileDetailsModel(status: 500); // Return an error status
+    }
+  }
+  /// Post Bank Detail
+  static Future<SavebankDetailModel> saveBankDetail({required var request}) async {
+    SavebankDetailModel result = SavebankDetailModel();
+    try {
+      Map<dynamic, dynamic> json = await APIManager().postAPICall(
+        endpoint: Endpoints.epPostBankDetails,
+        request: request,
+      );
+
+      SavebankDetailModel responseModel = SavebankDetailModel.fromJson(json);
+      if (responseModel.status == 200) {
+        result = responseModel;
+        printResult(
+            screenName: 'API CALL',
+            msg: "CALLING ENDPOINTS ${Endpoints.epPostBankDetails}, RESULT:$json");
+
+        return result;
+      } else {
+        result = responseModel;
+        return result;
+      }
+    } on Exception catch (e, st) {
+      printResult(
+          screenName: 'API CALL', msg: "", error: e.toString(), stackTrace: st);
+      return result;
+    }
+  }
+
+/// Get bank detail
+  static Future<GetBankDetailModel> getBankDetail({required String id}) async {
+    try {
+      String endPoint = Endpoints.epGetBankDetails;
+      Map<String, dynamic> json = await APIManager().getAllCall(endPoint: endPoint+id);
+      GetBankDetailModel responseModel = GetBankDetailModel.fromJson(json);
+      if (responseModel.status == 200) {
+        log("CALLING_ENDPOINT: $endPoint ,RESPONSE:  $json");
+        return responseModel;
+      } else {
+        throw Exception("Error: ${responseModel.status}");
+      }
+    } catch (e, st) {
+      log(e.toString());
+      log(st.toString());
+      return GetBankDetailModel(status: 500); // Return an error status
     }
   }
 

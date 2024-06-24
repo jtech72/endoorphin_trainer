@@ -56,7 +56,7 @@ class Result {
   dynamic? documentForntImg;
   String? documentFrontImg;
   String? documentBackImg;
-  String? categoryName;
+  dynamic? categoryName;
   String? categoryNumber;
   String? createdAt;
   String? updatedAt;
