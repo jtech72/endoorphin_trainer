@@ -9,6 +9,7 @@ import '../models/request_models/login_model.dart';
 import '../models/request_models/save_bankdetail_model.dart';
 import '../models/request_models/send_otp_model.dart';
 import '../models/request_models/sign_up_model.dart';
+import '../models/request_models/update_bank_detail_model.dart';
 import '../models/response_models/get_bank_detail.dart';
 import '../models/response_models/get_trainer_doc_status_model.dart';
 import '../models/response_models/profile_detail_model.dart';
@@ -304,6 +305,26 @@ class CallAPI {
       log(e.toString());
       log(st.toString());
       return GetBankDetailModel(status: 500); // Return an error status
+    }
+  }
+  static Future<UpdateBankDetailModel> updateBankDetail({required request}) async {
+    UpdateBankDetailModel result = UpdateBankDetailModel();
+    try {
+      String endPoint = Endpoints.epUpdateBankDetails;
+      Map<dynamic, dynamic> json =
+      await APIManager().putAPICall(endPoint: endPoint, request: request);
+      UpdateBankDetailModel responseModel = UpdateBankDetailModel.fromJson(json);
+      if (responseModel.status == 200) {
+        result = responseModel;
+        log("CALLING_ENDPOINT: $endPoint ,RESPONSE:  $json");
+        return result;
+      } else {
+        result = responseModel;
+        return result;
+      }
+    } on Exception catch (e) {
+      log(e.toString());
+      return result;
     }
   }
 

@@ -24,7 +24,7 @@ class GetBankDetailModel {
 }
 
 class Result {
-  int? id;
+  dynamic? id;
   String? ifscCode;
   String? bankName;
   String? branchName;
@@ -33,6 +33,7 @@ class Result {
   String? accountType;
   String? effectiveData;
   int? trainerId;
+  String? city;
   String? createdAt;
   String? updatedAt;
 
@@ -46,6 +47,7 @@ class Result {
         this.accountType,
         this.effectiveData,
         this.trainerId,
+        this.city,
         this.createdAt,
         this.updatedAt});
 
@@ -59,6 +61,7 @@ class Result {
     accountType = json['accountType'];
     effectiveData = json['effectiveData'];
     trainerId = json['trainerId'];
+    city = json['city'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
   }
@@ -74,6 +77,7 @@ class Result {
     data['accountType'] = this.accountType;
     data['effectiveData'] = this.effectiveData;
     data['trainerId'] = this.trainerId;
+    data['city'] = this.city;
     data['createdAt'] = this.createdAt;
     data['updatedAt'] = this.updatedAt;
     return data;

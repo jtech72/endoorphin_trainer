@@ -1,11 +1,14 @@
+import 'dart:developer';
+
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
+import '../services/models/request_models/update_bank_detail_model.dart';
 import '../services/network_services/api_call.dart';
 
-class BankingDetailsController extends GetxController{
-  final items2 = ['CURRENT ACCOUNT','SAVING ACCOUNT'];
+class BankingDetailsController extends GetxController {
+  final items2 = ['CURRENT ACCOUNT', 'SAVING ACCOUNT'];
   String accountType = "";
   RxString selectedOption1 = 'ACCOUNT TYPE'.obs;
   final ifscController = TextEditingController();
@@ -18,6 +21,8 @@ class BankingDetailsController extends GetxController{
   final accountTypeController = TextEditingController();
   final effectiveController = TextEditingController();
 
+  var buttonText = 'Save'.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -26,7 +31,7 @@ class BankingDetailsController extends GetxController{
     });
   }
 
-  void onSaveAndSubmitBooking() async {
+  Future<bool> onSaveAndSubmitBooking() async {
     if (ifscController.text.isEmpty ||
         bankNameController.text.isEmpty ||
         cityController.text.isEmpty ||
@@ -35,8 +40,9 @@ class BankingDetailsController extends GetxController{
         accountNameController.text.isEmpty ||
         bankAcNumberController.text.isEmpty ||
         confirmBankAcNumberController.text.isEmpty ||
-        effectiveController.text.isEmpty||selectedOption1.value=='ACCOUNT TYPE') {
+        effectiveController.text.isEmpty || selectedOption1.value == 'ACCOUNT TYPE') {
       showSnackBar("Please fill all the fields");
+      return false;
     } else {
       final saveBankDetailModel = {
         "ifscCode": ifscController.text.trim(),
@@ -56,15 +62,69 @@ class BankingDetailsController extends GetxController{
           if (kDebugMode) {
             print("Bank details saved successfully");
           }
-          Get.toNamed(AppRoutes.earning);
+          buttonText.value = 'Update'; // Change button text to Update
+          Get.toNamed(AppRoutes.bottomNavigation);
+          return true;
         } else {
           print('Saving bank details failed: ${response.message}');
           showSnackBar('Saving bank details failed: ${response.message}');
+          return false;
         }
       } catch (e) {
         print('Error: $e');
         showSnackBar('Error: $e');
+        return false;
       }
     }
   }
+
+  void updateUser(String id) async {
+    showLoader();
+    try {
+      Map<String, String> fields = {
+        "id":id ,
+        'ifscCode': ifscController.value.text.trim(),
+        'bankName': bankNameController.value.text.trim(),
+        'branchName': branchController.value.text.trim(),
+        'accountName': accountNameController.value.text.trim(),
+        'banckAccountNumber': bankAcNumberController.value.text.trim(),
+        'accountType': selectedOption1.value.trim(),
+        'effectiveData': effectiveController.value.text.trim(),
+        'city': cityController.value.text.trim(),
+      };
+      log("Updating user with fields: $fields");
+
+      final response = await CallAPI.updateBankDetail(request: {"Id":"userId"});
+      log("Update response: $response");
+
+      if (response.status == 200) {
+        dismissLoader();
+        Get.offAllNamed(AppRoutes.bottomNavigation);
+        showSnackBar(response.message.toString());
+        log('User details updated successfully: ${response.message}');
+      } else {
+        dismissLoader();
+        showSnackBar(response.message.toString());
+        log('Failed to update user details: ${response.message}');
+      }
+    } catch (e, st) {
+      dismissLoader();
+      log('Error updating user details: $e', stackTrace: st);
+    }
+  }
+  Future<void> onSaveButton() async {
+    try {
+      final response = await CallAPI.getBankDetail(id: storage.read("userId").toString());
+      if (response.result == null) {
+        log("message");
+        onSaveAndSubmitBooking();
+      } else {
+        updateUser(response.result!.id.toString());
+      }
+    } catch (e) {
+      // Handle the error (e.g., show a message to the user)
+      print('Error: $e');
+    }
+  }
+
 }
