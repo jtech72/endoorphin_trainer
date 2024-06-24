@@ -88,8 +88,9 @@ class ProfileUI extends StatelessWidget {
                               backgroundColor: AppColors.yellow,
                               child: CircleAvatar(
                                 radius: 40,
+                                backgroundColor: AppColors.blackShade,
                                 backgroundImage:
-                                    AssetImage(ImagesPaths.profilePic),
+                                    AssetImage(ImagesPaths.profile),
                               ),
                             ).paddingOnly(left: 30)
                           :  CircleAvatar(

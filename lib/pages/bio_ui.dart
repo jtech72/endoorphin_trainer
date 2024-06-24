@@ -50,7 +50,6 @@ class BioUi extends StatelessWidget {
                       : FileImage(controller.profileImage.value!) as ImageProvider<Object>?,
                 ),
               )
-
                               ),
 
                               Positioned(
@@ -92,9 +91,7 @@ class BioUi extends StatelessWidget {
                               controller: controller.nicknameController ,
                               inputFormatters: [
                                 LengthLimitingTextInputFormatter(64),
-                                FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                              ],
-
+                                FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))                      ],
                               enableInteractiveSelection: true,
                               style: Theme.of(context).textTheme.labelMedium,
                               cursorColor: AppColors.grey,
@@ -154,6 +151,9 @@ class BioUi extends StatelessWidget {
                               style: Theme.of(context).textTheme.labelMedium,
                               cursorColor: AppColors.grey,
                               cursorHeight: 18,
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(64),
+                                FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))                      ],
                               decoration: InputDecoration(
 
                                 filled: true,

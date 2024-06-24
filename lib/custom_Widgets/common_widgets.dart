@@ -270,3 +270,32 @@ enum UploadImage{
 //     ),
 //   );
 // }
+//
+
+Widget buildOption(IconData icon, String label, VoidCallback onTap) {
+  return InkWell(
+    onTap: onTap,
+    child: Container(
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      child: Column(
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: const BoxDecoration(
+              color: AppColors.yellow, // assuming AppColors.Yellow is defined somewhere
+              shape: BoxShape.circle,
+            ),
+            child: Icon(icon, color: AppColors.Black3),
+          ).paddingOnly(bottom: 5),
+          Text(
+            label,
+            style: const TextStyle(
+              color: AppColors.white,
+              fontSize: 14,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}

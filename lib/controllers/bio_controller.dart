@@ -29,27 +29,44 @@ class BioController extends GetxController {
     }
   }
   Future<void> selectSource() async {
-    Get.dialog(
-        AlertDialog(
-          title: const Text("Add Your Documents"),
-          actions: <Widget>[
-            TextButton(
-              child: Text("Camera"),
-              onPressed: () {
+    await Get.bottomSheet(
+      Container(
+        width: Get.width,
+        height: Get.height*0.13,
+        decoration: const BoxDecoration(
+          color: AppColors.Black3,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15),
+            topRight: Radius.circular(15),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            buildOption(
+              Icons.camera_alt,
+              'Camera',
+                  () {
+                print('Camera opened');
                 Get.back();
-                openCameraOrGallery( ImageSource.camera);
+                openCameraOrGallery(ImageSource.camera);
               },
             ),
-            TextButton(
-              child: Text("Gallery"),
-              onPressed: () {
+            buildOption(
+              Icons.photo_library,
+              'Gallery',
+                  () {
+                print('Gallery opened');
                 Get.back();
                 openCameraOrGallery(ImageSource.gallery);
               },
             ),
           ],
-        )
+        ),
+      ),
 
+      backgroundColor: Colors.white,
     );
   }
 

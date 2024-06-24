@@ -14,37 +14,46 @@ class BioEditController extends GetxController{
   TextEditingController bioController = TextEditingController();
 
   Future<void> onUpdateButton() async {
-    showLoader();
-    Map<String, String> fields = {
-      "id":storage.read("userId").toString(),
-      "nickName": niceNameController.text.trim(),
-      "professionalTitle": professionalTitleController.text.trim(),
-      "yearExperience": experienceController.text.trim(),
-      "funFact": funFactController.text.trim(),
-      "quote": motivationController.text.trim(),
-      "bio": bioController.text.trim(),
-    };
+    if(niceNameController.text.isEmpty ||
+        professionalTitleController.text.isEmpty ||
+        experienceController.text.isEmpty){
+      showSnackBar("Please fill all the mandatory fields");
 
-    log("fields = $fields ");
-    try {
-      DocumentModel result = await CallAPI.uploadProfileDetails(
-        fields: fields,
-        files: {},
-      );
-      if (result.status == 200) {
+    }else{
+      showLoader();
+      Map<String, String> fields = {
+        "id":storage.read("userId").toString(),
+        "nickName": niceNameController.text.trim(),
+        "professionalTitle": professionalTitleController.text.trim(),
+        "yearExperience": experienceController.text.trim(),
+        "funFact": funFactController.text.trim(),
+        "quote": motivationController.text.trim(),
+        "bio": bioController.text.trim(),
+      };
+
+      log("fields = $fields ");
+      try {
+        DocumentModel result = await CallAPI.uploadProfileDetails(
+          fields: fields,
+          files: {},
+        );
+        if (result.status == 200) {
+          dismissLoader();
+          Get.back();
+          showSnackBar(result.message.toString());
+          log("Successfully uploaded");
+        } else {
+          dismissLoader();
+          showSnackBar(result.message.toString());
+          log("Failed to upload");
+        }
+      } catch (e, st) {
         dismissLoader();
-        Get.back();
-        showSnackBar(result.message.toString());
-        log("Successfully uploaded");
-      } else {
-        dismissLoader();
-        showSnackBar(result.message.toString());
-        log("Failed to upload");
+        log(e.toString());
+        log(st.toString());
       }
-    } catch (e, st) {
-      log(e.toString());
-      log(st.toString());
     }
+
 
   }
 
