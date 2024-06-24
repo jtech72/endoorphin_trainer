@@ -458,84 +458,62 @@ class RegistrationUi extends StatelessWidget {
               ),
                       Row(
                         children: [
-                          Text("Categories",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),).paddingOnly(top: 15,bottom: 8),
-                          Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
-                        ],),
+                          Text(
+                            "Categories",
+                            style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14),
+                          ).paddingOnly(top: 15, bottom: 8),
+                          Text(
+                            " *",
+                            style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14, color: Colors.red),
+                          ).paddingOnly(top: 15, bottom: 8),
+                        ],
+                      ),
                       Container(
-                          width: Get.width,
-                          decoration: BoxDecoration(
-                            color: AppColors.yellowishWhite,
-                            border: Border.all(color: AppColors.impgrey),
-                            shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child:                     FutureBuilder(
-                            future: CallAPI.getCategory(),
-                            builder: (BuildContext context, snapshot) {
-                              if (snapshot.connectionState == ConnectionState.waiting) {
-                                return const Center(
-                                  child: CircularProgressIndicator(),
-                                ).paddingOnly(top: 20);
-                              }
-                              if (snapshot.hasError) {
-                                return Center(
-                                  child: Text('Error: ${snapshot.error}'),
-                                );
-                              }
-                              return
-                                Padding(
-                                padding: EdgeInsets.zero,
-                                child: RawScrollbar(padding: EdgeInsets.zero,
-                                  trackVisibility: true,
-                                  trackRadius: const Radius.circular(50),thickness: 5,
-                                  interactive: true,
-                                  thumbColor: AppColors.grey4,timeToFade: const Duration(seconds: 2),
-                                  child: ListView.builder(
-                                    physics: NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    itemCount: snapshot.data!.result!.length,
-                                    itemBuilder: (context, index) {
-                                      final item = snapshot.data!.result![index].id;
-                                      return Obx(
-                                            () => Row(
-                                            children: [
-                                              Checkbox(
-                                                activeColor: AppColors.yellow,
-                                                checkColor: AppColors.black,
-                                                value: controller.checkedList.length > index ? controller.checkedList[index] : false, // Use checkedList to determine checkbox state
-                                                onChanged: (value) {
-                                                  controller.toggleItem(item, index);
-                                                  log("Added value ==>${item.toString()}");
-                                                  if (value ?? false) {
-                                                    // Add the item to selectedOne2 list
-                                                    controller.selectedOne2.add(item!);
-                                                    log("Added value ==>${controller.selectedOne2.toString()}");
-                                                  } else {
-                                                    // Remove the item from selectedOne2 list
-                                                    controller.selectedOne2.remove(item);
-                                                    log("Added value ==>${controller.selectedOne2.toString()}");
-                                                  }
-                                                },
-                                              ),
-                                              InkWell(
-                                                  onTap: (){
-                                                    controller.toggleItem(item, index); // Toggle item selection
-
-                                                  },
-                                                  child: Container(
-                                                    alignment: Alignment.center,
-                                                      height: 27,
-                                                      child: Text(snapshot.data!.result![index].name.toString(),style: Theme.of(context).textTheme.displayLarge!.copyWith(fontWeight: FontWeight.w400,color: Colors.black),))),
-                                            ]
-                                                                                    ),
-                                      );
-                                    },
-                                  ),
-                                ),
+                        width: Get.width,
+                        decoration: BoxDecoration(
+                          color: AppColors.yellowishWhite,
+                          border: Border.all(color: AppColors.impgrey),
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: FutureBuilder(
+                          future: CallAPI.getCategory(),
+                          builder: (BuildContext context, AsyncSnapshot snapshot) {
+                            if (snapshot.connectionState == ConnectionState.waiting) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              ).paddingOnly(top: 20);
+                            }
+                            if (snapshot.hasError) {
+                              return Center(
+                                child: Text('Error: ${snapshot.error}'),
                               );
-                            },
-                          ),
-                     ),
+                            }
+                            List<DropdownMenuItem<String>> dropdownItems = snapshot.data.result.map<DropdownMenuItem<String>>((item) {
+                              return DropdownMenuItem<String>(
+                                value: item.id.toString(),
+                                child: Text(item.name.toString(), style: Theme.of(context).textTheme.displayLarge!.copyWith(fontWeight: FontWeight.w400, color: Colors.black)),
+                              );
+                            }).toList();
+
+                            return Padding(
+                              padding: EdgeInsets.zero,
+                              child: DropdownButton<String>(
+                                value: selectedItem,
+                                hint: Text("Select a category"),
+                                icon: Icon(Icons.arrow_drop_down),
+                                isExpanded: true,
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    selectedItem = newValue;
+                                  });
+                                },
+                                items: dropdownItems,
+                              ).paddingOnly(left: 8, right: 8),
+                            );
+                          },
+                        ),
+                      ),
                     ],
                   ).paddingOnly(top: 0,bottom: Get.height*0.01),
                   Row(

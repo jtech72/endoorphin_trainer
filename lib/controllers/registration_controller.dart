@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:get/get.dart';
+import '../services/models/response_models/get_trainer_doc_status_model.dart';
 import '../services/network_services/api_call.dart';
 import '../services/network_services/notification_servies.dart';
 class RegistrationController extends GetxController{
@@ -8,6 +9,8 @@ class RegistrationController extends GetxController{
  RxBool isValidVisible = false.obs;
   RxBool obscureText = true.obs;
   RxBool obscureText1 = true.obs;
+  var categories = <Result>[].obs;
+  var selectedItem = RxnString();
   void toggleObscureText() {
     obscureText.toggle(); // Toggle the RxBool value
   }
@@ -116,4 +119,22 @@ void onInit() {
   notificationServices.isDeviceTokenRefresh();
   super.onInit();
 }
+  void fetchCategories() async {
+    try {
+      var result = await CallAPI.getCategory();
+      if (result.result != null) {
+        categories.value = result.result!;
+      } else {
+        categories.value = [];
+      }
+    } catch (error) {
+      // Handle error appropriately
+      print("Error fetching categories: $error");
+      categories.value = [];
+    }
+  }
+
+  void setSelectedItem(String? value) {
+    selectedItem.value = value;
+  }
 }
