@@ -49,7 +49,7 @@ class BankingDetailsUI extends StatelessWidget {
                     child: Text('Error: ${snapshot.error}'),
                   );
                 }
-
+///
                 controller.ifscController.text = snapshot.data!.result!.ifscCode.toString();
                 controller.bankNameController.text = snapshot.data!.result!.bankName.toString();
                 controller.cityController.text = snapshot.data!.result!.branchName.toString();
