@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:endoorphin_trainer/controllers/banking_details_controller.dart';
 import 'package:endoorphin_trainer/custom_Widgets/common_widgets.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
@@ -49,16 +51,24 @@ class BankingDetailsUI extends StatelessWidget {
                     child: Text('Error: ${snapshot.error}'),
                   );
                 }
-///
-                controller.ifscController.text = snapshot.data!.result!.ifscCode.toString();
-                controller.bankNameController.text = snapshot.data!.result!.bankName.toString();
-                controller.cityController.text = snapshot.data!.result!.branchName.toString();
-                controller.branchController.text = snapshot.data!.result!.branchName.toString();
-                controller.accountNameController.text = snapshot.data!.result!.accountName.toString();
-                controller.bankAcNumberController.text = snapshot.data!.result!.banckAccountNumber.toString();
-                controller.confirmBankAcNumberController.text = snapshot.data!.result!.banckAccountNumber.toString();
-                controller.selectedOption1.value = snapshot.data!.result!.accountType.toString();
-                controller.effectiveController.text = snapshot.data!.result!.effectiveData.toString();
+                controller.ifscController.text =
+                    snapshot.data?.result?.ifscCode?.toString() ?? "";
+                controller.bankNameController.text =
+                    snapshot.data?.result?.bankName?.toString() ?? "";
+                controller.cityController.text =
+                    snapshot.data?.result?.branchName?.toString() ?? "";
+                controller.branchController.text =
+                    snapshot.data?.result?.branchName?.toString() ?? "";
+                controller.accountNameController.text =
+                    snapshot.data?.result?.accountName?.toString() ?? "";
+                controller.bankAcNumberController.text =
+                    snapshot.data?.result?.banckAccountNumber?.toString() ?? "";
+                controller.confirmBankAcNumberController.text =
+                    snapshot.data?.result?.banckAccountNumber?.toString() ?? "";
+                controller.selectedOption1.value =
+                    snapshot.data?.result?.accountType?.toString() ?? "";
+                controller.effectiveController.text =
+                    snapshot.data?.result?.effectiveData?.toString() ?? "";
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -482,19 +492,21 @@ class BankingDetailsUI extends StatelessWidget {
                     ),
                     Center(
                         child: InkButton(
-                            child: Text(
-                              'Save',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineSmall!
-                                  .copyWith(
-                                      color: AppColors.black,
-                                      fontSize: 18,
-                                      fontFamily: 'Montserrat'),
-                            ),
-                            onTap: () {
-                              controller.onSaveAndSubmitBooking();
-                            }))
+                      child: Obx(() => Text(
+                            controller.buttonText.value,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall!
+                                .copyWith(
+                                  color: AppColors.black,
+                                  fontSize: 18,
+                                  fontFamily: 'Montserrat',
+                                ),
+                          )),
+                      onTap: () {
+                        controller.onSaveButton();
+                      },
+                    ))
                   ],
                 ).paddingOnly(left: Get.width * 0.05, right: Get.width * 0.05);
               }),

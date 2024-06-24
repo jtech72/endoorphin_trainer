@@ -25,6 +25,9 @@ class Endpoints{
   /// get bank detail
 
   static const String epGetBankDetails="getBankDetailsForTrainers?trainerId=";
+  /// Update Bank Detail
+  static const String epUpdateBankDetails="updateBankDetails?trainerId=&city=";
+
 
 
 }
