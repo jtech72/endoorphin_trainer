@@ -13,17 +13,35 @@ class DocumentUI extends StatelessWidget {
     DocumentController controller = Get.put(DocumentController());
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: myAppBar(
-          title: GestureDetector(
+      appBar: AppBar(
+        toolbarHeight: 50,
+        leadingWidth: Get.width * 0.17,
+        centerTitle: false,
+        surfaceTintColor: Colors.transparent,
+        backgroundColor: AppColors.black,
+        elevation: 3,
+        titleSpacing: -10,
+        leading: GestureDetector(
             onTap: () {
-              Get.back();
+              Get.offAllNamed(AppRoutes.bottomNavigation);
             },
-            child: Text(
-              'Documents',
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
+            child: Container(
+                height: 30,
+                width: 40,
+                decoration: const BoxDecoration(
+                    color: Colors.transparent, shape: BoxShape.circle),
+                child: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: AppColors.white,
+                  size: 18,
+                ))),
+        title: GestureDetector(onTap: (){Get.offAllNamed(AppRoutes.bottomNavigation);},
+          child: Text(
+            "Documents",
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
-          context: context),
+        ),
+      ),
       body: Container(
         height: Get.height,
         width: Get.width,
@@ -363,6 +381,7 @@ class DocumentUI extends StatelessWidget {
                                                                           "",
                                                                       "certificateName":
                                                                           "",
+                                                                      "name":snapshot.data!.result![index].category!.name.toString()
                                                                     });
                                                               },
                                                               child: Container(
@@ -725,6 +744,8 @@ class DocumentUI extends StatelessWidget {
                                                                               "",
                                                                           "certificateName":
                                                                               "",
+                                                                          "name":snapshot.data!.result![index].category!.name.toString()
+
                                                                         });
                                                                   },
                                                                   child:
@@ -1080,6 +1101,8 @@ class DocumentUI extends StatelessWidget {
                                                                               "categoryId": snapshot.data!.result![index].category!.id.toString(),
                                                                               "certificateNumber": "",
                                                                               "certificateName": "",
+                                                                              "name":snapshot.data!.result![index].category!.name.toString()
+
                                                                             });
                                                                       },
                                                                       child:
@@ -1166,13 +1189,14 @@ class DocumentUI extends StatelessWidget {
                                                       .category
                                                       ?.id ??
                                                   "";
-
-                                              Get.toNamed(
-                                                  AppRoutes.trainerPassport,
+                                              uploadImage = UploadImage.byProfile;
+                                              Get.toNamed(AppRoutes.trainerPassport,
                                                   arguments: {
                                                     "userId": userId,
                                                     "categoryName": "",
                                                     "categoryId": categoryId,
+                                                    "name":snapshot.data!.result![index].category!.name.toString()
+
                                                   });
                                             },
                                             child: Container(
@@ -1303,6 +1327,7 @@ class DocumentUI extends StatelessWidget {
                                       "userId":
                                           storage.read("userId").toString(),
                                       "categoryName": "Emirates ID",
+
                                     });
                               },
                               child: Container(
@@ -1392,6 +1417,7 @@ class DocumentUI extends StatelessWidget {
                                       "userId":
                                           storage.read("userId").toString(),
                                       "categoryName": "Passport",
+
                                     });
                               },
                               child: Container(

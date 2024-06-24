@@ -58,14 +58,15 @@ class UploadImagesController extends GetxController {
           log("back Image ${backImagePicked.value}");
         }
       } else {
+        selectSource(isFrontImage);
         print('User canceled');
       }
     } catch (e) {
       print('Permission denied: $e');
-      selectSource(isFrontImage);
     }
   }
   Future<void> selectSource(bool isFrontImage) async {
+    log("message");
     await Get.bottomSheet(
       Container(
         width: Get.width,
@@ -141,7 +142,7 @@ class UploadImagesController extends GetxController {
         log("dsfghfdd${uploadImage}");
 
         uploadImage == UploadImage.byProfile?
-        Get.offAllNamed(AppRoutes.bottomNavigation):
+        Get.offAllNamed(AppRoutes.document):
         Get.offAllNamed(AppRoutes.moreaboutyou);
         showSnackBar(result.message.toString());
 
@@ -180,7 +181,7 @@ class UploadImagesController extends GetxController {
         log("Successfully uploaded");
         log("dsfghfdd${uploadImage}");
         uploadImage == UploadImage.byProfile?
-        Get.offAllNamed(AppRoutes.bottomNavigation):
+        Get.offAllNamed(AppRoutes.document):
         Get.offAllNamed(AppRoutes.moreaboutyou);
         showSnackBar(result.message.toString());
 
@@ -216,9 +217,9 @@ class UploadImagesController extends GetxController {
       if(result.status == 200){
         dismissLoader();
         log("Successfully uploaded");
-        log("sadfgg${uploadImage}");
+        log("dsfghfdd${uploadImage}");
         uploadImage == UploadImage.byProfile?
-            Get.offAllNamed(AppRoutes.bottomNavigation):
+            Get.offAllNamed(AppRoutes.document):
         Get.offAllNamed(AppRoutes.moreaboutyou);
         showSnackBar(result.message.toString());
 

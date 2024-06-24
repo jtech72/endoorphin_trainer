@@ -12,36 +12,6 @@ class MoreAboutYouUi extends StatelessWidget {
     MoreAboutYouController controller = Get.put(MoreAboutYouController());
 
     return Scaffold(
-      // appBar: myAppBar(
-      //     title: Transform.translate(
-      //         offset: const Offset(0, -3),
-      //         child: GestureDetector(
-      //             onTap: () {
-      //               Get.toNamed(AppRoutes.registration);
-      //             },
-      //             child: Image.asset(
-      //               ImagesPaths.logoimg,
-      //               height: 36,
-      //               width: 146,
-      //             ))),
-      //     action: [
-      //       IconButton(
-      //           onPressed: (){
-      //               Get.toNamed(AppRoutes.bio);
-      //           },
-      //           icon: Container(
-      //             alignment: Alignment.center,
-      //             height: 24,
-      //             width: 44,
-      //             decoration: const BoxDecoration(
-      //                 color: AppColors.yellow,
-      //                 borderRadius: BorderRadius.all(Radius.circular(24))),
-      //             child: Text('Skip',style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.black,fontWeight: FontWeight.w500),textAlign: TextAlign.center,),
-      //           ),
-      //       ),
-      //       SizedBox(width: Get.width*0.04,)
-      //     ],
-      //     context: context),
       appBar: AppBar(
         toolbarHeight: 50,
         leadingWidth: Get.width * 0.17,
@@ -1018,7 +988,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                                     .category
                                                     ?.id ??
                                                 "";
-
+                                            uploadImage = UploadImage.byInitically;
                                             Get.toNamed(
                                                 AppRoutes.trainerPassport,
                                                 arguments: {
