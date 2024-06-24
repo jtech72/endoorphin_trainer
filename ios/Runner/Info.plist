@@ -26,6 +26,11 @@
     <string>$(FLUTTER_BUILD_NUMBER)</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
+    <!-- Prmissions for file manger -->
+    <key>NSCameraUsageDescription</key>
+    <string>Used to pick files from your device</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Used to pick files from your device</string>
 
     <!-- Permissions for Camera and Photo Library -->
     <key>NSCameraUsageDescription</key>
