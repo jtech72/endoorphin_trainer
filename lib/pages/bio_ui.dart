@@ -50,7 +50,6 @@ class BioUi extends StatelessWidget {
                       : FileImage(controller.profileImage.value!) as ImageProvider<Object>?,
                 ),
               )
-
                               ),
 
                               Positioned(
