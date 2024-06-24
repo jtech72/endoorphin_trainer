@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import '../../utils/exports.dart';
+import '../models/request_models/save_bankdetail_model.dart';
 import 'custum_exceptions.dart';
 import 'endpoints.dart';
 import 'package:http_parser/http_parser.dart';
@@ -94,8 +95,6 @@ class APIManager {
 
     return responseJson;
   }
-
-
 // MULTIPART REQUEST
 
   Future<Map<String, dynamic>> putMultipartAPICall({required String endPoint, required Map<String, String> fields, required Map<String, File> files,}) async {
