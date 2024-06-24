@@ -219,7 +219,6 @@ class RegistrationUi extends StatelessWidget {
                             hintStyle: Theme.of(context).textTheme.labelMedium,
                             contentPadding:
                             const EdgeInsets.only(bottom: 3, left: 15),
-
                             hintText: "Enter your Email",
                             alignLabelWithHint: true,
                             enabledBorder: OutlineInputBorder(
