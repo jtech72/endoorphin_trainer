@@ -11,7 +11,6 @@ class BioEditUi extends StatelessWidget {
   Widget build(BuildContext context) {
     BioEditController controller = Get.put(BioEditController());
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: myAppBar(
         title: GestureDetector(
             onTap: () {
@@ -52,28 +51,26 @@ class BioEditUi extends StatelessWidget {
               );
             }
             controller.niceNameController.text =
-                snapshot.data!.result!.nickName!.toString();
+                snapshot.data?.result?.nickName?.toString() ?? "";
             controller.motivationController.text =
-                snapshot.data!.result!.quote!.toString();
+                snapshot.data?.result?.quote?.toString() ?? "";
             controller.professionalTitleController.text =
-                snapshot.data!.result!.professionalTitle!.toString();
+                snapshot.data?.result?.professionalTitle?.toString() ?? "";
             controller.experienceController.text =
-                snapshot.data!.result!.yearExperience!.toString();
+                snapshot.data?.result?.yearExperience?.toString() ?? "";
             controller.funFactController.text =
-                snapshot.data!.result!.funFact!.toString();
-            controller.bioController.text = snapshot.data!.result!.bio == null
-                ? ""
-                : snapshot.data!.result!.bio!.toString();
+                snapshot.data?.result?.funFact?.toString() ?? "";
+            controller.bioController.text =
+                snapshot.data?.result?.bio?.toString() ?? "";
+
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Nick Name',
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelLarge!
-                      .copyWith(color: AppColors.white),
-                  textAlign: TextAlign.start,
+                Row(
+                  children: [
+                    Text("Nick Name",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
+                    Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
+                  ],
                 ),
                 SizedBox(
                   height: Get.height * 0.011,
@@ -86,6 +83,9 @@ class BioEditUi extends StatelessWidget {
                   child: TextField(
                     controller: controller.niceNameController,
                     keyboardType: TextInputType.text,
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(64),
+                      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))                      ],
                     style: Theme.of(context)
                         .textTheme
                         .labelMedium!
@@ -120,13 +120,11 @@ class BioEditUi extends StatelessWidget {
                 SizedBox(
                   height: Get.height * 0.01,
                 ),
-                Text(
-                  'Professional Title',
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelLarge!
-                      .copyWith(color: AppColors.white),
-                  textAlign: TextAlign.start,
+                Row(
+                  children: [
+                    Text("Professional Title",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
+                    Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
+                  ],
                 ),
                 SizedBox(
                   height: Get.height * 0.011,
@@ -139,6 +137,9 @@ class BioEditUi extends StatelessWidget {
                   child: TextField(
                     controller: controller.professionalTitleController,
                     keyboardType: TextInputType.text,
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(64),
+                      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))                      ],
                     style: Theme.of(context)
                         .textTheme
                         .labelMedium!
@@ -173,13 +174,11 @@ class BioEditUi extends StatelessWidget {
                 SizedBox(
                   height: Get.height * 0.01,
                 ),
-                Text(
-                  'Years of Experience',
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelLarge!
-                      .copyWith(color: AppColors.white),
-                  textAlign: TextAlign.start,
+                Row(
+                  children: [
+                    Text("Years of Experience",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
+                    Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
+                  ],
                 ),
                 SizedBox(
                   height: Get.height * 0.011,
@@ -191,7 +190,7 @@ class BioEditUi extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5)),
                   child: TextField(
                     controller: controller.experienceController,
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.number,
                     style: Theme.of(context)
                         .textTheme
                         .labelMedium!
