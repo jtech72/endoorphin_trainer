@@ -7,10 +7,10 @@ PreferredSizeWidget myTabBar(TabController tabController, BuildContext context,)
 
     controller: tabController,
     unselectedLabelStyle: Theme.of(context).textTheme.labelLarge!.copyWith(fontSize: 11),
-    labelStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 11),
+    labelStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 11,color: AppColors.yellow),
     indicatorSize: TabBarIndicatorSize.tab,
     dividerHeight: 0,
-    labelPadding: EdgeInsets.all(2),
+    labelPadding: const EdgeInsets.all(2),
     automaticIndicatorColorAdjustment: true,
     indicator: BoxDecoration(
         color: AppColors.greyButton,

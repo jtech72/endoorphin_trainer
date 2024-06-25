@@ -185,10 +185,6 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                             _buildCalendarDialogButton(),
                           ],
                         ),
-
-
-
-
                       ],
                     ),
                   ),
@@ -329,7 +325,9 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                           },
                           child: SizedBox(
                             height: Get.height * .68,
-                            child: ListView.builder(itemBuilder: (context, index) {
+                            child: ListView.builder(
+                                itemCount: 10,
+                                itemBuilder: (context, index) {
                               return Column(
                                 children: [
                                   Row(
@@ -444,7 +442,9 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                 arguments: "Completed");
                           },
                           child: SizedBox(height: Get.height * .68,
-                            child: ListView.builder(itemBuilder: (context, index) {
+                            child: ListView.builder(
+                                itemCount: 10,
+                                itemBuilder: (context, index) {
                               return Column(
                                 children: [
                                   Container(
@@ -559,7 +559,9 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                 arguments: "Cancel");
                           },
                           child: SizedBox(height: Get.height * .68,
-                            child: ListView.builder(itemBuilder: (context, index) {
+                            child: ListView.builder(
+                                itemCount: 10,
+                                itemBuilder: (context, index) {
                               return Column(
                                 children: [
                                   Row(
@@ -779,7 +781,6 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
         );
       },
     );
-
     return Padding(
       padding: const EdgeInsets.only(left:0,right: 0,top: 10,bottom: 10),
       child: IconButton(
@@ -810,10 +811,4 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
            icon:const Icon(Icons.calendar_month, size: 18,color: AppColors.yellow,)),
     );
   }
-
-
-
-
-
-
 }
