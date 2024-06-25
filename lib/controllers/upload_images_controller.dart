@@ -36,11 +36,12 @@ class UploadImagesController extends GetxController {
           print('File path is null');
         }
       } else {
+        selectSource(isFrontImage);
         print('User canceled');
       }
     } catch (e) {
-      print('Permission denied: $e');
       selectSource(isFrontImage);
+      print('Permission denied: $e');
     }
   }
 

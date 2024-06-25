@@ -22,44 +22,49 @@ class LoginController extends GetxController{
   }
   void onLogin() async {
     showLoader();
-    if (phoneNumberController.text.trim().isEmpty && passwordController.text.trim().isEmpty) {
+    String phoneNumber = phoneNumberController.text.trim();
+    String password = passwordController.text.trim();
+    if (phoneNumber.isEmpty || password.isEmpty) {
       dismissLoader();
-      showSnackBar("Please enter your phone number/password");
-    } else if (passwordController.text.trim().isEmpty) {
-      dismissLoader();
-      showSnackBar("Please enter your password");
-    }else if (phoneNumberController.text.trim().isEmpty) {
-      dismissLoader();
-      showSnackBar("Please enter your phone number");
-    }
-    else {
-      Map<String, dynamic> request = {
-        "loginData": "$countryCode${phoneNumberController.text.trim()}",
-        "password": passwordController.text.trim(),
-        "deviceId": notificationServices.deviceToken ??""
-      };
-      try {
-        await CallAPI.login(request: request).then((value) {
-          if (value.status == 200) {
-            storage.write("token", value.result!.accessToken);
-            storage.write("userName", value.result!.userName);
-            storage.write("userId", value.result!.id);
-            log("token==>${value.result!.accessToken}");
-            log("UserId==>${value.result!.id}");
-            Get.offAllNamed(AppRoutes.bottomNavigation);
-          } else {
-            dismissLoader();
-            showSnackBar(value.message ?? "Please enter valid credentials");
-            printResult(
-                screenName: "LOGIN CONTROLLER", msg: value.message ?? "");
-          }
-        });
-      } catch (e, st) {
-        printResult(
-            screenName: "LOGIN CONTROLLER",
-            error: e.toString(),
-            stackTrace: st);
+      if (phoneNumber.isEmpty && password.isEmpty) {
+        showSnackBar("Please enter your phone number and password");
+      } else if (phoneNumber.isEmpty) {
+        showSnackBar("Please enter your phone number");
+      } else if (password.isEmpty) {
+        showSnackBar("Please enter your password");
       }
+      return;
+    }
+    Map<String, dynamic> request = {
+      "loginData": "$countryCode$phoneNumber",
+      "password": password,
+      "deviceId": notificationServices.deviceToken ?? ""
+    };
+
+    try {
+      var value = await CallAPI.login(request: request);
+      if (value.status == 200) {
+        if (value.result?.objectData == true) {
+          storage.write("phoneNumber", "$countryCode$phoneNumber");
+          storage.write("password", password);
+          Get.offAllNamed(AppRoutes.bio);
+        } else {
+          storage.write("token", value.result?.accessToken ?? "");
+          storage.write("userName", value.result?.userName ?? "");
+          storage.write("userId", value.result?.id ?? "");
+          log("token==>${value.result?.accessToken}");
+          log("UserId==>${value.result?.id}");
+          Get.offAllNamed(AppRoutes.bottomNavigation);
+        }
+      } else {
+        dismissLoader();
+        showSnackBar(value.message ?? "Please enter valid credentials");
+        printResult(screenName: "LOGIN CONTROLLER", msg: value.message ?? "");
+      }
+    } catch (e, st) {
+      dismissLoader();
+      showSnackBar("An error occurred during login");
+      printResult(screenName: "LOGIN CONTROLLER", error: e.toString(), stackTrace: st);
     }
   }
 
