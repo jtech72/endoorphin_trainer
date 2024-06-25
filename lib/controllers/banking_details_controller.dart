@@ -17,7 +17,6 @@ class BankingDetailsController extends GetxController {
   final accountTypeController = TextEditingController();
   final effectiveController = TextEditingController();
 
-  var buttonText = 'Save'.obs;
 
   @override
   void onInit() {
@@ -58,7 +57,6 @@ class BankingDetailsController extends GetxController {
           if (kDebugMode) {
             print("Bank details saved successfully");
           }
-          buttonText.value = 'Update'; // Change button text to Update
           Get.toNamed(AppRoutes.bottomNavigation);
           return true;
         } else {
