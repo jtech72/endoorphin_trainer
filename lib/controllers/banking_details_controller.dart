@@ -1,12 +1,8 @@
 import 'dart:developer';
-
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-
-import '../services/models/request_models/update_bank_detail_model.dart';
 import '../services/network_services/api_call.dart';
-
 class BankingDetailsController extends GetxController {
   final items2 = ['CURRENT ACCOUNT', 'SAVING ACCOUNT'];
   String accountType = "";
@@ -94,7 +90,7 @@ class BankingDetailsController extends GetxController {
       };
       log("Updating user with fields: $fields");
 
-      final response = await CallAPI.updateBankDetail(request: {"Id":"userId"});
+      final response = await CallAPI.updateBankDetail(request: fields);
       log("Update response: $response");
 
       if (response.status == 200) {

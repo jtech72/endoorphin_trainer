@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:math';
 
 import 'package:endoorphin_trainer/controllers/banking_details_controller.dart';
@@ -56,7 +57,7 @@ class BankingDetailsUI extends StatelessWidget {
                 controller.bankNameController.text =
                     snapshot.data?.result?.bankName?.toString() ?? "";
                 controller.cityController.text =
-                    snapshot.data?.result?.branchName?.toString() ?? "";
+                    snapshot.data?.result?.city?.toString() ?? "";
                 controller.branchController.text =
                     snapshot.data?.result?.branchName?.toString() ?? "";
                 controller.accountNameController.text =
@@ -65,7 +66,7 @@ class BankingDetailsUI extends StatelessWidget {
                     snapshot.data?.result?.banckAccountNumber?.toString() ?? "";
                 controller.confirmBankAcNumberController.text =
                     snapshot.data?.result?.banckAccountNumber?.toString() ?? "";
-                controller.selectedOption1.value =
+                controller.accountTypeController.text =
                     snapshot.data?.result?.accountType?.toString() ?? "";
                 controller.effectiveController.text =
                     snapshot.data?.result?.effectiveData?.toString() ?? "";
