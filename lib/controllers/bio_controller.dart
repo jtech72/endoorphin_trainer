@@ -6,9 +6,11 @@ import 'package:image_picker/image_picker.dart';
 
 import '../services/models/request_models/category_document_model.dart';
 import '../services/network_services/api_call.dart';
+import '../services/network_services/notification_servies.dart';
 
 class BioController extends GetxController {
   Rx<File?> profileImage = Rx<File?>(null);
+  NotificationServices notificationServices=NotificationServices();
   TextEditingController nicknameController = TextEditingController();
   TextEditingController professionalTitleController = TextEditingController();
   TextEditingController experienceController = TextEditingController();
@@ -69,8 +71,6 @@ class BioController extends GetxController {
       backgroundColor: Colors.white,
     );
   }
-
-
   Future<void> onSubmitButton(BuildContext context) async {
     if (profileImage.value == null) {
       showSnackBar("Please select a profile image");
@@ -102,6 +102,7 @@ class BioController extends GetxController {
         if (result.status == 200) {
           dismissLoader();
           log("Successfully uploaded");
+          onLogin();
           showDialogBox(context);
         } else {
           dismissLoader();
@@ -114,7 +115,31 @@ class BioController extends GetxController {
       }
     }
   }
-
+  void onLogin() async {
+    Map<String, dynamic> request = {
+      "loginData": storage.read("phoneNumber"),
+      "password":storage.read("password") ,
+      "deviceId": notificationServices.deviceToken ??""
+    };
+    try {
+      await CallAPI.login(request: request).then((value) {
+        if (value.status == 200) {
+          storage.write("token", value.result!.accessToken);
+          storage.write("userName", value.result!.userName);
+          storage.write("userId", value.result!.id);
+          log("token==>${value.result!.accessToken}");
+          log("UserId==>${value.result!.id}");
+        } else {
+          printResult(screenName: "LOGIN CONTROLLER", msg: value.message ?? "");
+        }
+      });
+    } catch (e, st) {
+      printResult(
+          screenName: "LOGIN CONTROLLER",
+          error: e.toString(),
+          stackTrace: st);
+    }
+  }
   showDialogBox(BuildContext context) {
     showDialog(
       barrierDismissible: false,
@@ -180,5 +205,12 @@ class BioController extends GetxController {
         );
       },
     );
+  }
+
+  @override
+  void onInit() {
+    notificationServices.getDeviceToken();
+    notificationServices.isDeviceTokenRefresh();
+    super.onInit();
   }
 }

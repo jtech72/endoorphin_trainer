@@ -24,7 +24,7 @@ class BioEditController extends GetxController{
       Map<String, String> fields = {
         "id":storage.read("userId").toString(),
         "nickName": niceNameController.text.trim(),
-        "professionalTitle": professionalTitleController.text.trim(),
+        "areaExpertise": professionalTitleController.text.trim(),
         "yearExperience": experienceController.text.trim(),
         "funFact": funFactController.text.trim(),
         "quote": motivationController.text.trim(),
