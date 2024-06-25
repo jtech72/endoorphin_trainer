@@ -747,18 +747,13 @@ class DocumentUI extends StatelessWidget {
                                                                               .userId
                                                                               .toString(),
                                                                           "categoryName":
-                                                                              "",
-                                                                          "categoryId": snapshot
-                                                                              .data!
-                                                                              .result![index]
-                                                                              .category!
-                                                                              .id
-                                                                              .toString(),
+                                                                              "Emirates ID",
+                                                                          "categoryId": snapshot.data?.result?[index].category?.id.toString()??"",
                                                                           "certificateNumber":
                                                                               "",
                                                                           "certificateName":
                                                                               "",
-                                                                          "name":snapshot.data!.result![index].category!.name.toString()
+                                                                          "name":snapshot.data?.result?[index].category?.name.toString()??""
 
                                                                         });
                                                                   },
@@ -1126,11 +1121,11 @@ class DocumentUI extends StatelessWidget {
                                                                             AppRoutes.trainerPassport,
                                                                             arguments: {
                                                                               "userId": snapshot.data!.result![index].userId.toString(),
-                                                                              "categoryName": "",
-                                                                              "categoryId": snapshot.data!.result![index].category!.id.toString(),
+                                                                              "categoryName": "Passport",
+                                                                              "categoryId": snapshot.data?.result?[index].category?.id.toString()??"",
                                                                               "certificateNumber": "",
                                                                               "certificateName": "",
-                                                                              "name":snapshot.data!.result![index].category!.name.toString()
+                                                                              "name":snapshot.data?.result?[index].category?.name.toString()??""
                                                                             });
                                                                       },
                                                                       child:
