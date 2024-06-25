@@ -248,10 +248,8 @@ class UploadImagesController extends GetxController {
     if (isFrontImage) {
       fontImagePicked.value = null;
       log("Front image cleared");
-      selectSource(true);
     } else {
       backImagePicked.value = null;
-      selectSource(false);
       log("Back image cleared");
     }
   }
