@@ -1102,7 +1102,6 @@ class DocumentUI extends StatelessWidget {
                                                                               "certificateNumber": "",
                                                                               "certificateName": "",
                                                                               "name":snapshot.data!.result![index].category!.name.toString()
-
                                                                             });
                                                                       },
                                                                       child:
