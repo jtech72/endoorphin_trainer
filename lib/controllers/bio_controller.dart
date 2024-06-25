@@ -10,6 +10,7 @@ import '../services/network_services/api_call.dart';
 class BioController extends GetxController {
   Rx<File?> profileImage = Rx<File?>(null);
   TextEditingController nicknameController = TextEditingController();
+  TextEditingController professionalTitleController = TextEditingController();
   TextEditingController experienceController = TextEditingController();
   TextEditingController expertiseController = TextEditingController();
   TextEditingController funFactsController = TextEditingController();
@@ -24,7 +25,7 @@ class BioController extends GetxController {
       profileImage.value = File(image.path);
       log("font Image ${profileImage.value}");
         } else {
-      log('User canceled');
+      print('User canceled');
     }
   }
   Future<void> selectSource() async {
@@ -47,7 +48,7 @@ class BioController extends GetxController {
               Icons.camera_alt,
               'Camera',
                   () {
-                log('Camera opened');
+                print('Camera opened');
                 Get.back();
                 openCameraOrGallery(ImageSource.camera);
               },
@@ -56,7 +57,7 @@ class BioController extends GetxController {
               Icons.photo_library,
               'Gallery',
                   () {
-                log('Gallery opened');
+                print('Gallery opened');
                 Get.back();
                 openCameraOrGallery(ImageSource.gallery);
               },
@@ -74,7 +75,7 @@ class BioController extends GetxController {
     if (profileImage.value == null) {
       showSnackBar("Please select a profile image");
     } else if (nicknameController.text.isEmpty ||
-        expertiseController.text.isEmpty ||
+        professionalTitleController.text.isEmpty ||
         experienceController.text.isEmpty) {
       showSnackBar("Please fill all the mandatory fields");
     } else {
@@ -82,6 +83,8 @@ class BioController extends GetxController {
       Map<String, String> fields = {
         'id': storage.read("userId").toString(),
         'nickName': nicknameController.text.trim(),
+        'professionalTitle': professionalTitleController.text.trim(),
+        'yearExperience': experienceController.text.trim(),
         'areaExpertise': expertiseController.text.trim(),
         'funFact': funFactsController.text.trim(),
         'quote': motivationalQuoteController.text.trim(),
@@ -179,4 +182,3 @@ class BioController extends GetxController {
     );
   }
 }
-//
