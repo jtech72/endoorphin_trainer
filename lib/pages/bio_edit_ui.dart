@@ -55,8 +55,8 @@ class BioEditUi extends StatelessWidget {
                   snapshot.data?.result?.nickName?.toString() ?? "";
               controller.motivationController.text =
                   snapshot.data?.result?.quote?.toString() ?? "";
-              controller.professionalTitleController.text =
-                  snapshot.data?.result?.professionalTitle?.toString() ?? "";
+              controller.areaOfExpertiseController.text =
+                  snapshot.data?.result?.areaExpertise?.toString() ?? "";
               controller.experienceController.text =
                   snapshot.data?.result?.yearExperience?.toString() ?? "";
               controller.funFactController.text =
@@ -123,7 +123,7 @@ class BioEditUi extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Text("Professional Title",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
+                      Text("Areas of Expertise",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
                       Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
                     ],
                   ),
@@ -136,7 +136,7 @@ class BioEditUi extends StatelessWidget {
                         border: Border.all(color: AppColors.grey3),
                         borderRadius: BorderRadius.circular(5)),
                     child: TextField(
-                      controller: controller.professionalTitleController,
+                      controller: controller.areaOfExpertiseController,
                       keyboardType: TextInputType.text,
                       inputFormatters: [
                         LengthLimitingTextInputFormatter(64),

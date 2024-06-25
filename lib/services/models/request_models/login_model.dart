@@ -31,6 +31,8 @@ class Result {
   String? phoneNumber;
   String? password;
   String? accessToken;
+  bool? dataExist;
+  bool? objectData;
 
   Result(
       {this.id,
@@ -39,7 +41,9 @@ class Result {
         this.email,
         this.phoneNumber,
         this.password,
-        this.accessToken});
+        this.accessToken,
+        this.dataExist,
+        this.objectData});
 
   Result.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -49,6 +53,8 @@ class Result {
     phoneNumber = json['phoneNumber'];
     password = json['password'];
     accessToken = json['accessToken'];
+    dataExist = json['dataExist'];
+    objectData = json['objectData'];
   }
 
   Map<String, dynamic> toJson() {
@@ -60,6 +66,8 @@ class Result {
     data['phoneNumber'] = phoneNumber;
     data['password'] = password;
     data['accessToken'] = accessToken;
+    data['dataExist'] = dataExist;
+    data['objectData'] = objectData;
     return data;
   }
 }
