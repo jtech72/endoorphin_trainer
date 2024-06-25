@@ -155,6 +155,7 @@ class AccountUI extends StatelessWidget {
                       child: TextField(
                         controller: controller.firstNameController,
                         keyboardType: TextInputType.text,
+                        textCapitalization: TextCapitalization.words,
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(50),
                           FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -220,6 +221,7 @@ class AccountUI extends StatelessWidget {
                       child: TextField(
                         controller: controller.lastNameController,
                         keyboardType: TextInputType.text,
+                        textCapitalization: TextCapitalization.words,
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(50),
                           FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -461,6 +463,7 @@ class AccountUI extends StatelessWidget {
                       child: TextField(
                         controller: controller.bioController,
                         keyboardType: TextInputType.text,
+                        textCapitalization: TextCapitalization.words,
                         inputFormatters: [
                           // LengthLimitingTextInputFormatter(64),
                           FilteringTextInputFormatter.deny(RegExp(r'\s')),

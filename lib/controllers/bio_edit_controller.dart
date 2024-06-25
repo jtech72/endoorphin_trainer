@@ -7,7 +7,7 @@ import '../services/network_services/api_call.dart';
 
 class BioEditController extends GetxController{
   TextEditingController niceNameController = TextEditingController();
-  TextEditingController professionalTitleController = TextEditingController();
+  TextEditingController areaOfExpertiseController = TextEditingController();
   TextEditingController experienceController = TextEditingController();
   TextEditingController funFactController = TextEditingController();
   TextEditingController motivationController = TextEditingController();
@@ -15,7 +15,7 @@ class BioEditController extends GetxController{
 
   Future<void> onUpdateButton() async {
     if(niceNameController.text.isEmpty ||
-        professionalTitleController.text.isEmpty ||
+        areaOfExpertiseController.text.isEmpty ||
         experienceController.text.isEmpty){
       showSnackBar("Please fill all the mandatory fields");
 
@@ -24,7 +24,7 @@ class BioEditController extends GetxController{
       Map<String, String> fields = {
         "id":storage.read("userId").toString(),
         "nickName": niceNameController.text.trim(),
-        "areaExpertise": professionalTitleController.text.trim(),
+        "areaExpertise": areaOfExpertiseController.text.trim(),
         "yearExperience": experienceController.text.trim(),
         "funFact": funFactController.text.trim(),
         "quote": motivationController.text.trim(),

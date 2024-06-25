@@ -444,6 +444,20 @@ class DocumentUI extends StatelessWidget {
                                                               color: AppColors
                                                                   .whiteShade),
                                                     ),
+                                                    Text(
+                                                      snapshot
+                                                          .data!
+                                                          .result![index]
+                                                          .comment!
+                                                          .toString(),
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .labelSmall!
+                                                          .copyWith(
+                                                              fontSize: 10,
+                                                              color: AppColors
+                                                                  .whiteShade),
+                                                    ),
                                                   ],
                                                 ).paddingOnly(top: 5)
                                         ],
@@ -809,6 +823,21 @@ class DocumentUI extends StatelessWidget {
                                                                   color: AppColors
                                                                       .whiteShade),
                                                         ),
+                                                        Text(
+                                                          snapshot
+                                                              .data!
+                                                              .result![index]
+                                                              .comment!
+                                                              .toString(),
+                                                          style: Theme.of(
+                                                                  context)
+                                                              .textTheme
+                                                              .labelSmall!
+                                                              .copyWith(
+                                                                  fontSize: 10,
+                                                                  color: AppColors
+                                                                      .whiteShade),
+                                                        ),
                                                       ],
                                                     ).paddingOnly(top: 5)
                                             ],
@@ -1155,6 +1184,23 @@ class DocumentUI extends StatelessWidget {
                                                                   .result![
                                                                       index]
                                                                   .remark!
+                                                                  .toString(),
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .labelSmall!
+                                                                  .copyWith(
+                                                                      fontSize:
+                                                                          10,
+                                                                      color: AppColors
+                                                                          .whiteShade),
+                                                            ),
+                                                            Text(
+                                                              snapshot
+                                                                  .data!
+                                                                  .result![
+                                                                      index]
+                                                                  .comment!
                                                                   .toString(),
                                                               style: Theme.of(
                                                                       context)

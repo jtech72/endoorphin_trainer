@@ -55,7 +55,7 @@ class BioEditUi extends StatelessWidget {
                   snapshot.data?.result?.nickName?.toString() ?? "";
               controller.motivationController.text =
                   snapshot.data?.result?.quote?.toString() ?? "";
-              controller.professionalTitleController.text =
+              controller.areaOfExpertiseController.text =
                   snapshot.data?.result?.areaExpertise?.toString() ?? "";
               controller.experienceController.text =
                   snapshot.data?.result?.yearExperience?.toString() ?? "";
@@ -136,7 +136,7 @@ class BioEditUi extends StatelessWidget {
                         border: Border.all(color: AppColors.grey3),
                         borderRadius: BorderRadius.circular(5)),
                     child: TextField(
-                      controller: controller.professionalTitleController,
+                      controller: controller.areaOfExpertiseController,
                       keyboardType: TextInputType.text,
                       inputFormatters: [
                         LengthLimitingTextInputFormatter(64),

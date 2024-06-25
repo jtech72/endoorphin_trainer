@@ -105,6 +105,7 @@ class RegistrationUi extends StatelessWidget {
                     child: TextField(
                       controller: controller.firstNameController,
                       keyboardType: TextInputType.text,
+                      textCapitalization: TextCapitalization.words,
                       inputFormatters: [
                         LengthLimitingTextInputFormatter(64),
                       FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))                        ,
@@ -121,7 +122,7 @@ class RegistrationUi extends StatelessWidget {
                         contentPadding:
                             const EdgeInsets.only(bottom: 3, left: 15),
 
-                        hintText: "Enter your First Name",
+                        hintText: "Enter First Name",
                         alignLabelWithHint: true,
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(4),
@@ -175,6 +176,7 @@ class RegistrationUi extends StatelessWidget {
                     child: TextField(
                       controller: controller.lastNameController,
                       keyboardType: TextInputType.text,
+                      textCapitalization: TextCapitalization.words,
                       inputFormatters: [
                         LengthLimitingTextInputFormatter(64),
                     FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))                      ],
@@ -190,7 +192,7 @@ class RegistrationUi extends StatelessWidget {
                         contentPadding:
                             const EdgeInsets.only(bottom: 3, left: 15),
 
-                        hintText: "Enter your Last Name",
+                        hintText: "Enter Last Name",
                         alignLabelWithHint: true,
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(4),
@@ -259,7 +261,7 @@ class RegistrationUi extends StatelessWidget {
                         hintStyle: Theme.of(context).textTheme.labelMedium,
                         contentPadding:
                             const EdgeInsets.only(bottom: 3, left: 15),
-                        hintText: "Enter your Email",
+                        hintText: "Enter Email",
                         alignLabelWithHint: true,
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(4),
@@ -320,6 +322,7 @@ class RegistrationUi extends StatelessWidget {
                         },
                         controller: controller.passwordController,
                         keyboardType: TextInputType.text,
+                        textCapitalization: TextCapitalization.words,
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(64),
                           FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -351,7 +354,7 @@ class RegistrationUi extends StatelessWidget {
                           contentPadding:
                               const EdgeInsets.only(bottom: 3, left: 15),
 
-                          hintText: "Enter your Password",
+                          hintText: "Enter Password",
                           alignLabelWithHint: true,
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(4),
@@ -418,6 +421,7 @@ class RegistrationUi extends StatelessWidget {
                       child: TextField(
                         controller: controller.confirmPasswordController,
                         keyboardType: TextInputType.text,
+                        textCapitalization: TextCapitalization.words,
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(64),
                           FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -448,7 +452,7 @@ class RegistrationUi extends StatelessWidget {
                           hintStyle: Theme.of(context).textTheme.labelMedium,
                           contentPadding:
                               const EdgeInsets.only(bottom: 3, left: 15),
-                          hintText: "Enter your Confirm Password",
+                          hintText: "Enter Confirm Password",
                           alignLabelWithHint: true,
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(4),
@@ -516,7 +520,7 @@ class RegistrationUi extends StatelessWidget {
                                 controller.selectedOption1.value.isEmpty
                                     ? "Select Gender" // Default text when nothing is selected
                                     : controller.selectedOption1.value,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: AppColors.lightGrey,
                                   fontSize: 12,
                                   fontFamily: 'Roboto',
@@ -559,11 +563,11 @@ class RegistrationUi extends StatelessWidget {
                                 },
                               );
                             }).toList(),
-                          ),
+
                         ),
                       ),
                     ),
-                  ),
+                  ),),
                   Row(
                     children: [
                       Text(
@@ -613,7 +617,7 @@ class RegistrationUi extends StatelessWidget {
                                       controller.selectedItemsName.value.isEmpty
                                           ? "Select categories"
                                           : controller.selectedItemsName.value.join(", "),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: AppColors.lightGrey,
                                         fontSize: 12,
                                         fontFamily: 'Roboto',
@@ -646,7 +650,7 @@ class RegistrationUi extends StatelessWidget {
                                     checkColor: AppColors.black,
                                     title: Text(
                                       item.name ?? '',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: AppColors.lightGrey,
                                         fontSize: 12,
                                         fontFamily: 'Roboto',
