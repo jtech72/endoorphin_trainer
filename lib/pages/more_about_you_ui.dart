@@ -94,8 +94,8 @@ class MoreAboutYouUi extends StatelessWidget {
                               style: Theme.of(context)
                                   .textTheme
                                   .displayMedium!
-                                  .copyWith(fontWeight: FontWeight.w400),
-                            ),
+                                  .copyWith(fontWeight: FontWeight.w400,color: AppColors.whiteShade2),
+                            ).paddingOnly(top: 2),
                           ),
                         ],
                       ).paddingOnly(
@@ -1101,8 +1101,8 @@ class MoreAboutYouUi extends StatelessWidget {
                                                     const Icon(
                                                       Icons
                                                           .arrow_forward_ios_outlined,
-                                                      color: AppColors.impgrey,
-                                                      size: 22,
+                                                      color: AppColors.grey4,
+                                                      size: 20,
                                                     ).paddingOnly(right: 15),
                                                   ],
                                                 ),
@@ -1188,8 +1188,8 @@ class MoreAboutYouUi extends StatelessWidget {
                                     children: [
                                       const Icon(
                                         Icons.arrow_forward_ios_outlined,
-                                        color: AppColors.impgrey,
-                                        size: 22,
+                                        color: AppColors.grey4,
+                                        size: 20,
                                       ).paddingOnly(right: 15),
                                     ],
                                   ),
@@ -1274,8 +1274,8 @@ class MoreAboutYouUi extends StatelessWidget {
                                     children: [
                                       const Icon(
                                         Icons.arrow_forward_ios_outlined,
-                                        color: AppColors.impgrey,
-                                        size: 22,
+                                        color: AppColors.grey4,
+                                        size: 20,
                                       ).paddingOnly(right: 15),
                                     ],
                                   ),
