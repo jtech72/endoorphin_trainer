@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import '../../utils/exports.dart';
 import '../models/request_models/save_bankdetail_model.dart';
@@ -60,6 +61,59 @@ class APIManager {
       log('Error in API Manager: $e', stackTrace: st);
       // Get.toNamed(AppRoutes.error);
       throw FetchDataException('Unexpected error occurred');
+    }
+    return responseJson;
+  }
+  Future<Map<String, dynamic>> putAPICall(
+      {required String endPoint, required dynamic request}) async {
+    Uri urlForPut = Uri.parse("${Endpoints.baseUrl}$endPoint");
+
+    log("Calling API: $urlForPut");
+
+    log("Calling Request: $request");
+
+    Map<String, dynamic> responseJson = {};
+    ///
+    try {
+      GetStorage getStorage = GetStorage();
+      log("HEADERS TOKEN ${getStorage.read("token")}");
+      final response = await http.put(urlForPut, body: jsonEncode(request), headers: {
+        "Authorization": "Bearer ${getStorage.read("token")}",
+        'Content-Type': 'application/json; charset=UTF-8',
+      });
+      log("ASDFGH${jsonDecode(response.body)}");
+      responseJson = _response(response);
+    } on SocketException {
+      // Get.back();
+      // showSnackBar("", "Internet not available");
+      throw FetchDataException('No Internet connection');
+    } on Error catch (e, st) {
+      log('Error: $e');
+      log('ST: $st');
+    }
+    return responseJson;
+  }
+  Future<Map<String, dynamic>> putAPICallWithoutHeaders(
+      {required String endPoint, required Map<String, dynamic> request}) async {
+    Uri urlForPut = Uri.parse("${Endpoints.baseUrl}$endPoint");
+
+    log("Calling API: $urlForPut");
+
+    log("Calling Request: $request");
+
+    Map<String, dynamic> responseJson = {};
+
+    try {
+      final response = await http.put(urlForPut, body: request);
+      log("${jsonDecode(response.body)}");
+      responseJson = _response(response);
+    } on SocketException {
+      // Get.back();
+      // showSnackBar("", "Internet not available");
+      throw FetchDataException('No Internet connection');
+    } on Error catch (e, st) {
+      log('Error: $e');
+      log('ST: $st');
     }
     return responseJson;
   }
