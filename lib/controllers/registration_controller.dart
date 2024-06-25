@@ -5,7 +5,7 @@ import '../services/models/response_models/get_category_model.dart';
 import '../services/network_services/api_call.dart';
 import '../services/network_services/notification_servies.dart';
 class RegistrationController extends GetxController{
-  NotificationServices notificationServices=NotificationServices();
+  // NotificationServices notificationServices=NotificationServices();
  RxBool isValidVisible = false.obs;
   RxBool obscureText = true.obs;
   RxBool obscureText1 = true.obs;
@@ -13,8 +13,15 @@ class RegistrationController extends GetxController{
   var selectedItems = <String>[].obs;
   var selectedItemsName = <String>[].obs;
   var isOptionsVisible = false.obs;
-
-  var isCategoriesVisible = false.obs; // Observable bool for visibility
+  var isCategoriesVisible = false.obs;
+ final items2 = ['Male','Female',];
+ final selectedOption1 = 'Select Gender'.obs;
+ TextEditingController firstNameController = TextEditingController();
+ TextEditingController lastNameController = TextEditingController();
+ TextEditingController emailController = TextEditingController();
+ TextEditingController passwordController = TextEditingController();
+ TextEditingController confirmPasswordController = TextEditingController();
+ TextEditingController genderController = TextEditingController();
   void toggleOptionsVisibility() {
     isOptionsVisible.value = !isOptionsVisible.value;
   }
@@ -24,23 +31,6 @@ class RegistrationController extends GetxController{
   void toggleObscureText1() {
     obscureText1.toggle(); // Toggle the RxBool value
   }
-  final items2 = ['Male','Female',];
-  final selectedOption1 = 'Select Gender'.obs;
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
-  TextEditingController genderController = TextEditingController();
-
-
-  // void toggleItem(dynamic item, int index) {
-  //   if (checkedList.length <= index) {
-  //     // Expand the list to accommodate the new item's index
-  //     checkedList.addAll(List.filled(index - checkedList.length + 1, false));
-  //   }
-  //   checkedList[index] = !checkedList[index]; // Toggle the checked state
-  // }
   void toggleSelection(String id,String name) {
     if (selectedItems.contains(id)||selectedItemsName.contains(name)) {
       selectedItems.remove(id);
@@ -96,9 +86,10 @@ class RegistrationController extends GetxController{
         showLoader();
         await CallAPI.uploadUserdata(request: request).then((value) {
           if (value.status == 200) {
-            onLogin();
+            // onLogin();
             dismissLoader();
             storage.write("userId", value.userId.toString());
+            storage.write("password", passwordController.text.trim());
             log("Success");
             Get.offAllNamed(AppRoutes.moreaboutyou, arguments: value.userId.toString());
           } else {
@@ -114,35 +105,9 @@ class RegistrationController extends GetxController{
       }
     }
   }
-  void onLogin() async {
-      Map<String, dynamic> request = {
-        "loginData": storage.read("phoneNumber"),
-        "password": passwordController.text.trim(),
-        "deviceId": notificationServices.deviceToken ??""
-      };
-      try {
-        await CallAPI.login(request: request).then((value) {
-          if (value.status == 200) {
-            storage.write("token", value.result!.accessToken);
-            storage.write("userName", value.result!.userName);
-            storage.write("userId", value.result!.id);
-            log("token==>${value.result!.accessToken}");
-            log("UserId==>${value.result!.id}");
-          } else {
-            printResult(screenName: "LOGIN CONTROLLER", msg: value.message ?? "");
-          }
-        });
-      } catch (e, st) {
-        printResult(
-            screenName: "LOGIN CONTROLLER",
-            error: e.toString(),
-            stackTrace: st);
-      }
-    }
-
-void onInit() {
-  notificationServices.getDeviceToken();
-  notificationServices.isDeviceTokenRefresh();
+  void onInit() {
+  // notificationServices.getDeviceToken();
+  // notificationServices.isDeviceTokenRefresh();
   fetchCategories();
 
   super.onInit();
@@ -157,5 +122,36 @@ void onInit() {
       categories.value = [];
     }
   }
-
+// void toggleItem(dynamic item, int index) {
+//   if (checkedList.length <= index) {
+//     // Expand the list to accommodate the new item's index
+//     checkedList.addAll(List.filled(index - checkedList.length + 1, false));
+//   }
+//   checkedList[index] = !checkedList[index]; // Toggle the checked state
+// }
+// void onLogin() async {
+//     Map<String, dynamic> request = {
+//       "loginData": storage.read("phoneNumber"),
+//       "password": passwordController.text.trim(),
+//       "deviceId": notificationServices.deviceToken ??""
+//     };
+//     try {
+//       await CallAPI.login(request: request).then((value) {
+//         if (value.status == 200) {
+//           storage.write("token", value.result!.accessToken);
+//           storage.write("userName", value.result!.userName);
+//           storage.write("userId", value.result!.id);
+//           log("token==>${value.result!.accessToken}");
+//           log("UserId==>${value.result!.id}");
+//         } else {
+//           printResult(screenName: "LOGIN CONTROLLER", msg: value.message ?? "");
+//         }
+//       });
+//     } catch (e, st) {
+//       printResult(
+//           screenName: "LOGIN CONTROLLER",
+//           error: e.toString(),
+//           stackTrace: st);
+//     }
+//   }
 }

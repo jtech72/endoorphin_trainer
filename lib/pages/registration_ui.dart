@@ -540,38 +540,34 @@ class RegistrationUi extends StatelessWidget {
                   Obx(
                     ()=> Visibility(
                       visible: controller.isOptionsVisible.value,
-                      child: Positioned(
-                        top: 45,
-                        right: 10,
-                        child: Card(
-                          elevation: 0,
-                          child: Container(
-                            width: Get.width,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(color: AppColors.impgrey),
-                            ),
-                            child: Column(
-                              children: controller.items2.map((String value) {
-                                return ListTile(
-                                  title: Text(
-                                    value,
-                                    style: const TextStyle(color: AppColors.lightGrey),
-                                  ),
-                                  onTap: () {
-                                    controller.selectedOption1.value = value;
-                                    controller.toggleOptionsVisibility(); // Close options after selection
-                                    print(controller.selectedOption1.value);
-                                  },
-                                );
-                              }).toList(),
-                            ),
+                      child: Card(
+                        elevation: 0,
+                        child: Container(
+                          width: Get.width,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(color: AppColors.impgrey),
                           ),
+                          child: Column(
+                            children: controller.items2.map((String value) {
+                              return ListTile(
+                                title: Text(
+                                  value,
+                                  style: TextStyle(color: AppColors.lightGrey),
+                                ),
+                                onTap: () {
+                                  controller.selectedOption1.value = value;
+                                  controller.toggleOptionsVisibility(); // Close options after selection
+                                  print(controller.selectedOption1.value);
+                                },
+                              );
+                            }).toList(),
+
                         ),
                       ),
                     ),
-                  ),
+                  ),),
                   Row(
                     children: [
                       Text(

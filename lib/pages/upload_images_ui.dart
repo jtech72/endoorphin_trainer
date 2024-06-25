@@ -116,6 +116,7 @@ class UploadImagesUi extends StatelessWidget {
                 GestureDetector(
                     onTap: (){
                       controller.removeImage(context,true);
+                      controller.selectSource(true);
                     },
                     child: Column(
                       children: [
@@ -219,8 +220,8 @@ class UploadImagesUi extends StatelessWidget {
                     }).paddingOnly(bottom: Get.height*0.024),
                     GestureDetector(
                       onTap: (){
-                        controller.selectSource(false);
-
+                     controller.removeImage(context, false);
+                     controller.selectSource(false);
                       },
                         child: Column(
                           children: [
