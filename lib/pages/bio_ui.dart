@@ -89,6 +89,7 @@ class BioUi extends StatelessWidget {
                             ),
                             child: TextField(
                               controller: controller.nicknameController ,
+                              textCapitalization: TextCapitalization.words,
                               inputFormatters: [
                                 LengthLimitingTextInputFormatter(64),
                                 FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))                      ],
@@ -106,64 +107,6 @@ class BioUi extends StatelessWidget {
                                 const EdgeInsets.only(bottom: 3, left: 15),
 
                                 hintText: "Enter Nick Name",
-                                alignLabelWithHint: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4),
-                                  borderSide: const BorderSide(
-                                    color: AppColors.yellowishWhite,
-                                    width: 1,
-                                  ),
-                                ),
-                                disabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4),
-                                  borderSide: const BorderSide(
-                                    color: AppColors.yellowishWhite,
-                                    width: 1,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4),
-                                  borderSide: const BorderSide(
-                                    color: AppColors.yellowishWhite,
-                                    width: 1,
-                                  ),
-                                ),// Center the hintText
-                              ),
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Text("Professional Title",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
-                              Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
-                            ],
-                          ),
-                          Container(
-                            height: 45,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.impgrey),
-                              shape: BoxShape.rectangle,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: TextField(
-                              controller: controller.professionalTitleController,
-
-                              enableInteractiveSelection: true,
-                              style: Theme.of(context).textTheme.labelMedium,
-                              cursorColor: AppColors.grey,
-                              cursorHeight: 18,
-                              inputFormatters: [
-                                LengthLimitingTextInputFormatter(64),
-                                FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))                      ],
-                              decoration: InputDecoration(
-
-                                filled: true,
-                                fillColor: AppColors.yellowishWhite,
-                                border: InputBorder.none,
-                                hintStyle: Theme.of(context).textTheme.labelMedium,
-                                contentPadding:
-                                const EdgeInsets.only(bottom: 3, left: 15),
-
-                                hintText: "Enter Professional Title",
                                 alignLabelWithHint: true,
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(4),
@@ -248,6 +191,8 @@ class BioUi extends StatelessWidget {
                           Row(
                             children: [
                               Text("Areas of Expertise",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
+                              Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
+
                             ],
                           ),
                           Container(
@@ -259,7 +204,7 @@ class BioUi extends StatelessWidget {
                             ),
                             child: TextField(
                               controller: controller.expertiseController,
-
+                              textCapitalization: TextCapitalization.words,
                               enableInteractiveSelection: true,
                               style: Theme.of(context).textTheme.labelMedium,
                               cursorColor: AppColors.grey,
@@ -313,8 +258,7 @@ class BioUi extends StatelessWidget {
                             ),
                             child: TextField(
                               controller: controller.funFactsController,
-
-
+                              textCapitalization: TextCapitalization.words,
                               enableInteractiveSelection: true,
                               style: Theme.of(context).textTheme.labelMedium,
                               cursorColor: AppColors.grey,
@@ -368,7 +312,7 @@ class BioUi extends StatelessWidget {
                             ),
                             child: TextField(
                               controller: controller.motivationalQuoteController,
-
+                              textCapitalization: TextCapitalization.words,
                               enableInteractiveSelection: true,
                               style: Theme.of(context).textTheme.labelMedium,
                               cursorColor: AppColors.grey,
@@ -424,6 +368,7 @@ class BioUi extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(7)),
                             child: TextField(
                               controller: controller.bioController,
+                              textCapitalization: TextCapitalization.words,
                               inputFormatters: [
                                 LengthLimitingTextInputFormatter(400),
                               ],
