@@ -42,9 +42,9 @@ class MoreAboutYouUi extends StatelessWidget {
               height: 24,
               width: 44,
               decoration: const BoxDecoration(
-                  color: AppColors.yellow,
+                  color: AppColors.greyButton,
                   borderRadius: BorderRadius.all(Radius.circular(24))),
-              child: Text('Skip',style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.black,fontWeight: FontWeight.w500),textAlign: TextAlign.center,),
+              child: Text('Skip',style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.yellow,fontWeight: FontWeight.w500),textAlign: TextAlign.center,),
             ),
           ),
           SizedBox(width: Get.width*0.04,)

@@ -26,7 +26,7 @@ class BioController extends GetxController {
       profileImage.value = File(image.path);
       log("font Image ${profileImage.value}");
         } else {
-      log('User canceled');
+      print('User canceled');
     }
   }
   Future<void> selectSource() async {
@@ -49,7 +49,7 @@ class BioController extends GetxController {
               Icons.camera_alt,
               'Camera',
                   () {
-                log('Camera opened');
+                print('Camera opened');
                 Get.back();
                 openCameraOrGallery(ImageSource.camera);
               },
@@ -58,7 +58,7 @@ class BioController extends GetxController {
               Icons.photo_library,
               'Gallery',
                   () {
-                log('Gallery opened');
+                print('Gallery opened');
                 Get.back();
                 openCameraOrGallery(ImageSource.gallery);
               },
@@ -82,8 +82,8 @@ class BioController extends GetxController {
       Map<String, String> fields = {
         'id': storage.read("userId").toString(),
         'nickName': nicknameController.text.trim(),
+        'yearExperience': experienceController.text.trim(),
         'areaExpertise': expertiseController.text.trim(),
-        'yearExperience':experienceController.text.trim(),
         'funFact': funFactsController.text.trim(),
         'quote': motivationalQuoteController.text.trim(),
         'bio': bioController.text.trim(),
