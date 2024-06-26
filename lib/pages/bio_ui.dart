@@ -14,7 +14,20 @@ class BioUi extends StatelessWidget {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        appBar: myAppBar(title: GestureDetector(onTap: (){Get.back();},child: Text('Bio',style: Theme.of(context).textTheme.headlineSmall,)), context: context),
+        appBar: AppBar(
+          toolbarHeight: 50,
+          leadingWidth: Get.width * 0.17,
+          centerTitle: false,
+          surfaceTintColor: Colors.transparent,
+          backgroundColor: AppColors.black,
+          automaticallyImplyLeading: false,
+          elevation: 3,
+          titleSpacing: 30,
+          title: Text(
+            "Bio",
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+        ),
         body: Stack(
           children: [
             Container(

@@ -66,7 +66,7 @@ class RegistrationController extends GetxController{
     } else if (selectedOption1.value == 'Select Gender') {
       showSnackBar("Please select gender");
     } else if (selectedItems == null) {
-      showSnackBar("Please select at least one category");
+      showSnackBar("Please select a category");
     } else {
       // All fields are filled and validated, proceed with API call
       Map<String, dynamic> request = {
