@@ -493,8 +493,7 @@ class BankingDetailsUI extends StatelessWidget {
                     ),
                     Center(
                         child: InkButton(
-                      child: Obx(() => Text(
-                            controller.buttonText.value,
+                      child:Text("Save",
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineSmall!
@@ -503,7 +502,7 @@ class BankingDetailsUI extends StatelessWidget {
                                   fontSize: 18,
                                   fontFamily: 'Montserrat',
                                 ),
-                          )),
+                          ),
                       onTap: () {
                         controller.onSaveButton();
                       },

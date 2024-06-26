@@ -12,7 +12,6 @@ class BioController extends GetxController {
   Rx<File?> profileImage = Rx<File?>(null);
   NotificationServices notificationServices=NotificationServices();
   TextEditingController nicknameController = TextEditingController();
-  TextEditingController professionalTitleController = TextEditingController();
   TextEditingController experienceController = TextEditingController();
   TextEditingController expertiseController = TextEditingController();
   TextEditingController funFactsController = TextEditingController();
@@ -75,7 +74,7 @@ class BioController extends GetxController {
     if (profileImage.value == null) {
       showSnackBar("Please select a profile image");
     } else if (nicknameController.text.isEmpty ||
-        professionalTitleController.text.isEmpty ||
+        expertiseController.text.isEmpty ||
         experienceController.text.isEmpty) {
       showSnackBar("Please fill all the mandatory fields");
     } else {
@@ -83,10 +82,8 @@ class BioController extends GetxController {
       Map<String, String> fields = {
         'id': storage.read("userId").toString(),
         'nickName': nicknameController.text.trim(),
-        'professionalTitle': professionalTitleController.text.trim(),
         'yearExperience': experienceController.text.trim(),
         'areaExpertise': expertiseController.text.trim(),
-        'yearExperience':experienceController.text.trim(),
         'funFact': funFactsController.text.trim(),
         'quote': motivationalQuoteController.text.trim(),
         'bio': bioController.text.trim(),

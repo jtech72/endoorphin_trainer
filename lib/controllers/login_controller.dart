@@ -47,6 +47,8 @@ class LoginController extends GetxController{
         if (value.result?.objectData == true) {
           storage.write("phoneNumber", "$countryCode$phoneNumber");
           storage.write("password", password);
+          storage.write("userName", value.result?.userName ?? "");
+          storage.write("userId", value.result?.id ?? "");
           Get.offAllNamed(AppRoutes.bio);
         } else {
           storage.write("token", value.result?.accessToken ?? "");
@@ -69,3 +71,4 @@ class LoginController extends GetxController{
   }
 
 }
+//
