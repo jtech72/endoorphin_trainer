@@ -16,9 +16,6 @@ class BankingDetailsController extends GetxController {
   final confirmBankAcNumberController = TextEditingController();
   final accountTypeController = TextEditingController();
   final effectiveController = TextEditingController();
-
-  var buttonText = 'Save'.obs;
-
   @override
   void onInit() {
     super.onInit();
@@ -26,7 +23,6 @@ class BankingDetailsController extends GetxController {
       accountTypeController.text = selectedOption1.value;
     });
   }
-
   Future<bool> onSaveAndSubmitBooking() async {
     if (ifscController.text.isEmpty ||
         bankNameController.text.isEmpty ||
@@ -58,7 +54,6 @@ class BankingDetailsController extends GetxController {
           if (kDebugMode) {
             print("Bank details saved successfully");
           }
-          buttonText.value = 'Update'; // Change button text to Update
           Get.toNamed(AppRoutes.bottomNavigation);
           return true;
         } else {
@@ -78,7 +73,7 @@ class BankingDetailsController extends GetxController {
     showLoader();
     try {
       Map<String, String> fields = {
-        "id":id ,
+        "id":id,
         'ifscCode': ifscController.value.text.trim(),
         'bankName': bankNameController.value.text.trim(),
         'branchName': branchController.value.text.trim(),
@@ -97,7 +92,7 @@ class BankingDetailsController extends GetxController {
         dismissLoader();
         Get.offAllNamed(AppRoutes.bottomNavigation);
         showSnackBar(response.message.toString());
-        log('User details updated successfully: ${response.message}');
+        log('User details updated successfully:${response.message}');
       } else {
         dismissLoader();
         showSnackBar(response.message.toString());
@@ -118,8 +113,9 @@ class BankingDetailsController extends GetxController {
         updateUser(response.result!.id.toString());
       }
     } catch (e) {
-      // Handle the error (e.g., show a message to the user)
-      print('Error: $e');
+      if (kDebugMode) {
+        print('Error: $e');
+      }
     }
   }
 

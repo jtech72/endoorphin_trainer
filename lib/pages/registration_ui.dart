@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:endoorphin_trainer/controllers/registration_controller.dart';
 import 'package:flutter/material.dart';
 import '../utils/exports.dart';
+
 class RegistrationUi extends StatelessWidget {
   RegistrationUi({super.key});
   RegistrationController controller = Get.put(RegistrationController());
@@ -10,8 +11,8 @@ class RegistrationUi extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.of(context).pushNamedAndRemoveUntil(
-            AppRoutes.signinoption, (route) => false);
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil(AppRoutes.signinoption, (route) => false);
         return false;
       },
       child: Container(
@@ -20,15 +21,15 @@ class RegistrationUi extends StatelessWidget {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(ImagesPaths.bgBlackShade),
-            fit: BoxFit.cover,),),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();
           },
           child: Scaffold(
-            backgroundColor: Colors.transparent,
             appBar: AppBar(
-              surfaceTintColor: Colors.transparent,
               toolbarHeight: 50,
               leadingWidth: Get.width * 0.14,
               centerTitle: false,
@@ -114,7 +115,8 @@ class RegistrationUi extends StatelessWidget {
                           textCapitalization: TextCapitalization.words,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(64),
-                            FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))                        ,
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'[a-zA-Z\s]')),
                           ],
                           enableInteractiveSelection: true,
                           style: Theme.of(context).textTheme.labelMedium,
@@ -126,8 +128,8 @@ class RegistrationUi extends StatelessWidget {
                             border: InputBorder.none,
                             hintStyle: Theme.of(context).textTheme.labelMedium,
                             contentPadding:
-                            const EdgeInsets.only(bottom: 3, left: 15),
-
+                                const EdgeInsets.only(bottom: 3, left: 15),
+              
                             hintText: "Enter First Name",
                             alignLabelWithHint: true,
                             enabledBorder: OutlineInputBorder(
@@ -185,7 +187,9 @@ class RegistrationUi extends StatelessWidget {
                           textCapitalization: TextCapitalization.words,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(64),
-                            FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))                      ],
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'[a-zA-Z\s]'))
+                          ],
                           enableInteractiveSelection: true,
                           style: Theme.of(context).textTheme.labelMedium,
                           cursorColor: AppColors.grey,
@@ -196,8 +200,8 @@ class RegistrationUi extends StatelessWidget {
                             border: InputBorder.none,
                             hintStyle: Theme.of(context).textTheme.labelMedium,
                             contentPadding:
-                            const EdgeInsets.only(bottom: 3, left: 15),
-
+                                const EdgeInsets.only(bottom: 3, left: 15),
+              
                             hintText: "Enter Last Name",
                             alignLabelWithHint: true,
                             enabledBorder: OutlineInputBorder(
@@ -266,7 +270,7 @@ class RegistrationUi extends StatelessWidget {
                             border: InputBorder.none,
                             hintStyle: Theme.of(context).textTheme.labelMedium,
                             contentPadding:
-                            const EdgeInsets.only(bottom: 3, left: 15),
+                                const EdgeInsets.only(bottom: 3, left: 15),
                             hintText: "Enter Email",
                             alignLabelWithHint: true,
                             enabledBorder: OutlineInputBorder(
@@ -312,7 +316,7 @@ class RegistrationUi extends StatelessWidget {
                         ],
                       ),
                       Obx(
-                            () => Container(
+                        () => Container(
                           height: 45,
                           decoration: BoxDecoration(
                             border: Border.all(color: AppColors.impgrey),
@@ -356,10 +360,11 @@ class RegistrationUi extends StatelessWidget {
                               filled: true,
                               fillColor: AppColors.yellowishWhite,
                               border: InputBorder.none,
-                              hintStyle: Theme.of(context).textTheme.labelMedium,
+                              hintStyle:
+                                  Theme.of(context).textTheme.labelMedium,
                               contentPadding:
-                              const EdgeInsets.only(bottom: 3, left: 15),
-
+                                  const EdgeInsets.only(bottom: 3, left: 15),
+              
                               hintText: "Enter Password",
                               alignLabelWithHint: true,
                               enabledBorder: OutlineInputBorder(
@@ -388,7 +393,7 @@ class RegistrationUi extends StatelessWidget {
                         ),
                       ),
                       Obx(
-                            () => Visibility(
+                        () => Visibility(
                             visible: controller.isValidVisible.value,
                             child: Text(
                               "Your password must contain at least one uppercase letter, one number, and one special character",
@@ -417,7 +422,7 @@ class RegistrationUi extends StatelessWidget {
                         ],
                       ),
                       Obx(
-                            () => Container(
+                        () => Container(
                           height: 45,
                           decoration: BoxDecoration(
                             border: Border.all(color: AppColors.impgrey),
@@ -455,9 +460,10 @@ class RegistrationUi extends StatelessWidget {
                               filled: true,
                               fillColor: AppColors.yellowishWhite,
                               border: InputBorder.none,
-                              hintStyle: Theme.of(context).textTheme.labelMedium,
+                              hintStyle:
+                                  Theme.of(context).textTheme.labelMedium,
                               contentPadding:
-                              const EdgeInsets.only(bottom: 3, left: 15),
+                                  const EdgeInsets.only(bottom: 3, left: 15),
                               hintText: "Enter Confirm Password",
                               alignLabelWithHint: true,
                               enabledBorder: OutlineInputBorder(
@@ -504,10 +510,11 @@ class RegistrationUi extends StatelessWidget {
                         ],
                       ),
                       Obx(
-                            () => GestureDetector(
+                        () => GestureDetector(
                           onTap: () {
                             log("${controller.isOptionsVisible.value}");
-                            controller.isOptionsVisible.value = !controller.isOptionsVisible.value;
+                            controller.isOptionsVisible.value =
+                                !controller.isOptionsVisible.value;
                           },
                           child: Container(
                             height: 45,
@@ -521,10 +528,11 @@ class RegistrationUi extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.only(left: Get.width * 0.035),
+                                  padding:
+                                      EdgeInsets.only(left: Get.width * 0.035),
                                   child: Text(
                                     controller.selectedOption1.value.isEmpty
-                                        ? "Select Gender" // Default text when nothing is selected
+                                        ? "Select Gender"
                                         : controller.selectedOption1.value,
                                     style: const TextStyle(
                                       color: AppColors.lightGrey,
@@ -535,16 +543,20 @@ class RegistrationUi extends StatelessWidget {
                                   ),
                                 ),
                                 Icon(
-                                    controller.isOptionsVisible.value == false?
-                                    Icons.keyboard_arrow_down:Icons.keyboard_arrow_up,
-                                    size: 32, color: AppColors.grey4).paddingOnly(right: 8),
+                                        controller.isOptionsVisible.value ==
+                                                false
+                                            ? Icons.keyboard_arrow_down
+                                            : Icons.keyboard_arrow_up,
+                                        size: 32,
+                                        color: AppColors.grey4)
+                                    .paddingOnly(right: 8),
                               ],
                             ),
                           ),
                         ),
                       ),
                       Obx(
-                            ()=> Visibility(
+                        () => Visibility(
                           visible: controller.isOptionsVisible.value,
                           child: Card(
                             elevation: 0,
@@ -560,20 +572,21 @@ class RegistrationUi extends StatelessWidget {
                                   return ListTile(
                                     title: Text(
                                       value,
-                                      style: const TextStyle(color: AppColors.lightGrey),
+                                      style:
+                                          TextStyle(color: AppColors.lightGrey),
                                     ),
                                     onTap: () {
                                       controller.selectedOption1.value = value;
-                                      controller.toggleOptionsVisibility(); // Close options after selection
+                                      controller.toggleOptionsVisibility();
                                       print(controller.selectedOption1.value);
                                     },
                                   );
                                 }).toList(),
-
                               ),
                             ),
                           ),
-                        ),),
+                        ),
+                      ),
                       Row(
                         children: [
                           Text(
@@ -598,82 +611,95 @@ class RegistrationUi extends StatelessWidget {
                             child: CircularProgressIndicator(),
                           ).paddingOnly(top: 20);
                         }
-
-                        return
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  // Implement logic to toggle visibility of categories container
-                                  controller.toggleVisibility(); // Assuming you have a method for this in your controller
-                                },
-                                child: Container(
-                                  height: 45,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.yellowishWhite,
-                                    border: Border.all(color: Colors.transparent), // Example border styling
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          controller.selectedItemsName.value.isEmpty
-                                              ? "Select categories"
-                                              : controller.selectedItemsName.value.join(", "),
-                                          style: const TextStyle(
-                                            color: AppColors.lightGrey,
-                                            fontSize: 12,
-                                            fontFamily: 'Roboto',
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                      ),
-                                      Icon(
-                                        controller.isCategoriesVisible.value == false?
-                                        Icons.keyboard_arrow_down:Icons.keyboard_arrow_up,
-                                        size: 32,
-                                        color: AppColors.grey4,
-                                      ),
-                                    ],
-                                  ).paddingOnly(left: 15,right: 8),
+              
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                // Implement logic to toggle visibility of categories container
+                                controller
+                                    .toggleVisibility(); // Assuming you have a method for this in your controller
+                              },
+                              child: Container(
+                                height: 45,
+                                decoration: BoxDecoration(
+                                  color: AppColors.yellowishWhite,
+                                  border: Border.all(
+                                      color: Colors
+                                          .transparent), // Example border styling
+                                  borderRadius: BorderRadius.circular(5),
                                 ),
-                              ).paddingOnly(bottom: 5),
-                              Visibility(
-                                visible: controller.isCategoriesVisible.value,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: AppColors.yellowishWhite,
-                                    border: Border.all(color: Colors.transparent), // Example border styling
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                                    children: controller.categories.map((item) {
-                                      return CheckboxListTile(
-                                        checkColor: AppColors.black,
-                                        title: Text(
-                                          item.name ?? '',
-                                          style: const TextStyle(
-                                            color: AppColors.lightGrey,
-                                            fontSize: 12,
-                                            fontFamily: 'Roboto',
-                                            fontWeight: FontWeight.w400,
-                                          ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        controller
+                                                .selectedItemsName.value.isEmpty
+                                            ? "Select categories"
+                                            : controller.selectedItemsName.value
+                                                .join(", "),
+                                        style: const TextStyle(
+                                          color: AppColors.lightGrey,
+                                          fontSize: 12,
+                                          fontFamily: 'Roboto',
+                                          fontWeight: FontWeight.w400,
                                         ),
-                                        value: controller.selectedItems.contains(item.id.toString()),
-                                        onChanged: (bool? value) {
-                                          controller.toggleSelection(item.id.toString(), item.name.toString());
-                                        },
-                                      );
-                                    }).toList(),
-                                  ),
+                                      ),
+                                    ),
+                                    Icon(
+                                      controller.isCategoriesVisible.value ==
+                                              false
+                                          ? Icons.keyboard_arrow_down
+                                          : Icons.keyboard_arrow_up,
+                                      size: 32,
+                                      color: AppColors.grey4,
+                                    ),
+                                  ],
+                                ).paddingOnly(left: 15, right: 8),
+                              ),
+                            ).paddingOnly(bottom: 5),
+                            Visibility(
+                              visible: controller.isCategoriesVisible.value,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: AppColors.yellowishWhite,
+                                  border: Border.all(
+                                      color: Colors
+                                          .transparent), // Example border styling
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: controller.categories.map((item) {
+                                    return CheckboxListTile(
+                                      checkColor: AppColors.black,
+                                      title: Text(
+                                        item.name ?? '',
+                                        style: const TextStyle(
+                                          color: AppColors.lightGrey,
+                                          fontSize: 12,
+                                          fontFamily: 'Roboto',
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      value: controller.selectedItems
+                                          .contains(item.id.toString()),
+                                      onChanged: (bool? value) {
+                                        controller.toggleSelection(
+                                            item.id.toString(),
+                                            item.name.toString());
+                                      },
+                                    );
+                                  }).toList(),
                                 ),
                               ),
-                            ],
-                          );
+                            ),
+                          ],
+                        );
                       }),
                     ],
                   ).paddingOnly(top: 0, bottom: Get.height * 0.01),
@@ -687,9 +713,9 @@ class RegistrationUi extends StatelessWidget {
                                 .textTheme
                                 .headlineSmall
                                 ?.copyWith(
-                                color: AppColors.black,
-                                fontSize: 18,
-                                fontFamily: 'Montserrat'),
+                                    color: AppColors.black,
+                                    fontSize: 18,
+                                    fontFamily: 'Montserrat'),
                           ),
                           onTap: () {
                             controller.onContinueButton();
@@ -698,7 +724,7 @@ class RegistrationUi extends StatelessWidget {
                   ).paddingOnly(top: 30, bottom: 30),
                 ],
               ).paddingOnly(left: 18, right: 18),
-            )
+            ),
           ),
         ),
       ),
