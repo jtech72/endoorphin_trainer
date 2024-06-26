@@ -1537,10 +1537,8 @@ class DocumentUI extends StatelessWidget {
                               ).paddingOnly(bottom: Get.height * 0.02),
                             );
                           }
-
                           return const SizedBox
-                              .shrink(); // Fallback in case index is out of bounds
-                        },
+                              .shrink(); },
                       ));
                 },
               ),
