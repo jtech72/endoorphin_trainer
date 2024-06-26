@@ -7,8 +7,12 @@ import 'package:image_picker/image_picker.dart';
 import '../services/models/request_models/category_document_model.dart';
 import '../services/network_services/api_call.dart';
 class AccountController extends GetxController {
+  var isOptionsVisible = false.obs;
   final selectedOption1 = 'Select'.obs;
   final items2 = ['Male','Female',];
+  void toggleOptionsVisibility() {
+    isOptionsVisible.value = !isOptionsVisible.value;
+  }
   Rx<File?> profileImage = Rx<File?>(null);
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();

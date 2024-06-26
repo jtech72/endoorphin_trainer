@@ -204,7 +204,7 @@ class BioUi extends StatelessWidget {
                             ),
                             child: TextField(
                               controller: controller.expertiseController,
-                              textCapitalization: TextCapitalization.words,
+
                               enableInteractiveSelection: true,
                               style: Theme.of(context).textTheme.labelMedium,
                               cursorColor: AppColors.grey,
@@ -258,7 +258,8 @@ class BioUi extends StatelessWidget {
                             ),
                             child: TextField(
                               controller: controller.funFactsController,
-                              textCapitalization: TextCapitalization.words,
+
+
                               enableInteractiveSelection: true,
                               style: Theme.of(context).textTheme.labelMedium,
                               cursorColor: AppColors.grey,
@@ -312,7 +313,7 @@ class BioUi extends StatelessWidget {
                             ),
                             child: TextField(
                               controller: controller.motivationalQuoteController,
-                              textCapitalization: TextCapitalization.words,
+
                               enableInteractiveSelection: true,
                               style: Theme.of(context).textTheme.labelMedium,
                               cursorColor: AppColors.grey,
@@ -368,7 +369,6 @@ class BioUi extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(7)),
                             child: TextField(
                               controller: controller.bioController,
-                              textCapitalization: TextCapitalization.words,
                               inputFormatters: [
                                 LengthLimitingTextInputFormatter(400),
                               ],
