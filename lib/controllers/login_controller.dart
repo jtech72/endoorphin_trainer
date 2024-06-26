@@ -69,6 +69,4 @@ class LoginController extends GetxController{
       printResult(screenName: "LOGIN CONTROLLER", error: e.toString(), stackTrace: st);
     }
   }
-
 }
-//
