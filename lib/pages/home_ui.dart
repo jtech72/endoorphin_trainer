@@ -275,8 +275,9 @@ class HomeUiState extends State<HomeUi> {
                                       color: AppColors.lightBlack,
                                     ),
                                     child: Text(
-                                      "50",
+                                      "0",
                                       style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+
                                         color: AppColors.yellow,
                                         fontWeight: FontWeight.w600,
                                       ),

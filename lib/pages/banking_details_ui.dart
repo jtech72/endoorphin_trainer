@@ -1,18 +1,12 @@
-import 'dart:ffi';
-import 'dart:math';
-
 import 'package:endoorphin_trainer/controllers/banking_details_controller.dart';
 import 'package:endoorphin_trainer/custom_Widgets/common_widgets.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
 import '../services/network_services/api_call.dart';
-
 class BankingDetailsUI extends StatelessWidget {
   const BankingDetailsUI({super.key});
-
   @override
   Widget build(BuildContext context) {
     BankingDetailsController controller = Get.put(BankingDetailsController());
