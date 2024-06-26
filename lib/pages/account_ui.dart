@@ -233,7 +233,6 @@ class AccountUI extends StatelessWidget {
                           style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.white),
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.only(top: 6,left: 20),
-
                             filled: true,
                             fillColor: Colors.transparent,
                             hintText: 'Enter Last Name',
@@ -399,23 +398,10 @@ class AccountUI extends StatelessWidget {
                         height: Get.height*0.011,
                       ),
                       Obx(
-                            () => PopupMenuButton<String>(
-                          offset: const Offset(1, 45),
-                          color: AppColors.greyButton,
-                          onSelected: (selectedValue) {
-                            controller.selectedOption1.value = selectedValue;
-                            log(controller.selectedOption1.value);
-                          },
-                          itemBuilder: (BuildContext context) {
-                            return controller.items2.map((String value) {
-                              return PopupMenuItem<String>(
-                                value: value,
-                                child: Text(
-                                  value,
-                                  style: const TextStyle(color: AppColors.white),
-                                ),
-                              );
-                            }).toList();
+                            () => GestureDetector(
+                          onTap: () {
+                            log("${controller.isOptionsVisible.value}");
+                            controller.isOptionsVisible.value = !controller.isOptionsVisible.value;
                           },
                           child: Container(
                             height: 45,
@@ -423,14 +409,13 @@ class AccountUI extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: Colors.transparent,
                               border: Border.all(color: AppColors.grey3),
-                              shape: BoxShape.rectangle,
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Transform.translate(
-                                  offset: const Offset(5, 0),
+                                Padding(
+                                  padding: EdgeInsets.only(left: Get.width * 0.05),
                                   child: Text(
                                     controller.selectedOption1.value.isEmpty
                                         ? "Select Gender"
@@ -443,12 +428,45 @@ class AccountUI extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                const Icon(Icons.keyboard_arrow_down, size: 32, color: AppColors.grey4),
+                                Icon(
+                                    controller.isOptionsVisible.value == false?
+                                    Icons.keyboard_arrow_down:Icons.keyboard_arrow_up,
+                                    size: 32, color: AppColors.grey4).paddingOnly(right: 8),
                               ],
-                            ).paddingOnly(left: Get.width * 0.035, right: Get.width * 0.030),
+                            ),
                           ),
                         ),
                       ),
+                      Obx(
+                            ()=> Visibility(
+                          visible: controller.isOptionsVisible.value,
+                          child: Card(
+                            elevation: 0,
+                            child: Container(
+                              width: Get.width,
+                              decoration: BoxDecoration(
+                                color: AppColors.blackShade,
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(color: AppColors.grey3),
+                              ),
+                              child: Column(
+                                children: controller.items2.map((String value) {
+                                  return ListTile(
+                                    title: Text(
+                                      value,
+                                      style: const TextStyle(color: AppColors.white),
+                                    ),
+                                    onTap: () {
+                                      controller.selectedOption1.value = value;
+                                      controller.toggleOptionsVisibility();
+                                      print(controller.selectedOption1.value);
+                                    },
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          ),
+                        ),),
                       SizedBox(
                         height: Get.height*0.01,
                       ),

@@ -518,7 +518,7 @@ class RegistrationUi extends StatelessWidget {
                               padding: EdgeInsets.only(left: Get.width * 0.035),
                               child: Text(
                                 controller.selectedOption1.value.isEmpty
-                                    ? "Select Gender" // Default text when nothing is selected
+                                    ? "Select Gender"
                                     : controller.selectedOption1.value,
                                 style: const TextStyle(
                                   color: AppColors.lightGrey,
@@ -558,7 +558,7 @@ class RegistrationUi extends StatelessWidget {
                                 ),
                                 onTap: () {
                                   controller.selectedOption1.value = value;
-                                  controller.toggleOptionsVisibility(); // Close options after selection
+                                  controller.toggleOptionsVisibility();
                                   print(controller.selectedOption1.value);
                                 },
                               );
