@@ -14,8 +14,10 @@ class TrainerPassportController extends GetxController {
 
     // Validation: Check if the trimmed strings are empty or certificate name length is invalid
     if (trimmedCertificateNumber.isEmpty || trimmedCertificateName.isEmpty) {
-      showSnackBar("Please enter a certificate number and name");
-    } else if (trimmedCertificateName.length < 3 || trimmedCertificateName.length > 50) {
+      showSnackBar(
+          "Please enter a ${certificationDetails!["categoryName"] == "Emirates ID"?"Emirates ID Number":certificationDetails!["categoryName"]=="Passport"?'Passport Number':"Certification Number"}and name");
+    } else if (trimmedCertificateName.length < 3 ||
+        trimmedCertificateName.length > 50) {
       showSnackBar("Certificate name must be atleast 3 characters");
     } else {
       Get.toNamed(AppRoutes.uploadimage, arguments: {

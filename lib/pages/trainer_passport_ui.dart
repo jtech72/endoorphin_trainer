@@ -62,7 +62,7 @@ class TrainerPassportUI extends StatelessWidget {
                           .labelLarge!
                           .copyWith(fontWeight: FontWeight.w500),
                     ).paddingOnly(bottom: Get.height*.008, top: Get.height*.04),
-                    Text(" ",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: Get.height  *.03,bottom: 0),
+                    Text("* ",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: Get.height  *.03,bottom: 0),
 
                   ],
                 ).paddingOnly(top:Get.height*0.02),
@@ -74,6 +74,7 @@ class TrainerPassportUI extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: TextField(
+
                     controller: controller.certificateName,
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(20),
@@ -139,11 +140,11 @@ class TrainerPassportUI extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: TextField(
-                    keyboardType: TextInputType.number,
+                    // keyboardType: TextInputType.number,
                     controller: controller.certificateNumber,
                     inputFormatters: [
-                      LengthLimitingTextInputFormatter(15),
-                      FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                      LengthLimitingTextInputFormatter(12), // Set maximum length to 12
+                      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')), // Allow only alphanumeric characters
                     ],
                     enableInteractiveSelection: true,
                     style: Theme.of(context).textTheme.labelMedium,
@@ -194,7 +195,7 @@ class TrainerPassportUI extends StatelessWidget {
                           .labelLarge!
                           .copyWith(fontWeight: FontWeight.w500),
                     ).paddingOnly(bottom: Get.height * .008, top: Get.height  *.02),
-                    Text(" ",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: Get.height*  .01,bottom: 0),
+                    Text("* ",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: Get.height*  .01,bottom: 0),
 
                   ],
                 ),
