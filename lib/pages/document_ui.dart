@@ -92,21 +92,15 @@ class DocumentUI extends StatelessWidget {
                     );
                   }
                   return SizedBox(
-                      height: Get.height - 150,
+                      height: Get.height*.8,
                       child: ListView.builder(
                         itemCount: snapshot.data!.result!.length ,
-                        shrinkWrap: true,
-                        reverse: true,
-                        padding: EdgeInsets.zero,
+                        reverse: false,
                         itemBuilder: (context, index) {
 
-                            return index < snapshot.data!.result!.length &&
-                                    snapshot.data!.result![index]
-                                            .documentBackImg !=
-                                        null &&
-                                    snapshot.data!.result![index]
-                                            .documentFrontImg !=
-                                        null
+                            return
+                                    snapshot.data!.result![index].documentBackImg != null &&
+                                    snapshot.data!.result![index].documentFrontImg != null
                                 //Certification
                                 ? Padding(
                                     padding: const EdgeInsets.all(8.0),
@@ -452,8 +446,7 @@ class DocumentUI extends StatelessWidget {
                                           left: 15),
                                     ),
                                   )
-                                : index < snapshot.data!.result!.length &&
-                                        snapshot.data!.result![index]
+                                : snapshot.data!.result![index]
                                                 .emiratesfrontImg !=
                                             null &&
                                         snapshot.data!.result![index]
@@ -827,8 +820,7 @@ class DocumentUI extends StatelessWidget {
                                               left: 15),
                                         ),
                                       )
-                                    : index <
-                                                snapshot.data!.result!.length &&
+                                    :
                                             snapshot.data!.result![index]
                                                     .passportfrontImg !=
                                                 null &&
