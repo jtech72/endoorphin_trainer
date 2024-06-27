@@ -29,6 +29,7 @@ class RegistrationUi extends StatelessWidget {
             FocusScope.of(context).unfocus();
           },
           child: Scaffold(
+            backgroundColor: Colors.transparent,
             appBar: AppBar(
               toolbarHeight: 50,
               leadingWidth: Get.width * 0.14,
@@ -117,6 +118,7 @@ class RegistrationUi extends StatelessWidget {
                             LengthLimitingTextInputFormatter(64),
                             FilteringTextInputFormatter.allow(
                                 RegExp(r'[a-zA-Z\s]')),
+                            FilteringTextInputFormatter.deny(RegExp(r'\s')),
                           ],
                           enableInteractiveSelection: true,
                           style: Theme.of(context).textTheme.labelMedium,
@@ -188,7 +190,9 @@ class RegistrationUi extends StatelessWidget {
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(64),
                             FilteringTextInputFormatter.allow(
-                                RegExp(r'[a-zA-Z\s]'))
+                                RegExp(r'[a-zA-Z\s]')),
+                            FilteringTextInputFormatter.deny(RegExp(r'\s')),
+
                           ],
                           enableInteractiveSelection: true,
                           style: Theme.of(context).textTheme.labelMedium,
