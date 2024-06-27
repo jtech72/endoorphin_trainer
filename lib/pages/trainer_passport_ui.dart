@@ -66,7 +66,7 @@ class TrainerPassportUI extends StatelessWidget {
 
                   ],
                 ).paddingOnly(top:Get.height*0.02),
-                Container(
+                Container(//
                   height: 45,
                   decoration: BoxDecoration(
                     border: Border.all(color: AppColors.lightWhite),
