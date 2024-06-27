@@ -1,4 +1,5 @@
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:endoorphin_trainer/controllers/forgot_password_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -10,7 +11,7 @@ class ForgotPasswordUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CountryCodeController controller = Get.put(CountryCodeController());
+    ForgotPasswordController controller = Get.put(ForgotPasswordController());
     return Container(
       height: Get.height,
       width: Get.width,
@@ -70,7 +71,7 @@ class ForgotPasswordUI extends StatelessWidget {
                                 LengthLimitingTextInputFormatter(64),
                                 FilteringTextInputFormatter.deny(RegExp(r'\s')),
                               ],
-                              controller: controller.phoneNumber,
+                              controller: controller.emailController,
                               style: Theme.of(context)
                                   .textTheme
                                   .labelMedium!
@@ -94,44 +95,8 @@ class ForgotPasswordUI extends StatelessWidget {
                             style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 18,
                                 fontFamily: 'Montserrat'),),
                           onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
+                              controller.onSubmitButton(context);
 
-                                  backgroundColor: AppColors.greyButton,
-                                  title: Column(
-                                    children: [
-                                      SizedBox(height: Get.height*0.03,),
-                                      Image.asset(ImagesPaths.cooltick,scale: 4,),
-                                      SizedBox(
-                                        height: Get.height*0.02,
-                                      ),
-                                      Text('Reset Password',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.yellow),)
-                                    ],
-                                  ),
-                                  content: SizedBox(
-                                      width: Get.width, // Set width as per your requirement
-                                      height: Get.height*0.07, // Set height as per your requirement
-                                      child: Text(
-                                        'A Link has been sent to your email for\nresetting the password',style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.white),
-                                        textAlign: TextAlign.center,
-                                      )),
-                                  actions: [
-                                    Center(
-                                      child: InkButton(
-                                          child: Text('OK',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 14,
-                                              fontFamily: 'Montserrat',),),
-                                          onTap: (){
-                                            Get.back();
-                                            Get.toNamed(AppRoutes.createNewPassword);
-                                          },height: 35,width: Get.width*.35),
-                                    ),
-                                  ],shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),);
-                              },
-                            );
                           }).paddingOnly(top: Get.height*0.2),
                   ),
                 ],

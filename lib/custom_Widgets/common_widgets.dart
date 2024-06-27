@@ -143,6 +143,11 @@ enum UploadImage{
   byInitically,
   byProfile
 }
+OtpVerified? otpVerified;
+enum OtpVerified{
+  byNumber,
+  byMail
+}
 
 // Drawer myDrawer() {
 //   return Drawer(

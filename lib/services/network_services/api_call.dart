@@ -5,6 +5,7 @@ import 'package:endoorphin_trainer/services/models/response_models/get_category_
 
 import '../../custom_Widgets/common_widgets.dart';
 import '../models/request_models/category_document_model.dart';
+import '../models/request_models/forget_password_model.dart';
 import '../models/request_models/login_model.dart';
 import '../models/request_models/save_bankdetail_model.dart';
 import '../models/request_models/send_otp_model.dart';
@@ -327,5 +328,33 @@ class CallAPI {
       return result;
     }
   }
+/// FORGET PASSWORD
+  static Future<ForgetPasswordModel> forgetPassword({required var request}) async {
+    ForgetPasswordModel result = ForgetPasswordModel();
+    try {
+      Map<dynamic, dynamic> json = await APIManager().postAPICall(
+        endpoint: Endpoints.epForgetPassword,
+        request: request,
+      );
+
+      ForgetPasswordModel responseModel = ForgetPasswordModel.fromJson(json);
+      if (responseModel.status == 200) {
+        result = responseModel;
+        printResult(
+            screenName: 'API CALL',
+            msg: "CALLING ENDPOINTS ${Endpoints.epLogin}, RESULT:$json");
+
+        return result;
+      } else {
+        result = responseModel;
+        return result;
+      }
+    } on Exception catch (e, st) {
+      printResult(
+          screenName: 'API CALL', msg: "", error: e.toString(), stackTrace: st);
+      return result;
+    }
+  }
 
 }
+
