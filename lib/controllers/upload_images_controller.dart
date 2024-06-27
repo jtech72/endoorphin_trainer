@@ -123,7 +123,9 @@ class UploadImagesController extends GetxController {
     Map<String, String> fields = {
       'passportName':certificationDetails!["certificateName"] , // example field
       'passportNumber':certificationDetails!["certificateNumber"] ,
-      "id":  certificationDetails!["id"]
+      "id":  certificationDetails!["id"],
+      "reupload":certificationDetails?["reupload"].toString() ?? "false" ,
+
     };
     Map<String, File> files = {
       'passportfrontImg': fontImagePicked!.value!,
@@ -161,7 +163,9 @@ class UploadImagesController extends GetxController {
       // 'userId': certificationDetails!["userId"].toString(), // example field
       'emiratesName':certificationDetails!["certificateName"] , // example field
       'emiratesNumber':certificationDetails!["certificateNumber"] ,
-      "id":  certificationDetails!["id"]
+      "id":  certificationDetails!["id"],
+      "reupload":certificationDetails?["reupload"].toString() ?? "false" ,
+
     };
     Map<String, File> files = {
       'emiratesfrontImg': fontImagePicked!.value!,
@@ -196,10 +200,11 @@ class UploadImagesController extends GetxController {
   Future<void> onCertification() async {
     showLoader();
     Map<String, String> fields = {
-      'userId': certificationDetails!["userId"].toString(), // example field
+      'userId': certificationDetails!["userId"].toString(),
       'categoryId':certificationDetails!["categoryId"].toString() ,
-      'categoryName':certificationDetails!["certificateName"] , // example field
-      'categoryNumber':certificationDetails!["certificateNumber"] , // example field
+      'categoryName':certificationDetails!["certificateName"] ,
+      'categoryNumber':certificationDetails!["certificateNumber"] ,
+      "reupload":certificationDetails?["reupload"].toString() ?? "false" ,
     };
     Map<String, File> files = {
       'documentFrontImg': fontImagePicked!.value!,

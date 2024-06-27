@@ -365,7 +365,8 @@ class DocumentUI extends StatelessWidget {
                                                             "name": snapshot.data?.result?[index].category?.name.toString() ?? "",
                                                             "categoryName": snapshot.data?.result?[index].passport.toString()??"",
                                                             "categoryId": categoryId,
-                                                            "id":snapshot.data!.result![index].id.toString()
+                                                            "id":snapshot.data!.result![index].id.toString(),
+                                                            "reupload":true,
                                                           });
                                                     },
 
@@ -734,7 +735,9 @@ class DocumentUI extends StatelessWidget {
                                                                 "name": snapshot.data?.result?[index].category?.name.toString() ?? "",
                                                                 "categoryName": snapshot.data?.result?[index].passport.toString()??"",
                                                                 "categoryId": categoryId,
-                                                                "id":snapshot.data!.result![index].id.toString()
+                                                                "id":snapshot.data!.result![index].id.toString(),
+                                                                "reupload":true,
+
                                                               });
                                                         },
 
@@ -1110,7 +1113,8 @@ class DocumentUI extends StatelessWidget {
                                                                     "name": snapshot.data?.result?[index].category?.name.toString() ?? "",
                                                                     "categoryName": snapshot.data?.result?[index].passport.toString()??"",
                                                                     "categoryId": categoryId,
-                                                                    "id":snapshot.data!.result![index].id.toString()
+                                                                    "id":snapshot.data!.result![index].id.toString(),
+                                                                    "reupload":true,
                                                                   });
                                                             },
 
