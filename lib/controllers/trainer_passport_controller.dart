@@ -24,6 +24,7 @@ class TrainerPassportController extends GetxController {
         "userId": certificationDetails!["userId"],
         "categoryName": certificationDetails!["categoryName"],
         "categoryId": certificationDetails!["categoryId"],
+        "id": certificationDetails!["id"],
         "certificateNumber": trimmedCertificateNumber,
         "certificateName": trimmedCertificateName,
       });

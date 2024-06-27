@@ -92,21 +92,15 @@ class DocumentUI extends StatelessWidget {
                     );
                   }
                   return SizedBox(
-                      height: Get.height - 150,
+                      height: Get.height*.8,
                       child: ListView.builder(
-                        itemCount: snapshot.data!.result!.length +
-                            2, // Adjusted itemCount to include the additional widgets
-                        shrinkWrap: true,
-                        padding: EdgeInsets.zero,
+                        itemCount: snapshot.data!.result!.length ,
+                        reverse: false,
                         itemBuilder: (context, index) {
-                          if (index < snapshot.data!.result!.length) {
-                            return index < snapshot.data!.result!.length &&
-                                    snapshot.data!.result![index]
-                                            .documentBackImg !=
-                                        null &&
-                                    snapshot.data!.result![index]
-                                            .documentFrontImg !=
-                                        null
+
+                            return
+                                    snapshot.data!.result![index].documentBackImg != null &&
+                                    snapshot.data!.result![index].documentFrontImg != null
                                 //Certification
                                 ? Padding(
                                     padding: const EdgeInsets.all(8.0),
@@ -358,29 +352,13 @@ class DocumentUI extends StatelessWidget {
                                                                 uploadImage =
                                                                     UploadImage
                                                                         .byProfile;
-                                                                Get.toNamed(
-                                                                    AppRoutes
-                                                                        .trainerPassport,
+                                                                Get.toNamed(AppRoutes.trainerPassport,
                                                                     arguments: {
-                                                                      "userId": snapshot
-                                                                          .data!
-                                                                          .result![
-                                                                              index]
-                                                                          .userId
-                                                                          .toString(),
-                                                                      "categoryName":
-                                                                          "",
-                                                                      "categoryId": snapshot
-                                                                          .data!
-                                                                          .result![
-                                                                              index]
-                                                                          .category!
-                                                                          .id
-                                                                          .toString(),
-                                                                      "certificateNumber":
-                                                                          "",
-                                                                      "certificateName":
-                                                                          "",
+                                                                      "userId": snapshot.data!.result![index].userId.toString(),
+                                                                      "categoryName": "",
+                                                                      "categoryId": snapshot.data!.result![index].category!.id.toString(),
+                                                                      "certificateNumber": "",
+                                                                      "certificateName": "",
                                                                       "name":snapshot.data!.result![index].category!.name.toString()
                                                                     });
                                                               },
@@ -468,8 +446,7 @@ class DocumentUI extends StatelessWidget {
                                           left: 15),
                                     ),
                                   )
-                                : index < snapshot.data!.result!.length &&
-                                        snapshot.data!.result![index]
+                                : snapshot.data!.result![index]
                                                 .emiratesfrontImg !=
                                             null &&
                                         snapshot.data!.result![index]
@@ -843,8 +820,7 @@ class DocumentUI extends StatelessWidget {
                                               left: 15),
                                         ),
                                       )
-                                    : index <
-                                                snapshot.data!.result!.length &&
+                                    :
                                             snapshot.data!.result![index]
                                                     .passportfrontImg !=
                                                 null &&
@@ -1233,10 +1209,10 @@ class DocumentUI extends StatelessWidget {
                                               Get.toNamed(AppRoutes.trainerPassport,
                                                   arguments: {
                                                     "userId": userId,
-                                                    "categoryName": "",
+                                                    "name": snapshot.data?.result?[index].category?.name.toString() ?? "",
+                                                    "categoryName": snapshot.data?.result?[index].passport.toString()??"",
                                                     "categoryId": categoryId,
-                                                    "name":snapshot.data!.result![index].category!.name.toString()
-
+                                                    "id":snapshot.data!.result![index].id.toString()
                                                   });
                                             },
                                             child: Container(
@@ -1298,33 +1274,33 @@ class DocumentUI extends StatelessWidget {
                                                           SizedBox(
                                                             width:
                                                                 Get.width * .55,
-                                                            child: Text(
+                                                            child:
+                                                            Text(
                                                               snapshot
-                                                                          .data!
-                                                                          .result![
-                                                                              index]
-                                                                          .category ==
-                                                                      null
-                                                                  ? ""
+                                                                  .data!
+                                                                  .result![
+                                                              index]
+                                                                  .category ==
+                                                                  null
+                                                                  ? snapshot.data!.result![index].passport.toString().toUpperCase()
                                                                   : snapshot
-                                                                      .data!
-                                                                      .result![
-                                                                          index]
-                                                                      .category!
-                                                                      .name
-                                                                      .toString(),
+                                                                  .data!
+                                                                  .result![
+                                                              index]
+                                                                  .category!
+                                                                  .name
+                                                                  .toString(),
                                                               overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
+                                                              TextOverflow
+                                                                  .ellipsis,
                                                               style: Theme.of(
-                                                                      context)
+                                                                  context)
                                                                   .textTheme
                                                                   .titleLarge
                                                                   ?.copyWith(
-                                                                      color: AppColors
-                                                                          .yellow),
-                                                            ).paddingOnly(
-                                                                top: 12),
+                                                                  color: AppColors
+                                                                      .yellow),
+                                                            ).paddingOnly(top: 12),
                                                           ),
                                                           Text(
                                                             "Upload your Certification ...",
@@ -1357,188 +1333,8 @@ class DocumentUI extends StatelessWidget {
                                             ).paddingOnly(
                                                 bottom: Get.height * 0.02),
                                           );
-                          } else if (index == snapshot.data!.result!.length &&
-                              storage.read("Emirates ID") != "true") {
-                            return InkWell(
-                              onTap: () {
-                                uploadImage = UploadImage.byProfile;
-                                Get.toNamed(AppRoutes.trainerPassport,
-                                    arguments: {
-                                      "userId":
-                                          storage.read("userId").toString(),
-                                      "categoryName": "Emirates ID",
-
-                                    });
-                              },
-                              child: Container(
-                                height: 70,
-                                width: Get.width,
-                                decoration: BoxDecoration(
-                                  color: AppColors.greyButton,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Transform.translate(
-                                          offset: const Offset(-10, 2),
-                                          child: Container(
-                                            height: Get.width * 0.14,
-                                            width: Get.width * 0.14,
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 15, vertical: 17),
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              color: AppColors.black,
-                                            ),
-                                            child: Image.asset(
-                                              ImagesPaths.document,
-                                              height: 24,
-                                              width: 24,
-                                            ),
-                                          ).paddingOnly(
-                                              left: 20, right: 10, bottom: 5),
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              width: Get.width * .55,
-                                              child: Text(
-                                                "Emirates ID",
-                                                overflow: TextOverflow.ellipsis,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .titleLarge
-                                                    ?.copyWith(
-                                                        color:
-                                                            AppColors.yellow),
-                                              ).paddingOnly(top: 12),
-                                            ),
-                                            Text(
-                                              "Upload your emirates id...",
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .labelSmall
-                                                  ?.copyWith(fontSize: 12),
-                                            ).paddingOnly(top: 10),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.arrow_forward_ios_outlined,
-                                          color: AppColors.impgrey,
-                                          size: 22,
-                                        ).paddingOnly(right: 15),
-                                      ],
-                                    ),
-                                  ],
-                                ).paddingOnly(left: 0),
-                              ).paddingOnly(bottom: Get.height * 0.02),
-                            );
-                          } else if (index ==
-                                  snapshot.data!.result!.length + 1 &&
-                              storage.read("Passport") != "true") {
-                            return InkWell(
-                              onTap: () {
-                                uploadImage = UploadImage.byProfile;
-                                Get.toNamed(AppRoutes.trainerPassport,
-                                    arguments: {
-                                      "userId":
-                                          storage.read("userId").toString(),
-                                      "categoryName": "Passport",
-
-                                    });
-                              },
-                              child: Container(
-                                height: 70,
-                                width: Get.width,
-                                decoration: BoxDecoration(
-                                  color: AppColors.greyButton,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Transform.translate(
-                                          offset: const Offset(-10, 2),
-                                          child: Container(
-                                            height: Get.width * 0.14,
-                                            width: Get.width * 0.14,
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 15, vertical: 17),
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              color: AppColors.black,
-                                            ),
-                                            child: Image.asset(
-                                              ImagesPaths.document,
-                                              height: 24,
-                                              width: 24,
-                                            ),
-                                          ).paddingOnly(
-                                              left: 20, right: 10, bottom: 5),
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              width: Get.width * .55,
-                                              child: Text(
-                                                "Passport",
-                                                overflow: TextOverflow.ellipsis,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .titleLarge
-                                                    ?.copyWith(
-                                                        color:
-                                                            AppColors.yellow),
-                                              ).paddingOnly(top: 12),
-                                            ),
-                                            Text(
-                                              "Upload your passport...",
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .labelSmall
-                                                  ?.copyWith(fontSize: 12),
-                                            ).paddingOnly(top: 10),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.arrow_forward_ios_outlined,
-                                          color: AppColors.impgrey,
-                                          size: 22,
-                                        ).paddingOnly(right: 15),
-                                      ],
-                                    ),
-                                  ],
-                                ).paddingOnly(left: 0),
-                              ).paddingOnly(bottom: Get.height * 0.02),
-                            );
                           }
-                          return const SizedBox
-                              .shrink(); },
+
                       ));
                 },
               ),
