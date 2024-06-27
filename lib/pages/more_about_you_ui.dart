@@ -477,7 +477,8 @@ class MoreAboutYouUi extends StatelessWidget {
                                         null
                                 ?
                                 //Passport
-                                Container(
+                                Container
+                                  (
                                     decoration: BoxDecoration(
                                       color: AppColors.greyButton,
                                       borderRadius: BorderRadius.circular(5),
@@ -1233,7 +1234,10 @@ class MoreAboutYouUi extends StatelessWidget {
                                                           index]
                                                               .category ==
                                                               null
-                                                              ? snapshot.data!.result![index].passport.toString().toUpperCase()
+                                                              ?
+                                                          snapshot.data!.result![index].passport.toString() =="emirates"?
+                                                              "Emirates ID":
+                                                          "Passport"
                                                               : snapshot
                                                               .data!
                                                               .result![

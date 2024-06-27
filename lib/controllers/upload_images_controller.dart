@@ -119,10 +119,8 @@ class UploadImagesController extends GetxController {
     );
   }
   Future<void> onPassport() async {
-    log("message");
     showLoader();
     Map<String, String> fields = {
-      // 'userId': certificationDetails!["userId"].toString(), // example field
       'passportName':certificationDetails!["certificateName"] , // example field
       'passportNumber':certificationDetails!["certificateNumber"] ,
       "id":  certificationDetails!["id"]
@@ -141,8 +139,6 @@ class UploadImagesController extends GetxController {
         dismissLoader();
         storage.write("Passport","true");
         log("Successfully uploaded");
-        log("dsfghfdd${uploadImage}");
-
         uploadImage == UploadImage.byProfile?
         Get.offAllNamed(AppRoutes.document):
         Get.offAllNamed(AppRoutes.moreaboutyou);
@@ -160,7 +156,6 @@ class UploadImagesController extends GetxController {
     }
   }
   Future<void> onEmirates() async {
-    log("message");
     showLoader();
     Map<String, String> fields = {
       // 'userId': certificationDetails!["userId"].toString(), // example field
@@ -182,7 +177,6 @@ class UploadImagesController extends GetxController {
         dismissLoader();
         storage.write("Emirates ID","true");
         log("Successfully uploaded");
-        log("dsfghfdd${uploadImage}");
         uploadImage == UploadImage.byProfile?
         Get.offAllNamed(AppRoutes.document):
         Get.offAllNamed(AppRoutes.moreaboutyou);
@@ -220,7 +214,6 @@ class UploadImagesController extends GetxController {
       if(result.status == 200){
         dismissLoader();
         log("Successfully uploaded");
-        log("dsfghfdd${uploadImage}");
         uploadImage == UploadImage.byProfile?
             Get.offAllNamed(AppRoutes.document):
         Get.offAllNamed(AppRoutes.moreaboutyou);
@@ -239,7 +232,6 @@ class UploadImagesController extends GetxController {
   }
   void onSaveButton() {
     if (certificationDetails!["categoryId"].toString() != "") {
-      log("sadfghgfds");
       onCertification();
     } else if(certificationDetails!["categoryName"] == "passport") {
       onPassport();
