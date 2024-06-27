@@ -11,6 +11,7 @@ class OtpController extends GetxController {
   final time = '00.00'.obs;
   RxBool isPaused = false.obs;
   String ?phoneNumber;
+  Map<String, dynamic>? userDetails;
   dynamic secondOtp;
   void startTimer(int seconds) {
     const duration = Duration(seconds: 1);
@@ -57,7 +58,40 @@ class OtpController extends GetxController {
     }
 
   }
-  void onVerify() {
+
+  void onNumberVerify() {
+    showLoader();
+
+    String otp = otpController.text.trim();
+
+    if (otp.isEmpty) {
+      dismissLoader();
+      showSnackBar("Please enter a valid OTP");
+      return;
+    }
+
+    if (otp.length != 6) {
+      dismissLoader();
+      showSnackBar("Invalid OTP");
+      return;
+    }
+
+    try {
+      int enteredOtp = int.parse(otp);
+      if (enteredOtp == countryCodeController.finalOTP || enteredOtp == secondOtp) {
+        dismissLoader();
+        Get.toNamed(AppRoutes.registration);
+        printResult(screenName: "OTP SCREEN", msg: "OTP VERIFIED");
+      } else {
+        dismissLoader();
+        showSnackBar("Invalid OTP");
+      }
+    } catch (e) {
+      dismissLoader();
+      showSnackBar("Invalid OTP format");
+    }
+  }
+  void onEmailVerify() {
     showLoader();
 
     String otp = otpController.text.trim();
@@ -91,8 +125,11 @@ class OtpController extends GetxController {
   }
   @override
   void onInit() {
+    userDetails = Get.arguments;
     phoneNumber = Get.arguments;
+
     log(phoneNumber.toString());
+    log(userDetails.toString());
     super.onInit();
   }
 }
