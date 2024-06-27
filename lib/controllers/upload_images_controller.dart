@@ -122,9 +122,10 @@ class UploadImagesController extends GetxController {
     log("message");
     showLoader();
     Map<String, String> fields = {
-      'userId': certificationDetails!["userId"], // example field
+      // 'userId': certificationDetails!["userId"].toString(), // example field
       'passportName':certificationDetails!["certificateName"] , // example field
-      'passportNumber':certificationDetails!["certificateNumber"] , // example field
+      'passportNumber':certificationDetails!["certificateNumber"] ,
+      "id":  certificationDetails!["id"]
     };
     Map<String, File> files = {
       'passportfrontImg': fontImagePicked!.value!,
@@ -162,9 +163,10 @@ class UploadImagesController extends GetxController {
     log("message");
     showLoader();
     Map<String, String> fields = {
-      'userId': certificationDetails!["userId"], // example field
+      // 'userId': certificationDetails!["userId"].toString(), // example field
       'emiratesName':certificationDetails!["certificateName"] , // example field
-      'emiratesNumber':certificationDetails!["certificateNumber"] , // example field
+      'emiratesNumber':certificationDetails!["certificateNumber"] ,
+      "id":  certificationDetails!["id"]
     };
     Map<String, File> files = {
       'emiratesfrontImg': fontImagePicked!.value!,
@@ -236,10 +238,10 @@ class UploadImagesController extends GetxController {
     }
   }
   void onSaveButton() {
-    if (certificationDetails!["categoryName"] == "") {
+    if (certificationDetails!["categoryId"].toString() != "") {
       log("sadfghgfds");
       onCertification();
-    } else if(certificationDetails!["categoryName"] == "Passport") {
+    } else if(certificationDetails!["categoryName"] == "passport") {
       onPassport();
     }else{
       onEmirates();
