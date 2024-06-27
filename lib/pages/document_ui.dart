@@ -348,21 +348,29 @@ class DocumentUI extends StatelessWidget {
                                                                               AppColors.whiteShade))),
                                                             )
                                                           : GestureDetector(
-                                                              onTap: () {
-                                                                uploadImage =
-                                                                    UploadImage
-                                                                        .byProfile;
-                                                                Get.toNamed(AppRoutes.trainerPassport,
-                                                                    arguments: {
-                                                                      "userId": snapshot.data!.result![index].userId.toString(),
-                                                                      "categoryName": "",
-                                                                      "categoryId": snapshot.data!.result![index].category!.id.toString(),
-                                                                      "certificateNumber": "",
-                                                                      "certificateName": "",
-                                                                      "name":snapshot.data!.result![index].category!.name.toString()
-                                                                    });
-                                                              },
-                                                              child: Container(
+                                                    onTap: () {
+                                                      final userId = snapshot.data!
+                                                          .result![index].userId ??
+                                                          "";
+                                                      final categoryId = snapshot
+                                                          .data!
+                                                          .result![index]
+                                                          .category
+                                                          ?.id ??
+                                                          "";
+                                                      uploadImage = UploadImage.byProfile;
+                                                      Get.toNamed(AppRoutes.trainerPassport,
+                                                          arguments: {
+                                                            "userId": userId,
+                                                            "name": snapshot.data?.result?[index].category?.name.toString() ?? "",
+                                                            "categoryName": snapshot.data?.result?[index].passport.toString()??"",
+                                                            "categoryId": categoryId,
+                                                            "id":snapshot.data!.result![index].id.toString(),
+                                                            "reupload":true,
+                                                          });
+                                                    },
+
+                                                    child: Container(
                                                                 height: 22,
                                                                 width: 120,
                                                                 decoration: BoxDecoration(
@@ -710,31 +718,30 @@ class DocumentUI extends StatelessWidget {
                                                                               color: AppColors.whiteShade))),
                                                                 )
                                                               : GestureDetector(
-                                                                  onTap: () {
-                                                                    uploadImage =
-                                                                        UploadImage
-                                                                            .byProfile;
-                                                                    Get.toNamed(
-                                                                        AppRoutes
-                                                                            .trainerPassport,
-                                                                        arguments: {
-                                                                          "userId": snapshot
-                                                                              .data!
-                                                                              .result![index]
-                                                                              .userId
-                                                                              .toString(),
-                                                                          "categoryName":
-                                                                              "Emirates ID",
-                                                                          "categoryId": snapshot.data?.result?[index].category?.id.toString()??"",
-                                                                          "certificateNumber":
-                                                                              "",
-                                                                          "certificateName":
-                                                                              "",
-                                                                          "name":snapshot.data?.result?[index].category?.name.toString()??""
+                                                        onTap: () {
+                                                          final userId = snapshot.data!
+                                                              .result![index].userId ??
+                                                              "";
+                                                          final categoryId = snapshot
+                                                              .data!
+                                                              .result![index]
+                                                              .category
+                                                              ?.id ??
+                                                              "";
+                                                          uploadImage = UploadImage.byProfile;
+                                                          Get.toNamed(AppRoutes.trainerPassport,
+                                                              arguments: {
+                                                                "userId": userId,
+                                                                "name": snapshot.data?.result?[index].category?.name.toString() ?? "",
+                                                                "categoryName": snapshot.data?.result?[index].passport.toString()??"",
+                                                                "categoryId": categoryId,
+                                                                "id":snapshot.data!.result![index].id.toString(),
+                                                                "reupload":true,
 
-                                                                        });
-                                                                  },
-                                                                  child:
+                                                              });
+                                                        },
+
+                                                        child:
                                                                       Container(
                                                                     height: 22,
                                                                     width: 120,
@@ -1089,22 +1096,30 @@ class DocumentUI extends StatelessWidget {
                                                                               style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: AppColors.whiteShade))),
                                                                     )
                                                                   : GestureDetector(
-                                                                      onTap:
-                                                                          () {
-                                                                        uploadImage =
-                                                                            UploadImage.byProfile;
-                                                                        Get.toNamed(
-                                                                            AppRoutes.trainerPassport,
-                                                                            arguments: {
-                                                                              "userId": snapshot.data!.result![index].userId.toString(),
-                                                                              "categoryName": "Passport",
-                                                                              "categoryId": snapshot.data?.result?[index].category?.id.toString()??"",
-                                                                              "certificateNumber": "",
-                                                                              "certificateName": "",
-                                                                              "name":snapshot.data?.result?[index].category?.name.toString()??""
-                                                                            });
-                                                                      },
-                                                                      child:
+                                                            onTap: () {
+                                                              final userId = snapshot.data!
+                                                                  .result![index].userId ??
+                                                                  "";
+                                                              final categoryId = snapshot
+                                                                  .data!
+                                                                  .result![index]
+                                                                  .category
+                                                                  ?.id ??
+                                                                  "";
+                                                              uploadImage = UploadImage.byProfile;
+                                                              Get.toNamed(AppRoutes.trainerPassport,
+                                                                  arguments: {
+                                                                    "userId": userId,
+                                                                    "name": snapshot.data?.result?[index].category?.name.toString() ?? "",
+                                                                    "categoryName": snapshot.data?.result?[index].passport.toString()??"",
+                                                                    "categoryId": categoryId,
+                                                                    "id":snapshot.data!.result![index].id.toString(),
+                                                                    "reupload":true,
+                                                                  });
+                                                            },
+
+
+                                                            child:
                                                                           Container(
                                                                         height:
                                                                             22,

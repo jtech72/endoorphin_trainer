@@ -55,7 +55,7 @@ class TrainerPassportUI extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      controller.certificationDetails!["categoryName"] == "Emirates ID"? "Emirates ID Name":controller.certificationDetails!["categoryName"] == "Passport"?'Passport Name':"Certification Name",
+                      controller.certificationDetails!["categoryName"] == "emirates"? "Emirates ID Name":controller.certificationDetails!["categoryName"] == "passport"?'Passport Name':"Certification Name",
 
                       style: Theme.of(context)
                           .textTheme
@@ -77,7 +77,7 @@ class TrainerPassportUI extends StatelessWidget {
 
                     controller: controller.certificateName,
                     inputFormatters: [
-                      LengthLimitingTextInputFormatter(20),
+                      LengthLimitingTextInputFormatter(50),
                       FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))                      ],
                     enableInteractiveSelection: true,
                     style: Theme.of(context).textTheme.labelMedium,
@@ -90,7 +90,7 @@ class TrainerPassportUI extends StatelessWidget {
                       hintStyle: Theme.of(context).textTheme.labelMedium,
                       contentPadding: const EdgeInsets.only(bottom: 3, left: 15),
 
-                      hintText: controller.certificationDetails!["categoryName"] == "Emirates ID"? " Enter Emirates ID name":controller.certificationDetails!["categoryName"] == "Passport"?'Enter Passport name':"Enter Certification Name",
+                      hintText: controller.certificationDetails!["categoryName"] == "emirates"? " Enter Emirates ID name":controller.certificationDetails!["categoryName"] == "passport"?'Enter Passport name':"Enter Certification Name",
                       alignLabelWithHint: true,
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(4),
@@ -122,7 +122,7 @@ class TrainerPassportUI extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      controller.certificationDetails!["categoryName"] == "Emirates ID"? "Emirates ID Number":controller.certificationDetails!["categoryName"] == "Passport"?'Passport Number':"Certification Number",
+                      controller.certificationDetails!["categoryName"] == "emirates"? "Emirates ID Number":controller.certificationDetails!["categoryName"] == "passport"?'Passport Number':"Certification Number",
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge!
@@ -143,7 +143,7 @@ class TrainerPassportUI extends StatelessWidget {
                     // keyboardType: TextInputType.number,
                     controller: controller.certificateNumber,
                     inputFormatters: [
-                      LengthLimitingTextInputFormatter(12), // Set maximum length to 12
+                      LengthLimitingTextInputFormatter(25), // Set maximum length to 12
                       FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')), // Allow only alphanumeric characters
                     ],
                     enableInteractiveSelection: true,
@@ -157,7 +157,7 @@ class TrainerPassportUI extends StatelessWidget {
                       hintStyle: Theme.of(context).textTheme.labelMedium,
                       contentPadding: const EdgeInsets.only(bottom: 3, left: 15),
 
-                      hintText: controller.certificationDetails!["categoryName"] == "Emirates ID"? " Enter Emirates ID Number":controller.certificationDetails!["categoryName"] == "Passport"?'Enter Passport Number':"Enter Certification Number",
+                      hintText: controller.certificationDetails!["categoryName"] == "emirates"? " Enter Emirates ID Number":controller.certificationDetails!["categoryName"] == "passport"?'Enter Passport Number':"Enter Certification Number",
                       alignLabelWithHint: true,
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(4),
@@ -189,7 +189,7 @@ class TrainerPassportUI extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      controller.certificationDetails!["categoryName"] == "Emirates ID"? " Upload Emirates ID Photo":controller.certificationDetails!["categoryName"] == "Passport"?'Upload Passport Photo':"Upload Certification Photo",
+                      controller.certificationDetails!["categoryName"] == "emirates"? " Upload Emirates ID Photo":controller.certificationDetails!["categoryName"] == "passport"?'Upload Passport Photo':"Upload Certification Photo",
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge!
