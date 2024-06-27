@@ -88,6 +88,7 @@ class BioEditUi extends StatelessWidget {
                         keyboardType: TextInputType.text,
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(64),
+                          FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
                           FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))                      ],
                         style: Theme.of(context)
                             .textTheme
@@ -142,6 +143,7 @@ class BioEditUi extends StatelessWidget {
                         keyboardType: TextInputType.text,
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(64),
+                          NoLeadingSpaceFormatter(),
                           FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))                      ],
                         style: Theme.of(context)
                             .textTheme
@@ -194,6 +196,7 @@ class BioEditUi extends StatelessWidget {
                       child: TextField(
                         controller: controller.experienceController,
                         keyboardType: TextInputType.number,
+                        inputFormatters: [NoLeadingSpaceFormatter()],
                         style: Theme.of(context)
                             .textTheme
                             .labelMedium!
@@ -247,6 +250,7 @@ class BioEditUi extends StatelessWidget {
                       child: TextField(
                         controller: controller.funFactController,
                         keyboardType: TextInputType.text,
+                        inputFormatters: [NoLeadingSpaceFormatter()],
                         style: Theme.of(context)
                             .textTheme
                             .labelMedium!
@@ -300,6 +304,7 @@ class BioEditUi extends StatelessWidget {
                       child: TextField(
                         controller: controller.motivationController,
                         keyboardType: TextInputType.text,
+                        inputFormatters: [NoLeadingSpaceFormatter()],
                         style: Theme.of(context)
                             .textTheme
                             .labelMedium!
@@ -353,6 +358,7 @@ class BioEditUi extends StatelessWidget {
                       child: TextField(
                         controller: controller.bioController,
                         keyboardType: TextInputType.text,
+                        inputFormatters: [NoLeadingSpaceFormatter()],
                         maxLines: 10,
                         style: Theme.of(context)
                             .textTheme
