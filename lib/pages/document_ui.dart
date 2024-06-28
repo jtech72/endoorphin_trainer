@@ -331,7 +331,7 @@ class DocumentUI extends StatelessWidget {
                                                               width: 100,
                                                               decoration: BoxDecoration(
                                                                   color: AppColors
-                                                                      .backgroundcolor2,
+                                                                      .yellow,
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
@@ -345,7 +345,7 @@ class DocumentUI extends StatelessWidget {
                                                                           fontWeight: FontWeight
                                                                               .w400,
                                                                           color:
-                                                                              AppColors.whiteShade))),
+                                                                              AppColors.black))),
                                                             )
                                                           : GestureDetector(
                                                     onTap: () {
@@ -1345,8 +1345,8 @@ class DocumentUI extends StatelessWidget {
                                                   ),
                                                 ],
                                               ).paddingOnly(left: 0),
-                                            ).paddingOnly(
-                                                bottom: Get.height * 0.02),
+                                            ).paddingOnly(top: Get.height*0.008,
+                                                bottom: Get.height * 0.008,left: Get.width*0.02,right: Get.width*0.02),
                                           );
                           }
 

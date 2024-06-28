@@ -125,11 +125,9 @@ class OtpController extends GetxController {
   }
   @override
   void onInit() {
-    userDetails = Get.arguments;
     phoneNumber = Get.arguments;
 
     log(phoneNumber.toString());
-    log(userDetails.toString());
     super.onInit();
   }
 }

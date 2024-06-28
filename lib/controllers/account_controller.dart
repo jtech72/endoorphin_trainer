@@ -90,7 +90,7 @@ class AccountController extends GetxController {
       showSnackBar("Please enter valid email");
     }
     else {
-      showLoader();
+      // showLoader();
 
       Map<String, String> fields = {
         "id": storage.read("userId").toString(),
