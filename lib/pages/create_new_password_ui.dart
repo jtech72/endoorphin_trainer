@@ -1,13 +1,15 @@
+import 'package:endoorphin_trainer/controllers/create_new_password_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../utils/exports.dart';
 
 class CreateNewPasswordUI extends StatelessWidget {
-  const CreateNewPasswordUI({super.key});
-
+   const CreateNewPasswordUI({super.key});
   @override
   Widget build(BuildContext context) {
+    CreateNewPasswordController controller = Get.put(CreateNewPasswordController());
+
     return Container(
       height: Get.height,
       width: Get.width,
@@ -69,28 +71,45 @@ class CreateNewPasswordUI extends StatelessWidget {
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    child: TextField(
-                      obscureText: true,
-                      obscuringCharacter: "*",
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(64),
-                        FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                      ],
+                    child: Obx(
+                      ()=> TextField(
+                        controller: controller.newPasswordController,
+                        obscureText: controller.obscureText.value,
+                        obscuringCharacter: "*",
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(64),
+                          FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                        ],
 
-                      enableInteractiveSelection: true,
-                      style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.black),
-                      cursorColor: AppColors.grey,
-                      cursorHeight: 18,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: AppColors.yellowishWhite,
-                        border: InputBorder.none,
-                        hintStyle: Theme.of(context).textTheme.labelMedium?.copyWith(color: AppColors.lightGrey),
-                        contentPadding:
-                        const EdgeInsets.only(bottom: 3, left: 25),
+                        enableInteractiveSelection: true,
+                        style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.black),
+                        cursorColor: AppColors.grey,
+                        cursorHeight: 18,
+                        decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            highlightColor: Colors.transparent,
+                            icon: Icon(
+                              controller.obscureText.value
+                                  ? Icons.visibility_off_rounded
+                                  : Icons.visibility_rounded,
+                              color: Colors.grey,
+                              size: 18,
+                            ),
+                            onPressed: () {
+                              controller.toggleObscureText();
+                            },
+                          ),
 
-                        hintText: "Enter New password",
-                        alignLabelWithHint: true, // Center the hintText
+                          filled: true,
+                          fillColor: AppColors.yellowishWhite,
+                          border: InputBorder.none,
+                          hintStyle: Theme.of(context).textTheme.labelMedium?.copyWith(color: AppColors.lightGrey),
+                          contentPadding:
+                          const EdgeInsets.only(top: 10, left: 25),
+
+                          hintText: "Enter New password",
+                          alignLabelWithHint: true, // Center the hintText
+                        ),
                       ),
                     ),
                   ),
@@ -109,28 +128,47 @@ class CreateNewPasswordUI extends StatelessWidget {
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    child: TextField(
-                      obscureText: true,
-                      obscuringCharacter: "*",
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(64),
-                        FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                      ],
+                    child: Obx(
+                      ()=> TextField(
+                        controller: controller.confirmPasswordController,
+                        obscureText: controller.obscureText1.value,
+                        obscuringCharacter: "*",
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(64),
+                          FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                        ],
 
-                      enableInteractiveSelection: true,
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(color: AppColors.black),
-                      cursorColor: AppColors.grey,
-                      cursorHeight: 18,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: AppColors.yellowishWhite,
-                        border: InputBorder.none,
-                        hintStyle: Theme.of(context).textTheme.labelMedium?.copyWith(color: AppColors.lightGrey),
-                        contentPadding:
-                        const EdgeInsets.only(bottom: 3, left: 25),
+                        enableInteractiveSelection: true,
+                        style: Theme.of(context).textTheme.labelMedium?.copyWith(color: AppColors.black),
+                        cursorColor: AppColors.grey,
+                        cursorHeight: 18,
 
-                        hintText: "Enter Confirm password",
-                        alignLabelWithHint: true, // Center the hintText
+                        decoration: InputDecoration(
+
+                          suffixIcon: IconButton(
+                            highlightColor: Colors.transparent,
+                            icon: Icon(
+                              controller.obscureText1.value
+                                  ? Icons.visibility_off_rounded
+                                  : Icons.visibility_rounded,
+                              color: Colors.grey,
+                              size: 18,
+                            ),
+                            onPressed: () {
+                              controller.toggleObscureText1();
+                            },
+                          ),
+
+                          filled: true,
+                          fillColor: AppColors.yellowishWhite,
+                          border: InputBorder.none,
+                          hintStyle: Theme.of(context).textTheme.labelMedium?.copyWith(color: AppColors.lightGrey),
+                          contentPadding:
+                          const EdgeInsets.only(top: 10, left: 25),
+
+                          hintText: "Enter Confirm password",
+                          alignLabelWithHint: true, // Center the hintText
+                        ),
                       ),
                     ),
                   ),
@@ -143,42 +181,7 @@ class CreateNewPasswordUI extends StatelessWidget {
                             style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 18,
                                 fontFamily: 'Montserrat'),),
                           onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-
-                                  backgroundColor: AppColors.blackShade,
-                                  title: Column(
-                                    children: [
-                                      SizedBox(height: Get.height*0.03,),
-                                      Image.asset(ImagesPaths.cooltick,scale: 4,),
-                                      SizedBox(
-                                        height: Get.height*0.02,
-                                      ),
-                                      Text('Password Updated',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.yellow),)
-                                    ],
-                                  ),
-                                  content: SizedBox(
-                                      width: Get.width, // Set width as per your requirement
-                                      height: Get.height*0.07, // Set height as per your requirement
-                                      child: Text(
-                                        'Your Password has been updated successfully.',style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.white),
-                                        textAlign: TextAlign.center,
-                                      )),
-                                  actions: [
-                                    Center(
-                                      child: InkButton(
-                                          child: Text('Continue to login',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,
-                                              fontFamily: 'Montserrat',fontSize: 12),), onTap: (){
-                                        Get.offAllNamed(AppRoutes.login);
-                                      },height: 35,width: 150),
-                                    ),
-                                  ],shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),);
-                              },
-                            );
+                            controller.onSubmitButton(context);
                           })
                   )
                 ],

@@ -20,15 +20,12 @@ Future<void> onSubmitButton (BuildContext context)async{
 
     };
 
-    try {var value = await CallAPI.forgetPassword(request: request);
+    try {
+      var value = await CallAPI.forgetPassword(request: request);
       if (value.status == 200) {
       dismissLoader();
       otpVerified = OtpVerified.byMail;
-      Get.toNamed(AppRoutes.otp,arguments:{
-        "loginData": value.result!.phoneNumber.toString(),
-        "otp": value.result!.otp.toString()
-      });
-      onVerified(context);
+      onVerified(context,value.result!.otp.toString(),value.result!.phoneNumber.toString());
     } else {
       dismissLoader();
       showSnackBar(value.message ?? "Please enter valid credentials");
@@ -41,7 +38,7 @@ Future<void> onSubmitButton (BuildContext context)async{
     }
   }
 }
-onVerified(BuildContext context){
+onVerified(BuildContext context,String otp,String phoneNumber){
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -72,6 +69,10 @@ onVerified(BuildContext context){
                   fontFamily: 'Montserrat',),),
                 onTap: (){
                   Get.back();
+                  Get.toNamed(AppRoutes.otp, arguments: {
+                    "otp": otp.toString(),
+                    "phoneNumber": phoneNumber.toString(),
+                  });
                 },height: 35,width: Get.width*.35),
           ),
         ],shape: RoundedRectangleBorder(
@@ -80,4 +81,5 @@ onVerified(BuildContext context){
     },
   );
 }
+
 }
