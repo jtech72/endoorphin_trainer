@@ -133,7 +133,8 @@ log("message");
   @override
   void onInit() {
     phoneNumber = Get.arguments;
-   log(phoneNumber.toString());
+
+    log(phoneNumber.toString());
     super.onInit();
   }
 }
