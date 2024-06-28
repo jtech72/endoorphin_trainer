@@ -1,16 +1,44 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
+
+import '../services/network_services/api_call.dart';
 class ForgotPasswordController extends GetxController{
   TextEditingController emailController = TextEditingController();
 Future<void> onSubmitButton (BuildContext context)async{
+  showLoader();
   if(emailController.text.isEmpty){
+    dismissLoader();
     showSnackBar("Please enter your email");
   } else if (!RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
       .hasMatch(emailController.text.trim())) {
+    dismissLoader();
     showSnackBar("Please enter valid email");
   }else{
-    onVerified(context);
+    Map<String, dynamic> request = {
+      "loginData": emailController.text.trim(),
+
+    };
+
+    try {var value = await CallAPI.forgetPassword(request: request);
+      if (value.status == 200) {
+      dismissLoader();
+      otpVerified = OtpVerified.byMail;
+      Get.toNamed(AppRoutes.otp,arguments:{
+        "loginData": value.result!.phoneNumber.toString(),
+        "otp": value.result!.otp.toString()
+      });
+      onVerified(context);
+    } else {
+      dismissLoader();
+      showSnackBar(value.message ?? "Please enter valid credentials");
+      printResult(screenName: "LOGIN CONTROLLER", msg: value.message ?? "");
+    }
+    } catch (e, st) {
+      dismissLoader();
+      showSnackBar("An error occurred during login");
+      printResult(screenName: "LOGIN CONTROLLER", error: e.toString(), stackTrace: st);
+    }
   }
 }
 onVerified(BuildContext context){
@@ -44,8 +72,6 @@ onVerified(BuildContext context){
                   fontFamily: 'Montserrat',),),
                 onTap: (){
                   Get.back();
-                  otpVerified = OtpVerified.byMail;
-                  Get.toNamed(AppRoutes.otp);
                 },height: 35,width: Get.width*.35),
           ),
         ],shape: RoundedRectangleBorder(

@@ -41,9 +41,7 @@ class LoginController extends GetxController{
       "deviceId": notificationServices.deviceToken ?? ""
     };
 
-    try {
-      var value = await CallAPI.login(request: request);
-      if (value.status == 200) {
+    try {var value = await CallAPI.login(request: request);if (value.status == 200) {
         if (value.result?.objectData == true) {
           storage.write("phoneNumber", "$countryCode$phoneNumber");
           storage.write("password", password);

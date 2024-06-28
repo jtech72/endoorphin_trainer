@@ -110,7 +110,7 @@ class OtpUI extends StatelessWidget {
                 Center(
                   child: InkButton(
                     onTap: () {
-                      controller.onVerify();
+                      controller.onNumberVerify();
                     },
                     child: Text('Verify', textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Colors.black,fontSize: 18,
