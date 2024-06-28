@@ -15,6 +15,7 @@ class UploadImagesUi extends StatelessWidget {
         toolbarHeight: 50,
         leadingWidth: Get.width * 0.17,
         centerTitle: false,
+
         leading: GestureDetector(
           onTap: () {
             if (controller.selectedoption.value == 3) {

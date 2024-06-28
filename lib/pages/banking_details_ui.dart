@@ -463,6 +463,8 @@ class BankingDetailsUI extends StatelessWidget {
                                                 .labelMedium,
                                             contentPadding: const EdgeInsets.only(
                                                 bottom: 0, left: 0),
+
+
                                             hintText: "EFFECTIVE DATA",
                                             alignLabelWithHint: true,
                                             enabledBorder: InputBorder.none,
