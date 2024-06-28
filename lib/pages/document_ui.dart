@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:endoorphin_trainer/controllers/document_controller.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
@@ -35,7 +37,10 @@ class DocumentUI extends StatelessWidget {
                   color: AppColors.white,
                   size: 18,
                 ))),
-        title: GestureDetector(onTap: (){Get.offAllNamed(AppRoutes.bottomNavigation);},
+        title: GestureDetector(
+          onTap: () {
+            Get.offAllNamed(AppRoutes.bottomNavigation);
+          },
           child: Text(
             "Documents",
             style: Theme.of(context).textTheme.headlineSmall,
@@ -52,416 +57,73 @@ class DocumentUI extends StatelessWidget {
                 ),
                 fit: BoxFit.cover)),
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Transform.translate(
-                  offset: const Offset(10, 0),
-                  child: Text(
-                    'Uploaded Documents',
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ).paddingOnly(
-                      bottom: Get.height * 0.03,
-                      top: Get.height * 0.01,
-                      left: 10)),
-              FutureBuilder(
-                future: CallAPI.getDocStatus(storage.read("userId").toString()),
-                builder: (BuildContext context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return SizedBox(
-                      height: Get.height * .7,
-                      child: const Center(
-                        child: CircularProgressIndicator(),
-                      ).paddingOnly(top: 0),
-                    );
-                  }
-                  if (snapshot.hasError) {
-                    return Center(
-                      child: Text('Error: ${snapshot.error}'),
-                    );
-                  }
-                  if (!snapshot.hasData || snapshot.data!.result == null) {
-                    return SizedBox(
-                      height: Get.height * .7,
-                      child: const Center(
-                        child: Text(
-                          'No data available',
-                          style: TextStyle(color: AppColors.white),
+          child: RefreshIndicator(
+            onRefresh: () {
+              return controller.onRefresh();
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Transform.translate(
+                    offset: const Offset(10, 0),
+                    child: Text(
+                      'Uploaded Documents',
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ).paddingOnly(
+                        bottom: Get.height * 0.03,
+                        top: Get.height * 0.01,
+                        left: 10)),
+                FutureBuilder(
+                  future:
+                      CallAPI.getDocStatus(storage.read("userId").toString()),
+                  builder: (BuildContext context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return SizedBox(
+                        height: Get.height * .7,
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ).paddingOnly(top: 0),
+                      );
+                    }
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Text('Error: ${snapshot.error}'),
+                      );
+                    }
+                    if (!snapshot.hasData ||
+                        controller.trainerDocStatusModel.value.result == null) {
+                      return SizedBox(
+                        height: Get.height * .7,
+                        child: const Center(
+                          child: Text(
+                            'No data available',
+                            style: TextStyle(color: AppColors.white),
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                  return SizedBox(
-                      height: Get.height*.8,
-                      child: ListView.builder(
-                        itemCount: snapshot.data!.result!.length ,
-                        reverse: false,
-                        itemBuilder: (context, index) {
-
-                            return
-                                    snapshot.data!.result![index].documentBackImg != null &&
-                                    snapshot.data!.result![index].documentFrontImg != null
-                                //Certification
-                                ? Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      width: Get.width,
-                                      decoration: BoxDecoration(
-                                          color: AppColors.greyButton,
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                snapshot.data!.result![index]
-                                                            .category ==
-                                                        null
-                                                    ? snapshot
-                                                                .data!
-                                                                .result![index]
-                                                                .emirates ==
-                                                            null
-                                                        ? snapshot
-                                                            .data!
-                                                            .result![index]
-                                                            .passport
-                                                            .toString()
-                                                            .toUpperCase()
-                                                        : snapshot
-                                                            .data!
-                                                            .result![index]
-                                                            .emirates
-                                                            .toString()
-                                                            .toUpperCase()
-                                                    : snapshot
-                                                        .data!
-                                                        .result![index]
-                                                        .category!
-                                                        .name
-                                                        .toString(),
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .titleLarge!
-                                                    .copyWith(
-                                                        color:
-                                                            AppColors.yellow),
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Container(
-                                                    height: 22,
-                                                    width: 52,
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                        color: snapshot
-                                                                    .data!
-                                                                    .result![
-                                                                        index]
-                                                                    .approveStatus ==
-                                                                "pending"
-                                                            ? AppColors
-                                                                .backgroundcolor2
-                                                            : AppColors.black),
-                                                    child: const Center(
-                                                        child: Text('SAVED',
-                                                            style: TextStyle(
-                                                                fontSize: 10,
-                                                                fontFamily:
-                                                                    'Roboto',
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                color: Colors
-                                                                    .white))),
-                                                  ).paddingOnly(
-                                                      right: Get.width * 0.03),
-                                                  CircleAvatar(
-                                                    backgroundColor:
-                                                        AppColors.yellow,
-                                                    radius: 11,
-                                                    child: Image.asset(
-                                                      ImagesPaths.tick,
-                                                      color: AppColors.black,
-                                                      width: 12,
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ],
-                                          ).paddingOnly(
-                                              bottom: Get.height * 0.01),
-                                          Container(
-                                            height: 1,
-                                            width: Get.width,
-                                            color: AppColors.lightyGrey,
-                                          ).paddingOnly(
-                                              bottom: Get.height * 0.02),
-                                          Row(
-                                            children: [
-                                              Flexible(
-                                                child: SizedBox(
-                                                  height: 131,
-                                                  width: 204,
-                                                  child: CachedNetworkImage(
-                                                      fit: BoxFit.cover,
-                                                imageUrl:       snapshot
-                                                                  .data!
-                                                                  .result![
-                                                                      index]
-                                                                  .documentFrontImg ==
-                                                              null
-                                                          ? snapshot
-                                                                      .data!
-                                                                      .result![
-                                                                          index]
-                                                                      .passportfrontImg ==
-                                                                  null
-                                                              ? snapshot
-                                                                  .data!
-                                                                  .result![
-                                                                      index]
-                                                                  .emiratesfrontImg
-                                                                  .toString()
-                                                              : snapshot
-                                                                  .data!
-                                                                  .result![
-                                                                      index]
-                                                                  .passportfrontImg
-                                                                  .toString()
-                                                          : snapshot
-                                                              .data!
-                                                              .result![index]
-                                                              .documentFrontImg
-                                                              .toString(),
-                                                    progressIndicatorBuilder: (context, url, downloadProgress) => Center(
-                                                      child: SizedBox(
-                                                        height: 30, // Adjust the height to make it smaller
-                                                        width: 30,  // Adjust the width to make it smaller
-                                                        child: CircularProgressIndicator(value: downloadProgress.progress),
-                                                      ),
-                                                    ),
-                                                    errorWidget: (context, url, error) => Icon(Icons.error),
-                                                  ),
-                                                ),
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Certification Name',
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelMedium,
-                                                  ).paddingOnly(bottom: 2),
-                                                  Text(
-                                                    snapshot
-                                                        .data!
-                                                        .result![index]
-                                                        .categoryName
-                                                        .toString(),
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelSmall,
-                                                  ).paddingOnly(bottom: 8),
-                                                  Text(
-                                                    'Certification Number',
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelMedium,
-                                                  ).paddingOnly(bottom: 2),
-                                                  Text(
-                                                    snapshot
-                                                        .data!
-                                                        .result![index]
-                                                        .categoryNumber
-                                                        .toString(),
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelSmall,
-                                                  ),
-                                                  SizedBox(
-                                                    height: Get.height * 0.02,
-                                                  ),
-                                                  snapshot.data!.result![index]
-                                                              .approveStatus ==
-                                                          "approved"
-                                                      ? Container(
-                                                          height: 22,
-                                                          width: 64,
-                                                          decoration: BoxDecoration(
-                                                              color: AppColors
-                                                                  .yellow,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5)),
-                                                          child: const Center(
-                                                              child: Text(
-                                                                  'Approved',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          10,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w400,
-                                                                      color: AppColors
-                                                                          .black))),
-                                                        )
-                                                      : snapshot
-                                                                  .data!
-                                                                  .result![
-                                                                      index]
-                                                                  .approveStatus ==
-                                                              "pending"
-                                                          ? Container(
-                                                              height: 22,
-                                                              width: 100,
-                                                              decoration: BoxDecoration(
-                                                                  color: AppColors
-                                                                      .yellow,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              5)),
-                                                              child: const Center(
-                                                                  child: Text(
-                                                                      'Under verification',
-                                                                      style: TextStyle(
-                                                                          fontSize:
-                                                                              10,
-                                                                          fontWeight: FontWeight
-                                                                              .w400,
-                                                                          color:
-                                                                              AppColors.black))),
-                                                            )
-                                                          : GestureDetector(
-                                                    onTap: () {
-                                                      final userId = snapshot.data!
-                                                          .result![index].userId ??
-                                                          "";
-                                                      final categoryId = snapshot
-                                                          .data!
-                                                          .result![index]
-                                                          .category
-                                                          ?.id ??
-                                                          "";
-                                                      uploadImage = UploadImage.byProfile;
-                                                      Get.toNamed(AppRoutes.trainerPassport,
-                                                          arguments: {
-                                                            "userId": userId,
-                                                            "name": snapshot.data?.result?[index].category?.name.toString() ?? "",
-                                                            "categoryName": snapshot.data?.result?[index].passport.toString()??"",
-                                                            "categoryId": categoryId,
-                                                            "id":snapshot.data!.result![index].id.toString(),
-                                                            "reupload":true,
-                                                          });
-                                                    },
-
-                                                    child: Container(
-                                                                height: 22,
-                                                                width: 120,
-                                                                decoration: BoxDecoration(
-                                                                    color: AppColors
-                                                                        .yellow,
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            5)),
-                                                                child: const Center(
-                                                                    child: Text(
-                                                                        'Resubmit Documents',
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                10,
-                                                                            fontWeight:
-                                                                                FontWeight.w400,
-                                                                            color: AppColors.black))),
-                                                              ),
-                                                            )
-                                                ],
-                                              ).paddingOnly(
-                                                  left: Get.width * 0.04)
-                                            ],
-                                          ),
-                                          snapshot.data!.result![index]
-                                                      .remark ==
-                                                  null
-                                              ? const Text("")
-                                              : Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      "Rejection Reason",
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .labelSmall!
-                                                          .copyWith(
-                                                              fontSize: 12,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                              color: AppColors
-                                                                  .white),
-                                                    ),
-                                                    Text(
-                                                      snapshot
-                                                          .data!
-                                                          .result![index]
-                                                          .remark!
-                                                          .toString(),
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .labelSmall!
-                                                          .copyWith(
-                                                              fontSize: 10,
-                                                              color: AppColors
-                                                                  .whiteShade),
-                                                    ),
-                                                    Text(
-                                                      snapshot
-                                                          .data!
-                                                          .result![index]
-                                                          .comment!
-                                                          .toString(),
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .labelSmall!
-                                                          .copyWith(
-                                                              fontSize: 10,
-                                                              color: AppColors
-                                                                  .whiteShade),
-                                                    ),
-                                                  ],
-                                                ).paddingOnly(top: 5)
-                                        ],
-                                      ).paddingOnly(
-                                          bottom: 5,
-                                          top: 15,
-                                          right: 15,
-                                          left: 15),
-                                    ),
-                                  )
-                                : snapshot.data!.result![index]
-                                                .emiratesfrontImg !=
+                      );
+                    }
+                    if (snapshot.hasData) {
+                      controller.trainerDocStatusModel.value =
+                          controller.trainerDocStatusModel.value;
+                    }
+                    return Obx(
+                        ()=> SizedBox(
+                          height: Get.height * .8,
+                          child: ListView.builder(
+                              itemCount: controller
+                                  .trainerDocStatusModel.value.result!.length,
+                              reverse: false,
+                              itemBuilder: (context, index) {
+                                return controller.trainerDocStatusModel.value
+                                                .result![index].documentBackImg !=
                                             null &&
-                                        snapshot.data!.result![index]
-                                                .emiratesbackImg !=
+                                        controller
+                                                .trainerDocStatusModel
+                                                .value
+                                                .result![index]
+                                                .documentFrontImg !=
                                             null
-
-                                    //Emirates Id
+                                    //Certification
                                     ? Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Container(
@@ -482,13 +144,46 @@ class DocumentUI extends StatelessWidget {
                                                         .spaceBetween,
                                                 children: [
                                                   Text(
-                                                  "EMIRATES ID",
+                                                    controller
+                                                                .trainerDocStatusModel
+                                                                .value
+                                                                .result![index]
+                                                                .category ==
+                                                            null
+                                                        ? controller
+                                                        .trainerDocStatusModel
+                                                        .value
+                                                                    .result![
+                                                                        index]
+                                                                    .emirates ==
+                                                                null
+                                                            ? controller
+                                                        .trainerDocStatusModel
+                                                        .value
+                                                                .result![index]
+                                                                .passport
+                                                                .toString()
+                                                                .toUpperCase()
+                                                            : controller
+                                                        .trainerDocStatusModel
+                                                        .value
+                                                                .result![index]
+                                                                .emirates
+                                                                .toString()
+                                                                .toUpperCase()
+                                                        : controller
+                                                        .trainerDocStatusModel
+                                                        .value
+                                                            .result![index]
+                                                            .category!
+                                                            .name
+                                                            .toString(),
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .titleLarge!
                                                         .copyWith(
-                                                            color: AppColors
-                                                                .yellow),
+                                                            color:
+                                                                AppColors.yellow),
                                                   ),
                                                   Row(
                                                     children: [
@@ -498,10 +193,10 @@ class DocumentUI extends StatelessWidget {
                                                         decoration: BoxDecoration(
                                                             borderRadius:
                                                                 BorderRadius
-                                                                    .circular(
-                                                                        5),
-                                                            color: snapshot
-                                                                        .data!
+                                                                    .circular(5),
+                                                            color: controller
+                                                                .trainerDocStatusModel
+                                                                .value
                                                                         .result![
                                                                             index]
                                                                         .approveStatus ==
@@ -513,8 +208,7 @@ class DocumentUI extends StatelessWidget {
                                                         child: const Center(
                                                             child: Text('SAVED',
                                                                 style: TextStyle(
-                                                                    fontSize:
-                                                                        10,
+                                                                    fontSize: 10,
                                                                     fontFamily:
                                                                         'Roboto',
                                                                     fontWeight:
@@ -531,8 +225,7 @@ class DocumentUI extends StatelessWidget {
                                                         radius: 11,
                                                         child: Image.asset(
                                                           ImagesPaths.tick,
-                                                          color:
-                                                              AppColors.black,
+                                                          color: AppColors.black,
                                                           width: 12,
                                                         ),
                                                       )
@@ -554,95 +247,109 @@ class DocumentUI extends StatelessWidget {
                                                       height: 131,
                                                       width: 204,
                                                       child: CachedNetworkImage(
-                                                          fit: BoxFit.cover,
-                                                          imageUrl: snapshot
-                                                                      .data!
-                                                                      .result![
-                                                                          index]
-                                                                      .documentFrontImg ==
-                                                                  null
-                                                              ? snapshot
-                                                                          .data!
-                                                                          .result![
-                                                                              index]
-                                                                          .passportfrontImg ==
-                                                                      null
-                                                                  ? snapshot
-                                                                      .data!
-                                                                      .result![
-                                                                          index]
-                                                                      .emiratesfrontImg
-                                                                      .toString()
-                                                                  : snapshot
-                                                                      .data!
-                                                                      .result![
-                                                                          index]
-                                                                      .passportfrontImg
-                                                                      .toString()
-                                                              : snapshot
-                                                                  .data!
-                                                                  .result![
-                                                                      index]
-                                                                  .documentFrontImg
-                                                                  .toString(),
-                                                        progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                                                        fit: BoxFit.cover,
+                                                        imageUrl: controller
+                                                            .trainerDocStatusModel
+                                                            .value
+                                                                    .result![
+                                                                        index]
+                                                                    .documentFrontImg ==
+                                                                null
+                                                            ? controller
+                                                            .trainerDocStatusModel
+                                                            .value
+                                                                        .result![
+                                                                            index]
+                                                                        .passportfrontImg ==
+                                                                    null
+                                                                ? controller
+                                                            .trainerDocStatusModel
+                                                            .value
+                                                                    .result![
+                                                                        index]
+                                                                    .emiratesfrontImg
+                                                                    .toString()
+                                                                : controller
+                                                            .trainerDocStatusModel
+                                                            .value
+                                                                    .result![
+                                                                        index]
+                                                                    .passportfrontImg
+                                                                    .toString()
+                                                            : controller
+                                                            .trainerDocStatusModel
+                                                            .value
+                                                                .result![index]
+                                                                .documentFrontImg
+                                                                .toString(),
+                                                        progressIndicatorBuilder:
+                                                            (context, url,
+                                                                    downloadProgress) =>
+                                                                Center(
                                                           child: SizedBox(
-                                                            height: 30, // Adjust the height to make it smaller
-                                                            width: 30,  // Adjust the width to make it smaller
-                                                            child: CircularProgressIndicator(value: downloadProgress.progress),
+                                                            height: 30,
+                                                            // Adjust the height to make it smaller
+                                                            width: 30,
+                                                            // Adjust the width to make it smaller
+                                                            child: CircularProgressIndicator(
+                                                                value:
+                                                                    downloadProgress
+                                                                        .progress),
                                                           ),
                                                         ),
-                                                        errorWidget: (context, url, error) => Icon(Icons.error),
+                                                        errorWidget: (context,
+                                                                url, error) =>
+                                                            Icon(Icons.error),
                                                       ),
                                                     ),
                                                   ),
                                                   Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                        CrossAxisAlignment.start,
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
                                                     children: [
                                                       Text(
-                                                        'Emirates ID Name',
+                                                        'Certification Name',
                                                         style: Theme.of(context)
                                                             .textTheme
                                                             .labelMedium,
                                                       ).paddingOnly(bottom: 2),
                                                       Text(
-                                                        snapshot
-                                                            .data!
+                                                        controller
+                                                            .trainerDocStatusModel
+                                                            .value
                                                             .result![index]
-                                                            .emiratesName
+                                                            .categoryName
                                                             .toString(),
                                                         style: Theme.of(context)
                                                             .textTheme
                                                             .labelSmall,
                                                       ).paddingOnly(bottom: 8),
                                                       Text(
-                                                        'Emirates ID Number',
+                                                        'Certification Number',
                                                         style: Theme.of(context)
                                                             .textTheme
                                                             .labelMedium,
                                                       ).paddingOnly(bottom: 2),
                                                       Text(
-                                                        snapshot
-                                                            .data!
+                                                        controller
+                                                            .trainerDocStatusModel
+                                                            .value
                                                             .result![index]
-                                                            .emiratesNumber
+                                                            .categoryNumber
                                                             .toString(),
                                                         style: Theme.of(context)
                                                             .textTheme
                                                             .labelSmall,
                                                       ),
                                                       SizedBox(
-                                                        height:
-                                                            Get.height * 0.02,
+                                                        height: Get.height * 0.02,
                                                       ),
-                                                      snapshot
-                                                                  .data!
-                                                                  .result![
-                                                                      index]
+                                                      controller
+                                                                  .trainerDocStatusModel
+                                                                  .value
+                                                                  .result![index]
                                                                   .approveStatus ==
                                                               "approved"
                                                           ? Container(
@@ -661,13 +368,15 @@ class DocumentUI extends StatelessWidget {
                                                                       style: TextStyle(
                                                                           fontSize:
                                                                               10,
-                                                                          fontWeight: FontWeight
-                                                                              .w400,
-                                                                          color:
-                                                                              AppColors.black))),
+                                                                          fontWeight:
+                                                                              FontWeight
+                                                                                  .w400,
+                                                                          color: AppColors
+                                                                              .black))),
                                                             )
-                                                          : snapshot
-                                                                      .data!
+                                                          : controller
+                                                          .trainerDocStatusModel
+                                                          .value
                                                                       .result![
                                                                           index]
                                                                       .approveStatus ==
@@ -677,7 +386,7 @@ class DocumentUI extends StatelessWidget {
                                                                   width: 100,
                                                                   decoration: BoxDecoration(
                                                                       color: AppColors
-                                                                          .backgroundcolor2,
+                                                                          .yellow,
                                                                       borderRadius:
                                                                           BorderRadius.circular(
                                                                               5)),
@@ -685,35 +394,61 @@ class DocumentUI extends StatelessWidget {
                                                                       child: Text(
                                                                           'Under verification',
                                                                           style: TextStyle(
-                                                                              fontSize: 10,
-                                                                              fontWeight: FontWeight.w400,
-                                                                              color: AppColors.whiteShade))),
+                                                                              fontSize:
+                                                                                  10,
+                                                                              fontWeight:
+                                                                                  FontWeight.w400,
+                                                                              color: AppColors.black))),
                                                                 )
                                                               : GestureDetector(
-                                                        onTap: () {
-                                                          final userId = snapshot.data!
-                                                              .result![index].userId ??
-                                                              "";
-                                                          final categoryId = snapshot
-                                                              .data!
-                                                              .result![index]
-                                                              .category
-                                                              ?.id ??
-                                                              "";
-                                                          uploadImage = UploadImage.byProfile;
-                                                          Get.toNamed(AppRoutes.trainerPassport,
-                                                              arguments: {
-                                                                "userId": userId,
-                                                                "name": snapshot.data?.result?[index].category?.name.toString() ?? "",
-                                                                "categoryName": snapshot.data?.result?[index].passport.toString()??"",
-                                                                "categoryId": categoryId,
-                                                                "id":snapshot.data!.result![index].id.toString(),
-                                                                "reupload":true,
-
-                                                              });
-                                                        },
-
-                                                        child:
+                                                                  onTap: () {
+                                                                    final userId = controller
+                                                                            .trainerDocStatusModel
+                                                                            .value
+                                                                            .result![
+                                                                                index]
+                                                                            .userId ??
+                                                                        "";
+                                                                    final categoryId = controller
+                                                                        .trainerDocStatusModel
+                                                                        .value
+                                                                            .result![
+                                                                                index]
+                                                                            .category
+                                                                            ?.id ??
+                                                                        "";
+                                                                    uploadImage =
+                                                                        UploadImage
+                                                                            .byProfile;
+                                                                    Get.toNamed(
+                                                                        AppRoutes
+                                                                            .trainerPassport,
+                                                                        arguments: {
+                                                                          "userId":
+                                                                              userId,
+                                                                          "name":
+                                                                          controller
+                                                                              .trainerDocStatusModel
+                                                                              .value?.result?[index].category?.name.toString() ??
+                                                                                  "",
+                                                                          "categoryName":
+                                                                          controller
+                                                                              .trainerDocStatusModel
+                                                                              .value?.result?[index].passport.toString() ??
+                                                                                  "",
+                                                                          "categoryId":
+                                                                              categoryId,
+                                                                          "id": controller
+                                                                              .trainerDocStatusModel
+                                                                              .value
+                                                                              .result![index]
+                                                                              .id
+                                                                              .toString(),
+                                                                          "reupload":
+                                                                              true,
+                                                                        });
+                                                                  },
+                                                                  child:
                                                                       Container(
                                                                     height: 22,
                                                                     width: 120,
@@ -721,7 +456,8 @@ class DocumentUI extends StatelessWidget {
                                                                         color: AppColors
                                                                             .yellow,
                                                                         borderRadius:
-                                                                            BorderRadius.circular(5)),
+                                                                            BorderRadius.circular(
+                                                                                5)),
                                                                     child: const Center(
                                                                         child: Text(
                                                                             'Resubmit Documents',
@@ -736,7 +472,10 @@ class DocumentUI extends StatelessWidget {
                                                       left: Get.width * 0.04)
                                                 ],
                                               ),
-                                              snapshot.data!.result![index]
+                                              controller
+                                                          .trainerDocStatusModel
+                                                          .value
+                                                          .result![index]
                                                           .remark ==
                                                       null
                                                   ? const Text("")
@@ -747,8 +486,7 @@ class DocumentUI extends StatelessWidget {
                                                       children: [
                                                         Text(
                                                           "Rejection Reason",
-                                                          style: Theme.of(
-                                                                  context)
+                                                          style: Theme.of(context)
                                                               .textTheme
                                                               .labelSmall!
                                                               .copyWith(
@@ -760,13 +498,13 @@ class DocumentUI extends StatelessWidget {
                                                                       .white),
                                                         ),
                                                         Text(
-                                                          snapshot
-                                                              .data!
+                                                          controller
+                                                              .trainerDocStatusModel
+                                                              .value
                                                               .result![index]
                                                               .remark!
                                                               .toString(),
-                                                          style: Theme.of(
-                                                                  context)
+                                                          style: Theme.of(context)
                                                               .textTheme
                                                               .labelSmall!
                                                               .copyWith(
@@ -775,13 +513,13 @@ class DocumentUI extends StatelessWidget {
                                                                       .whiteShade),
                                                         ),
                                                         Text(
-                                                          snapshot
-                                                              .data!
+                                                          controller
+                                                              .trainerDocStatusModel
+                                                              .value
                                                               .result![index]
                                                               .comment!
                                                               .toString(),
-                                                          style: Theme.of(
-                                                                  context)
+                                                          style: Theme.of(context)
                                                               .textTheme
                                                               .labelSmall!
                                                               .copyWith(
@@ -799,14 +537,20 @@ class DocumentUI extends StatelessWidget {
                                               left: 15),
                                         ),
                                       )
-                                    :
-                                            snapshot.data!.result![index]
-                                                    .passportfrontImg !=
+                                    : controller
+                                                    .trainerDocStatusModel
+                                                    .value
+                                                    .result![index]
+                                                    .emiratesfrontImg !=
                                                 null &&
-                                            snapshot.data!.result![index]
-                                                    .passportbackImg !=
+                                            controller
+                                                    .trainerDocStatusModel
+                                                    .value
+                                                    .result![index]
+                                                    .emiratesbackImg !=
                                                 null
-                                        //Passport
+
+                                        //Emirates Id
                                         ? Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: Container(
@@ -827,38 +571,7 @@ class DocumentUI extends StatelessWidget {
                                                             .spaceBetween,
                                                     children: [
                                                       Text(
-                                                        snapshot
-                                                                    .data!
-                                                                    .result![
-                                                                        index]
-                                                                    .category ==
-                                                                null
-                                                            ? snapshot
-                                                                        .data!
-                                                                        .result![
-                                                                            index]
-                                                                        .emirates ==
-                                                                    null
-                                                                ? snapshot
-                                                                    .data!
-                                                                    .result![
-                                                                        index]
-                                                                    .passport
-                                                                    .toString()
-                                                                    .toUpperCase()
-                                                                : snapshot
-                                                                    .data!
-                                                                    .result![
-                                                                        index]
-                                                                    .emirates
-                                                                    .toString()
-                                                                    .toUpperCase()
-                                                            : snapshot
-                                                                .data!
-                                                                .result![index]
-                                                                .category!
-                                                                .name
-                                                                .toString(),
+                                                        "EMIRATES ID",
                                                         style: Theme.of(context)
                                                             .textTheme
                                                             .titleLarge!
@@ -876,8 +589,9 @@ class DocumentUI extends StatelessWidget {
                                                                     BorderRadius
                                                                         .circular(
                                                                             5),
-                                                                color: snapshot
-                                                                            .data!
+                                                                color: controller
+                                                                    .trainerDocStatusModel
+                                                                    .value
                                                                             .result![
                                                                                 index]
                                                                             .approveStatus ==
@@ -904,13 +618,12 @@ class DocumentUI extends StatelessWidget {
                                                                   0.03),
                                                           CircleAvatar(
                                                             backgroundColor:
-                                                                AppColors
-                                                                    .yellow,
+                                                                AppColors.yellow,
                                                             radius: 11,
                                                             child: Image.asset(
                                                               ImagesPaths.tick,
-                                                              color: AppColors
-                                                                  .black,
+                                                              color:
+                                                                  AppColors.black,
                                                               width: 12,
                                                             ),
                                                           )
@@ -918,57 +631,74 @@ class DocumentUI extends StatelessWidget {
                                                       ),
                                                     ],
                                                   ).paddingOnly(
-                                                      bottom:
-                                                          Get.height * 0.01),
+                                                      bottom: Get.height * 0.01),
                                                   Container(
                                                     height: 1,
                                                     width: Get.width,
                                                     color: AppColors.lightyGrey,
                                                   ).paddingOnly(
-                                                      bottom:
-                                                          Get.height * 0.02),
+                                                      bottom: Get.height * 0.02),
                                                   Row(
                                                     children: [
                                                       Flexible(
                                                         child: SizedBox(
                                                           height: 131,
                                                           width: 204,
-                                                          child: CachedNetworkImage(
-                                                              fit: BoxFit.cover,
-                                                          imageUrl:     snapshot
-                                                                          .data!
-                                                                          .result![
-                                                                              index]
-                                                                          .documentFrontImg ==
-                                                                      null
-                                                                  ? snapshot.data!.result![index].passportfrontImg ==
-                                                                          null
-                                                                      ? snapshot
-                                                                          .data!
-                                                                          .result![
-                                                                              index]
-                                                                          .emiratesfrontImg
-                                                                          .toString()
-                                                                      : snapshot
-                                                                          .data!
-                                                                          .result![
-                                                                              index]
-                                                                          .passportfrontImg
-                                                                          .toString()
-                                                                  : snapshot
-                                                                      .data!
-                                                                      .result![
-                                                                          index]
-                                                                      .documentFrontImg
-                                                                      .toString(),
-                                                            progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                                                          child:
+                                                              CachedNetworkImage(
+                                                            fit: BoxFit.cover,
+                                                            imageUrl: controller
+                                                                .trainerDocStatusModel
+                                                                .value
+                                                                        .result![
+                                                                            index]
+                                                                        .documentFrontImg ==
+                                                                    null
+                                                                ? controller
+                                                                .trainerDocStatusModel
+                                                                .value
+                                                                            .result![
+                                                                                index]
+                                                                            .passportfrontImg ==
+                                                                        null
+                                                                    ? controller
+                                                                .trainerDocStatusModel
+                                                                .value
+                                                                        .result![
+                                                                            index]
+                                                                        .emiratesfrontImg
+                                                                        .toString()
+                                                                    : controller
+                                                                .trainerDocStatusModel
+                                                                .value
+                                                                        .result![
+                                                                            index]
+                                                                        .passportfrontImg
+                                                                        .toString()
+                                                                : controller
+                                                                .trainerDocStatusModel
+                                                                .value
+                                                                    .result![
+                                                                        index]
+                                                                    .documentFrontImg
+                                                                    .toString(),
+                                                            progressIndicatorBuilder:
+                                                                (context, url,
+                                                                        downloadProgress) =>
+                                                                    Center(
                                                               child: SizedBox(
-                                                                height: 30, // Adjust the height to make it smaller
-                                                                width: 30,  // Adjust the width to make it smaller
-                                                                child: CircularProgressIndicator(value: downloadProgress.progress),
+                                                                height: 30,
+                                                                // Adjust the height to make it smaller
+                                                                width: 30,
+                                                                // Adjust the width to make it smaller
+                                                                child: CircularProgressIndicator(
+                                                                    value: downloadProgress
+                                                                        .progress),
                                                               ),
                                                             ),
-                                                            errorWidget: (context, url, error) => Icon(Icons.error),
+                                                            errorWidget: (context,
+                                                                    url, error) =>
+                                                                Icon(Icons.error),
                                                           ),
                                                         ),
                                                       ),
@@ -981,50 +711,53 @@ class DocumentUI extends StatelessWidget {
                                                                 .start,
                                                         children: [
                                                           Text(
-                                                            'Passport Name',
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .labelMedium,
+                                                            'Emirates ID Name',
+                                                            style:
+                                                                Theme.of(context)
+                                                                    .textTheme
+                                                                    .labelMedium,
                                                           ).paddingOnly(
                                                               bottom: 2),
                                                           Text(
-                                                            snapshot
-                                                                .data!
+                                                            controller
+                                                                .trainerDocStatusModel
+                                                                .value
                                                                 .result![index]
-                                                                .passportName
+                                                                .emiratesName
                                                                 .toString(),
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .labelSmall,
+                                                            style:
+                                                                Theme.of(context)
+                                                                    .textTheme
+                                                                    .labelSmall,
                                                           ).paddingOnly(
                                                               bottom: 8),
                                                           Text(
-                                                            'Passport Number',
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .labelMedium,
+                                                            'Emirates ID Number',
+                                                            style:
+                                                                Theme.of(context)
+                                                                    .textTheme
+                                                                    .labelMedium,
                                                           ).paddingOnly(
                                                               bottom: 2),
                                                           Text(
-                                                            snapshot
-                                                                .data!
+                                                            controller
+                                                                .trainerDocStatusModel
+                                                                .value
                                                                 .result![index]
-                                                                .passportNumber
+                                                                .emiratesNumber
                                                                 .toString(),
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .labelSmall,
+                                                            style:
+                                                                Theme.of(context)
+                                                                    .textTheme
+                                                                    .labelSmall,
                                                           ),
                                                           SizedBox(
-                                                            height: Get.height *
-                                                                0.02,
+                                                            height:
+                                                                Get.height * 0.02,
                                                           ),
-                                                          snapshot
-                                                                      .data!
+                                                          controller
+                                                              .trainerDocStatusModel
+                                                              .value
                                                                       .result![
                                                                           index]
                                                                       .approveStatus ==
@@ -1042,21 +775,22 @@ class DocumentUI extends StatelessWidget {
                                                                       child: Text(
                                                                           'Approved',
                                                                           style: TextStyle(
-                                                                              fontSize: 10,
-                                                                              fontWeight: FontWeight.w400,
+                                                                              fontSize:
+                                                                                  10,
+                                                                              fontWeight:
+                                                                                  FontWeight.w400,
                                                                               color: AppColors.black))),
                                                                 )
-                                                              : snapshot
-                                                                          .data!
+                                                              : controller
+                                                              .trainerDocStatusModel
+                                                              .value
                                                                           .result![
                                                                               index]
                                                                           .approveStatus ==
                                                                       "pending"
                                                                   ? Container(
-                                                                      height:
-                                                                          22,
-                                                                      width:
-                                                                          100,
+                                                                      height: 22,
+                                                                      width: 100,
                                                                       decoration: BoxDecoration(
                                                                           color: AppColors
                                                                               .backgroundcolor2,
@@ -1065,54 +799,77 @@ class DocumentUI extends StatelessWidget {
                                                                       child: const Center(
                                                                           child: Text(
                                                                               'Under verification',
-                                                                              style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: AppColors.whiteShade))),
+                                                                              style: TextStyle(
+                                                                                  fontSize: 10,
+                                                                                  fontWeight: FontWeight.w400,
+                                                                                  color: AppColors.whiteShade))),
                                                                     )
                                                                   : GestureDetector(
-                                                            onTap: () {
-                                                              final userId = snapshot.data!
-                                                                  .result![index].userId ??
-                                                                  "";
-                                                              final categoryId = snapshot
-                                                                  .data!
-                                                                  .result![index]
-                                                                  .category
-                                                                  ?.id ??
-                                                                  "";
-                                                              uploadImage = UploadImage.byProfile;
-                                                              Get.toNamed(AppRoutes.trainerPassport,
-                                                                  arguments: {
-                                                                    "userId": userId,
-                                                                    "name": snapshot.data?.result?[index].category?.name.toString() ?? "",
-                                                                    "categoryName": snapshot.data?.result?[index].passport.toString()??"",
-                                                                    "categoryId": categoryId,
-                                                                    "id":snapshot.data!.result![index].id.toString(),
-                                                                    "reupload":true,
-                                                                  });
-                                                            },
-
-
-                                                            child:
+                                                                      onTap: () {
+                                                                        final userId = controller
+                                                                                .trainerDocStatusModel
+                                                                                .value
+                                                                                .result![index]
+                                                                                .userId ??
+                                                                            "";
+                                                                        final categoryId =controller
+                                                                            .trainerDocStatusModel
+                                                                            .value
+                                                                                .result![index]
+                                                                                .category
+                                                                                ?.id ??
+                                                                            "";
+                                                                        uploadImage =
+                                                                            UploadImage
+                                                                                .byProfile;
+                                                                        Get.toNamed(
+                                                                            AppRoutes
+                                                                                .trainerPassport,
+                                                                            arguments: {
+                                                                              "userId":
+                                                                                  userId,
+                                                                              "name":
+                                                                              controller
+                                                                                  .trainerDocStatusModel
+                                                                                  .value?.result?[index].category?.name.toString() ?? "",
+                                                                              "categoryName":
+                                                                              controller
+                                                                                  .trainerDocStatusModel
+                                                                                  .value.result?[index].passport.toString() ?? "",
+                                                                              "categoryId":
+                                                                                  categoryId,
+                                                                              "id":
+                                                                                  controller.trainerDocStatusModel.value.result![index].id.toString(),
+                                                                              "reupload":
+                                                                                  true,
+                                                                            });
+                                                                      },
+                                                                      child:
                                                                           Container(
                                                                         height:
                                                                             22,
                                                                         width:
                                                                             120,
                                                                         decoration: BoxDecoration(
-                                                                            color:
-                                                                                AppColors.yellow,
-                                                                            borderRadius: BorderRadius.circular(5)),
+                                                                            color: AppColors
+                                                                                .yellow,
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(5)),
                                                                         child: const Center(
-                                                                            child:
-                                                                                Text('Resubmit Documents', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: AppColors.black))),
+                                                                            child: Text(
+                                                                                'Resubmit Documents',
+                                                                                style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: AppColors.black))),
                                                                       ),
                                                                     )
                                                         ],
                                                       ).paddingOnly(
-                                                          left:
-                                                              Get.width * 0.04)
+                                                          left: Get.width * 0.04)
                                                     ],
                                                   ),
-                                                  snapshot.data!.result![index]
+                                                  controller
+                                                              .trainerDocStatusModel
+                                                              .value
+                                                              .result![index]
                                                               .remark ==
                                                           null
                                                       ? const Text("")
@@ -1137,10 +894,10 @@ class DocumentUI extends StatelessWidget {
                                                                           .white),
                                                             ),
                                                             Text(
-                                                              snapshot
-                                                                  .data!
-                                                                  .result![
-                                                                      index]
+                                                              controller
+                                                                  .trainerDocStatusModel
+                                                                  .value
+                                                                  .result![index]
                                                                   .remark!
                                                                   .toString(),
                                                               style: Theme.of(
@@ -1154,10 +911,10 @@ class DocumentUI extends StatelessWidget {
                                                                           .whiteShade),
                                                             ),
                                                             Text(
-                                                              snapshot
-                                                                  .data!
-                                                                  .result![
-                                                                      index]
+                                                              controller
+                                                                  .trainerDocStatusModel
+                                                                  .value
+                                                                  .result![index]
                                                                   .comment!
                                                                   .toString(),
                                                               style: Theme.of(
@@ -1180,152 +937,619 @@ class DocumentUI extends StatelessWidget {
                                                   left: 15),
                                             ),
                                           )
-                                        : InkWell(
-                                            splashColor: Colors.transparent,
-                                            onTap: () {
-                                              final userId = snapshot.data!
-                                                      .result![index].userId ??
-                                                  "";
-                                              final categoryId = snapshot
-                                                      .data!
-                                                      .result![index]
-                                                      .category
-                                                      ?.id ??
-                                                  "";
-                                              uploadImage = UploadImage.byProfile;
-                                              Get.toNamed(AppRoutes.trainerPassport,
-                                                  arguments: {
-                                                    "userId": userId,
-                                                    "name": snapshot.data?.result?[index].category?.name.toString() ?? "",
-                                                    "categoryName": snapshot.data?.result?[index].passport.toString()??"",
-                                                    "categoryId": categoryId,
-                                                    "id":snapshot.data!.result![index].id.toString()
-                                                  });
-                                            },
-                                            child: Container(
-                                              height: 70,
-                                              width: Get.width,
-                                              decoration: BoxDecoration(
-                                                color: AppColors.greyButton,
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                              ),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Row(
+                                        : controller
+                                                        .trainerDocStatusModel
+                                                        .value
+                                                        .result![index]
+                                                        .passportfrontImg !=
+                                                    null &&
+                                                controller
+                                                        .trainerDocStatusModel
+                                                        .value
+                                                        .result![index]
+                                                        .passportbackImg !=
+                                                    null
+                                            //Passport
+                                            ? Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Container(
+                                                  width: Get.width,
+                                                  decoration: BoxDecoration(
+                                                      color: AppColors.greyButton,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
+                                                  child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
                                                     children: [
-                                                      Transform.translate(
-                                                        offset: const Offset(
-                                                            -10, 2),
-                                                        child: Container(
-                                                          height:
-                                                              Get.width * 0.14,
-                                                          width:
-                                                              Get.width * 0.14,
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .symmetric(
-                                                                  horizontal:
-                                                                      15,
-                                                                  vertical: 17),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5),
-                                                            color:
-                                                                AppColors.black,
-                                                          ),
-                                                          child: Image.asset(
-                                                            ImagesPaths
-                                                                .document,
-                                                            height: 24,
-                                                            width: 24,
-                                                          ),
-                                                        ).paddingOnly(
-                                                            left: 20,
-                                                            right: 10,
-                                                            bottom: 5),
-                                                      ),
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
                                                         children: [
-                                                          SizedBox(
-                                                            width:
-                                                                Get.width * .55,
-                                                            child:
-                                                            Text(
-                                                              snapshot
-                                                                  .data!
-                                                                  .result![
-                                                              index]
-                                                                  .category ==
-                                                                  null
-                                                                  ? snapshot.data!.result![index].passport.toString().toUpperCase()
-                                                                  : snapshot
-                                                                  .data!
-                                                                  .result![
-                                                              index]
-                                                                  .category!
-                                                                  .name
-                                                                  .toString(),
-                                                              overflow:
-                                                              TextOverflow
-                                                                  .ellipsis,
-                                                              style: Theme.of(
-                                                                  context)
-                                                                  .textTheme
-                                                                  .titleLarge
-                                                                  ?.copyWith(
-                                                                  color: AppColors
-                                                                      .yellow),
-                                                            ).paddingOnly(top: 12),
-                                                          ),
                                                           Text(
-                                                            "Upload your Certification ...",
+                                                            controller
+                                                                .trainerDocStatusModel
+                                                                .value
+                                                                        .result![
+                                                                            index]
+                                                                        .category ==
+                                                                    null
+                                                                ? controller
+                                                                .trainerDocStatusModel
+                                                                .value
+                                                                            .result![
+                                                                                index]
+                                                                            .emirates ==
+                                                                        null
+                                                                    ?controller
+                                                                .trainerDocStatusModel
+                                                                .value
+                                                                        .result![
+                                                                            index]
+                                                                        .passport
+                                                                        .toString()
+                                                                        .toUpperCase()
+                                                                    : controller
+                                                                .trainerDocStatusModel
+                                                                .value
+                                                                        .result![
+                                                                            index]
+                                                                        .emirates
+                                                                        .toString()
+                                                                        .toUpperCase()
+                                                                : controller
+                                                                .trainerDocStatusModel
+                                                                .value
+                                                                    .result![
+                                                                        index]
+                                                                    .category!
+                                                                    .name
+                                                                    .toString(),
                                                             style: Theme.of(
                                                                     context)
                                                                 .textTheme
-                                                                .labelSmall
-                                                                ?.copyWith(
-                                                                    fontSize:
-                                                                        12),
+                                                                .titleLarge!
+                                                                .copyWith(
+                                                                    color: AppColors
+                                                                        .yellow),
+                                                          ),
+                                                          Row(
+                                                            children: [
+                                                              Container(
+                                                                height: 22,
+                                                                width: 52,
+                                                                decoration: BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(
+                                                                                5),
+                                                                    color:controller
+                                                                        .trainerDocStatusModel
+                                                                        .value
+                                                                                .result![
+                                                                                    index]
+                                                                                .approveStatus ==
+                                                                            "pending"
+                                                                        ? AppColors
+                                                                            .backgroundcolor2
+                                                                        : AppColors
+                                                                            .black),
+                                                                child: const Center(
+                                                                    child: Text(
+                                                                        'SAVED',
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                10,
+                                                                            fontFamily:
+                                                                                'Roboto',
+                                                                            fontWeight: FontWeight
+                                                                                .w400,
+                                                                            color:
+                                                                                Colors.white))),
+                                                              ).paddingOnly(
+                                                                  right:
+                                                                      Get.width *
+                                                                          0.03),
+                                                              CircleAvatar(
+                                                                backgroundColor:
+                                                                    AppColors
+                                                                        .yellow,
+                                                                radius: 11,
+                                                                child:
+                                                                    Image.asset(
+                                                                  ImagesPaths
+                                                                      .tick,
+                                                                  color: AppColors
+                                                                      .black,
+                                                                  width: 12,
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ).paddingOnly(
+                                                          bottom:
+                                                              Get.height * 0.01),
+                                                      Container(
+                                                        height: 1,
+                                                        width: Get.width,
+                                                        color:
+                                                            AppColors.lightyGrey,
+                                                      ).paddingOnly(
+                                                          bottom:
+                                                              Get.height * 0.02),
+                                                      Row(
+                                                        children: [
+                                                          Flexible(
+                                                            child: SizedBox(
+                                                              height: 131,
+                                                              width: 204,
+                                                              child:
+                                                                  CachedNetworkImage(
+                                                                fit: BoxFit.cover,
+                                                                imageUrl: controller
+                                                                    .trainerDocStatusModel
+                                                                    .value
+                                                                            .result![
+                                                                                index]
+                                                                            .documentFrontImg ==
+                                                                        null
+                                                                    ? controller
+                                                                                .trainerDocStatusModel
+                                                                                .value
+                                                                                .result![
+                                                                                    index]
+                                                                                .passportfrontImg ==
+                                                                            null
+                                                                        ? controller
+                                                                    .trainerDocStatusModel
+                                                                    .value
+                                                                            .result![
+                                                                                index]
+                                                                            .emiratesfrontImg
+                                                                            .toString()
+                                                                        : controller
+                                                                    .trainerDocStatusModel
+                                                                    .value
+                                                                            .result![
+                                                                                index]
+                                                                            .passportfrontImg
+                                                                            .toString()
+                                                                    : controller
+                                                                    .trainerDocStatusModel
+                                                                    .value
+                                                                        .result![
+                                                                            index]
+                                                                        .documentFrontImg
+                                                                        .toString(),
+                                                                progressIndicatorBuilder:
+                                                                    (context, url,
+                                                                            downloadProgress) =>
+                                                                        Center(
+                                                                  child: SizedBox(
+                                                                    height: 30,
+                                                                    // Adjust the height to make it smaller
+                                                                    width: 30,
+                                                                    // Adjust the width to make it smaller
+                                                                    child: CircularProgressIndicator(
+                                                                        value: downloadProgress
+                                                                            .progress),
+                                                                  ),
+                                                                ),
+                                                                errorWidget: (context,
+                                                                        url,
+                                                                        error) =>
+                                                                    Icon(Icons
+                                                                        .error),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                'Passport Name',
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .labelMedium,
+                                                              ).paddingOnly(
+                                                                  bottom: 2),
+                                                              Text(
+                                                                controller
+                                                                    .trainerDocStatusModel
+                                                                    .value
+                                                                    .result![
+                                                                        index]
+                                                                    .passportName
+                                                                    .toString(),
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .labelSmall,
+                                                              ).paddingOnly(
+                                                                  bottom: 8),
+                                                              Text(
+                                                                'Passport Number',
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .labelMedium,
+                                                              ).paddingOnly(
+                                                                  bottom: 2),
+                                                              Text(
+                                                                controller
+                                                                    .trainerDocStatusModel
+                                                                    .value
+                                                                    .result![
+                                                                        index]
+                                                                    .passportNumber
+                                                                    .toString(),
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .labelSmall,
+                                                              ),
+                                                              SizedBox(
+                                                                height:
+                                                                    Get.height *
+                                                                        0.02,
+                                                              ),
+                                                              controller
+                                                                  .trainerDocStatusModel
+                                                                  .value
+                                                                          .result![
+                                                                              index]
+                                                                          .approveStatus ==
+                                                                      "approved"
+                                                                  ? Container(
+                                                                      height: 22,
+                                                                      width: 64,
+                                                                      decoration: BoxDecoration(
+                                                                          color: AppColors
+                                                                              .yellow,
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(5)),
+                                                                      child: const Center(
+                                                                          child: Text(
+                                                                              'Approved',
+                                                                              style: TextStyle(
+                                                                                  fontSize: 10,
+                                                                                  fontWeight: FontWeight.w400,
+                                                                                  color: AppColors.black))),
+                                                                    )
+                                                                  : controller
+                                                                  .trainerDocStatusModel
+                                                                  .value
+                                                                              .result![index]
+                                                                              .approveStatus ==
+                                                                          "pending"
+                                                                      ? Container(
+                                                                          height:
+                                                                              22,
+                                                                          width:
+                                                                              100,
+                                                                          decoration: BoxDecoration(
+                                                                              color:
+                                                                                  AppColors.backgroundcolor2,
+                                                                              borderRadius: BorderRadius.circular(5)),
+                                                                          child: const Center(
+                                                                              child:
+                                                                                  Text('Under verification', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: AppColors.whiteShade))),
+                                                                        )
+                                                                      : GestureDetector(
+                                                                          onTap:
+                                                                              () {
+                                                                            final userId =
+                                                                                controller.trainerDocStatusModel.value.result![index].userId ?? "";
+                                                                            final categoryId =
+                                                                                controller
+                                                                                    .trainerDocStatusModel
+                                                                                    .value.result![index].category?.id ?? "";
+                                                                            uploadImage =
+                                                                                UploadImage.byProfile;
+                                                                            Get.toNamed(
+                                                                                AppRoutes.trainerPassport,
+                                                                                arguments: {
+                                                                                  "userId": userId,
+                                                                                  "name": controller
+                                                                                      .trainerDocStatusModel
+                                                                                      .value?.result?[index].category?.name.toString() ?? "",
+                                                                                  "categoryName": controller
+                                                                                      .trainerDocStatusModel
+                                                                                      .value?.result?[index].passport.toString() ?? "",
+                                                                                  "categoryId": categoryId,
+                                                                                  "id": controller.trainerDocStatusModel.value.result![index].id.toString(),
+                                                                                  "reupload": true,
+                                                                                });
+                                                                          },
+                                                                          child:
+                                                                              Container(
+                                                                            height:
+                                                                                22,
+                                                                            width:
+                                                                                120,
+                                                                            decoration: BoxDecoration(
+                                                                                color: AppColors.yellow,
+                                                                                borderRadius: BorderRadius.circular(5)),
+                                                                            child:
+                                                                                const Center(child: Text('Resubmit Documents', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: AppColors.black))),
+                                                                          ),
+                                                                        )
+                                                            ],
                                                           ).paddingOnly(
-                                                              top: 10),
+                                                              left: Get.width *
+                                                                  0.04)
+                                                        ],
+                                                      ),
+                                                      controller
+                                                                  .trainerDocStatusModel
+                                                                  .value
+                                                                  .result![index]
+                                                                  .remark ==
+                                                              null
+                                                          ? const Text("")
+                                                          : Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  "Rejection Reason",
+                                                                  style: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .labelSmall!
+                                                                      .copyWith(
+                                                                          fontSize:
+                                                                              12,
+                                                                          fontWeight:
+                                                                              FontWeight
+                                                                                  .w400,
+                                                                          color: AppColors
+                                                                              .white),
+                                                                ),
+                                                                Text(
+                                                                  controller
+                                                                      .trainerDocStatusModel
+                                                                      .value
+                                                                      .result![
+                                                                          index]
+                                                                      .remark!
+                                                                      .toString(),
+                                                                  style: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .labelSmall!
+                                                                      .copyWith(
+                                                                          fontSize:
+                                                                              10,
+                                                                          color: AppColors
+                                                                              .whiteShade),
+                                                                ),
+                                                                Text(
+                                                                  controller
+                                                                      .trainerDocStatusModel
+                                                                      .value
+                                                                      .result![
+                                                                          index]
+                                                                      .comment!
+                                                                      .toString(),
+                                                                  style: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .labelSmall!
+                                                                      .copyWith(
+                                                                          fontSize:
+                                                                              10,
+                                                                          color: AppColors
+                                                                              .whiteShade),
+                                                                ),
+                                                              ],
+                                                            ).paddingOnly(top: 5)
+                                                    ],
+                                                  ).paddingOnly(
+                                                      bottom: 5,
+                                                      top: 15,
+                                                      right: 15,
+                                                      left: 15),
+                                                ),
+                                              )
+                                            : InkWell(
+                                                splashColor: Colors.transparent,
+                                                onTap: () {
+                                                  final userId = controller
+                                                          .trainerDocStatusModel
+                                                          .value
+                                                          .result![index]
+                                                          .userId ??
+                                                      "";
+                                                  final categoryId = controller
+                                                      .trainerDocStatusModel
+                                                      .value
+                                                          .result![index]
+                                                          .category
+                                                          ?.id ??
+                                                      "";
+                                                  uploadImage =
+                                                      UploadImage.byProfile;
+                                                  Get.toNamed(
+                                                      AppRoutes.trainerPassport,
+                                                      arguments: {
+                                                        "userId": userId,
+                                                        "name": controller
+                                                            .trainerDocStatusModel
+                                                            .value
+                                                                ?.result?[index]
+                                                                .category
+                                                                ?.name
+                                                                .toString() ??
+                                                            "",
+                                                        "categoryName":controller
+                                                            .trainerDocStatusModel
+                                                            .value
+                                                                ?.result?[index]
+                                                                .passport
+                                                                .toString() ??
+                                                            "",
+                                                        "categoryId": categoryId,
+                                                        "id": controller
+                                                            .trainerDocStatusModel
+                                                            .value
+                                                            .result![index]
+                                                            .id
+                                                            .toString()
+                                                      });
+                                                },
+                                                child: Container(
+                                                  height: 70,
+                                                  width: Get.width,
+                                                  decoration: BoxDecoration(
+                                                    color: AppColors.greyButton,
+                                                    borderRadius:
+                                                        BorderRadius.circular(5),
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Transform.translate(
+                                                            offset: const Offset(
+                                                                -10, 2),
+                                                            child: Container(
+                                                              height: Get.width *
+                                                                  0.14,
+                                                              width: Get.width *
+                                                                  0.14,
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                      horizontal:
+                                                                          15,
+                                                                      vertical:
+                                                                          17),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5),
+                                                                color: AppColors
+                                                                    .black,
+                                                              ),
+                                                              child: Image.asset(
+                                                                ImagesPaths
+                                                                    .document,
+                                                                height: 24,
+                                                                width: 24,
+                                                              ),
+                                                            ).paddingOnly(
+                                                                left: 20,
+                                                                right: 10,
+                                                                bottom: 5),
+                                                          ),
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              SizedBox(
+                                                                width: Get.width *
+                                                                    .55,
+                                                                child: Text(
+                                                                  controller
+                                                                      .trainerDocStatusModel
+                                                                      .value
+                                                                              .result![
+                                                                                  index]
+                                                                              .category ==
+                                                                          null
+                                                                      ? controller
+                                                                          .trainerDocStatusModel
+                                                                          .value
+                                                                          .result![
+                                                                              index]
+                                                                          .passport
+                                                                          .toString()
+                                                                          .toUpperCase()
+                                                                      : controller
+                                                                      .trainerDocStatusModel
+                                                                      .value
+                                                                          .result![
+                                                                              index]
+                                                                          .category!
+                                                                          .name
+                                                                          .toString(),
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                  style: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .titleLarge
+                                                                      ?.copyWith(
+                                                                          color: AppColors
+                                                                              .yellow),
+                                                                ).paddingOnly(
+                                                                    top: 12),
+                                                              ),
+                                                              Text(
+                                                                "Upload your Certification ...",
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .labelSmall
+                                                                    ?.copyWith(
+                                                                        fontSize:
+                                                                            12),
+                                                              ).paddingOnly(
+                                                                  top: 10),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          const Icon(
+                                                            Icons
+                                                                .arrow_forward_ios_outlined,
+                                                            color:
+                                                                AppColors.impgrey,
+                                                            size: 22,
+                                                          ).paddingOnly(
+                                                              right: 15),
                                                         ],
                                                       ),
                                                     ],
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      const Icon(
-                                                        Icons
-                                                            .arrow_forward_ios_outlined,
-                                                        color:
-                                                            AppColors.impgrey,
-                                                        size: 22,
-                                                      ).paddingOnly(right: 15),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ).paddingOnly(left: 0),
-                                            ).paddingOnly(top: Get.height*0.008,
-                                                bottom: Get.height * 0.008,left: Get.width*0.02,right: Get.width*0.02),
-                                          );
-                          }
-
-                      ));
-                },
-              ),
-            ],
+                                                  ).paddingOnly(left: 0),
+                                                ).paddingOnly(
+                                                    top: Get.height * 0.008,
+                                                    bottom: Get.height * 0.008,
+                                                    left: Get.width * 0.02,
+                                                    right: Get.width * 0.02),
+                                              );
+                              })),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
