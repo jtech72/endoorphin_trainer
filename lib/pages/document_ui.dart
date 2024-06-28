@@ -8,6 +8,7 @@ import '../services/network_services/api_call.dart';
 class DocumentUI extends StatelessWidget {
   const DocumentUI({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     DocumentController controller = Get.put(DocumentController());
@@ -381,7 +382,7 @@ class DocumentUI extends StatelessWidget {
                                                                             5)),
                                                                 child: const Center(
                                                                     child: Text(
-                                                                        'Resubmit Documents',
+                                                                        'Reupload Documents',
                                                                         style: TextStyle(
                                                                             fontSize:
                                                                                 10,
