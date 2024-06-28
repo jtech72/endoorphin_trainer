@@ -32,10 +32,19 @@ class BankingDetailsController extends GetxController {
         accountNameController.text.isEmpty ||
         bankAcNumberController.text.isEmpty ||
         confirmBankAcNumberController.text.isEmpty ||
-        effectiveController.text.isEmpty || selectedOption1.value == 'ACCOUNT TYPE') {
+        effectiveController.text.isEmpty ||
+        selectedOption1.value == 'ACCOUNT TYPE') {
       showSnackBar("Please fill all the fields");
       return false;
-    } else {
+    } else if (bankAcNumberController.text.length < 14) {
+      showSnackBar("Bank account number must be at least 14 digits long");
+      return false;
+    }
+    else if (ifscController.text.length > 11) {
+      showSnackBar("Ifsc account number must be at least 11 digits long");
+      return false;
+    }
+    else {
       final saveBankDetailModel = {
         "ifscCode": ifscController.text.trim(),
         "trainerId": "${storage.read("userId")}",
@@ -68,7 +77,6 @@ class BankingDetailsController extends GetxController {
       }
     }
   }
-
   void updateUser(String id) async {
     showLoader();
     try {

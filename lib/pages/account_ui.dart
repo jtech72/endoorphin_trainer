@@ -30,7 +30,7 @@ class AccountUI extends StatelessWidget {
                   return SizedBox(
                     height: Get.height,
                     child: const Center(
-                      child: CircularProgressIndicator(),
+                      // child: CircularProgressIndicator(),
                     ).paddingOnly(top: 0),
                   );
                 }

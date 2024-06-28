@@ -21,7 +21,7 @@ class TrainerPassportController extends GetxController {
       showSnackBar("Please enter a${certificationDetails!["categoryName"] == "emirates" ? "Emirates ID Number" : certificationDetails!["categoryName"] == "passport" ? "Passport Number" : " certification number"}");
     }
     // Validation: Check if the certificate name length is invalid
-    else if (trimmedCertificateName.length < 3 || trimmedCertificateName.length > 50) {
+    else if (trimmedCertificateName.length < 3 ) {
       showSnackBar("Certificate name must be at least 3 characters");
     }else if (trimmedCertificateNumber.length < 5) {
       showSnackBar("Certificate number must be at least 5 characters");

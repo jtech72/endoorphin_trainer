@@ -78,6 +78,9 @@ class ImagesPaths {
   static const String arrowback= "${baseUrl}ic_arrow_back.png";
   static const String arrowforword= "${baseUrl}ic_arrow_forword.png";
   static const String bio= "${baseUrl}ic_bio.png";
+  static const String check= "${baseUrl}circle-check.png";
+  static const String checktick= "${baseUrl}circle-check-tick.png";
+  static const String checkcross= "${baseUrl}circle-check-cross.png";
 
 
 

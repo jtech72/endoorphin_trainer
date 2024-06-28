@@ -86,10 +86,14 @@ class BankingDetailsUI extends StatelessWidget {
                               height: Get.height * 0.05,
                               width: Get.width,
                               child: TextField(
+                                textCapitalization: TextCapitalization.characters,
+
                                 controller: controller.ifscController,
                                 inputFormatters: [
                                   LengthLimitingTextInputFormatter(64),
-                                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
+
+                                  FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))
+
                                 ],
                                 enableInteractiveSelection: true,
                                 style: Theme.of(context).textTheme.labelMedium,
