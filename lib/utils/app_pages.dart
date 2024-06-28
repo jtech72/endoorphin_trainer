@@ -45,7 +45,7 @@ class AppPages {
         binding: ForgotPasswordBinding()),
     GetPage(
         name: AppRoutes.createNewPassword,
-        page: ()=>  const CreateNewPasswordUI(),
+        page: ()=>   CreateNewPasswordUI(),
         binding: CreateNewPasswordBinding()),
     GetPage(
         name: AppRoutes.verifyPhoneNumber,

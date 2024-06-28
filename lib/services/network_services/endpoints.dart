@@ -29,6 +29,8 @@ class Endpoints{
   static const String epUpdateBankDetails="updateBankDetails";
   /// FORGET PASSWORD
   static const String epForgetPassword="users/forgetPassword";
+  /// RESET PASSWORD
+  static const String epResetPassword="users/resetPassword";
 
 
 
