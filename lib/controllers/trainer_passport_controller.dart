@@ -12,14 +12,22 @@ class TrainerPassportController extends GetxController {
     String trimmedCertificateNumber = certificateNumber.text.trim();
     String trimmedCertificateName = certificateName.text.trim();
 
-    // Validation: Check if the trimmed strings are empty or certificate name length is invalid
-    if (trimmedCertificateNumber.isEmpty || trimmedCertificateName.isEmpty) {
-      showSnackBar(
-          "Please enter a ${certificationDetails!["categoryName"] == "Emirates ID"?"Emirates ID Number":certificationDetails!["categoryName"]=="Passport"?'Passport Number':"Certification Number"}and name");
-    } else if (trimmedCertificateName.length < 3 ||
-        trimmedCertificateName.length > 50) {
-      showSnackBar("Certificate name must be atleast 3 characters");
-    } else {
+    // Validation: Check if the trimmed certificate number is empty
+    if (trimmedCertificateName.isEmpty) {
+      showSnackBar("Please enter a${certificationDetails!["categoryName"] == "emirates" ? "Emirates ID Name" : certificationDetails!["categoryName"] == "passport" ? "Passport Name" : " certification name"}");
+    }
+    // Validation: Check if the trimmed certificate name is empty
+    else if (trimmedCertificateNumber.isEmpty) {
+      showSnackBar("Please enter a${certificationDetails!["categoryName"] == "emirates" ? "Emirates ID Number" : certificationDetails!["categoryName"] == "passport" ? "Passport Number" : " certification number"}");
+    }
+    // Validation: Check if the certificate name length is invalid
+    else if (trimmedCertificateName.length < 3 || trimmedCertificateName.length > 50) {
+      showSnackBar("Certificate name must be at least 3 characters");
+    }else if (trimmedCertificateNumber.length < 5) {
+      showSnackBar("Certificate number must be at least 5 characters");
+    }
+    // If all validations pass, navigate to the upload image screen
+    else {
       Get.toNamed(AppRoutes.uploadimage, arguments: {
         "userId": certificationDetails!["userId"],
         "categoryName": certificationDetails!["categoryName"],
@@ -27,6 +35,7 @@ class TrainerPassportController extends GetxController {
         "id": certificationDetails!["id"],
         "certificateNumber": trimmedCertificateNumber,
         "certificateName": trimmedCertificateName,
+        "reupload": certificationDetails!["reupload"],
       });
     }
   }

@@ -3,7 +3,6 @@ import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
 
 class TrainerPassportUI extends StatelessWidget {
-
   const TrainerPassportUI({super.key});
 
   @override
@@ -11,18 +10,23 @@ class TrainerPassportUI extends StatelessWidget {
     TrainerPassportController controller = Get.find();
     String? username;
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: myAppBar(
             title: GestureDetector(
-              onTap: (){
+              onTap: () {
                 Get.back();
               },
               child: Text(
-                controller.certificationDetails!["categoryName"] == "emirates"? "Emirates ID":controller.certificationDetails!["categoryName"] == "passport"?'Passport':controller.certificationDetails!["name"].toString(),
+                controller.certificationDetails!["categoryName"] == "emirates"
+                    ? "Emirates ID"
+                    : controller.certificationDetails!["categoryName"] ==
+                            "passport"
+                        ? 'Passport'
+                        : controller.certificationDetails!["name"].toString(),
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
             ),
@@ -32,12 +36,12 @@ class TrainerPassportUI extends StatelessWidget {
           width: Get.width,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage(ImagesPaths.bgBlackShade,),fit: BoxFit.cover
-              )
-          ),
+                  image: AssetImage(
+                    ImagesPaths.bgBlackShade,
+                  ),
+                  fit: BoxFit.cover)),
           child: SingleChildScrollView(
-            child:
-            Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -55,17 +59,28 @@ class TrainerPassportUI extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      controller.certificationDetails!["categoryName"] == "Emirates ID"? "Emirates ID Name":controller.certificationDetails!["categoryName"] == "Passport"?'Passport Name':"Certification Name",
-
+                      controller.certificationDetails!["categoryName"] ==
+                              "emirates"
+                          ? "Emirates ID Name"
+                          : controller.certificationDetails!["categoryName"] ==
+                                  "passport"
+                              ? 'Passport Name'
+                              : "Certification Name",
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge!
                           .copyWith(fontWeight: FontWeight.w500),
-                    ).paddingOnly(bottom: Get.height*.008, top: Get.height*.04),
-                    Text("* ",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: Get.height  *.03,bottom: 0),
-
+                    ).paddingOnly(
+                        bottom: Get.height * .008, top: Get.height * .04),
+                    Text(
+                      "* ",
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelLarge
+                          ?.copyWith(fontSize: 14, color: Colors.red),
+                    ).paddingOnly(top: Get.height * .03, bottom: 0),
                   ],
-                ).paddingOnly(top:Get.height*0.02),
+                ).paddingOnly(top: Get.height * 0.02),
                 Container(
                   height: 45,
                   decoration: BoxDecoration(
@@ -77,7 +92,8 @@ class TrainerPassportUI extends StatelessWidget {
                     controller: controller.certificateName,
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(20),
-                      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))],
+                      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))
+                    ],
                     enableInteractiveSelection: true,
                     style: Theme.of(context).textTheme.labelMedium,
                     cursorColor: AppColors.grey,
@@ -87,9 +103,17 @@ class TrainerPassportUI extends StatelessWidget {
                       fillColor: AppColors.yellowishWhite,
                       border: InputBorder.none,
                       hintStyle: Theme.of(context).textTheme.labelMedium,
-                      contentPadding: const EdgeInsets.only(bottom: 3, left: 15),
+                      contentPadding:
+                          const EdgeInsets.only(bottom: 3, left: 15),
 
-                      hintText: controller.certificationDetails!["categoryName"] == "Emirates ID"? " Enter Emirates ID name":controller.certificationDetails!["categoryName"] == "Passport"?'Enter Passport name':"Enter Certification Name",
+                      hintText: controller
+                                  .certificationDetails!["categoryName"] ==
+                              "emirates"
+                          ? " Enter Emirates ID name"
+                          : controller.certificationDetails!["categoryName"] ==
+                                  "passport"
+                              ? 'Enter Passport name'
+                              : "Enter Certification Name",
                       alignLabelWithHint: true,
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(4),
@@ -111,7 +135,9 @@ class TrainerPassportUI extends StatelessWidget {
                           color: AppColors.yellowishWhite,
                           width: 1,
                         ),
-                      ),/// Center the hintText
+                      ),
+
+                      /// Center the hintText
                     ),
                   ),
                 ),
@@ -121,14 +147,26 @@ class TrainerPassportUI extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      controller.certificationDetails!["categoryName"] == "Emirates ID"? "Emirates ID Number":controller.certificationDetails!["categoryName"] == "Passport"?'Passport Number':"Certification Number",
+                      controller.certificationDetails!["categoryName"] ==
+                              "emirates"
+                          ? "Emirates ID Number"
+                          : controller.certificationDetails!["categoryName"] ==
+                                  "passport"
+                              ? 'Passport Number'
+                              : "Certification Number",
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge!
                           .copyWith(fontWeight: FontWeight.w500),
-                    ).paddingOnly(bottom: Get.height * .008, top: Get.height * .02),
-                    Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
-
+                    ).paddingOnly(
+                        bottom: Get.height * .008, top: Get.height * .02),
+                    Text(
+                      " *",
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelLarge
+                          ?.copyWith(fontSize: 14, color: Colors.red),
+                    ).paddingOnly(top: 15, bottom: 8),
                   ],
                 ),
                 Container(
@@ -142,8 +180,10 @@ class TrainerPassportUI extends StatelessWidget {
                     // keyboardType: TextInputType.number,
                     controller: controller.certificateNumber,
                     inputFormatters: [
-                      LengthLimitingTextInputFormatter(12), // Set maximum length to 12
-                      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')), // Allow only alphanumeric characters
+                      LengthLimitingTextInputFormatter(25),
+                      // Set maximum length to 12
+                      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')),
+                      // Allow only alphanumeric characters
                     ],
                     enableInteractiveSelection: true,
                     style: Theme.of(context).textTheme.labelMedium,
@@ -154,9 +194,17 @@ class TrainerPassportUI extends StatelessWidget {
                       fillColor: AppColors.yellowishWhite,
                       border: InputBorder.none,
                       hintStyle: Theme.of(context).textTheme.labelMedium,
-                      contentPadding: const EdgeInsets.only(bottom: 3, left: 15),
+                      contentPadding:
+                          const EdgeInsets.only(bottom: 3, left: 15),
 
-                      hintText: controller.certificationDetails!["categoryName"] == "Emirates ID"? " Enter Emirates ID Number":controller.certificationDetails!["categoryName"] == "Passport"?'Enter Passport Number':"Enter Certification Number",
+                      hintText: controller
+                                  .certificationDetails!["categoryName"] ==
+                              "emirates"
+                          ? " Enter Emirates ID Number"
+                          : controller.certificationDetails!["categoryName"] ==
+                                  "passport"
+                              ? 'Enter Passport Number'
+                              : "Enter Certification Number",
                       alignLabelWithHint: true,
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(4),
@@ -178,7 +226,9 @@ class TrainerPassportUI extends StatelessWidget {
                           color: AppColors.yellowishWhite,
                           width: 1,
                         ),
-                      ),/// Center the hintText
+                      ),
+
+                      /// Center the hintText
                     ),
                   ),
                 ),
@@ -188,14 +238,26 @@ class TrainerPassportUI extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      controller.certificationDetails!["categoryName"] == "Emirates ID"? " Upload Emirates ID Photo":controller.certificationDetails!["categoryName"] == "Passport"?'Upload Passport Photo':"Upload Certification Photo",
+                      controller.certificationDetails!["categoryName"] ==
+                              "emirates"
+                          ? " Upload Emirates ID Photo"
+                          : controller.certificationDetails!["categoryName"] ==
+                                  "passport"
+                              ? 'Upload Passport Photo'
+                              : "Upload Certification Photo",
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge!
                           .copyWith(fontWeight: FontWeight.w500),
-                    ).paddingOnly(bottom: Get.height * .008, top: Get.height  *.02),
-                    Text("* ",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: Get.height*  .01,bottom: 0),
-
+                    ).paddingOnly(
+                        bottom: Get.height * .008, top: Get.height * .02),
+                    Text(
+                      "* ",
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelLarge
+                          ?.copyWith(fontSize: 14, color: Colors.red),
+                    ).paddingOnly(top: Get.height * .01, bottom: 0),
                   ],
                 ),
                 GestureDetector(
@@ -229,7 +291,6 @@ class TrainerPassportUI extends StatelessWidget {
                     ),
                   ),
                 ),
-
               ],
             ).paddingOnly(
                 left: Get.width * 0.03,

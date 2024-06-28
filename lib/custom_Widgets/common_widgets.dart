@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_strings.dart';
+import '../utils/exports.dart';
 
 GetStorage storage=GetStorage();
 
@@ -141,6 +142,11 @@ void dismissLoader() {
 enum UploadImage{
   byInitically,
   byProfile
+}
+OtpVerified? otpVerified;
+enum OtpVerified{
+  byNumber,
+  byMail
 }
 
 // Drawer myDrawer() {
@@ -298,4 +304,14 @@ Widget buildOption(IconData icon, String label, VoidCallback onTap) {
       ),
     ),
   );
+}
+
+class NoLeadingSpaceFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    if (newValue.text.startsWith(' ')) {
+      return oldValue;
+    }
+    return newValue;
+  }
 }

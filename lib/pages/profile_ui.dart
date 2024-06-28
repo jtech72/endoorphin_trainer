@@ -108,9 +108,17 @@ class ProfileUI extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            snapshot.data!.result!.userName == null?'':snapshot.data!.result!.userName.toString(),
-                            style: Theme.of(context).textTheme.headlineSmall,
+                          Row(
+                            children: [
+                              Text(
+                                snapshot.data!.result!.userName == null?'':snapshot.data!.result!.userName.toString(),
+                                style: Theme.of(context).textTheme.headlineSmall,
+                              ).paddingOnly(right: 3),
+                              Text(
+                                snapshot.data!.result!.lastName == null?'':snapshot.data!.result!.lastName.toString(),
+                                style: Theme.of(context).textTheme.headlineSmall,
+                              ),
+                            ],
                           ),
                           SizedBox(
                             height: Get.height * 0.003,

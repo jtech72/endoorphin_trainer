@@ -33,7 +33,8 @@ class UploadImagesUi extends StatelessWidget {
             height: 2,width: 2,
             child: const Icon(Icons.arrow_back_ios,size: 18,color: Colors.white,)),
         ),
-        title: Text(controller.certificationDetails == 0? "Emirates ID":controller.certificationDetails == 1?'Passport':"Certification",style: Theme.of(context).textTheme.headlineSmall,),
+        title: Text(
+          controller.certificationDetails!["categoryName"] == "emirates"? "Emirates ID":controller.certificationDetails!["categoryName"] == "passport"?'Passport':"Certification".toString(),style: Theme.of(context).textTheme.headlineSmall,),
 
       ),
       body: Obx(
