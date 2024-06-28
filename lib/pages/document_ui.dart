@@ -72,7 +72,7 @@ class DocumentUI extends StatelessWidget {
                       height: Get.height * .7,
                       child: const Center(
                         child: CircularProgressIndicator(),
-                      ).paddingOnly(top: 20),
+                      ).paddingOnly(top: 0),
                     );
                   }
                   if (snapshot.hasError) {
@@ -482,35 +482,7 @@ class DocumentUI extends StatelessWidget {
                                                         .spaceBetween,
                                                 children: [
                                                   Text(
-                                                    snapshot
-                                                                .data!
-                                                                .result![index]
-                                                                .category ==
-                                                            null
-                                                        ? snapshot
-                                                                    .data!
-                                                                    .result![
-                                                                        index]
-                                                                    .emirates ==
-                                                                null
-                                                            ? snapshot
-                                                                .data!
-                                                                .result![index]
-                                                                .passport
-                                                                .toString()
-                                                                .toUpperCase()
-                                                            : snapshot
-                                                                .data!
-                                                                .result![index]
-                                                                .emirates
-                                                                .toString()
-                                                                .toUpperCase()
-                                                        : snapshot
-                                                            .data!
-                                                            .result![index]
-                                                            .category!
-                                                            .name
-                                                            .toString(),
+                                                  "EMIRATES ID",
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .titleLarge!

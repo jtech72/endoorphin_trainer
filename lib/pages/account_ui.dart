@@ -19,7 +19,7 @@ class AccountUI extends StatelessWidget {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: myAppBar(title:GestureDetector(onTap: (){Get.back();},child: Text('Accounts',style: Theme.of(context).textTheme.headlineSmall,)), context: context, ),
+        appBar: myAppBar(title:GestureDetector(onTap: (){Get.back();},child: Text('Account',style: Theme.of(context).textTheme.headlineSmall,)), context: context, ),
         body: Container(
           child: SingleChildScrollView(
             child: FutureBuilder(
