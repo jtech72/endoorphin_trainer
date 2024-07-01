@@ -23,7 +23,10 @@ class CountryCodeController extends GetxController {
             storage.write("phoneNumber", "$countryCode${phoneNumber.text.trim()}");
             finalOTP = value.otp;
             showSnackBar("${value.otp}");
-            Get.toNamed(AppRoutes.otp,arguments:phoneNumber.text.toString() );
+            Get.toNamed(AppRoutes.otp, arguments: {
+              "otp": "",
+              "phoneNumber": "",
+            });
           }else{
             dismissLoader();
             showSnackBar("${value.message}");

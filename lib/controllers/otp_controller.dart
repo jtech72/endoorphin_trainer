@@ -10,8 +10,7 @@ class OtpController extends GetxController {
   int remainingSeconds = 60;
   final time = '00.00'.obs;
   RxBool isPaused = false.obs;
-  String ?phoneNumber;
-  Map<String, dynamic>? userDetails;
+  Map<String,dynamic>?phoneNumber;
   dynamic secondOtp;
   void startTimer(int seconds) {
     const duration = Duration(seconds: 1);
@@ -46,7 +45,7 @@ class OtpController extends GetxController {
   void resendOtp() async{
     if (time.value == "00:01"){
       await CallAPI.sentOTP(request: {
-        "phoneNumber": phoneNumber
+        "phoneNumber": storage.read("phoneNumber")
       }).then((value) {
         startTimer(59);
 
@@ -58,7 +57,6 @@ class OtpController extends GetxController {
     }
 
   }
-
   void onNumberVerify() {
     showLoader();
 
@@ -93,7 +91,7 @@ class OtpController extends GetxController {
   }
   void onEmailVerify() {
     showLoader();
-
+log("message");
     String otp = otpController.text.trim();
 
     if (otp.isEmpty) {
@@ -110,17 +108,26 @@ class OtpController extends GetxController {
 
     try {
       int enteredOtp = int.parse(otp);
-      if (enteredOtp == countryCodeController.finalOTP || enteredOtp == secondOtp) {
+      log(enteredOtp.toString());
+      log(phoneNumber!["otp"]);
+      if (enteredOtp.toString() == phoneNumber!["otp"].toString()) {
         dismissLoader();
-        Get.toNamed(AppRoutes.registration);
+        Get.toNamed(AppRoutes.createNewPassword,arguments: phoneNumber!["phoneNumber"].toString());
         printResult(screenName: "OTP SCREEN", msg: "OTP VERIFIED");
       } else {
         dismissLoader();
         showSnackBar("Invalid OTP");
       }
-    } catch (e) {
+    } catch (e,st) {
       dismissLoader();
-      showSnackBar("Invalid OTP format");
+      log(st.toString());
+    }
+  }
+  void onVerify(){
+    if(phoneNumber!["otp"] != "" || phoneNumber!["phoneNumber"] !=""){
+     onEmailVerify();
+    }else{
+      onNumberVerify();
     }
   }
   @override
