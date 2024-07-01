@@ -14,7 +14,7 @@ class TrainerPassportController extends GetxController {
 
     // Validation: Check if the trimmed certificate number is empty
     if (trimmedCertificateName.isEmpty) {
-      showSnackBar("Please enter a${certificationDetails!["categoryName"] == "emirates" ? "Emirates ID Name" : certificationDetails!["categoryName"] == "passport" ? "Passport Name" : " certification name"}");
+      showSnackBar("Please enter a ${certificationDetails!["categoryName"] == "emirates" ? "Emirates ID Name" : certificationDetails!["categoryName"] == "passport" ? "Passport Name" : " certification name"}");
     }
     // Validation: Check if the trimmed certificate name is empty
     else if (trimmedCertificateNumber.isEmpty) {

@@ -20,145 +20,180 @@ class AppPages {
   static List<GetPage> routes =[
     GetPage(
         name: AppRoutes.splash,
+        transitionDuration: Duration(milliseconds: 800),
         page: () => const SplashUI(),
         binding: SplashBinding()
     ),GetPage(
-        name: AppRoutes.earning,
+        name: AppRoutes.earning,        transitionDuration: Duration(milliseconds: 800),
+
         page: () => const EarningUi(),
         binding: EarningBinding()
     ),  GetPage(
-        name: AppRoutes.home,
+        name: AppRoutes.home,        transitionDuration: Duration(milliseconds: 800),
+
         page: () => const HomeUi(),
         binding: HomeBindings()
     ),
     GetPage(
-        name: AppRoutes.countrycode,
+        name: AppRoutes.countrycode,        transitionDuration: Duration(milliseconds: 800),
+
         page: () =>  CountryCodeUI(),
         binding: CountryCodeBinding()),
     GetPage(
-        name: AppRoutes.otp,
+        name: AppRoutes.otp,        transitionDuration: Duration(milliseconds: 800),
+
         page: () => const OtpUI(),
         binding: OtpBinding()),
     GetPage(
-        name: AppRoutes.forgotPassword,
+        name: AppRoutes.forgotPassword,        transitionDuration: Duration(milliseconds: 800),
+
         page: ()=> const ForgotPasswordUI(),
         binding: ForgotPasswordBinding()),
     GetPage(
-        name: AppRoutes.createNewPassword,
+        name: AppRoutes.createNewPassword,        transitionDuration: Duration(milliseconds: 800),
+
         page: ()=>   CreateNewPasswordUI(),
         binding: CreateNewPasswordBinding()),
     GetPage(
-        name: AppRoutes.verifyPhoneNumber,
+        name: AppRoutes.verifyPhoneNumber,        transitionDuration: Duration(milliseconds: 800),
+
         page: ()=>  const VerifyPhoneNumberUI(),
         binding: VerifyPhoneNumberBinding()),
     GetPage(
-        name: AppRoutes.registration,
+        name: AppRoutes.registration,        transitionDuration: Duration(milliseconds: 800),
+
         page: ()=>    RegistrationUi(),
         binding: RegistrationBinding()),
     GetPage(
-        name: AppRoutes.selectcategory,
+        name: AppRoutes.selectcategory,        transitionDuration: Duration(milliseconds: 800),
+
         page: ()=>  const SelectCategoryUI(),
         binding: SelectCategoryBinding()),
     GetPage(
-        name: AppRoutes.bio,
+        name: AppRoutes.bio,        transitionDuration: Duration(milliseconds: 800),
+
         page: ()=>  const BioUi(),
         binding: BioBinding()),
     GetPage(
-        name: AppRoutes.login,
+        name: AppRoutes.login,        transitionDuration: Duration(milliseconds: 800),
+
         page: ()=>   LoginUi(),
         binding: LoginBinding()),
     GetPage(
-        name: AppRoutes.notification,
+        name: AppRoutes.notification,        transitionDuration: Duration(milliseconds: 800),
+
         page: () => const NotificationUi(),
         binding: NotificationBinding()
     ),
     GetPage(
         name: AppRoutes.profile,
+        transitionDuration: Duration(milliseconds: 800),
         page: () => const ProfileUI(),
         binding: ProfileBinding()
     ),
     GetPage(
         name: AppRoutes.account,
+        transitionDuration: Duration(milliseconds: 800),
         page: () => const AccountUI(),
         binding: AccountBinding()),
     GetPage(
-        name: AppRoutes.sessionRunning,
+        name: AppRoutes.sessionRunning,        transitionDuration: Duration(milliseconds: 800),
+
         page: () => const SessionRunningUi(),
         binding: SessionRunningBinding()),
     GetPage(
-        name: AppRoutes.sessionDetails,
+        name: AppRoutes.sessionDetails,        transitionDuration: Duration(milliseconds: 800),
+
         page: () => const SessionDetailsUi(),
         binding: SessionDetailsBindings()),
     GetPage(
-        name: AppRoutes.review,
+        name: AppRoutes.review,        transitionDuration: Duration(milliseconds: 800),
+
         page: () => const ReviewUi(),
         binding: ReviewBinding()),
     GetPage(
-        name: AppRoutes.moreaboutyou,
+        name: AppRoutes.moreaboutyou,        transitionDuration: Duration(milliseconds: 800),
+
         page: () =>  MoreAboutYouUi(),
         binding: MoreAboutYouBinding()),
     GetPage(
-        name: AppRoutes.letverified,
+        name: AppRoutes.letverified,        transitionDuration: Duration(milliseconds: 800),
+
         page: () => const LetGetYouVerifiedUi(),
         binding: LetGetYouVerifiedBinding()),
 GetPage(
-        name: AppRoutes.trainerPassport,
-        page: () =>   TrainerPassportUI(),
+        name: AppRoutes.trainerPassport,        transitionDuration: Duration(milliseconds: 800),
+
+    page: () =>   TrainerPassportUI(),
         binding: TrainerPassportBinding()),
     GetPage(
-        name: AppRoutes.bookingrequest,
+        name: AppRoutes.bookingrequest,        transitionDuration: Duration(milliseconds: 800),
+
         page: () => const BookingRequsetUi(),
         binding: BookingRequestBinding()),
     GetPage(
-        name: AppRoutes.withdraw,
+        name: AppRoutes.withdraw,        transitionDuration: Duration(milliseconds: 800),
+
         page: () =>  const WithdrawUI(),
         binding: WithdrawBinding()),
     GetPage(
-        name: AppRoutes.document,
+        name: AppRoutes.document,        transitionDuration: Duration(milliseconds: 800),
+
         page: () => const DocumentUI(),
         binding: DocumentBinding()),
     GetPage(
-        name: AppRoutes.support,
+        name: AppRoutes.support,        transitionDuration: Duration(milliseconds: 800),
+
         page: () => const SupportUI(),
         binding: SupportBinding()),
   GetPage(
-        name: AppRoutes.error,
-        page: ()=>   const ErrorUi(),
+        name: AppRoutes.error,        transitionDuration: Duration(milliseconds: 800),
+
+      page: ()=>   const ErrorUi(),
         binding: ErrorBinding()),
     GetPage(
-        name: AppRoutes.noInternet,
+        name: AppRoutes.noInternet,        transitionDuration: Duration(milliseconds: 800),
+
         page: ()=>  const NoInternetUI(),
         binding: NoInternetBinding()),
     GetPage(
-        name: AppRoutes.bookingdetails,
+        name: AppRoutes.bookingdetails,        transitionDuration: Duration(milliseconds: 800),
+
         page: ()=>  const BookingDetailsUi(),
         binding: BookingDetailsBinding()),
     GetPage(
-        name: AppRoutes.sessionComplete,
+        name: AppRoutes.sessionComplete,        transitionDuration: Duration(milliseconds: 800),
+
         page: ()=>  const SessionCompleteUI(),
         binding: SessionCompleteBinding()),
   GetPage(
-        name: AppRoutes.booking,
-        page: ()=>     BookingUi(initialIndex: 0,),
+        name: AppRoutes.booking,        transitionDuration: Duration(milliseconds: 800),
+
+      page: ()=>     BookingUi(initialIndex: 0,),
         binding: BookingBinding()),
     GetPage(
-        name: AppRoutes.bottomNavigation,
+        name: AppRoutes.bottomNavigation,        transitionDuration: Duration(milliseconds: 800),
+
         page: () => BottomNavigationBarUI(),
         binding: BottomNavigationBarBinding()),
     GetPage(
-        name: AppRoutes.bankingDetails,
+        name: AppRoutes.bankingDetails,        transitionDuration: Duration(milliseconds: 800),
+
         page: () => BankingDetailsUI(),
         binding: BankingDetailsBinding()),
     GetPage(
-        name: AppRoutes.signinoption,
+        name: AppRoutes.signinoption,        transitionDuration: Duration(milliseconds: 800),
+
         page: () => SignInOptionUi(),
         binding: SignInOptionBinding()),
     GetPage(
-        name: AppRoutes.uploadimage,
+        name: AppRoutes.uploadimage,        transitionDuration: Duration(milliseconds: 800),
+
         page: () => UploadImagesUi(),
         binding: UploadImagesBinding()),
     GetPage(
-        name: AppRoutes.bioEdit,
+        name: AppRoutes.bioEdit,        transitionDuration: Duration(milliseconds: 800),
+
         page: () => BioEditUi(),
         binding: BioEditBinding()),
   ];

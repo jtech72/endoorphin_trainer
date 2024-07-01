@@ -179,20 +179,20 @@ class MoreAboutYouUi extends StatelessWidget {
                                         ),
                                         Container(
                                           alignment: Alignment.center,
-                                          height: 20,
-                                          width: 40,
+                                          height: 22,
+                                          width: 100,
                                           decoration: BoxDecoration(
-                                              color: AppColors.black,
+                                              color: AppColors.Black3,
                                               borderRadius:
                                                   BorderRadius.circular(5)),
                                           child: Text(
-                                            "SAVED",
+                                            "Under verification",
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .labelSmall!
                                                 .copyWith(
-                                                    color: AppColors.white,
-                                                    fontSize: 8),
+                                                    color: Colors.yellow,
+                                                    fontSize: 10),
                                           ),
                                         ).paddingOnly(right: 10),
                                         Container(
@@ -201,12 +201,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                           decoration: const BoxDecoration(
                                               color: AppColors.yellow,
                                               shape: BoxShape.circle),
-                                          child: const Icon(
-                                            Icons.done,
-                                            color: AppColors.black,
-                                            size: 14,
-                                            weight: 10,
-                                          ),
+                                          child: Image.asset(ImagesPaths.check),
                                         )
                                       ],
                                     ).paddingOnly(bottom: 5),
@@ -503,20 +498,20 @@ class MoreAboutYouUi extends StatelessWidget {
                                             ),
                                             Container(
                                               alignment: Alignment.center,
-                                              height: 20,
-                                              width: 40,
+                                              height: 22,
+                                              width: 100,
                                               decoration: BoxDecoration(
-                                                  color: AppColors.black,
+                                                  color: AppColors.Black3,
                                                   borderRadius:
                                                       BorderRadius.circular(5)),
                                               child: Text(
-                                                "SAVED",
+                                                "Under verification",
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .labelSmall!
                                                     .copyWith(
-                                                        color: AppColors.white,
-                                                        fontSize: 8),
+                                                        color: Colors.yellow,
+                                                        fontSize: 10),
                                               ),
                                             ).paddingOnly(right: 10),
                                             Container(
@@ -525,12 +520,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                               decoration: const BoxDecoration(
                                                   color: AppColors.yellow,
                                                   shape: BoxShape.circle),
-                                              child: const Icon(
-                                                Icons.done,
-                                                color: AppColors.black,
-                                                size: 14,
-                                                weight: 10,
-                                              ),
+                                              child: Image.asset(ImagesPaths.check),
                                             )
                                           ],
                                         ).paddingOnly(bottom: 5),
@@ -841,22 +831,22 @@ class MoreAboutYouUi extends StatelessWidget {
                                                 ),
                                                 Container(
                                                   alignment: Alignment.center,
-                                                  height: 20,
-                                                  width: 40,
+                                                  height: 22,
+                                                  width: 100,
                                                   decoration: BoxDecoration(
-                                                      color: AppColors.black,
+                                                      color: AppColors.Black3,
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               5)),
                                                   child: Text(
-                                                    "SAVED",
+                                                    "Under verification",
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .labelSmall!
                                                         .copyWith(
                                                             color:
-                                                                AppColors.white,
-                                                            fontSize: 8),
+                                                                Colors.yellow,
+                                                            fontSize: 10),
                                                   ),
                                                 ).paddingOnly(right: 10),
                                                 Container(
@@ -868,12 +858,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                                               AppColors.yellow,
                                                           shape:
                                                               BoxShape.circle),
-                                                  child: const Icon(
-                                                    Icons.done,
-                                                    color: AppColors.black,
-                                                    size: 14,
-                                                    weight: 10,
-                                                  ),
+                                                  child: Image.asset(ImagesPaths.check),
                                                 )
                                               ],
                                             ).paddingOnly(bottom: 5),
@@ -1337,7 +1322,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                 storage.read("Emirates ID") != "true";
 
                         if (hasMissingDocuments) {
-                          showSnackBar("Please upload all the certificates");
+                          showSnackBar("Please upload all the documents");
                         } else if (!controller.isChecked.value) {
                           showSnackBar("Please accept terms and conditions");
                         } else {

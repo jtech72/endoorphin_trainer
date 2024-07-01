@@ -102,9 +102,9 @@ class BioUi extends StatelessWidget {
                             controller: controller.nicknameController ,
                             textCapitalization: TextCapitalization.words,
                             inputFormatters: [
-                              LengthLimitingTextInputFormatter(64),
+                              LengthLimitingTextInputFormatter(30),
                               NoLeadingSpaceFormatter(),
-                              FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))                      ],
+                                         ],
                             enableInteractiveSelection: true,
                             style: Theme.of(context).textTheme.labelMedium,
                             cursorColor: AppColors.grey,
@@ -160,7 +160,11 @@ class BioUi extends StatelessWidget {
                           child: TextField(
                             controller: controller.experienceController,
                             keyboardType: TextInputType.number,
-                            inputFormatters: [NoLeadingSpaceFormatter()],
+                            inputFormatters: [
+                              NoLeadingSpaceFormatter(),
+                              LengthLimitingTextInputFormatter(2),
+
+                            ],
                             enableInteractiveSelection: true,
                             style: Theme.of(context).textTheme.labelMedium,
                             cursorColor: AppColors.grey,
@@ -215,7 +219,11 @@ class BioUi extends StatelessWidget {
                             borderRadius: BorderRadius.circular(5),
                           ),
                           child: TextField(
-                            inputFormatters: [NoLeadingSpaceFormatter()],
+                            inputFormatters: [
+                              NoLeadingSpaceFormatter(),
+                              LengthLimitingTextInputFormatter(250),
+
+                            ],
                             controller: controller.expertiseController,
                             enableInteractiveSelection: true,
                             style: Theme.of(context).textTheme.labelMedium,

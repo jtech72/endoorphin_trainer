@@ -87,8 +87,8 @@ class BioEditUi extends StatelessWidget {
                         controller: controller.niceNameController,
                         keyboardType: TextInputType.text,
                         inputFormatters: [
-                          LengthLimitingTextInputFormatter(64),
-                          FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
+                          LengthLimitingTextInputFormatter(30),
+                          NoLeadingSpaceFormatter(),
                           FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))                      ],
                         style: Theme.of(context)
                             .textTheme
@@ -142,7 +142,7 @@ class BioEditUi extends StatelessWidget {
                         controller: controller.areaOfExpertiseController,
                         keyboardType: TextInputType.text,
                         inputFormatters: [
-                          LengthLimitingTextInputFormatter(64),
+                          LengthLimitingTextInputFormatter(250),
                           NoLeadingSpaceFormatter(),
                           FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))                      ],
                         style: Theme.of(context)
@@ -153,7 +153,7 @@ class BioEditUi extends StatelessWidget {
                           contentPadding: const EdgeInsets.only(top: 6, left: 20),
                           filled: true,
                           fillColor: Colors.transparent,
-                          hintText: ' Enter Professional Title',
+                          hintText: ' Enter Areas of Expertise',
                           hintStyle: Theme.of(context)
                               .textTheme
                               .labelMedium!
@@ -196,7 +196,10 @@ class BioEditUi extends StatelessWidget {
                       child: TextField(
                         controller: controller.experienceController,
                         keyboardType: TextInputType.number,
-                        inputFormatters: [NoLeadingSpaceFormatter()],
+                        inputFormatters: [
+                          NoLeadingSpaceFormatter(),
+                          LengthLimitingTextInputFormatter(2),
+                        ],
                         style: Theme.of(context)
                             .textTheme
                             .labelMedium!
