@@ -3,8 +3,11 @@ import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import '../services/network_services/api_call.dart';
+
 class BankingDetailsController extends GetxController {
   final items2 = ['CURRENT ACCOUNT', 'SAVING ACCOUNT'];
+  var buttonText = 0.obs;
+
   String accountType = "";
   RxString selectedOption1 = 'ACCOUNT TYPE'.obs;
   final ifscController = TextEditingController();
@@ -16,6 +19,7 @@ class BankingDetailsController extends GetxController {
   final confirmBankAcNumberController = TextEditingController();
   final accountTypeController = TextEditingController();
   final effectiveController = TextEditingController();
+
   @override
   void onInit() {
     super.onInit();
@@ -23,6 +27,7 @@ class BankingDetailsController extends GetxController {
       accountTypeController.text = selectedOption1.value;
     });
   }
+
   Future<bool> onSaveAndSubmitBooking() async {
     if (ifscController.text.isEmpty ||
         bankNameController.text.isEmpty ||
@@ -39,12 +44,13 @@ class BankingDetailsController extends GetxController {
     } else if (bankAcNumberController.text.length < 14) {
       showSnackBar("Bank account number must be at least 14 digits long");
       return false;
-    }
-    else if (ifscController.text.length > 11) {
+    } else if (bankAcNumberController.text != confirmBankAcNumberController.text) {
+      showSnackBar(" Bank account number do not match");
+      return false;
+    } else if (ifscController.text.length > 11) {
       showSnackBar("Ifsc account number must be at least 11 digits long");
       return false;
-    }
-    else {
+    } else {
       final saveBankDetailModel = {
         "ifscCode": ifscController.text.trim(),
         "trainerId": "${storage.read("userId")}",
@@ -77,11 +83,12 @@ class BankingDetailsController extends GetxController {
       }
     }
   }
+
   void updateUser(String id) async {
     showLoader();
     try {
       Map<String, String> fields = {
-        "id":id,
+        "id": id,
         'ifscCode': ifscController.value.text.trim(),
         'bankName': bankNameController.value.text.trim(),
         'branchName': branchController.value.text.trim(),
@@ -111,14 +118,19 @@ class BankingDetailsController extends GetxController {
       log('Error updating user details: $e', stackTrace: st);
     }
   }
+
   Future<void> onSaveButton() async {
     try {
       final response = await CallAPI.getBankDetail(id: storage.read("userId").toString());
       if (response.result == null) {
         log("message");
-        onSaveAndSubmitBooking();
+        await onSaveAndSubmitBooking();
       } else {
         updateUser(response.result!.id.toString());
+        Future.delayed(Duration.zero, () {
+          buttonText.value = 1;
+          print("Button text updated to: ${buttonText.value}");  // Debug print
+        });
       }
     } catch (e) {
       if (kDebugMode) {
@@ -126,5 +138,4 @@ class BankingDetailsController extends GetxController {
       }
     }
   }
-
 }

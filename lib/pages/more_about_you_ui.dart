@@ -825,7 +825,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                             Row(
                                               children: [
                                                 Text(
-                                                  "EMIRATES Id",
+                                                  "EMIRATES ID",
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .labelSmall!
