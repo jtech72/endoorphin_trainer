@@ -793,7 +793,7 @@ class DocumentUI extends StatelessWidget {
                                                                       width: 100,
                                                                       decoration: BoxDecoration(
                                                                           color: AppColors
-                                                                              .backgroundcolor2,
+                                                                              .yellow,
                                                                           borderRadius:
                                                                               BorderRadius.circular(5)),
                                                                       child: const Center(
@@ -802,7 +802,7 @@ class DocumentUI extends StatelessWidget {
                                                                               style: TextStyle(
                                                                                   fontSize: 10,
                                                                                   fontWeight: FontWeight.w400,
-                                                                                  color: AppColors.whiteShade))),
+                                                                                  color: AppColors.black))),
                                                                     )
                                                                   : GestureDetector(
                                                                       onTap: () {
@@ -1241,11 +1241,11 @@ class DocumentUI extends StatelessWidget {
                                                                               100,
                                                                           decoration: BoxDecoration(
                                                                               color:
-                                                                                  AppColors.backgroundcolor2,
+                                                                                  AppColors.yellow,
                                                                               borderRadius: BorderRadius.circular(5)),
                                                                           child: const Center(
                                                                               child:
-                                                                                  Text('Under verification', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: AppColors.whiteShade))),
+                                                                                  Text('Under verification', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: AppColors.black))),
                                                                         )
                                                                       : GestureDetector(
                                                                           onTap:
