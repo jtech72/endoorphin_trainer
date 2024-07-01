@@ -22,6 +22,11 @@ class RegistrationController extends GetxController{
  TextEditingController passwordController = TextEditingController();
  TextEditingController confirmPasswordController = TextEditingController();
  TextEditingController genderController = TextEditingController();
+ bool isPasswordValid(String password) {
+   // Define your password validation logic here
+   RegExp passwordRegExp = RegExp(r'^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$');
+   return passwordRegExp.hasMatch(password);
+ }
   void toggleOptionsVisibility() {
     isOptionsVisible.value = !isOptionsVisible.value;
   }
@@ -65,7 +70,7 @@ class RegistrationController extends GetxController{
       showSnackBar("Password and confirm password do not match");
     } else if (selectedOption1.value == 'Select Gender') {
       showSnackBar("Please select gender");
-    } else if (selectedItems == null) {
+    } else if (selectedItems.value.isEmpty) {
       showSnackBar("Please select a category");
     } else {
       // All fields are filled and validated, proceed with API call

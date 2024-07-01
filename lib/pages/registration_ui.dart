@@ -320,7 +320,7 @@ class RegistrationUi extends StatelessWidget {
                         ],
                       ),
                       Obx(
-                        () => Container(
+                            () => Container(
                           height: 45,
                           decoration: BoxDecoration(
                             border: Border.all(color: AppColors.impgrey),
@@ -329,10 +329,7 @@ class RegistrationUi extends StatelessWidget {
                           ),
                           child: TextField(
                             onChanged: (v) {
-                              // Print the current value of isValidVisible
-                              log("${controller.isValidVisible.value}");
-                              // Update isValidVisible based on whether the input is non-empty
-                              controller.isValidVisible.value = v.isNotEmpty;
+                              controller.isValidVisible.value = !controller.isPasswordValid(v);
                             },
                             controller: controller.passwordController,
                             keyboardType: TextInputType.text,
@@ -364,11 +361,8 @@ class RegistrationUi extends StatelessWidget {
                               filled: true,
                               fillColor: AppColors.yellowishWhite,
                               border: InputBorder.none,
-                              hintStyle:
-                                  Theme.of(context).textTheme.labelMedium,
-                              contentPadding:
-                                  const EdgeInsets.only(bottom: 3, left: 15),
-              
+                              hintStyle: Theme.of(context).textTheme.labelMedium,
+                              contentPadding: const EdgeInsets.only(bottom: 3, left: 15),
                               hintText: "Enter Password",
                               alignLabelWithHint: true,
                               enabledBorder: OutlineInputBorder(
@@ -391,21 +385,22 @@ class RegistrationUi extends StatelessWidget {
                                   color: AppColors.yellowishWhite,
                                   width: 1,
                                 ),
-                              ), // Cen/ Center the hintText
+                              ),
                             ),
                           ),
                         ),
                       ),
                       Obx(
-                        () => Visibility(
-                            visible: controller.isValidVisible.value,
-                            child: Text(
-                              "Your password must contain at least one uppercase letter, one number, and one special character",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelSmall!
-                                  .copyWith(color: Colors.red),
-                            ).paddingOnly(top: 5)),
+                            () => Visibility(
+                          visible: controller.isValidVisible.value,
+                          child: Text(
+                            "Your password must contain at least one uppercase letter, one number, and one special character",
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall!
+                                .copyWith(color: Colors.red),
+                          ).paddingOnly(top: 5),
+                        ),
                       ),
                       Row(
                         children: [

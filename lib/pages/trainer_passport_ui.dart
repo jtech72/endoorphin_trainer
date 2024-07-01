@@ -177,7 +177,7 @@ class TrainerPassportUI extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: TextField(
-                    // keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.number,
                     controller: controller.certificateNumber,
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(25),
