@@ -318,7 +318,7 @@ class DocumentUI extends StatelessWidget {
                                                     height: 131,
                                                     width: 204,
                                                     child: CachedNetworkImage(
-                                                      fit: BoxFit.cover,
+                                                      fit: BoxFit.contain,
                                                       // imageUrl: controller
                                                       //             .trainerDocStatusModel
                                                       //             .value
@@ -637,8 +637,8 @@ class DocumentUI extends StatelessWidget {
                                                         },
                                                         child:
                                                         Container(
-                                                          height: 17,
-                                                          width: 76,
+                                                          height: 20,
+                                                          width: 80,
                                                           decoration: BoxDecoration(
                                                               borderRadius:
                                                               BorderRadius.circular(
@@ -896,7 +896,7 @@ class DocumentUI extends StatelessWidget {
                                                     width: 204,
                                                     child:
                                                     CachedNetworkImage(
-                                                      fit: BoxFit.cover,
+                                                      fit: BoxFit.contain,
                                                       // imageUrl: controller
                                                       //             .trainerDocStatusModel
                                                       //             .value
@@ -1225,8 +1225,8 @@ class DocumentUI extends StatelessWidget {
                                                     },
                                                     child:
                                                     Container(
-                                                      height: 17,
-                                                      width: 76,
+                                                      height: 20,
+                                                      width: 80,
                                                       decoration: BoxDecoration(
                                                           borderRadius:
                                                           BorderRadius.circular(
@@ -1253,10 +1253,10 @@ class DocumentUI extends StatelessWidget {
                                                             color:
                                                             AppColors.yellow,
                                                             scale:
-                                                            7,
-                                                          )
+                                                            8,
+                                                          ).paddingOnly(left: 5)
                                                         ],
-                                                      ),
+                                                      ).paddingAll(2),
                                                     ).paddingOnly(
                                                         left:
                                                         20),
@@ -1496,7 +1496,7 @@ class DocumentUI extends StatelessWidget {
                                                     child:
                                                     CachedNetworkImage(
                                                       fit: BoxFit
-                                                          .cover,
+                                                          .contain,
                                                       // imageUrl: controller
                                                       //             .trainerDocStatusModel
                                                       //             .value
@@ -1788,9 +1788,9 @@ class DocumentUI extends StatelessWidget {
                                                     child:
                                                     Container(
                                                       height:
-                                                      17,
+                                                      20,
                                                       width:
-                                                      76,
+                                                      80,
                                                       decoration: BoxDecoration(
                                                           borderRadius:
                                                           BorderRadius.circular(30),
@@ -1888,7 +1888,7 @@ class DocumentUI extends StatelessWidget {
                                             "name": controller
                                                 .trainerDocStatusModel
                                                 .value
-                                                ?.result?[index]
+                                                .result?[index]
                                                 .category
                                                 ?.name
                                                 .toString() ??
@@ -1896,7 +1896,7 @@ class DocumentUI extends StatelessWidget {
                                             "categoryName": controller
                                                 .trainerDocStatusModel
                                                 .value
-                                                ?.result?[index]
+                                                .result?[index]
                                                 .passport
                                                 .toString() ??
                                                 "",
@@ -1989,9 +1989,9 @@ class DocumentUI extends StatelessWidget {
                                                           .value
                                                           .result![
                                                       index]
-                                                          .passport
-                                                          .toString()
-                                                          .toUpperCase()
+                                                          .passport == "passport"?
+                                                          "Passport":"Emirates ID"
+
                                                           : controller
                                                           .trainerDocStatusModel
                                                           .value
