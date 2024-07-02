@@ -1,8 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:endoorphin_trainer/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../custom_Widgets/common_widgets.dart';
 import '../pages/bottom_navigation_bar_ui.dart';
+import '../services/network_services/api_call.dart';
 import 'app_colors.dart';
 import 'image_paths.dart';
 
@@ -39,29 +42,84 @@ class _MyDrawerState extends State<MyDrawer> {
           SizedBox(
             height: Get.width*0.02,
           ),
-      Row(
-                children: [
-                    GestureDetector(
-                      onTap: (){
-                        Get.toNamed(AppRoutes.profile);
-                      },
-                      child: const CircleAvatar(
-                        radius: 30,
-                        backgroundImage: AssetImage(ImagesPaths.profilePic),
-                      ),
-                    ),
-                  SizedBox(width: Get.width*0.06,),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('John',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.yellow),).paddingOnly(bottom: 5),
-                      Text('+91 000-111-5555',style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.lightGrey1),),
-                    ],
-                  ),
-                ],
+          FutureBuilder(
+            future: CallAPI.getProfileDetails(
+                storage.read("userId").toString()),
+            builder: (BuildContext context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Container(
+                  height: Get.height*.15,
+                  child: const Center(
+                    child: CircularProgressIndicator(),
+                  ).paddingOnly(top: 20),
+                );
+              }
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text('Error: ${snapshot.error}'),
+                );
+              }
 
-              ).paddingOnly(top: Get.height*0.05,left: Get.width*0.09,bottom: Get.height*0.05),
+              if (!snapshot.hasData || snapshot.data!.result == null) {
+                return const Center(
+                  child: Text('No data available'),
+                );
+              }
+
+              return
+                Container(
+                  height: Get.height*.15,
+                  child: Row(
+                    children: [
+                      snapshot.data!.result!.profileImg == null
+                          ? GestureDetector(
+                            onTap: (){
+                              Get.toNamed(AppRoutes.profile);
+                            },
+                            child: const CircleAvatar(
+                                                      radius: 32,
+                                                      backgroundColor: AppColors.yellow,
+                                                      child: CircleAvatar(
+                                radius: 30,
+                                backgroundColor: AppColors.blackShade,
+                                backgroundImage:
+                                AssetImage(ImagesPaths.profile),
+                                                      ),
+                                                    ),
+                          )
+                          :  GestureDetector(
+                        onTap: (){
+                          Get.toNamed(AppRoutes.profile);
+                        },
+                        child: CircleAvatar(
+                                                  radius: 32,
+                                                  backgroundColor: AppColors.yellow,
+                                                  child: CircleAvatar(
+                                                    radius: 30,
+                                                    backgroundImage:CachedNetworkImageProvider(snapshot.data!.result!.profileImg.toString()), // Your profile image
+                                                  ),
+                                                ),
+                          ),
+                      SizedBox(width: Get.width*0.06,),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text( snapshot.data!.result!.userName == null?'':snapshot.data!.result!.userName.toString(),
+
+                                style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.yellow),).paddingOnly(bottom: 5),
+                          Text(
+                                snapshot.data!.result!.phoneNumber == null?'':snapshot.data!.result!.phoneNumber.toString(),
+                                style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.lightGrey1),),
+                        ],
+                      ),
+                    ],
+
+                  ).paddingOnly(top: Get.height*0.05,left: Get.width*0.09,bottom: Get.height*0.03),
+                );
+
+            },
+          ),
 
           Container(color: selectedTile == 0 ? AppColors.yellow : Colors.transparent,height: 55,width: Get.width,
             child: ListTile(
