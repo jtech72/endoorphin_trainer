@@ -318,7 +318,7 @@ class BankingDetailsUI extends StatelessWidget {
                               width: Get.width,
                               color: AppColors.darkGrey,
                             ),
-                            Container(
+                            SizedBox(
                               height: Get.height * 0.05,
                               width: Get.width,
                               child: TextField(
