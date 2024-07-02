@@ -176,12 +176,13 @@ class TrainerPassportUI extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: TextField(
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.text,
                     controller: controller.certificateNumber,
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(25),
+                      NoLeadingSpaceFormatter(),
                       // Set maximum length to 12
-                      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')),
+                      // FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')),
                       // Allow only alphanumeric characters
                     ],
                     enableInteractiveSelection: true,
