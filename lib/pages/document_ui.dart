@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:endoorphin_trainer/controllers/document_controller.dart';
-import 'package:endoorphin_trainer/services/models/response_models/get_trainer_doc_status_model.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
 
@@ -389,7 +388,7 @@ class DocumentUI extends StatelessWidget {
                                                     'Certification Name',
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .labelMedium,
+                                                        .labelMedium!.copyWith(color: Colors.white),
                                                   ).paddingOnly(bottom: 2),
                                                   Text(
                                                     controller
@@ -400,13 +399,13 @@ class DocumentUI extends StatelessWidget {
                                                         .toString(),
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .labelSmall,
+                                                        .labelSmall!.copyWith(color: AppColors.lightGrey),
                                                   ).paddingOnly(bottom: 8),
                                                   Text(
                                                     'Certification Number',
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .labelMedium,
+                                                        .labelMedium!.copyWith(color: Colors.white),
                                                   ).paddingOnly(bottom: 2),
                                                   Text(
                                                     controller
@@ -417,7 +416,7 @@ class DocumentUI extends StatelessWidget {
                                                         .toString(),
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .labelSmall,
+                                                        .labelSmall!.copyWith(color: AppColors.lightGrey),
                                                   ),
                                                   SizedBox(
                                                     height:
@@ -971,7 +970,7 @@ class DocumentUI extends StatelessWidget {
                                                     style: Theme.of(
                                                         context)
                                                         .textTheme
-                                                        .labelMedium,
+                                                        .labelMedium!.copyWith(color: Colors.white),
                                                   ).paddingOnly(
                                                       bottom: 2),
                                                   Text(
@@ -984,7 +983,7 @@ class DocumentUI extends StatelessWidget {
                                                     style: Theme.of(
                                                         context)
                                                         .textTheme
-                                                        .labelSmall,
+                                                        .labelSmall!.copyWith(color: AppColors.lightGrey),
                                                   ).paddingOnly(
                                                       bottom: 8),
                                                   Text(
@@ -992,7 +991,7 @@ class DocumentUI extends StatelessWidget {
                                                     style: Theme.of(
                                                         context)
                                                         .textTheme
-                                                        .labelMedium,
+                                                        .labelMedium!.copyWith(color: Colors.white),
                                                   ).paddingOnly(
                                                       bottom: 2),
                                                   Text(
@@ -1005,7 +1004,7 @@ class DocumentUI extends StatelessWidget {
                                                     style: Theme.of(
                                                         context)
                                                         .textTheme
-                                                        .labelSmall,
+                                                        .labelSmall!.copyWith(color: AppColors.lightGrey),
                                                   ),
                                                   SizedBox(
                                                     height: Get.height *
@@ -1568,7 +1567,7 @@ class DocumentUI extends StatelessWidget {
                                                     style: Theme.of(
                                                         context)
                                                         .textTheme
-                                                        .labelMedium,
+                                                        .labelMedium!.copyWith(color: Colors.white),
                                                   ).paddingOnly(
                                                       bottom: 2),
                                                   Text(
@@ -1582,7 +1581,7 @@ class DocumentUI extends StatelessWidget {
                                                     style: Theme.of(
                                                         context)
                                                         .textTheme
-                                                        .labelSmall,
+                                                        .labelSmall!.copyWith(color: AppColors.lightGrey),
                                                   ).paddingOnly(
                                                       bottom: 8),
                                                   Text(
@@ -1590,7 +1589,7 @@ class DocumentUI extends StatelessWidget {
                                                     style: Theme.of(
                                                         context)
                                                         .textTheme
-                                                        .labelMedium,
+                                                        .labelMedium!.copyWith(color: Colors.white),
                                                   ).paddingOnly(
                                                       bottom: 2),
                                                   Text(
@@ -1604,7 +1603,7 @@ class DocumentUI extends StatelessWidget {
                                                     style: Theme.of(
                                                         context)
                                                         .textTheme
-                                                        .labelSmall,
+                                                        .labelSmall!.copyWith(color: AppColors.lightGrey),
                                                   ),
                                                   SizedBox(
                                                     height:
@@ -2280,7 +2279,7 @@ class DocumentUI extends StatelessWidget {
                                                   'Certification Name',
                                                   style: Theme.of(context)
                                                       .textTheme
-                                                      .labelMedium,
+                                                      .labelMedium!.copyWith(color: Colors.white),
                                                 ).paddingOnly(bottom: 2),
                                                 Container(
                                                   width: 120,
@@ -2293,14 +2292,14 @@ class DocumentUI extends StatelessWidget {
                                                         .toString(),
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .labelSmall,
+                                                        .labelSmall!.copyWith(color: AppColors.lightGrey),
                                                   ).paddingOnly(bottom: 8),
                                                 ),
                                                 Text(
                                                   'Certification Number',
                                                   style: Theme.of(context)
                                                       .textTheme
-                                                      .labelMedium,
+                                                      .labelMedium!.copyWith(color: Colors.white),
                                                 ).paddingOnly(bottom: 2),
                                                 Text(
                                                   controller
@@ -2311,7 +2310,7 @@ class DocumentUI extends StatelessWidget {
                                                       .toString(),
                                                   style: Theme.of(context)
                                                       .textTheme
-                                                      .labelSmall,
+                                                      .labelSmall!.copyWith(color: AppColors.lightGrey),
                                                 ),
                                                 SizedBox(
                                                   height: Get.height * 0.02,
@@ -2685,7 +2684,7 @@ class DocumentUI extends StatelessWidget {
                                                   style:
                                                   Theme.of(context)
                                                       .textTheme
-                                                      .labelMedium,
+                                                      .labelMedium!..copyWith(color: Colors.white),
                                                 ).paddingOnly(
                                                     bottom: 2),
                                                 Text(
@@ -2698,7 +2697,7 @@ class DocumentUI extends StatelessWidget {
                                                   style:
                                                   Theme.of(context)
                                                       .textTheme
-                                                      .labelSmall,
+                                                      .labelSmall!.copyWith(color:AppColors.lightGrey,),
                                                 ).paddingOnly(
                                                     bottom: 8),
                                                 Text(
@@ -2706,7 +2705,7 @@ class DocumentUI extends StatelessWidget {
                                                   style:
                                                   Theme.of(context)
                                                       .textTheme
-                                                      .labelMedium,
+                                                      .labelMedium!.copyWith(color: Colors.white),
                                                 ).paddingOnly(
                                                     bottom: 2),
                                                 Text(
@@ -2719,7 +2718,7 @@ class DocumentUI extends StatelessWidget {
                                                   style:
                                                   Theme.of(context)
                                                       .textTheme
-                                                      .labelSmall,
+                                                      .labelSmall!.copyWith(color: AppColors.lightGrey),
                                                 ),
                                                 SizedBox(
                                                   height:
@@ -3132,7 +3131,7 @@ class DocumentUI extends StatelessWidget {
                                                   style: Theme.of(
                                                       context)
                                                       .textTheme
-                                                      .labelMedium,
+                                                      .labelMedium!.copyWith(color: Colors.white),
                                                 ).paddingOnly(
                                                     bottom: 2),
                                                 Text(
@@ -3146,7 +3145,7 @@ class DocumentUI extends StatelessWidget {
                                                   style: Theme.of(
                                                       context)
                                                       .textTheme
-                                                      .labelSmall,
+                                                      .labelSmall!.copyWith(color: AppColors.lightGrey),
                                                 ).paddingOnly(
                                                     bottom: 8),
                                                 Text(
@@ -3154,7 +3153,7 @@ class DocumentUI extends StatelessWidget {
                                                   style: Theme.of(
                                                       context)
                                                       .textTheme
-                                                      .labelMedium,
+                                                      .labelMedium!.copyWith(color: Colors.white),
                                                 ).paddingOnly(
                                                     bottom: 2),
                                                 Text(
@@ -3168,7 +3167,7 @@ class DocumentUI extends StatelessWidget {
                                                   style: Theme.of(
                                                       context)
                                                       .textTheme
-                                                      .labelSmall,
+                                                      .labelSmall!..copyWith(color: AppColors.lightGrey),
                                                 ),
                                                 SizedBox(
                                                   height:
