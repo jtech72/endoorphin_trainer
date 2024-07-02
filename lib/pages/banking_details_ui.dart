@@ -118,7 +118,8 @@ class BankingDetailsUI extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              height: 2,
+                              height: 1,
+
                               width: Get.width,
                               color: AppColors.darkGrey,
                             ),
@@ -152,7 +153,8 @@ class BankingDetailsUI extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              height: 2,
+                              height: 1,
+
                               width: Get.width,
                               color: AppColors.darkGrey,
                             ),
@@ -186,7 +188,7 @@ class BankingDetailsUI extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              height: 2,
+                              height: 1,
                               width: Get.width,
                               color: AppColors.darkGrey,
                             ),
@@ -220,7 +222,8 @@ class BankingDetailsUI extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              height: 2,
+                              height: 1,
+
                               width: Get.width,
                               color: AppColors.darkGrey,
                             ),
@@ -275,7 +278,8 @@ class BankingDetailsUI extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              height: 2,
+                              height: 1,
+
                               width: Get.width,
                               color: AppColors.darkGrey,
                             ),
@@ -309,7 +313,8 @@ class BankingDetailsUI extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              height: 2,
+                              height: 1,
+
                               width: Get.width,
                               color: AppColors.darkGrey,
                             ),
@@ -343,7 +348,8 @@ class BankingDetailsUI extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              height: 2,
+                              height: 1,
+
                               width: Get.width,
                               color: AppColors.darkGrey,
                             ).paddingOnly(bottom: 2),
@@ -411,7 +417,7 @@ class BankingDetailsUI extends StatelessWidget {
                                             ),
                                           ),
                                           PopupMenuButton<String>(
-                                            offset: Offset(-105, 250),
+                                            offset: Offset(-110, 50),
                                             key: popupKey,
                                             icon: const Icon(
                                                 Icons.keyboard_arrow_down,
@@ -429,7 +435,8 @@ class BankingDetailsUI extends StatelessWidget {
                                                     value,
                                                     style: const TextStyle(
                                                         color: AppColors
-                                                            .lightGrey),
+
+                                                            .lightGrey,),
                                                   ),
                                                 );
                                               }).toList();
@@ -442,7 +449,8 @@ class BankingDetailsUI extends StatelessWidget {
                                         ],
                                       ),
                                       Container(
-                                        height: 2,
+                                        height: 1,
+
                                         width: Get.width,
                                         color: AppColors.darkGrey,
                                       ).paddingOnly(bottom: 0),
@@ -487,7 +495,8 @@ class BankingDetailsUI extends StatelessWidget {
                                             focusedBorder: InputBorder.none),
                                       ),
                                       Container(
-                                        height: 2,
+                                        height: 1,
+
                                         width: Get.width,
                                         color: AppColors.darkGrey,
                                       ),
