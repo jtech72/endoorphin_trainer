@@ -6,6 +6,13 @@ import 'package:flutter/material.dart';
 
 import '../services/network_services/api_call.dart';
 class CreateNewPasswordController extends GetxController{
+  RxBool isValidVisible = false.obs;
+
+  bool isPasswordValid(String password) {
+    // Define your password validation logic here
+    RegExp passwordRegExp = RegExp(r'^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$');
+    return passwordRegExp.hasMatch(password);
+  }
 TextEditingController newPasswordController = TextEditingController();
 TextEditingController confirmPasswordController = TextEditingController();
 String?phoneNumber;

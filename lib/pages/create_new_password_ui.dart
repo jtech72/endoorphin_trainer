@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:endoorphin_trainer/controllers/create_new_password_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,9 +27,37 @@ class CreateNewPasswordUI extends StatelessWidget {
         },
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: myAppBar(
-            title: GestureDetector(onTap: (){Get.back();},child: Text('Create New Password',style: Theme.of(context).textTheme.headlineSmall,)),
-            context: context,),
+          appBar: AppBar(
+            toolbarHeight: 50,
+            leadingWidth: Get.width * 0.17,
+            centerTitle: false,
+            surfaceTintColor: Colors.transparent,
+            backgroundColor: AppColors.black,
+            elevation: 3,
+            titleSpacing: -10,
+            leading: GestureDetector(
+                onTap: () {
+                  Get.offAllNamed(AppRoutes.forgotPassword);
+                },
+                child: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: AppColors.white,
+                  size: 18,
+                )),
+            title: Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(AppRoutes.forgotPassword);
+                  },
+                  child: Text('Create New Password',style: Theme.of(context).textTheme.headlineSmall,),
+                ),
+              ],
+            ),
+          ),
+          // appBar: myAppBar(
+          //   title: GestureDetector(onTap: (){Get.back();},child: Text('Create New Password',style: Theme.of(context).textTheme.headlineSmall,)),
+          //   context: context,),
           body: Container(
             child: SingleChildScrollView(
               child: Column(mainAxisAlignment: MainAxisAlignment.start,
@@ -67,12 +97,15 @@ class CreateNewPasswordUI extends StatelessWidget {
                   Container(
                     height: 45,
                     decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.lightWhite),
+                      border: Border.all(color: Colors.grey),
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Obx(
-                      ()=> TextField(
+                          () => TextField(
+                        onChanged: (v) {
+                          controller.isValidVisible.value = !controller.isPasswordValid(v);
+                        },
                         controller: controller.newPasswordController,
                         obscureText: controller.obscureText.value,
                         obscuringCharacter: "*",
@@ -80,10 +113,12 @@ class CreateNewPasswordUI extends StatelessWidget {
                           LengthLimitingTextInputFormatter(64),
                           FilteringTextInputFormatter.deny(RegExp(r'\s')),
                         ],
-
                         enableInteractiveSelection: true,
-                        style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.black),
-                        cursorColor: AppColors.grey,
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelMedium!
+                            .copyWith(color: Colors.black),
+                        cursorColor: Colors.grey,
                         cursorHeight: 18,
                         decoration: InputDecoration(
                           suffixIcon: IconButton(
@@ -99,18 +134,30 @@ class CreateNewPasswordUI extends StatelessWidget {
                               controller.toggleObscureText();
                             },
                           ),
-
                           filled: true,
-                          fillColor: AppColors.yellowishWhite,
+                          fillColor: Colors.white,
                           border: InputBorder.none,
-                          hintStyle: Theme.of(context).textTheme.labelMedium?.copyWith(color: AppColors.lightGrey),
-                          contentPadding:
-                          const EdgeInsets.only(top: 10, left: 25),
-
+                          hintStyle: Theme.of(context)
+                              .textTheme
+                              .labelMedium
+                              ?.copyWith(color: Colors.grey),
+                          contentPadding: const EdgeInsets.only(top: 10, left: 25),
                           hintText: "Enter New password",
-                          alignLabelWithHint: true, // Center the hintText
+                          alignLabelWithHint: true,
                         ),
                       ),
+                    ),
+                  ),
+                  Obx(
+                        () => Visibility(
+                      visible: controller.isValidVisible.value,
+                      child: Text(
+                        "Your password must contain at least one uppercase letter, one number, and one special character",
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelSmall!
+                            .copyWith(color: Colors.red),
+                      ).paddingOnly(top: 5),
                     ),
                   ),
                   SizedBox(

@@ -64,7 +64,8 @@ class EarningUi extends StatelessWidget {
         titleSpacing: -10,
         leading: GestureDetector(
           onTap: () {
-            Get.offAllNamed(AppRoutes.bottomNavigation);
+            // Get.offAllNamed(AppRoutes.bottomNavigation);
+            Get.back();
           },
           child: Container(
             height: 30,
@@ -82,7 +83,8 @@ class EarningUi extends StatelessWidget {
         ),
         title: GestureDetector(
           onTap: () {
-            Get.offAllNamed(AppRoutes.bottomNavigation);
+            // Get.offAllNamed(AppRoutes.bottomNavigation);
+            Get.back();
           },
           child: Text(
             "My Earnings",

@@ -26,9 +26,32 @@ class ForgotPasswordUI extends StatelessWidget {
         },
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: myAppBar(
-            title: GestureDetector(onTap: (){Get.back();},child: Text('Forgot Password',style: Theme.of(context).textTheme.headlineSmall,)),
-            context: context,),
+          appBar: AppBar(
+            toolbarHeight: 50,
+            leadingWidth: Get.width * 0.17,
+            centerTitle: false,
+            surfaceTintColor: Colors.transparent,
+            backgroundColor: AppColors.black,
+            elevation: 3,
+            titleSpacing: -10,
+            leading: GestureDetector(
+                onTap: () {
+                  Get.offAllNamed(AppRoutes.login);
+                },
+                child: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: AppColors.white,
+                  size: 18,
+                )),
+            title:GestureDetector(
+                onTap: (){
+                  Get.offAllNamed(AppRoutes.login);
+                },
+                child: Text('Forgot Password',style: Theme.of(context).textTheme.headlineSmall,)),
+          ),
+          // appBar: myAppBar(
+          //   title: GestureDetector(onTap: (){Get.back();},child: Text('Forgot Password',style: Theme.of(context).textTheme.headlineSmall,)),
+          //   context: context,),
           body: Container(
             child: SingleChildScrollView(
               child: Column(
