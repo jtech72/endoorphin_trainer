@@ -14,14 +14,15 @@ class TrainerPassportController extends GetxController {
 
     // Validation: Check if the trimmed certificate number is empty
     if (trimmedCertificateName.isEmpty) {
+      showSnackBar("Please enter a ${certificationDetails!["categoryName"] == "emirates" ? "Emirates ID Name" : certificationDetails!["categoryName"] == "passport" ? "Passport Name" : "certification name"}");
       showSnackBar("Please enter a ${certificationDetails!["categoryName"] == "emirates" ? "Emirates ID Name" : certificationDetails!["categoryName"] == "passport" ? "Passport Name" : " certification name"}");
     }
     // Validation: Check if the trimmed certificate name is empty
     else if (trimmedCertificateNumber.isEmpty) {
-      showSnackBar("Please enter a${certificationDetails!["categoryName"] == "emirates" ? "Emirates ID Number" : certificationDetails!["categoryName"] == "passport" ? "Passport Number" : " certification number"}");
+      showSnackBar("Please enter a ${certificationDetails!["categoryName"] == "emirates" ? "Emirates ID Number" : certificationDetails!["categoryName"] == "passport" ? "Passport Number" : "certification number"}");
     }
     // Validation: Check if the certificate name length is invalid
-    else if (trimmedCertificateName.length < 3 || trimmedCertificateName.length > 50) {
+    else if (trimmedCertificateName.length < 3 ) {
       showSnackBar("Certificate name must be at least 3 characters");
     }else if (trimmedCertificateNumber.length < 5) {
       showSnackBar("Certificate number must be at least 5 characters");

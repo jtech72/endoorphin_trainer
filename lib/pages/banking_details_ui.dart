@@ -5,8 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../services/network_services/api_call.dart';
+
 class BankingDetailsUI extends StatelessWidget {
   const BankingDetailsUI({super.key});
+
   @override
   Widget build(BuildContext context) {
     BankingDetailsController controller = Get.put(BankingDetailsController());
@@ -35,8 +37,8 @@ class BankingDetailsUI extends StatelessWidget {
         body: Container(
           child: SingleChildScrollView(
             child: FutureBuilder(
-                future:
-                    CallAPI.getBankDetail(id: storage.read("userId").toString()),
+                future: CallAPI.getBankDetail(
+                    id: storage.read("userId").toString()),
                 builder: (BuildContext context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
@@ -59,9 +61,11 @@ class BankingDetailsUI extends StatelessWidget {
                   controller.accountNameController.text =
                       snapshot.data?.result?.accountName?.toString() ?? "";
                   controller.bankAcNumberController.text =
-                      snapshot.data?.result?.banckAccountNumber?.toString() ?? "";
+                      snapshot.data?.result?.banckAccountNumber?.toString() ??
+                          "";
                   controller.confirmBankAcNumberController.text =
-                      snapshot.data?.result?.banckAccountNumber?.toString() ?? "";
+                      snapshot.data?.result?.banckAccountNumber?.toString() ??
+                          "";
                   controller.accountTypeController.text =
                       snapshot.data?.result?.accountType?.toString() ?? "";
                   controller.effectiveController.text =
@@ -86,10 +90,13 @@ class BankingDetailsUI extends StatelessWidget {
                               height: Get.height * 0.05,
                               width: Get.width,
                               child: TextField(
+                                textCapitalization:
+                                    TextCapitalization.characters,
                                 controller: controller.ifscController,
                                 inputFormatters: [
                                   LengthLimitingTextInputFormatter(64),
-                                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[a-zA-Z0-9\s]')),
                                 ],
                                 enableInteractiveSelection: true,
                                 style: Theme.of(context).textTheme.labelMedium,
@@ -100,9 +107,9 @@ class BankingDetailsUI extends StatelessWidget {
                                     fillColor: AppColors.blackShade,
                                     border: const OutlineInputBorder(),
                                     hintStyle:
-                                        Theme.of(context).textTheme.labelMedium,
-                                    contentPadding:
-                                        const EdgeInsets.only(bottom: 0, left: 0),
+                                        Theme.of(context).textTheme.labelMedium!.copyWith(fontSize: 14),
+                                    contentPadding: const EdgeInsets.only(
+                                        bottom: 0, left: 0),
                                     hintText: "IFSC CODE",
                                     alignLabelWithHint: true,
                                     enabledBorder: InputBorder.none,
@@ -122,7 +129,8 @@ class BankingDetailsUI extends StatelessWidget {
                                 controller: controller.bankNameController,
                                 inputFormatters: [
                                   LengthLimitingTextInputFormatter(64),
-                                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                                  FilteringTextInputFormatter.deny(
+                                      RegExp(r'\s')),
                                 ],
                                 enableInteractiveSelection: true,
                                 style: Theme.of(context).textTheme.labelMedium,
@@ -133,9 +141,9 @@ class BankingDetailsUI extends StatelessWidget {
                                     fillColor: AppColors.blackShade,
                                     border: const OutlineInputBorder(),
                                     hintStyle:
-                                        Theme.of(context).textTheme.labelMedium,
-                                    contentPadding:
-                                        const EdgeInsets.only(bottom: 0, left: 0),
+                                        Theme.of(context).textTheme.labelMedium!.copyWith(fontSize: 14),
+                                    contentPadding: const EdgeInsets.only(
+                                        bottom: 0, left: 0),
                                     hintText: "BANK NAME",
                                     alignLabelWithHint: true,
                                     enabledBorder: InputBorder.none,
@@ -155,7 +163,8 @@ class BankingDetailsUI extends StatelessWidget {
                                 controller: controller.cityController,
                                 inputFormatters: [
                                   LengthLimitingTextInputFormatter(64),
-                                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
+
+                                  NoLeadingSpaceFormatter(),
                                 ],
                                 enableInteractiveSelection: true,
                                 style: Theme.of(context).textTheme.labelMedium,
@@ -166,9 +175,9 @@ class BankingDetailsUI extends StatelessWidget {
                                     fillColor: AppColors.blackShade,
                                     border: const OutlineInputBorder(),
                                     hintStyle:
-                                        Theme.of(context).textTheme.labelMedium,
-                                    contentPadding:
-                                        const EdgeInsets.only(bottom: 0, left: 0),
+                                        Theme.of(context).textTheme.labelMedium!.copyWith(fontSize: 14),
+                                    contentPadding: const EdgeInsets.only(
+                                        bottom: 0, left: 0),
                                     hintText: "CITY",
                                     alignLabelWithHint: true,
                                     enabledBorder: InputBorder.none,
@@ -188,7 +197,8 @@ class BankingDetailsUI extends StatelessWidget {
                                 controller: controller.branchController,
                                 inputFormatters: [
                                   LengthLimitingTextInputFormatter(64),
-                                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                                  FilteringTextInputFormatter.deny(
+                                      RegExp(r'\s')),
                                 ],
                                 enableInteractiveSelection: true,
                                 style: Theme.of(context).textTheme.labelMedium,
@@ -199,9 +209,9 @@ class BankingDetailsUI extends StatelessWidget {
                                     fillColor: AppColors.blackShade,
                                     border: const OutlineInputBorder(),
                                     hintStyle:
-                                        Theme.of(context).textTheme.labelMedium,
-                                    contentPadding:
-                                        const EdgeInsets.only(bottom: 0, left: 0),
+                                        Theme.of(context).textTheme.labelMedium!.copyWith(fontSize: 14),
+                                    contentPadding: const EdgeInsets.only(
+                                        bottom: 0, left: 0),
                                     hintText: "BRANCH NAME",
                                     alignLabelWithHint: true,
                                     enabledBorder: InputBorder.none,
@@ -240,7 +250,9 @@ class BankingDetailsUI extends StatelessWidget {
                                 controller: controller.accountNameController,
                                 inputFormatters: [
                                   LengthLimitingTextInputFormatter(64),
-                                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                                  NoLeadingSpaceFormatter(),
+
+
                                 ],
                                 enableInteractiveSelection: true,
                                 style: Theme.of(context).textTheme.labelMedium,
@@ -251,10 +263,11 @@ class BankingDetailsUI extends StatelessWidget {
                                     fillColor: AppColors.blackShade,
                                     border: const OutlineInputBorder(),
                                     hintStyle:
-                                        Theme.of(context).textTheme.labelMedium,
-                                    contentPadding:
-                                        const EdgeInsets.only(bottom: 0, left: 0),
-                                    hintText: "ACCOUNT NAME(AS PER BANK DETAILS)",
+                                        Theme.of(context).textTheme.labelMedium!.copyWith(fontSize: 14),
+                                    contentPadding: const EdgeInsets.only(
+                                        bottom: 0, left: 0),
+                                    hintText:
+                                        "ACCOUNT NAME(AS PER BANK DETAILS)",
                                     alignLabelWithHint: true,
                                     enabledBorder: InputBorder.none,
                                     disabledBorder: InputBorder.none,
@@ -272,9 +285,10 @@ class BankingDetailsUI extends StatelessWidget {
                               child: TextField(
                                 controller: controller.bankAcNumberController,
                                 inputFormatters: [
-                                  LengthLimitingTextInputFormatter(64),
-                                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                                  LengthLimitingTextInputFormatter(14),
+                                  FilteringTextInputFormatter.digitsOnly,
                                 ],
+
                                 enableInteractiveSelection: true,
                                 style: Theme.of(context).textTheme.labelMedium,
                                 cursorColor: AppColors.grey,
@@ -284,9 +298,9 @@ class BankingDetailsUI extends StatelessWidget {
                                     fillColor: AppColors.blackShade,
                                     border: const OutlineInputBorder(),
                                     hintStyle:
-                                        Theme.of(context).textTheme.labelMedium,
-                                    contentPadding:
-                                        const EdgeInsets.only(bottom: 0, left: 0),
+                                        Theme.of(context).textTheme.labelMedium!.copyWith(fontSize: 14),
+                                    contentPadding: const EdgeInsets.only(
+                                        bottom: 0, left: 0),
                                     hintText: "BANK A/C NUMBER",
                                     alignLabelWithHint: true,
                                     enabledBorder: InputBorder.none,
@@ -306,8 +320,8 @@ class BankingDetailsUI extends StatelessWidget {
                                 controller:
                                     controller.confirmBankAcNumberController,
                                 inputFormatters: [
-                                  LengthLimitingTextInputFormatter(64),
-                                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                                  LengthLimitingTextInputFormatter(14),
+                                  FilteringTextInputFormatter.digitsOnly,
                                 ],
                                 enableInteractiveSelection: true,
                                 style: Theme.of(context).textTheme.labelMedium,
@@ -318,9 +332,9 @@ class BankingDetailsUI extends StatelessWidget {
                                     fillColor: AppColors.blackShade,
                                     border: const OutlineInputBorder(),
                                     hintStyle:
-                                        Theme.of(context).textTheme.labelMedium,
-                                    contentPadding:
-                                        const EdgeInsets.only(bottom: 0, left: 0),
+                                        Theme.of(context).textTheme.labelMedium!.copyWith(fontSize: 14),
+                                    contentPadding: const EdgeInsets.only(
+                                        bottom: 0, left: 0),
                                     hintText: "CONFIRM BANK A/C NUMBER",
                                     alignLabelWithHint: true,
                                     enabledBorder: InputBorder.none,
@@ -338,7 +352,8 @@ class BankingDetailsUI extends StatelessWidget {
                                 Expanded(
                                   flex: 5,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
                                         children: [
@@ -396,14 +411,15 @@ class BankingDetailsUI extends StatelessWidget {
                                             ),
                                           ),
                                           PopupMenuButton<String>(
-                                            offset: Offset(-105, 50),
+                                            offset: Offset(-105, 250),
                                             key: popupKey,
                                             icon: const Icon(
                                                 Icons.keyboard_arrow_down,
                                                 size: 24,
                                                 color: AppColors.lightGrey),
                                             color: AppColors.blackShade,
-                                            itemBuilder: (BuildContext context) {
+                                            itemBuilder:
+                                                (BuildContext context) {
                                               return controller.items2
                                                   .map<PopupMenuEntry<String>>(
                                                       (String value) {
@@ -412,8 +428,8 @@ class BankingDetailsUI extends StatelessWidget {
                                                   child: Text(
                                                     value,
                                                     style: const TextStyle(
-                                                        color:
-                                                            AppColors.lightGrey),
+                                                        color: AppColors
+                                                            .lightGrey),
                                                   ),
                                                 );
                                               }).toList();
@@ -460,11 +476,10 @@ class BankingDetailsUI extends StatelessWidget {
                                             border: const OutlineInputBorder(),
                                             hintStyle: Theme.of(context)
                                                 .textTheme
-                                                .labelMedium,
-                                            contentPadding: const EdgeInsets.only(
-                                                bottom: 0, left: 0),
-
-
+                                                .labelMedium!.copyWith(fontSize: 14),
+                                            contentPadding:
+                                                const EdgeInsets.only(
+                                                    bottom: 0, left: 0),
                                             hintText: "EFFECTIVE DATA",
                                             alignLabelWithHint: true,
                                             enabledBorder: InputBorder.none,
@@ -490,23 +505,28 @@ class BankingDetailsUI extends StatelessWidget {
                         height: Get.height * .06,
                       ),
                       Center(
-                          child: InkButton(
-                        child:Text("Save",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineSmall!
-                                  .copyWith(
-                                    color: AppColors.black,
-                                    fontSize: 18,
-                                    fontFamily: 'Montserrat',
-                                  ),
-                            ),
-                        onTap: () {
-                          controller.onSaveButton();
-                        },
-                      ))
+                        child: InkButton(
+                          child: Obx(() {
+                            String buttonTextValue = controller.buttonText.value == 0 ? 'Save' : 'Update';
+                            return Text(
+                              buttonTextValue,
+                              style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                                color: AppColors.black,
+                                fontSize: 18,
+                                fontFamily: 'Montserrat',
+                              ),
+                            );
+                          }),
+                          onTap: () {
+                            controller.onSaveButton();
+                          },
+                        ),
+                      )
+
+
                     ],
-                  ).paddingOnly(left: Get.width * 0.05, right: Get.width * 0.05);
+                  ).paddingOnly(
+                      left: Get.width * 0.05, right: Get.width * 0.05);
                 }),
           ),
         ),

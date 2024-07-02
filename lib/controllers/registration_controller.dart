@@ -83,6 +83,7 @@ class RegistrationController extends GetxController{
         "gender": selectedOption1.value.toString(),
         "lastName": lastNameController.text.trim(),
         "categoryId": selectedItems.value
+
       };
 
       log("DATA FOR PROFILE INFO $request");
