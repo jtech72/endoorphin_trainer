@@ -10,6 +10,7 @@ class AccountController extends GetxController {
   var isOptionsVisible = false.obs;
   final selectedOption1 = 'Select'.obs;
   final items2 = ['Male','Female',];
+  RxBool scaffoldColor = false.obs;
   void toggleOptionsVisibility() {
     isOptionsVisible.value = !isOptionsVisible.value;
   }

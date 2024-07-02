@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -149,134 +150,6 @@ enum OtpVerified{
   byMail
 }
 
-// Drawer myDrawer() {
-//   return Drawer(
-//
-//     surfaceTintColor: Colors.red,
-//     child: ListView(
-//       padding: EdgeInsets.zero,
-//       children: [
-//         DrawerHeader(
-//           decoration: BoxDecoration(
-//             color: Colors.blue,
-//           ),
-//           child: Text('Drawer Header'),
-//         ),
-//         ListTile(
-//           selected: true, // Set to true when tile is selected
-//           selectedTileColor: AppColors.yellow, // Background color when tile is selected
-//           tileColor: AppColors.yellow, // Background color when tile is not selected (to maintain the color)
-//           iconColor: Colors.white, // Icon color
-//           title: InkWell(
-//             onTap: () {
-//               // Add your onTap logic here
-//             },
-//             child: Row(
-//               children: [
-//                 Image.asset(ImagesPaths.home, scale: 5, color: Colors.white), // Set icon color to white
-//                 SizedBox(width: Get.width * 0.05),
-//                 Text('Drawer Header', style: TextStyle(color: Colors.white)), // Set text color to white
-//               ],
-//             ),
-//           ),
-//         ),
-//
-//         ListTile(
-//           selected: true, // Set to true when tile is selected
-//           selectedTileColor: AppColors.yellow, // Background color when tile is selected
-//           tileColor: AppColors.yellow, // Background color when tile is not selected (to maintain the color)
-//           iconColor: Colors.white, // Icon color
-//           title: InkWell(
-//             onTap: () {
-//               // Add your onTap logic here
-//             },
-//             child: Row(
-//               children: [
-//                 Image.asset(ImagesPaths.home, scale: 5, color: Colors.white), // Set icon color to white
-//                 SizedBox(width: Get.width * 0.05),
-//                 Text('Drawer Header', style: TextStyle(color: Colors.white)), // Set text color to white
-//               ],
-//             ),
-//           ),
-//         ),
-//         ListTile(
-//           selectedColor:AppColors.yellow ,
-//           title: InkWell(
-//             onTap: () {
-//             },
-//             child: Row(
-//               children: [
-//                 Image.asset(ImagesPaths.home, scale: 5, color: AppColors.impgrey,),
-//                 SizedBox(width: Get.width * 0.05,),
-//                 Text('Drawer Header', style: Theme.of(Get.context!).textTheme.titleLarge),
-//               ],
-//             ),
-//           ),
-//         ),
-//         ListTile(
-//           selectedColor:AppColors.yellow ,
-//           title: InkWell(
-//             onTap: () {
-//             },
-//             child: Row(
-//               children: [
-//                 Image.asset(ImagesPaths.home, scale: 5, color: AppColors.impgrey,),
-//                 SizedBox(width: Get.width * 0.05,),
-//                 Text('Drawer Header', style: Theme.of(Get.context!).textTheme.titleLarge),
-//               ],
-//             ),
-//           ),
-//         ),
-//         ListTile(
-//           selectedColor:AppColors.yellow ,
-//           title: InkWell(
-//             onTap: () {
-//             },
-//             child: Row(
-//               children: [
-//                 Image.asset(ImagesPaths.home, scale: 5, color: AppColors.impgrey,),
-//                 SizedBox(width: Get.width * 0.05,),
-//                 Text('Drawer Header', style: Theme.of(Get.context!).textTheme.titleLarge),
-//               ],
-//             ),
-//           ),
-//         ),
-//         ListTile(
-//           selectedColor:AppColors.yellow ,
-//           title: InkWell(
-//             onTap: () {
-//             },
-//             child: Row(
-//               children: [
-//                 Image.asset(ImagesPaths.home, scale: 5, color: AppColors.impgrey,),
-//                 SizedBox(width: Get.width * 0.05,),
-//                 Text('Drawer Header', style: Theme.of(Get.context!).textTheme.titleLarge),
-//               ],
-//             ),
-//           ),
-//         ),
-//         ListTile(
-//           selectedColor:AppColors.yellow ,
-//           title: InkWell(
-//             onTap: () {
-//             },
-//             child: Row(
-//               children: [
-//                 Image.asset(ImagesPaths.home, scale: 5, color: AppColors.impgrey,),
-//                 SizedBox(width: Get.width * 0.05,),
-//                 Text('Drawer Header', style: Theme.of(Get.context!).textTheme.titleLarge),
-//               ],
-//             ),
-//           ),
-//         ),
-//
-//
-//
-//       ],
-//     ),
-//   );
-// }
-//
 
 Widget buildOption(IconData icon, String label, VoidCallback onTap) {
   return InkWell(
@@ -313,5 +186,209 @@ class NoLeadingSpaceFormatter extends TextInputFormatter {
       return oldValue;
     }
     return newValue;
+  }
+}
+
+
+
+class CertificateCard extends StatelessWidget {
+  final String categoryName;
+  final String categoryNumber;
+  final String documentFrontImg;
+  final String documentBackImg;
+  final bool isFrontImageVisible;
+  final Function onFrontImageTap;
+  final Function onBackImageTap;
+
+  const CertificateCard({
+    Key? key,
+    required this.categoryName,
+    required this.categoryNumber,
+    required this.documentFrontImg,
+    required this.documentBackImg,
+    required this.isFrontImageVisible,
+    required this.onFrontImageTap,
+    required this.onBackImageTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.greyButton,
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Text(
+                categoryName,
+                style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                    color: AppColors.yellow,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
+              ),
+              const Spacer(
+                flex: 1,
+              ),
+              Container(
+                alignment: Alignment.center,
+                height: 22,
+                width: 100,
+                decoration: BoxDecoration(
+                    color: AppColors.Black3,
+                    borderRadius: BorderRadius.circular(5)),
+                child: Text(
+                  "Under verification",
+                  style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                      color: Colors.yellow, fontSize: 10),
+                ),
+              ).paddingOnly(right: 10),
+              Container(
+                height: 20,
+                width: 25,
+                decoration: const BoxDecoration(
+                    color: AppColors.yellow, shape: BoxShape.circle),
+                child: Image.asset(ImagesPaths.check),
+              )
+            ],
+          ).paddingOnly(bottom: 5),
+          Container(
+            height: 0.5,
+            color: AppColors.grey5,
+          ).paddingOnly(bottom: 15, top: 5),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: Get.width * 0.55,
+                height: Get.height * 0.17,
+                child: CachedNetworkImage(
+                  fit: BoxFit.cover,
+                  imageUrl: isFrontImageVisible
+                      ? documentFrontImg
+                      : documentBackImg,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      Center(
+                        child: SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: CircularProgressIndicator(
+                              value: downloadProgress.progress),
+                        ),
+                      ),
+                  errorWidget: (context, url, error) =>
+                  const Icon(Icons.error),
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Certificate Name",
+                          style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                              fontSize: 12, fontWeight: FontWeight.w400),
+                        ),
+                        Text(
+                          categoryName,
+                          style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.whiteShade),
+                          overflow: TextOverflow.ellipsis,
+                        ).paddingOnly(bottom: 7),
+                        Text(
+                          "Certificate Number",
+                          style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                              fontSize: 12, fontWeight: FontWeight.w400),
+                        ),
+                        Text(
+                          categoryNumber,
+                          style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.whiteShade),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ).paddingOnly(left: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () => onFrontImageTap(),
+                          child: Container(
+                            height: 22,
+                            width: 22,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: AppColors.yellow),
+                                color: isFrontImageVisible
+                                    ? AppColors.yellow
+                                    : Colors.transparent,
+                                shape: BoxShape.circle),
+                            child: Transform.translate(
+                              offset: const Offset(-1, 0),
+                              child: Image.asset(
+                                ImagesPaths.arrowback,
+                                scale: 7,
+                                color: isFrontImageVisible
+                                    ? AppColors.black
+                                    : AppColors.yellow,
+                                alignment: Alignment.center,
+                              ),
+                            ),
+                          ).paddingOnly(right: 0),
+                        ),
+                        Container(
+                          height: Get.height * 0.025,
+                          width: Get.width * 0.12,
+                          alignment: Alignment.topCenter,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: AppColors.grey),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Text(
+                            isFrontImageVisible ? 'Front' : 'Back',
+                            style: Theme.of(context).textTheme.titleMedium,
+                            textAlign: TextAlign.center,
+                          ),
+                        ).paddingOnly(left: 1, right: 1),
+                        InkWell(
+                          onTap: () => onBackImageTap(),
+                          child: Container(
+                            height: 22,
+                            width: 22,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: AppColors.yellow),
+                                color: !isFrontImageVisible
+                                    ? AppColors.yellow
+                                    : Colors.transparent,
+                                shape: BoxShape.circle),
+                            child: Transform.translate(
+                              offset: const Offset(1, 0),
+                              child: Image.asset(
+                                ImagesPaths.arrowforword,
+                                scale: 7,
+                                color: !isFrontImageVisible
+                                    ? AppColors.black
+                                    : AppColors.yellow,
+                                alignment: Alignment.center,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ).paddingOnly(top: 7, left: 5),
+                  ],
+                ),
+              ),
+            ],
+          )
+        ],
+      ).paddingOnly(top: 5, bottom: 5, right: 15, left: 15),
+    ).paddingOnly(bottom: Get.height * 0.02);
   }
 }
