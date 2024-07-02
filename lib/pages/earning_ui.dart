@@ -64,8 +64,8 @@ class EarningUi extends StatelessWidget {
         titleSpacing: -10,
         leading: GestureDetector(
           onTap: () {
-            // Get.offAllNamed(AppRoutes.bottomNavigation);
-            Get.back();
+            Get.offAllNamed(AppRoutes.bottomNavigation);
+            // Get.back();
           },
           child: Container(
             height: 30,

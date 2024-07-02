@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:endoorphin_trainer/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 
@@ -80,7 +81,8 @@ class ProfileUI extends StatelessWidget {
                     );
                   }
 
-                  return Row(
+                  return
+                    Row(
                     children: [
                       snapshot.data!.result!.profileImg == null
                           ? const CircleAvatar(
@@ -98,8 +100,7 @@ class ProfileUI extends StatelessWidget {
                               backgroundColor: AppColors.yellow,
                               child: CircleAvatar(
                                 radius: 40,
-                                backgroundImage:
-                                    NetworkImage(snapshot.data!.result!.profileImg.toString()),
+                                backgroundImage:CachedNetworkImageProvider(snapshot.data!.result!.profileImg.toString()), // Your profile image
                               ),
                             ).paddingOnly(left: 30),
                       const SizedBox(

@@ -193,6 +193,7 @@ class NoLeadingSpaceFormatter extends TextInputFormatter {
 
 class CertificateCard extends StatelessWidget {
   final String categoryName;
+  final String categoryMainName;
   final String categoryNumber;
   final String documentFrontImg;
   final String documentBackImg;
@@ -201,15 +202,16 @@ class CertificateCard extends StatelessWidget {
   final Function onBackImageTap;
 
   const CertificateCard({
-    Key? key,
+    super.key,
     required this.categoryName,
+    required this.categoryMainName,
     required this.categoryNumber,
     required this.documentFrontImg,
     required this.documentBackImg,
     required this.isFrontImageVisible,
     required this.onFrontImageTap,
     required this.onBackImageTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -223,7 +225,7 @@ class CertificateCard extends StatelessWidget {
           Row(
             children: [
               Text(
-                categoryName,
+                categoryMainName,
                 style: Theme.of(context).textTheme.labelSmall!.copyWith(
                     color: AppColors.yellow,
                     fontSize: 16,

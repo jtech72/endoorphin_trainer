@@ -1,12 +1,8 @@
 import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:endoorphin_trainer/controllers/document_controller.dart';
-import 'package:endoorphin_trainer/services/models/response_models/get_trainer_doc_status_model.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
-
-import '../services/network_services/api_call.dart';
 
 class DocumentUI extends StatelessWidget {
   const DocumentUI({super.key});
@@ -115,325 +111,109 @@ class DocumentUI extends StatelessWidget {
                                           null
                                   //Certification
                                       ?
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child:
-                                    Container(
-                                      width: Get.width,
-                                      decoration: BoxDecoration(
-                                          color: AppColors.greyButton,
-                                          borderRadius:
-                                          BorderRadius.circular(5)),
+                                  Padding(padding: const EdgeInsets.all(8.0), child:
+                                    Container(width: Get.width,
+                                      decoration: BoxDecoration(color: AppColors.greyButton,
+                                          borderRadius: BorderRadius.circular(5)),
                                       child: Column(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment
-                                                .spaceBetween,
-                                            children: [
-                                              Text(
-                                                controller
-                                                    .trainerDocStatusModel
-                                                    .value
-                                                    .result![index]
-                                                    .category ==
-                                                    null
-                                                    ? controller
-                                                    .trainerDocStatusModel
-                                                    .value
-                                                    .result![
-                                                index]
-                                                    .emirates ==
-                                                    null
-                                                    ? controller
-                                                    .trainerDocStatusModel
-                                                    .value
-                                                    .result![index]
-                                                    .passport
-                                                    .toString()
-                                                    .toUpperCase()
-                                                    : controller
-                                                    .trainerDocStatusModel
-                                                    .value
-                                                    .result![index]
-                                                    .emirates
-                                                    .toString()
-                                                    .toUpperCase()
-                                                    : controller
-                                                    .trainerDocStatusModel
-                                                    .value
-                                                    .result![index]
-                                                    .category!
-                                                    .name
-                                                    .toString(),
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .titleLarge!
-                                                    .copyWith(
-                                                    color: AppColors
-                                                        .yellow),
-                                              ),
-
-                                              //status----------------------------------------------------------------
-
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [Text(
+                                              controller.trainerDocStatusModel.value.result![index].category == null
+                                                    ? controller.trainerDocStatusModel.value.result![index].emirates == null
+                                                    ? controller.trainerDocStatusModel.value.result![index].passport.toString().toUpperCase()
+                                                    : controller.trainerDocStatusModel.value.result![index].emirates.toString().toUpperCase()
+                                                    : controller.trainerDocStatusModel.value.result![index].category!.name.toString(),
+                                                style: Theme.of(context).textTheme.titleLarge!.copyWith(color: AppColors.yellow),),
                                               Row(
                                                 children: [
-                                                  controller
-                                                      .trainerDocStatusModel
-                                                      .value
-                                                      .result![
-                                                  index]
-                                                      .approveStatus ==
-                                                      "approved"
+                                                  controller.trainerDocStatusModel.value.result![index].approveStatus == "approved"
                                                       ? Row(
                                                     children: [
                                                       Container(
                                                         height: 22,
                                                         width: 64,
-                                                        decoration: BoxDecoration(
-                                                            color: AppColors
-                                                                .Black3,
-                                                            borderRadius:
-                                                            BorderRadius.circular(
-                                                                5)),
+                                                        decoration: BoxDecoration(color: AppColors.Black3,
+                                                            borderRadius: BorderRadius.circular(5)),
                                                         child: const Center(
-                                                            child: Text(
-                                                                'Approved',
-                                                                style: TextStyle(
-                                                                    fontSize: 10,
-                                                                    fontWeight: FontWeight.w400,
-                                                                    color: Colors.green))),
+                                                            child: Text('Approved',
+                                                                style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: Colors.green))),
                                                       ),
-                                                      CircleAvatar(
-                                                        backgroundColor:
-                                                        AppColors
-                                                            .yellow,
-                                                        radius: 11,
-                                                        child: Image
-                                                            .asset(
-                                                          ImagesPaths
-                                                              .checktick,
-                                                          width: 22,
-                                                        ),
-                                                      ).paddingOnly(
-                                                          left: 10)
+                                                      CircleAvatar(backgroundColor: AppColors.yellow,
+                                                        radius: 11, child: Image.asset(ImagesPaths.checktick, width: 22,),).paddingOnly(left: 10)
                                                     ],
-                                                  )
-                                                      : controller
-                                                      .trainerDocStatusModel
-                                                      .value
-                                                      .result![
-                                                  index]
-                                                      .approveStatus ==
-                                                      "pending"
-                                                      ? Row(
-                                                    children: [
-                                                      Container(
-                                                        height:
-                                                        22,
-                                                        width:
-                                                        100,
-                                                        decoration: BoxDecoration(
-                                                            color: AppColors
-                                                                .Black3,
-                                                            borderRadius:
-                                                            BorderRadius.circular(5)),
-                                                        child: const Center(
-                                                            child: Text(
-                                                                'Under verification',
+                                                  ) : controller.trainerDocStatusModel.value.result![index].approveStatus == "pending"
+                                                      ? Row(children: [Container(height: 22, width: 100,
+                                                        decoration: BoxDecoration(color: AppColors.Black3,
+                                                            borderRadius: BorderRadius.circular(5)),
+                                                        child: const Center(child: Text('Under verification',
                                                                 style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: Colors.yellow))),
                                                       ),
-                                                      CircleAvatar(
-                                                        backgroundColor:
-                                                        AppColors
-                                                            .yellow,
-                                                        radius:
-                                                        11,
-                                                        child: Image
-                                                            .asset(
-                                                          ImagesPaths
-                                                              .check,
-                                                          width:
-                                                          22,
-                                                        ),
-                                                      ).paddingOnly(
-                                                          left:
-                                                          10)
+                                                      CircleAvatar(backgroundColor: AppColors.yellow, radius: 11,
+                                                        child: Image.asset(ImagesPaths.check, width: 22,),).paddingOnly(left: 10)
                                                     ],
                                                   )
-                                                      : Row(
-                                                    children: [
-                                                      Container(
-                                                        height:
-                                                        22,
+                                                      : Row(children: [Container(height: 22,
                                                         width: 64,
-                                                        decoration: BoxDecoration(
-                                                            color: AppColors
-                                                                .Black3,
-                                                            borderRadius:
-                                                            BorderRadius.circular(5)),
-                                                        child: const Center(
-                                                            child: Text(
-                                                                'Rejected',
-                                                                style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: Colors.red))),
+                                                        decoration: BoxDecoration(color: AppColors.Black3, borderRadius: BorderRadius.circular(5)),
+                                                        child: const Center(child: Text('Rejected', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: Colors.red))),
                                                       ),
-                                                      CircleAvatar(
-                                                        backgroundColor:
-                                                        AppColors
-                                                            .yellow,
-                                                        radius:
-                                                        11,
-                                                        child: Image
-                                                            .asset(
-                                                          ImagesPaths
-                                                              .checkcross,
-                                                          width:
-                                                          22,
-                                                        ),
-                                                      ).paddingOnly(
-                                                          left:
-                                                          10)
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
-                                            ],
-                                          ).paddingOnly(
-                                              bottom: Get.height * 0.01),
+                                                      CircleAvatar(backgroundColor: AppColors.yellow,
+                                                        radius: 11,
+                                                        child: Image.asset(ImagesPaths.checkcross,
+                                                          width: 22,
+                                                        ),).paddingOnly(left: 10)
+                                                    ],)],),],).paddingOnly(bottom: Get.height * 0.01),
                                           Container(
                                             height: 1,
                                             width: Get.width,
                                             color: AppColors.lightyGrey,
-                                          ).paddingOnly(
-                                              bottom: Get.height * 0.02),
+                                          ).paddingOnly(bottom: Get.height * 0.02),
                                           Row(
                                             children: [
                                               Flexible(
-                                                child: Obx(
-                                                      ()=> SizedBox(
+                                                child: Obx(()=> SizedBox(
                                                     height: 131,
                                                     width: 204,
                                                     child: CachedNetworkImage(
-                                                      fit: BoxFit.cover,
-                                                      // imageUrl: controller
-                                                      //             .trainerDocStatusModel
-                                                      //             .value
-                                                      //             .result![
-                                                      //                 index]
-                                                      //             .documentFrontImg ==
-                                                      //         null
-                                                      //     ? controller
-                                                      //                 .trainerDocStatusModel
-                                                      //                 .value
-                                                      //                 .result![
-                                                      //                     index]
-                                                      //                 .passportfrontImg ==
-                                                      //             null
-                                                      //         ? controller
-                                                      //             .trainerDocStatusModel
-                                                      //             .value
-                                                      //             .result![
-                                                      //                 index]
-                                                      //             .emiratesfrontImg
-                                                      //             .toString()
-                                                      //         : controller
-                                                      //             .trainerDocStatusModel
-                                                      //             .value
-                                                      //             .result![
-                                                      //                 index]
-                                                      //             .passportfrontImg
-                                                      //             .toString()
-                                                      //     : controller
-                                                      //         .trainerDocStatusModel
-                                                      //         .value
-                                                      //         .result![index]
-                                                      //         .documentFrontImg
-                                                      //         .toString(),
-                                                      imageUrl: controller
-                                                          .isFrontImageVisible1
-                                                          .value?controller.trainerDocStatusModel.value.result![index].documentFrontImg!:controller.trainerDocStatusModel.value.result![index].documentBackImg!,
-                                                      progressIndicatorBuilder:
-                                                          (context, url,
-                                                          downloadProgress) =>
+                                                      fit: BoxFit.contain,
+                                                      imageUrl: controller.isFrontImageVisible1.value?controller.trainerDocStatusModel.value.result![index].documentFrontImg!:controller.trainerDocStatusModel.value.result![index].documentBackImg!,
+                                                      progressIndicatorBuilder: (context, url, downloadProgress) =>
                                                           Center(
                                                             child: SizedBox(
                                                               height: 30,
-                                                              // Adjust the height to make it smaller
                                                               width: 30,
-                                                              // Adjust the width to make it smaller
-                                                              child: CircularProgressIndicator(
-                                                                  value: downloadProgress
-                                                                      .progress),
-                                                            ),
-                                                          ),
-                                                      errorWidget: (context,
-                                                          url, error) =>
-                                                      const Icon(
-                                                          Icons.error),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
+                                                              child: CircularProgressIndicator(value: downloadProgress.progress),),),
+                                                      errorWidget: (context, url, error) =>
+                                                      const Icon(Icons.error),),),),),
                                               Column(
-                                                crossAxisAlignment:
-                                                CrossAxisAlignment
-                                                    .start,
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     'Certification Name',
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelMedium,
+                                                    style: Theme.of(context).textTheme.labelMedium,
                                                   ).paddingOnly(bottom: 2),
-                                                  Text(
-                                                    controller
-                                                        .trainerDocStatusModel
-                                                        .value
-                                                        .result![index]
-                                                        .categoryName
-                                                        .toString(),
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelSmall,
-                                                  ).paddingOnly(bottom: 8),
+                                                  Text(controller.trainerDocStatusModel.value.result![index].categoryName.toString(),
+                                                    style: Theme.of(context).textTheme.labelSmall,).paddingOnly(bottom: 8),
                                                   Text(
                                                     'Certification Number',
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelMedium,
-                                                  ).paddingOnly(bottom: 2),
+                                                    style: Theme.of(context).textTheme.labelMedium,).paddingOnly(bottom: 2),
                                                   Text(
-                                                    controller
-                                                        .trainerDocStatusModel
-                                                        .value
-                                                        .result![index]
-                                                        .categoryNumber
-                                                        .toString(),
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelSmall,
+                                                    controller.trainerDocStatusModel.value.result![index].categoryNumber.toString(),
+                                                    style: Theme.of(context).textTheme.labelSmall,
                                                   ),
                                                   SizedBox(
-                                                    height:
-                                                    Get.height * 0.02,
+                                                    height: Get.height * 0.02,
                                                   ),
-                                                  Obx(
-                                                        () => Row(
-                                                      mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
+                                                  Obx(() => Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                       children: [
                                                         InkWell(
                                                           onTap: () {
-                                                            controller
-                                                                .isFrontImageVisible1
-                                                                .value = true;
+                                                            controller.isFrontImageVisible1.value = true;
                                                           },
                                                           child: Container(
                                                             height: 22,
@@ -637,8 +417,8 @@ class DocumentUI extends StatelessWidget {
                                                         },
                                                         child:
                                                         Container(
-                                                          height: 17,
-                                                          width: 76,
+                                                          height: 20,
+                                                          width: 80,
                                                           decoration: BoxDecoration(
                                                               borderRadius:
                                                               BorderRadius.circular(
@@ -896,7 +676,7 @@ class DocumentUI extends StatelessWidget {
                                                     width: 204,
                                                     child:
                                                     CachedNetworkImage(
-                                                      fit: BoxFit.cover,
+                                                      fit: BoxFit.contain,
                                                       // imageUrl: controller
                                                       //             .trainerDocStatusModel
                                                       //             .value
@@ -1225,8 +1005,8 @@ class DocumentUI extends StatelessWidget {
                                                     },
                                                     child:
                                                     Container(
-                                                      height: 17,
-                                                      width: 76,
+                                                      height: 20,
+                                                      width: 80,
                                                       decoration: BoxDecoration(
                                                           borderRadius:
                                                           BorderRadius.circular(
@@ -1253,10 +1033,10 @@ class DocumentUI extends StatelessWidget {
                                                             color:
                                                             AppColors.yellow,
                                                             scale:
-                                                            7,
-                                                          )
+                                                            8,
+                                                          ).paddingOnly(left: 5)
                                                         ],
-                                                      ),
+                                                      ).paddingAll(2),
                                                     ).paddingOnly(
                                                         left:
                                                         20),
@@ -1496,7 +1276,7 @@ class DocumentUI extends StatelessWidget {
                                                     child:
                                                     CachedNetworkImage(
                                                       fit: BoxFit
-                                                          .cover,
+                                                          .contain,
                                                       // imageUrl: controller
                                                       //             .trainerDocStatusModel
                                                       //             .value
@@ -1788,9 +1568,9 @@ class DocumentUI extends StatelessWidget {
                                                     child:
                                                     Container(
                                                       height:
-                                                      17,
+                                                      20,
                                                       width:
-                                                      76,
+                                                      80,
                                                       decoration: BoxDecoration(
                                                           borderRadius:
                                                           BorderRadius.circular(30),
@@ -1888,7 +1668,7 @@ class DocumentUI extends StatelessWidget {
                                             "name": controller
                                                 .trainerDocStatusModel
                                                 .value
-                                                ?.result?[index]
+                                                .result?[index]
                                                 .category
                                                 ?.name
                                                 .toString() ??
@@ -1896,7 +1676,7 @@ class DocumentUI extends StatelessWidget {
                                             "categoryName": controller
                                                 .trainerDocStatusModel
                                                 .value
-                                                ?.result?[index]
+                                                .result?[index]
                                                 .passport
                                                 .toString() ??
                                                 "",
@@ -1989,9 +1769,9 @@ class DocumentUI extends StatelessWidget {
                                                           .value
                                                           .result![
                                                       index]
-                                                          .passport
-                                                          .toString()
-                                                          .toUpperCase()
+                                                          .passport == "passport"?
+                                                          "Passport":"Emirates ID"
+
                                                           : controller
                                                           .trainerDocStatusModel
                                                           .value

@@ -12,19 +12,28 @@ class TrainerPassportController extends GetxController {
     String trimmedCertificateNumber = certificateNumber.text.trim();
     String trimmedCertificateName = certificateName.text.trim();
 
-    // Validation: Check if the trimmed certificate number is empty
-    if (trimmedCertificateName.isEmpty) {
-      showSnackBar("Please enter a ${certificationDetails!["categoryName"] == "emirates" ? "Emirates ID Name" : certificationDetails!["categoryName"] == "passport" ? "Passport Name" : "certification name"}");
-      showSnackBar("Please enter a ${certificationDetails!["categoryName"] == "emirates" ? "Emirates ID Name" : certificationDetails!["categoryName"] == "passport" ? "Passport Name" : " certification name"}");
-    }
     // Validation: Check if the trimmed certificate name is empty
+    if (trimmedCertificateName.isEmpty) {
+      showSnackBar("Please enter the ${certificationDetails!["categoryName"] == "emirates" ? "Emirates ID Name" : certificationDetails!["categoryName"] == "passport" ? "Passport Name" : "certificate name"}");
+    }
+    // Validation: Check if the trimmed certificate number is empty
     else if (trimmedCertificateNumber.isEmpty) {
-      showSnackBar("Please enter a ${certificationDetails!["categoryName"] == "emirates" ? "Emirates ID Number" : certificationDetails!["categoryName"] == "passport" ? "Passport Number" : "certification number"}");
+      showSnackBar("Please enter the ${certificationDetails!["categoryName"] == "emirates" ? "Emirates ID Number" : certificationDetails!["categoryName"] == "passport" ? "Passport Number" : "certificate number"}");
     }
     // Validation: Check if the certificate name length is invalid
-    else if (trimmedCertificateName.length < 3 ) {
+    else if (trimmedCertificateName.length < 3) {
       showSnackBar("Certificate name must be at least 3 characters");
-    }else if (trimmedCertificateNumber.length < 5) {
+    }
+    // Validation: Check if the passport number length is invalid
+    else if (certificationDetails!["categoryName"] == "passport" && (trimmedCertificateNumber.length < 8 || trimmedCertificateNumber.length > 9)) {
+      showSnackBar("Passport number must be between 8 and 9 characters");
+    }
+    // Validation: Check if the Emirates ID number length is invalid
+    else if (certificationDetails!["categoryName"] == "emirates" && (trimmedCertificateNumber.length < 6 || trimmedCertificateNumber.length > 15)) {
+      showSnackBar("Emirates ID number must be between 6 and 15 characters");
+    }
+    // Validation: Check if the certificate number length is invalid for other categories
+    else if (trimmedCertificateNumber.length < 5) {
       showSnackBar("Certificate number must be at least 5 characters");
     }
     // If all validations pass, navigate to the upload image screen
@@ -40,6 +49,7 @@ class TrainerPassportController extends GetxController {
       });
     }
   }
+
 
   @override
   void onInit() {

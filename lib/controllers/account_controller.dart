@@ -7,10 +7,10 @@ import 'package:image_picker/image_picker.dart';
 import '../services/models/request_models/category_document_model.dart';
 import '../services/network_services/api_call.dart';
 class AccountController extends GetxController {
+  RxBool scaffoldColor = false.obs;
   var isOptionsVisible = false.obs;
   final selectedOption1 = 'Select'.obs;
   final items2 = ['Male','Female',];
-  RxBool scaffoldColor = false.obs;
   void toggleOptionsVisibility() {
     isOptionsVisible.value = !isOptionsVisible.value;
   }
@@ -91,7 +91,7 @@ class AccountController extends GetxController {
       showSnackBar("Please enter valid email");
     }
     else {
-      // showLoader();
+      showLoader();
 
       Map<String, String> fields = {
         "id": storage.read("userId").toString(),
