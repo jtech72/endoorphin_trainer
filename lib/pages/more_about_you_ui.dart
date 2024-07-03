@@ -46,10 +46,8 @@ class MoreAboutYouUi extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(24))),
               child: Text(
                 'Skip',
-                style: Theme.of(context)
-                    .textTheme
-                    .labelMedium!
-                    .copyWith(color: AppColors.yellow, fontWeight: FontWeight.w500),
+                style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                    color: AppColors.yellow, fontWeight: FontWeight.w500),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -139,1201 +137,366 @@ class MoreAboutYouUi extends StatelessWidget {
                         child: Text('No data available'),
                       );
                     }
-                    return ListView.builder(
-                      itemCount: snapshot.data!.result!
-                          .length, // Adjusted itemCount to include the additional widgets
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      reverse: true,
-                      padding: EdgeInsets.zero,
-                      itemBuilder: (context, index) {
-                        return snapshot.data!.result![index].documentFrontImg !=
-                                    null ||
-                                snapshot.data!.result![index].documentBackImg !=
-                                    null
-                            ?
+                    return
+                      ListView.builder(
+                        itemCount: snapshot.data!.result!.length + 2, // Adjusted itemCount to include the additional widgets
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        padding: EdgeInsets.zero,
+                        itemBuilder: (context, index) {
+                          if (index < snapshot.data!.result!.length) {
+                            return
+                            snapshot.data!.result![index].documentFrontImg != null ||
+                                snapshot.data!.result![index].documentBackImg != null ?
                             //Certification
-                            Container(
+                            TrainerDocumentStatusCard(
+                              docName: "Certification Name",
+                              docNumber: "Certification Number",
+                              categoryMainName: snapshot.data!.result![index].category!.name!.toUpperCase().toString(),
+                              categoryName: snapshot.data!.result![index].categoryName,
+                              categoryNumber: snapshot.data!.result![index].categoryNumber,
+                              documentFrontImg: snapshot.data!.result![index].documentFrontImg,
+                              documentBackImg: snapshot.data!.result![index].documentBackImg,
+                              approveStatus: snapshot.data!.result![index].approveStatus.toString(),
+                              remark: snapshot.data!.result![index].remark,
+                              comment: snapshot.data!.result![index].comment,
+                              onReuploadTap: () {
+                                {
+                                  final userId =snapshot.data!
+                                      .result![index]
+                                      .userId ??
+                                      "";
+                                  final categoryId = snapshot.data!.result![index]
+                                      .category
+                                      ?.id ??
+                                      "";
+                                  uploadImage =
+                                      UploadImage
+                                          .byProfile;
+                                  Get.toNamed(
+                                      AppRoutes
+                                          .trainerPassport,
+                                      arguments: {
+                                        "userId":
+                                        userId,
+                                        "name":
+                                        snapshot.data?.result?[index].category?.name.toString() ?? "",
+                                        "categoryName":
+                                        snapshot.data?.result?[index].passport.toString() ?? "",
+                                        "categoryId":
+                                        categoryId,
+                                        "id": snapshot.data!.result![index]
+                                            .id
+                                            .toString(),
+                                        "reupload":
+                                        true,
+                                      });
+                                }
+                              },
+                            )
+                                : snapshot.data!.result![index].passportbackImg != null ||
+                                snapshot.data!.result![index].passportfrontImg != null ?
+                            //Passport
+                            TrainerDocumentStatusCard(
+                              docName: "Passport Name",
+                              docNumber: "Passport Number",
+                              categoryMainName: "Passport",
+                              categoryName: snapshot.data!.result![index].passportName,
+                              categoryNumber: snapshot.data!.result![index].passportNumber,
+                              documentFrontImg: snapshot.data!.result![index].passportfrontImg.toString(),
+                              documentBackImg: snapshot.data!.result![index].passportbackImg.toString(),
+                              approveStatus: snapshot.data!.result![index].approveStatus.toString(),
+                              remark: snapshot.data!.result![index].remark,
+                              comment: snapshot.data!.result![index].comment,
+                              onReuploadTap: ()
+                              {
+                                final userId =
+                                    snapshot.data!.result![index].userId ??
+                                        "";
+                                final categoryId =
+                                    snapshot.data!.result![index].category?.id ??
+                                        "";
+                                uploadImage =
+                                    UploadImage.byProfile;
+                                Get.toNamed(
+                                    AppRoutes.trainerPassport,
+                                    arguments: {
+                                      "userId": userId,
+                                      "name": snapshot.data!.result?[index].category?.name.toString() ?? "",
+                                      "categoryName": snapshot.data!.result?[index].passport.toString() ?? "",
+                                      "categoryId": categoryId,
+                                      "id": snapshot.data!.result![index].id.toString(),
+                                      "reupload": true,
+                                    });
+                              }
+                              ,
+                            )
+                                : snapshot.data!.result![index].emiratesfrontImg != null ||
+                                snapshot.data!.result![index].emiratesbackImg != null
+                                ?
+                            //Emirates Id
+                            TrainerDocumentStatusCard(
+                              docName: "Emirates ID Name",
+                              docNumber: "Emirates ID Number",
+                              categoryMainName: "Emirates Id",
+                              categoryName: snapshot.data!.result![index].emiratesName,
+                              categoryNumber: snapshot.data!.result![index].emiratesNumber,
+                              documentFrontImg: snapshot.data!.result![index].emiratesfrontImg.toString(),
+                              documentBackImg: snapshot.data!.result![index].emiratesbackImg.toString(),
+                              approveStatus: snapshot.data!.result![index].approveStatus.toString(),
+                              remark: snapshot.data!.result![index].remark,
+                              comment: snapshot.data!.result![index].comment,
+                              onReuploadTap: () {
+                                {
+                                  final userId = snapshot.data!.result![index]
+                                      .userId ??
+                                      "";
+                                  final categoryId = snapshot.data!.result![index]
+                                      .category
+                                      ?.id ??
+                                      "";
+                                  uploadImage =
+                                      UploadImage
+                                          .byProfile;
+                                  Get.toNamed(
+                                      AppRoutes
+                                          .trainerPassport,
+                                      arguments: {
+                                        "userId":
+                                        userId,
+                                        "name":
+                                        snapshot.data!.result?[index].category?.name.toString() ?? "",
+                                        "categoryName":
+                                        snapshot.data!.result?[index].passport.toString() ?? "",
+                                        "categoryId":
+                                        categoryId,
+                                        "id": snapshot.data!.result![index]
+                                            .id
+                                            .toString(),
+                                        "reupload":
+                                        true,
+                                      });
+                                }
+
+                              },
+                            )
+                                :
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              onTap: () {
+                                final userId = snapshot.data!
+                                    .result![index].userId ??
+                                    "";
+                                final categoryId = snapshot
+                                    .data!
+                                    .result![index]
+                                    .category
+                                    ?.id ??
+                                    "";
+                                uploadImage =
+                                    UploadImage.byInitically;
+                                Get.toNamed(AppRoutes.trainerPassport,
+                                    arguments: {
+                                      "userId": userId,
+                                      "name": snapshot
+                                          .data
+                                          ?.result?[index]
+                                          .category
+                                          ?.name
+                                          .toString() ??
+                                          "",
+                                      "categoryName": snapshot
+                                          .data
+                                          ?.result?[index]
+                                          .passport
+                                          .toString() ??
+                                          "",
+                                      "categoryId": categoryId,
+                                      "id": snapshot
+                                          .data!.result![index].id
+                                          .toString()
+                                    });
+                              },
+                              child: Container(
+                                height: 70,
+                                width: Get.width,
                                 decoration: BoxDecoration(
                                   color: AppColors.greyButton,
-                                  borderRadius: BorderRadius.circular(5),
+                                  borderRadius:
+                                  BorderRadius.circular(5),
                                 ),
-                                child: Column(
+                                child: Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          snapshot.data!.result![index]!
-                                              .category!.name
-                                              .toString(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelSmall!
-                                              .copyWith(
-                                                  color: AppColors.yellow,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w600),
-                                        ),
-                                        const Spacer(
-                                          flex: 1,
-                                        ),
-                                        Container(
-                                          alignment: Alignment.center,
-                                          height: 22,
-                                          width: 100,
-                                          decoration: BoxDecoration(
-                                              color: AppColors.Black3,
+                                        Transform.translate(
+                                          offset:
+                                          const Offset(-10, 2),
+                                          child: Container(
+                                            height: Get.width * 0.14,
+                                            width: Get.width * 0.14,
+                                            padding: const EdgeInsets
+                                                .symmetric(
+                                                horizontal: 15,
+                                                vertical: 17),
+                                            decoration: BoxDecoration(
                                               borderRadius:
-                                                  BorderRadius.circular(5)),
-                                          child: Text(
-                                            "Under verification",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelSmall!
-                                                .copyWith(
-                                                    color: Colors.yellow,
-                                                    fontSize: 10),
-                                          ),
-                                        ).paddingOnly(right: 10),
-                                        Container(
-                                          height: 20,
-                                          width: 25,
-                                          decoration: const BoxDecoration(
-                                              color: AppColors.yellow,
-                                              shape: BoxShape.circle),
-                                          child: Image.asset(ImagesPaths.check),
-                                        )
-                                      ],
-                                    ).paddingOnly(bottom: 5),
-                                    Container(
-                                      height: 0.5,
-                                      color: AppColors.grey5,
-                                    ).paddingOnly(bottom: 15, top: 5),
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Obx(
-                                          () => SizedBox(
-                                            width: Get.width * 0.55,
-                                            height: Get.height * 0.17,
-                                            child: CachedNetworkImage(
-                                              fit: BoxFit.cover,
-                                              imageUrl: controller
-                                                          .isFrontImageVisible2
-                                                          .value ==
-                                                      true
-                                                  ? snapshot
-                                                      .data!
-                                                      .result![index]
-                                                      .documentFrontImg
-                                                      .toString()
-                                                  : snapshot
-                                                      .data!
-                                                      .result![index]
-                                                      .documentBackImg
-                                                      .toString(),
-                                              progressIndicatorBuilder:
-                                                  (context, url,
-                                                          downloadProgress) =>
-                                                      Center(
-                                                child: SizedBox(
-                                                  height:
-                                                      30, // Adjust the height to make it smaller
-                                                  width:
-                                                      30, // Adjust the width to make it smaller
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                          value:
-                                                              downloadProgress
-                                                                  .progress),
-                                                ),
-                                              ),
-                                              errorWidget:
-                                                  (context, url, error) =>
-                                                      const Icon(Icons.error),
+                                              BorderRadius
+                                                  .circular(5),
+                                              color: AppColors.black,
                                             ),
-                                          ),
+                                            child: Image.asset(
+                                              ImagesPaths.document,
+                                              height: 24,
+                                              width: 24,
+                                            ),
+                                          ).paddingOnly(
+                                              left: 20,
+                                              right: 10,
+                                              bottom: 5),
                                         ),
-                                        Expanded(
-                                          child: Column(
-                                            children: [
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    "Certificate Name",
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelSmall!
-                                                        .copyWith(
-                                                            fontSize: 12,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w400),
-                                                  ),
-                                                  Text(
-                                                    snapshot
-                                                        .data!
-                                                        .result![index]
-                                                        .categoryName
-                                                        .toString(),
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelSmall!
-                                                        .copyWith(
-                                                            fontSize: 10,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: AppColors
-                                                                .whiteShade),
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                  ).paddingOnly(bottom: 7),
-                                                  Text(
-                                                    "Certificate Number",
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelSmall!
-                                                        .copyWith(
-                                                            fontSize: 12,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w400),
-                                                  ),
-                                                  Text(
-                                                    snapshot
-                                                        .data!
-                                                        .result![index]
-                                                        .categoryNumber
-                                                        .toString(),
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelSmall!
-                                                        .copyWith(
-                                                            fontSize: 10,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: AppColors
-                                                                .whiteShade),
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                  ),
-                                                ],
-                                              ).paddingOnly(left: 10),
-                                              Obx(
-                                                () => Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    InkWell(
-                                                      onTap: () {
-                                                        controller
-                                                            .isFrontImageVisible2
-                                                            .value = true;
-                                                      },
-                                                      child: Container(
-                                                        height: 22,
-                                                        width: 22,
-                                                        decoration: BoxDecoration(
-                                                            border: Border.all(
-                                                                color: AppColors
-                                                                    .yellow),
-                                                            color: controller
-                                                                        .isFrontImageVisible2
-                                                                        .value !=
-                                                                    false
-                                                                ? AppColors
-                                                                    .yellow
-                                                                : Colors
-                                                                    .transparent,
-                                                            shape: BoxShape
-                                                                .circle),
-                                                        child:
-                                                            Transform.translate(
-                                                          offset: const Offset(
-                                                              -1, 0),
-                                                          child: Image.asset(
-                                                            ImagesPaths
-                                                                .arrowback,
-                                                            scale: 7,
-                                                            color: controller
-                                                                        .isFrontImageVisible2
-                                                                        .value !=
-                                                                    false
-                                                                ? AppColors
-                                                                    .black
-                                                                : AppColors
-                                                                    .yellow,
-                                                            alignment: Alignment
-                                                                .center,
-                                                          ),
-                                                        ),
-                                                      ).paddingOnly(right: 0),
-                                                    ),
-                                                    Container(
-                                                      height:
-                                                          Get.height * 0.025,
-                                                      width: Get.width * 0.12,
-                                                      alignment:
-                                                          Alignment.topCenter,
-                                                      decoration: BoxDecoration(
-                                                          border: Border.all(
-                                                              color: AppColors
-                                                                  .grey),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      10)),
-                                                      child: Text(
-                                                        controller
-                                                                .isFrontImageVisible2
-                                                                .value
-                                                            ? 'Front'
-                                                            : 'Back',
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .titleMedium,
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                      ),
-                                                    ).paddingOnly(
-                                                        left: 1, right: 1),
-                                                    InkWell(
-                                                      onTap: () {
-                                                        controller
-                                                            .isFrontImageVisible2
-                                                            .value = false;
-                                                        log(controller
-                                                            .isFrontImageVisible2
-                                                            .value
-                                                            .toString());
-                                                      },
-                                                      child: Container(
-                                                        height: 22,
-                                                        width: 22,
-                                                        decoration: BoxDecoration(
-                                                            border: Border.all(
-                                                                color: AppColors
-                                                                    .yellow),
-                                                            color: controller
-                                                                        .isFrontImageVisible2
-                                                                        .value ==
-                                                                    false
-                                                                ? AppColors
-                                                                    .yellow
-                                                                : Colors
-                                                                    .transparent,
-                                                            shape: BoxShape
-                                                                .circle),
-                                                        child:
-                                                            Transform.translate(
-                                                          offset: const Offset(
-                                                              1, 0),
-                                                          child: Image.asset(
-                                                            ImagesPaths
-                                                                .arrowforword,
-                                                            scale: 7,
-                                                            color: controller
-                                                                        .isFrontImageVisible2
-                                                                        .value !=
-                                                                    false
-                                                                ? AppColors
-                                                                    .yellow
-                                                                : AppColors
-                                                                    .black,
-                                                            alignment: Alignment
-                                                                .center,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ).paddingOnly(
-                                                  top: 7,
-                                                  left: 5,
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                ).paddingOnly(
-                                    top: 5, bottom: 5, right: 15, left: 15),
-                              ).paddingOnly(bottom: Get.height * 0.02)
-                            : snapshot.data!.result![index].passportbackImg !=
-                                        null ||
-                                    snapshot.data!.result![index]
-                                            .passportfrontImg !=
-                                        null
-                                ?
-                                //Passport
-                                Container
-                                  (
-                                    decoration: BoxDecoration(
-                                      color: AppColors.greyButton,
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Row(
+                                        Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
                                           children: [
+                                            SizedBox(
+                                              width: Get.width * .55,
+                                              child: Text(
+                                                snapshot
+                                                    .data!
+                                                    .result![
+                                                index]
+                                                    .category ==
+                                                    null
+                                                    ? snapshot
+                                                    .data!
+                                                    .result![
+                                                index]
+                                                    .passport
+                                                    .toString() ==
+                                                    "emirates"
+                                                    ? "Emirates ID"
+                                                    : "Passport"
+                                                    : snapshot
+                                                    .data!
+                                                    .result![
+                                                index]
+                                                    .category!
+                                                    .name
+                                                    .toString(),
+                                                overflow: TextOverflow
+                                                    .ellipsis,
+                                                style: Theme.of(
+                                                    context)
+                                                    .textTheme
+                                                    .titleLarge
+                                                    ?.copyWith(
+                                                    color: AppColors
+                                                        .yellow),
+                                              ).paddingOnly(top: 12),
+                                            ),
                                             Text(
-                                              "PASSPORT",
+                                              "Upload your Certification ...",
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .labelSmall!
-                                                  .copyWith(
-                                                    color: AppColors.yellow,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                            ),
-                                            const Spacer(
-                                              flex: 1,
-                                            ),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              height: 22,
-                                              width: 100,
-                                              decoration: BoxDecoration(
-                                                  color: AppColors.Black3,
-                                                  borderRadius:
-                                                      BorderRadius.circular(5)),
-                                              child: Text(
-                                                "Under verification",
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .labelSmall!
-                                                    .copyWith(
-                                                        color: Colors.yellow,
-                                                        fontSize: 10),
-                                              ),
-                                            ).paddingOnly(right: 10),
-                                            Container(
-                                              height: 20,
-                                              width: 25,
-                                              decoration: const BoxDecoration(
-                                                  color: AppColors.yellow,
-                                                  shape: BoxShape.circle),
-                                              child: Image.asset(ImagesPaths.check),
-                                            )
+                                                  .labelSmall
+                                                  ?.copyWith(
+                                                  fontSize: 12),
+                                            ).paddingOnly(top: 10),
                                           ],
-                                        ).paddingOnly(bottom: 5),
-                                        Container(
-                                          height: 0.5,
-                                          color: AppColors.grey5,
-                                        ).paddingOnly(bottom: 15, top: 5),
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Obx(
-                                              () => SizedBox(
-                                                width: Get.width * 0.55,
-                                                height: Get.height * 0.17,
-                                                child: CachedNetworkImage(
-                                                  fit: BoxFit.cover,
-                                                  imageUrl: controller
-                                                              .isFrontImageVisible
-                                                              .value ==
-                                                          true
-                                                      ? snapshot
-                                                          .data!
-                                                          .result![index]
-                                                          .passportfrontImg
-                                                          .toString()
-                                                      : snapshot
-                                                          .data!
-                                                          .result![index]
-                                                          .passportbackImg
-                                                          .toString(),
-                                                  progressIndicatorBuilder:
-                                                      (context, url,
-                                                              downloadProgress) =>
-                                                          Center(
-                                                    child: SizedBox(
-                                                      height:
-                                                          30, // Adjust the height to make it smaller
-                                                      width:
-                                                          30, // Adjust the width to make it smaller
-                                                      child: CircularProgressIndicator(
-                                                          value:
-                                                              downloadProgress
-                                                                  .progress),
-                                                    ),
-                                                  ),
-                                                  errorWidget: (context, url,
-                                                          error) =>
-                                                      const Icon(Icons.error),
-                                                ),
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Column(
-                                                children: [
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        "Certificate Name",
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .labelSmall!
-                                                            .copyWith(
-                                                                fontSize: 12,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400),
-                                                      ),
-                                                      Text(
-                                                        snapshot
-                                                            .data!
-                                                            .result![index]
-                                                            .passportName
-                                                            .toString(),
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .labelSmall!
-                                                            .copyWith(
-                                                                fontSize: 10,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                color: AppColors
-                                                                    .whiteShade),
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                      ).paddingOnly(bottom: 7),
-                                                      Text(
-                                                        "Certificate Number",
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .labelSmall!
-                                                            .copyWith(
-                                                                fontSize: 12,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400),
-                                                      ),
-                                                      Text(
-                                                        snapshot
-                                                            .data!
-                                                            .result![index]
-                                                            .passportNumber
-                                                            .toString(),
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .labelSmall!
-                                                            .copyWith(
-                                                                fontSize: 10,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                color: AppColors
-                                                                    .whiteShade),
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                      ),
-                                                    ],
-                                                  ).paddingOnly(left: 10),
-                                                  Obx(
-                                                    () => Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        InkWell(
-                                                          onTap: () {
-                                                            controller
-                                                                .isFrontImageVisible
-                                                                .value = true;
-                                                          },
-                                                          child: Container(
-                                                            height: 22,
-                                                            width: 22,
-                                                            decoration: BoxDecoration(
-                                                                border: Border.all(
-                                                                    color: AppColors
-                                                                        .yellow),
-                                                                color: controller
-                                                                            .isFrontImageVisible
-                                                                            .value !=
-                                                                        false
-                                                                    ? AppColors
-                                                                        .yellow
-                                                                    : Colors
-                                                                        .transparent,
-                                                                shape: BoxShape
-                                                                    .circle),
-                                                            child: Transform
-                                                                .translate(
-                                                              offset:
-                                                                  const Offset(
-                                                                      -1, 0),
-                                                              child:
-                                                                  Image.asset(
-                                                                ImagesPaths
-                                                                    .arrowback,
-                                                                scale: 7,
-                                                                color: controller
-                                                                            .isFrontImageVisible
-                                                                            .value !=
-                                                                        false
-                                                                    ? AppColors
-                                                                        .black
-                                                                    : AppColors
-                                                                        .yellow,
-                                                                alignment:
-                                                                    Alignment
-                                                                        .center,
-                                                              ),
-                                                            ),
-                                                          ).paddingOnly(
-                                                              right: 0),
-                                                        ),
-                                                        Container(
-                                                          height: Get.height *
-                                                              0.025,
-                                                          width:
-                                                              Get.width * 0.12,
-                                                          alignment: Alignment
-                                                              .topCenter,
-                                                          decoration: BoxDecoration(
-                                                              border: Border.all(
-                                                                  color:
-                                                                      AppColors
-                                                                          .grey),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          10)),
-                                                          child: Text(
-                                                            controller
-                                                                    .isFrontImageVisible
-                                                                    .value
-                                                                ? 'Front'
-                                                                : 'Back',
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .titleMedium,
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                        ).paddingOnly(
-                                                            left: 1, right: 1),
-                                                        InkWell(
-                                                          onTap: () {
-                                                            controller
-                                                                .isFrontImageVisible
-                                                                .value = false;
-                                                            log(controller
-                                                                .isFrontImageVisible
-                                                                .value
-                                                                .toString());
-                                                          },
-                                                          child: Container(
-                                                            height: 22,
-                                                            width: 22,
-                                                            decoration: BoxDecoration(
-                                                                border: Border.all(
-                                                                    color: AppColors
-                                                                        .yellow),
-                                                                color: controller
-                                                                            .isFrontImageVisible
-                                                                            .value ==
-                                                                        false
-                                                                    ? AppColors
-                                                                        .yellow
-                                                                    : Colors
-                                                                        .transparent,
-                                                                shape: BoxShape
-                                                                    .circle),
-                                                            child: Transform
-                                                                .translate(
-                                                              offset:
-                                                                  const Offset(
-                                                                      1, 0),
-                                                              child:
-                                                                  Image.asset(
-                                                                ImagesPaths
-                                                                    .arrowforword,
-                                                                scale: 7,
-                                                                color: controller
-                                                                            .isFrontImageVisible
-                                                                            .value !=
-                                                                        false
-                                                                    ? AppColors
-                                                                        .yellow
-                                                                    : AppColors
-                                                                        .black,
-                                                                alignment:
-                                                                    Alignment
-                                                                        .center,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ).paddingOnly(
-                                                      top: 7,
-                                                      left: 5,
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        )
-                                      ],
-                                    ).paddingOnly(
-                                        top: 5, bottom: 5, right: 15, left: 15),
-                                  ).paddingOnly(bottom: Get.height * 0.02)
-                                : snapshot.data!.result![index]
-                                                .emiratesfrontImg !=
-                                            null ||
-                                        snapshot.data!.result![index]
-                                                .emiratesbackImg !=
-                                            null
-                                    ?
-                                    //Emirates Id
-                                    Container(
-                                        decoration: BoxDecoration(
-                                          color: AppColors.greyButton,
-                                          borderRadius:
-                                              BorderRadius.circular(5),
                                         ),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  "EMIRATES ID",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .labelSmall!
-                                                      .copyWith(
-                                                          color:
-                                                              AppColors.yellow,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w600),
-                                                ),
-                                                const Spacer(
-                                                  flex: 1,
-                                                ),
-                                                Container(
-                                                  alignment: Alignment.center,
-                                                  height: 22,
-                                                  width: 100,
-                                                  decoration: BoxDecoration(
-                                                      color: AppColors.Black3,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5)),
-                                                  child: Text(
-                                                    "Under verification",
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelSmall!
-                                                        .copyWith(
-                                                            color:
-                                                                Colors.yellow,
-                                                            fontSize: 10),
-                                                  ),
-                                                ).paddingOnly(right: 10),
-                                                Container(
-                                                  height: 20,
-                                                  width: 25,
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                          color:
-                                                              AppColors.yellow,
-                                                          shape:
-                                                              BoxShape.circle),
-                                                  child: Image.asset(ImagesPaths.check),
-                                                )
-                                              ],
-                                            ).paddingOnly(bottom: 5),
-                                            Container(
-                                              height: 0.5,
-                                              color: AppColors.grey5,
-                                            ).paddingOnly(bottom: 15, top: 5),
-                                            Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Obx(
-                                                  () => SizedBox(
-                                                    width: Get.width * 0.55,
-                                                    height: Get.height * 0.17,
-                                                    child: CachedNetworkImage(
-                                                      fit: BoxFit.cover,
-                                                      imageUrl: controller
-                                                                  .isFrontImageVisible1
-                                                                  .value ==
-                                                              true
-                                                          ? snapshot
-                                                              .data!
-                                                              .result![index]
-                                                              .emiratesfrontImg
-                                                              .toString()
-                                                          : snapshot
-                                                              .data!
-                                                              .result![index]
-                                                              .emiratesbackImg
-                                                              .toString(),
-                                                      progressIndicatorBuilder:
-                                                          (context, url,
-                                                                  downloadProgress) =>
-                                                              Center(
-                                                        child: SizedBox(
-                                                          height:
-                                                              30, // Adjust the height to make it smaller
-                                                          width:
-                                                              30, // Adjust the width to make it smaller
-                                                          child: CircularProgressIndicator(
-                                                              value:
-                                                                  downloadProgress
-                                                                      .progress),
-                                                        ),
-                                                      ),
-                                                      errorWidget: (context,
-                                                              url, error) =>
-                                                          const Icon(
-                                                              Icons.error),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: Column(
-                                                    children: [
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            "Certificate Name",
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .labelSmall!
-                                                                .copyWith(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400),
-                                                          ),
-                                                          Text(
-                                                            snapshot
-                                                                .data!
-                                                                .result![index]
-                                                                .emiratesName
-                                                                .toString(),
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .labelSmall!
-                                                                .copyWith(
-                                                                    fontSize:
-                                                                        10,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    color: AppColors
-                                                                        .whiteShade),
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                          ).paddingOnly(
-                                                              bottom: 7),
-                                                          Text(
-                                                            "Certificate Number",
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .labelSmall!
-                                                                .copyWith(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400),
-                                                          ),
-                                                          Text(
-                                                            snapshot
-                                                                .data!
-                                                                .result![index]
-                                                                .emiratesNumber
-                                                                .toString(),
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .labelSmall!
-                                                                .copyWith(
-                                                                    fontSize:
-                                                                        10,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    color: AppColors
-                                                                        .whiteShade),
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                          ),
-                                                        ],
-                                                      ).paddingOnly(left: 10),
-                                                      Obx(
-                                                        () => Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            InkWell(
-                                                              onTap: () {
-                                                                controller
-                                                                    .isFrontImageVisible1
-                                                                    .value = true;
-                                                              },
-                                                              child: Container(
-                                                                height: 22,
-                                                                width: 22,
-                                                                decoration: BoxDecoration(
-                                                                    border: Border.all(
-                                                                        color: AppColors
-                                                                            .yellow),
-                                                                    color: controller.isFrontImageVisible1.value !=
-                                                                            false
-                                                                        ? AppColors
-                                                                            .yellow
-                                                                        : Colors
-                                                                            .transparent,
-                                                                    shape: BoxShape
-                                                                        .circle),
-                                                                child: Transform
-                                                                    .translate(
-                                                                  offset:
-                                                                      const Offset(
-                                                                          -1,
-                                                                          0),
-                                                                  child: Image
-                                                                      .asset(
-                                                                    ImagesPaths
-                                                                        .arrowback,
-                                                                    scale: 7,
-                                                                    color: controller.isFrontImageVisible1.value !=
-                                                                            false
-                                                                        ? AppColors
-                                                                            .black
-                                                                        : AppColors
-                                                                            .yellow,
-                                                                    alignment:
-                                                                        Alignment
-                                                                            .center,
-                                                                  ),
-                                                                ),
-                                                              ).paddingOnly(
-                                                                  right: 0),
-                                                            ),
-                                                            Container(
-                                                              height:
-                                                                  Get.height *
-                                                                      0.025,
-                                                              width: Get.width *
-                                                                  0.12,
-                                                              alignment:
-                                                                  Alignment
-                                                                      .topCenter,
-                                                              decoration: BoxDecoration(
-                                                                  border: Border.all(
-                                                                      color: AppColors
-                                                                          .grey),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              10)),
-                                                              child: Text(
-                                                                controller
-                                                                        .isFrontImageVisible1
-                                                                        .value
-                                                                    ? 'Front'
-                                                                    : 'Back',
-                                                                style: Theme.of(
-                                                                        context)
-                                                                    .textTheme
-                                                                    .titleMedium,
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
-                                                              ),
-                                                            ).paddingOnly(
-                                                                left: 1,
-                                                                right: 1),
-                                                            InkWell(
-                                                              onTap: () {
-                                                                controller
-                                                                    .isFrontImageVisible1
-                                                                    .value = false;
-                                                                log(controller
-                                                                    .isFrontImageVisible1
-                                                                    .value
-                                                                    .toString());
-                                                              },
-                                                              child: Container(
-                                                                height: 22,
-                                                                width: 22,
-                                                                decoration: BoxDecoration(
-                                                                    border: Border.all(
-                                                                        color: AppColors
-                                                                            .yellow),
-                                                                    color: controller.isFrontImageVisible1.value ==
-                                                                            false
-                                                                        ? AppColors
-                                                                            .yellow
-                                                                        : Colors
-                                                                            .transparent,
-                                                                    shape: BoxShape
-                                                                        .circle),
-                                                                child: Transform
-                                                                    .translate(
-                                                                  offset:
-                                                                      const Offset(
-                                                                          1, 0),
-                                                                  child: Image
-                                                                      .asset(
-                                                                    ImagesPaths
-                                                                        .arrowforword,
-                                                                    scale: 7,
-                                                                    color: controller.isFrontImageVisible1.value !=
-                                                                            false
-                                                                        ? AppColors
-                                                                            .yellow
-                                                                        : AppColors
-                                                                            .black,
-                                                                    alignment:
-                                                                        Alignment
-                                                                            .center,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ).paddingOnly(
-                                                          top: 7,
-                                                          left: 5,
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                )
-                                              ],
-                                            )
-                                          ],
-                                        ).paddingOnly(
-                                            top: 5,
-                                            bottom: 5,
-                                            right: 15,
-                                            left: 15),
-                                      ).paddingOnly(bottom: Get.height * 0.02)
-                                    : InkWell(
-                                        splashColor: Colors.transparent,
-                                        onTap: () {
-                                          final userId = snapshot.data!
-                                                  .result![index].userId ??
-                                              "";
-                                          final categoryId = snapshot.data!.result![index].category?.id ?? "";
-                                          uploadImage = UploadImage.byInitically;
-                                          Get.toNamed(AppRoutes.trainerPassport,
-                                              arguments: {
-                                                "userId": userId,
-                                                "name": snapshot.data?.result?[index].category?.name.toString() ?? "",
-                                                "categoryName": snapshot.data?.result?[index].passport.toString()??"",
-                                                "categoryId": categoryId,
-                                                "id":snapshot.data!.result![index].id.toString()
-                                              });
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        const Icon(
+                                          Icons
+                                              .arrow_forward_ios_outlined,
+                                          color: AppColors.grey4,
+                                          size: 20,
+                                        ).paddingOnly(right: 15),
+                                      ],
+                                    ),
+                                  ],
+                                ).paddingOnly(left: 0),
+                              ).paddingOnly(
+                                  bottom: Get.height * 0.02),
+                            );
+                          } else if (index == snapshot.data!.result!.length) {
+                            return Obx(
+                                  () => Material(
+                                type: MaterialType.transparency,
+                                child: Theme(
+                                  data: ThemeData(
+                                    unselectedWidgetColor: Colors.white,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Checkbox(
+                                        activeColor: AppColors.yellow,
+                                        checkColor: Colors.black,
+                                        value: controller.isChecked.value,
+                                        onChanged: (value) {
+                                          controller.isChecked.value = value!;
+                                          log(controller.isChecked.value
+                                              .toString());
                                         },
-                                        child: Container(
-                                          height: 70,
-                                          width: Get.width,
-                                          decoration: BoxDecoration(
-                                            color: AppColors.greyButton,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Transform.translate(
-                                                    offset:
-                                                        const Offset(-10, 2),
-                                                    child: Container(
-                                                      height: Get.width * 0.14,
-                                                      width: Get.width * 0.14,
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 15,
-                                                          vertical: 17),
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                        color: AppColors.black,
-                                                      ),
-                                                      child: Image.asset(
-                                                        ImagesPaths.document,
-                                                        height: 24,
-                                                        width: 24,
-                                                      ),
-                                                    ).paddingOnly(
-                                                        left: 20,
-                                                        right: 10,
-                                                        bottom: 5),
-                                                  ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      SizedBox(
-                                                        width: Get.width * .55,
-                                                        child:
-                                                        Text(
-                                                          snapshot
-                                                              .data!
-                                                              .result![
-                                                          index]
-                                                              .category ==
-                                                              null
-                                                              ?
-                                                          snapshot.data!.result![index].passport.toString() =="emirates"?
-                                                              "Emirates ID":
-                                                          "Passport"
-                                                              : snapshot
-                                                              .data!
-                                                              .result![
-                                                          index]
-                                                              .category!
-                                                              .name
-                                                              .toString(),
-                                                          overflow:
-                                                          TextOverflow
-                                                              .ellipsis,
-                                                          style: Theme.of(
-                                                              context)
-                                                              .textTheme
-                                                              .titleLarge
-                                                              ?.copyWith(
-                                                              color: AppColors
-                                                                  .yellow),
-                                                        ).paddingOnly(top: 12),
-                                                      ),
-                                                      Text(
-                                                        "Upload your Certification ...",
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .labelSmall
-                                                            ?.copyWith(
-                                                                fontSize: 12),
-                                                      ).paddingOnly(top: 10),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  const Icon(
-                                                    Icons
-                                                        .arrow_forward_ios_outlined,
-                                                    color: AppColors.grey4,
-                                                    size: 20,
-                                                  ).paddingOnly(right: 15),
-                                                ],
-                                              ),
-                                            ],
-                                          ).paddingOnly(left: 0),
-                                        ).paddingOnly(
-                                            bottom: Get.height * 0.02),
-                                      );
-                      },
-                    );
+                                      ),
+                                      const Text(
+                                          'I accept the terms and conditions',
+                                          style: TextStyle(
+                                              color: Colors.white, fontSize: 12)),
+                                      const Spacer(flex: 1,),
+                                      const Text(
+                                          'view all',
+                                          style: TextStyle(
+                                              color: AppColors.whiteShade, fontSize: 12))
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                          else if (index == snapshot.data!.result!.length +1) {
+                            return
+                              Center(
+                                child: InkButton(
+                                  child: Text(
+                                    'Continue',
+                                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                                      color: AppColors.black,
+                                      fontSize: 18,
+                                      fontFamily: 'Montserrat',
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    log(index.toString());
+                                    if (snapshot.data!.result![index-2].approveStatus == null) {
+                                      showSnackBar("Please upload all document images");
+                                    } else if (!controller.isChecked.value) {
+                                      showSnackBar("Please accept terms and conditions");
+                                    } else {
+                                      Get.toNamed(AppRoutes.bio)?.then((result) {
+                                        if (result != null && result == true) {
+                                          controller.showButton(true);
+                                        }
+                                      });
+                                    }
+                                  },
+                                ),
+                              ).paddingOnly(bottom: 15, top: 5);
+                          }
+                          return const SizedBox.shrink();
+                        },
+                      );
                   },
                 ),
-                Obx(
-                  () => Material(
-                    type: MaterialType.transparency,
-                    child: Theme(
-                      data: ThemeData(
-                        unselectedWidgetColor: Colors.white,
-                      ),
-                      child: Row(
-                        children: [
-                          Checkbox(
-                            activeColor: AppColors.yellow,
-                            checkColor: Colors.black,
-                            value: controller.isChecked.value,
-                            onChanged: (value) {
-                              controller.isChecked.value = value!;
-                              log(controller.isChecked.value.toString());
-                            },
-                          ),
-                          const Text('I accept the terms and conditions',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 12)),
-                          const Spacer(
-                            flex: 1,
-                          ),
-                          const Text('view all',
-                              style: TextStyle(
-                                  color: AppColors.whiteShade, fontSize: 12))
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Center(
-                  child: InkButton(
-                      child: Text(
-                        'Continue',
-                        style:
-                            Theme.of(context).textTheme.headlineSmall!.copyWith(
-                                  color: AppColors.black,
-                                  fontSize: 18,
-                                  fontFamily: 'Montserrat',
-                                ),
-                      ),
-                      onTap: () {
-                        bool hasMissingDocuments =
-                            storage.read("Passport") != "true" ||
-                                storage.read("Emirates ID") != "true";
 
-                        if (hasMissingDocuments) {
-                          showSnackBar("Please upload all the documents");
-                        } else if (!controller.isChecked.value) {
-                          showSnackBar("Please accept terms and conditions");
-                        } else {
-                          Get.offAllNamed(AppRoutes.bio)?.then((result) {
-                            if (result != null && result == true) {
-                              controller.showButton(true);
-                            }
-                          });
-                        }
-                      }),
-                ).paddingOnly(bottom: 15, top: 5)
               ],
             ),
           ),

@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -149,134 +150,6 @@ enum OtpVerified{
   byMail
 }
 
-// Drawer myDrawer() {
-//   return Drawer(
-//
-//     surfaceTintColor: Colors.red,
-//     child: ListView(
-//       padding: EdgeInsets.zero,
-//       children: [
-//         DrawerHeader(
-//           decoration: BoxDecoration(
-//             color: Colors.blue,
-//           ),
-//           child: Text('Drawer Header'),
-//         ),
-//         ListTile(
-//           selected: true, // Set to true when tile is selected
-//           selectedTileColor: AppColors.yellow, // Background color when tile is selected
-//           tileColor: AppColors.yellow, // Background color when tile is not selected (to maintain the color)
-//           iconColor: Colors.white, // Icon color
-//           title: InkWell(
-//             onTap: () {
-//               // Add your onTap logic here
-//             },
-//             child: Row(
-//               children: [
-//                 Image.asset(ImagesPaths.home, scale: 5, color: Colors.white), // Set icon color to white
-//                 SizedBox(width: Get.width * 0.05),
-//                 Text('Drawer Header', style: TextStyle(color: Colors.white)), // Set text color to white
-//               ],
-//             ),
-//           ),
-//         ),
-//
-//         ListTile(
-//           selected: true, // Set to true when tile is selected
-//           selectedTileColor: AppColors.yellow, // Background color when tile is selected
-//           tileColor: AppColors.yellow, // Background color when tile is not selected (to maintain the color)
-//           iconColor: Colors.white, // Icon color
-//           title: InkWell(
-//             onTap: () {
-//               // Add your onTap logic here
-//             },
-//             child: Row(
-//               children: [
-//                 Image.asset(ImagesPaths.home, scale: 5, color: Colors.white), // Set icon color to white
-//                 SizedBox(width: Get.width * 0.05),
-//                 Text('Drawer Header', style: TextStyle(color: Colors.white)), // Set text color to white
-//               ],
-//             ),
-//           ),
-//         ),
-//         ListTile(
-//           selectedColor:AppColors.yellow ,
-//           title: InkWell(
-//             onTap: () {
-//             },
-//             child: Row(
-//               children: [
-//                 Image.asset(ImagesPaths.home, scale: 5, color: AppColors.impgrey,),
-//                 SizedBox(width: Get.width * 0.05,),
-//                 Text('Drawer Header', style: Theme.of(Get.context!).textTheme.titleLarge),
-//               ],
-//             ),
-//           ),
-//         ),
-//         ListTile(
-//           selectedColor:AppColors.yellow ,
-//           title: InkWell(
-//             onTap: () {
-//             },
-//             child: Row(
-//               children: [
-//                 Image.asset(ImagesPaths.home, scale: 5, color: AppColors.impgrey,),
-//                 SizedBox(width: Get.width * 0.05,),
-//                 Text('Drawer Header', style: Theme.of(Get.context!).textTheme.titleLarge),
-//               ],
-//             ),
-//           ),
-//         ),
-//         ListTile(
-//           selectedColor:AppColors.yellow ,
-//           title: InkWell(
-//             onTap: () {
-//             },
-//             child: Row(
-//               children: [
-//                 Image.asset(ImagesPaths.home, scale: 5, color: AppColors.impgrey,),
-//                 SizedBox(width: Get.width * 0.05,),
-//                 Text('Drawer Header', style: Theme.of(Get.context!).textTheme.titleLarge),
-//               ],
-//             ),
-//           ),
-//         ),
-//         ListTile(
-//           selectedColor:AppColors.yellow ,
-//           title: InkWell(
-//             onTap: () {
-//             },
-//             child: Row(
-//               children: [
-//                 Image.asset(ImagesPaths.home, scale: 5, color: AppColors.impgrey,),
-//                 SizedBox(width: Get.width * 0.05,),
-//                 Text('Drawer Header', style: Theme.of(Get.context!).textTheme.titleLarge),
-//               ],
-//             ),
-//           ),
-//         ),
-//         ListTile(
-//           selectedColor:AppColors.yellow ,
-//           title: InkWell(
-//             onTap: () {
-//             },
-//             child: Row(
-//               children: [
-//                 Image.asset(ImagesPaths.home, scale: 5, color: AppColors.impgrey,),
-//                 SizedBox(width: Get.width * 0.05,),
-//                 Text('Drawer Header', style: Theme.of(Get.context!).textTheme.titleLarge),
-//               ],
-//             ),
-//           ),
-//         ),
-//
-//
-//
-//       ],
-//     ),
-//   );
-// }
-//
 
 Widget buildOption(IconData icon, String label, VoidCallback onTap) {
   return InkWell(
@@ -315,3 +188,292 @@ class NoLeadingSpaceFormatter extends TextInputFormatter {
     return newValue;
   }
 }
+
+
+/// UPLOADED DOC CLASS
+class TrainerDocumentStatusCard extends StatelessWidget {
+  final String categoryName;
+  final String categoryMainName;
+  final String docName;
+  final String docNumber;
+  final String categoryNumber;
+  final String documentFrontImg;
+  final String documentBackImg;
+  final String approveStatus;
+  final String? remark;
+  final String? comment;
+  final void Function()? onReuploadTap;
+  final bool isFrontImageVisible;
+
+  TrainerDocumentStatusCard({
+    required this.categoryName,
+    required this.docName,
+    required this.docNumber,
+    required this.categoryMainName,
+    required this.categoryNumber,
+    required this.documentFrontImg,
+    required this.documentBackImg,
+    required this.approveStatus,
+    this.remark,
+    this.comment,
+    this.onReuploadTap,
+    this.isFrontImageVisible = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    var isFrontImageVisible = true.obs;
+
+    return Container(
+      width: Get.width,
+      decoration: BoxDecoration(
+        color: AppColors.greyButton,
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child:
+      Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildHeader(context),
+          _buildDivider(),
+          _buildBody(context, isFrontImageVisible),
+          if (remark != null) _buildRemarkSection(context),
+        ],
+      ).paddingOnly(bottom: 15, top: 15, right: 15, left: 15),
+    ).paddingOnly(bottom: 15);
+  }
+
+  Widget _buildHeader(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          categoryMainName,
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(color: AppColors.yellow),
+        ),
+        _buildApprovalStatus(),
+      ],
+    ).paddingOnly(bottom: Get.height * 0.01);
+  }
+
+  Widget _buildApprovalStatus() {
+    switch (approveStatus) {
+      case "approved":
+        return _buildApprovedStatus();
+      case "pending":
+        return _buildPendingStatus();
+      case "rejected":
+        return _buildRejectedStatus();
+      default:
+        return SizedBox.shrink();
+    }
+  }
+
+  Widget _buildApprovedStatus() {
+    return Row(
+      children: [
+        Container(
+          height: 22,
+          width: 64,
+          decoration: BoxDecoration(color: AppColors.Black3, borderRadius: BorderRadius.circular(5)),
+          child: Center(
+            child: Text('Approved', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: Colors.green)),
+          ),
+        ),
+        CircleAvatar(
+          backgroundColor: AppColors.yellow,
+          radius: 11,
+          child: Image.asset(ImagesPaths.checktick, width: 22),
+        ).paddingOnly(left: 10),
+      ],
+    );
+  }
+
+  Widget _buildPendingStatus() {
+    return Row(
+      children: [
+        Container(
+          height: 22,
+          width: 100,
+          decoration: BoxDecoration(color: AppColors.Black3, borderRadius: BorderRadius.circular(5)),
+          child: Center(
+            child: Text('Under verification', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: Colors.yellow)),
+          ),
+        ),
+        CircleAvatar(
+          backgroundColor: AppColors.yellow,
+          radius: 11,
+          child: Image.asset(ImagesPaths.check, width: 22),
+        ).paddingOnly(left: 10),
+      ],
+    );
+  }
+
+  Widget _buildRejectedStatus() {
+    return Row(
+      children: [
+        Container(
+          height: 22,
+          width: 64,
+          decoration: BoxDecoration(color: AppColors.Black3, borderRadius: BorderRadius.circular(5)),
+          child: Center(
+            child: Text('Rejected', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: Colors.red)),
+          ),
+        ),
+        CircleAvatar(
+          backgroundColor: AppColors.yellow,
+          radius: 11,
+          child: Image.asset(ImagesPaths.checkcross, width: 22),
+        ).paddingOnly(left: 10),
+      ],
+    );
+  }
+
+  Widget _buildDivider() {
+    return Container(
+      height: 1,
+      width: Get.width,
+      color: AppColors.lightyGrey,
+    ).paddingOnly(bottom: Get.height * 0.02);
+  }
+
+  Widget _buildBody(BuildContext context, RxBool isFrontImageVisible) {
+    return Row(
+      children: [
+        Flexible(
+          child: Obx(() => SizedBox(
+            height: 131,
+            width: 204,
+            child: CachedNetworkImage(
+              fit: BoxFit.contain,
+              imageUrl: isFrontImageVisible.value ? documentFrontImg : documentBackImg,
+              progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                child: SizedBox(
+                  height: 30,
+                  width: 30,
+                  child: CircularProgressIndicator(value: downloadProgress.progress),
+                ),
+              ),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+            ),
+          )),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            _buildCertificationInfo(context),
+            _buildFrontBackToggle(context, isFrontImageVisible),
+          ],
+        ).paddingOnly(left: Get.width * 0.04),
+      ],
+    );
+  }
+
+  Widget _buildCertificationInfo(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(docName, style: Theme.of(context).textTheme.labelMedium).paddingOnly(bottom: 2),
+        Text(categoryName, style: Theme.of(context).textTheme.labelSmall).paddingOnly(bottom: 8),
+        Text(docNumber, style: Theme.of(context).textTheme.labelMedium).paddingOnly(bottom: 2),
+        Text(categoryNumber, style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.white)).paddingOnly(bottom: 2),
+
+      ],
+    );
+  }
+
+  Widget _buildFrontBackToggle(BuildContext context, RxBool isFrontImageVisible) {
+    return Obx(() => Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        _buildToggleIcon(true, isFrontImageVisible),
+        _buildFrontBackLabel(context, isFrontImageVisible),
+        _buildToggleIcon(false, isFrontImageVisible),
+      ],
+    ).paddingOnly(top: 7, left: 5));
+  }
+
+  Widget _buildToggleIcon(bool isFront, RxBool isFrontImageVisible) {
+    return InkWell(
+      onTap: () {
+        isFrontImageVisible.value = isFront;
+      },
+      child: Container(
+        height: 22,
+        width: 22,
+        decoration: BoxDecoration(
+          border: Border.all(color: AppColors.yellow),
+          color: isFrontImageVisible.value == isFront ? AppColors.yellow : Colors.transparent,
+          shape: BoxShape.circle,
+        ),
+        child: Transform.translate(
+          offset: Offset(isFront ? -1 : 1, 0),
+          child: Image.asset(
+            isFront ? ImagesPaths.arrowback : ImagesPaths.arrowforword,
+            scale: 7,
+            color: isFrontImageVisible.value == isFront ? AppColors.black : AppColors.yellow,
+            alignment: Alignment.center,
+          ),
+        ),
+      ).paddingOnly(right: isFront ? 10 : 0, left: isFront ? 0 : 10),
+    );
+  }
+
+  Widget _buildFrontBackLabel(BuildContext context, RxBool isFrontImageVisible) {
+    return Container(
+      height: Get.height * 0.025,
+      width: Get.width * 0.12,
+      alignment: Alignment.topCenter,
+      decoration: BoxDecoration(
+        border: Border.all(color: AppColors.grey),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Text(
+        isFrontImageVisible.value ? 'Front' : 'Back',
+        style: Theme.of(context).textTheme.titleMedium,
+        textAlign: TextAlign.center,
+      ),
+    ).paddingOnly(left: 1, right: 1);
+  }
+
+  Widget _buildRemarkSection(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Text(
+              "Rejection Reason",
+              style: Theme.of(context).textTheme.labelSmall!.copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: AppColors.white),
+            ),
+            GestureDetector(
+              onTap: onReuploadTap,
+              child: Container(
+                height: 24,
+                width: 85,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  border: Border.all(color: AppColors.yellow),
+                ),
+                child: Center(
+                  child: Text(
+                    "Reupload",
+                    style: TextStyle(color: AppColors.yellow),
+                  ),
+                ),
+              ).paddingOnly(left: 7),
+            ),
+          ],
+        ).paddingOnly(bottom: Get.height * 0.01),
+        Text(
+          comment ?? '',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+      ],
+    );
+  }
+}
+
+/// NO UPLOADED DOC CLASS
