@@ -190,207 +190,290 @@ class NoLeadingSpaceFormatter extends TextInputFormatter {
 }
 
 
-
-class CertificateCard extends StatelessWidget {
+/// UPLOADED DOC CLASS
+class TrainerDocumentStatusCard extends StatelessWidget {
   final String categoryName;
   final String categoryMainName;
+  final String docName;
+  final String docNumber;
   final String categoryNumber;
   final String documentFrontImg;
   final String documentBackImg;
+  final String approveStatus;
+  final String? remark;
+  final String? comment;
+  final void Function()? onReuploadTap;
   final bool isFrontImageVisible;
-  final Function onFrontImageTap;
-  final Function onBackImageTap;
 
-  const CertificateCard({
-    super.key,
+  TrainerDocumentStatusCard({
     required this.categoryName,
+    required this.docName,
+    required this.docNumber,
     required this.categoryMainName,
     required this.categoryNumber,
     required this.documentFrontImg,
     required this.documentBackImg,
-    required this.isFrontImageVisible,
-    required this.onFrontImageTap,
-    required this.onBackImageTap,
+    required this.approveStatus,
+    this.remark,
+    this.comment,
+    this.onReuploadTap,
+    this.isFrontImageVisible = true,
   });
 
   @override
   Widget build(BuildContext context) {
+    var isFrontImageVisible = true.obs;
+
     return Container(
+      width: Get.width,
       decoration: BoxDecoration(
         color: AppColors.greyButton,
         borderRadius: BorderRadius.circular(5),
       ),
-      child: Column(
+      child:
+      Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Text(
-                categoryMainName,
-                style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                    color: AppColors.yellow,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600),
-              ),
-              const Spacer(
-                flex: 1,
-              ),
-              Container(
-                alignment: Alignment.center,
-                height: 22,
-                width: 100,
-                decoration: BoxDecoration(
-                    color: AppColors.Black3,
-                    borderRadius: BorderRadius.circular(5)),
-                child: Text(
-                  "Under verification",
-                  style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                      color: Colors.yellow, fontSize: 10),
-                ),
-              ).paddingOnly(right: 10),
-              Container(
-                height: 20,
-                width: 25,
-                decoration: const BoxDecoration(
-                    color: AppColors.yellow, shape: BoxShape.circle),
-                child: Image.asset(ImagesPaths.check),
-              )
-            ],
-          ).paddingOnly(bottom: 5),
-          Container(
-            height: 0.5,
-            color: AppColors.grey5,
-          ).paddingOnly(bottom: 15, top: 5),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: Get.width * 0.55,
-                height: Get.height * 0.17,
-                child: CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  imageUrl: isFrontImageVisible
-                      ? documentFrontImg
-                      : documentBackImg,
-                  progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      Center(
-                        child: SizedBox(
-                          height: 30,
-                          width: 30,
-                          child: CircularProgressIndicator(
-                              value: downloadProgress.progress),
-                        ),
-                      ),
-                  errorWidget: (context, url, error) =>
-                  const Icon(Icons.error),
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Certificate Name",
-                          style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                              fontSize: 12, fontWeight: FontWeight.w400),
-                        ),
-                        Text(
-                          categoryName,
-                          style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.whiteShade),
-                          overflow: TextOverflow.ellipsis,
-                        ).paddingOnly(bottom: 7),
-                        Text(
-                          "Certificate Number",
-                          style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                              fontSize: 12, fontWeight: FontWeight.w400),
-                        ),
-                        Text(
-                          categoryNumber,
-                          style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.whiteShade),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    ).paddingOnly(left: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        InkWell(
-                          onTap: () => onFrontImageTap(),
-                          child: Container(
-                            height: 22,
-                            width: 22,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: AppColors.yellow),
-                                color: isFrontImageVisible
-                                    ? AppColors.yellow
-                                    : Colors.transparent,
-                                shape: BoxShape.circle),
-                            child: Transform.translate(
-                              offset: const Offset(-1, 0),
-                              child: Image.asset(
-                                ImagesPaths.arrowback,
-                                scale: 7,
-                                color: isFrontImageVisible
-                                    ? AppColors.black
-                                    : AppColors.yellow,
-                                alignment: Alignment.center,
-                              ),
-                            ),
-                          ).paddingOnly(right: 0),
-                        ),
-                        Container(
-                          height: Get.height * 0.025,
-                          width: Get.width * 0.12,
-                          alignment: Alignment.topCenter,
-                          decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.grey),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Text(
-                            isFrontImageVisible ? 'Front' : 'Back',
-                            style: Theme.of(context).textTheme.titleMedium,
-                            textAlign: TextAlign.center,
-                          ),
-                        ).paddingOnly(left: 1, right: 1),
-                        InkWell(
-                          onTap: () => onBackImageTap(),
-                          child: Container(
-                            height: 22,
-                            width: 22,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: AppColors.yellow),
-                                color: !isFrontImageVisible
-                                    ? AppColors.yellow
-                                    : Colors.transparent,
-                                shape: BoxShape.circle),
-                            child: Transform.translate(
-                              offset: const Offset(1, 0),
-                              child: Image.asset(
-                                ImagesPaths.arrowforword,
-                                scale: 7,
-                                color: !isFrontImageVisible
-                                    ? AppColors.black
-                                    : AppColors.yellow,
-                                alignment: Alignment.center,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ).paddingOnly(top: 7, left: 5),
-                  ],
-                ),
-              ),
-            ],
-          )
+          _buildHeader(context),
+          _buildDivider(),
+          _buildBody(context, isFrontImageVisible),
+          if (remark != null) _buildRemarkSection(context),
         ],
-      ).paddingOnly(top: 5, bottom: 5, right: 15, left: 15),
+      ).paddingOnly(bottom: 15, top: 15, right: 15, left: 15),
+    ).paddingOnly(bottom: 15);
+  }
+
+  Widget _buildHeader(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          categoryMainName,
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(color: AppColors.yellow),
+        ),
+        _buildApprovalStatus(),
+      ],
+    ).paddingOnly(bottom: Get.height * 0.01);
+  }
+
+  Widget _buildApprovalStatus() {
+    switch (approveStatus) {
+      case "approved":
+        return _buildApprovedStatus();
+      case "pending":
+        return _buildPendingStatus();
+      case "rejected":
+        return _buildRejectedStatus();
+      default:
+        return SizedBox.shrink();
+    }
+  }
+
+  Widget _buildApprovedStatus() {
+    return Row(
+      children: [
+        Container(
+          height: 22,
+          width: 64,
+          decoration: BoxDecoration(color: AppColors.Black3, borderRadius: BorderRadius.circular(5)),
+          child: Center(
+            child: Text('Approved', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: Colors.green)),
+          ),
+        ),
+        CircleAvatar(
+          backgroundColor: AppColors.yellow,
+          radius: 11,
+          child: Image.asset(ImagesPaths.checktick, width: 22),
+        ).paddingOnly(left: 10),
+      ],
+    );
+  }
+
+  Widget _buildPendingStatus() {
+    return Row(
+      children: [
+        Container(
+          height: 22,
+          width: 100,
+          decoration: BoxDecoration(color: AppColors.Black3, borderRadius: BorderRadius.circular(5)),
+          child: Center(
+            child: Text('Under verification', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: Colors.yellow)),
+          ),
+        ),
+        CircleAvatar(
+          backgroundColor: AppColors.yellow,
+          radius: 11,
+          child: Image.asset(ImagesPaths.check, width: 22),
+        ).paddingOnly(left: 10),
+      ],
+    );
+  }
+
+  Widget _buildRejectedStatus() {
+    return Row(
+      children: [
+        Container(
+          height: 22,
+          width: 64,
+          decoration: BoxDecoration(color: AppColors.Black3, borderRadius: BorderRadius.circular(5)),
+          child: Center(
+            child: Text('Rejected', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: Colors.red)),
+          ),
+        ),
+        CircleAvatar(
+          backgroundColor: AppColors.yellow,
+          radius: 11,
+          child: Image.asset(ImagesPaths.checkcross, width: 22),
+        ).paddingOnly(left: 10),
+      ],
+    );
+  }
+
+  Widget _buildDivider() {
+    return Container(
+      height: 1,
+      width: Get.width,
+      color: AppColors.lightyGrey,
     ).paddingOnly(bottom: Get.height * 0.02);
   }
+
+  Widget _buildBody(BuildContext context, RxBool isFrontImageVisible) {
+    return Row(
+      children: [
+        Flexible(
+          child: Obx(() => SizedBox(
+            height: 131,
+            width: 204,
+            child: CachedNetworkImage(
+              fit: BoxFit.contain,
+              imageUrl: isFrontImageVisible.value ? documentFrontImg : documentBackImg,
+              progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                child: SizedBox(
+                  height: 30,
+                  width: 30,
+                  child: CircularProgressIndicator(value: downloadProgress.progress),
+                ),
+              ),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+            ),
+          )),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            _buildCertificationInfo(context),
+            _buildFrontBackToggle(context, isFrontImageVisible),
+          ],
+        ).paddingOnly(left: Get.width * 0.04),
+      ],
+    );
+  }
+
+  Widget _buildCertificationInfo(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(docName, style: Theme.of(context).textTheme.labelMedium).paddingOnly(bottom: 2),
+        Text(categoryName, style: Theme.of(context).textTheme.labelSmall).paddingOnly(bottom: 8),
+        Text(docNumber, style: Theme.of(context).textTheme.labelMedium).paddingOnly(bottom: 2),
+        Text(categoryNumber, style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.white)).paddingOnly(bottom: 2),
+
+      ],
+    );
+  }
+
+  Widget _buildFrontBackToggle(BuildContext context, RxBool isFrontImageVisible) {
+    return Obx(() => Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        _buildToggleIcon(true, isFrontImageVisible),
+        _buildFrontBackLabel(context, isFrontImageVisible),
+        _buildToggleIcon(false, isFrontImageVisible),
+      ],
+    ).paddingOnly(top: 7, left: 5));
+  }
+
+  Widget _buildToggleIcon(bool isFront, RxBool isFrontImageVisible) {
+    return InkWell(
+      onTap: () {
+        isFrontImageVisible.value = isFront;
+      },
+      child: Container(
+        height: 22,
+        width: 22,
+        decoration: BoxDecoration(
+          border: Border.all(color: AppColors.yellow),
+          color: isFrontImageVisible.value == isFront ? AppColors.yellow : Colors.transparent,
+          shape: BoxShape.circle,
+        ),
+        child: Transform.translate(
+          offset: Offset(isFront ? -1 : 1, 0),
+          child: Image.asset(
+            isFront ? ImagesPaths.arrowback : ImagesPaths.arrowforword,
+            scale: 7,
+            color: isFrontImageVisible.value == isFront ? AppColors.black : AppColors.yellow,
+            alignment: Alignment.center,
+          ),
+        ),
+      ).paddingOnly(right: isFront ? 10 : 0, left: isFront ? 0 : 10),
+    );
+  }
+
+  Widget _buildFrontBackLabel(BuildContext context, RxBool isFrontImageVisible) {
+    return Container(
+      height: Get.height * 0.025,
+      width: Get.width * 0.12,
+      alignment: Alignment.topCenter,
+      decoration: BoxDecoration(
+        border: Border.all(color: AppColors.grey),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Text(
+        isFrontImageVisible.value ? 'Front' : 'Back',
+        style: Theme.of(context).textTheme.titleMedium,
+        textAlign: TextAlign.center,
+      ),
+    ).paddingOnly(left: 1, right: 1);
+  }
+
+  Widget _buildRemarkSection(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Text(
+              "Rejection Reason",
+              style: Theme.of(context).textTheme.labelSmall!.copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: AppColors.white),
+            ),
+            GestureDetector(
+              onTap: onReuploadTap,
+              child: Container(
+                height: 24,
+                width: 85,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  border: Border.all(color: AppColors.yellow),
+                ),
+                child: Center(
+                  child: Text(
+                    "Reupload",
+                    style: TextStyle(color: AppColors.yellow),
+                  ),
+                ),
+              ).paddingOnly(left: 7),
+            ),
+          ],
+        ).paddingOnly(bottom: Get.height * 0.01),
+        Text(
+          comment ?? '',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+      ],
+    );
+  }
 }
+
+/// NO UPLOADED DOC CLASS

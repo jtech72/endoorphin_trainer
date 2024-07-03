@@ -137,295 +137,366 @@ class MoreAboutYouUi extends StatelessWidget {
                         child: Text('No data available'),
                       );
                     }
-                    return ListView.builder(
-                      itemCount: snapshot.data!.result!
-                          .length, // Adjusted itemCount to include the additional widgets
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      reverse: true,
-                      padding: EdgeInsets.zero,
-                      itemBuilder: (context, index) {
-                        return snapshot.data!.result![index].documentFrontImg !=
-                                    null ||
-                                snapshot.data!.result![index].documentBackImg !=
-                                    null
-                            ?
+                    return
+                      ListView.builder(
+                        itemCount: snapshot.data!.result!.length + 2, // Adjusted itemCount to include the additional widgets
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        padding: EdgeInsets.zero,
+                        itemBuilder: (context, index) {
+                          if (index < snapshot.data!.result!.length) {
+                            return
+                            snapshot.data!.result![index].documentFrontImg != null ||
+                                snapshot.data!.result![index].documentBackImg != null ?
                             //Certification
-                            Obx(
-                                () =>CertificateCard(
-                                  categoryMainName: snapshot.data!.result![index].category!.name!.toUpperCase(),
-                                  categoryName: snapshot.data!.result![index]!.categoryName.toString(),
-                                  categoryNumber: snapshot.data!.result![index]!.categoryNumber.toString(),
-                                  documentFrontImg: snapshot.data!.result![index]!.documentFrontImg,
-                                  documentBackImg: snapshot.data!.result![index]!.documentBackImg,
-                                  isFrontImageVisible: controller.isFrontImageVisible2.value,
-                                  onFrontImageTap: () {
-                                    controller.isFrontImageVisible2.value = true;
-                                  },
-                                  onBackImageTap: () {
-                                    controller.isFrontImageVisible2.value = false;
+                            TrainerDocumentStatusCard(
+                              docName: "Certification Name",
+                              docNumber: "Certification Number",
+                              categoryMainName: snapshot.data!.result![index].category!.name!.toUpperCase().toString(),
+                              categoryName: snapshot.data!.result![index].categoryName,
+                              categoryNumber: snapshot.data!.result![index].categoryNumber,
+                              documentFrontImg: snapshot.data!.result![index].documentFrontImg,
+                              documentBackImg: snapshot.data!.result![index].documentBackImg,
+                              approveStatus: snapshot.data!.result![index].approveStatus.toString(),
+                              remark: snapshot.data!.result![index].remark,
+                              comment: snapshot.data!.result![index].comment,
+                              onReuploadTap: () {
+                                {
+                                  final userId =snapshot.data!
+                                      .result![index]
+                                      .userId ??
+                                      "";
+                                  final categoryId = snapshot.data!.result![index]
+                                      .category
+                                      ?.id ??
+                                      "";
+                                  uploadImage =
+                                      UploadImage
+                                          .byProfile;
+                                  Get.toNamed(
+                                      AppRoutes
+                                          .trainerPassport,
+                                      arguments: {
+                                        "userId":
+                                        userId,
+                                        "name":
+                                        snapshot.data?.result?[index].category?.name.toString() ?? "",
+                                        "categoryName":
+                                        snapshot.data?.result?[index].passport.toString() ?? "",
+                                        "categoryId":
+                                        categoryId,
+                                        "id": snapshot.data!.result![index]
+                                            .id
+                                            .toString(),
+                                        "reupload":
+                                        true,
+                                      });
+                                }
+                              },
+                            )
+                                : snapshot.data!.result![index].passportbackImg != null ||
+                                snapshot.data!.result![index].passportfrontImg != null ?
+                            //Passport
+                            TrainerDocumentStatusCard(
+                              docName: "Passport Name",
+                              docNumber: "Passport Number",
+                              categoryMainName: "Passport",
+                              categoryName: snapshot.data!.result![index].passportName,
+                              categoryNumber: snapshot.data!.result![index].passportNumber,
+                              documentFrontImg: snapshot.data!.result![index].passportfrontImg.toString(),
+                              documentBackImg: snapshot.data!.result![index].passportbackImg.toString(),
+                              approveStatus: snapshot.data!.result![index].approveStatus.toString(),
+                              remark: snapshot.data!.result![index].remark,
+                              comment: snapshot.data!.result![index].comment,
+                              onReuploadTap: ()
+                              {
+                                final userId =
+                                    snapshot.data!.result![index].userId ??
+                                        "";
+                                final categoryId =
+                                    snapshot.data!.result![index].category?.id ??
+                                        "";
+                                uploadImage =
+                                    UploadImage.byProfile;
+                                Get.toNamed(
+                                    AppRoutes.trainerPassport,
+                                    arguments: {
+                                      "userId": userId,
+                                      "name": snapshot.data!.result?[index].category?.name.toString() ?? "",
+                                      "categoryName": snapshot.data!.result?[index].passport.toString() ?? "",
+                                      "categoryId": categoryId,
+                                      "id": snapshot.data!.result![index].id.toString(),
+                                      "reupload": true,
+                                    });
+                              }
+                              ,
+                            )
+                                : snapshot.data!.result![index].emiratesfrontImg != null ||
+                                snapshot.data!.result![index].emiratesbackImg != null
+                                ?
+                            //Emirates Id
+                            TrainerDocumentStatusCard(
+                              docName: "Emirates ID Name",
+                              docNumber: "Emirates ID Number",
+                              categoryMainName: "Emirates Id",
+                              categoryName: snapshot.data!.result![index].emiratesName,
+                              categoryNumber: snapshot.data!.result![index].emiratesNumber,
+                              documentFrontImg: snapshot.data!.result![index].emiratesfrontImg.toString(),
+                              documentBackImg: snapshot.data!.result![index].emiratesbackImg.toString(),
+                              approveStatus: snapshot.data!.result![index].approveStatus.toString(),
+                              remark: snapshot.data!.result![index].remark,
+                              comment: snapshot.data!.result![index].comment,
+                              onReuploadTap: () {
+                                {
+                                  final userId = snapshot.data!.result![index]
+                                      .userId ??
+                                      "";
+                                  final categoryId = snapshot.data!.result![index]
+                                      .category
+                                      ?.id ??
+                                      "";
+                                  uploadImage =
+                                      UploadImage
+                                          .byProfile;
+                                  Get.toNamed(
+                                      AppRoutes
+                                          .trainerPassport,
+                                      arguments: {
+                                        "userId":
+                                        userId,
+                                        "name":
+                                        snapshot.data!.result?[index].category?.name.toString() ?? "",
+                                        "categoryName":
+                                        snapshot.data!.result?[index].passport.toString() ?? "",
+                                        "categoryId":
+                                        categoryId,
+                                        "id": snapshot.data!.result![index]
+                                            .id
+                                            .toString(),
+                                        "reupload":
+                                        true,
+                                      });
+                                }
+
+                              },
+                            )
+                                :
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              onTap: () {
+                                final userId = snapshot.data!
+                                    .result![index].userId ??
+                                    "";
+                                final categoryId = snapshot
+                                    .data!
+                                    .result![index]
+                                    .category
+                                    ?.id ??
+                                    "";
+                                uploadImage =
+                                    UploadImage.byInitically;
+                                Get.toNamed(AppRoutes.trainerPassport,
+                                    arguments: {
+                                      "userId": userId,
+                                      "name": snapshot
+                                          .data
+                                          ?.result?[index]
+                                          .category
+                                          ?.name
+                                          .toString() ??
+                                          "",
+                                      "categoryName": snapshot
+                                          .data
+                                          ?.result?[index]
+                                          .passport
+                                          .toString() ??
+                                          "",
+                                      "categoryId": categoryId,
+                                      "id": snapshot
+                                          .data!.result![index].id
+                                          .toString()
+                                    });
+                              },
+                              child: Container(
+                                height: 70,
+                                width: Get.width,
+                                decoration: BoxDecoration(
+                                  color: AppColors.greyButton,
+                                  borderRadius:
+                                  BorderRadius.circular(5),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.start,
+                                      children: [
+                                        Transform.translate(
+                                          offset:
+                                          const Offset(-10, 2),
+                                          child: Container(
+                                            height: Get.width * 0.14,
+                                            width: Get.width * 0.14,
+                                            padding: const EdgeInsets
+                                                .symmetric(
+                                                horizontal: 15,
+                                                vertical: 17),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius
+                                                  .circular(5),
+                                              color: AppColors.black,
+                                            ),
+                                            child: Image.asset(
+                                              ImagesPaths.document,
+                                              height: 24,
+                                              width: 24,
+                                            ),
+                                          ).paddingOnly(
+                                              left: 20,
+                                              right: 10,
+                                              bottom: 5),
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            SizedBox(
+                                              width: Get.width * .55,
+                                              child: Text(
+                                                snapshot
+                                                    .data!
+                                                    .result![
+                                                index]
+                                                    .category ==
+                                                    null
+                                                    ? snapshot
+                                                    .data!
+                                                    .result![
+                                                index]
+                                                    .passport
+                                                    .toString() ==
+                                                    "emirates"
+                                                    ? "Emirates ID"
+                                                    : "Passport"
+                                                    : snapshot
+                                                    .data!
+                                                    .result![
+                                                index]
+                                                    .category!
+                                                    .name
+                                                    .toString(),
+                                                overflow: TextOverflow
+                                                    .ellipsis,
+                                                style: Theme.of(
+                                                    context)
+                                                    .textTheme
+                                                    .titleLarge
+                                                    ?.copyWith(
+                                                    color: AppColors
+                                                        .yellow),
+                                              ).paddingOnly(top: 12),
+                                            ),
+                                            Text(
+                                              "Upload your Certification ...",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelSmall
+                                                  ?.copyWith(
+                                                  fontSize: 12),
+                                            ).paddingOnly(top: 10),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        const Icon(
+                                          Icons
+                                              .arrow_forward_ios_outlined,
+                                          color: AppColors.grey4,
+                                          size: 20,
+                                        ).paddingOnly(right: 15),
+                                      ],
+                                    ),
+                                  ],
+                                ).paddingOnly(left: 0),
+                              ).paddingOnly(
+                                  bottom: Get.height * 0.02),
+                            );
+                          } else if (index == snapshot.data!.result!.length) {
+                            return Obx(
+                                  () => Material(
+                                type: MaterialType.transparency,
+                                child: Theme(
+                                  data: ThemeData(
+                                    unselectedWidgetColor: Colors.white,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Checkbox(
+                                        activeColor: AppColors.yellow,
+                                        checkColor: Colors.black,
+                                        value: controller.isChecked.value,
+                                        onChanged: (value) {
+                                          controller.isChecked.value = value!;
+                                          log(controller.isChecked.value
+                                              .toString());
+                                        },
+                                      ),
+                                      const Text(
+                                          'I accept the terms and conditions',
+                                          style: TextStyle(
+                                              color: Colors.white, fontSize: 12)),
+                                      const Spacer(flex: 1,),
+                                      const Text(
+                                          'view all',
+                                          style: TextStyle(
+                                              color: AppColors.whiteShade, fontSize: 12))
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                          else if (index == snapshot.data!.result!.length +1) {
+                            return
+                              Center(
+                                child: InkButton(
+                                  child: Text(
+                                    'Continue',
+                                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                                      color: AppColors.black,
+                                      fontSize: 18,
+                                      fontFamily: 'Montserrat',
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    log(index.toString());
+                                    if (snapshot.data!.result![index-2].approveStatus == null) {
+                                      showSnackBar("Please upload all document images");
+                                    } else if (!controller.isChecked.value) {
+                                      showSnackBar("Please accept terms and conditions");
+                                    } else {
+                                      Get.toNamed(AppRoutes.bio)?.then((result) {
+                                        if (result != null && result == true) {
+                                          controller.showButton(true);
+                                        }
+                                      });
+                                    }
                                   },
                                 ),
-                            )
-                            : snapshot.data!.result![index].passportbackImg !=
-                                        null ||
-                                    snapshot.data!.result![index]
-                                            .passportfrontImg !=
-                                        null
-                                ?
-                                //Passport
-                        Obx(
-                              () =>CertificateCard(
-                            categoryMainName: "PASSPORT",
-                            categoryName: snapshot.data!.result![index]!.passportName.toString(),
-                            categoryNumber: snapshot.data!.result![index]!.passportNumber.toString(),
-                            documentFrontImg: snapshot.data!.result![index]!.passportfrontImg.toString(),
-                            documentBackImg: snapshot.data!.result![index]!.passportbackImg.toString(),
-                            isFrontImageVisible: controller.isFrontImageVisible.value,
-                            onFrontImageTap: () {
-                              controller.isFrontImageVisible.value = true;
-                            },
-                            onBackImageTap: () {
-                              controller.isFrontImageVisible.value = false;
-                            },
-                          ),
-                        )
-                                : snapshot.data!.result![index]
-                                                .emiratesfrontImg !=
-                                            null ||
-                                        snapshot.data!.result![index]
-                                                .emiratesbackImg !=
-                                            null
-                                    ?
-                                    //Emirates Id
-                        Obx(
-                              () =>CertificateCard(
-                            categoryMainName: "EMIRATES ID",
-                            categoryName: snapshot.data!.result![index]!.emiratesName.toString(),
-                            categoryNumber: snapshot.data!.result![index]!.emiratesNumber.toString(),
-                            documentFrontImg: snapshot.data!.result![index]!.emiratesfrontImg.toString(),
-                            documentBackImg: snapshot.data!.result![index]!.emiratesfrontImg.toString(),
-                            isFrontImageVisible: controller.isFrontImageVisible1.value,
-                            onFrontImageTap: () {
-                              controller.isFrontImageVisible1.value = true;
-                            },
-                            onBackImageTap: () {
-                              controller.isFrontImageVisible1.value = false;
-                            },
-                          ),
-                        )
-                                    :
-                        InkWell(
-                                        splashColor: Colors.transparent,
-                                        onTap: () {
-                                          final userId = snapshot.data!
-                                                  .result![index].userId ??
-                                              "";
-                                          final categoryId = snapshot
-                                                  .data!
-                                                  .result![index]
-                                                  .category
-                                                  ?.id ??
-                                              "";
-                                          uploadImage =
-                                              UploadImage.byInitically;
-                                          Get.toNamed(AppRoutes.trainerPassport,
-                                              arguments: {
-                                                "userId": userId,
-                                                "name": snapshot
-                                                        .data
-                                                        ?.result?[index]
-                                                        .category
-                                                        ?.name
-                                                        .toString() ??
-                                                    "",
-                                                "categoryName": snapshot
-                                                        .data
-                                                        ?.result?[index]
-                                                        .passport
-                                                        .toString() ??
-                                                    "",
-                                                "categoryId": categoryId,
-                                                "id": snapshot
-                                                    .data!.result![index].id
-                                                    .toString()
-                                              });
-                                        },
-                                        child: Container(
-                                          height: 70,
-                                          width: Get.width,
-                                          decoration: BoxDecoration(
-                                            color: AppColors.greyButton,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Transform.translate(
-                                                    offset:
-                                                        const Offset(-10, 2),
-                                                    child: Container(
-                                                      height: Get.width * 0.14,
-                                                      width: Get.width * 0.14,
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 15,
-                                                          vertical: 17),
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                        color: AppColors.black,
-                                                      ),
-                                                      child: Image.asset(
-                                                        ImagesPaths.document,
-                                                        height: 24,
-                                                        width: 24,
-                                                      ),
-                                                    ).paddingOnly(
-                                                        left: 20,
-                                                        right: 10,
-                                                        bottom: 5),
-                                                  ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      SizedBox(
-                                                        width: Get.width * .55,
-                                                        child: Text(
-                                                          snapshot
-                                                                      .data!
-                                                                      .result![
-                                                                          index]
-                                                                      .category ==
-                                                                  null
-                                                              ? snapshot
-                                                                          .data!
-                                                                          .result![
-                                                                              index]
-                                                                          .passport
-                                                                          .toString() ==
-                                                                      "emirates"
-                                                                  ? "Emirates ID"
-                                                                  : "Passport"
-                                                              : snapshot
-                                                                  .data!
-                                                                  .result![
-                                                                      index]
-                                                                  .category!
-                                                                  .name
-                                                                  .toString(),
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                          style: Theme.of(
-                                                                  context)
-                                                              .textTheme
-                                                              .titleLarge
-                                                              ?.copyWith(
-                                                                  color: AppColors
-                                                                      .yellow),
-                                                        ).paddingOnly(top: 12),
-                                                      ),
-                                                      Text(
-                                                        "Upload your Certification ...",
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .labelSmall
-                                                            ?.copyWith(
-                                                                fontSize: 12),
-                                                      ).paddingOnly(top: 10),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  const Icon(
-                                                    Icons
-                                                        .arrow_forward_ios_outlined,
-                                                    color: AppColors.grey4,
-                                                    size: 20,
-                                                  ).paddingOnly(right: 15),
-                                                ],
-                                              ),
-                                            ],
-                                          ).paddingOnly(left: 0),
-                                        ).paddingOnly(
-                                            bottom: Get.height * 0.02),
-                                      );
-                      },
-                    );
+                              ).paddingOnly(bottom: 15, top: 5);
+                          }
+                          return const SizedBox.shrink();
+                        },
+                      );
                   },
                 ),
-                Obx(
-                  () => Material(
-                    type: MaterialType.transparency,
-                    child: Theme(
-                      data: ThemeData(
-                        unselectedWidgetColor: Colors.white,
-                      ),
-                      child: Row(
-                        children: [
-                          Checkbox(
-                            activeColor: AppColors.yellow,
-                            checkColor: Colors.black,
-                            value: controller.isChecked.value,
-                            onChanged: (value) {
-                              controller.isChecked.value = value!;
-                              log(controller.isChecked.value.toString());
-                            },
-                          ),
-                          const Text('I accept the terms and conditions',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 12)),
-                          const Spacer(
-                            flex: 1,
-                          ),
-                          const Text('view all',
-                              style: TextStyle(
-                                  color: AppColors.whiteShade, fontSize: 12))
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Center(
-                  child: InkButton(
-                      child: Text(
-                        'Continue',
-                        style:
-                            Theme.of(context).textTheme.headlineSmall!.copyWith(
-                                  color: AppColors.black,
-                                  fontSize: 18,
-                                  fontFamily: 'Montserrat',
-                                ),
-                      ),
-                      onTap: () {
-                        bool hasMissingDocuments =
-                            storage.read("Passport") != "true" ||
-                                storage.read("Emirates ID") != "true";
 
-                        if (hasMissingDocuments) {
-                          showSnackBar("Please upload all the documents");
-                        } else if (!controller.isChecked.value) {
-                          showSnackBar("Please accept terms and conditions");
-                        } else {
-                          Get.offAllNamed(AppRoutes.bio)?.then((result) {
-                            if (result != null && result == true) {
-                              controller.showButton(true);
-                            }
-                          });
-                        }
-                      }),
-                ).paddingOnly(bottom: 15, top: 5)
               ],
             ),
           ),
