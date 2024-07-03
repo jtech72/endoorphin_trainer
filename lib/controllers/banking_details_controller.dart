@@ -57,7 +57,7 @@ class BankingDetailsController extends GetxController {
         "bankName": bankNameController.text.trim(),
         "city": cityController.text.trim(),
         "branchName": branchController.text.trim(),
-        "accountName": accountNameController.text.trim(),
+        "accountName": accountNameController.text.trim() ,
         "banckAccountNumber": bankAcNumberController.text.trim(),
         "accountType": selectedOption1.value,
         "effectiveData": effectiveController.text.trim(),
@@ -129,7 +129,9 @@ class BankingDetailsController extends GetxController {
         updateUser(response.result!.id.toString());
         Future.delayed(Duration.zero, () {
           buttonText.value = 1;
-          print("Button text updated to: ${buttonText.value}");  // Debug print
+          if (kDebugMode) {
+            print("Button text updated to: ${buttonText.value}");
+          }
         });
       }
     } catch (e) {
