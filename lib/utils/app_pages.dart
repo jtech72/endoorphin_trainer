@@ -173,7 +173,6 @@ GetPage(
         binding: BookingBinding()),
     GetPage(
         name: AppRoutes.bottomNavigation,        transitionDuration: Duration(milliseconds: 800),
-
         page: () => BottomNavigationBarUI(),
         binding: BottomNavigationBarBinding()),
     GetPage(

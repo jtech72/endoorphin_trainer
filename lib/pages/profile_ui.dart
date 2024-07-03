@@ -50,8 +50,8 @@ class ProfileUI extends StatelessWidget {
       body: Container(
         height: Get.height,
         width: Get.width,
-        decoration: BoxDecoration(
-            image: DecorationImage(
+        decoration: const BoxDecoration(
+            image:  DecorationImage(
                 image: AssetImage(
                   ImagesPaths.bgBlackShade,
                 ),
@@ -266,12 +266,25 @@ class ProfileUI extends StatelessWidget {
               InkWell(
                 onTap: () {
                   Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              BottomNavigationBarUI(
-                                currentTabIndex: 2,
-                              )));
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation1, animation2) => BottomNavigationBarUI(currentTabIndex: 2),
+                      transitionDuration: const Duration(milliseconds: 600),
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        const begin = Offset(1.0, 0.0);
+                        const end = Offset.zero;
+                        const curve = Curves.ease;
+
+                        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                        var offsetAnimation = animation.drive(tween);
+
+                        return SlideTransition(
+                          position: offsetAnimation,
+                          child: child,
+                        );
+                      },
+                    ),
+                  );
                 },
                 child: Container(
                     height: Get.height * 0.05,
@@ -460,7 +473,7 @@ class ProfileUI extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Icon(
+                        const Icon(
                           Icons.arrow_forward_ios,
                           color: AppColors.white,
                           size: 20,
@@ -509,7 +522,7 @@ class ProfileUI extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Icon(
+                        const Icon(
                           Icons.arrow_forward_ios,
                           color: AppColors.white,
                           size: 20,
