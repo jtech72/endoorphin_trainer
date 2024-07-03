@@ -159,7 +159,7 @@ class DocumentUI extends StatelessWidget {
                                             });
                                       }
                                     },
-                                  )
+                                  ).paddingOnly(left: 15,right: 15)
                                       : controller
                                       .trainerDocStatusModel
                                       .value
@@ -228,7 +228,7 @@ class DocumentUI extends StatelessWidget {
                                       }
 
                                     },
-                                  )
+                                  ).paddingOnly(left: 15,right: 15)
 
                                       : controller
                                       .trainerDocStatusModel
@@ -277,7 +277,7 @@ class DocumentUI extends StatelessWidget {
                                           });
                                     }
                                     ,
-                                  )
+                                  ).paddingOnly(left: 15,right: 15)
                                       :
                                   InkWell(
                                     splashColor: Colors.transparent,
