@@ -87,13 +87,11 @@ class AppPages {
     ),
     GetPage(
         name: AppRoutes.profile,
-        transitionDuration: Duration(milliseconds: 800),
         page: () => const ProfileUI(),
         binding: ProfileBinding()
     ),
     GetPage(
         name: AppRoutes.account,
-        transitionDuration: Duration(milliseconds: 800),
         page: () => const AccountUI(),
         binding: AccountBinding()),
     GetPage(
