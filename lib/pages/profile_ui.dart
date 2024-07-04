@@ -124,14 +124,17 @@ class ProfileUI extends StatelessWidget {
                           SizedBox(
                             height: Get.height * 0.003,
                           ),
-                          Text(
-                  snapshot.data!.result!.email == null?'':snapshot.data!.result!.email.toString(),
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelMedium!
-                                .copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    color: AppColors.white),
+                          Container(
+                            width: Get.width*0.4,
+                            child: Text(
+                                              snapshot.data!.result!.email == null?'':snapshot.data!.result!.email.toString(),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium!
+                                  .copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      color: AppColors.white),
+                            ),
                           ),
                           SizedBox(
                             height: Get.height * 0.003,
