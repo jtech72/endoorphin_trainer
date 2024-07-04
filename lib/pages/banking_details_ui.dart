@@ -14,7 +14,6 @@ class BankingDetailsUI extends StatelessWidget {
     BankingDetailsController controller = Get.put(BankingDetailsController());
     GlobalKey popupKey = GlobalKey();
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       appBar: myAppBar(
           title: GestureDetector(
               onTap: () {
@@ -170,7 +169,6 @@ class BankingDetailsUI extends StatelessWidget {
                                   controller: controller.cityController,
                                   inputFormatters: [
                                     LengthLimitingTextInputFormatter(64),
-
                                     NoLeadingSpaceFormatter(),
                                   ],
                                   enableInteractiveSelection: true,
@@ -366,93 +364,56 @@ class BankingDetailsUI extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Row(
-                                          children: [
-                                            GestureDetector(
-                                              onTap: () {
-                                                dynamic state =
-                                                    popupKey.currentState;
-                                                state.showButtonMenu();
-                                              },
-                                              child: Container(
-                                                width: Get.width * 0.25,
-                                                child: Obx(
-                                                  () => TextField(
-                                                    controller: controller
-                                                        .accountTypeController,
-                                                    enabled: false,
-                                                    inputFormatters: [
-                                                      LengthLimitingTextInputFormatter(
-                                                          64),
-                                                      FilteringTextInputFormatter
-                                                          .deny(RegExp(r'\s')),
-                                                    ],
-                                                    enableInteractiveSelection:
-                                                        true,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelMedium,
-                                                    cursorColor:
-                                                        AppColors.lightGrey,
-                                                    cursorHeight: 18,
-                                                    decoration: InputDecoration(
-                                                      filled: true,
-                                                      fillColor:
-                                                          AppColors.blackShade,
-                                                      border:
-                                                          const OutlineInputBorder(),
-                                                      hintStyle: Theme.of(context)
-                                                          .textTheme
-                                                          .labelMedium,
-                                                      contentPadding:
-                                                          const EdgeInsets.only(
-                                                              bottom: 0, left: 0),
-                                                      hintText: controller
-                                                          .selectedOption1.value,
-                                                      alignLabelWithHint: true,
-                                                      enabledBorder:
-                                                          InputBorder.none,
-                                                      disabledBorder:
-                                                          InputBorder.none,
-                                                      focusedBorder:
-                                                          InputBorder.none,
+                                      Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              GestureDetector(
+                                                onTap: () {
+                                                  FocusScope.of(context).unfocus();
+                                                  controller.showBottomSheet.value = !controller.showBottomSheet.value;
+                                                },
+                                                child: Container(
+                                                  width: Get.width * 0.25,
+                                                  child: Obx(
+                                                        () => TextField(
+                                                      controller: controller.accountTypeController,
+                                                      enabled: false,
+                                                      inputFormatters: [
+                                                        LengthLimitingTextInputFormatter(64),
+                                                        FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                                                      ],
+                                                      enableInteractiveSelection: true,
+                                                      style: Theme.of(context).textTheme.labelMedium,
+                                                      cursorColor: AppColors.lightGrey,
+                                                      cursorHeight: 18,
+                                                      decoration: InputDecoration(
+                                                        filled: true,
+                                                        fillColor: AppColors.blackShade,
+                                                        border: const OutlineInputBorder(),
+                                                        hintStyle: Theme.of(context).textTheme.labelMedium,
+                                                        contentPadding: const EdgeInsets.only(bottom: 0, left: 0),
+                                                        hintText: controller.selectedOption1.value,
+                                                        alignLabelWithHint: true,
+                                                        enabledBorder: InputBorder.none,
+                                                        disabledBorder: InputBorder.none,
+                                                        focusedBorder: InputBorder.none,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                            PopupMenuButton<String>(
-                                              offset: Offset(-110, 50),
-                                              key: popupKey,
-                                              icon: const Icon(
-                                                  Icons.keyboard_arrow_down,
-                                                  size: 24,
-                                                  color: AppColors.lightGrey),
-                                              color: AppColors.blackShade,
-                                              itemBuilder:
-                                                  (BuildContext context) {
-                                                return controller.items2
-                                                    .map<PopupMenuEntry<String>>(
-                                                        (String value) {
-                                                  return PopupMenuItem<String>(
-                                                    value: value,
-                                                    child: Text(
-                                                      value,
-                                                      style: const TextStyle(
-                                                          color: AppColors
-
-                                                              .lightGrey,),
-                                                    ),
-                                                  );
-                                                }).toList();
-                                              },
-                                              onSelected: (selectedValue) {
-                                                controller.selectedOption1.value =
-                                                    selectedValue;
-                                              },
-                                            ),
-                                          ],
-                                        ),
+                                              IconButton(
+                                                icon: const Icon(Icons.keyboard_arrow_down, size: 24, color: AppColors.lightGrey),
+                                                onPressed: () {
+                                                  FocusScope.of(context).unfocus();
+                                                  controller.showBottomSheet.value = !controller.showBottomSheet.value;
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      )   ,
                                         Container(
                                           height: 1,
 
@@ -510,6 +471,7 @@ class BankingDetailsUI extends StatelessWidget {
                                   ),
                                 ],
                               ),
+
                             ]).paddingOnly(
                                 left: Get.width * 0.04,
                                 right: Get.width * 0.04,
@@ -543,6 +505,39 @@ class BankingDetailsUI extends StatelessWidget {
                         left: Get.width * 0.05, right: Get.width * 0.05);
                   }),
             ),
+          Positioned(
+            top: Get.height*.62,
+            left: Get.width*.09,
+            child: Obx(
+                  () => Visibility(
+                visible: controller.showBottomSheet.value,
+                child: Container(
+                  width: Get.width*.4,
+                  child: BottomSheet(
+                    onClosing: () {
+                      controller.showBottomSheet.value = false;
+                    },
+                    builder: (context) => Container(
+                      color: AppColors.blackShade,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: controller.items2.map((String value) {
+                          return ListTile(
+                            title: Text(value, style: const TextStyle(color: AppColors.lightGrey)),
+                            onTap: () {
+                              controller.selectedOption1.value = value;
+                              controller.showBottomSheet.value = false;
+                            },
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
         ],
       ),
 

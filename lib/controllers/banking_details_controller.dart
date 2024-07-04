@@ -19,7 +19,7 @@ class BankingDetailsController extends GetxController {
   final confirmBankAcNumberController = TextEditingController();
   final accountTypeController = TextEditingController();
   final effectiveController = TextEditingController();
-
+  var showBottomSheet = false.obs;
   @override
   void onInit() {
     super.onInit();
