@@ -4,12 +4,10 @@ import 'package:flutter_page_view_indicator/flutter_page_view_indicator.dart';
 import '../utils/app_drawer.dart';
 import '../utils/exports.dart';
 import 'package:endoorphin_trainer/controllers/home_controller.dart';
-
 import 'bottom_navigation_bar_ui.dart';
 
-
 class HomeUi extends StatefulWidget {
-  const HomeUi({Key? key}) : super(key: key);
+  const HomeUi({super.key});
   @override
   HomeUiState createState() => HomeUiState();
 }
@@ -106,7 +104,7 @@ class HomeUiState extends State<HomeUi> {
           ),
         ],
       ),
-      drawer: MyDrawer(),
+      drawer: const MyDrawer(),
       body: Container(
         height: Get.height,
         width: Get.width,
@@ -221,7 +219,7 @@ class HomeUiState extends State<HomeUi> {
                   SizedBox(
                     height: Get.height*0.02,
                   ),
-                  Container(
+                  SizedBox(
                     height: Get.height * 0.53,
                     width: Get.width,
                     child: Padding(
@@ -243,11 +241,69 @@ class HomeUiState extends State<HomeUi> {
                               if (controller.selectedIndex.value == 0) {
                                 Get.toNamed(AppRoutes.earning);
                               } else if (controller.selectedIndex.value == 1) {
-                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => BottomNavigationBarUI(currentTabIndex: 2,)));
+                                Navigator.pushReplacement(
+                                  context,
+                                  PageRouteBuilder(
+                                    pageBuilder: (context, animation1, animation2) => BottomNavigationBarUI(currentTabIndex: 2),
+                                    transitionDuration: const Duration(milliseconds: 600),
+                                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                      const begin = Offset(1.0, 0.0);
+                                      const end = Offset.zero;
+                                      const curve = Curves.ease;
+
+                                      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                                      var offsetAnimation = animation.drive(tween);
+
+                                      return SlideTransition(
+                                        position: offsetAnimation,
+                                        child: child,
+                                      );
+                                    },
+                                  ),
+                                );
+
                               } else if (controller.selectedIndex.value == 2) {
-                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => BottomNavigationBarUI(currentTabIndex: 2,)));
+                                Navigator.pushReplacement(
+                                  context,
+                                  PageRouteBuilder(
+                                    pageBuilder: (context, animation1, animation2) => BottomNavigationBarUI(currentTabIndex: 2),
+                                    transitionDuration: const Duration(milliseconds: 600),
+                                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                      const begin = Offset(1.0, 0.0);
+                                      const end = Offset.zero;
+                                      const curve = Curves.ease;
+
+                                      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                                      var offsetAnimation = animation.drive(tween);
+
+                                      return SlideTransition(
+                                        position: offsetAnimation,
+                                        child: child,
+                                      );
+                                    },
+                                  ),
+                                );
                               } else if (controller.selectedIndex.value == 3) {
-                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => BottomNavigationBarUI(currentTabIndex: 2,)));
+                                Navigator.pushReplacement(
+                                  context,
+                                  PageRouteBuilder(
+                                    pageBuilder: (context, animation1, animation2) => BottomNavigationBarUI(currentTabIndex: 2),
+                                    transitionDuration: const Duration(milliseconds: 600),
+                                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                      const begin = Offset(1.0, 0.0);
+                                      const end = Offset.zero;
+                                      const curve = Curves.ease;
+
+                                      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                                      var offsetAnimation = animation.drive(tween);
+
+                                      return SlideTransition(
+                                        position: offsetAnimation,
+                                        child: child,
+                                      );
+                                    },
+                                  ),
+                                );
                               } else {
                                 Get.toNamed(AppRoutes.bookingdetails);
                               }

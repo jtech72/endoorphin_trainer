@@ -178,7 +178,7 @@ class DocumentUI extends StatelessWidget {
                                   TrainerDocumentStatusCard(
                                     docName: "Emirates ID Name",
                                     docNumber: "Emirates ID Number",
-                                    categoryMainName: "Emirates Id",
+                                    categoryMainName: "Emirates ID",
                                     categoryName: controller.trainerDocStatusModel.value.result![index].emiratesName,
                                     categoryNumber: controller.trainerDocStatusModel.value.result![index].emiratesNumber,
                                     documentFrontImg: controller.trainerDocStatusModel.value.result![index].emiratesfrontImg.toString(),

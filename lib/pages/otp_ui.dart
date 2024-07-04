@@ -1,5 +1,4 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -35,7 +34,7 @@ class OtpUI extends StatelessWidget {
                   height: Get.height * 0.03,
                 ),
                 Text(
-                  'Check your phone. We’ve sent\nyou the OTP at your number',
+                  'Check your phone. We’ve sent\nyou the OTP at your ${controller.phoneNumber!["otp"] != "" || controller.phoneNumber!["phoneNumber"] !=""?"Email":"Number"}',
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
                 SizedBox(
