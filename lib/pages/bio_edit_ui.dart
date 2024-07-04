@@ -78,7 +78,9 @@ class BioEditUi extends StatelessWidget {
                         Row(
                           children: [
                             Text("Nick Name",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
-                            Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
+                            Text(" *",style: Theme.of(context).
+
+                            textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
                           ],
                         ),
                         SizedBox(
