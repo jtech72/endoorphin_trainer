@@ -14,7 +14,7 @@ import '../bindings/bottom_navigation_bar_binding.dart';
 import '../pages/bottom_navigation_bar_ui.dart';
 
 class AppPages {
-  static  const initialRoute = AppRoutes.sessionRunning;
+  static  const initialRoute = AppRoutes.splash;
 
 
   static List<GetPage> routes =[
