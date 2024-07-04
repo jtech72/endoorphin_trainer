@@ -1,9 +1,4 @@
-import 'package:country_code_picker/country_code_picker.dart';
-import 'package:endoorphin_trainer/controllers/forgot_password_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-import '../controllers/countrycode_controller.dart';
 import '../utils/exports.dart';
 
 class ForgotPasswordUI extends StatelessWidget {
@@ -12,48 +7,52 @@ class ForgotPasswordUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ForgotPasswordController controller = Get.put(ForgotPasswordController());
-    return Container(
-      height: Get.height,
-      width: Get.width,
-      decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(ImagesPaths.bgBlackShade,),fit: BoxFit.cover
-          )
-      ),
-      child: GestureDetector(
-        onTap: (){
-          FocusScope.of(context).unfocus();
-        },
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            toolbarHeight: 50,
-            leadingWidth: Get.width * 0.17,
-            centerTitle: false,
-            surfaceTintColor: Colors.transparent,
-            backgroundColor: AppColors.black,
-            elevation: 3,
-            titleSpacing: -10,
-            leading: GestureDetector(
-                onTap: () {
-                  Get.offAllNamed(AppRoutes.login);
-                },
-                child: const Icon(
-                  Icons.arrow_back_ios_new_rounded,
-                  color: AppColors.white,
-                  size: 18,
-                )),
-            title:GestureDetector(
-                onTap: (){
-                  Get.offAllNamed(AppRoutes.login);
-                },
-                child: Text('Forgot Password',style: Theme.of(context).textTheme.headlineSmall,)),
-          ),
-          // appBar: myAppBar(
-          //   title: GestureDetector(onTap: (){Get.back();},child: Text('Forgot Password',style: Theme.of(context).textTheme.headlineSmall,)),
-          //   context: context,),
-          body: Container(
-            child: SingleChildScrollView(
+    return GestureDetector(
+      onTap: (){
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 50,
+          leadingWidth: Get.width * 0.17,
+          centerTitle: false,
+          surfaceTintColor: Colors.transparent,
+          backgroundColor: AppColors.black,
+          elevation: 3,
+          titleSpacing: -10,
+          leading: GestureDetector(
+              onTap: () {
+                Get.offAllNamed(AppRoutes.login);
+              },
+              child: const Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: AppColors.white,
+                size: 18,
+              )),
+          title:GestureDetector(
+              onTap: (){
+                Get.offAllNamed(AppRoutes.login);
+              },
+              child: Text('Forgot Password',style: Theme.of(context).textTheme.headlineSmall,)),
+        ),
+        // appBar: myAppBar(
+        //   title: GestureDetector(onTap: (){Get.back();},child: Text('Forgot Password',style: Theme.of(context).textTheme.headlineSmall,)),
+        //   context: context,),
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              physics: const NeverScrollableScrollPhysics(),
+              child: Container(
+                height: Get.height,
+                width: Get.width,
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(ImagesPaths.bgBlackShade,),fit: BoxFit.cover
+                    )
+                ),
+              ),
+            ),
+            SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -101,7 +100,7 @@ class ForgotPasswordUI extends StatelessWidget {
                                   .copyWith(color: AppColors.black),
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.only(left: 2,bottom: 7),
+                                  contentPadding: const EdgeInsets.only(left: 2,bottom: 7),
                                   counterText: "",
                                   hintText: 'Enter your Email',
                                   hintStyle:
@@ -125,7 +124,7 @@ class ForgotPasswordUI extends StatelessWidget {
                 ],
               ).paddingOnly(left: Get.width*0.035,right: Get.width*0.035),
             ),
-          ),
+          ],
         ),
       ),
     );

@@ -19,7 +19,7 @@ class OtpController extends GetxController {
       if (!isPaused.value) {
         if (remainingSeconds == 0) {
           timer.cancel();
-          showResendText.value = true;  // Show resend text when timer reaches 00:00
+          showResendText.value = true;
 
         } else {
           int minutes = remainingSeconds ~/ 60;
@@ -32,7 +32,7 @@ class OtpController extends GetxController {
   }
   @override
   void onReady() {
-    startTimer(59);
+    startTimer(29);
     super.onReady();
   }
   @override
@@ -42,24 +42,51 @@ class OtpController extends GetxController {
     }
     super.onClose();
   }
-  void resendOtp() async{
-    if (time.value == "00:01"){
-      await CallAPI.sentOTP(request: {
-        "phoneNumber": storage.read("phoneNumber")
-      }).then((value) {
-        startTimer(59);
 
-        secondOtp = value.otp;
-        if (value.status == 200) {
-          showSnackBar("${value.otp}");
+
+  void resendOtp() async {
+    log("z");
+    try {
+      if (phoneNumber!["otp"] != "" || phoneNumber!["phoneNumber"] != "") {
+        showLoader();
+          final response = await CallAPI.forgetPassword(request: {
+            "loginData": phoneNumber!["email"],
+
+          });
+          startTimer(29);
+          secondOtp = response.result!.otp.toString();
+          if (response.status == 200) {
+            dismissLoader();
+            showSnackBar (response.message.toString());
+          } else {
+            dismissLoader();
+            showSnackBar("Failed to resend OTP: ${response.message}");
+          }
+
+      }
+      else {
+
+        if (time.value == "00:01") {
+          final response = await CallAPI.sentOTP(request: {
+            "phoneNumber": storage.read("phoneNumber")
+          });
+          startTimer(29);
+          secondOtp = response.otp;
+          if (response.status == 200) {
+            showSnackBar("${response.otp}");
+          } else {
+            showSnackBar("Failed to send OTP: ${response.message}");
+          }
         }
-      });
+      }
+    } catch (e) {
+      dismissLoader();
+      print("Error in resendOtp: $e");
+      showSnackBar("An error occurred while resending OTP. Please try again.");
     }
-
   }
   void onNumberVerify() {
     showLoader();
-
     String otp = otpController.text.trim();
 
     if (otp.isEmpty) {
@@ -91,7 +118,7 @@ class OtpController extends GetxController {
   }
   void onEmailVerify() {
     showLoader();
-log("message");
+    log("message");
     String otp = otpController.text.trim();
 
     if (otp.isEmpty) {
@@ -110,15 +137,17 @@ log("message");
       int enteredOtp = int.parse(otp);
       log(enteredOtp.toString());
       log(phoneNumber!["otp"]);
-      if (enteredOtp.toString() == phoneNumber!["otp"].toString()) {
+      if (enteredOtp.toString() == phoneNumber!["otp"].toString() ||
+          enteredOtp.toString() == secondOtp.toString()) {
         dismissLoader();
-        Get.toNamed(AppRoutes.createNewPassword,arguments: phoneNumber!["phoneNumber"].toString());
+        Get.toNamed(AppRoutes.createNewPassword,
+            arguments: phoneNumber!["phoneNumber"].toString());
         printResult(screenName: "OTP SCREEN", msg: "OTP VERIFIED");
       } else {
         dismissLoader();
         showSnackBar("Invalid OTP");
       }
-    } catch (e,st) {
+    } catch (e, st) {
       dismissLoader();
       log(st.toString());
     }
