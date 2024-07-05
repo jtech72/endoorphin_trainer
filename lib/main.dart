@@ -9,7 +9,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_storage/get_storage.dart';
-import 'custom_Widgets/deepling_controller.dart';
 import 'firebase_options.dart';
 void main() async {
   try {
@@ -37,7 +36,6 @@ class EndoorphinTrainer extends StatelessWidget {
   const EndoorphinTrainer({super.key});
   @override
   Widget build(BuildContext context) {
-    final DeepLinkController deepLinkController = Get.put(DeepLinkController());
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
