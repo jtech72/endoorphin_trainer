@@ -63,7 +63,7 @@ dependencies:
   url_launcher: ^6.2.6
   intl:
   get_storage:
-  firebase_core: ^2.32.0
+  firebase_core:
   firebase_messaging:
   flutter_local_notifications:
   logger:
@@ -72,6 +72,8 @@ dependencies:
   open_file_manager: ^1.0.2
   permission_handler:
   file_picker:
+  firebase_crashlytics:
+  firebase_analytics:
 dev_dependencies:
   flutter_test:
     sdk: flutter

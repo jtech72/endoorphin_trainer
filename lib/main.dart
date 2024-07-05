@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:ui';
 import 'package:endoorphin_trainer/utils/app_pages.dart';
 import 'package:endoorphin_trainer/utils/app_strings.dart';
 import 'package:endoorphin_trainer/utils/app_themes.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -16,6 +18,13 @@ void main() async {
   } catch (e, stackTrace) {
     log('Error initializing Firebase: $e\n$stackTrace');
   }
+  FlutterError.onError = (errorDetails) {
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
   GetStorage.init();
   runApp(const EndoorphinTrainer());
 }

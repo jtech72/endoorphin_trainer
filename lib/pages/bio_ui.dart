@@ -395,7 +395,7 @@ class BioUi extends StatelessWidget {
                               controller: controller.bioController,
                               inputFormatters: [
                                 NoLeadingSpaceFormatter(),
-                                LengthLimitingTextInputFormatter(400),
+                                LengthLimitingTextInputFormatter(100),
                               ],
                               keyboardType: TextInputType.text,
                               minLines: 1,
