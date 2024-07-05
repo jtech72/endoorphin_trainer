@@ -25,7 +25,7 @@ Future<void> onSubmitButton (BuildContext context)async{
       if (value.status == 200) {
       dismissLoader();
       otpVerified = OtpVerified.byMail;
-      onVerified(context,value.result!.otp.toString(),value.result!.phoneNumber.toString());
+      onVerified(context,value.result!.otp.toString(),value.result!.phoneNumber.toString(),value.result!.email.toString());
     } else {
       dismissLoader();
       showSnackBar(value.message ?? "Please enter valid credentials");
@@ -38,7 +38,7 @@ Future<void> onSubmitButton (BuildContext context)async{
     }
   }
 }
-onVerified(BuildContext context,String otp,String phoneNumber){
+onVerified(BuildContext context,String otp,String phoneNumber,String email){
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -72,6 +72,7 @@ onVerified(BuildContext context,String otp,String phoneNumber){
                   Get.toNamed(AppRoutes.otp, arguments: {
                     "otp": otp.toString(),
                     "phoneNumber": phoneNumber.toString(),
+                    "email": email.toString(),
                   });
                 },height: 35,width: Get.width*.35),
           ),

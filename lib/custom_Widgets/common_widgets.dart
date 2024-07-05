@@ -375,11 +375,12 @@ class TrainerDocumentStatusCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(docName, style: Theme.of(context).textTheme.labelMedium).paddingOnly(bottom: 2),
-        Text(categoryName, style: Theme.of(context).textTheme.labelSmall).paddingOnly(bottom: 8),
-        Text(docNumber, style: Theme.of(context).textTheme.labelMedium).paddingOnly(bottom: 2),
-        Text(categoryNumber, style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.white)).paddingOnly(bottom: 2),
-
+        Text(docName, style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.white)).paddingOnly(bottom: 2),
+        Container(
+            width: 120,
+            child: Text(categoryName, style: Theme.of(context).textTheme.labelSmall!.copyWith(color:AppColors.lightGrey)).paddingOnly(bottom: 8)),
+        Text(docNumber, style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.white)).paddingOnly(bottom: 2),
+        Text(categoryNumber, style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.lightGrey)).paddingOnly(bottom: 2),
       ],
     );
   }
@@ -458,22 +459,51 @@ class TrainerDocumentStatusCard extends StatelessWidget {
                   border: Border.all(color: AppColors.yellow),
                 ),
                 child: Center(
-                  child: Text(
-                    "Reupload",
-                    style: TextStyle(color: AppColors.yellow),
+                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        "Reupload",
+                        style: TextStyle(color: AppColors.yellow,fontSize: 10,fontWeight: FontWeight.w400),
+                      ),
+                      Image.asset(ImagesPaths.upload,color: AppColors.yellow,scale: 8,)
+                    ],
                   ),
                 ),
               ).paddingOnly(left: 7),
             ),
           ],
-        ).paddingOnly(bottom: Get.height * 0.01),
+        ).paddingOnly(top: Get.height*0.01),
+        Text(
+          remark ?? '',
+          style: Theme.of(context).textTheme.titleMedium!.copyWith(color: AppColors.lightGrey),
+        ),
         Text(
           comment ?? '',
-          style: Theme.of(context).textTheme.titleMedium,
+          style: Theme.of(context).textTheme.titleMedium!.copyWith(color: AppColors.lightGrey),
         ),
       ],
     );
   }
 }
 
-/// NO UPLOADED DOC CLASS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

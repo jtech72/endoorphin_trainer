@@ -22,6 +22,8 @@ class DrawerItem {
 }
 
 class MyDrawer extends StatefulWidget {
+  const MyDrawer({super.key});
+
   @override
   _MyDrawerState createState() => _MyDrawerState();
 }
@@ -47,7 +49,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 storage.read("userId").toString()),
             builder: (BuildContext context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Container(
+                return SizedBox(
                   height: Get.height*.15,
                   child: const Center(
                     child: CircularProgressIndicator(),
@@ -67,7 +69,7 @@ class _MyDrawerState extends State<MyDrawer> {
               }
 
               return
-                Container(
+                SizedBox(
                   height: Get.height*.15,
                   child: Row(
                     children: [
@@ -141,8 +143,26 @@ class _MyDrawerState extends State<MyDrawer> {
                 setState(() {
                   selectedTile = 0;
                 });
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => BottomNavigationBarUI(currentTabIndex: 0,)));
+                Navigator.pushReplacement(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation1, animation2) => BottomNavigationBarUI(currentTabIndex: 0),
+                    transitionDuration: const Duration(milliseconds: 600),
+                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      const begin = Offset(1.0, 0.0);
+                      const end = Offset.zero;
+                      const curve = Curves.ease;
 
+                      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                      var offsetAnimation = animation.drive(tween);
+
+                      return SlideTransition(
+                        position: offsetAnimation,
+                        child: child,
+                      );
+                    },
+                  ),
+                );
                 // Add functionality here
 
               },
@@ -170,8 +190,26 @@ class _MyDrawerState extends State<MyDrawer> {
                 setState(() {
                   selectedTile = 1; // Set selected index
                 });
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => BottomNavigationBarUI(currentTabIndex: 2,)));
-                // Add functionality here
+                Navigator.pushReplacement(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation1, animation2) => BottomNavigationBarUI(currentTabIndex: 2),
+                    transitionDuration: const Duration(milliseconds: 600),
+                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      const begin = Offset(1.0, 0.0);
+                      const end = Offset.zero;
+                      const curve = Curves.ease;
+
+                      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                      var offsetAnimation = animation.drive(tween);
+
+                      return SlideTransition(
+                        position: offsetAnimation,
+                        child: child,
+                      );
+                    },
+                  ),
+                );                // Add functionality here
 
               },
             ).paddingOnly(left: Get.width*0.05),

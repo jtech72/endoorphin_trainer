@@ -172,7 +172,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                       "";
                                   uploadImage =
                                       UploadImage
-                                          .byProfile;
+                                          .byInitically;
                                   Get.toNamed(
                                       AppRoutes
                                           .trainerPassport,
@@ -217,7 +217,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                     snapshot.data!.result![index].category?.id ??
                                         "";
                                 uploadImage =
-                                    UploadImage.byProfile;
+                                    UploadImage.byInitically;
                                 Get.toNamed(
                                     AppRoutes.trainerPassport,
                                     arguments: {
@@ -257,7 +257,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                       "";
                                   uploadImage =
                                       UploadImage
-                                          .byProfile;
+                                          .byInitically;
                                   Get.toNamed(
                                       AppRoutes
                                           .trainerPassport,
@@ -477,7 +477,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                   onTap: () {
                                     log(index.toString());
                                     if (snapshot.data!.result![index-2].approveStatus == null) {
-                                      showSnackBar("Please upload all document images");
+                                      showSnackBar("Please upload all documents");
                                     } else if (!controller.isChecked.value) {
                                       showSnackBar("Please accept terms and conditions");
                                     } else {
