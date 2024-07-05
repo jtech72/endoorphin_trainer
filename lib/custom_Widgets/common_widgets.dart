@@ -266,7 +266,7 @@ class TrainerDocumentStatusCard extends StatelessWidget {
       case "rejected":
         return _buildRejectedStatus();
       default:
-        return SizedBox.shrink();
+        return const SizedBox.shrink();
     }
   }
 
@@ -277,7 +277,7 @@ class TrainerDocumentStatusCard extends StatelessWidget {
           height: 22,
           width: 64,
           decoration: BoxDecoration(color: AppColors.Black3, borderRadius: BorderRadius.circular(5)),
-          child: Center(
+          child: const Center(
             child: Text('Approved', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: Colors.green)),
           ),
         ),
@@ -297,7 +297,7 @@ class TrainerDocumentStatusCard extends StatelessWidget {
           height: 22,
           width: 100,
           decoration: BoxDecoration(color: AppColors.Black3, borderRadius: BorderRadius.circular(5)),
-          child: Center(
+          child: const Center(
             child: Text('Under verification', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: Colors.yellow)),
           ),
         ),
@@ -317,7 +317,7 @@ class TrainerDocumentStatusCard extends StatelessWidget {
           height: 22,
           width: 64,
           decoration: BoxDecoration(color: AppColors.Black3, borderRadius: BorderRadius.circular(5)),
-          child: Center(
+          child: const Center(
             child: Text('Rejected', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: Colors.red)),
           ),
         ),
@@ -461,7 +461,7 @@ class TrainerDocumentStatusCard extends StatelessWidget {
                 child: Center(
                   child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text(
+                      const Text(
                         "Reupload",
                         style: TextStyle(color: AppColors.yellow,fontSize: 10,fontWeight: FontWeight.w400),
                       ),
