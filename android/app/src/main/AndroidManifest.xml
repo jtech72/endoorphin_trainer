@@ -51,8 +51,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAb-OJXPRTflwkd0huWLB2ygvwMv2Iwzgo"/>
-        <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-        <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     </application>
 
     <!-- Required to query activities that can process text, see:
