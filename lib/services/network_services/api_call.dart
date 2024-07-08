@@ -394,6 +394,7 @@ class CallAPI {
       );
 
       PostAddressModel responseModel = PostAddressModel.fromJson(json);
+
       if (responseModel.status == 200) {
         result = responseModel;
         printResult(

@@ -79,6 +79,7 @@ class HomeUiState extends State<HomeUi> {
                         inactiveTrackColor: Colors.black,
                         value: controller.isTrainerOnline.value,
                         onChanged: (v) {
+
                         },
                       ),
                     ),
