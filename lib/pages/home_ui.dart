@@ -27,16 +27,6 @@ class HomeUiState extends State<HomeUi> {
   void initState() {
     super.initState();
     _pageController = PageController();
-    // _timer = Timer.periodic(const Duration(seconds: 5), (Timer timer) {
-    //   setState(() {
-    //     _currentPage = (_currentPage + 1) % 3;
-    //   });
-    //   _pageController.animateToPage(
-    //     _currentPage,
-    //     duration: const Duration(milliseconds: 500),
-    //     curve: Curves.easeInOut,
-    //   );
-    // });
   }
 
   @override
