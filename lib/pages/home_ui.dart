@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_page_view_indicator/flutter_page_view_indicator.dart';
+import 'package:geolocator/geolocator.dart';
 import '../utils/app_drawer.dart';
 import '../utils/exports.dart';
 import 'package:endoorphin_trainer/controllers/home_controller.dart';
@@ -50,60 +51,85 @@ class HomeUiState extends State<HomeUi> {
     HomeController controller = Get.find();
 
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: AppColors.impgrey),
-        title: Obx(
-              () => Text(
-            controller.isTrainerOnline.value ? 'Online' : 'Offline',
-            style: Theme.of(context).textTheme.headlineSmall,
-          ),
-        ),
-        centerTitle: true,
-        actions: [
-          Obx(
-                () => InkWell(
-              splashColor: Colors.transparent,
-              onTap: () {
-                controller.isTrainerOnline.value = !controller.isTrainerOnline.value;
-              },
-              child: SizedBox(
-                height: 15,
-                width: 43,
-                child: Container(
-                  height: 15,
-                  width: 15,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    border: Border.all(color: Colors.white),
-                    color: controller.isTrainerOnline.value ? Colors.yellow : Colors.grey.withOpacity(0.5), // Change container color conditionally
-                  ),
-                  child: Transform.scale(
-                    scale: 0.4,
-                    child: Switch(
-                      activeTrackColor: AppColors.yellow,
-                      activeColor: controller.isTrainerOnline.value ? Colors.yellow : Colors.grey.withOpacity(0.5), // Change switch button color conditionally
-                      inactiveThumbImage: const AssetImage(ImagesPaths.trainerOnline),
-                      activeThumbImage: const AssetImage(ImagesPaths.trainerOnline),
-                      inactiveThumbColor: Colors.transparent,
-                      inactiveTrackColor: Colors.black,
-                      value: controller.isTrainerOnline.value,
-                      onChanged: (v) {
-                        controller.isTrainerOnline.value = !controller.isTrainerOnline.value;
-                      },
-                    ),
-                  ),
-                ).paddingOnly(left: 20),
-              ),
+        appBar: AppBar(
+          iconTheme: const IconThemeData(color: AppColors.impgrey),
+          title: Obx(
+                () => Text(
+              controller.isTrainerOnline.value ? 'Online' : 'Offline',
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
-          IconButton(
-            onPressed: () {
-              Get.toNamed(AppRoutes.notification);
-            },
-            icon: Image.asset(ImagesPaths.bell, scale: 4,),
-          ),
-        ],
-      ),
+          centerTitle: true,
+          actions: [
+            Obx(
+                  () => InkWell(
+                splashColor: Colors.transparent,
+                onTap: () {
+                  controller.isTrainerOnline.value = !controller.isTrainerOnline.value;
+                },
+                child: SizedBox(
+                  height: 15,
+                  width: 43,
+                  child: Container(
+                    height: 15,
+                    width: 15,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      border: Border.all(color: Colors.white),
+                      color: controller.isTrainerOnline.value ? Colors.yellow : Colors.grey.withOpacity(0.5),
+                    ),
+                    child: Transform.scale(
+                      scale: 0.4,
+                      child: Switch(
+                        activeTrackColor: AppColors.yellow,
+                        activeColor: controller.isTrainerOnline.value ? Colors.yellow : Colors.grey.withOpacity(0.5),
+                        inactiveThumbImage: const AssetImage(ImagesPaths.trainerOnline),
+                        activeThumbImage: const AssetImage(ImagesPaths.trainerOnline),
+                        inactiveThumbColor: Colors.transparent,
+                        inactiveTrackColor: Colors.black,
+                        value: controller.isTrainerOnline.value,
+                        onChanged: (v) {
+                          if (!controller.isTrainerOnline.value) {
+                            Get.defaultDialog(
+                              title: "Enable Location",
+                              middleText: "Please allow location access to go online.",
+                              textCancel: "Cancel",
+                              textConfirm: "Allow",
+                              onConfirm: () async {
+                                bool isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
+                                if (!isLocationServiceEnabled) {
+                                  Geolocator.openLocationSettings();
+                                  return;
+                                }
+
+                                LocationPermission permission = await Geolocator.requestPermission();
+                                if (permission == LocationPermission.whileInUse || permission == LocationPermission.always) {
+                                  controller.isTrainerOnline.value = true;
+                                } else {
+                                  Get.snackbar('Permission Denied', 'Location permission is required to go online.');
+                                }
+
+                                Get.back();
+                              },
+                            );
+                          } else {
+                            controller.isTrainerOnline.value = false;
+                          }
+                        },
+                      ),
+                    ),
+                  ).paddingOnly(left: 20),
+                ),
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                Get.toNamed(AppRoutes.notification);
+              },
+              icon: Image.asset(ImagesPaths.bell, scale: 4),
+            ),
+          ],
+        ),
       drawer: const MyDrawer(),
       body: Container(
         height: Get.height,
