@@ -79,32 +79,7 @@ class HomeUiState extends State<HomeUi> {
                         inactiveTrackColor: Colors.black,
                         value: controller.isTrainerOnline.value,
                         onChanged: (v) {
-                          if (!controller.isTrainerOnline.value) {
-                            Get.defaultDialog(
-                              title: "Enable Location",
-                              middleText: "Please allow location access to go online.",
-                              textCancel: "Cancel",
-                              textConfirm: "Allow",
-                              onConfirm: () async {
-                                bool isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
-                                if (!isLocationServiceEnabled) {
-                                  Geolocator.openLocationSettings();
-                                  return;
-                                }
-
-                                LocationPermission permission = await Geolocator.requestPermission();
-                                if (permission == LocationPermission.whileInUse || permission == LocationPermission.always) {
-                                  controller.isTrainerOnline.value = true;
-                                } else {
-                                  Get.snackbar('Permission Denied', 'Location permission is required to go online.');
-                                }
-
-                                Get.back();
-                              },
-                            );
-                          } else {
-                            controller.isTrainerOnline.value = false;
-                          }
+                          controller.onToggleButton();
                         },
                       ),
                     ),

@@ -383,5 +383,33 @@ class CallAPI {
       return result;
     }
   }
+  /// POST ADDRESS
+  static Future<ResetPasswordModel> postAddress({required var request}) async {
+    ResetPasswordModel result = ResetPasswordModel();
+    try {
+      Map<dynamic, dynamic> json = await APIManager().postAPICall(
+        endpoint: Endpoints.epPostAddress,
+        request: request,
+      );
+
+      ResetPasswordModel responseModel = ResetPasswordModel.fromJson(json);
+      if (responseModel.status == 200) {
+        result = responseModel;
+        printResult(
+            screenName: 'API CALL',
+            msg: "CALLING ENDPOINTS ${Endpoints.epLogin}, RESULT:$json");
+
+        return result;
+      } else {
+        result = responseModel;
+        return result;
+      }
+    } on Exception catch (e, st) {
+      printResult(
+          screenName: 'API CALL', msg: "", error: e.toString(), stackTrace: st);
+      return result;
+    }
+  }
+
 }
 
