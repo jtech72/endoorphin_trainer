@@ -32,7 +32,7 @@ class Endpoints{
   /// RESET PASSWORD
   static const String epResetPassword="users/resetPassword";
 /// POST ADDRESS
-  static const String epPostAddress="saveUserAddresss";
+  static const String epPostAddress="updateUserAddress";
 
 
 
