@@ -13,10 +13,7 @@ class HomeController extends GetxController {
   void setSelectedItem(String value) {
     selectedItem.value = value;
   }
-
-
-
-  // Define an observable variable to track the selected option
+  
   final selectedOption = 'Yoga''Tennis'.obs;
   RxString selectedOption1 = 'last 3 days'.obs;
 }
