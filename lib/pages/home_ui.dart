@@ -55,7 +55,7 @@ class HomeUiState extends State<HomeUi> {
                   () => InkWell(
                 splashColor: Colors.transparent,
                 onTap: () {
-                  controller.isTrainerOnline.value = !controller.isTrainerOnline.value;
+                  controller.onToggleButton();
                 },
                 child: SizedBox(
                   height: 15,
@@ -79,7 +79,7 @@ class HomeUiState extends State<HomeUi> {
                         inactiveTrackColor: Colors.black,
                         value: controller.isTrainerOnline.value,
                         onChanged: (v) {
-                          controller.onToggleButton();
+
                         },
                       ),
                     ),

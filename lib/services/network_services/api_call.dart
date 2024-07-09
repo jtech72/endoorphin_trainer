@@ -7,6 +7,7 @@ import '../../custom_Widgets/common_widgets.dart';
 import '../models/request_models/category_document_model.dart';
 import '../models/request_models/forget_password_model.dart';
 import '../models/request_models/login_model.dart';
+import '../models/request_models/post_address_model.dart';
 import '../models/request_models/reset_password_model.dart';
 import '../models/request_models/save_bankdetail_model.dart';
 import '../models/request_models/send_otp_model.dart';
@@ -384,15 +385,16 @@ class CallAPI {
     }
   }
   /// POST ADDRESS
-  static Future<ResetPasswordModel> postAddress({required var request}) async {
-    ResetPasswordModel result = ResetPasswordModel();
+  static Future<PostAddressModel> postAddress({required var request}) async {
+    PostAddressModel result = PostAddressModel();
     try {
       Map<dynamic, dynamic> json = await APIManager().postAPICall(
         endpoint: Endpoints.epPostAddress,
         request: request,
       );
 
-      ResetPasswordModel responseModel = ResetPasswordModel.fromJson(json);
+      PostAddressModel responseModel = PostAddressModel.fromJson(json);
+
       if (responseModel.status == 200) {
         result = responseModel;
         printResult(
