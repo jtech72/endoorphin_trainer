@@ -202,7 +202,7 @@ class CertificateNumberFormatter extends TextInputFormatter {
 
     // Insert dashes based on the cleaned text
     for (int i = 0; i < cleanText.length; i++) {
-      if (i == 3 || i == 7) {
+      if (i == 3 || i == 7 || i == 14 || i == 15) {
         buffer.write('-');
         if (selectionIndex >= i) selectionIndex++;
       }

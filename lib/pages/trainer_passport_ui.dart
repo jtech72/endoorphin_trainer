@@ -192,6 +192,12 @@ class TrainerPassportUI extends StatelessWidget {
                       :NoLeadingSpaceFormatter(),
                       NoLeadingSpaceFormatter(),
                       FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                      controller.certificationDetails!["categoryName"] ==
+                          "emirates"?
+                      LengthLimitingTextInputFormatter(18)
+                          :controller.certificationDetails!["categoryName"] ==
+                          "passport"?NoLeadingSpaceFormatter()
+                          :NoLeadingSpaceFormatter(),
                       // Set maximum length to 12
                       // FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')),
                       // Allow only alphanumeric characters
