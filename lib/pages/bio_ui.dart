@@ -212,7 +212,7 @@ class BioUi extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              Text("Areas of Expertise",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
+                              Text("Areas of Expertise relevant for coaching",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
                               Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
 
                             ],
@@ -243,7 +243,7 @@ class BioUi extends StatelessWidget {
                                 contentPadding:
                                 const EdgeInsets.only(bottom: 3, left: 15),
 
-                                hintText: "Enter Areas of Expertise",
+                                hintText: "Enter Your Expertise",
                                 alignLabelWithHint: true,
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(4),

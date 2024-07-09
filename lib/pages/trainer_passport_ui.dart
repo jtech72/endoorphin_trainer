@@ -34,7 +34,7 @@ class TrainerPassportUI extends StatelessWidget {
         body: Container(
           height: Get.height,
           width: Get.width,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(
                     ImagesPaths.bgBlackShade,
@@ -61,11 +61,11 @@ class TrainerPassportUI extends StatelessWidget {
                     Text(
                       controller.certificationDetails!["categoryName"] ==
                               "emirates"
-                          ? "Emirates ID Name"
+                          ? "Name on the Emirates ID "
                           : controller.certificationDetails!["categoryName"] ==
                                   "passport"
-                              ? 'Passport Name'
-                              : "Certification Name",
+                              ? 'Name on the Passport '
+                              : "Name of the Certification ",
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge!
@@ -108,10 +108,10 @@ class TrainerPassportUI extends StatelessWidget {
                       hintText: controller
                                   .certificationDetails!["categoryName"] ==
                               "emirates"
-                          ? " Enter Emirates ID name"
+                          ? " Enter Name on the Emirates ID"
                           : controller.certificationDetails!["categoryName"] ==
                                   "passport"
-                              ? 'Enter Passport name'
+                              ? 'Enter Name on the Passport'
                               : "Enter Certification Name",
                       alignLabelWithHint: true,
                       enabledBorder: OutlineInputBorder(
@@ -135,8 +135,6 @@ class TrainerPassportUI extends StatelessWidget {
                           width: 1,
                         ),
                       ),
-
-                      /// Center the hintText
                     ),
                   ),
                 ),
@@ -176,11 +174,24 @@ class TrainerPassportUI extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: TextField(
-                    keyboardType: TextInputType.text,
+                    keyboardType: controller.certificationDetails!["categoryName"] ==
+                        "emirates"
+                        ? TextInputType.number
+                        : controller.certificationDetails!["categoryName"] ==
+                        "passport"
+                        ?TextInputType.text
+                        : TextInputType.text,
                     controller: controller.certificateNumber,
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(25),
+                      controller.certificationDetails!["categoryName"] ==
+                          "emirates"?
+                      CertificateNumberFormatter()
+                      :controller.certificationDetails!["categoryName"] ==
+                          "passport"?NoLeadingSpaceFormatter()
+                      :NoLeadingSpaceFormatter(),
                       NoLeadingSpaceFormatter(),
+                      FilteringTextInputFormatter.deny(RegExp(r'\s')),
                       // Set maximum length to 12
                       // FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')),
                       // Allow only alphanumeric characters
@@ -227,8 +238,6 @@ class TrainerPassportUI extends StatelessWidget {
                           width: 1,
                         ),
                       ),
-
-                      /// Center the hintText
                     ),
                   ),
                 ),
