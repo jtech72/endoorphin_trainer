@@ -11,13 +11,23 @@ import '../utils/exports.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class BookingRequestController extends GetxController{
+  final TextEditingController pinController = TextEditingController();
+  final ValueNotifier<bool> isPinComplete = ValueNotifier(false);
+
+  PinCodePage() {
+    pinController.addListener(() {
+      if (pinController.text.length == 4) {
+        isPinComplete.value = true;
+      }
+    });
+  }
+  RxBool selectedbutton = true.obs;
   late GoogleMapController mapController;
   Rx<LatLng?> currentLocation = Rx<LatLng?>(null);
   Location location = Location();
   RxInt selectedIndex = 0.obs;
   Map<dynamic,dynamic> notificationData = {};
   late IO.Socket socket;
-
   var messages = <String>[].obs;
   final TextEditingController messageController = TextEditingController();
 

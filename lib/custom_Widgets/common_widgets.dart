@@ -189,6 +189,33 @@ class NoLeadingSpaceFormatter extends TextInputFormatter {
   }
 }
 
+class CertificateNumberFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    final text = newValue.text;
+    final buffer = StringBuffer();
+    int selectionIndex = newValue.selection.end;
+
+    // Remove all dashes from the input text
+    final cleanText = text.replaceAll('-', '');
+
+    // Insert dashes based on the cleaned text
+    for (int i = 0; i < cleanText.length; i++) {
+      if (i == 3 || i == 7) {
+        buffer.write('-');
+        if (selectionIndex >= i) selectionIndex++;
+      }
+      buffer.write(cleanText[i]);
+    }
+
+    final formattedText = buffer.toString();
+    return TextEditingValue(
+      text: formattedText,
+      selection: TextSelection.collapsed(offset: selectionIndex),
+    );
+  }
+}
 
 /// UPLOADED DOC CLASS
 class TrainerDocumentStatusCard extends StatelessWidget {
