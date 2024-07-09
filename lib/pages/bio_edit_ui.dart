@@ -134,7 +134,7 @@ class BioEditUi extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            Text("Areas of Expertise",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
+                            Text("Areas of Expertise relevant for coaching",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
                             Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
                           ],
                         ),
@@ -161,7 +161,7 @@ class BioEditUi extends StatelessWidget {
                               contentPadding: const EdgeInsets.only(top: 6, left: 20),
                               filled: true,
                               fillColor: Colors.transparent,
-                              hintText: ' Enter Areas of Expertise',
+                              hintText: ' Enter Your Expertise',
                               hintStyle: Theme.of(context)
                                   .textTheme
                                   .labelMedium!
