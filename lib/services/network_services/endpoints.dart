@@ -33,6 +33,8 @@ class Endpoints{
   static const String epResetPassword="users/resetPassword";
 /// POST ADDRESS
   static const String epPostAddress="updateUserAddress";
+  /// BOOKING ACCEPT
+  static const String epBookingAccept="acceptBooking";
 
 
 

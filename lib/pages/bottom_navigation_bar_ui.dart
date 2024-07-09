@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:motion_tab_bar/MotionTabBar.dart';
 import '../controllers/home_controller.dart';
 import '../controllers/otp_controller.dart';
+import '../services/location_controller.dart';
 import '../utils/exports.dart';
 
 class BottomNavigationBarUI extends StatefulWidget {
