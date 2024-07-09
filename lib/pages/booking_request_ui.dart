@@ -1,4 +1,5 @@
 import 'package:endoorphin_trainer/controllers/booking_request_controller.dart';
+import 'package:endoorphin_trainer/services/location_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -8,11 +9,12 @@ import 'package:url_launcher/url_launcher.dart';
 import '../utils/exports.dart';
 import 'bottom_navigation_bar_ui.dart';
 
-class BookingRequsetUi extends StatelessWidget {
-  const BookingRequsetUi({super.key});
+class BookingRequestUi extends StatelessWidget {
+  const BookingRequestUi({super.key});
 
   @override
   Widget build(BuildContext context) {
+    LocationController locationController = Get.put(LocationController());
     BookingRequestController controller = Get.find();
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -504,8 +506,22 @@ class BookingRequsetUi extends StatelessWidget {
                                             fontFamily: 'Montserrat'),
                                       ),
                                       onTap: () {
-                                        controller.selectedIndex.value = 1;
-                                      })).paddingOnly(top: 30, bottom: 30),
+                                           controller.onAcceptButton();
+                                      })).paddingOnly(top: 30, bottom: 5),
+                              Center(
+                                  child: InkButton(
+                                    backGroundColor: AppColors.black,
+                                      child: Text(
+                                        'Reject',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall!
+                                            .copyWith(color: AppColors.yellow,fontSize: 18,
+                                            fontFamily: 'Montserrat'),
+                                      ),
+                                      onTap: () {
+                                    controller.showDialogBox("Session request rejected");
+                                      })).paddingOnly(top: 10, bottom: 15),
                               SizedBox(height: Get.height*0.02,),
                               //
                             ],
@@ -515,38 +531,53 @@ class BookingRequsetUi extends StatelessWidget {
           },
         ),
         body:
-            // Obx(() {
-            //   return controller.currentLocation.value == null
-            //       ? const Center(child: CircularProgressIndicator())
-            //       .paddingOnly(bottom: 300)
-            //       :
             Stack(
               children: [
-                SizedBox(
-                          height: Get.height * .8,
-                          child: GoogleMap(
-                            mapType: MapType.normal,
-                            myLocationButtonEnabled: true,
-                            myLocationEnabled: true,
-                            zoomControlsEnabled: true,
-                            scrollGesturesEnabled:true,
-                            onMapCreated: (GoogleMapController onMapCreatedController) {
-                              controller.mapController = onMapCreatedController;
-                              controller.setMapStyle();
-                            },
-                initialCameraPosition: const CameraPosition(
-                  target: LatLng(37.43296265331129, -122.08832357078792),
-                  zoom: 15.0,
-                ),
-                // markers: {
-                //   Marker(
-                //     markerId: const MarkerId('current_location'),
-                //     position: controller.currentLocation.value!,
-                //     infoWindow: const InfoWindow(title: 'Current Location'),
-                //   ),
-                // },
+                Obx(
+                ()=>   SizedBox(
+                            height: Get.height * .8,
+                            child:
+                            locationController.currentLocation.value == null?
+                               Center(
+                                 child: SizedBox(
+                                     height: 50,
+                                     width: 50,
+                                     ),
+                               ):
+                            GoogleMap(
+                              mapType: MapType.normal,
+
+                              zoomControlsEnabled: true,
+                              scrollGesturesEnabled:true,
+                              onMapCreated: (GoogleMapController onMapCreatedController) {
+                                controller.mapController = onMapCreatedController;
+                                controller.setMapStyle();
+                              },
+                  initialCameraPosition:  CameraPosition(
+                    target: locationController.currentLocation.value!,
+                    zoom: 15.0,
+                  ),
+                              markers: Set<Marker>.of(controller.markers.values),
+                              polylines: Set<Polyline>.of(controller.polylines.values),
+
+                            ),
                           ),
+                ),
+                controller.selectedIndex.value != 2 ||controller.selectedIndex.value != 1 || locationController.currentLocation.value != null?
+                Positioned(
+                    top: Get.height*.3,
+                    left: Get.width*.27,
+                    child: Obx(()=> Container(
+                        height: 100,
+                        width: 200,
+                        alignment: Alignment.center,
+                        decoration:  BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color:AppColors.yellow,width: 6 ),
+                          color: AppColors.white.withOpacity(0.8)
                         ),
+
+                        child: Text(controller.time.value.toString(),style: const TextStyle(fontSize: 25,color: AppColors.black),)))):SizedBox.shrink(),
                 Positioned(
                     left: Get.width*0.041,
                     top: Get.height*0.061,

@@ -412,6 +412,34 @@ class CallAPI {
       return result;
     }
   }
+  /// BOOKING ACCEPT
+  static Future<PostAddressModel> bookingAccept({required var request}) async {
+    PostAddressModel result = PostAddressModel();
+    try {
+      Map<dynamic, dynamic> json = await APIManager().postAPICall(
+        endpoint: Endpoints.epBookingAccept,
+        request: request,
+      );
+
+      PostAddressModel responseModel = PostAddressModel.fromJson(json);
+
+      if (responseModel.status == 200) {
+        result = responseModel;
+        printResult(
+            screenName: 'API CALL',
+            msg: "CALLING ENDPOINTS ${Endpoints.epLogin}, RESULT:$json");
+
+        return result;
+      } else {
+        result = responseModel;
+        return result;
+      }
+    } on Exception catch (e, st) {
+      printResult(
+          screenName: 'API CALL', msg: "", error: e.toString(), stackTrace: st);
+      return result;
+    }
+  }
 
 }
 
