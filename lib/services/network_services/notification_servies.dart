@@ -139,11 +139,19 @@ class NotificationServices {
         final name = data['Name'] ?? '';
         final address = data['Address'] ?? '';
         final contact = data['Contact'] ?? '';
+        final userId = data['userId'] ?? '';
+        final userProfile = data['userProfile'] ?? '';
+        final userLat = data['userLat'] ?? '';
+        final userLong = data['userLong'] ?? '';
 
         Get.toNamed(AppRoutes.bookingrequest, arguments: {
           "name": name,
           "address": address,
           "contact": contact,
+          "userId": userId,
+          "userProfile": userProfile,
+          "userLat": userLat,
+          "userLong": userLong,
         });
       } catch (e) {
         log("Error parsing notification data: $e");

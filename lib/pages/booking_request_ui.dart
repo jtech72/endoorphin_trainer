@@ -1,16 +1,20 @@
 import 'package:endoorphin_trainer/controllers/booking_request_controller.dart';
+import 'package:endoorphin_trainer/services/location_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:slide_to_act/slide_to_act.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../utils/exports.dart';
 import 'bottom_navigation_bar_ui.dart';
 
-class BookingRequsetUi extends StatelessWidget {
-  const BookingRequsetUi({super.key});
+class BookingRequestUi extends StatelessWidget {
+  const BookingRequestUi({super.key});
 
   @override
   Widget build(BuildContext context) {
+    LocationController locationController = Get.put(LocationController());
     BookingRequestController controller = Get.find();
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -40,70 +44,91 @@ class BookingRequsetUi extends StatelessWidget {
                           Text(
                             "Please Verify the pin to start the training",
                             style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.w400),
-                          ).paddingOnly(bottom: Get.height * 0.03,top: Get.height * 0.02),
-                          ValueListenableBuilder<bool>(
-                            valueListenable: controller.isPinComplete,
-                            builder: (context, isComplete, child) {
-                              if (isComplete) {
-                                WidgetsBinding.instance.addPostFrameCallback((_) {
-                                  if (controller.isPinComplete.value) {
-                                    controller.isPinComplete.value = false; // Reset the value to prevent repeated navigation
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => const SessionRunningUi()),
-                                    );
-                                  }
-                                });
-                              }
-                              return Center(
-                                child: PinCodeTextField(
-                                  appContext: context,
-                                  length: 4,
-                                  controller: controller.pinController,
-                                  onChanged: (value) {
-                                    if (value.length == 4) {
-                                      controller.isPinComplete.value = true;
-                                    }
-                                  },
-                                  inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                                  ],
-                                  textStyle: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 30,
-                                  ),
+                          ).paddingOnly(bottom: Get.height * 0.03),
+                          PinCodeTextField(
+                              inputFormatters: <TextInputFormatter>[
+                                FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                              ],
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .headlineLarge!
+                                      .copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 30),
                                   animationCurve: Curves.easeInCubic,
                                   pinTheme: PinTheme(
-                                    shape: PinCodeFieldShape.underline,
-                                    borderRadius: BorderRadius.circular(5),
-                                    fieldHeight: 50,
-                                    fieldWidth: 40,
-                                    inactiveColor: AppColors.lightGrey,
-                                    selectedColor: AppColors.yellow,
-                                    activeColor: AppColors.yellow,
-                                    inactiveBorderWidth: 1,
-                                    selectedBorderWidth: 1,
-                                    activeBorderWidth: 1,
-                                  ),
+                                      shape: PinCodeFieldShape.underline,
+                                      borderRadius: BorderRadius.circular(5),
+                                      fieldHeight: 50,
+                                      fieldWidth: 40,
+                                      inactiveColor: AppColors.lightGrey,
+                                      selectedColor: AppColors.yellow,
+                                      activeColor: AppColors.yellow,
+                                      inactiveBorderWidth: 1,
+                                      selectedBorderWidth: 1,
+                                      activeBorderWidth: 1),
                                   autoDisposeControllers: true,
                                   enablePinAutofill: true,
+                                  appContext: context,
                                   hintStyle: const TextStyle(
-                                    color: AppColors.grey,
-                                    fontSize: 22,
-                                  ),
+                                      color: AppColors.grey, fontSize: 22),
                                   hintCharacter: '●',
                                   blinkWhenObscuring: true,
                                   cursorColor: AppColors.yellow,
                                   keyboardType: TextInputType.number,
-                                  backgroundColor: Colors.transparent,
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                ),
-                              );
-                            },
-                          ),
+                                  backgroundColor:Colors.transparent,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  length: 4)
+                              .paddingOnly(bottom: Get.height * 0.01),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: Get.width*.6,
+                                child: SlideAction(
+                                  sliderButtonYOffset:-4,
+                                  animationDuration: Durations.medium4,
+                                  innerColor: AppColors.black,
+                                  sliderButtonIcon: Image.asset(
+                                    ImagesPaths.send2,
+                                    scale: 5,
+                                  ),
+                                  outerColor: AppColors.yellow,
+                                  height: 35,
+                                  sliderButtonIconPadding: 8,
+                                  borderRadius: 36,
+                                  sliderRotate: false,
 
-                              // .paddingOnly(bottom: Get.height * 0.01),
+                                  child: Text(
+                                    "Swipe to Start Session",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelMedium
+                                        ?.copyWith(color: Colors.black,fontSize: 12,
+                                        fontFamily: 'Montserrat'),
+                                  ).paddingOnly(left: Get.width*.07),
+                                  onSubmit: (){
+                                    Get.toNamed(AppRoutes.sessionRunning);
+                                    return null;
+                                  },
 
+                                ).paddingOnly(right: 20),
+                              ).paddingOnly(left: Get.width*0.01),
+                               GestureDetector(
+                                 onTap: (){
+                                   _launchTelephone();
+                                 },
+                                 child: const CircleAvatar(
+                                  radius: 20,
+                                  backgroundColor: Colors.black,
+                                  backgroundImage: AssetImage(
+                                    ImagesPaths.telephone,
+                                  ), // Your profile image
+                                                               ),
+                               ),
+                            ],
+                          ).paddingOnly(bottom: Get.height * 0.02),
                           Text('Customer Address',
                                   style: Theme.of(context)
                                       .textTheme
@@ -111,7 +136,7 @@ class BookingRequsetUi extends StatelessWidget {
                                       .copyWith(
                                           fontWeight: FontWeight.w500,
                                           color: AppColors.yellow))
-                              .paddingOnly(bottom: Get.height * 0.015,top: Get.height * 0.01),
+                              .paddingOnly(bottom: Get.height * 0.015),
                           Row(
                             children: [
                               const Icon(
@@ -127,59 +152,11 @@ class BookingRequsetUi extends StatelessWidget {
                                     .copyWith(fontWeight: FontWeight.w500),
                               )
                             ],
-                          ).paddingOnly(bottom: Get.height * 0.02)
+                          )
                         ],
                       ).paddingOnly(top: 20, bottom: 50, left: 25, right: 25),
                     ),
                   )
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     SizedBox(
-            //       width: Get.width*.6,
-            //       child: SlideAction(
-            //         sliderButtonYOffset:-4,
-            //         animationDuration: Durations.medium4,
-            //         innerColor: AppColors.black,
-            //         sliderButtonIcon: Image.asset(
-            //           ImagesPaths.send2,
-            //           scale: 5,
-            //         ),
-            //         outerColor: AppColors.yellow,
-            //         height: 35,
-            //         sliderButtonIconPadding: 8,
-            //         borderRadius: 36,
-            //         sliderRotate: false,
-            //
-            //         child: Text(
-            //           "Swipe to Start Session",
-            //           style: Theme.of(context)
-            //               .textTheme
-            //               .labelMedium
-            //               ?.copyWith(color: Colors.black,fontSize: 12,
-            //               fontFamily: 'Montserrat'),
-            //         ).paddingOnly(left: Get.width*.07),
-            //         onSubmit: (){
-            //           Get.toNamed(AppRoutes.sessionRunning);
-            //           return null;
-            //         },
-            //
-            //       ).paddingOnly(right: 20),
-            //     ).paddingOnly(left: Get.width*0.01),
-            //      GestureDetector(
-            //        onTap: (){
-            //          _launchTelephone();
-            //        },
-            //        child: const CircleAvatar(
-            //         radius: 20,
-            //         backgroundColor: Colors.black,
-            //         backgroundImage: AssetImage(
-            //           ImagesPaths.telephone,
-            //         ), // Your profile image
-            //                                      ),
-            //      ),
-            //   ],
-            // ).paddingOnly(bottom: Get.height * 0.02),
                 : controller.selectedIndex.value == 1
                     ? SingleChildScrollView(
 
@@ -519,53 +496,32 @@ class BookingRequsetUi extends StatelessWidget {
                                 ],
                               ).paddingOnly(left: Get.width*0.04,right: Get.width*0.04,bottom: Get.height*0.01),
                               Center(
-                                child: Column(
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                         controller.selectedbutton.value = true;
-                                        controller.selectedIndex.value = 1;
-                                      },
-                                      child: Container(
-                                        height:  50,
-                                        width:  300,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(color: AppColors.yellow),
-                                          borderRadius: BorderRadius.circular(50),
-                                          color:controller.selectedbutton.value ? AppColors.yellow : Colors.transparent,
-                                        ),
-                                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                                        child: Text(
-                                          "Accept",textAlign: TextAlign.center,
-                                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 18,
-                                              fontFamily: 'Montserrat',color:controller.selectedbutton.value ? AppColors.black : AppColors.yellow),
-                                        ),
+                                  child: InkButton(
+                                      child: Text(
+                                        'Accept',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall!
+                                            .copyWith(color: AppColors.black,fontSize: 18,
+                                            fontFamily: 'Montserrat'),
                                       ),
-                                    ),
-                                    const SizedBox(height: 20),
-                                    GestureDetector(
                                       onTap: () {
-                                     controller.selectedbutton.value = false;
-                                      },
-                                      child: Container(
-                                        height:  50,
-                                        width:  300,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(color: AppColors.yellow),
-                                          borderRadius: BorderRadius.circular(50),
-                                          color:controller.selectedbutton.value ?Colors.transparent :AppColors.yellow ,
-                                        ),
-                                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                                        child: Text(
-                                          "Reject",textAlign: TextAlign.center,
-                                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 18,
-                                              fontFamily: 'Montserrat',color: controller.selectedbutton.value ? AppColors.yellow:AppColors.black),
-                                        ),
+                                           controller.onAcceptButton();
+                                      })).paddingOnly(top: 30, bottom: 5),
+                              Center(
+                                  child: InkButton(
+                                    backGroundColor: AppColors.black,
+                                      child: Text(
+                                        'Reject',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall!
+                                            .copyWith(color: AppColors.yellow,fontSize: 18,
+                                            fontFamily: 'Montserrat'),
                                       ),
-                                    ),
-                                  ],
-                                ).paddingOnly(top: 30),
-                              ),
+                                      onTap: () {
+                                    controller.showDialogBox("Session request rejected");
+                                      })).paddingOnly(top: 10, bottom: 15),
                               SizedBox(height: Get.height*0.02,),
                               //
                             ],
@@ -575,38 +531,53 @@ class BookingRequsetUi extends StatelessWidget {
           },
         ),
         body:
-            // Obx(() {
-            //   return controller.currentLocation.value == null
-            //       ? const Center(child: CircularProgressIndicator())
-            //       .paddingOnly(bottom: 300)
-            //       :
             Stack(
               children: [
-                SizedBox(
-                          height: Get.height * .8,
-                          child: GoogleMap(
-                            mapType: MapType.normal,
-                            myLocationButtonEnabled: true,
-                            myLocationEnabled: true,
-                            zoomControlsEnabled: true,
-                            scrollGesturesEnabled:true,
-                            onMapCreated: (GoogleMapController onMapCreatedController) {
-                              controller.mapController = onMapCreatedController;
-                              controller.setMapStyle();
-                            },
-                initialCameraPosition: const CameraPosition(
-                  target: LatLng(37.43296265331129, -122.08832357078792),
-                  zoom: 15.0,
-                ),
-                // markers: {
-                //   Marker(
-                //     markerId: const MarkerId('current_location'),
-                //     position: controller.currentLocation.value!,
-                //     infoWindow: const InfoWindow(title: 'Current Location'),
-                //   ),
-                // },
+                Obx(
+                ()=>   SizedBox(
+                            height: Get.height * .8,
+                            child:
+                            locationController.currentLocation.value == null?
+                               Center(
+                                 child: SizedBox(
+                                     height: 50,
+                                     width: 50,
+                                     ),
+                               ):
+                            GoogleMap(
+                              mapType: MapType.normal,
+
+                              zoomControlsEnabled: true,
+                              scrollGesturesEnabled:true,
+                              onMapCreated: (GoogleMapController onMapCreatedController) {
+                                controller.mapController = onMapCreatedController;
+                                controller.setMapStyle();
+                              },
+                  initialCameraPosition:  CameraPosition(
+                    target: locationController.currentLocation.value!,
+                    zoom: 15.0,
+                  ),
+                              markers: Set<Marker>.of(controller.markers.values),
+                              polylines: Set<Polyline>.of(controller.polylines.values),
+
+                            ),
                           ),
+                ),
+                controller.selectedIndex.value != 2 ||controller.selectedIndex.value != 1 || locationController.currentLocation.value != null?
+                Positioned(
+                    top: Get.height*.3,
+                    left: Get.width*.27,
+                    child: Obx(()=> Container(
+                        height: 100,
+                        width: 200,
+                        alignment: Alignment.center,
+                        decoration:  BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color:AppColors.yellow,width: 6 ),
+                          color: AppColors.white.withOpacity(0.8)
                         ),
+
+                        child: Text(controller.time.value.toString(),style: const TextStyle(fontSize: 25,color: AppColors.black),)))):SizedBox.shrink(),
                 Positioned(
                     left: Get.width*0.041,
                     top: Get.height*0.061,
@@ -631,10 +602,10 @@ _launchTelephone() async {
     throw 'Could not launch $telephoneNumber';
   }
 }
+
+
 class ChatBottomSheet extends StatelessWidget {
   final BookingRequestController chatController = Get.put(BookingRequestController());
-
-   ChatBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
