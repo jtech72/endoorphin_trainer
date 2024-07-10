@@ -83,8 +83,8 @@ class EarningUi extends StatelessWidget {
         ),
         title: GestureDetector(
           onTap: () {
-            // Get.offAllNamed(AppRoutes.bottomNavigation);
-            Get.back();
+            Get.offAllNamed(AppRoutes.bottomNavigation);
+            // Get.back();
           },
           child: Text(
             "My Earnings",

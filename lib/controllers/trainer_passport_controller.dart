@@ -29,7 +29,7 @@ class TrainerPassportController extends GetxController {
       showSnackBar("Passport number must be between 8 and 9 characters");
     }
     // Validation: Check if the Emirates ID number length is invalid
-    else if (certificationDetails!["categoryName"] == "emirates" && (trimmedCertificateNumber.length < 6 || trimmedCertificateNumber.length > 15)) {
+    else if (certificationDetails!["categoryName"] == "emirates" && (trimmedCertificateNumber.length < 6 || trimmedCertificateNumber.length > 18)) {
       showSnackBar("Emirates ID number must be between 6 and 15 characters");
     }
     // Validation: Check if the certificate number length is invalid for other categories
@@ -38,12 +38,13 @@ class TrainerPassportController extends GetxController {
     }
     // If all validations pass, navigate to the upload image screen
     else {
+
       Get.toNamed(AppRoutes.uploadimage, arguments: {
         "userId": certificationDetails!["userId"],
         "categoryName": certificationDetails!["categoryName"],
         "categoryId": certificationDetails!["categoryId"],
         "id": certificationDetails!["id"],
-        "certificateNumber": trimmedCertificateNumber,
+        "certificateNumber": certificateNumber.text.replaceAll("-", ""),
         "certificateName": trimmedCertificateName,
         "reupload": certificationDetails!["reupload"],
       });

@@ -161,7 +161,7 @@ Widget buildOption(IconData icon, String label, VoidCallback onTap) {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: const BoxDecoration(
-              color: AppColors.yellow, // assuming AppColors.Yellow is defined somewhere
+              color: AppColors.yellow,
               shape: BoxShape.circle,
             ),
             child: Icon(icon, color: AppColors.Black3),
@@ -178,7 +178,7 @@ Widget buildOption(IconData icon, String label, VoidCallback onTap) {
     ),
   );
 }
-
+//
 class NoLeadingSpaceFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
@@ -188,25 +188,24 @@ class NoLeadingSpaceFormatter extends TextInputFormatter {
     return newValue;
   }
 }
-
 class CertificateNumberFormatter extends TextInputFormatter {
+  final int maxLength;
+
+  CertificateNumberFormatter(this.maxLength);
+
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
-    final text = newValue.text;
+    final cleanText = newValue.text.replaceAll('-', '');
+    final truncatedText = cleanText.substring(0, cleanText.length <= maxLength ? cleanText.length : maxLength);
     final buffer = StringBuffer();
-    int selectionIndex = newValue.selection.end;
-
-    // Remove all dashes from the input text
-    final cleanText = text.replaceAll('-', '');
-
-    // Insert dashes based on the cleaned text
-    for (int i = 0; i < cleanText.length; i++) {
+    int selectionIndex = truncatedText.length;
+    for (int i = 0; i < truncatedText.length; i++) {
       if (i == 3 || i == 7 || i == 14 || i == 15) {
         buffer.write('-');
-        if (selectionIndex >= i) selectionIndex++;
+        if (i < selectionIndex) selectionIndex++;
       }
-      buffer.write(cleanText[i]);
+      buffer.write(truncatedText[i]);
     }
 
     final formattedText = buffer.toString();
@@ -250,7 +249,6 @@ class TrainerDocumentStatusCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var isFrontImageVisible = true.obs;
-
     return Container(
       width: Get.width,
       decoration: BoxDecoration(
@@ -512,25 +510,3 @@ class TrainerDocumentStatusCard extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
