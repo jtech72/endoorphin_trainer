@@ -42,6 +42,7 @@ class HomeUiState extends State<HomeUi> {
 
     return Scaffold(
         appBar: AppBar(
+          surfaceTintColor: AppColors.black,
           iconTheme: const IconThemeData(color: AppColors.impgrey),
           title: Obx(
                 () => Text(
