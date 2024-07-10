@@ -130,7 +130,7 @@ class BookingRequestController extends GetxController{
     return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
   }
   int getMarkerSize() {
-    double baseSize = 15.0; // Base marker size in dp
+    double baseSize = 25.0; // Base marker size in dp
     double devicePixelRatio = ui.window.devicePixelRatio;
     double screenWidth = ui.window.physicalSize.width / devicePixelRatio;
     double scaleFactor = screenWidth / 360.0; // Assume 360dp as the reference screen width
@@ -138,7 +138,7 @@ class BookingRequestController extends GetxController{
     double maxSize = 50.0; // Maximum size limit in dp
     return (scaledSize * devicePixelRatio).clamp(baseSize * devicePixelRatio, maxSize * devicePixelRatio).toInt();
   }
- void addMarker(LatLng position, String id, BitmapDescriptor descriptor) async{
+ Future<void> addMarker(LatLng position, String id) async{
     int markerSize = getMarkerSize();
    final Uint8List markerIcon = await getBytesFromAsset('assets/images/ic_current_location.png', markerSize);
     MarkerId markerId = MarkerId(id);
@@ -288,23 +288,24 @@ class BookingRequestController extends GetxController{
     notificationData = Get.arguments ?? {};
     userLat = double.parse(notificationData["userLat"]);
     userLng = double.parse(notificationData["userLong"]);
-    log(userLat.toString());
     log("notification data ===> $notificationData");
     await locationController.getCurrentLocation();
-    if (locationController.currentLocation.value != null) {
-      LatLng currentLocation = LatLng(
-          locationController.currentLocation.value!.latitude,
-          locationController.currentLocation.value!.longitude
-      );
       startTimer(180);
-      /// origin marker
-      addMarker(currentLocation, "origin", BitmapDescriptor.defaultMarker);
-      /// destination marker
-      addMarker(LatLng(userLat!,userLng!), "destination", BitmapDescriptor.defaultMarkerWithHue(90));
-      getPolyline();
-      log(locationController.currentLocation.toString());
-    } else {
-      log("Failed to get the current location.");
-    }
+
+    // if (locationController.currentLocation.value != null) {
+    //   LatLng currentLocation = LatLng(
+    //       locationController.currentLocation.value!.latitude,
+    //       locationController.currentLocation.value!.longitude
+    //   );
+    //   /// origin marker
+    //  await addMarker(currentLocation, "origin", BitmapDescriptor.defaultMarker);
+    //   /// destination marker
+    //  await addMarker(LatLng(userLat!,userLng!), "destination", BitmapDescriptor.defaultMarkerWithHue(90));
+    //   log(locationController.currentLocation.toString());
+    // } else {
+    //   log("Failed to get the current location.");
+    // }
+    getPolyline();
+
   }
 }

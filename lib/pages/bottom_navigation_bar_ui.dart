@@ -43,6 +43,7 @@ class _BottomNavigationBarUIState extends State<BottomNavigationBarUI> {
   @override
   void initState() {
     initializePages();
+    LocationController().getCurrentLocation();
     super.initState();
   }
 

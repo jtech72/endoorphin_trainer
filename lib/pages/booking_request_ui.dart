@@ -549,11 +549,13 @@ class BookingRequestUi extends StatelessWidget {
 
                               zoomControlsEnabled: true,
                               scrollGesturesEnabled:true,
-                              onMapCreated: (GoogleMapController onMapCreatedController) {
+                              onMapCreated: (GoogleMapController onMapCreatedController) async{
                                 controller.mapController = onMapCreatedController;
                                 controller.setMapStyle();
-                                // controller.getBothMarkers();
-                              },
+                                /// origin marker
+                               await  controller.addMarker(controller.locationController.currentLocation.value!, "origin");
+                                /// destination marker
+                              await  controller.addMarker(LatLng(controller.userLat!,controller.userLng!), "destination" );                              },
                   initialCameraPosition:  CameraPosition(
                     target: locationController.currentLocation.value!,
                     zoom: 15.0,

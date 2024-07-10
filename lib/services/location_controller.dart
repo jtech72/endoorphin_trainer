@@ -36,7 +36,6 @@ class LocationController extends GetxController {
         return;
       }
     }
-
     try {
       // Get the current location
       LocationData currentLocationData = await location.getLocation();
@@ -45,11 +44,5 @@ class LocationController extends GetxController {
       log("Error getting current location: $e");
       // Handle errors here
     }
-  }
-
-  @override
-  void onInit() {
-    getCurrentLocation();
-    super.onInit();
   }
 }
