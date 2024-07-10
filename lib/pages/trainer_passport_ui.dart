@@ -91,7 +91,8 @@ class TrainerPassportUI extends StatelessWidget {
                   child: TextField(
                     controller: controller.certificateName,
                     inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))
+                      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]')),
+                      NoLeadingSpaceFormatter()
                     ],
                     enableInteractiveSelection: true,
                     style: Theme.of(context).textTheme.labelMedium,
@@ -174,33 +175,28 @@ class TrainerPassportUI extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: TextField(
-                    keyboardType: controller.certificationDetails!["categoryName"] ==
-                        "emirates"
+                    onTap: (){
+                      if(controller.certificationDetails!["categoryName"] == "emirates"){
+                        if (!controller.certificateNumber.text.startsWith('784-')) {
+                          controller.certificateNumber.text = '784-';
+                        }
+                      }
+                      },
+                    keyboardType: controller.certificationDetails!["categoryName"] == "emirates"
                         ? TextInputType.number
-                        : controller.certificationDetails!["categoryName"] ==
-                        "passport"
-                        ?TextInputType.text
+                        : controller.certificationDetails!["categoryName"] == "passport"
+                        ? TextInputType.text
                         : TextInputType.text,
                     controller: controller.certificateNumber,
                     inputFormatters: [
-                      LengthLimitingTextInputFormatter(25),
-                      controller.certificationDetails!["categoryName"] ==
-                          "emirates"?
-                      CertificateNumberFormatter()
-                      :controller.certificationDetails!["categoryName"] ==
-                          "passport"?NoLeadingSpaceFormatter()
-                      :NoLeadingSpaceFormatter(),
-                      NoLeadingSpaceFormatter(),
-                      FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                      controller.certificationDetails!["categoryName"] ==
-                          "emirates"?
-                      LengthLimitingTextInputFormatter(18)
-                          :controller.certificationDetails!["categoryName"] ==
-                          "passport"?NoLeadingSpaceFormatter()
-                          :NoLeadingSpaceFormatter(),
-                      // Set maximum length to 12
-                      // FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')),
-                      // Allow only alphanumeric characters
+                      if (controller.certificationDetails!["categoryName"] == "emirates") ...[
+                    FilteringTextInputFormatter.digitsOnly,
+                        CertificateNumberFormatter(15),NoLeadingSpaceFormatter(),
+                      ] else if(controller.certificationDetails!["categoryName"]=="passport") ...[
+                        NoLeadingSpaceFormatter(),LengthLimitingTextInputFormatter(9),
+                      ]else ...[
+                      FilteringTextInputFormatter.deny(RegExp(r'\s')), LengthLimitingTextInputFormatter(25)
+                      ]
                     ],
                     enableInteractiveSelection: true,
                     style: Theme.of(context).textTheme.labelMedium,
@@ -211,17 +207,12 @@ class TrainerPassportUI extends StatelessWidget {
                       fillColor: AppColors.yellowishWhite,
                       border: InputBorder.none,
                       hintStyle: Theme.of(context).textTheme.labelMedium,
-                      contentPadding:
-                          const EdgeInsets.only(bottom: 3, left: 15),
-
-                      hintText: controller
-                                  .certificationDetails!["categoryName"] ==
-                              "emirates"
+                      contentPadding: const EdgeInsets.only(bottom: 3, left: 15),
+                      hintText: controller.certificationDetails!["categoryName"] == "emirates"
                           ? " Enter Emirates ID Number"
-                          : controller.certificationDetails!["categoryName"] ==
-                                  "passport"
-                              ? 'Enter Passport Number'
-                              : "Enter Certification Number",
+                          : controller.certificationDetails!["categoryName"] == "passport"
+                          ? 'Enter Passport Number'
+                          : "Enter Certification Number",
                       alignLabelWithHint: true,
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(4),
@@ -317,4 +308,4 @@ class TrainerPassportUI extends StatelessWidget {
     );
   }
 }
-//
+
