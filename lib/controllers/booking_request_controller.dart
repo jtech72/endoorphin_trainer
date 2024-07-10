@@ -1,50 +1,82 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
+import 'dart:ui'as ui;
 import 'package:endoorphin_trainer/services/location_controller.dart';
 import 'package:endoorphin_trainer/services/network_services/api_call.dart';
 import 'package:endoorphin_trainer/services/network_services/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
 import '../utils/exports.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class BookingRequestController extends GetxController{
   final TextEditingController pinController = TextEditingController();
   final ValueNotifier<bool> isPinComplete = ValueNotifier(false);
+  LatLng?northeastCoordinates;
+  LatLng?southwestCoordinates;
+  double ?userLat;
+  double ?userLng;
+  late GoogleMapController mapController;
+  RxInt selectedIndex = 0.obs;
+  LocationController locationController = Get.put(LocationController());
+  Map<MarkerId, Marker> markers = {};
+  Map<PolylineId, Polyline> polyLines = {};
+  List<LatLng> polylineCoordinates = [];
+  Map<dynamic,dynamic> notificationData = {};
+  late IO.Socket socket;
+  var messages = <String>[].obs;
+  final TextEditingController messageController = TextEditingController();
+  Timer? _timer;
+  int remainingSeconds = 60;
+  final time = '01.00'.obs;
 
-  PinCodePage() {
+
+ void pinCodePage() {
     pinController.addListener(() {
       if (pinController.text.length == 4) {
         isPinComplete.value = true;
       }
     });
   }
-  RxBool selectedbutton = true.obs;
-  late GoogleMapController mapController;
-  RxInt selectedIndex = 0.obs;
-  LocationController locationController = Get.put(LocationController());
-  double _originLatitude = 26.48424, _originLongitude = 50.04551;
-  double _destLatitude = 26.46423, _destLongitude = 50.06358;
-  Map<MarkerId, Marker> markers = {};
-  Map<PolylineId, Polyline> polylines = {};
-  List<LatLng> polylineCoordinates = [];
-  PolylinePoints polylinePoints = PolylinePoints();
-  String googleAPiKey = "AIzaSyDQ2c_pOSOFYSjxGMwkFvCVWKjYOM9siow";
 
-  Map<dynamic,dynamic> notificationData = {};
-  late IO.Socket socket;
-  var messages = <String>[].obs;
-  final TextEditingController messageController = TextEditingController();
+  void getBothMarkers() {
+    if (locationController.currentLocation.value != null) {
+      LatLng currentLocation = locationController.currentLocation.value!;
 
+      if (currentLocation.latitude <= 30.725238) {
+        southwestCoordinates = currentLocation;
+        northeastCoordinates = LatLng(30.725238, 76.804086);
+      } else {
+        southwestCoordinates = LatLng(30.725238, 76.804086);
+        northeastCoordinates = currentLocation;
+      }
+
+      log('Northeast Coordinates: ${northeastCoordinates.toString()}');
+      log('Southwest Coordinates: ${southwestCoordinates.toString()}');
+
+      mapController.animateCamera(
+        CameraUpdate.newLatLngBounds(
+          LatLngBounds(
+            northeast: northeastCoordinates!,
+            southwest: southwestCoordinates!,
+          ),
+          100.0, // padding
+        ),
+      );
+    } else {
+      log('Current location is null');
+    }
+  }
   void sendMessage() {
     if (messageController.text.trim().isNotEmpty) {
       messages.add(messageController.text.trim());
       messageController.clear();
     }
   }
-  initSocket() {
+  void initSocket() {
     socket = IO.io(Endpoints.baseUrl, <String, dynamic>{
       'autoConnect': false,
       'transports': ['websocket'],
@@ -60,8 +92,7 @@ class BookingRequestController extends GetxController{
   void onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
-
-  sendMessageIo() {
+ void sendMessageIo() {
     String message = messageController.text.trim();
     if (message.isEmpty) return;
     Map messageMap = {
@@ -72,30 +103,15 @@ class BookingRequestController extends GetxController{
     };
     socket.emit('sendNewMessage', messageMap);
   }
-  @override
-  void onClose() {
-    selectedIndex.value = 0;
-    if (_timer != null) {
-      _timer!.cancel();
-    }
-    super.onClose();
-  }
   void setMapStyle() async {
     String style = await DefaultAssetBundle.of(Get.context!)
         .loadString('assets/dark_map_style.json');
-    log("message1111");
     mapController.setMapStyle(style);
   }
-  Timer? _timer;
-  int remainingSeconds = 60;
-  final time = '01.00'.obs;
-  RxBool isPaused = false.obs;
-
   void startTimer(int seconds) {
     const duration = Duration(seconds: 1);
     remainingSeconds = seconds;
     _timer = Timer.periodic(duration, (Timer timer) {
-      if (!isPaused.value) {
         if (remainingSeconds == 0) {
           timer.cancel();
           showDialogBox("Session request timeout");
@@ -105,38 +121,71 @@ class BookingRequestController extends GetxController{
           time.value = "${minutes.toString().padLeft(2, "0")}:${seconds.toString().padLeft(2, "0")}";
           remainingSeconds--;
         }
-      }
     });
   }
-  _addMarker(LatLng position, String id, BitmapDescriptor descriptor) {
+  Future<Uint8List> getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+  }
+  int getMarkerSize() {
+    double baseSize = 15.0; // Base marker size in dp
+    double devicePixelRatio = ui.window.devicePixelRatio;
+    double screenWidth = ui.window.physicalSize.width / devicePixelRatio;
+    double scaleFactor = screenWidth / 360.0; // Assume 360dp as the reference screen width
+    double scaledSize = baseSize * scaleFactor;
+    double maxSize = 50.0; // Maximum size limit in dp
+    return (scaledSize * devicePixelRatio).clamp(baseSize * devicePixelRatio, maxSize * devicePixelRatio).toInt();
+  }
+ void addMarker(LatLng position, String id, BitmapDescriptor descriptor) async{
+    int markerSize = getMarkerSize();
+   final Uint8List markerIcon = await getBytesFromAsset('assets/images/ic_current_location.png', markerSize);
     MarkerId markerId = MarkerId(id);
     Marker marker =
-    Marker(markerId: markerId, icon: descriptor, position: position);
+    Marker(markerId: markerId, icon: BitmapDescriptor.fromBytes(markerIcon), position: position);
     markers[markerId] = marker;
   }
-
-  _addPolyLine() {
+  void addPolyLine() {
     PolylineId id = PolylineId("poly");
     Polyline polyline = Polyline(
         polylineId: id, color: AppColors.yellow, points: polylineCoordinates);
-    polylines[id] = polyline;
+    polyLines[id] = polyline;
 
   }
+ void getPolyline() async {
+    try {
+      log("getPolyline");
+      if (locationController.currentLocation.value != null) {
+        PolylineResult result = await PolylinePoints().getRouteBetweenCoordinates(
+            googleApiKey: "AIzaSyAb-OJXPRTflwkd0huWLB2ygvwMv2Iwzgo",
+            request: PolylineRequest(
+                origin: PointLatLng(
+                    locationController.currentLocation.value!.latitude,
+                    locationController.currentLocation.value!.longitude
+                ),
+                destination: PointLatLng(30.725238, 76.804086),
+                mode: TravelMode.driving,
+                wayPoints: [PolylineWayPoint(location: "Sabo, Yaba Lagos Nigeria")]
+            )
+        );
 
-  _getPolyline() async {
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-       googleApiKey:  "AIzaSyAb-OJXPRTflwkd0huWLB2ygvwMv2Iwzgo",
-        request: PolylineRequest(
-            origin: PointLatLng(locationController.currentLocation.value!.latitude, locationController.currentLocation.value!.longitude),
-            destination: PointLatLng(30.725238, 76.804086),
-        mode: TravelMode.driving,
-        wayPoints: [PolylineWayPoint(location: "Sabo, Yaba Lagos Nigeria")]));
-    if (result.points.isNotEmpty) {
-      result.points.forEach((PointLatLng point) {
-        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      });
+        if (result.points.isNotEmpty) {
+          log("result ===>$result");
+          result.points.forEach((PointLatLng point) {
+            polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+          });
+        } else {
+          log("No points found in the result.");
+        }
+        addPolyLine();
+      } else {
+        log("Current location is null.");
+      }
+    } catch (e, st) {
+      log("Error occurred while getting polyline: $e");
+      log("Stack trace: $st");
     }
-    _addPolyLine();
   }
   Future<void>onAcceptButton()async{
     showLoader();
@@ -160,7 +209,7 @@ class BookingRequestController extends GetxController{
       log('Error occurred: $st');
     }
   }
-  showDialogBox(String title) {
+  void showDialogBox(String title) {
     showDialog(
       barrierDismissible: false,
       context: Get.context!,
@@ -227,19 +276,35 @@ class BookingRequestController extends GetxController{
     );
   }
   @override
-  void onInit() async{
-    notificationData = Get.arguments??{};
-    log("notification data ===>$notificationData");
+  void onClose() {
+    selectedIndex.value = 0;
+    if (_timer != null) {
+      _timer!.cancel();
+    }
+    super.onClose();
+  }
+  @override
+  void onInit() async {
+    notificationData = Get.arguments ?? {};
+    userLat = double.parse(notificationData["userLat"]);
+    userLng = double.parse(notificationData["userLong"]);
+    log(userLat.toString());
+    log("notification data ===> $notificationData");
     await locationController.getCurrentLocation();
-    startTimer(180);
-    /// origin marker
-    _addMarker(LatLng(locationController.currentLocation.value!.latitude, locationController.currentLocation.value!.longitude), "origin",
-        BitmapDescriptor.defaultMarker);
-    /// destination marker
-    _addMarker(LatLng(30.725238, 76.804086), "destination",
-        BitmapDescriptor.defaultMarkerWithHue(90));
-    _getPolyline();
-    log(locationController.currentLocation.toString());
-    // initSocket();
+    if (locationController.currentLocation.value != null) {
+      LatLng currentLocation = LatLng(
+          locationController.currentLocation.value!.latitude,
+          locationController.currentLocation.value!.longitude
+      );
+      startTimer(180);
+      /// origin marker
+      addMarker(currentLocation, "origin", BitmapDescriptor.defaultMarker);
+      /// destination marker
+      addMarker(LatLng(userLat!,userLng!), "destination", BitmapDescriptor.defaultMarkerWithHue(90));
+      getPolyline();
+      log(locationController.currentLocation.toString());
+    } else {
+      log("Failed to get the current location.");
+    }
   }
 }
