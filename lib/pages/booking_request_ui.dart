@@ -552,13 +552,14 @@ class BookingRequestUi extends StatelessWidget {
                               onMapCreated: (GoogleMapController onMapCreatedController) {
                                 controller.mapController = onMapCreatedController;
                                 controller.setMapStyle();
+                                // controller.getBothMarkers();
                               },
                   initialCameraPosition:  CameraPosition(
                     target: locationController.currentLocation.value!,
                     zoom: 15.0,
                   ),
                               markers: Set<Marker>.of(controller.markers.values),
-                              polylines: Set<Polyline>.of(controller.polylines.values),
+                              polylines: Set<Polyline>.of(controller.polyLines.values),
 
                             ),
                           ),
