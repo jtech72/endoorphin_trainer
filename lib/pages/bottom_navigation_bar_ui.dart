@@ -35,6 +35,7 @@ class _BottomNavigationBarUIState extends State<BottomNavigationBarUI> {
 
   @override
   void initState() {
+    LocationController().getCurrentLocation();
     super.initState();
     navigatorKeys = List<GlobalKey<NavigatorState>>.generate(4, (index) => GlobalKey<NavigatorState>());
     pages = [
