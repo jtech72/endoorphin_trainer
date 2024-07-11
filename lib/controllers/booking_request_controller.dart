@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:developer';
 import 'dart:ui'as ui;
 import 'package:endoorphin_trainer/services/location_controller.dart';
@@ -7,7 +6,6 @@ import 'package:endoorphin_trainer/services/network_services/api_call.dart';
 import 'package:endoorphin_trainer/services/network_services/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../utils/exports.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
@@ -32,44 +30,6 @@ class BookingRequestController extends GetxController{
   Timer? _timer;
   int remainingSeconds = 60;
   final time = '01.00'.obs;
-
-
- void pinCodePage() {
-    pinController.addListener(() {
-      if (pinController.text.length == 4) {
-        isPinComplete.value = true;
-      }
-    });
-  }
-
-  void getBothMarkers() {
-    if (locationController.currentLocation.value != null) {
-      LatLng currentLocation = locationController.currentLocation.value!;
-
-      if (currentLocation.latitude <= 30.725238) {
-        southwestCoordinates = currentLocation;
-        northeastCoordinates = LatLng(30.725238, 76.804086);
-      } else {
-        southwestCoordinates = LatLng(30.725238, 76.804086);
-        northeastCoordinates = currentLocation;
-      }
-
-      log('Northeast Coordinates: ${northeastCoordinates.toString()}');
-      log('Southwest Coordinates: ${southwestCoordinates.toString()}');
-
-      mapController.animateCamera(
-        CameraUpdate.newLatLngBounds(
-          LatLngBounds(
-            northeast: northeastCoordinates!,
-            southwest: southwestCoordinates!,
-          ),
-          100.0, // padding
-        ),
-      );
-    } else {
-      log('Current location is null');
-    }
-  }
   void sendMessage() {
     if (messageController.text.trim().isNotEmpty) {
       messages.add(messageController.text.trim());
@@ -145,6 +105,7 @@ class BookingRequestController extends GetxController{
     Marker marker =
     Marker(markerId: markerId, icon: BitmapDescriptor.fromBytes(markerIcon), position: position);
     markers[markerId] = marker;
+    update();
   }
   void addPolyLine() {
     PolylineId id = PolylineId("poly");
@@ -193,14 +154,18 @@ class BookingRequestController extends GetxController{
       Map<String, dynamic> request = {
         "trainerId":storage.read("userId").toString(),
         "userId":notificationData["userId"].toString(),
-        "acceptBookingStatus":"true"
+        "acceptBookingStatus":true
       };
       var response = await CallAPI.bookingAccept(request: request);
       if (response.status == 200) {
         dismissLoader();
+        Get.back();
+        showSnackBar(response.message.toString());
         log(response.message.toString());
       } else {
         dismissLoader();
+        Get.back();
+        showSnackBar(response.message.toString());
         log(response.message.toString());
       }
     } catch (e,st) {
@@ -289,22 +254,8 @@ class BookingRequestController extends GetxController{
     userLat = double.parse(notificationData["userLat"]);
     userLng = double.parse(notificationData["userLong"]);
     log("notification data ===> $notificationData");
+    startTimer(180);
     await locationController.getCurrentLocation();
-      startTimer(180);
-
-    // if (locationController.currentLocation.value != null) {
-    //   LatLng currentLocation = LatLng(
-    //       locationController.currentLocation.value!.latitude,
-    //       locationController.currentLocation.value!.longitude
-    //   );
-    //   /// origin marker
-    //  await addMarker(currentLocation, "origin", BitmapDescriptor.defaultMarker);
-    //   /// destination marker
-    //  await addMarker(LatLng(userLat!,userLng!), "destination", BitmapDescriptor.defaultMarkerWithHue(90));
-    //   log(locationController.currentLocation.toString());
-    // } else {
-    //   log("Failed to get the current location.");
-    // }
     getPolyline();
 
   }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:endoorphin_trainer/controllers/booking_request_controller.dart';
 import 'package:endoorphin_trainer/services/location_controller.dart';
 import 'package:flutter/material.dart';
@@ -544,25 +546,46 @@ class BookingRequestUi extends StatelessWidget {
                                      width: 50,
                                      ),
                                ):
-                            GoogleMap(
-                              mapType: MapType.normal,
+                            GetBuilder<BookingRequestController>(
+                              builder: (context) {
+                                return
+                                  GoogleMap(
+                                    mapType: MapType.normal,
+                                    zoomControlsEnabled: true,
+                                    scrollGesturesEnabled: true,
+                                    onMapCreated: (GoogleMapController onMapCreatedController) async {
+                                      controller.mapController = onMapCreatedController;
+                                      controller.setMapStyle();
 
-                              zoomControlsEnabled: true,
-                              scrollGesturesEnabled:true,
-                              onMapCreated: (GoogleMapController onMapCreatedController) async{
-                                controller.mapController = onMapCreatedController;
-                                controller.setMapStyle();
-                                /// origin marker
-                               await  controller.addMarker(controller.locationController.currentLocation.value!, "origin");
-                                /// destination marker
-                              await  controller.addMarker(LatLng(controller.userLat!,controller.userLng!), "destination" );                              },
-                  initialCameraPosition:  CameraPosition(
-                    target: locationController.currentLocation.value!,
-                    zoom: 15.0,
-                  ),
-                              markers: Set<Marker>.of(controller.markers.values),
-                              polylines: Set<Polyline>.of(controller.polyLines.values),
+                                      /// Origin marker
+                                      await controller.addMarker(controller.locationController.currentLocation.value!, "origin");
 
+                                      /// Destination marker
+                                      await controller.addMarker(LatLng(controller.userLat!, controller.userLng!), "destination");
+
+                                      /// Update the camera position to show both markers
+                                      LatLngBounds bounds = LatLngBounds(
+                                        southwest: LatLng(
+                                          min(controller.locationController.currentLocation.value!.latitude, controller.userLat!),
+                                          min(controller.locationController.currentLocation.value!.longitude, controller.userLng!),
+                                        ),
+                                        northeast: LatLng(
+                                          max(controller.locationController.currentLocation.value!.latitude, controller.userLat!),
+                                          max(controller.locationController.currentLocation.value!.longitude, controller.userLng!),
+                                        ),
+
+                                      );
+                                      CameraUpdate cameraUpdate = CameraUpdate.newLatLngBounds(bounds, 200);
+                                      onMapCreatedController.animateCamera(cameraUpdate);
+                                    },
+                                    initialCameraPosition: CameraPosition(
+                                      target: controller.locationController.currentLocation.value!,
+                                      zoom: 20.0,
+                                    ),
+                                    markers: Set<Marker>.of(controller.markers.values),
+                                    polylines: Set<Polyline>.of(controller.polyLines.values),
+                                  );
+                              }
                             ),
                           ),
                 ),

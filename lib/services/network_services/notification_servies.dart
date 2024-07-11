@@ -140,7 +140,7 @@ class NotificationServices {
         final address = data['Address'] ?? '';
         final contact = data['Contact'] ?? '';
         final userId = data['userId'] ?? '';
-        final userProfile = data['userProfile'] ?? '';
+        final userProfile = data['userProfile'].toString() ?? '';
         final userLat = data['userLat'] ?? '';
         final userLong = data['userLong'] ?? '';
 
