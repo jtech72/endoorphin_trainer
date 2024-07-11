@@ -236,7 +236,7 @@ class HomeUiState extends State<HomeUi> {
                                 Navigator.pushReplacement(
                                   context,
                                   PageRouteBuilder(
-                                    pageBuilder: (context, animation1, animation2) => BottomNavigationBarUI(currentTabIndex: 2),
+                                    pageBuilder: (context, animation1, animation2) => BookingUi(initialIndex: 2),
                                     transitionDuration: const Duration(milliseconds: 600),
                                     transitionsBuilder: (context, animation, secondaryAnimation, child) {
                                       const begin = Offset(1.0, 0.0);
@@ -258,7 +258,7 @@ class HomeUiState extends State<HomeUi> {
                                 Navigator.pushReplacement(
                                   context,
                                   PageRouteBuilder(
-                                    pageBuilder: (context, animation1, animation2) => BottomNavigationBarUI(currentTabIndex: 2),
+                                    pageBuilder: (context, animation1, animation2) => BookingUi(initialIndex: 2),
                                     transitionDuration: const Duration(milliseconds: 600),
                                     transitionsBuilder: (context, animation, secondaryAnimation, child) {
                                       const begin = Offset(1.0, 0.0);
@@ -279,7 +279,7 @@ class HomeUiState extends State<HomeUi> {
                                 Navigator.pushReplacement(
                                   context,
                                   PageRouteBuilder(
-                                    pageBuilder: (context, animation1, animation2) => BottomNavigationBarUI(currentTabIndex: 2),
+                                    pageBuilder: (context, animation1, animation2) => BookingUi(initialIndex: 0),
                                     transitionDuration: const Duration(milliseconds: 600),
                                     transitionsBuilder: (context, animation, secondaryAnimation, child) {
                                       const begin = Offset(1.0, 0.0);
