@@ -62,7 +62,8 @@ class NotificationServices {
     RemoteNotification? notification=message.notification;
     AndroidNotification? android=message.notification!.android;
 
-    log("FIREBASE MESSAGE ${message.notification!.title.toString()}");log("FIREBASE BODY ${message.notification!.body.toString()}");
+    log("FIREBASE MESSAGE ${message.notification!.title.toString()}");
+    log("FIREBASE BODY ${message.notification!.body.toString()}");
     log("FIREBASE DATA ${message.data.toString()}");
     if(Platform.isIOS) {
       foregroundMessage();
@@ -109,7 +110,8 @@ class NotificationServices {
     );
     Future.delayed(Duration.zero,(){
       flutterLocalNotificationsPlugin
-          .show(0, message.notification!.title.toString(), message.notification!.body.toString(), notificationDetails);
+          .show(0, message.notification!.title.toString(),
+          message.notification!.body.toString(), notificationDetails);
     });
   }
 

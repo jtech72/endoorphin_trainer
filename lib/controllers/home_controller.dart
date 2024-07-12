@@ -1,16 +1,13 @@
-import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-import 'package:endoorphin_trainer/services/network_services/api_call.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:get/get.dart';
 import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
 
-
 class HomeController extends GetxController {
   RxBool isTrainerOnline = false.obs;
+  RxInt currentIndex = 0.obs;
   List<String> quickGlanceList = [
     "Earnings",
     "Sessions",
@@ -19,25 +16,16 @@ class HomeController extends GetxController {
   ];
   RxInt selectedIndex = (-1).obs;
   Location location = Location();
-
-  final items = [
-    "Yoga",
-    "Padel Tennis",
-    "Swimming",
-    "Tennis",
-    "Boxing",
-    "Personal Training"
-  ];
+  PageController pageController = PageController();
+  final GlobalKey menuKey = GlobalKey();
   final items2 = ['last 3 days', 'last 5 days', 'last 7 days'];
-  RxString selectedItem = 'Male'.obs;
-
-  void setSelectedItem(String value) {
-    selectedItem.value = value;
-  }
-
-  final selectedOption = 'Yoga''Tennis'.obs;
   RxString selectedOption1 = 'last 3 days'.obs;
 
+  void openMenu() {
+    final dynamic state = menuKey.currentState;
+    state.showButtonMenu();
+  }
+ /// ONLINE OFFLINE FUNCTION
   onToggleButton() async {
     if (!isTrainerOnline.value) {
       LocationPermission permission = await Geolocator.checkPermission();
@@ -77,6 +65,7 @@ class HomeController extends GetxController {
       postAddress();
     }
   }
+ /// CONVERT LAT LONG INTO PLACES NAME
   Future<Map<String, String?>> getAddressComponentsFromLatLng(double latitude, double longitude) async {
     const apiKey = 'AIzaSyAb-OJXPRTflwkd0huWLB2ygvwMv2Iwzgo';
     final url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=$apiKey';
@@ -124,7 +113,7 @@ class HomeController extends GetxController {
       return {};
     }
   }
-
+/// POST ADDRESS USING ONLINE OFFLINE FUNCTION
   Future<void> postAddress() async {
     showLoader();
     try {
