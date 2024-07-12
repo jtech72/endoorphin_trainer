@@ -1,12 +1,6 @@
-import 'dart:async';
 import 'dart:developer';
 import 'dart:ui'as ui;
-import 'package:endoorphin_trainer/services/location_controller.dart';
-import 'package:endoorphin_trainer/services/network_services/api_call.dart';
-import 'package:endoorphin_trainer/services/network_services/endpoints.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../utils/exports.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
@@ -98,9 +92,9 @@ class BookingRequestController extends GetxController{
     double maxSize = 50.0; // Maximum size limit in dp
     return (scaledSize * devicePixelRatio).clamp(baseSize * devicePixelRatio, maxSize * devicePixelRatio).toInt();
   }
- Future<void> addMarker(LatLng position, String id) async{
+ Future<void> addMarker(LatLng position, String id,String image) async{
     int markerSize = getMarkerSize();
-   final Uint8List markerIcon = await getBytesFromAsset('assets/images/ic_current_location.png', markerSize);
+   final Uint8List markerIcon = await getBytesFromAsset(image, markerSize);
     MarkerId markerId = MarkerId(id);
     Marker marker =
     Marker(markerId: markerId, icon: BitmapDescriptor.fromBytes(markerIcon), position: position);
@@ -254,9 +248,8 @@ class BookingRequestController extends GetxController{
     userLat = double.parse(notificationData["userLat"]);
     userLng = double.parse(notificationData["userLong"]);
     log("notification data ===> $notificationData");
-    startTimer(180);
     await locationController.getCurrentLocation();
+    startTimer(180);
     getPolyline();
-
   }
 }
