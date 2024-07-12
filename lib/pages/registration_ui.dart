@@ -595,7 +595,7 @@ class RegistrationUi extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                "Categories",
+                                "Categories you want to provide coaching on",
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelLarge

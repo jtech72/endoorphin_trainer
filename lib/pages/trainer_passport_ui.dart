@@ -45,7 +45,7 @@ class TrainerPassportUI extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Please submit the details to continue',
+                  'The following information will be collected as a part of the onboarding process, so please ensure that you provide \ncorrect details.',
                   style: Theme.of(context)
                       .textTheme
                       .labelLarge!

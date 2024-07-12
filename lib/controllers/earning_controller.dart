@@ -1,6 +1,7 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
 
 class EarningController extends GetxController{
+  RxString type = "".obs;
   final List<String> months = [
     'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
   ];
