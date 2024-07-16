@@ -15,83 +15,85 @@ class BookingRequestUi extends StatelessWidget {
             Column(
               children: [
                 Flexible(
-                  child: Stack(
-                    children: [
-                      Obx(
-                      ()=>   SizedBox(
-                                  child:
-                                  locationController.currentLocation.value == null?
-                                     const Center(
-                                       child: CircularProgressIndicator(color: AppColors.yellow,)
-                                     ):
-                                  GetBuilder<BookingRequestController>(
-                                    builder: (context) {
-                                      return
-                                        GoogleMap(
-                                          mapType: MapType.normal,
-                                          zoomControlsEnabled: false,
-                                          scrollGesturesEnabled: true,
-                                          onMapCreated: (GoogleMapController onMapCreatedController) async {
-                                            controller.mapController = onMapCreatedController;
-                                            controller.setMapStyle();
+                  child: Obx(
+                ()=> Stack(
+                      children: [
 
-                                            /// Origin marker
-                                            await controller.addMarker(locationController.currentLocation.value!, "origin","assets/images/ic_current_location.png");
+                            SizedBox(
+                                    child:
+                                    locationController.currentLocation.value == null?
+                                       const Center(
+                                         child: CircularProgressIndicator(color: AppColors.yellow,)
+                                       ):
+                                    GetBuilder<BookingRequestController>(
+                                      builder: (context) {
+                                        return
+                                          GoogleMap(
+                                            mapType: MapType.normal,
+                                            zoomControlsEnabled: false,
+                                            scrollGesturesEnabled: true,
+                                            onMapCreated: (GoogleMapController onMapCreatedController) async {
+                                              controller.mapController = onMapCreatedController;
+                                              controller.setMapStyle();
 
-                                            /// Destination marker
-                                            await controller.addMarker(LatLng(controller.userLat!, controller.userLng!), "destination","assets/images/ic_category.png");
+                                              /// Origin marker
+                                              await controller.addMarker(locationController.currentLocation.value!, "origin","assets/images/ic_current_location.png");
 
-                                            /// Update the camera position to show both markers
-                                            LatLngBounds bounds = LatLngBounds(
-                                              southwest: LatLng(
-                                                min(locationController.currentLocation.value!.latitude, controller.userLat!),
-                                                min(locationController.currentLocation.value!.longitude, controller.userLng!),
-                                              ),
-                                              northeast: LatLng(
-                                                max(locationController.currentLocation.value!.latitude, controller.userLat!),
-                                                max(locationController.currentLocation.value!.longitude, controller.userLng!),
-                                              ),
+                                              /// Destination marker
+                                              await controller.addMarker(LatLng(controller.userLat!, controller.userLng!), "destination","assets/images/ic_category.png");
 
-                                            );
-                                            CameraUpdate cameraUpdate = CameraUpdate.newLatLngBounds(bounds, 120);
-                                            onMapCreatedController.animateCamera(cameraUpdate);
-                                          },
-                                          initialCameraPosition: CameraPosition(
-                                            target:locationController.currentLocation.value != null? locationController.currentLocation.value!:const LatLng(30.6665, 76.8260),
-                                            zoom: 15.0,
-                                          ),
-                                          markers: Set<Marker>.of(controller.markers.values),
-                                          polylines: Set<Polyline>.of(controller.polyLines.values),
-                                        );
-                                    }
+                                              /// Update the camera position to show both markers
+                                              LatLngBounds bounds = LatLngBounds(
+                                                southwest: LatLng(
+                                                  min(locationController.currentLocation.value!.latitude, controller.userLat!),
+                                                  min(locationController.currentLocation.value!.longitude, controller.userLng!),
+                                                ),
+                                                northeast: LatLng(
+                                                  max(locationController.currentLocation.value!.latitude, controller.userLat!),
+                                                  max(locationController.currentLocation.value!.longitude, controller.userLng!),
+                                                ),
+
+                                              );
+                                              CameraUpdate cameraUpdate = CameraUpdate.newLatLngBounds(bounds, 120);
+                                              onMapCreatedController.animateCamera(cameraUpdate);
+                                            },
+                                            initialCameraPosition: CameraPosition(
+                                              target:locationController.currentLocation.value != null? locationController.currentLocation.value!:const LatLng(30.6665, 76.8260),
+                                              zoom: 15.0,
+                                            ),
+                                            markers: Set<Marker>.of(controller.markers.values),
+                                            polylines: Set<Polyline>.of(controller.polyLines.values),
+                                          );
+                                      }
+                                    ),
                                   ),
+                        controller.selectedIndex.value == 2 || controller.selectedIndex.value == 1?
+                        const SizedBox.shrink():
+                        Positioned(
+                            top: Get.height*.3,
+                            left: Get.width*.27,
+                            child: Obx(()=> Container(
+                                height: 100,
+                                width: 200,
+                                alignment: Alignment.center,
+                                decoration:  BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(color:AppColors.yellow,width: 6 ),
+                                  color: AppColors.white.withOpacity(0.8)
                                 ),
-                      ),
-                      controller.selectedIndex.value != 2 ||controller.selectedIndex.value != 1 && locationController.currentLocation.value != null?
-                      Positioned(
-                          top: Get.height*.3,
-                          left: Get.width*.27,
-                          child: Obx(()=> Container(
-                              height: 100,
-                              width: 200,
-                              alignment: Alignment.center,
-                              decoration:  BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(color:AppColors.yellow,width: 6 ),
-                                color: AppColors.white.withOpacity(0.8)
-                              ),
 
-                              child: Text(controller.time.value.toString(),style: const TextStyle(fontSize: 25,color: AppColors.black),)))):const SizedBox.shrink(),
-                      Positioned(
-                          left: Get.width*0.041,
-                          top: Get.height*0.061,
-                          child: IconButton(
-                              onPressed: (){
-                                Get.back();
+                                child: Text(controller.time.value.toString(),style: const TextStyle(fontSize: 25,color: AppColors.black),)))),
+                        Positioned(
+                            left: Get.width*0.041,
+                            top: Get.height*0.061,
+                            child: IconButton(
+                                onPressed: (){
+                                  Get.back();
 
-                              },
-                              icon: const Icon(Icons.arrow_back_ios,size: 18,color: Colors.white,)))
-                    ],
+                                },
+                                icon: const Icon(Icons.arrow_back_ios,size: 18,color: Colors.white,)))
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -115,6 +117,7 @@ class BookingRequestUi extends StatelessWidget {
                             style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.w400),
                           ).paddingOnly(bottom: Get.height * 0.03),
                           PinCodeTextField(
+                            controller: controller.pinController,
                               inputFormatters: <TextInputFormatter>[
                                 FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                               ],
@@ -178,15 +181,14 @@ class BookingRequestUi extends StatelessWidget {
                                         fontFamily: 'Montserrat'),
                                   ).paddingOnly(left: Get.width*.07),
                                   onSubmit: (){
-                                    Get.toNamed(AppRoutes.sessionRunning);
-                                    return null;
+                                    controller.onPinVerify();
                                   },
 
                                 ).paddingOnly(right: 20),
                               ).paddingOnly(left: Get.width*0.01),
                               GestureDetector(
                                 onTap: (){
-                                  _launchTelephone();
+                                  _launchTelephone(controller.bookingDetails?.result?.phoneNumber.toString()??"");
                                 },
                                 child: const CircleAvatar(
                                   radius: 20,
@@ -214,7 +216,7 @@ class BookingRequestUi extends StatelessWidget {
                                 color: AppColors.impgrey,
                               ).paddingOnly(right: 20),
                               Text(
-                                '54, route Gue banquet',
+                                "${controller.bookingDetails?.result?.userHouseNo??""} ${controller.bookingDetails?.result?.userStreetArea??""} ${controller.bookingDetails?.result?.userCity??""} ",
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelMedium!
@@ -264,7 +266,7 @@ class BookingRequestUi extends StatelessWidget {
                                     RichText(
                                         text: TextSpan(children: [
                                           TextSpan(
-                                            text: 'John Doe',
+                                            text: controller.bookingDetails?.result?.userName.toString()??"",
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headlineSmall,
@@ -330,7 +332,7 @@ class BookingRequestUi extends StatelessWidget {
                                 const Spacer(flex: 1,),
                                 GestureDetector(
                                   onTap: (){
-                                    _launchTelephone();
+                                    _launchTelephone(controller.bookingDetails?.result?.phoneNumber.toString()??"");
                                   },
                                   child: const CircleAvatar(
                                     radius: 20,
@@ -433,7 +435,7 @@ class BookingRequestUi extends StatelessWidget {
                                     CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "54, route Gue banquet",
+                                        "${controller.bookingDetails?.result?.trainerHouseNo??""} ${controller.bookingDetails?.result?.trainerStreetArea??""} ${controller.bookingDetails?.result?.trainerCity??""} ",
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelLarge
@@ -458,7 +460,7 @@ class BookingRequestUi extends StatelessWidget {
                                         color: AppColors.grey,
                                       ).paddingOnly(top: 10, bottom: 15),
                                       Text(
-                                        "66, route Gue banquet",
+                                        "${controller.bookingDetails?.result?.userHouseNo??""} ${controller.bookingDetails?.result?.userStreetArea??""} ${controller.bookingDetails?.result?.userCity??""}",
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelLarge
@@ -606,8 +608,8 @@ class BookingRequestUi extends StatelessWidget {
 }
 //
 
-_launchTelephone() async {
-  const telephoneNumber = 'tel:+1234567890';
+_launchTelephone(String number) async {
+  final telephoneNumber = number;
   if (await canLaunch(telephoneNumber)) {
     await launch(telephoneNumber);
   } else {
