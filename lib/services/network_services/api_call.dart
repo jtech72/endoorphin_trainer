@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:endoorphin_trainer/services/models/response_models/get_category_model.dart';
 
 import '../../custom_Widgets/common_widgets.dart';
+import '../models/request_models/booking_accept_model.dart';
 import '../models/request_models/category_document_model.dart';
 import '../models/request_models/forget_password_model.dart';
 import '../models/request_models/login_model.dart';
@@ -413,15 +414,15 @@ class CallAPI {
     }
   }
   /// BOOKING ACCEPT
-  static Future<PostAddressModel> bookingAccept({required var request}) async {
-    PostAddressModel result = PostAddressModel();
+  static Future<BookingAcceptDetailsModel> bookingAccept({required var request}) async {
+    BookingAcceptDetailsModel result = BookingAcceptDetailsModel();
     try {
       Map<dynamic, dynamic> json = await APIManager().postAPICall(
         endpoint: Endpoints.epBookingAccept,
         request: request,
       );
 
-      PostAddressModel responseModel = PostAddressModel.fromJson(json);
+      BookingAcceptDetailsModel responseModel = BookingAcceptDetailsModel.fromJson(json);
 
       if (responseModel.status == 200) {
         result = responseModel;

@@ -1,12 +1,15 @@
 import 'dart:developer';
 import 'dart:ui'as ui;
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import '../services/models/request_models/booking_accept_model.dart';
 import '../utils/exports.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class BookingRequestController extends GetxController{
   final TextEditingController pinController = TextEditingController();
   final ValueNotifier<bool> isPinComplete = ValueNotifier(false);
+  BookingAcceptDetailsModel?bookingDetails;
   LatLng?northeastCoordinates;
   LatLng?southwestCoordinates;
   double ?userLat;
@@ -153,14 +156,13 @@ class BookingRequestController extends GetxController{
       var response = await CallAPI.bookingAccept(request: request);
       if (response.status == 200) {
         dismissLoader();
-        Get.back();
-        showSnackBar(response.message.toString());
-        log(response.message.toString());
+        bookingDetails = response;
+        selectedIndex.value = 1;
+        _timer!.cancel();
       } else {
         dismissLoader();
         Get.back();
-        showSnackBar(response.message.toString());
-        log(response.message.toString());
+        _timer!.cancel();
       }
     } catch (e,st) {
       dismissLoader();
@@ -242,6 +244,37 @@ class BookingRequestController extends GetxController{
     }
     super.onClose();
   }
+  void onPinVerify() {
+    showLoader();
+    String otp = pinController.text.trim();
+    log(pinController.text.trim());
+    if (otp.isEmpty) {
+      dismissLoader();
+      showSnackBar("Please enter a valid OTP");
+      return;
+    }
+
+    if (otp.length != 4) {
+      dismissLoader();
+      showSnackBar("Invalid OTP");
+      return;
+    }
+
+    try {
+      int enteredOtp = int.parse(otp);
+      if (enteredOtp == bookingDetails!.result!.sessionPin) {
+        dismissLoader();
+        Get.toNamed(AppRoutes.sessionRunning);
+      } else {
+        dismissLoader();
+        showSnackBar("Invalid OTP");
+      }
+    } catch (e) {
+      dismissLoader();
+      showSnackBar("Invalid OTP format");
+    }
+  }
+
   @override
   void onInit() async {
     notificationData = Get.arguments ?? {};

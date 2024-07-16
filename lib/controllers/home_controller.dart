@@ -70,7 +70,6 @@ class HomeController extends GetxController {
     const apiKey = 'AIzaSyAb-OJXPRTflwkd0huWLB2ygvwMv2Iwzgo';
     final url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=$apiKey';
     log("url for placename $url");
-
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
