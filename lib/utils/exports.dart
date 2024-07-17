@@ -86,5 +86,4 @@ export 'package:flutter_polyline_points/flutter_polyline_points.dart';
 export 'package:google_maps_flutter/google_maps_flutter.dart';
 export 'package:endoorphin_trainer/controllers/booking_request_controller.dart';
 export 'package:pin_code_fields/pin_code_fields.dart';
-export 'package:slide_to_act/slide_to_act.dart';
 export 'package:url_launcher/url_launcher.dart';
