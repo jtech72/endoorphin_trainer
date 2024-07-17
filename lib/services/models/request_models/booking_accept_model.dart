@@ -1,13 +1,15 @@
 class BookingAcceptDetailsModel {
   Result? result;
   int? status;
+  String? message;
 
-  BookingAcceptDetailsModel({this.result, this.status});
+  BookingAcceptDetailsModel({this.result, this.status,this.message});
 
   BookingAcceptDetailsModel.fromJson(Map<dynamic, dynamic> json) {
     result =
     json['result'] != null ? new Result.fromJson(json['result']) : null;
     status = json['status'];
+    message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
@@ -16,6 +18,7 @@ class BookingAcceptDetailsModel {
       data['result'] = this.result!.toJson();
     }
     data['status'] = this.status;
+    data['message'] = this.message;
     return data;
   }
 }
@@ -38,6 +41,7 @@ class Result {
   double? trainerLat;
   double? trainerLong;
   int? sessionPin;
+  int? bookingId;
 
   Result(
       {this.userName,
@@ -56,7 +60,8 @@ class Result {
         this.trainerStreetArea,
         this.trainerLat,
         this.trainerLong,
-        this.sessionPin});
+        this.sessionPin,
+        this.bookingId});
 
   Result.fromJson(Map<String, dynamic> json) {
     userName = json['userName'];
@@ -76,6 +81,7 @@ class Result {
     trainerLat = json['trainerLat'];
     trainerLong = json['trainerLong'];
     sessionPin = json['sessionPin'];
+    bookingId = json['bookingId'];
   }
 
   Map<String, dynamic> toJson() {
@@ -97,6 +103,7 @@ class Result {
     data['trainerLat'] = this.trainerLat;
     data['trainerLong'] = this.trainerLong;
     data['sessionPin'] = this.sessionPin;
+    data['bookingId'] = this.bookingId;
     return data;
   }
 }

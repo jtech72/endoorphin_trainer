@@ -1,26 +1,25 @@
 import 'dart:developer';
-import 'dart:ui'as ui;
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../services/models/request_models/booking_accept_model.dart';
 import '../utils/exports.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-class BookingRequestController extends GetxController{
+class BookingRequestController extends GetxController {
   final TextEditingController pinController = TextEditingController();
-  final ValueNotifier<bool> isPinComplete = ValueNotifier(false);
-  BookingAcceptDetailsModel?bookingDetails;
-  LatLng?northeastCoordinates;
-  LatLng?southwestCoordinates;
-  double ?userLat;
-  double ?userLng;
+  BookingAcceptDetailsModel? bookingDetails;
+  LatLng? northeastCoordinates;
+  LatLng? southwestCoordinates;
+  double? userLat;
+  double? userLng;
   late GoogleMapController mapController;
   RxInt selectedIndex = 0.obs;
   LocationController locationController = Get.put(LocationController());
   Map<MarkerId, Marker> markers = {};
   Map<PolylineId, Polyline> polyLines = {};
   List<LatLng> polylineCoordinates = [];
-  Map<dynamic,dynamic> notificationData = {};
+  Map<dynamic, dynamic> notificationData = {};
   late IO.Socket socket;
   var messages = <String>[].obs;
   final TextEditingController messageController = TextEditingController();
@@ -33,6 +32,7 @@ class BookingRequestController extends GetxController{
       messageController.clear();
     }
   }
+
   void initSocket() {
     socket = IO.io(Endpoints.baseUrl, <String, dynamic>{
       'autoConnect': false,
@@ -46,10 +46,8 @@ class BookingRequestController extends GetxController{
     socket.onConnectError((err) => print(err));
     socket.onError((err) => print(err));
   }
-  void onMapCreated(GoogleMapController controller) {
-    mapController = controller;
-  }
- void sendMessageIo() {
+
+  void sendMessageIo() {
     String message = messageController.text.trim();
     if (message.isEmpty) return;
     Map messageMap = {
@@ -60,73 +58,91 @@ class BookingRequestController extends GetxController{
     };
     socket.emit('sendNewMessage', messageMap);
   }
+
   void setMapStyle() async {
     String style = await DefaultAssetBundle.of(Get.context!)
         .loadString('assets/dark_map_style.json');
     mapController.setMapStyle(style);
   }
+
   void startTimer(int seconds) {
     const duration = Duration(seconds: 1);
     remainingSeconds = seconds;
     _timer = Timer.periodic(duration, (Timer timer) {
-        if (remainingSeconds == 0) {
-          timer.cancel();
-          showDialogBox("Session request timeout");
-        } else {
-          int minutes = remainingSeconds ~/ 60;
-          int seconds = (remainingSeconds % 60);
-          time.value = "${minutes.toString().padLeft(2, "0")}:${seconds.toString().padLeft(2, "0")}";
-          remainingSeconds--;
-        }
+      if (remainingSeconds == 0) {
+        timer.cancel();
+        showDialogBox(
+            "Session request timeout", ImagesPaths.cooltick.toString(), () {
+          Get.offAllNamed(AppRoutes.bottomNavigation);
+        });
+      } else {
+        int minutes = remainingSeconds ~/ 60;
+        int seconds = (remainingSeconds % 60);
+        time.value =
+            "${minutes.toString().padLeft(2, "0")}:${seconds.toString().padLeft(2, "0")}";
+        remainingSeconds--;
+      }
     });
   }
+
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(path);
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+        targetWidth: width);
     ui.FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
+        .buffer
+        .asUint8List();
   }
+
   int getMarkerSize() {
     double baseSize = 25.0; // Base marker size in dp
     double devicePixelRatio = ui.window.devicePixelRatio;
     double screenWidth = ui.window.physicalSize.width / devicePixelRatio;
-    double scaleFactor = screenWidth / 360.0; // Assume 360dp as the reference screen width
+    double scaleFactor =
+        screenWidth / 360.0; // Assume 360dp as the reference screen width
     double scaledSize = baseSize * scaleFactor;
     double maxSize = 50.0; // Maximum size limit in dp
-    return (scaledSize * devicePixelRatio).clamp(baseSize * devicePixelRatio, maxSize * devicePixelRatio).toInt();
+    return (scaledSize * devicePixelRatio)
+        .clamp(baseSize * devicePixelRatio, maxSize * devicePixelRatio)
+        .toInt();
   }
- Future<void> addMarker(LatLng position, String id,String image) async{
+
+  Future<void> addMarker(LatLng position, String id, String image) async {
     int markerSize = getMarkerSize();
-   final Uint8List markerIcon = await getBytesFromAsset(image, markerSize);
+    final Uint8List markerIcon = await getBytesFromAsset(image, markerSize);
     MarkerId markerId = MarkerId(id);
-    Marker marker =
-    Marker(markerId: markerId, icon: BitmapDescriptor.fromBytes(markerIcon), position: position);
+    Marker marker = Marker(
+        markerId: markerId,
+        icon: BitmapDescriptor.fromBytes(markerIcon),
+        position: position);
     markers[markerId] = marker;
     update();
   }
+
   void addPolyLine() {
     PolylineId id = PolylineId("poly");
     Polyline polyline = Polyline(
         polylineId: id, color: AppColors.yellow, points: polylineCoordinates);
     polyLines[id] = polyline;
-
   }
- void getPolyline() async {
+
+  void getPolyline() async {
     try {
       log("getPolyline");
       if (locationController.currentLocation.value != null) {
-        PolylineResult result = await PolylinePoints().getRouteBetweenCoordinates(
-            googleApiKey: "AIzaSyAb-OJXPRTflwkd0huWLB2ygvwMv2Iwzgo",
-            request: PolylineRequest(
-                origin: PointLatLng(
-                    locationController.currentLocation.value!.latitude,
-                    locationController.currentLocation.value!.longitude
-                ),
-                destination: PointLatLng(30.725238, 76.804086),
-                mode: TravelMode.driving,
-                wayPoints: [PolylineWayPoint(location: "Sabo, Yaba Lagos Nigeria")]
-            )
-        );
+        PolylineResult result = await PolylinePoints()
+            .getRouteBetweenCoordinates(
+                googleApiKey: "AIzaSyAb-OJXPRTflwkd0huWLB2ygvwMv2Iwzgo",
+                request: PolylineRequest(
+                    origin: PointLatLng(
+                        locationController.currentLocation.value!.latitude,
+                        locationController.currentLocation.value!.longitude),
+                    destination: PointLatLng(30.725238, 76.804086),
+                    mode: TravelMode.driving,
+                    wayPoints: [
+                      PolylineWayPoint(location: "Sabo, Yaba Lagos Nigeria")
+                    ]));
 
         if (result.points.isNotEmpty) {
           log("result ===>$result");
@@ -145,13 +161,14 @@ class BookingRequestController extends GetxController{
       log("Stack trace: $st");
     }
   }
-  Future<void>onAcceptButton()async{
+
+  Future<void> onAcceptButton() async {
     showLoader();
     try {
       Map<String, dynamic> request = {
-        "trainerId":storage.read("userId").toString(),
-        "userId":notificationData["userId"].toString(),
-        "acceptBookingStatus":true
+        "trainerId": storage.read("userId").toString(),
+        "userId": notificationData["userId"].toString(),
+        "acceptBookingStatus": true
       };
       var response = await CallAPI.bookingAccept(request: request);
       if (response.status == 200) {
@@ -162,15 +179,42 @@ class BookingRequestController extends GetxController{
       } else {
         dismissLoader();
         Get.back();
+        showSnackBar(response.message.toString());
         _timer!.cancel();
       }
-    } catch (e,st) {
+    } catch (e, st) {
       dismissLoader();
       log('Error occurred: $e');
       log('Error occurred: $st');
     }
   }
-  void showDialogBox(String title) {
+  Future<void>onStartButton()async{
+    showLoader();
+
+    try{
+      Map<String, dynamic> request = {
+        "id":bookingDetails!.result!.bookingId.toString(),
+        "trainerOnTheWay":true
+      };
+
+   final result = await CallAPI.sessionStart(request: request);
+    if(result.status == 200){
+      dismissLoader();
+      selectedIndex.value = 2;
+      showSnackBar(bookingDetails!.result!.sessionPin.toString());
+    }else{
+      dismissLoader();
+      showToast(result.message.toString());
+    }
+    }
+    catch(e,st){
+      dismissLoader();
+      log(e.toString());
+      log(st.toString());
+    }
+  }
+
+  void showDialogBox(String title, String image, void Function() ontap) {
     showDialog(
       barrierDismissible: false,
       context: Get.context!,
@@ -189,7 +233,7 @@ class BookingRequestController extends GetxController{
                   height: Get.height * 0.03,
                 ),
                 Image.asset(
-                  ImagesPaths.cooltick,
+                  image,
                   scale: 4,
                 ),
                 SizedBox(
@@ -217,13 +261,11 @@ class BookingRequestController extends GetxController{
                           .textTheme
                           .headlineSmall!
                           .copyWith(
-                          color: AppColors.black,
-                          fontSize: 18,
-                          fontFamily: 'Montserrat'),
+                              color: AppColors.black,
+                              fontSize: 18,
+                              fontFamily: 'Montserrat'),
                     ),
-                    onTap: () {
-                      Get.offAllNamed(AppRoutes.bottomNavigation);
-                    },
+                    onTap: ontap,
                     height: 35,
                     width: 95),
               ),
@@ -236,15 +278,17 @@ class BookingRequestController extends GetxController{
       },
     );
   }
-  @override
-  void onClose() {
-    selectedIndex.value = 0;
-    if (_timer != null) {
-      _timer!.cancel();
+  void openGoogleMaps(double originLat, double originLng, double destLat, double destLng) async {
+    final String googleMapsUrl = 'https://www.google.com/maps/dir/?api=1&origin=$originLat,$originLng&destination=$destLat,$destLng&travelmode=driving';
+    if (await canLaunch(googleMapsUrl)) {
+      await launch(googleMapsUrl);
+    } else {
+      throw 'Could not open the map.';
     }
-    super.onClose();
   }
-  void onPinVerify() {
+
+
+  Future<void> onPinVerify() async{
     showLoader();
     String otp = pinController.text.trim();
     log(pinController.text.trim());
@@ -262,17 +306,29 @@ class BookingRequestController extends GetxController{
 
     try {
       int enteredOtp = int.parse(otp);
-      if (enteredOtp == bookingDetails!.result!.sessionPin) {
+      final result = await CallAPI.getSessionDetails(id: bookingDetails!.result!.bookingId.toString(), pinSession: enteredOtp.toString());
+      if(result.status == 200){
+           dismissLoader();
+         Get.toNamed(AppRoutes.sessionRunning);
+      }
+      else {
         dismissLoader();
-        Get.toNamed(AppRoutes.sessionRunning);
-      } else {
-        dismissLoader();
-        showSnackBar("Invalid OTP");
+        showDialogBox("Your Request pin is not correct Please try Again",
+            ImagesPaths.inVaildPopUp.toString(),(){Get.back();});
       }
     } catch (e) {
       dismissLoader();
       showSnackBar("Invalid OTP format");
     }
+  }
+
+  @override
+  void onClose() {
+    selectedIndex.value = 0;
+    if (_timer != null) {
+      _timer!.cancel();
+    }
+    super.onClose();
   }
 
   @override

@@ -35,6 +35,10 @@ class Endpoints{
   static const String epPostAddress="updateUserAddress";
   /// BOOKING ACCEPT
   static const String epBookingAccept="acceptBooking";
+  /// START SESSION
+  static const String epStartSession="booking/trainerOnTheWay";
+  /// GET SESSION DETAILS AND VERIFY PIN
+  static const String epGetSessionDetails="booking/verfiySeesionPinForTrainer";
 
 
 

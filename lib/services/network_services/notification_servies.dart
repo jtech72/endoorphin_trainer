@@ -63,7 +63,7 @@ class NotificationServices {
     AndroidNotification? android=message.notification!.android;
 
     log("FIREBASE MESSAGE ${message.notification!.title.toString()}");
-    log("FIREBASE BODY ${message.notification!.body.toString()}");
+    log("FIREBASE BODY ${message.notification!.body..toString()}");
     log("FIREBASE DATA ${message.data.toString()}");
     if(Platform.isIOS) {
       foregroundMessage();
@@ -142,7 +142,7 @@ class NotificationServices {
         final address = data['Address'] ?? '';
         final contact = data['Contact'] ?? '';
         final userId = data['userId'] ?? '';
-        final userProfile = data['userProfile'].toString() ?? '';
+        final userProfile = data['userProfile'] ?? '';
         final userLat = data['userLat'] ?? '';
         final userLong = data['userLong'] ?? '';
 
@@ -151,7 +151,7 @@ class NotificationServices {
           "address": address,
           "contact": contact,
           "userId": userId,
-          "userProfile": userProfile,
+          "userProfile": userProfile.toString(),
           "userLat": userLat,
           "userLong": userLong,
         });
