@@ -26,19 +26,17 @@ class HomeUi extends StatelessWidget {
               onTap: () {
                 controller.onToggleButton();
               },
-              child: SizedBox(
-                height: 15,
+              child: Container(
+                height: 30,
                 width: 43,
                 child: Container(
-                  height: 15,
-                  width: 15,
+
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
-                    border: Border.all(color: Colors.white),
-                    color: controller.isTrainerOnline.value ? Colors.yellow : Colors.grey.withOpacity(0.5),
+                    color: Colors.transparent,
                   ),
                   child: Transform.scale(
-                    scale: 0.4,
+                    scale: 0.5,
                     child: Switch(
                       activeTrackColor: AppColors.yellow,
                       activeColor: controller.isTrainerOnline.value ? Colors.yellow : Colors.grey.withOpacity(0.5),
@@ -48,11 +46,12 @@ class HomeUi extends StatelessWidget {
                       inactiveTrackColor: Colors.black,
                       value: controller.isTrainerOnline.value,
                       onChanged: (v) {
+                        controller.onToggleButton();
 
                       },
                     ),
                   ),
-                ).paddingOnly(left: 20),
+                ).paddingOnly(left: 12),
               ),
             ),
           ),

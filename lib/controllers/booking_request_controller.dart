@@ -25,6 +25,7 @@ class BookingRequestController extends GetxController {
   final TextEditingController messageController = TextEditingController();
   Timer? _timer;
   int remainingSeconds = 60;
+  RxBool timerIsVisible = true.obs;
   final time = '01.00'.obs;
   void sendMessage() {
     if (messageController.text.trim().isNotEmpty) {
@@ -164,6 +165,7 @@ class BookingRequestController extends GetxController {
 
   Future<void> onAcceptButton() async {
     showLoader();
+    timerIsVisible.value = false;
     try {
       Map<String, dynamic> request = {
         "trainerId": storage.read("userId").toString(),
@@ -178,9 +180,9 @@ class BookingRequestController extends GetxController {
         _timer!.cancel();
       } else {
         dismissLoader();
+        _timer!.cancel();
         Get.back();
         showSnackBar(response.message.toString());
-        _timer!.cancel();
       }
     } catch (e, st) {
       dismissLoader();
@@ -309,7 +311,10 @@ class BookingRequestController extends GetxController {
       final result = await CallAPI.getSessionDetails(id: bookingDetails!.result!.bookingId.toString(), pinSession: enteredOtp.toString());
       if(result.status == 200){
            dismissLoader();
-         Get.toNamed(AppRoutes.sessionRunning);
+         Get.toNamed(AppRoutes.sessionRunning,arguments: {
+           "id":bookingDetails!.result!.bookingId.toString(),
+           "pin":enteredOtp.toString()
+         });
       }
       else {
         dismissLoader();

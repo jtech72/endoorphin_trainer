@@ -79,7 +79,8 @@ class AccountUI extends StatelessWidget {
                           : snapshot.data!.result!.bio!.toString();
                   controller.selectedOption1.value =
                       snapshot.data!.result!.gender!.toString();
-                  return Column(
+                  return
+                    Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Center(
@@ -670,8 +671,7 @@ class AccountUI extends StatelessWidget {
                         height: Get.height * 0.05,
                       )
                     ],
-                  ).paddingOnly(
-                      left: Get.width * 0.05, right: Get.width * 0.05);
+                  ).paddingOnly(left: Get.width * 0.05, right: Get.width * 0.05);
                 },
               ),
             ),
