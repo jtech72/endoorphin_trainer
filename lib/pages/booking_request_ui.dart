@@ -92,10 +92,12 @@ class BookingRequestUi extends StatelessWidget {
                               );
                             }),
                     ),
-                    controller.selectedIndex.value == 2 ||
+                            controller.selectedIndex.value == 2 ||
                             controller.selectedIndex.value == 1 ||
-                            locationController.currentLocation.value == null
-                        ? const SizedBox.shrink()
+                            locationController.currentLocation.value == null||
+                            controller.timerIsVisible.value == false
+                           ?
+                         const SizedBox.shrink()
                         : Positioned(
                             top: Get.height * .3,
                             left: Get.width * .27,

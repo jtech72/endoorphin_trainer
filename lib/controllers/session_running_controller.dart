@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:endoorphin_trainer/utils/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -10,7 +11,15 @@ class SessionRunningController extends GetxController {
   int remainingSeconds = 60;
   final time = '01.00'.obs;
   RxBool isPaused = false.obs;
+  Map<String, dynamic>? sessionIds;
 
+
+  @override
+  void onInit() {
+    sessionIds = Get.arguments;
+    log(sessionIds.toString());
+    super.onInit();
+  }
   @override
   void onReady() {
     startTimer(3600);
