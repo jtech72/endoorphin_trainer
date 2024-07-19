@@ -4,10 +4,11 @@ import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
-
 class HomeController extends GetxController {
   RxBool isTrainerOnline = false.obs;
   RxInt currentIndex = 0.obs;
+  Timer? pageChangeTimer;
+
   List<String> quickGlanceList = [
     "Earnings",
     "Sessions",
@@ -20,43 +21,109 @@ class HomeController extends GetxController {
   final GlobalKey menuKey = GlobalKey();
   final items2 = ['last 3 days', 'last 5 days', 'last 7 days'];
   RxString selectedOption1 = 'last 3 days'.obs;
-
+  Timer? locationUpdateTimer;
   void openMenu() {
     final dynamic state = menuKey.currentState;
     state.showButtonMenu();
   }
- /// ONLINE OFFLINE FUNCTION
-  onToggleButton() async {
+  void startPageChangeTimer() {
+    pageChangeTimer = Timer.periodic(Duration(seconds: 3), (timer) {
+      if (currentIndex.value < 2) { // assuming there are 3 pages (0, 1, 2)
+        currentIndex.value++;
+      } else {
+        currentIndex.value = 0;
+      }
+      pageController.jumpToPage(currentIndex.value);
+    });
+  }
+  @override
+  void onInit() {
+    isTrainerOnline.value = storage.read('isTrainerOnline') ?? false;
+    startPageChangeTimer();
+    if (isTrainerOnline.value) {
+      startLocationUpdates();
+    }
+    super.onInit();
+  }
+
+  void startLocationUpdates() {
+    locationUpdateTimer ??= Timer.periodic(const Duration(minutes: 5), (timer) async {
+        if (isTrainerOnline.value) {
+          await _updateLocation();
+        }
+      });
+  }
+
+  void _stopLocationUpdates() {
+    locationUpdateTimer?.cancel();
+    locationUpdateTimer = null;
+  }
+
+  Future<void> _updateLocation() async {
+    try {
+      var location = Location();
+      var currentLocation = await location.getLocation();
+      var addressComponents = await getAddressComponentsFromLatLng(
+        currentLocation.latitude!,
+        currentLocation.longitude!,
+      );
+      Map<String, dynamic> request = {
+        "trianerId": storage.read("userId").toString(),
+        "addressType": addressComponents['addressType'] ?? "Unknown",
+        "name": addressComponents['name'] ?? "Unknown",
+        "houseNo": addressComponents['houseNo'] ?? "Unknown",
+        "city": addressComponents['city'] ?? "Unknown",
+        "streetArea": addressComponents['streetArea'] ?? "Unknown",
+        "lat": currentLocation.latitude,
+        "long": currentLocation.longitude,
+        "activeStatus": true,
+      };
+
+      var response = await CallAPI.postAddress(request: request);
+
+      if (response.status == 200) {
+        log('Location updated successfully');
+      } else {
+        log('Failed to update location');
+      }
+    } catch (e) {
+      log('Error occurred while updating location: $e');
+    }
+  }
+
+  @override
+  void onClose() {
+    pageChangeTimer?.cancel();
+    startPageChangeTimer();
+    super.onClose();
+  }
+
+  void onToggleButton() async {
     if (!isTrainerOnline.value) {
       LocationPermission permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.whileInUse ||
           permission == LocationPermission.always) {
         postAddress();
-        print("Permission already granted");
+        log("Permission already granted");
       } else {
-        // Show dialog to request permission
         Get.defaultDialog(
           title: "Enable Location",
           middleText: "Please allow location access to go online.",
           textCancel: "Cancel",
           textConfirm: "Allow",
           onConfirm: () async {
-            bool isLocationServiceEnabled = await Geolocator
-                .isLocationServiceEnabled();
+            bool isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
             if (!isLocationServiceEnabled) {
               Geolocator.openLocationSettings();
               return;
             }
-            LocationPermission newPermission = await Geolocator
-                .requestPermission();
+            LocationPermission newPermission = await Geolocator.requestPermission();
             if (newPermission == LocationPermission.whileInUse ||
                 newPermission == LocationPermission.always) {
               postAddress();
             } else {
-              Get.snackbar('Permission Denied',
-                  'Location permission is required to go online.');
+              Get.snackbar('Permission Denied', 'Location permission is required to go online.');
             }
-
             Get.back();
           },
         );
@@ -65,7 +132,7 @@ class HomeController extends GetxController {
       postAddress();
     }
   }
- /// CONVERT LAT LONG INTO PLACES NAME
+
   Future<Map<String, String?>> getAddressComponentsFromLatLng(double latitude, double longitude) async {
     const apiKey = 'AIzaSyAb-OJXPRTflwkd0huWLB2ygvwMv2Iwzgo';
     final url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=$apiKey';
@@ -112,40 +179,46 @@ class HomeController extends GetxController {
       return {};
     }
   }
-/// POST ADDRESS USING ONLINE OFFLINE FUNCTION
+
   Future<void> postAddress() async {
     showLoader();
     try {
       var location = Location();
       var currentLocation = await location.getLocation();
       var addressComponents = await getAddressComponentsFromLatLng(currentLocation.latitude!, currentLocation.longitude!);
-        Map<String, dynamic> request = {
-          "trianerId":storage.read("userId").toString(),
-          "addressType":addressComponents['addressType'] ?? "Unknown",
-          "name":addressComponents['name'] ?? "Unknown",
-          "houseNo":addressComponents['houseNo'] ?? "Unknown",
-          "city":addressComponents['city'] ?? "Unknown",
-          "streetArea":addressComponents['streetArea'] ?? "Unknown",
-          "lat":currentLocation.latitude,
-          "long":currentLocation.longitude,
-          "activeStatus":!isTrainerOnline.value
-        };
+      Map<String, dynamic> request = {
+        "trianerId": storage.read("userId").toString(),
+        "addressType": addressComponents['addressType'] ?? "Unknown",
+        "name": addressComponents['name'] ?? "Unknown",
+        "houseNo": addressComponents['houseNo'] ?? "Unknown",
+        "city": addressComponents['city'] ?? "Unknown",
+        "streetArea": addressComponents['streetArea'] ?? "Unknown",
+        "lat": currentLocation.latitude,
+        "long": currentLocation.longitude,
+        "activeStatus": !isTrainerOnline.value
+      };
 
-        var response = await CallAPI.postAddress(request: request);
+      var response = await CallAPI.postAddress(request: request);
 
-        if (response.status == 200) {
-          dismissLoader();
-          isTrainerOnline.value = !isTrainerOnline.value;
-          log(isTrainerOnline.value.toString());
-          print('Location sent successfully');
+      if (response.status == 200) {
+        dismissLoader();
+        isTrainerOnline.value = !isTrainerOnline.value;
+        storage.write('isTrainerOnline', isTrainerOnline.value);
+        if (isTrainerOnline.value) {
+          startLocationUpdates();
         } else {
-          dismissLoader();
-          print('Failed to send location');
+          _stopLocationUpdates();
         }
+        log(isTrainerOnline.value.toString());
+        log('Location sent successfully');
+      } else {
+        dismissLoader();
+        log('Failed to send location');
+      }
 
     } catch (e) {
       dismissLoader();
-      print('Error occurred: $e');
+      log('Error occurred: $e');
     }
   }
 }

@@ -37,7 +37,8 @@ class HomeUi extends StatelessWidget {
                   ),
                   child: Transform.scale(
                     scale: 0.5,
-                    child: Switch(
+                    child:
+                    Switch(
                       activeTrackColor: AppColors.yellow,
                       activeColor: controller.isTrainerOnline.value ? Colors.yellow : Colors.grey.withOpacity(0.5),
                       inactiveThumbImage: const AssetImage(ImagesPaths.trainerOnline),
@@ -83,16 +84,17 @@ class HomeUi extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: PageView(
-                  controller: controller.pageController,
-                  onPageChanged: (index) {
-                      controller.currentIndex.value = index;
-                  },
-                  children: [
-                    Image.asset(ImagesPaths.homepackage, fit: BoxFit.fill),
-                    Image.asset(ImagesPaths.homepackage, fit: BoxFit.fill),
-                    Image.asset(ImagesPaths.homepackage, fit: BoxFit.fill),
-                  ],
+                child:
+                PageView(
+                    controller: controller.pageController,
+                    onPageChanged: (index) {
+                        controller.currentIndex.value = index;
+                    },
+                    children: [
+                      Image.asset(ImagesPaths.homepackage, fit: BoxFit.fill),
+                      Image.asset(ImagesPaths.homepackage, fit: BoxFit.fill),
+                      Image.asset(ImagesPaths.homepackage, fit: BoxFit.fill),
+                    ],
                 ),
               ),
               SizedBox(

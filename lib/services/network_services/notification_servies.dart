@@ -108,11 +108,32 @@ class NotificationServices {
         android: androidNotificationDetails,
         iOS: darwinNotificationDetails
     );
-    Future.delayed(Duration.zero,(){
-      flutterLocalNotificationsPlugin
-          .show(0, message.notification!.title.toString(),
-          message.notification!.body.toString(), notificationDetails);
-    });
+    final notificationBody = message.notification?.body;
+
+    if (notificationBody != null) {
+      log("NOTIFICATION DATA: $notificationBody");
+        final keyValuePairs = notificationBody.split(',');
+        final Map<String, String> data = {};
+        for (var pair in keyValuePairs) {
+          // Using a regular expression to split each pair only at the first colon
+          final keyValue = pair.split(RegExp(r'(?<!http[s]?):'));
+          if (keyValue.length == 2) {
+            final key = keyValue[0].trim();
+            final value = keyValue[1].trim();
+            data[key] = value;
+          }
+        }
+        final name = data['Name'] ?? '';
+        final address = data['Address'] ?? '';
+      Future.delayed(Duration.zero,(){
+        flutterLocalNotificationsPlugin
+            .show(0, message.notification!.title.toString(),
+            "Name: $name, Address: $address", notificationDetails);
+      });
+    } else {
+      log("Notification body is null");
+    }
+
   }
 
   void handleNotification(RemoteMessage message) {
@@ -129,8 +150,8 @@ class NotificationServices {
         final Map<String, String> data = {};
 
         for (var pair in keyValuePairs) {
-          // Splitting each pair by the colon to separate key and value
-          final keyValue = pair.split(':');
+          // Using a regular expression to split each pair only at the first colon
+          final keyValue = pair.split(RegExp(r'(?<!http[s]?):'));
           if (keyValue.length == 2) {
             final key = keyValue[0].trim();
             final value = keyValue[1].trim();
@@ -145,15 +166,17 @@ class NotificationServices {
         final userProfile = data['userProfile'] ?? '';
         final userLat = data['userLat'] ?? '';
         final userLong = data['userLong'] ?? '';
+        final categoryLogo = data['categoryLogo'] ?? '';
 
         Get.toNamed(AppRoutes.bookingrequest, arguments: {
           "name": name,
           "address": address,
           "contact": contact,
           "userId": userId,
-          "userProfile": userProfile.toString(),
+          "userProfile": userProfile,
           "userLat": userLat,
           "userLong": userLong,
+          "categoryLogo": categoryLogo,
         });
       } catch (e) {
         log("Error parsing notification data: $e");
