@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import '../utils/exports.dart';
 
 class BookingRequestUi extends StatelessWidget {
@@ -46,7 +47,7 @@ class BookingRequestUi extends StatelessWidget {
                                       LatLng(controller.userLat!,
                                           controller.userLng!),
                                       "destination",
-                                      "assets/images/ic_category.png");
+                                      controller.notificationData["categoryLogo"].toString(),isNetworkImage: true);
 
                                   /// Update the camera position to show both markers
                                   LatLngBounds bounds = LatLngBounds(
@@ -132,7 +133,7 @@ class BookingRequestUi extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: Get.height * .38,
+              height:controller.selectedIndex.value == 1?Get.height*.48: Get.height * .38,
               child: Obx(() => controller.selectedIndex.value == 2
                   ? SingleChildScrollView(
                       child: Container(
@@ -528,145 +529,164 @@ class BookingRequestUi extends StatelessWidget {
                                 top: 20, left: 20, right: 20, bottom: 20),
                           ),
                         )
-                      : SingleChildScrollView(
-                          child: Container(
-                            width: Get.width,
-                            decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(ImagesPaths.bgBlackShade),
-                                    fit: BoxFit.cover)),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: Get.height * 0.03,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            CircleAvatar(
-                                              radius: 32,
-                                              backgroundColor: AppColors.yellow,
-                                              child: CircleAvatar(
-                                                  radius: 30,
-                                                  backgroundImage:
-                                                      CachedNetworkImageProvider(
-                                                          controller
-                                                              .notificationData[
-                                                                  "userProfile"]
-                                                              .toString())),
+                      :
+
+              Obx(() {
+                if (controller.isLoading.value) {
+                  return Shimmer.fromColors(
+                    baseColor: AppColors.white,
+                    highlightColor: AppColors.black,
+                    child:  Center(
+                      child: Text(
+                        'Booking Requested, waiting for confirmation Please wait...',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ).paddingOnly(left: 10,right: 10),
+                    ),
+                  );
+                } else {
+                  return SingleChildScrollView(
+                    child: Container(
+                      width: Get.width,
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(ImagesPaths.bgBlackShade),
+                              fit: BoxFit.cover)),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: Get.height * 0.03,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      CircleAvatar(
+                                        radius: 32,
+                                        backgroundColor: AppColors.yellow,
+                                        child: CircleAvatar(
+                                            radius: 30,
+                                            backgroundImage:
+                                            CachedNetworkImageProvider(
+                                                controller.notificationData["userProfile"].toString())),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      RichText(
+                                          text: TextSpan(children: [
+                                            TextSpan(
+                                              text: controller
+                                                  .notificationData["name"],
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headlineSmall,
                                             ),
-                                            const SizedBox(
-                                              width: 10,
-                                            ),
-                                            RichText(
-                                                text: TextSpan(children: [
-                                              TextSpan(
-                                                text: controller
-                                                    .notificationData["name"],
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .headlineSmall,
-                                              ),
-                                              TextSpan(
-                                                text: '\n3kms away | 12 min',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .labelMedium!
-                                                    .copyWith(
-                                                        color: Colors.white),
-                                              ),
-                                            ])),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Image.asset(
-                                              ImagesPaths.star2,
-                                              scale: 4,
-                                            ).paddingOnly(right: 5),
-                                            Text(
-                                              '4.78',
+                                            TextSpan(
+                                              text: '\n3kms away | 12 min',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .labelMedium!
                                                   .copyWith(
-                                                      color: Colors.white),
-                                            )
-                                          ],
-                                        )
-                                      ],
-                                    ).paddingOnly(top: 15, bottom: 15),
-                                    Text(
-                                      'Client address',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headlineSmall,
-                                    ),
-                                    Text(
-                                      controller.notificationData["address"]
-                                          .toString(),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelMedium!
-                                          .copyWith(color: Colors.white),
-                                    ),
-                                  ],
-                                ).paddingOnly(
-                                    left: Get.width * 0.04,
-                                    right: Get.width * 0.04,
-                                    bottom: Get.height * 0.01),
-                                Center(
-                                    child: InkButton(
-                                        child: Text(
-                                          'Accept',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headlineSmall!
-                                              .copyWith(
-                                                  color: AppColors.black,
-                                                  fontSize: 18,
-                                                  fontFamily: 'Montserrat'),
-                                        ),
-                                        onTap: () {
-                                          controller.onAcceptButton();
-                                        })).paddingOnly(top: 30, bottom: 5),
-                                Center(
-                                    child: InkButton(
-                                        backGroundColor: AppColors.black,
-                                        child: Text(
-                                          'Reject',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headlineSmall!
-                                              .copyWith(
-                                                  color: AppColors.yellow,
-                                                  fontSize: 18,
-                                                  fontFamily: 'Montserrat'),
-                                        ),
-                                        onTap: () {
-                                          controller.showDialogBox(
-                                              "Session request rejected",
-                                              ImagesPaths.cooltick.toString(),
-                                              () {
-                                            Get.offAllNamed(
-                                                AppRoutes.bottomNavigation);
-                                          });
-                                        })).paddingOnly(top: 10, bottom: 15),
-                                SizedBox(
-                                  height: Get.height * 0.02,
-                                ),
-                                //
-                              ],
-                            ).paddingOnly(left: 15, right: 15),
+                                                  color: Colors.white),
+                                            ),
+                                          ])),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Image.asset(
+                                        ImagesPaths.star2,
+                                        scale: 4,
+                                      ).paddingOnly(right: 5),
+                                      Text(
+                                        '4.78',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelMedium!
+                                            .copyWith(
+                                            color: Colors.white),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ).paddingOnly(top: 15, bottom: 15),
+                              Text(
+                                'Client address',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall,
+                              ),
+                              Text(
+                                controller.notificationData["address"]
+                                    .toString(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelMedium!
+                                    .copyWith(color: Colors.white),
+                              ),
+                            ],
+                          ).paddingOnly(
+                              left: Get.width * 0.04,
+                              right: Get.width * 0.04,
+                              bottom: Get.height * 0.01),
+                          Center(
+                              child: InkButton(
+                                  child: Text(
+                                    'Accept',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineSmall!
+                                        .copyWith(
+                                        color: AppColors.black,
+                                        fontSize: 18,
+                                        fontFamily: 'Montserrat'),
+                                  ),
+                                  onTap: () {
+                                    controller.onAcceptButton();
+                                  })).paddingOnly(top: 30, bottom: 5),
+                          Center(
+                              child: InkButton(
+                                  backGroundColor: AppColors.black,
+                                  child: Text(
+                                    'Reject',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineSmall!
+                                        .copyWith(
+                                        color: AppColors.yellow,
+                                        fontSize: 18,
+                                        fontFamily: 'Montserrat'),
+                                  ),
+                                  onTap: () {
+                                    controller.showDialogBox(
+                                        "Session request rejected",
+                                        ImagesPaths.cooltick.toString(),
+                                            () {
+                                          Get.offAllNamed(
+                                              AppRoutes.bottomNavigation);
+                                        });
+                                  })).paddingOnly(top: 10, bottom: 15),
+                          SizedBox(
+                            height: Get.height * 0.02,
                           ),
-                        )),
+                          //
+                        ],
+                      ).paddingOnly(left: 15, right: 15),
+                    ),
+                  ); // Replace with your normal widget when not loading
+                }
+              })
+              ),
             )
           ],
         ));
