@@ -1,14 +1,16 @@
 import 'dart:developer';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import '../services/models/request_models/booking_accept_model.dart';
 import '../utils/exports.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:http/http.dart' as http;
 
 class BookingRequestController extends GetxController {
   final TextEditingController pinController = TextEditingController();
   BookingAcceptDetailsModel? bookingDetails;
+  RxBool isLoading = false.obs;
   LatLng? northeastCoordinates;
   LatLng? southwestCoordinates;
   double? userLat;
@@ -43,13 +45,14 @@ class BookingRequestController extends GetxController {
     socket.onConnect((_) {
       print('Connection established');
     });
-    socket.onDisconnect((_) => print('Connection Disconnection'));
-    socket.onConnectError((err) => print(err));
-    socket.onError((err) => print(err));
+    socket.onDisconnect((_) => log('Connection Disconnection'));
+    socket.onConnectError((err) => log(err));
+    socket.onError((err) => log(err));
   }
 
   void sendMessageIo() {
-    String message = messageController.text.trim();
+    String message = "messageController.text.trim()";
+    log(message.toString());
     if (message.isEmpty) return;
     Map messageMap = {
       'message': message,
@@ -57,6 +60,7 @@ class BookingRequestController extends GetxController {
       'receiverId': "receiverId",
       'time': DateTime.now().millisecondsSinceEpoch,
     };
+    log(messageMap.toString());
     socket.emit('sendNewMessage', messageMap);
   }
 
@@ -85,7 +89,20 @@ class BookingRequestController extends GetxController {
       }
     });
   }
+  Future<Uint8List> getBytesFromNetwork(String url, int width) async {
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      final Uint8List data = response.bodyBytes;
+      ui.Codec codec = await ui.instantiateImageCodec(data, targetWidth: width);
+      ui.FrameInfo fi = await codec.getNextFrame();
+      return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
+          .buffer
 
+          .asUint8List();
+    } else {
+      throw Exception('Failed to load image from network');
+    }
+  }
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(path);
     ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
@@ -95,7 +112,6 @@ class BookingRequestController extends GetxController {
         .buffer
         .asUint8List();
   }
-
   int getMarkerSize() {
     double baseSize = 25.0; // Base marker size in dp
     double devicePixelRatio = ui.window.devicePixelRatio;
@@ -108,26 +124,31 @@ class BookingRequestController extends GetxController {
         .clamp(baseSize * devicePixelRatio, maxSize * devicePixelRatio)
         .toInt();
   }
-
-  Future<void> addMarker(LatLng position, String id, String image) async {
+  Future<void> addMarker(LatLng position, String id, String image, {bool isNetworkImage = false}) async {
     int markerSize = getMarkerSize();
-    final Uint8List markerIcon = await getBytesFromAsset(image, markerSize);
+    Uint8List markerIcon;
+
+    if (isNetworkImage) {
+      markerIcon = await getBytesFromNetwork(image, markerSize);
+    } else {
+      markerIcon = await getBytesFromAsset(image, markerSize);
+    }
+
     MarkerId markerId = MarkerId(id);
     Marker marker = Marker(
-        markerId: markerId,
-        icon: BitmapDescriptor.fromBytes(markerIcon),
-        position: position);
+      markerId: markerId,
+      icon: BitmapDescriptor.fromBytes(markerIcon),
+      position: position,
+    );
     markers[markerId] = marker;
     update();
   }
-
   void addPolyLine() {
     PolylineId id = PolylineId("poly");
     Polyline polyline = Polyline(
         polylineId: id, color: AppColors.yellow, points: polylineCoordinates);
     polyLines[id] = polyline;
   }
-
   void getPolyline() async {
     try {
       log("getPolyline");
@@ -162,9 +183,8 @@ class BookingRequestController extends GetxController {
       log("Stack trace: $st");
     }
   }
-
   Future<void> onAcceptButton() async {
-    showLoader();
+    isLoading.value = true;
     timerIsVisible.value = false;
     try {
       Map<String, dynamic> request = {
@@ -174,18 +194,19 @@ class BookingRequestController extends GetxController {
       };
       var response = await CallAPI.bookingAccept(request: request);
       if (response.status == 200) {
-        dismissLoader();
+        isLoading.value = false;
         bookingDetails = response;
         selectedIndex.value = 1;
         _timer!.cancel();
       } else {
-        dismissLoader();
+        isLoading.value = false;
         _timer!.cancel();
         Get.back();
         showSnackBar(response.message.toString());
       }
     } catch (e, st) {
-      dismissLoader();
+      isLoading.value = false;
+
       log('Error occurred: $e');
       log('Error occurred: $st');
     }
@@ -215,7 +236,6 @@ class BookingRequestController extends GetxController {
       log(st.toString());
     }
   }
-
   void showDialogBox(String title, String image, void Function() ontap) {
     showDialog(
       barrierDismissible: false,
@@ -288,8 +308,6 @@ class BookingRequestController extends GetxController {
       throw 'Could not open the map.';
     }
   }
-
-
   Future<void> onPinVerify() async{
     showLoader();
     String otp = pinController.text.trim();
@@ -326,7 +344,6 @@ class BookingRequestController extends GetxController {
       showSnackBar("Invalid OTP format");
     }
   }
-
   @override
   void onClose() {
     selectedIndex.value = 0;
@@ -335,15 +352,16 @@ class BookingRequestController extends GetxController {
     }
     super.onClose();
   }
-
   @override
   void onInit() async {
+    initSocket();
     notificationData = Get.arguments ?? {};
     userLat = double.parse(notificationData["userLat"]);
     userLng = double.parse(notificationData["userLong"]);
     log("notification data ===> $notificationData");
     await locationController.getCurrentLocation();
     startTimer(180);
-    getPolyline();
+    // getPolyline();
+
   }
 }

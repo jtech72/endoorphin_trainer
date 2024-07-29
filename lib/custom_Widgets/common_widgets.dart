@@ -8,7 +8,9 @@ import 'package:get_storage/get_storage.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_strings.dart';
 import '../utils/exports.dart';
-
+import 'dart:convert';
+import 'dart:typed_data';
+import 'package:image_picker/image_picker.dart';
 GetStorage storage=GetStorage();
 
 void printResult({

@@ -68,12 +68,12 @@ dependencies:
   cached_network_image:
   socket_io_client: ^2.0.3+1
   open_file_manager: ^1.0.2
-  flutter_background_service: ^5.0.6
   permission_handler:
   file_picker:
   firebase_crashlytics:
   flutter_polyline_points: ^2.1.0
   firebase_analytics:
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:
