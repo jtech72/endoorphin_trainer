@@ -184,8 +184,9 @@ class BookingRequestController extends GetxController {
     }
   }
   Future<void> onAcceptButton() async {
+    timerIsVisible.value = true;
+    startTimer(180);
     isLoading.value = true;
-    timerIsVisible.value = false;
     try {
       Map<String, dynamic> request = {
         "trainerId": storage.read("userId").toString(),
@@ -194,19 +195,22 @@ class BookingRequestController extends GetxController {
       };
       var response = await CallAPI.bookingAccept(request: request);
       if (response.status == 200) {
+        timerIsVisible.value = false;
         isLoading.value = false;
         bookingDetails = response;
         selectedIndex.value = 1;
         _timer!.cancel();
       } else {
         isLoading.value = false;
+        timerIsVisible.value = false;
         _timer!.cancel();
         Get.back();
         showSnackBar(response.message.toString());
       }
     } catch (e, st) {
       isLoading.value = false;
-
+      timerIsVisible.value = false;
+      _timer!.cancel();
       log('Error occurred: $e');
       log('Error occurred: $st');
     }
