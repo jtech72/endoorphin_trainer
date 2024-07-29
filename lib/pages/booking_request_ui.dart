@@ -72,10 +72,8 @@ class BookingRequestUi extends StatelessWidget {
                                           controller.userLng!),
                                     ),
                                   );
-                                  CameraUpdate cameraUpdate =
-                                      CameraUpdate.newLatLngBounds(bounds, 120);
-                                  onMapCreatedController
-                                      .animateCamera(cameraUpdate);
+                                  CameraUpdate cameraUpdate = CameraUpdate.newLatLngBounds(bounds, 120);
+                                  onMapCreatedController.animateCamera(cameraUpdate);
                                 },
                                 initialCameraPosition: CameraPosition(
                                   target: locationController
@@ -668,13 +666,14 @@ class BookingRequestUi extends StatelessWidget {
                                         fontFamily: 'Montserrat'),
                                   ),
                                   onTap: () {
-                                    controller.showDialogBox(
-                                        "Session request rejected",
-                                        ImagesPaths.cooltick.toString(),
-                                            () {
-                                          Get.offAllNamed(
-                                              AppRoutes.bottomNavigation);
-                                        });
+                                    // controller.showDialogBox(
+                                    //     "Session request rejected",
+                                    //     ImagesPaths.cooltick.toString(),
+                                    //         () {
+                                    //       Get.offAllNamed(
+                                    //           AppRoutes.bottomNavigation);
+                                    //     });
+                                    controller.sendMessageIo();
                                   })).paddingOnly(top: 10, bottom: 15),
                           SizedBox(
                             height: Get.height * 0.02,
