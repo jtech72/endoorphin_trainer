@@ -184,6 +184,7 @@ class BookingRequestController extends GetxController {
     }
   }
   Future<void> onAcceptButton() async {
+    _timer!.cancel();
     timerIsVisible.value = true;
     startTimer(180);
     isLoading.value = true;
@@ -199,11 +200,9 @@ class BookingRequestController extends GetxController {
         isLoading.value = false;
         bookingDetails = response;
         selectedIndex.value = 1;
-        _timer!.cancel();
       } else {
         isLoading.value = false;
         timerIsVisible.value = false;
-        _timer!.cancel();
         Get.back();
         showSnackBar(response.message.toString());
       }
@@ -228,7 +227,6 @@ class BookingRequestController extends GetxController {
     if(result.status == 200){
       dismissLoader();
       selectedIndex.value = 2;
-      showSnackBar(bookingDetails!.result!.sessionPin.toString());
     }else{
       dismissLoader();
       showToast(result.message.toString());

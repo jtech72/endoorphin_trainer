@@ -524,3 +524,50 @@ void showToast(String message) {
     fontSize: 14.0,
   );
 }
+
+
+class CustomProgressIndicator extends StatelessWidget {
+  final double width;
+  final double height;
+  final double strokeWidth;
+  final Color backgroundColor;
+  final Color valueColor;
+  final String logoPath;
+  final double logoWidth;
+  final double logoHeight;
+
+  const CustomProgressIndicator({
+    Key? key,
+    this.width = 150,
+    this.height = 150,
+    this.strokeWidth = 10,
+    this.backgroundColor = Colors.yellow,
+    this.valueColor = const Color(0xffFFF9E8),
+    required this.logoPath,
+    this.logoWidth = 60,
+    this.logoHeight = 60,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        SizedBox(
+          width: width,
+          height: height,
+          child: CircularProgressIndicator(
+            strokeWidth: strokeWidth,
+            backgroundColor: backgroundColor,
+            valueColor: AlwaysStoppedAnimation<Color>(valueColor),
+          ),
+        ),
+        Image.asset(
+          logoPath,
+          width: logoWidth,
+          height: logoHeight,
+        ),
+      ],
+    );
+  }
+}
