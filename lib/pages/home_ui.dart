@@ -79,36 +79,46 @@ class HomeUi extends StatelessWidget {
 
             children: [
               Container(
-                height: Get.height*0.24,
+                height: Get.height * 0.24,
                 width: Get.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child:
-                PageView(
-                    controller: controller.pageController,
-                    onPageChanged: (index) {
-                        controller.currentIndex.value = index;
-                    },
-                    children: [
-                      Image.asset(ImagesPaths.homepackage, fit: BoxFit.fill),
-                      Image.asset(ImagesPaths.homepackage, fit: BoxFit.fill),
-                      Image.asset(ImagesPaths.homepackage, fit: BoxFit.fill),
-                    ],
+                child: PageView(
+                  controller: controller.pageController,
+                  onPageChanged: (index) {
+                    controller.currentIndex.value = index;
+                  },
+                  children: [
+                    Image.asset(ImagesPaths.homepackage, fit: BoxFit.fill),
+                    Image.asset(ImagesPaths.homepackage, fit: BoxFit.fill),
+                    Image.asset(ImagesPaths.homepackage, fit: BoxFit.fill),
+                  ],
                 ),
               ),
               SizedBox(
-                height: Get.height*0.01,
+                height: Get.height * 0.01,
               ),
               Obx(
-                ()=> PageViewIndicator(
-                  currentSize: 10,
-                  otherSize: 10,
-                  length: 3,
-                  currentColor: AppColors.yellow,
-                  currentIndex: controller.currentIndex.value,
+                    () => GestureDetector(
+                  onTap: () {
+                    controller.pageController.animateToPage(
+                      controller.currentIndex.value,
+                      duration: Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                    );
+                  },
+                  child: PageViewIndicator(
+                    currentSize: 10,
+                    otherSize: 10,
+                    length: 3,
+                    currentColor: AppColors.yellow,
+                    currentIndex: controller.currentIndex.value,
+                  ),
                 ),
               ),
+
+
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -182,7 +192,7 @@ class HomeUi extends StatelessWidget {
                     height: Get.height*0.02,
                   ),
                   SizedBox(
-                    height: Get.height * 0.53,
+                    height: Get.height * 0.45,
                     width: Get.width,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
