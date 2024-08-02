@@ -95,6 +95,7 @@ class HomeController extends GetxController {
   void onClose() {
     pageChangeTimer?.cancel();
     startPageChangeTimer();
+    pageController.dispose();
     super.onClose();
   }
 
