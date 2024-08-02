@@ -27,8 +27,8 @@ class Result {
   String? customerProfileImg;
   String? bookingDate;
   int? duration;
-  Null? startSession;
-  Null? endSession;
+  String? startSession;
+  String? endSession;
 
   Result(
       {this.categoryName,
