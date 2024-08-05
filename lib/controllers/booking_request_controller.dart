@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
@@ -29,6 +30,8 @@ class BookingRequestController extends GetxController {
   int remainingSeconds = 60;
   RxBool timerIsVisible = true.obs;
   final time = '01.00'.obs;
+  RxString totalTIme = "".obs;
+  RxString totalDistance = "".obs;
   void sendMessage() {
     if (messageController.text.trim().isNotEmpty) {
       messages.add(messageController.text.trim());
@@ -36,32 +39,47 @@ class BookingRequestController extends GetxController {
     }
   }
 
-  void initSocket() {
-    socket = IO.io(Endpoints.baseUrl, <String, dynamic>{
-      'autoConnect': false,
-      'transports': ['websocket'],
-    });
-    socket.connect();
-    socket.onConnect((_) {
-      print('Connection established');
-    });
-    socket.onDisconnect((_) => log('Connection Disconnection'));
-    socket.onConnectError((err) => log(err));
-    socket.onError((err) => log(err));
+  Future<void> initSocket() async {
+    log("Initializing socket...");
+
+    try {
+      socket = IO.io("http://103.185.212.115:5002", <String, dynamic>{
+        'autoConnect': false,
+        'transports': ['websocket'],
+      });
+
+      socket.connect();
+
+      socket.onConnect((_) {
+        log('Connection established');
+      });
+
+      socket.onDisconnect((_) {
+        log('Connection Disconnected');
+      });
+
+      socket.onConnectError((err) {
+        log('Connection Error: $err');
+      });
+
+      socket.onError((err) {
+        log('General Error: $err');
+      });
+    } catch (e) {
+      log('Exception caught: $e');
+    }
   }
 
-  void sendMessageIo() {
-    String message = "messageController.text.trim()";
-    log(message.toString());
-    if (message.isEmpty) return;
+  void sendMessageIo(String id,String pinSession) {
+    log(id.toString());
+    log(pinSession.toString());
+    if (id.isEmpty||pinSession.isEmpty) return;
     Map messageMap = {
-      'message': message,
-      'senderId': "userId",
-      'receiverId': "receiverId",
-      'time': DateTime.now().millisecondsSinceEpoch,
+      'id': id,
+      'pinSession': pinSession,
     };
     log(messageMap.toString());
-    socket.emit('sendNewMessage', messageMap);
+    socket.emit('message', messageMap);
   }
 
   void setMapStyle() async {
@@ -153,18 +171,29 @@ class BookingRequestController extends GetxController {
     try {
       log("getPolyline");
       if (locationController.currentLocation.value != null) {
-        PolylineResult result = await PolylinePoints()
-            .getRouteBetweenCoordinates(
-                googleApiKey: "AIzaSyAb-OJXPRTflwkd0huWLB2ygvwMv2Iwzgo",
-                request: PolylineRequest(
-                    origin: PointLatLng(
-                        locationController.currentLocation.value!.latitude,
-                        locationController.currentLocation.value!.longitude),
-                    destination: PointLatLng(30.725238, 76.804086),
-                    mode: TravelMode.driving,
-                    wayPoints: [
-                      PolylineWayPoint(location: "Sabo, Yaba Lagos Nigeria")
-                    ]));
+        final origin = PointLatLng(
+            locationController.currentLocation.value!.latitude,
+            locationController.currentLocation.value!.longitude);
+        final destination = PointLatLng(userLat!, userLng!);
+        final wayPoints = [PolylineWayPoint(location: "Sabo, Yaba Lagos Nigeria")];
+
+        // Construct the URL for logging with API key included
+        String waypointsString = wayPoints.map((wp) => wp.location).join('|');
+        String url = 'https://maps.googleapis.com/maps/api/directions/json?'
+            'origin=${origin.latitude},${origin.longitude}&'
+            'destination=${destination.latitude},${destination.longitude}&'
+            'mode=driving&'
+            'waypoints=$waypointsString&'
+            'key=AIzaSyAb-OJXPRTflwkd0huWLB2ygvwMv2Iwzgo';
+        log("Request URL: $url");
+
+        PolylineResult result = await PolylinePoints().getRouteBetweenCoordinates(
+            googleApiKey: "AIzaSyAb-OJXPRTflwkd0huWLB2ygvwMv2Iwzgo",
+            request: PolylineRequest(
+                origin: origin,
+                destination: destination,
+                mode: TravelMode.driving,
+                wayPoints: wayPoints));
 
         if (result.points.isNotEmpty) {
           log("result ===>$result");
@@ -185,7 +214,7 @@ class BookingRequestController extends GetxController {
   }
   Future<void> onAcceptButton() async {
     _timer!.cancel();
-    timerIsVisible.value = true;
+    timerIsVisible.value = false;
     startTimer(180);
     isLoading.value = true;
     try {
@@ -196,20 +225,52 @@ class BookingRequestController extends GetxController {
       };
       var response = await CallAPI.bookingAccept(request: request);
       if (response.status == 200) {
+        _timer!.cancel();
         timerIsVisible.value = false;
         isLoading.value = false;
         bookingDetails = response;
         selectedIndex.value = 1;
       } else {
+        _timer!.cancel();
         isLoading.value = false;
         timerIsVisible.value = false;
         Get.back();
-        showSnackBar(response.message.toString());
       }
     } catch (e, st) {
       isLoading.value = false;
       timerIsVisible.value = false;
       _timer!.cancel();
+      log('Error occurred: $e');
+      log('Error occurred: $st');
+    }
+  }
+  Future<void> onRejectButton() async {
+    showLoader();
+    _timer!.cancel();
+    timerIsVisible.value = false;
+
+    try {
+      Map<String, dynamic> request = {
+        "trainerId": storage.read("userId").toString(),
+        "userId": notificationData["userId"].toString(),
+        "acceptBookingStatus": false
+      };
+      var response = await CallAPI.bookingAccept(request: request);
+      if (response.status == 200) {
+        dismissLoader();
+        Get.back();
+        Get.back();
+        showToast(response.message.toString());
+      } else {
+        dismissLoader();
+        Get.back();
+        Get.back();
+        showToast(response.message.toString());
+      }
+    } catch (e, st) {
+      dismissLoader();
+      Get.back();
+      Get.back();
       log('Error occurred: $e');
       log('Error occurred: $st');
     }
@@ -310,6 +371,33 @@ class BookingRequestController extends GetxController {
       throw 'Could not open the map.';
     }
   }
+  Future<void> findDistanceAndTime(LatLng origin, LatLng destination) async {
+    String apiKey = 'AIzaSyAb-OJXPRTflwkd0huWLB2ygvwMv2Iwzgo';
+    String url = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origin.latitude},${origin.longitude}&destinations=${destination.latitude},${destination.longitude}&key=$apiKey';
+
+    log("Fetching ETA and distance from URL: $url");
+    final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      log("API response: $data");
+      if (data['rows'] != null &&
+          data['rows'][0]['elements'] != null &&
+          data['rows'][0]['elements'][0]['duration'] != null &&
+          data['rows'][0]['elements'][0]['distance'] != null) {
+
+        totalTIme.value = data['rows'][0]['elements'][0]['duration']['text'];
+        totalDistance.value = data['rows'][0]['elements'][0]['distance']['text'];
+
+        log("ETA fetched successfully: ${totalTIme.value}");
+        log("Distance fetched successfully: ${totalDistance.value}");
+      } else {
+        log("ETA or distance data is not in the expected format.");
+      }
+    } else {
+      log('Failed to fetch ETA and distance. Status code: ${response.statusCode}');
+    }
+  }
   Future<void> onPinVerify() async{
     showLoader();
     String otp = pinController.text.trim();
@@ -331,6 +419,7 @@ class BookingRequestController extends GetxController {
       final result = await CallAPI.getSessionDetails(id: bookingDetails!.result!.bookingId.toString(), pinSession: enteredOtp.toString());
       if(result.status == 200){
            dismissLoader();
+           sendMessageIo(bookingDetails!.result!.bookingId.toString(),enteredOtp.toString());
          Get.toNamed(AppRoutes.sessionRunning,arguments: {
            "id":bookingDetails!.result!.bookingId.toString(),
            "pin":enteredOtp.toString()
@@ -346,6 +435,17 @@ class BookingRequestController extends GetxController {
       showSnackBar("Invalid OTP format");
     }
   }
+  void addPolyline(LatLng origin, LatLng destination) {
+    final PolylineId polylineId = PolylineId('route');
+    final Polyline polyline = Polyline(
+      polylineId: polylineId,
+      color: AppColors.yellow,
+      width: 5,
+      points: [origin, destination],
+    );
+    polyLines[polylineId] = polyline;
+    update();
+  }
   @override
   void onClose() {
     selectedIndex.value = 0;
@@ -354,16 +454,18 @@ class BookingRequestController extends GetxController {
     }
     super.onClose();
   }
+
   @override
   void onInit() async {
-    initSocket();
     notificationData = Get.arguments ?? {};
     userLat = double.parse(notificationData["userLat"]);
     userLng = double.parse(notificationData["userLong"]);
     log("notification data ===> $notificationData");
     await locationController.getCurrentLocation();
+    await findDistanceAndTime(locationController.currentLocation.value!,LatLng(userLat!, userLng!));
     startTimer(180);
-    // getPolyline();
+    await initSocket();
+    getPolyline();
 
   }
 }
