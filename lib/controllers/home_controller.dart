@@ -69,11 +69,7 @@ class HomeController extends GetxController {
       );
       Map<String, dynamic> request = {
         "trianerId": storage.read("userId").toString(),
-        "addressType": addressComponents['addressType'] ?? "Unknown",
-        "name": addressComponents['name'] ?? "Unknown",
-        "houseNo": addressComponents['houseNo'] ?? "Unknown",
-        "city": addressComponents['city'] ?? "Unknown",
-        "streetArea": addressComponents['streetArea'] ?? "Unknown",
+        "addressType":  addressComponents['name'] ?? "",
         "lat": currentLocation.latitude,
         "long": currentLocation.longitude,
         "activeStatus": true,
@@ -193,11 +189,11 @@ class HomeController extends GetxController {
       var addressComponents = await getAddressComponentsFromLatLng(currentLocation.latitude!, currentLocation.longitude!);
       Map<String, dynamic> request = {
         "trianerId": storage.read("userId").toString(),
-        "addressType": addressComponents['addressType'] ?? "Unknown",
-        "name": addressComponents['name'] ?? "Unknown",
-        "houseNo": addressComponents['houseNo'] ?? "Unknown",
-        "city": addressComponents['city'] ?? "Unknown",
-        "streetArea": addressComponents['streetArea'] ?? "Unknown",
+        "addressType":  addressComponents['name'] ?? "",
+        // "name": addressComponents['name'] ?? "Unknown",
+        // "houseNo": addressComponents['houseNo'] ?? "Unknown",
+        // "city": addressComponents['city'] ?? "Unknown",
+        // "streetArea": addressComponents['streetArea'] ?? "Unknown",
         "lat": currentLocation.latitude,
         "long": currentLocation.longitude,
         "activeStatus": !isTrainerOnline.value

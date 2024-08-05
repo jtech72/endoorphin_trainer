@@ -532,7 +532,6 @@ class CustomProgressIndicator extends StatelessWidget {
   final double strokeWidth;
   final Color backgroundColor;
   final Color valueColor;
-  final String logoPath;
   final double logoWidth;
   final double logoHeight;
 
@@ -541,9 +540,8 @@ class CustomProgressIndicator extends StatelessWidget {
     this.width = 150,
     this.height = 150,
     this.strokeWidth = 10,
-    this.backgroundColor = Colors.yellow,
+    this.backgroundColor = AppColors.yellow,
     this.valueColor = const Color(0xffFFF9E8),
-    required this.logoPath,
     this.logoWidth = 60,
     this.logoHeight = 60,
   }) : super(key: key);
@@ -563,7 +561,7 @@ class CustomProgressIndicator extends StatelessWidget {
           ),
         ),
         Image.asset(
-          logoPath,
+          "assets/images/app_logo.png",
           width: logoWidth,
           height: logoHeight,
         ),

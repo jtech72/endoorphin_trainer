@@ -83,7 +83,8 @@ class DocumentUI extends StatelessWidget {
                  else  if (snapshot.hasData || controller.trainerDocStatusModel.value.result!.isNotEmpty) {
                       controller.trainerDocStatusModel.value =
                           controller.trainerDocStatusModel.value;
-                      return Obx(
+                      return
+                        Obx(
                             () => SizedBox(
                             height: Get.height * .8,
                             child:

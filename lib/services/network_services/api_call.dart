@@ -17,6 +17,7 @@ import '../models/request_models/session_detail_model.dart';
 import '../models/request_models/sign_up_model.dart';
 import '../models/request_models/update_bank_detail_model.dart';
 import '../models/response_models/get_bank_detail.dart';
+import '../models/response_models/get_booking_history_model.dart';
 import '../models/response_models/get_trainer_doc_status_model.dart';
 import '../models/response_models/profile_detail_model.dart';
 import 'api_manager.dart';
@@ -491,6 +492,28 @@ class CallAPI {
       log(e.toString());
       log(st.toString());
       return SessionDetailModel(status: 500); // Return an error status
+    }
+  }
+  /// GET BOOKING HISTORY
+  static Future<GetBookingHistoryModel> getBookingHistory({
+    required String id,
+    required String bookingStatus,
+  }) async {
+    try {
+      String endPoint = Endpoints.epGetBookingHistory;
+      String fullUrl = "$endPoint?bookingStatus=$bookingStatus&userId=$id";
+      Map<String, dynamic> json = await APIManager().getAllCall(endPoint: fullUrl);
+      GetBookingHistoryModel responseModel = GetBookingHistoryModel.fromJson(json);
+      if (responseModel.status == 200) {
+        log("CALLING_ENDPOINT: $fullUrl ,RESPONSE:  $json");
+        return responseModel;
+      } else {
+        throw Exception("Error: ${responseModel.status}");
+      }
+    } catch (e, st) {
+      log(e.toString());
+      log(st.toString());
+      return GetBookingHistoryModel(status: 500); // Return an error status
     }
   }
 
