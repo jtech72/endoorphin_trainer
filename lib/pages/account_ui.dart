@@ -78,7 +78,7 @@ class AccountUI extends StatelessWidget {
                           ? ""
                           : snapshot.data!.result!.bio!.toString();
                   controller.selectedOption1.value =
-                      snapshot.data!.result!.gender!.toString();
+                      snapshot.data?.result?.gender?.toString()??"";
                   return
                     Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

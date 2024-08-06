@@ -106,11 +106,12 @@ class BioUi extends StatelessWidget {
                             ),
                             child: TextField(
                               controller: controller.nicknameController ,
-                              textCapitalization: TextCapitalization.words,
+                              textCapitalization: TextCapitalization.none,
                               inputFormatters: [
                                 LengthLimitingTextInputFormatter(30),
                                 NoLeadingSpaceFormatter(),
-                                           ],
+                                CapitalizeFirstLetterFormatter(),
+                              ],
                               enableInteractiveSelection: true,
                               style: Theme.of(context).textTheme.labelMedium,
                               cursorColor: AppColors.grey,
@@ -165,10 +166,12 @@ class BioUi extends StatelessWidget {
                             ),
                             child: TextField(
                               controller: controller.experienceController,
+                              textCapitalization: TextCapitalization.none,
                               keyboardType: TextInputType.number,
                               inputFormatters: [
                                 NoLeadingSpaceFormatter(),
                                 LengthLimitingTextInputFormatter(2),
+                                CapitalizeFirstLetterFormatter(),
 
                               ],
                               enableInteractiveSelection: true,
@@ -225,9 +228,11 @@ class BioUi extends StatelessWidget {
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: TextField(
+                              textCapitalization: TextCapitalization.none,
                               inputFormatters: [
                                 NoLeadingSpaceFormatter(),
                                 LengthLimitingTextInputFormatter(250),
+                                CapitalizeFirstLetterFormatter(),
 
                               ],
                               controller: controller.expertiseController,
@@ -282,8 +287,12 @@ class BioUi extends StatelessWidget {
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: TextField(
+                              textCapitalization: TextCapitalization.none,
                               controller: controller.funFactsController,
-                              inputFormatters: [NoLeadingSpaceFormatter()],
+                              inputFormatters: [
+                                NoLeadingSpaceFormatter(),
+                                CapitalizeFirstLetterFormatter()
+                              ],
                               enableInteractiveSelection: true,
                               style: Theme.of(context).textTheme.labelMedium,
                               cursorColor: AppColors.grey,
@@ -336,8 +345,12 @@ class BioUi extends StatelessWidget {
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: TextField(
+                              textCapitalization: TextCapitalization.none,
                               controller: controller.motivationalQuoteController,
-                              inputFormatters: [NoLeadingSpaceFormatter()],
+                              inputFormatters: [
+                                NoLeadingSpaceFormatter(),
+                                CapitalizeFirstLetterFormatter()
+                              ],
                               enableInteractiveSelection: true,
                               style: Theme.of(context).textTheme.labelMedium,
                               cursorColor: AppColors.grey,
@@ -389,21 +402,23 @@ class BioUi extends StatelessWidget {
                             height: Get.height * 0.15,
                             width: Get.width,
                             decoration: BoxDecoration(
-                                color: AppColors.yellowishWhite,
-                                borderRadius: BorderRadius.circular(7)),
+                              color: AppColors.yellowishWhite,
+                              borderRadius: BorderRadius.circular(7),
+                            ),
                             child: TextField(
+                              textCapitalization: TextCapitalization.none,
                               controller: controller.bioController,
                               inputFormatters: [
                                 NoLeadingSpaceFormatter(),
                                 LengthLimitingTextInputFormatter(100),
+                                CapitalizeFirstLetterFormatter(), // Add the custom formatter here
                               ],
                               keyboardType: TextInputType.text,
                               minLines: 1,
                               maxLines: 10,
                               style: Theme.of(context).textTheme.labelMedium,
                               decoration: InputDecoration(
-                                contentPadding:
-                                const EdgeInsets.only(bottom: 3, left: 15, right: 15),
+                                contentPadding: const EdgeInsets.only(bottom: 3, left: 15, right: 15),
                                 fillColor: AppColors.yellowishWhite,
                                 hintText: 'Tell us something about yourself ',
                                 hintStyle: Theme.of(context).textTheme.labelMedium,
@@ -431,7 +446,8 @@ class BioUi extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          ),
+                          )
+
                         ],
                       ),
                     ],

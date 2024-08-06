@@ -577,3 +577,20 @@ class CustomProgressIndicator extends StatelessWidget {
 
 
 
+class CapitalizeFirstLetterFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    if (newValue.text.isEmpty) return newValue;
+
+    // Capitalize only the first letter of the entire text and keep the rest as it is
+    String newText = newValue.text[0].toUpperCase() + newValue.text.substring(1);
+
+    return newValue.copyWith(
+      text: newText,
+      selection: newValue.selection,
+    );
+  }
+}
+
+
+
