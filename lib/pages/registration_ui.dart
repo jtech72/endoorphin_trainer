@@ -125,6 +125,7 @@ class RegistrationUi extends StatelessWidget {
                                 FilteringTextInputFormatter.allow(
                                     RegExp(r'[a-zA-Z\s]')),
                                 FilteringTextInputFormatter.deny(RegExp(r'\s')),
+
                               ],
                               enableInteractiveSelection: true,
                               style: Theme.of(context).textTheme.labelMedium,
