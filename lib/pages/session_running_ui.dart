@@ -106,7 +106,7 @@ class SessionRunningUi extends StatelessWidget {
                         () => Column(
                           children: [
                             Text(
-                              controller.time.value.toString(),
+                              controller.scheduleTime.value.toString(),
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineLarge

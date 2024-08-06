@@ -16,5 +16,3 @@ class UpdateBankDetailModel {
     return data;
   }
 }
-
-///

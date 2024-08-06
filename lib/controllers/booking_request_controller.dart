@@ -32,55 +32,27 @@ class BookingRequestController extends GetxController {
   final time = '01.00'.obs;
   RxString totalTIme = "".obs;
   RxString totalDistance = "".obs;
+  dynamic socketData ;
   void sendMessage() {
     if (messageController.text.trim().isNotEmpty) {
       messages.add(messageController.text.trim());
       messageController.clear();
     }
   }
-
-  Future<void> initSocket() async {
-    log("Initializing socket...");
-
-    try {
-      socket = IO.io("http://103.185.212.115:5002", <String, dynamic>{
-        'autoConnect': false,
-        'transports': ['websocket'],
-      });
-
-      socket.connect();
-
-      socket.onConnect((_) {
-        log('Connection established');
-      });
-
-      socket.onDisconnect((_) {
-        log('Connection Disconnected');
-      });
-
-      socket.onConnectError((err) {
-        log('Connection Error: $err');
-      });
-
-      socket.onError((err) {
-        log('General Error: $err');
-      });
-    } catch (e) {
-      log('Exception caught: $e');
-    }
-  }
-
-  void sendMessageIo(String id,String pinSession) {
+  Future<dynamic> sendMessageIo(String id, String pinSession) async {
     log(id.toString());
     log(pinSession.toString());
-    if (id.isEmpty||pinSession.isEmpty) return;
-    Map messageMap = {
+    if (id.isEmpty || pinSession.isEmpty) return null;
+
+    Map<String, String> messageMap = {
       'id': id,
       'pinSession': pinSession,
     };
     log(messageMap.toString());
     socket.emit('message', messageMap);
+
   }
+
 
   void setMapStyle() async {
     String style = await DefaultAssetBundle.of(Get.context!)
@@ -398,10 +370,11 @@ class BookingRequestController extends GetxController {
       log('Failed to fetch ETA and distance. Status code: ${response.statusCode}');
     }
   }
-  Future<void> onPinVerify() async{
+  Future<void> onPinVerify() async {
     showLoader();
     String otp = pinController.text.trim();
     log(pinController.text.trim());
+
     if (otp.isEmpty) {
       dismissLoader();
       showSnackBar("Please enter a valid OTP");
@@ -416,23 +389,28 @@ class BookingRequestController extends GetxController {
 
     try {
       int enteredOtp = int.parse(otp);
-      final result = await CallAPI.getSessionDetails(id: bookingDetails!.result!.bookingId.toString(), pinSession: enteredOtp.toString());
-      if(result.status == 200){
-           dismissLoader();
-           sendMessageIo(bookingDetails!.result!.bookingId.toString(),enteredOtp.toString());
-         Get.toNamed(AppRoutes.sessionRunning,arguments: {
-           "id":bookingDetails!.result!.bookingId.toString(),
-           "pin":enteredOtp.toString()
-         });
-      }
-      else {
+       await sendMessageIo(bookingDetails!.result!.bookingId.toString(), enteredOtp.toString());
+      socket.on('message', (data) {
+        socketData = data;
+        log('Received message: $data');
+      });
+      if (socketData != null) {
         dismissLoader();
-        showDialogBox("Your Request pin is not correct Please try Again",
-            ImagesPaths.inVaildPopUp.toString(),(){Get.back();});
+        Get.toNamed(AppRoutes.sessionRunning, arguments: {
+          "id": bookingDetails!.result!.bookingId.toString(),
+          "pin": enteredOtp.toString(),
+        });
+      } else {
+        dismissLoader();
+        showDialogBox("Your Request pin is not correct. Please try again.",
+            ImagesPaths.inVaildPopUp.toString(), () {
+              Get.back();
+            });
       }
-    } catch (e) {
+    } catch (e, st) {
       dismissLoader();
-      showSnackBar("Invalid OTP format");
+      log(e.toString());
+      log(st.toString());
     }
   }
   void addPolyline(LatLng origin, LatLng destination) {
@@ -453,6 +431,36 @@ class BookingRequestController extends GetxController {
       _timer!.cancel();
     }
     super.onClose();
+  }
+  Future<void> initSocket() async {
+    log("Initializing socket...");
+
+    try {
+      socket = IO.io("http://103.185.212.115:5002", <String, dynamic>{
+        'autoConnect': false,
+        'transports': ['websocket'],
+      });
+
+      socket.connect();
+
+      socket.onConnect((_) {
+        log('Connection established');
+      });
+
+      socket.onDisconnect((_) {
+        log('Connection Disconnected');
+      });
+
+      socket.onConnectError((err) {
+        log('Connection Error: $err');
+      });
+
+      socket.onError((err) {
+        log('General Error: $err');
+      });
+    } catch (e) {
+      log('Exception caught: $e');
+    }
   }
 
   @override
