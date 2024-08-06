@@ -389,11 +389,15 @@ class BookingRequestController extends GetxController {
 
     try {
       int enteredOtp = int.parse(otp);
-       await sendMessageIo(bookingDetails!.result!.bookingId.toString(), enteredOtp.toString());
+      await sendMessageIo(bookingDetails!.result!.bookingId.toString(), enteredOtp.toString());
+
       socket.on('message', (data) {
         socketData = data;
         log('Received message: $data');
       });
+
+      await Future.delayed(Duration(seconds: 2));
+
       if (socketData != null) {
         dismissLoader();
         Get.toNamed(AppRoutes.sessionRunning, arguments: {
@@ -402,10 +406,14 @@ class BookingRequestController extends GetxController {
         });
       } else {
         dismissLoader();
-        showDialogBox("Your Request pin is not correct. Please try again.",
-            ImagesPaths.inVaildPopUp.toString(), () {
+        log(socketData.toString());
+        showDialogBox(
+            "Your Request pin is not correct. Please try again.",
+            ImagesPaths.inVaildPopUp.toString(),
+                () {
               Get.back();
-            });
+            }
+        );
       }
     } catch (e, st) {
       dismissLoader();
