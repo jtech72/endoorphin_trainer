@@ -66,7 +66,7 @@ dependencies:
   flutter_local_notifications:
   logger:
   cached_network_image:
-  socket_io_client: ^2.0.3+1
+  socket_io_client:
   open_file_manager: ^1.0.2
   permission_handler:
   file_picker:

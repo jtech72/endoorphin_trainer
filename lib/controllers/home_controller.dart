@@ -69,11 +69,7 @@ class HomeController extends GetxController {
       );
       Map<String, dynamic> request = {
         "trianerId": storage.read("userId").toString(),
-        "addressType": addressComponents['addressType'] ?? "Unknown",
-        "name": addressComponents['name'] ?? "Unknown",
-        "houseNo": addressComponents['houseNo'] ?? "Unknown",
-        "city": addressComponents['city'] ?? "Unknown",
-        "streetArea": addressComponents['streetArea'] ?? "Unknown",
+        "addressType":  addressComponents['name'] ?? "",
         "lat": currentLocation.latitude,
         "long": currentLocation.longitude,
         "activeStatus": true,
@@ -134,6 +130,10 @@ class HomeController extends GetxController {
     }
   }
 
+
+
+
+
   Future<Map<String, String?>> getAddressComponentsFromLatLng(double latitude, double longitude) async {
     const apiKey = 'AIzaSyAb-OJXPRTflwkd0huWLB2ygvwMv2Iwzgo';
     final url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=$apiKey';
@@ -144,30 +144,31 @@ class HomeController extends GetxController {
         final jsonData = json.decode(response.body);
         if (jsonData['status'] == 'OK' && jsonData['results'].isNotEmpty) {
           final components = jsonData['results'][0]['address_components'];
-          String? addressType, name, houseNo, city, streetArea;
+          final formattedAddress = jsonData['results'][0]['formatted_address'];
+          String? addressType, houseNo, city, streetArea;
 
           for (var component in components) {
+            log('Component: ${component['long_name']} - Types: ${component['types']}');
             if (component['types'].contains('administrative_area_level_2')) {
               addressType = component['long_name'];
-            } else if (component['types'].contains('sublocality_level_1')) {
-              name = component['long_name'];
             } else if (component['types'].contains('premise')) {
               houseNo = component['long_name'];
             } else if (component['types'].contains('locality')) {
               city = component['long_name'];
-            } else if (component['types'].contains('route')) {
+            } else if (component['types'].contains('sublocality_level_1') || component['types'].contains('sublocality')) {
               streetArea = component['long_name'];
             }
           }
 
           return {
             'addressType': addressType,
-            'name': name,
+            'name': formattedAddress,  // Assign the formatted address to name
             'houseNo': houseNo,
             'city': city,
-            'streetArea': streetArea,
+            'streetArea': streetArea,  // Ensure streetArea is set to sublocality
           };
         } else {
+          log('No results found or status is not OK');
           return {};
         }
       } else {
@@ -189,11 +190,11 @@ class HomeController extends GetxController {
       var addressComponents = await getAddressComponentsFromLatLng(currentLocation.latitude!, currentLocation.longitude!);
       Map<String, dynamic> request = {
         "trianerId": storage.read("userId").toString(),
-        "addressType": addressComponents['addressType'] ?? "Unknown",
-        "name": addressComponents['name'] ?? "Unknown",
-        "houseNo": addressComponents['houseNo'] ?? "Unknown",
-        "city": addressComponents['city'] ?? "Unknown",
-        "streetArea": addressComponents['streetArea'] ?? "Unknown",
+        "addressType":  addressComponents['name'] ?? "",
+        // "name": addressComponents['name'] ?? "Unknown",
+        // "houseNo": addressComponents['houseNo'] ?? "Unknown",
+        // "city": addressComponents['city'] ?? "Unknown",
+        // "streetArea": addressComponents['streetArea'] ?? "Unknown",
         "lat": currentLocation.latitude,
         "long": currentLocation.longitude,
         "activeStatus": !isTrainerOnline.value

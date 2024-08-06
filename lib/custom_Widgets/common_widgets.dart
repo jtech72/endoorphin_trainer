@@ -1,4 +1,6 @@
 import 'dart:developer';
+import 'dart:io';
+import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -11,7 +13,10 @@ import '../utils/exports.dart';
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
+
 GetStorage storage=GetStorage();
+late IO.Socket socket;
 
 void printResult({
   required String screenName,
@@ -532,7 +537,6 @@ class CustomProgressIndicator extends StatelessWidget {
   final double strokeWidth;
   final Color backgroundColor;
   final Color valueColor;
-  final String logoPath;
   final double logoWidth;
   final double logoHeight;
 
@@ -541,9 +545,8 @@ class CustomProgressIndicator extends StatelessWidget {
     this.width = 150,
     this.height = 150,
     this.strokeWidth = 10,
-    this.backgroundColor = Colors.yellow,
+    this.backgroundColor = AppColors.yellow,
     this.valueColor = const Color(0xffFFF9E8),
-    required this.logoPath,
     this.logoWidth = 60,
     this.logoHeight = 60,
   }) : super(key: key);
@@ -563,7 +566,7 @@ class CustomProgressIndicator extends StatelessWidget {
           ),
         ),
         Image.asset(
-          logoPath,
+          "assets/images/app_logo.png",
           width: logoWidth,
           height: logoHeight,
         ),
