@@ -40,6 +40,8 @@ class Endpoints{
   static const String epGetSessionDetails="booking/verfiySeesionPinForTrainer";
   /// BOOKING HISTORY
   static const String epGetBookingHistory="booking/getAllBookingForTrainer";
-
-
+  /// BOOKING HISTORY
+  static const String epGetBookingSessionDetails="booking/sessionCompletedDetails";
+  /// POST REVIEW
+  static const String epPostReviewUser="review/saveReview";
 }
