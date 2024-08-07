@@ -324,26 +324,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 setState(() {
                   selectedTile = 5;
                 });
-                Navigator.pushReplacement(
-                  context,
-                  PageRouteBuilder(
-                    pageBuilder: (context, animation1, animation2) => HomeUi(),
-                    transitionDuration: const Duration(milliseconds: 600),
-                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                      const begin = Offset(1.0, 0.0);
-                      const end = Offset.zero;
-                      const curve = Curves.ease;
-
-                      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-                      var offsetAnimation = animation.drive(tween);
-
-                      return SlideTransition(
-                        position: offsetAnimation,
-                        child: child,
-                      );
-                    },
-                  ),
-                );
+                Get.toNamed(AppRoutes.support);
               },
             ).paddingOnly(left: Get.width*0.05),
           ),
