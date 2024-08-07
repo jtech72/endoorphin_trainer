@@ -18,6 +18,7 @@ import '../models/request_models/sign_up_model.dart';
 import '../models/request_models/update_bank_detail_model.dart';
 import '../models/response_models/get_bank_detail.dart';
 import '../models/response_models/get_booking_history_model.dart';
+import '../models/response_models/get_session_detail_model.dart';
 import '../models/response_models/get_trainer_doc_status_model.dart';
 import '../models/response_models/profile_detail_model.dart';
 import 'api_manager.dart';
@@ -495,13 +496,10 @@ class CallAPI {
     }
   }
   /// GET BOOKING HISTORY
-  static Future<GetBookingHistoryModel> getBookingHistory({
-    required String id,
-    required String bookingStatus,
-  }) async {
+  static Future<GetBookingHistoryModel> getBookingHistory({required String id, required String bookingStatus,}) async {
     try {
       String endPoint = Endpoints.epGetBookingHistory;
-      String fullUrl = "$endPoint?bookingStatus=$bookingStatus&userId=$id";
+      String fullUrl = "$endPoint?bookingStatus=$bookingStatus&trainerId=$id";
       Map<String, dynamic> json = await APIManager().getAllCall(endPoint: fullUrl);
       GetBookingHistoryModel responseModel = GetBookingHistoryModel.fromJson(json);
       if (responseModel.status == 200) {
@@ -514,6 +512,53 @@ class CallAPI {
       log(e.toString());
       log(st.toString());
       return GetBookingHistoryModel(status: 500); // Return an error status
+    }
+  }
+  /// GET BOOKING DETAILS
+  static Future<SessionBookingDetailModel> getBookingDetails({required String id}) async {
+    try {
+      String endPoint = Endpoints.epGetBookingSessionDetails;
+      String fullUrl = "$endPoint?id=$id";
+      Map<String, dynamic> json = await APIManager().getAllCall(endPoint: fullUrl);
+      SessionBookingDetailModel responseModel = SessionBookingDetailModel.fromJson(json);
+      if (responseModel.status == 200) {
+        log("CALLING_ENDPOINT: $fullUrl ,RESPONSE:  $json");
+        return responseModel;
+      } else {
+        throw Exception("Error: ${responseModel.status}");
+      }
+    } catch (e, st) {
+      log(e.toString());
+      log(st.toString());
+      return SessionBookingDetailModel(status: 500); // Return an error status
+    }
+  }
+  /// POST REVIEW USER
+  static Future<SessionStartModel> sessionReviewUser({required var request}) async {
+    SessionStartModel result = SessionStartModel();
+    try {
+      Map<dynamic, dynamic> json = await APIManager().postAPICall(
+        endpoint: Endpoints.epPostReviewUser,
+        request: request,
+      );
+
+      SessionStartModel responseModel = SessionStartModel.fromJson(json);
+
+      if (responseModel.status == 200) {
+        result = responseModel;
+        printResult(
+            screenName: 'API CALL',
+            msg: "CALLING ENDPOINTS ${Endpoints.epLogin}, RESULT:$json");
+
+        return result;
+      } else {
+        result = responseModel;
+        return result;
+      }
+    } on Exception catch (e, st) {
+      printResult(
+          screenName: 'API CALL', msg: "", error: e.toString(), stackTrace: st);
+      return result;
     }
   }
 

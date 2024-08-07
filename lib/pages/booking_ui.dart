@@ -135,7 +135,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                           child:
 
                           FutureBuilder(
-                              future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"cancelled" ),
+                              future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"pending" ),
                               builder: (BuildContext context, snapshot) {
                                 if (snapshot.connectionState == ConnectionState.waiting) {
                                   return SizedBox(
@@ -151,7 +151,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                 }else{
 
                                   return
-                                    snapshot.data!.result!.isEmpty ?
+                                    snapshot.data!.result ==  null ?
                                     SizedBox(
                                       height: Get.height * .7,
                                       child: const Center(
@@ -161,7 +161,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                     SizedBox(
                                       height: Get.height * .68,
                                       child: ListView.builder(
-                                          itemCount: 10,
+                                          itemCount: snapshot.data!.result!.length,
                                           itemBuilder: (context, index) {
                                             return Column(
                                               children: [
@@ -287,7 +287,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                           },
                           child:
                           FutureBuilder(
-                              future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"cancelled" ),
+                              future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"inprogress" ),
                               builder: (BuildContext context, snapshot) {
                                 if (snapshot.connectionState == ConnectionState.waiting) {
                                   return SizedBox(
@@ -303,7 +303,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                 }else{
 
                                   return
-                                    snapshot.data!.result!.isEmpty ?
+                                    snapshot.data!.result == null ?
                                     SizedBox(
                                       height: Get.height * .7,
                                       child: const Center(
@@ -313,7 +313,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                     SizedBox(
                                       height: Get.height * .68,
                                       child: ListView.builder(
-                                          itemCount: 10,
+                                          itemCount: snapshot.data!.result!.length,
                                           itemBuilder: (context, index) {
                                             return Column(
                                               children: [
@@ -439,7 +439,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                           },
                           child:
                           FutureBuilder(
-                              future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"cancelled" ),
+                              future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"scheduled" ),
                               builder: (BuildContext context, snapshot) {
                                 if (snapshot.connectionState == ConnectionState.waiting) {
                                   return SizedBox(
@@ -465,7 +465,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                     SizedBox(
                                       height: Get.height * .68,
                                       child: ListView.builder(
-                                          itemCount: 10,
+                                          itemCount: snapshot.data!.result!.length,
                                           itemBuilder: (context, index) {
                                             return Column(
                                               children: [
@@ -614,7 +614,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                     SizedBox(
                                       height: Get.height * .68,
                                       child: ListView.builder(
-                                          itemCount: 10,
+                                          itemCount: snapshot.data!.result!.length,
                                           itemBuilder: (context, index) {
                                             return Column(
                                               children: [

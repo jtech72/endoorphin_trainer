@@ -73,7 +73,8 @@ class DocumentUI extends StatelessWidget {
                   future:controller.onRefresh(),
                   builder: (BuildContext context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return SizedBox(
+                      return
+                        SizedBox(
                         height: Get.height * .7,
                         child: const Center(
                           child: CircularProgressIndicator(),

@@ -55,22 +55,22 @@ class SessionRunningController extends GetxController {
   void onInit() async {
     sessionIds = Get.arguments;
     await initSocket();
-    socket.on('message', (data) {
-      log('session running: $data');
-      if (data != null && data['scheduletime'] != null) {
-        int scheduleTime = data['scheduletime'];
-        updateScheduleTime(scheduleTime);
-      }
-    });
-    socket.on('sessionCompleted', (data) {
-
-    });
-    log(sessionIds.toString());
+    // socket.on('message', (data) {
+    //   log('session running: $data');
+    //   if (data != null && data['scheduletime'] != null) {
+    //     int scheduleTime = data['scheduletime'];
+    //     updateScheduleTime(scheduleTime);
+    //   }
+    // });
+    // socket.on('sessionCompleted', (data) {
+    // Get.toNamed(AppRoutes.sessionComplete);
+    // });
+    // log(sessionIds.toString());
     super.onInit();
   }
   @override
   void onReady() {
-    startTimer(3600);
+    startTimer(60);
     super.onReady();
   }
   @override

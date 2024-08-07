@@ -10,14 +10,14 @@ class GetBookingHistoryModel {
     if (json['result'] != null) {
       result = <Result>[];
       json['result'].forEach((v) {
-        result!.add(new Result.fromJson(v));
+        result!.add(Result.fromJson(v));
       });
     }
     status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['message'] = this.message;
     if (this.result != null) {
       data['result'] = this.result!.map((v) => v.toJson()).toList();
@@ -35,8 +35,8 @@ class Result {
   int? bookingAmount;
   String? categoryName;
   int? sessionTime;
-  Null? startSession;
-  Null? endSession;
+  String? startSession;
+  String? endSession;
   Null? totalTimePeriod;
   String? bookingStatus;
   Null? bookingRemark;
@@ -50,12 +50,12 @@ class Result {
   String? userName;
   bool? trainerOnTheWay;
   Null? scheduleDate;
-  Null? scheduletime;
+  String? scheduletime;
   Null? paymentType;
   int? categoryId;
+  bool? pinStatus;
   String? createdAt;
   String? updatedAt;
-  Category? category;
 
   Result(
       {this.id,
@@ -83,9 +83,9 @@ class Result {
         this.scheduletime,
         this.paymentType,
         this.categoryId,
+        this.pinStatus,
         this.createdAt,
-        this.updatedAt,
-        this.category});
+        this.updatedAt});
 
   Result.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -113,15 +113,13 @@ class Result {
     scheduletime = json['scheduletime'];
     paymentType = json['paymentType'];
     categoryId = json['categoryId'];
+    pinStatus = json['pinStatus'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
-    category = json['category'] != null
-        ? new Category.fromJson(json['category'])
-        : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
     data['userId'] = this.userId;
     data['trainerId'] = this.trainerId;
@@ -147,62 +145,7 @@ class Result {
     data['scheduletime'] = this.scheduletime;
     data['paymentType'] = this.paymentType;
     data['categoryId'] = this.categoryId;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    if (this.category != null) {
-      data['category'] = this.category!.toJson();
-    }
-    return data;
-  }
-}
-
-class Category {
-  int? id;
-  String? name;
-  String? price;
-  String? image;
-  String? description;
-  bool? status;
-  String? logo;
-  String? durations;
-  String? createdAt;
-  String? updatedAt;
-
-  Category(
-      {this.id,
-        this.name,
-        this.price,
-        this.image,
-        this.description,
-        this.status,
-        this.logo,
-        this.durations,
-        this.createdAt,
-        this.updatedAt});
-
-  Category.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    price = json['price'];
-    image = json['image'];
-    description = json['description'];
-    status = json['status'];
-    logo = json['logo'];
-    durations = json['durations'];
-    createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['price'] = this.price;
-    data['image'] = this.image;
-    data['description'] = this.description;
-    data['status'] = this.status;
-    data['logo'] = this.logo;
-    data['durations'] = this.durations;
+    data['pinStatus'] = this.pinStatus;
     data['createdAt'] = this.createdAt;
     data['updatedAt'] = this.updatedAt;
     return data;

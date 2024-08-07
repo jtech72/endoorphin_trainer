@@ -418,15 +418,18 @@ class BookingRequestUi extends StatelessWidget {
                                   children: [
                                     Transform.translate(
                                         offset: const Offset(0, 25),
-                                        child: Text(
-                                          '4\nmin',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelMedium!
-                                              .copyWith(
-                                                  fontWeight: FontWeight.w500,
-                                                  color: AppColors.Black2),
-                                          textAlign: TextAlign.center,
+                                        child: SizedBox(
+                                          width: 23,
+                                          child: Text(
+                                            controller.totalTIme.value.toString(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelMedium!
+                                                .copyWith(
+                                                    fontWeight: FontWeight.w500,
+                                                    color: AppColors.Black2),
+                                            textAlign: TextAlign.center,
+                                          ),
                                         )),
                                     Column(
                                       children: [
