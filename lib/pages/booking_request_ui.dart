@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import '../utils/exports.dart';
@@ -116,17 +117,34 @@ class BookingRequestUi extends StatelessWidget {
                                   fontSize: 25, color: AppColors.black),
                             )))),
                 Positioned(
-                    left: Get.width * 0.041,
-                    top: Get.height * 0.061,
-                    child: IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: const Icon(
-                          Icons.arrow_back_ios,
-                          size: 18,
-                          color: Colors.white,
-                        )))
+                  top: Get.height * .43,
+                  left: Get.width * .2,
+                  child: Container(
+                    height: 35,
+                    width: 251,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: AppColors.blackShade
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Time Remaining to Accept this Booking',style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                  ),
+                )
+                // Positioned(
+                //     left: Get.width * 0.041,
+                //     top: Get.height * 0.061,
+                //     child: IconButton(
+                //         onPressed: () {
+                //           Get.back();
+                //         },
+                //         icon: const Icon(
+                //           Icons.arrow_back_ios,
+                //           size: 18,
+                //           color: Colors.white,
+                //         )))
               ],
             ),
           ),

@@ -213,69 +213,12 @@ class HomeUi extends StatelessWidget {
                               if (controller.selectedIndex.value == 0) {
                                 Get.toNamed(AppRoutes.earning);
                               } else if (controller.selectedIndex.value == 1) {
-                                Navigator.pushReplacement(
-                                  context,
-                                  PageRouteBuilder(
-                                    pageBuilder: (context, animation1, animation2) => const BookingUi(initialIndex: 2),
-                                    transitionDuration: const Duration(milliseconds: 600),
-                                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                      const begin = Offset(1.0, 0.0);
-                                      const end = Offset.zero;
-                                      const curve = Curves.ease;
-
-                                      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-                                      var offsetAnimation = animation.drive(tween);
-
-                                      return SlideTransition(
-                                        position: offsetAnimation,
-                                        child: child,
-                                      );
-                                    },
-                                  ),
-                                );
+                                Get.toNamed(AppRoutes.booking);
 
                               } else if (controller.selectedIndex.value == 2) {
-                                Navigator.pushReplacement(
-                                  context,
-                                  PageRouteBuilder(
-                                    pageBuilder: (context, animation1, animation2) => const BookingUi(initialIndex: 2),
-                                    transitionDuration: const Duration(milliseconds: 600),
-                                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                      const begin = Offset(1.0, 0.0);
-                                      const end = Offset.zero;
-                                      const curve = Curves.ease;
-
-                                      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-                                      var offsetAnimation = animation.drive(tween);
-
-                                      return SlideTransition(
-                                        position: offsetAnimation,
-                                        child: child,
-                                      );
-                                    },
-                                  ),
-                                );
+                                Get.toNamed(AppRoutes.booking);
                               } else if (controller.selectedIndex.value == 3) {
-                                Navigator.pushReplacement(
-                                  context,
-                                  PageRouteBuilder(
-                                    pageBuilder: (context, animation1, animation2) => const BookingUi(initialIndex: 0),
-                                    transitionDuration: const Duration(milliseconds: 600),
-                                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                      const begin = Offset(1.0, 0.0);
-                                      const end = Offset.zero;
-                                      const curve = Curves.ease;
-
-                                      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-                                      var offsetAnimation = animation.drive(tween);
-
-                                      return SlideTransition(
-                                        position: offsetAnimation,
-                                        child: child,
-                                      );
-                                    },
-                                  ),
-                                );
+                                Get.toNamed(AppRoutes.booking);
                               } else {
                                 Get.toNamed(AppRoutes.bookingdetails);
                               }
@@ -343,6 +286,5 @@ class HomeUi extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }
