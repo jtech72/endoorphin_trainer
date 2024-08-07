@@ -501,7 +501,7 @@ class CallAPI {
   }) async {
     try {
       String endPoint = Endpoints.epGetBookingHistory;
-      String fullUrl = "$endPoint?bookingStatus=$bookingStatus&userId=$id";
+      String fullUrl = "$endPoint?bookingStatus=$bookingStatus&trainerId=$id";
       Map<String, dynamic> json = await APIManager().getAllCall(endPoint: fullUrl);
       GetBookingHistoryModel responseModel = GetBookingHistoryModel.fromJson(json);
       if (responseModel.status == 200) {

@@ -398,7 +398,7 @@ class BookingRequestController extends GetxController {
 
       await Future.delayed(Duration(seconds: 2));
 
-      if (socketData != null) {
+      if (socketData["message"] != "Your request pin is not correct. Please try again.") {
         dismissLoader();
         Get.toNamed(AppRoutes.sessionRunning, arguments: {
           "id": bookingDetails!.result!.bookingId.toString(),

@@ -39,7 +39,7 @@ class Endpoints{
   /// GET SESSION DETAILS AND VERIFY PIN
   static const String epGetSessionDetails="booking/verfiySeesionPinForTrainer";
   /// BOOKING HISTORY
-  static const String epGetBookingHistory="booking/getAllBookingForUsers";
+  static const String epGetBookingHistory="booking/getAllBookingForTrainer";
 
 
 }
