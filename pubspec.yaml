@@ -52,7 +52,7 @@ dependencies:
   stories_for_flutter: ^1.2.1
   location:
   image_picker:
-#  syncfusion_flutter_core:
+#  syncfusion_flutter_charts:
   flutter_page_view_indicator:
   multi_select_flutter: ^4.0.0
   dotted_border: ^2.1.0

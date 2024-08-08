@@ -3,7 +3,6 @@ import 'package:endoorphin_trainer/controllers/earning_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 // import 'package:syncfusion_flutter_charts/charts.dart';
-// import 'package:syncfusion_flutter_charts/charts.dart';
 class EarningUi extends StatelessWidget {
   const EarningUi({super.key});
 

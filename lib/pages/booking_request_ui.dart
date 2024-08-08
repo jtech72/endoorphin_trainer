@@ -101,38 +101,38 @@ class BookingRequestUi extends StatelessWidget {
                     ? const SizedBox.shrink()
                     : Positioned(
                         top: Get.height * .3,
-                        left: Get.width * .27,
-                        child: Obx(() => Container(
-                            height: 100,
-                            width: 200,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    color: AppColors.yellow, width: 6),
-                                color: AppColors.white.withOpacity(0.8)),
-                            child: Text(
-                              controller.time.value.toString(),
-                              style: const TextStyle(
-                                  fontSize: 25, color: AppColors.black),
-                            )))),
-                Positioned(
-                  top: Get.height * .43,
-                  left: Get.width * .2,
-                  child: Container(
-                    height: 35,
-                    width: 251,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: AppColors.blackShade
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Time Remaining to Accept this Booking',style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ),
-                )
+                        left: Get.width * .25,
+                        child: Obx(() => Column(
+                          children: [
+                            Container(
+                                height: 100,
+                                width: 200,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                        color: AppColors.yellow, width: 6),
+                                    color: AppColors.white.withOpacity(0.8)),
+                                child: Text(
+                                  controller.time.value.toString(),
+                                  style: const TextStyle(
+                                      fontSize: 25, color: AppColors.black),
+                                )),paddingOnly(bottom: Get.height*0.03),
+                            Container(
+                              height: 35,
+                              width: 251,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: AppColors.blackShade
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'Time Remaining to Accept this Booking',style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w400),
+                                ),
+                              ),
+                            )
+                          ],
+                        ))),
                 // Positioned(
                 //     left: Get.width * 0.041,
                 //     top: Get.height * 0.061,
@@ -230,12 +230,15 @@ class BookingRequestUi extends StatelessWidget {
                                 size: 15,
                                 color: AppColors.impgrey,
                               ).paddingOnly(right: 20),
-                              Text(
-                                "${controller.bookingDetails?.result?.userHouseNo ?? ""} ${controller.bookingDetails?.result?.userStreetArea ?? ""} ${controller.bookingDetails?.result?.userCity ?? ""} ",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelMedium!
-                                    .copyWith(fontWeight: FontWeight.w500),
+                              Container(
+                                width: Get.width*0.7,
+                                child: Text(
+                                  "${controller.bookingDetails?.result?.userHouseNo ?? ""} ${controller.bookingDetails?.result?.userStreetArea ?? ""} ${controller.bookingDetails?.result?.userCity ?? ""} ",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelMedium!
+                                      .copyWith(fontWeight: FontWeight.w500,color: Colors.white),
+                                ),
                               )
                             ],
                           )
