@@ -18,11 +18,11 @@ class UploadImagesController extends GetxController {
 
   Future<void> openFilePicker(bool isFrontImage) async {
     try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles();
+      FilePickerResult? result = await FilePicker.platform.pickFiles( type: FileType.custom,
+        allowedExtensions: ['jpg', 'jpeg', 'png','heic'],);
 
       if (result != null) {
-        PlatformFile pickedFile = result.files.first; // Get the first file
-
+        PlatformFile pickedFile = result.files.first;
         if (pickedFile.path != null) {
           File image = File(pickedFile.path!);
           if (isFrontImage) {

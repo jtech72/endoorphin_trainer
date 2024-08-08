@@ -111,6 +111,7 @@ class BioUi extends StatelessWidget {
                                 LengthLimitingTextInputFormatter(30),
                                 NoLeadingSpaceFormatter(),
                                 CapitalizeFirstLetterFormatter(),
+                                FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]"))
                               ],
                               enableInteractiveSelection: true,
                               style: Theme.of(context).textTheme.labelMedium,
@@ -233,6 +234,7 @@ class BioUi extends StatelessWidget {
                                 NoLeadingSpaceFormatter(),
                                 LengthLimitingTextInputFormatter(250),
                                 CapitalizeFirstLetterFormatter(),
+                                EmojiFilteringTextInputFormatter()
 
                               ],
                               controller: controller.expertiseController,
@@ -291,7 +293,8 @@ class BioUi extends StatelessWidget {
                               controller: controller.funFactsController,
                               inputFormatters: [
                                 NoLeadingSpaceFormatter(),
-                                CapitalizeFirstLetterFormatter()
+                                CapitalizeFirstLetterFormatter(),
+                                EmojiFilteringTextInputFormatter()
                               ],
                               enableInteractiveSelection: true,
                               style: Theme.of(context).textTheme.labelMedium,
@@ -349,7 +352,8 @@ class BioUi extends StatelessWidget {
                               controller: controller.motivationalQuoteController,
                               inputFormatters: [
                                 NoLeadingSpaceFormatter(),
-                                CapitalizeFirstLetterFormatter()
+                                CapitalizeFirstLetterFormatter(),
+                                EmojiFilteringTextInputFormatter()
                               ],
                               enableInteractiveSelection: true,
                               style: Theme.of(context).textTheme.labelMedium,
@@ -395,9 +399,10 @@ class BioUi extends StatelessWidget {
                                Text(
                                 'Mention Bio',
                                 style: Theme.of(context).textTheme.labelLarge!.copyWith(fontSize: 14,fontWeight: FontWeight.w500,),
-                              ).paddingOnly(bottom: 12,),
+                              ).paddingOnly(top: 15,bottom: 8),
+                              Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
                             ],
-                          ).paddingOnly(top: 20),
+                          ).paddingOnly(),
                           Container(
                             height: Get.height * 0.15,
                             width: Get.width,
@@ -411,7 +416,8 @@ class BioUi extends StatelessWidget {
                               inputFormatters: [
                                 NoLeadingSpaceFormatter(),
                                 LengthLimitingTextInputFormatter(100),
-                                CapitalizeFirstLetterFormatter(), // Add the custom formatter here
+                                CapitalizeFirstLetterFormatter(),
+                                EmojiFilteringTextInputFormatter()// Add the custom formatter here
                               ],
                               keyboardType: TextInputType.text,
                               minLines: 1,

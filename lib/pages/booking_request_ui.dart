@@ -2,22 +2,21 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 import '../utils/exports.dart';
-
 class BookingRequestUi extends StatelessWidget {
   const BookingRequestUi({super.key});
 
   @override
   Widget build(BuildContext context) {
     LocationController locationController = Get.put(LocationController());
-    BookingRequestController controller = Get.find();
+    BookingRequestController controller = Get.put(BookingRequestController());
     return Scaffold(
         body: Column(
       children: [
         Flexible(
           child: Obx(
             () => Stack(
+              alignment: Alignment.center,
               children: [
                 SizedBox(
                   child: locationController.currentLocation.value == null
@@ -99,40 +98,41 @@ class BookingRequestUi extends StatelessWidget {
                         locationController.currentLocation.value == null ||
                         controller.timerIsVisible.value == false
                     ? const SizedBox.shrink()
-                    : Positioned(
-                        top: Get.height * .3,
-                        left: Get.width * .25,
-                        child: Obx(() => Column(
-                          children: [
-                            Container(
-                                height: 100,
-                                width: 200,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                        color: AppColors.yellow, width: 6),
-                                    color: AppColors.white.withOpacity(0.8)),
-                                child: Text(
-                                  controller.time.value.toString(),
-                                  style: const TextStyle(
-                                      fontSize: 25, color: AppColors.black),
-                                )),paddingOnly(bottom: Get.height*0.03),
-                            Container(
-                              height: 35,
-                              width: 251,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: AppColors.blackShade
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Time Remaining to Accept this Booking',style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w400),
-                                ),
-                              ),
-                            )
-                          ],
-                        ))),
+                    : SizedBox(
+                      height: 200,
+                      child: Column(
+                                                children: [
+                      Container(
+                          height: 100,
+                          width: 200,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  color: AppColors.yellow, width: 6),
+                              color: AppColors.white.withOpacity(0.8)),
+                          child: Text(
+                            controller.time.value.toString(),
+                            style: const TextStyle(
+                                fontSize: 25, color: AppColors.black),
+                          )),
+                      Container(
+                        height: 35,
+                        width: 251,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: AppColors.blackShade
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Time Remaining to Accept this Booking',style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ).paddingOnly(top: 10)
+                                                ],
+                                              ),
+                    )
+                ,
                 // Positioned(
                 //     left: Get.width * 0.041,
                 //     top: Get.height * 0.061,
