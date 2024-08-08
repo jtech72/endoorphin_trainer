@@ -1,7 +1,9 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:intl/intl.dart';
 class BookingController extends GetxController{
-  String formatDateTime(String date, String time) {
+  var _selectedDates = <DateTime?>[].obs;
+
+String formatDateTime(String date, String time) {
     try {
       // Parse the date and time strings
       DateTime dateTime = DateFormat("yyyy-MM-dd").parse(date); // Adjust the format based on your date string

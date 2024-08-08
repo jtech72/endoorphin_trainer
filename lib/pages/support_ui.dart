@@ -91,7 +91,8 @@ class SupportUI extends StatelessWidget {
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(30),
                       NoLeadingSpaceFormatter(),
-                      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))                      ],
+                      EmojiFilteringTextInputFormatter()
+                    ],
                     style: Theme.of(context)
                         .textTheme
                         .labelMedium!
@@ -134,11 +135,11 @@ class SupportUI extends StatelessWidget {
                       border: Border.all(color: AppColors.grey3),
                       borderRadius: BorderRadius.circular(5)),
                   child: TextField(
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.number,
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(30),
                       NoLeadingSpaceFormatter(),
-                      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))                      ],
+                    ],
                     style: Theme.of(context)
                         .textTheme
                         .labelMedium!
@@ -189,7 +190,10 @@ class SupportUI extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5)),
                   child: TextField(
                     keyboardType: TextInputType.text,
-                    inputFormatters: [NoLeadingSpaceFormatter()],
+                    inputFormatters: [
+                      NoLeadingSpaceFormatter(),
+                      EmojiFilteringTextInputFormatter()
+                    ],
                     maxLines: 10,
                     style: Theme.of(context)
                         .textTheme

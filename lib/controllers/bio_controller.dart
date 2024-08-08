@@ -75,7 +75,9 @@ class BioController extends GetxController {
       showSnackBar("Please select a profile image");
     } else if (nicknameController.text.isEmpty ||
         expertiseController.text.isEmpty ||
-        experienceController.text.isEmpty) {
+        experienceController.text.isEmpty ||
+        bioController.text.isEmpty
+    ) {
       showSnackBar("Please fill all the mandatory fields");
     } else {
       showLoader();

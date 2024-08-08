@@ -270,6 +270,7 @@ class RegistrationUi extends StatelessWidget {
                               inputFormatters: [
                                 LengthLimitingTextInputFormatter(64),
                                 FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                                EmojiFilteringTextInputFormatter()
                               ],
                               enableInteractiveSelection: true,
                               style: Theme.of(context).textTheme.labelMedium,
@@ -344,6 +345,7 @@ class RegistrationUi extends StatelessWidget {
                                 inputFormatters: [
                                   LengthLimitingTextInputFormatter(64),
                                   FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                                  EmojiFilteringTextInputFormatter()
                                 ],
                                 obscureText: controller.obscureText.value,
                                 obscuringCharacter: '*',
@@ -442,6 +444,7 @@ class RegistrationUi extends StatelessWidget {
                                 inputFormatters: [
                                   LengthLimitingTextInputFormatter(64),
                                   FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                                  EmojiFilteringTextInputFormatter()
                                 ],
                                 obscureText: controller.obscureText1.value,
                                 obscuringCharacter: '*',

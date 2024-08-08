@@ -106,12 +106,15 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Center(
-                                child: Text(
-                                  _selectedDates.isNotEmpty
-                                      ? _selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')
-                                      : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
-                                  style: const TextStyle(color: Colors.white, fontSize: 10),
-                                ),
+                                 child:  Obx(() {
+                                   return Text(
+                                     _selectedDates.isNotEmpty
+                                         ? _selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')
+                                         : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
+                                     style: const TextStyle(color: Colors.white, fontSize: 10),
+                                   );
+                                 }),
+
                               ),
                             ),
                             _buildCalendarDialogButton(),
@@ -258,12 +261,15 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Center(
-                                child: Text(
-                                  _selectedDates.isNotEmpty
-                                      ? _selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')
-                                      : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
-                                  style: const TextStyle(color: Colors.white, fontSize: 10),
-                                ),
+                                child: Obx(() {
+                                  return Text(
+                                    _selectedDates.isNotEmpty
+                                        ? _selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')
+                                        : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
+                                    style: const TextStyle(color: Colors.white, fontSize: 10),
+                                  );
+                                }),
+
                               ),
                             ),
                             _buildCalendarDialogButton(),
@@ -410,12 +416,15 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Center(
-                                child: Text(
-                                  _selectedDates.isNotEmpty
-                                      ? _selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')
-                                      : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
-                                  style: const TextStyle(color: Colors.white, fontSize: 10),
-                                ),
+                                child: Obx(() {
+                                  return Text(
+                                    _selectedDates.isNotEmpty
+                                        ? _selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')
+                                        : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
+                                    style: const TextStyle(color: Colors.white, fontSize: 10),
+                                  );
+                                }),
+
                               ),
                             ),
                             _buildCalendarDialogButton(),
@@ -560,12 +569,15 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Center(
-                                child: Text(
-                                  _selectedDates.isNotEmpty
-                                      ? _selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')
-                                      : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
-                                  style: const TextStyle(color: Colors.white, fontSize: 10),
-                                ),
+                                child: Obx(() {
+                                  return Text(
+                                    _selectedDates.isNotEmpty
+                                        ? _selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')
+                                        : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
+                                    style: const TextStyle(color: Colors.white, fontSize: 10),
+                                  );
+                                }),
+
                               ),
                             ),
                             _buildCalendarDialogButton(),
@@ -857,15 +869,10 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                value: _dialogCalendarPickerValue,
                dialogBackgroundColor: AppColors.greyButton,
              );
-             if (values != null) {
-               // ignore: avoid_print
-               print(_getValueText(
-                 config.calendarType,
-                 values,
-               ));
-                 _dialogCalendarPickerValue = values;
-                 _selectedDates.value = values;
 
+             if (values != null) {
+               // Update the reactive state
+               _selectedDates.value = values;
              }
            },
            icon:const Icon(Icons.calendar_month, size: 18,color: AppColors.yellow,)),
