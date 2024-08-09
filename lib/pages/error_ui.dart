@@ -57,7 +57,7 @@ class ErrorUi extends StatelessWidget {
                         fontFamily: 'Montserrat'),
                   ),
                   onTap: () {
-
+Get.back();
                   })
             ],
           ).paddingOnly(left: 20,right: 20),

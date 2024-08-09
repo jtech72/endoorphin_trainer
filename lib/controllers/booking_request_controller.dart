@@ -470,7 +470,12 @@ class BookingRequestController extends GetxController {
       log('Exception caught: $e');
     }
   }
-
+@override
+  void dispose() {
+    socket.disconnected;
+    // TODO: implement dispose
+    super.dispose();
+  }
   @override
   void onInit() async {
     notificationData = Get.arguments ?? {};

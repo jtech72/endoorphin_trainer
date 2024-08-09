@@ -9,7 +9,6 @@ import '../custom_Widgets/common_widgets.dart';
 
 class SessionRunningController extends GetxController {
   PanelController panelController = PanelController();
-  late IO.Socket socket;
   var scheduleTime = 0.obs;
   Timer? _timer;
   int remainingSeconds = 60;
