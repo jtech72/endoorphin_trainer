@@ -136,6 +136,7 @@ class NotificationServices {
 
       // Extract specific information
       final name = data['Name'] ?? 'Unknown';
+      final lastName = data['lastName'] ?? 'Unknown';
       final address = data['Address'] ?? 'Unknown';
 
       // Show the notification with cleaned up data
@@ -143,7 +144,7 @@ class NotificationServices {
         flutterLocalNotificationsPlugin.show(
           0,
           message.notification!.title.toString(),
-          "Name: $name, Address: $address",
+          "Name: $name $lastName, Address: $address",
           notificationDetails,
         );
       });
@@ -153,7 +154,7 @@ class NotificationServices {
   }
   void handleNotification(RemoteMessage message) {
     final notificationBody = message.notification?.body;
-
+;
     if (notificationBody != null) {
       log("NOTIFICATION DATA: $notificationBody");
 
@@ -175,6 +176,7 @@ class NotificationServices {
         }
 
         final name = data['Name'] ?? '';
+        final lastName = data['lastName'] ?? '';
         final address = data['Address'] ?? '';
         final contact = data['Contact'] ?? '';
         final userId = data['userId'] ?? '';
@@ -185,6 +187,7 @@ class NotificationServices {
 
         Get.toNamed(AppRoutes.bookingrequest, arguments: {
           "name": name,
+          "lastName": lastName,
           "address": address,
           "contact": contact,
           "userId": userId,
