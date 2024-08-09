@@ -24,7 +24,7 @@ class GetBankDetailModel {
 }
 
 class Result {
-  dynamic? id;
+  dynamic id;
   String? ifscCode;
   String? bankName;
   String? branchName;
