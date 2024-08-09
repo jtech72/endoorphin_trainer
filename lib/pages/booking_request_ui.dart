@@ -152,7 +152,7 @@ class BookingRequestUi extends StatelessWidget {
         Obx(
     ()=> SizedBox(
             height: controller.selectedIndex.value == 1
-                ? Get.height * .52
+                ? Get.height * .55
                 : controller.selectedIndex.value == 2
                     ? Get.height * .3
                     : Get.height * .38,
@@ -422,7 +422,7 @@ class BookingRequestUi extends StatelessWidget {
                                     Transform.translate(
                                         offset: const Offset(0, 25),
                                         child: SizedBox(
-                                          width: 23,
+                                          width: 25,
                                           child: Text(
                                             controller.totalTIme.value.toString(),
                                             style: Theme.of(context)
@@ -437,7 +437,7 @@ class BookingRequestUi extends StatelessWidget {
                                     Column(
                                       children: [
                                         Container(
-                                          height: Get.height * 0.025,
+                                          height: Get.height * 0.028,
                                           width: Get.width * 0.030,
                                           decoration: BoxDecoration(
                                             color: Colors.white,
@@ -447,6 +447,18 @@ class BookingRequestUi extends StatelessWidget {
                                           ),
                                         ),
                                         Container(
+                                          height: 3,
+                                          width: 2,
+                                          color: AppColors.white,
+                                        ).paddingOnly(top: 3, bottom: 3), Container(
+                                          height: 3,
+                                          width: 2,
+                                          color: AppColors.white,
+                                        ).paddingOnly(top: 3, bottom: 3), Container(
+                                          height: 3,
+                                          width: 2,
+                                          color: AppColors.white,
+                                        ).paddingOnly(top: 3, bottom: 3),Container(
                                           height: 3,
                                           width: 2,
                                           color: AppColors.white,
@@ -494,7 +506,8 @@ class BookingRequestUi extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            "${controller.bookingDetails?.result?.trainerHouseNo ?? ""} ${controller.bookingDetails?.result?.trainerStreetArea ?? ""} ${controller.bookingDetails?.result?.trainerCity ?? ""} ",
+                                            maxLines: 2,
+                                            "${controller.bookingDetails?.result?.trainerddressType ?? ""} ",
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .labelLarge
@@ -519,6 +532,7 @@ class BookingRequestUi extends StatelessWidget {
                                             color: AppColors.grey,
                                           ).paddingOnly(top: 10, bottom: 15),
                                           Text(
+                                            maxLines: 2,
                                             "${controller.bookingDetails?.result?.userHouseNo ?? ""} ${controller.bookingDetails?.result?.userStreetArea ?? ""} ${controller.bookingDetails?.result?.userCity ?? ""}",
                                             style: Theme.of(context)
                                                 .textTheme
