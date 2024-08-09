@@ -1,4 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:endoorphin_trainer/pages/booking_ui.dart';
+import 'package:endoorphin_trainer/pages/home_ui.dart';
 import 'package:endoorphin_trainer/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -146,7 +148,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 Navigator.pushReplacement(
                   context,
                   PageRouteBuilder(
-                    pageBuilder: (context, animation1, animation2) => BottomNavigationBarUI(currentTabIndex: 0),
+                    pageBuilder: (context, animation1, animation2) => HomeUi(),
                     transitionDuration: const Duration(milliseconds: 600),
                     transitionsBuilder: (context, animation, secondaryAnimation, child) {
                       const begin = Offset(1.0, 0.0);
@@ -193,7 +195,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 Navigator.pushReplacement(
                   context,
                   PageRouteBuilder(
-                    pageBuilder: (context, animation1, animation2) => BottomNavigationBarUI(currentTabIndex: 2),
+                    pageBuilder: (context, animation1, animation2) => BookingUi(initialIndex: 1),
                     transitionDuration: const Duration(milliseconds: 600),
                     transitionsBuilder: (context, animation, secondaryAnimation, child) {
                       const begin = Offset(1.0, 0.0);
@@ -322,7 +324,26 @@ class _MyDrawerState extends State<MyDrawer> {
                 setState(() {
                   selectedTile = 5;
                 });
-                Get.back();
+                Navigator.pushReplacement(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation1, animation2) => HomeUi(),
+                    transitionDuration: const Duration(milliseconds: 600),
+                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      const begin = Offset(1.0, 0.0);
+                      const end = Offset.zero;
+                      const curve = Curves.ease;
+
+                      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                      var offsetAnimation = animation.drive(tween);
+
+                      return SlideTransition(
+                        position: offsetAnimation,
+                        child: child,
+                      );
+                    },
+                  ),
+                );
               },
             ).paddingOnly(left: Get.width*0.05),
           ),
@@ -349,7 +370,26 @@ class _MyDrawerState extends State<MyDrawer> {
                 setState(() {
                   selectedTile = 6;
                 });
-                Get.back();
+                Navigator.pushReplacement(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation1, animation2) => HomeUi(),
+                    transitionDuration: const Duration(milliseconds: 600),
+                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      const begin = Offset(1.0, 0.0);
+                      const end = Offset.zero;
+                      const curve = Curves.ease;
+
+                      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                      var offsetAnimation = animation.drive(tween);
+
+                      return SlideTransition(
+                        position: offsetAnimation,
+                        child: child,
+                      );
+                    },
+                  ),
+                );
                 // Add functionality here
 
               },
@@ -378,7 +418,26 @@ class _MyDrawerState extends State<MyDrawer> {
                 setState(() {
                   selectedTile = 7;
                 });
-                Get.back();
+                Navigator.pushReplacement(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation1, animation2) => HomeUi(),
+                    transitionDuration: const Duration(milliseconds: 600),
+                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      const begin = Offset(1.0, 0.0);
+                      const end = Offset.zero;
+                      const curve = Curves.ease;
+
+                      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                      var offsetAnimation = animation.drive(tween);
+
+                      return SlideTransition(
+                        position: offsetAnimation,
+                        child: child,
+                      );
+                    },
+                  ),
+                );
                 // Add functionality here
 
               },
@@ -389,64 +448,5 @@ class _MyDrawerState extends State<MyDrawer> {
         ],
       ),
     );
-    // return Drawer(
-    //
-    //   backgroundColor: AppColors.blackShade,
-    //   child: ListView(
-    //     padding: EdgeInsets.zero,
-    //     children: [
-    //
-    //       Row(
-    //           children: [
-    //               CircleAvatar(
-    //                 radius: 30,
-    //                 backgroundImage: AssetImage(ImagesPaths.profilePic),
-    //               ),
-    //             SizedBox(width: Get.width*0.06,),
-    //             Column(
-    //               mainAxisAlignment: MainAxisAlignment.center,
-    //               crossAxisAlignment: CrossAxisAlignment.start,
-    //               children: [
-    //                 Text('John Doe',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.lightGrey1),),
-    //                 Text('+91 000-111-5555',style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.lightGrey1),),
-    //               ],
-    //             ),
-    //           ],
-    //
-    //         ).paddingOnly(top: Get.height*0.05,left: 20,bottom: Get.height*0.05),
-    //       for (int i = 0; i < drawerItems.length; i++)
-    //         ListTile(
-    //           selected: selectedTileIndex == i,
-    //           selectedTileColor: AppColors.yellow,
-    //           tileColor: selectedTileIndex == i ? AppColors.yellow : null,
-    //           iconColor: selectedTileIndex == i ? Colors.white : AppColors.impgrey,
-    //           title: GestureDetector(
-    //             onTap: () {
-    //               setState(() {
-    //                 selectedTileIndex = selectedTileIndex == i ? -1 : i;
-    //               });
-    //               if (selectedTileIndex == i) {
-    //                 Get.toNamed(drawerItems[i].route);
-    //               }
-    //             },
-    //             child: Row(
-    //               children: [
-    //                 Image.asset(drawerItems[i].imagePath, scale: 5, color: selectedTileIndex == i ? Colors.white : AppColors.impgrey).paddingOnly(left: Get.width*0.06),
-    //                 SizedBox(width: MediaQuery.of(context).size.width * 0.09),
-    //                 Text(
-    //                   drawerItems[i].title,
-    //                   style: Theme.of(context).textTheme.titleLarge?.copyWith(color: selectedTileIndex == i ? Colors.black : AppColors.impgrey,
-    //                   ),
-    //                 ),
-    //               ],
-    //             ),
-    //           ),
-    //         ),
-    //     ],
-    //   ),
-    // );
   }
 }
-
-
-//

@@ -104,7 +104,7 @@ GetPage(
         binding: TrainerPassportBinding()),
     GetPage(
         name: AppRoutes.bookingrequest,        transitionDuration: const Duration(milliseconds: 800),
-        page: () => const BookingRequsetUi(),
+        page: () => const BookingRequestUi(),
         binding: BookingRequestBinding()),
     GetPage(
         name: AppRoutes.withdraw,        transitionDuration: const Duration(milliseconds: 800),

@@ -405,7 +405,7 @@ class BankingDetailsUI extends StatelessWidget {
                                               ),
                                               IconButton(
                                                 ////
-                                                icon: const Icon(Icons.keyboard_arrow_down, size: 24, color: AppColors.lightGrey),
+                                                icon: const Icon(Icons.keyboard_arrow_down, size: 30, color: AppColors.lightGrey),
                                                 onPressed: () {
                                                   FocusScope.of(context).unfocus();
                                                   controller.showBottomSheet.value = !controller.showBottomSheet.value;

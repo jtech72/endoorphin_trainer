@@ -1,15 +1,19 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:endoorphin_trainer/services/models/request_models/session_start_model.dart';
 import 'package:endoorphin_trainer/services/models/response_models/get_category_model.dart';
 
 import '../../custom_Widgets/common_widgets.dart';
+import '../models/request_models/booking_accept_model.dart';
 import '../models/request_models/category_document_model.dart';
 import '../models/request_models/forget_password_model.dart';
 import '../models/request_models/login_model.dart';
+import '../models/request_models/post_address_model.dart';
 import '../models/request_models/reset_password_model.dart';
 import '../models/request_models/save_bankdetail_model.dart';
 import '../models/request_models/send_otp_model.dart';
+import '../models/request_models/session_detail_model.dart';
 import '../models/request_models/sign_up_model.dart';
 import '../models/request_models/update_bank_detail_model.dart';
 import '../models/response_models/get_bank_detail.dart';
@@ -383,5 +387,112 @@ class CallAPI {
       return result;
     }
   }
+  /// POST ADDRESS
+  static Future<PostAddressModel> postAddress({required var request}) async {
+    PostAddressModel result = PostAddressModel();
+    try {
+      Map<dynamic, dynamic> json = await APIManager().postAPICall(
+        endpoint: Endpoints.epPostAddress,
+        request: request,
+      );
+
+      PostAddressModel responseModel = PostAddressModel.fromJson(json);
+
+      if (responseModel.status == 200) {
+        result = responseModel;
+        printResult(
+            screenName: 'API CALL',
+            msg: "CALLING ENDPOINTS ${Endpoints.epLogin}, RESULT:$json");
+
+        return result;
+      } else {
+        result = responseModel;
+        return result;
+      }
+    } on Exception catch (e, st) {
+      printResult(
+          screenName: 'API CALL', msg: "", error: e.toString(), stackTrace: st);
+      return result;
+    }
+  }
+  /// BOOKING ACCEPT
+  static Future<BookingAcceptDetailsModel> bookingAccept({required var request}) async {
+    BookingAcceptDetailsModel result = BookingAcceptDetailsModel();
+    try {
+      Map<dynamic, dynamic> json = await APIManager().postAPICall(
+        endpoint: Endpoints.epBookingAccept,
+        request: request,
+      );
+
+      BookingAcceptDetailsModel responseModel = BookingAcceptDetailsModel.fromJson(json);
+
+      if (responseModel.status == 200) {
+        result = responseModel;
+        printResult(
+            screenName: 'API CALL',
+            msg: "CALLING ENDPOINTS ${Endpoints.epLogin}, RESULT:$json");
+
+        return result;
+      } else {
+        result = responseModel;
+        return result;
+      }
+    } on Exception catch (e, st) {
+      printResult(
+          screenName: 'API CALL', msg: "", error: e.toString(), stackTrace: st);
+      return result;
+    }
+  }
+  /// SESSION START
+  static Future<SessionStartModel> sessionStart({required var request}) async {
+    SessionStartModel result = SessionStartModel();
+    try {
+      Map<dynamic, dynamic> json = await APIManager().postAPICall(
+        endpoint: Endpoints.epStartSession,
+        request: request,
+      );
+
+      SessionStartModel responseModel = SessionStartModel.fromJson(json);
+
+      if (responseModel.status == 200) {
+        result = responseModel;
+        printResult(
+            screenName: 'API CALL',
+            msg: "CALLING ENDPOINTS ${Endpoints.epLogin}, RESULT:$json");
+
+        return result;
+      } else {
+        result = responseModel;
+        return result;
+      }
+    } on Exception catch (e, st) {
+      printResult(
+          screenName: 'API CALL', msg: "", error: e.toString(), stackTrace: st);
+      return result;
+    }
+  }
+  /// GET SESSION AND VERIFY PIN
+  static Future<SessionDetailModel> getSessionDetails({
+    required String id,
+    required String pinSession,
+  }) async {
+    try {
+      String endPoint = Endpoints.epGetSessionDetails;
+      String fullUrl = "$endPoint?id=$id&pinSession=$pinSession";
+      Map<String, dynamic> json = await APIManager().getAllCall(endPoint: fullUrl);
+      SessionDetailModel responseModel = SessionDetailModel.fromJson(json);
+      if (responseModel.status == 200) {
+        log("CALLING_ENDPOINT: $fullUrl ,RESPONSE:  $json");
+        return responseModel;
+      } else {
+        throw Exception("Error: ${responseModel.status}");
+      }
+    } catch (e, st) {
+      log(e.toString());
+      log(st.toString());
+      return SessionDetailModel(status: 500); // Return an error status
+    }
+  }
+
 }
 

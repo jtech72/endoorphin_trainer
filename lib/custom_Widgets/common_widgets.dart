@@ -2,12 +2,15 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_strings.dart';
 import '../utils/exports.dart';
-
+import 'dart:convert';
+import 'dart:typed_data';
+import 'package:image_picker/image_picker.dart';
 GetStorage storage=GetStorage();
 
 void printResult({
@@ -161,7 +164,7 @@ Widget buildOption(IconData icon, String label, VoidCallback onTap) {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: const BoxDecoration(
-              color: AppColors.yellow, // assuming AppColors.Yellow is defined somewhere
+              color: AppColors.yellow,
               shape: BoxShape.circle,
             ),
             child: Icon(icon, color: AppColors.Black3),
@@ -178,7 +181,7 @@ Widget buildOption(IconData icon, String label, VoidCallback onTap) {
     ),
   );
 }
-
+//
 class NoLeadingSpaceFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
@@ -188,7 +191,33 @@ class NoLeadingSpaceFormatter extends TextInputFormatter {
     return newValue;
   }
 }
+class CertificateNumberFormatter extends TextInputFormatter {
+  final int maxLength;
 
+  CertificateNumberFormatter(this.maxLength);
+
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    final cleanText = newValue.text.replaceAll('-', '');
+    final truncatedText = cleanText.substring(0, cleanText.length <= maxLength ? cleanText.length : maxLength);
+    final buffer = StringBuffer();
+    int selectionIndex = truncatedText.length;
+    for (int i = 0; i < truncatedText.length; i++) {
+      if (i == 3 || i == 7 || i == 14 || i == 15) {
+        buffer.write('-');
+        if (i < selectionIndex) selectionIndex++;
+      }
+      buffer.write(truncatedText[i]);
+    }
+
+    final formattedText = buffer.toString();
+    return TextEditingValue(
+      text: formattedText,
+      selection: TextSelection.collapsed(offset: selectionIndex),
+    );
+  }
+}
 
 /// UPLOADED DOC CLASS
 class TrainerDocumentStatusCard extends StatelessWidget {
@@ -223,7 +252,6 @@ class TrainerDocumentStatusCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var isFrontImageVisible = true.obs;
-
     return Container(
       width: Get.width,
       decoration: BoxDecoration(
@@ -485,25 +513,14 @@ class TrainerDocumentStatusCard extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void showToast(String message) {
+  Fluttertoast.showToast(
+    msg: message,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.BOTTOM,
+    timeInSecForIosWeb: 1,
+    backgroundColor: AppColors.yellow,
+    textColor: AppColors.black,
+    fontSize: 14.0,
+  );
+}

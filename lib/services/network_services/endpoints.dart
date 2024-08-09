@@ -31,6 +31,14 @@ class Endpoints{
   static const String epForgetPassword="users/forgetPassword";
   /// RESET PASSWORD
   static const String epResetPassword="users/resetPassword";
+/// POST ADDRESS
+  static const String epPostAddress="updateUserAddress";
+  /// BOOKING ACCEPT
+  static const String epBookingAccept="acceptBooking";
+  /// START SESSION
+  static const String epStartSession="booking/trainerOnTheWay";
+  /// GET SESSION DETAILS AND VERIFY PIN
+  static const String epGetSessionDetails="booking/verfiySeesionPinForTrainer";
 
 
 

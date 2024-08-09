@@ -39,7 +39,6 @@ dependencies:
   http:
   country_code_picker: ^3.0.0
   pin_code_fields:
-  animated_bottom_navigation_bar: ^1.3.3
   google_maps_flutter:
   geolocator: ^11.0.0
   sliding_up_panel:
@@ -53,7 +52,6 @@ dependencies:
   stories_for_flutter: ^1.2.1
   location:
   image_picker:
-  slide_to_act:
   syncfusion_flutter_charts: ^25.1.40
   flutter_page_view_indicator:
   multi_select_flutter: ^4.0.0
@@ -73,7 +71,10 @@ dependencies:
   permission_handler:
   file_picker:
   firebase_crashlytics:
+  flutter_polyline_points: ^2.1.0
   firebase_analytics:
+  shimmer: ^3.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

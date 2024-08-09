@@ -66,39 +66,42 @@ Future<void> onSubmitButton(BuildContext context) async {
 }
 onPasswordChanged(BuildContext context){
   showDialog(
+    barrierDismissible: false,
     context: context,
     builder: (BuildContext context) {
-      return AlertDialog(
-
-        backgroundColor: AppColors.blackShade,
-        title: Column(
-          children: [
-            SizedBox(height: Get.height*0.03,),
-            Image.asset(ImagesPaths.cooltick,scale: 4,),
-            SizedBox(
-              height: Get.height*0.02,
-            ),
-            Text('Password Updated',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.yellow),)
-          ],
-        ),
-        content: SizedBox(
-            width: Get.width, // Set width as per your requirement
-            height: Get.height*0.07, // Set height as per your requirement
-            child: Text(
-              'Your Password has been updated successfully.',style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.white),
-              textAlign: TextAlign.center,
-            )),
-        actions: [
-          Center(
-            child: InkButton(
-                child: Text('Continue to login',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,
-                    fontFamily: 'Montserrat',fontSize: 12),), onTap: (){
-              Get.offAllNamed(AppRoutes.login);
-            },height: 35,width: 150),
+      return WillPopScope(
+        onWillPop: () async => false,
+        child: AlertDialog(
+          backgroundColor: AppColors.blackShade,
+          title: Column(
+            children: [
+              SizedBox(height: Get.height*0.03,),
+              Image.asset(ImagesPaths.cooltick,scale: 4,),
+              SizedBox(
+                height: Get.height*0.02,
+              ),
+              Text('Password Updated',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.yellow),)
+            ],
           ),
-        ],shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),);
+          content: SizedBox(
+              width: Get.width, // Set width as per your requirement
+              height: Get.height*0.07, // Set height as per your requirement
+              child: Text(
+                'Your Password has been updated successfully.',style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.white),
+                textAlign: TextAlign.center,
+              )),
+          actions: [
+            Center(
+              child: InkButton(
+                  child: Text('Continue to login',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,
+                      fontFamily: 'Montserrat',fontSize: 12),), onTap: (){
+                Get.offAllNamed(AppRoutes.login);
+              },height: 35,width: 150),
+            ),
+          ],shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),),
+      );
     },
   );
 
