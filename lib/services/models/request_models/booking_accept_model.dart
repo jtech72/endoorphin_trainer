@@ -25,6 +25,7 @@ class BookingAcceptDetailsModel {
 
 class Result {
   String? userName;
+  String? lastName;
   int? userId;
   String? phoneNumber;
   String? userProfile;
@@ -44,7 +45,9 @@ class Result {
   int? bookingId;
 
   Result(
-      {this.userName,
+      {
+        this.userName,
+        this.lastName,
         this.userId,
         this.phoneNumber,
         this.userProfile,
@@ -65,6 +68,7 @@ class Result {
 
   Result.fromJson(Map<String, dynamic> json) {
     userName = json['userName'];
+    lastName = json['lastName'];
     userId = json['userId'];
     phoneNumber = json['phoneNumber'];
     userProfile = json['userProfile'];
@@ -87,6 +91,7 @@ class Result {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['userName'] = this.userName;
+    data['lastName'] = this.lastName;
     data['userId'] = this.userId;
     data['phoneNumber'] = this.phoneNumber;
     data['userProfile'] = this.userProfile;
