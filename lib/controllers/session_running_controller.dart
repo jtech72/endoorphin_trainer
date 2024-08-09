@@ -3,26 +3,73 @@ import 'dart:developer';
 import 'package:endoorphin_trainer/utils/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
+
+import '../custom_Widgets/common_widgets.dart';
 
 class SessionRunningController extends GetxController {
   PanelController panelController = PanelController();
-
+  var scheduleTime = 0.obs;
   Timer? _timer;
   int remainingSeconds = 60;
   final time = '01.00'.obs;
   RxBool isPaused = false.obs;
   Map<String, dynamic>? sessionIds;
 
+  Future<void> initSocket() async {
+    log("Initializing socket...");
 
+    try {
+      socket = IO.io("http://103.185.212.115:5002", <String, dynamic>{
+        'autoConnect': false,
+        'transports': ['websocket'],
+      });
+
+      socket.connect();
+
+      socket.onConnect((_) {
+        log('Connection established');
+      });
+
+      socket.onDisconnect((_) {
+        log('Connection Disconnected');
+      });
+
+      socket.onConnectError((err) {
+        log('Connection Error: $err');
+      });
+
+      socket.onError((err) {
+        log('General Error: $err');
+      });
+    } catch (e) {
+      log('Exception caught: $e');
+    }
+  }
+  void updateScheduleTime(int newTime) {
+    scheduleTime.value = newTime;
+    log('Updated scheduleTime: $newTime');
+  }
   @override
-  void onInit() {
+  void onInit() async {
     sessionIds = Get.arguments;
-    log(sessionIds.toString());
+    await initSocket();
+    // socket.on('message', (data) {
+    //   log('session running: $data');
+    //   if (data != null && data['scheduletime'] != null) {
+    //     int scheduleTime = data['scheduletime'];
+    //     updateScheduleTime(scheduleTime);
+    //   }
+    // });
+    // socket.on('sessionCompleted', (data) {
+    // Get.toNamed(AppRoutes.sessionComplete);
+    // });
+    // log(sessionIds.toString());
     super.onInit();
   }
   @override
   void onReady() {
-    startTimer(3600);
+    startTimer(60);
     super.onReady();
   }
   @override

@@ -1,9 +1,11 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
+import 'package:endoorphin_trainer/services/network_services/api_call.dart';
 import 'package:flutter/material.dart';
 import 'package:endoorphin_trainer/utils/app_colors.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../controllers/booking_controller.dart';
+import '../custom_Widgets/common_widgets.dart';
 import '../custom_widgets/tabbar_widgets.dart';
 import '../utils/app_routes.dart';
 import '../utils/image_paths.dart';
@@ -17,7 +19,7 @@ class BookingUi extends StatefulWidget {
 class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMixin {
   late TabController tabController;
   bool showCalendar = false;
-  List<DateTime?> _selectedDates = [];
+  RxList _selectedDates = [].obs;
   late CalendarDatePicker2WithActionButtonsConfig config;
 
 
@@ -36,79 +38,9 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    BookingController controller = Get.find();
+    BookingController controller = BookingController();
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      // appBar: AppBar(
-      //   iconTheme: IconThemeData(color: AppColors.impgrey),
-      //   title: Obx(
-      //         () =>
-      //         Text(
-      //           controller.isTrainerOnline.value ? 'Online' : 'Offline',
-      //           style: Theme
-      //               .of(context)
-      //               .textTheme
-      //               .headlineSmall,
-      //         ),
-      //   ),
-      //   centerTitle: true,
-      //   actions: [
-      //     Obx(
-      //           () =>
-      //           InkWell(
-      //             splashColor: Colors.transparent,
-      //             onTap: () {
-      //               controller.isTrainerOnline.value =
-      //               !controller.isTrainerOnline.value;
-      //             },
-      //             child: SizedBox(
-      //               height: 15,
-      //               width: 43,
-      //               child: Container(
-      //                 height: 15,
-      //                 width: 15,
-      //                 decoration: BoxDecoration(
-      //                   borderRadius: BorderRadius.circular(30),
-      //                   border: Border.all(color: Colors.white),
-      //                   color: controller.isTrainerOnline.value
-      //                       ? Colors.yellow
-      //                       : Colors.grey.withOpacity(
-      //                       0.5), // Change container color conditionally
-      //                 ),
-      //                 child: Transform.scale(
-      //                   scale: 0.4,
-      //                   child: Switch(
-      //                     activeTrackColor: AppColors.yellow,
-      //                     activeColor: controller.isTrainerOnline.value ? Colors
-      //                         .yellow : Colors.grey.withOpacity(0.5),
-      //                     // Change switch button color conditionally
-      //                     inactiveThumbImage: AssetImage(
-      //                         ImagesPaths.trainerOnline),
-      //                     activeThumbImage: AssetImage(
-      //                         ImagesPaths.trainerOnline),
-      //                     inactiveThumbColor: Colors.transparent,
-      //                     inactiveTrackColor: Colors.black,
-      //                     value: controller.isTrainerOnline.value,
-      //                     onChanged: (v) {
-      //                       controller.isTrainerOnline.value = !controller
-      //                           .isTrainerOnline.value;
-      //                     },
-      //                   ),
-      //                 ),
-      //               ).paddingOnly(left: 20),
-      //             ),
-      //           ),
-      //     ),
-      //     IconButton(
-      //       onPressed: () {
-      //         Get.toNamed(AppRoutes.notification);
-      //       },
-      //       icon: Image.asset(ImagesPaths.bell, scale: 4,),
-      //     ),
-      //   ],
-      //   bottom: myTabBar(tabController, context),
-      // ),
-      // drawer: MyDrawer(),
       appBar: AppBar(
         toolbarHeight: 50,
         leadingWidth: Get.width * 0.17,
@@ -174,12 +106,15 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Center(
-                                child: Text(
-                                  _selectedDates.isNotEmpty
-                                      ? _selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')
-                                      : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
-                                  style: const TextStyle(color: Colors.white, fontSize: 10),
-                                ),
+                                 child:  Obx(() {
+                                   return Text(
+                                     _selectedDates.isNotEmpty
+                                         ? _selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')
+                                         : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
+                                     style: const TextStyle(color: Colors.white, fontSize: 10),
+                                   );
+                                 }),
+
                               ),
                             ),
                             _buildCalendarDialogButton(),
@@ -200,60 +135,90 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                             Get.toNamed(AppRoutes.bookingdetails,
                                 arguments: "Upcomming");
                           },
-                          child: SizedBox(
-                            height: Get.height * .68,
-                            child: ListView.builder(
-                                itemCount: 10,
-                                itemBuilder: (context, index) {
-                                  return Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment
-                                            .spaceBetween,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Container(
-                                                  height: 50,
-                                                  width: 50,
-                                                  decoration: BoxDecoration(
-                                                      color: AppColors.grey,
-                                                      borderRadius: BorderRadius
-                                                          .circular(100)),
+                          child:
 
-                                                  child: Center(
-                                                      child: Image.asset(
-                                                        ImagesPaths.yoga,
-                                                        scale: 3,))),
-                                              Column(
-                                                crossAxisAlignment: CrossAxisAlignment
-                                                    .start,
-                                                children: [
-                                                  Text(
-                                                    "Yoga session with Richard",
-                                                    style: Theme
-                                                        .of(context)
-                                                        .textTheme
-                                                        .displayLarge,),
-                                                  Text("21 Dec . 1.39 pm ",
-                                                    style: Theme
-                                                        .of(context)
-                                                        .textTheme
-                                                        .displayMedium,)
-                                                      .paddingOnly(top: 10),
-                                                ],).paddingOnly(left: 15)
-                                            ],
-                                          ),
-                                          Image.asset(ImagesPaths.eye, scale: 4,),
-                                        ],
-                                      ).paddingOnly(top: 15, left: 18, right: 18),
-                                      Container(height: 1,
-                                        width: Get.width,
-                                        color: AppColors.grey,).paddingOnly(
-                                        top: 15,),
-                                    ],
+                          FutureBuilder(
+                              future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"pending" ),
+                              builder: (BuildContext context, snapshot) {
+                                if (snapshot.connectionState == ConnectionState.waiting) {
+                                  return SizedBox(
+                                    height: Get.height * .7,
+                                    child: const Center(
+                                      child: CircularProgressIndicator(),
+                                    ).paddingOnly(top: 0),
                                   );
-                                }),
+                                }else  if (snapshot.hasError) {
+                                  return Center(
+                                    child: Text('Error: ${snapshot.error}'),
+                                  );
+                                }else{
+
+                                  return
+                                    snapshot.data!.result ==  null ?
+                                    SizedBox(
+                                      height: Get.height * .7,
+                                      child: const Center(
+                                        child: Text("No data available",style: TextStyle(color: AppColors.white,fontWeight: FontWeight.w600,fontSize: 17),),
+                                      ).paddingOnly(top: 0),
+                                    ):
+                                    SizedBox(
+                                      height: Get.height * .68,
+                                      child: ListView.builder(
+                                          itemCount: snapshot.data!.result!.length,
+                                          itemBuilder: (context, index) {
+                                            return Column(
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment
+                                                      .spaceBetween,
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Container(
+                                                            height: 50,
+                                                            width: 50,
+                                                            decoration: BoxDecoration(
+                                                                color: AppColors.grey,
+                                                                borderRadius: BorderRadius
+                                                                    .circular(100)),
+
+                                                            child: Center(
+                                                                child: Image.asset(
+                                                                  ImagesPaths.yoga,
+                                                                  scale: 3,))),
+                                                        Column(
+                                                          crossAxisAlignment: CrossAxisAlignment
+                                                              .start,
+                                                          children: [
+                                                            Text(
+                                                              "${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].userName}",
+                                                              style: Theme
+                                                                  .of(context)
+                                                                  .textTheme
+                                                                  .displayLarge,),
+                                                            Text(
+                                                              controller.formatDateTime(snapshot.data!.result![index].createdAt.toString(),snapshot.data!.result![index].createdAt.toString()) ,
+                                                              style: Theme
+                                                                  .of(context)
+                                                                  .textTheme
+                                                                  .displayMedium,)
+                                                                .paddingOnly(top: 10),
+                                                          ],).paddingOnly(left: 15)
+                                                      ],
+                                                    ),
+                                                    Image.asset(ImagesPaths.eye, scale: 4,),
+                                                  ],
+                                                ).paddingOnly(top: 15, left: 18, right: 18),
+                                                Container(height: 1,
+                                                  width: Get.width,
+                                                  color: AppColors.grey,).paddingOnly(
+                                                  top: 15,),
+                                              ],
+                                            );
+                                          }),
+                                    );
+                                }
+                              }
                           ),
                         )
 
@@ -296,12 +261,15 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Center(
-                                child: Text(
-                                  _selectedDates.isNotEmpty
-                                      ? _selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')
-                                      : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
-                                  style: const TextStyle(color: Colors.white, fontSize: 10),
-                                ),
+                                child: Obx(() {
+                                  return Text(
+                                    _selectedDates.isNotEmpty
+                                        ? _selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')
+                                        : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
+                                    style: const TextStyle(color: Colors.white, fontSize: 10),
+                                  );
+                                }),
+
                               ),
                             ),
                             _buildCalendarDialogButton(),
@@ -323,57 +291,91 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                             Get.toNamed(
                                 AppRoutes.bookingdetails, arguments: "");
                           },
-                          child: SizedBox(
-                            height: Get.height * .68,
-                            child: ListView.builder(
-                                itemCount: 10,
-                                itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment
-                                        .spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                              height: 50,
-                                              width: 50,
-                                              decoration: BoxDecoration(
-                                                  color: AppColors.grey,
-                                                  borderRadius: BorderRadius
-                                                      .circular(100)),
+                          child:
+                          FutureBuilder(
+                              future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"inprogress" ),
+                              builder: (BuildContext context, snapshot) {
+                                if (snapshot.connectionState == ConnectionState.waiting) {
+                                  return SizedBox(
+                                    height: Get.height * .7,
+                                    child: const Center(
+                                      child: CircularProgressIndicator(),
+                                    ).paddingOnly(top: 0),
+                                  );
+                                }else  if (snapshot.hasError) {
+                                  return Center(
+                                    child: Text('Error: ${snapshot.error}'),
+                                  );
+                                }else{
 
-                                              child: Center(child: Image.asset(
-                                                ImagesPaths.yoga, scale: 3,))),
-                                          Column(
-                                            crossAxisAlignment: CrossAxisAlignment
-                                                .start,
-                                            children: [
-                                              Text("Yoga session with Richard",
-                                                style: Theme
-                                                    .of(context)
-                                                    .textTheme
-                                                    .displayLarge,),
-                                              Text(
-                                                "21 Dec . 1.39 pm ", style: Theme
-                                                  .of(context)
-                                                  .textTheme
-                                                  .displayMedium,).paddingOnly(
-                                                  top: 10),
-                                            ],).paddingOnly(left: 15)
-                                        ],
-                                      ),
-                                      Image.asset(ImagesPaths.eye, scale: 4,),
-                                    ],
-                                  ).paddingOnly(top: 15, left: 18, right: 18),
-                                  Container(height: 1,
-                                    width: Get.width,
-                                    color: AppColors.grey,).paddingOnly(top: 15,),
-                                ],
-                              );
-                            }),
+                                  return
+                                    snapshot.data!.result == null ?
+                                    SizedBox(
+                                      height: Get.height * .7,
+                                      child: const Center(
+                                        child: Text("No data available",style: TextStyle(color: AppColors.white,fontWeight: FontWeight.w600,fontSize: 17),),
+                                      ).paddingOnly(top: 0),
+                                    ):
+                                    SizedBox(
+                                      height: Get.height * .68,
+                                      child: ListView.builder(
+                                          itemCount: snapshot.data!.result!.length,
+                                          itemBuilder: (context, index) {
+                                            return Column(
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment
+                                                      .spaceBetween,
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Container(
+                                                            height: 50,
+                                                            width: 50,
+                                                            decoration: BoxDecoration(
+                                                                color: AppColors.grey,
+                                                                borderRadius: BorderRadius
+                                                                    .circular(100)),
+
+                                                            child: Center(
+                                                                child: Image.asset(
+                                                                  ImagesPaths.yoga,
+                                                                  scale: 3,))),
+                                                        Column(
+                                                          crossAxisAlignment: CrossAxisAlignment
+                                                              .start,
+                                                          children: [
+                                                            Text(
+                                                              "${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].userName}",
+                                                              style: Theme
+                                                                  .of(context)
+                                                                  .textTheme
+                                                                  .displayLarge,),
+                                                            Text(
+                                                              controller.formatDateTime(snapshot.data!.result![index].createdAt.toString(),snapshot.data!.result![index].createdAt.toString()) ,
+                                                              style: Theme
+                                                                  .of(context)
+                                                                  .textTheme
+                                                                  .displayMedium,)
+                                                                .paddingOnly(top: 10),
+                                                          ],).paddingOnly(left: 15)
+                                                      ],
+                                                    ),
+                                                    Image.asset(ImagesPaths.eye, scale: 4,),
+                                                  ],
+                                                ).paddingOnly(top: 15, left: 18, right: 18),
+                                                Container(height: 1,
+                                                  width: Get.width,
+                                                  color: AppColors.grey,).paddingOnly(
+                                                  top: 15,),
+                                              ],
+                                            );
+                                          }),
+                                    );
+                                }
+                              }
                           ),
+
                         )
 
                       ],
@@ -414,12 +416,15 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Center(
-                                child: Text(
-                                  _selectedDates.isNotEmpty
-                                      ? _selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')
-                                      : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
-                                  style: const TextStyle(color: Colors.white, fontSize: 10),
-                                ),
+                                child: Obx(() {
+                                  return Text(
+                                    _selectedDates.isNotEmpty
+                                        ? _selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')
+                                        : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
+                                    style: const TextStyle(color: Colors.white, fontSize: 10),
+                                  );
+                                }),
+
                               ),
                             ),
                             _buildCalendarDialogButton(),
@@ -441,57 +446,89 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                             Get.toNamed(AppRoutes.bookingdetails,
                                 arguments: "Completed");
                           },
-                          child: SizedBox(height: Get.height * .68,
-                            child: ListView.builder(
-                                itemCount: 10,
-                                itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  Container(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Container(
-                                                height: 50,
-                                                width: 50,
-                                                decoration: BoxDecoration(
-                                                    color: AppColors.grey,
-                                                    borderRadius: BorderRadius
-                                                        .circular(100)),
+                          child:
+                          FutureBuilder(
+                              future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"scheduled" ),
+                              builder: (BuildContext context, snapshot) {
+                                if (snapshot.connectionState == ConnectionState.waiting) {
+                                  return SizedBox(
+                                    height: Get.height * .7,
+                                    child: const Center(
+                                      child: CircularProgressIndicator(),
+                                    ).paddingOnly(top: 0),
+                                  );
+                                }else  if (snapshot.hasError) {
+                                  return Center(
+                                    child: Text('Error: ${snapshot.error}'),
+                                  );
+                                }else{
 
-                                                child: Center(child: Image.asset(
-                                                  ImagesPaths.yoga, scale: 3,))),
-                                            Column(
-                                              crossAxisAlignment: CrossAxisAlignment
-                                                  .start,
+                                  return
+                                    snapshot.data!.result!.isEmpty ?
+                                    SizedBox(
+                                      height: Get.height * .7,
+                                      child: const Center(
+                                        child: Text("No data available",style: TextStyle(color: AppColors.white,fontWeight: FontWeight.w600,fontSize: 17),),
+                                      ).paddingOnly(top: 0),
+                                    ):
+                                    SizedBox(
+                                      height: Get.height * .68,
+                                      child: ListView.builder(
+                                          itemCount: snapshot.data!.result!.length,
+                                          itemBuilder: (context, index) {
+                                            return Column(
                                               children: [
-                                                Text("Yoga session with Richard",
-                                                  style: Theme
-                                                      .of(context)
-                                                      .textTheme
-                                                      .displayLarge,),
-                                                Text("21 Dec . 1.39 pm ",
-                                                  style: Theme
-                                                      .of(context)
-                                                      .textTheme
-                                                      .displayMedium,)
-                                                    .paddingOnly(top: 10),
-                                              ],).paddingOnly(left: 15)
-                                          ],
-                                        ),
-                                        Image.asset(ImagesPaths.eye, scale: 4,),
-                                      ],
-                                    ).paddingOnly(top: 15, left: 18, right: 18),
-                                  ),
-                                  Container(height: 1,
-                                    width: Get.width,
-                                    color: AppColors.grey,).paddingOnly(top: 15,),
-                                ],
-                              );
-                            }),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment
+                                                      .spaceBetween,
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Container(
+                                                            height: 50,
+                                                            width: 50,
+                                                            decoration: BoxDecoration(
+                                                                color: AppColors.grey,
+                                                                borderRadius: BorderRadius
+                                                                    .circular(100)),
+
+                                                            child: Center(
+                                                                child: Image.asset(
+                                                                  ImagesPaths.yoga,
+                                                                  scale: 3,))),
+                                                        Column(
+                                                          crossAxisAlignment: CrossAxisAlignment
+                                                              .start,
+                                                          children: [
+                                                            Text(
+                                                              "${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].userName}",
+                                                              style: Theme
+                                                                  .of(context)
+                                                                  .textTheme
+                                                                  .displayLarge,),
+                                                            Text(
+                                                              controller.formatDateTime(snapshot.data!.result![index].createdAt.toString(),snapshot.data!.result![index].createdAt.toString()) ,
+                                                              style: Theme
+                                                                  .of(context)
+                                                                  .textTheme
+                                                                  .displayMedium,)
+                                                                .paddingOnly(top: 10),
+                                                          ],).paddingOnly(left: 15)
+                                                      ],
+                                                    ),
+                                                    Image.asset(ImagesPaths.eye, scale: 4,),
+                                                  ],
+                                                ).paddingOnly(top: 15, left: 18, right: 18),
+                                                Container(height: 1,
+                                                  width: Get.width,
+                                                  color: AppColors.grey,).paddingOnly(
+                                                  top: 15,),
+                                              ],
+                                            );
+                                          }),
+                                    );
+                                }
+                              }
                           ),
                         )
                       ],
@@ -532,12 +569,15 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Center(
-                                child: Text(
-                                  _selectedDates.isNotEmpty
-                                      ? _selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')
-                                      : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
-                                  style: const TextStyle(color: Colors.white, fontSize: 10),
-                                ),
+                                child: Obx(() {
+                                  return Text(
+                                    _selectedDates.isNotEmpty
+                                        ? _selectedDates.map((date) => DateFormat('MM/dd/yyyy').format(date!)).join(' - ')
+                                        : 'Today: ${DateFormat('MM/dd/yyyy').format(DateTime.now())}',
+                                    style: const TextStyle(color: Colors.white, fontSize: 10),
+                                  );
+                                }),
+
                               ),
                             ),
                             _buildCalendarDialogButton(),
@@ -558,55 +598,89 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                             Get.toNamed(AppRoutes.bookingdetails,
                                 arguments: "Cancel");
                           },
-                          child: SizedBox(height: Get.height * .68,
-                            child: ListView.builder(
-                                itemCount: 10,
-                                itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment
-                                        .spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                              height: 50,
-                                              width: 50,
-                                              decoration: BoxDecoration(
-                                                  color: AppColors.grey,
-                                                  borderRadius: BorderRadius
-                                                      .circular(100)),
+                          child:
+                          FutureBuilder(
+                              future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"cancelled" ),
+                              builder: (BuildContext context, snapshot) {
+                                if (snapshot.connectionState == ConnectionState.waiting) {
+                                  return SizedBox(
+                                    height: Get.height * .7,
+                                    child: const Center(
+                                      child: CircularProgressIndicator(),
+                                    ).paddingOnly(top: 0),
+                                  );
+                                }else  if (snapshot.hasError) {
+                                  return Center(
+                                    child: Text('Error: ${snapshot.error}'),
+                                  );
+                                }else{
 
-                                              child: Center(child: Image.asset(
-                                                ImagesPaths.yoga, scale: 3,))),
-                                          Column(
-                                            crossAxisAlignment: CrossAxisAlignment
-                                                .start,
-                                            children: [
-                                              Text("Yoga session with Richard",
-                                                style: Theme
-                                                    .of(context)
-                                                    .textTheme
-                                                    .displayLarge,),
-                                              Text(
-                                                "21 Dec . 1.39 pm ", style: Theme
-                                                  .of(context)
-                                                  .textTheme
-                                                  .displayMedium,).paddingOnly(
-                                                  top: 10),
-                                            ],).paddingOnly(left: 15)
-                                        ],
-                                      ),
-                                      Image.asset(ImagesPaths.eye, scale: 4,),
-                                    ],
-                                  ).paddingOnly(top: 15, left: 18, right: 18),
-                                  Container(height: 1,
-                                    width: Get.width,
-                                    color: AppColors.grey,).paddingOnly(top: 15,),
-                                ],
-                              );
-                            }),
+                                  return
+                                    snapshot.data!.result!.isEmpty ?
+                                    SizedBox(
+                                      height: Get.height * .7,
+                                      child: const Center(
+                                        child: Text("No data available",style: TextStyle(color: AppColors.white,fontWeight: FontWeight.w600,fontSize: 17),),
+                                      ).paddingOnly(top: 0),
+                                    ):
+                                    SizedBox(
+                                      height: Get.height * .68,
+                                      child: ListView.builder(
+                                          itemCount: snapshot.data!.result!.length,
+                                          itemBuilder: (context, index) {
+                                            return Column(
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment
+                                                      .spaceBetween,
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Container(
+                                                            height: 50,
+                                                            width: 50,
+                                                            decoration: BoxDecoration(
+                                                                color: AppColors.grey,
+                                                                borderRadius: BorderRadius
+                                                                    .circular(100)),
+
+                                                            child: Center(
+                                                                child: Image.asset(
+                                                                  ImagesPaths.yoga,
+                                                                  scale: 3,))),
+                                                        Column(
+                                                          crossAxisAlignment: CrossAxisAlignment
+                                                              .start,
+                                                          children: [
+                                                            Text(
+                                                              "${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].userName}",
+                                                              style: Theme
+                                                                  .of(context)
+                                                                  .textTheme
+                                                                  .displayLarge,),
+                                            Text(
+                                            controller.formatDateTime(snapshot.data!.result![index].createdAt.toString(),snapshot.data!.result![index].createdAt.toString()) ,
+                                                                                                         style: Theme
+                                                                  .of(context)
+                                                                  .textTheme
+                                                                  .displayMedium,)
+                                                                .paddingOnly(top: 10),
+                                                          ],).paddingOnly(left: 15)
+                                                      ],
+                                                    ),
+                                                    Image.asset(ImagesPaths.eye, scale: 4,),
+                                                  ],
+                                                ).paddingOnly(top: 15, left: 18, right: 18),
+                                                Container(height: 1,
+                                                  width: Get.width,
+                                                  color: AppColors.grey,).paddingOnly(
+                                                  top: 15,),
+                                              ],
+                                            );
+                                          }),
+                                    );
+                                }
+                              }
                           ),
                         )
                       ],
@@ -795,17 +869,10 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                value: _dialogCalendarPickerValue,
                dialogBackgroundColor: AppColors.greyButton,
              );
-             if (values != null) {
-               // ignore: avoid_print
-               print(_getValueText(
-                 config.calendarType,
-                 values,
-               ));
-               setState(() {
-                 _dialogCalendarPickerValue = values;
-                 _selectedDates = values;
 
-               });
+             if (values != null) {
+               // Update the reactive state
+               _selectedDates.value = values;
              }
            },
            icon:const Icon(Icons.calendar_month, size: 18,color: AppColors.yellow,)),

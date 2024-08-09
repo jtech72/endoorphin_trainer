@@ -268,26 +268,7 @@ class ProfileUI extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    PageRouteBuilder(
-                      pageBuilder: (context, animation1, animation2) => BookingUi(initialIndex: 0,),
-                      transitionDuration: const Duration(milliseconds: 600),
-                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        const begin = Offset(1.0, 0.0);
-                        const end = Offset.zero;
-                        const curve = Curves.ease;
-
-                        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-                        var offsetAnimation = animation.drive(tween);
-
-                        return SlideTransition(
-                          position: offsetAnimation,
-                          child: child,
-                        );
-                      },
-                    ),
-                  );
+                  Get.toNamed(AppRoutes.booking);
                 },
                 child: Container(
                     height: Get.height * 0.05,
@@ -345,7 +326,7 @@ class ProfileUI extends StatelessWidget {
                       color: AppColors.greyButton),
                   child: InkWell(
                     onTap: () {
-                      // Get.toNamed(AppRoutes.support);
+                      Get.toNamed(AppRoutes.support);
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

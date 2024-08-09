@@ -194,8 +194,10 @@ class TrainerPassportUI extends StatelessWidget {
                         CertificateNumberFormatter(15),NoLeadingSpaceFormatter(),
                       ] else if(controller.certificationDetails!["categoryName"]=="passport") ...[
                         NoLeadingSpaceFormatter(),LengthLimitingTextInputFormatter(9),
+                        EmojiFilteringTextInputFormatter()
                       ]else ...[
-                      FilteringTextInputFormatter.deny(RegExp(r'\s')), LengthLimitingTextInputFormatter(25)
+                      FilteringTextInputFormatter.deny(RegExp(r'\s')), LengthLimitingTextInputFormatter(25),
+                        EmojiFilteringTextInputFormatter()
                       ]
                     ],
                     enableInteractiveSelection: true,

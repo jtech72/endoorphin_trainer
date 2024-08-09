@@ -1,4 +1,6 @@
 import 'dart:developer';
+import 'dart:io';
+import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -11,7 +13,10 @@ import '../utils/exports.dart';
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
+
 GetStorage storage=GetStorage();
+late IO.Socket socket;
 
 void printResult({
   required String screenName,
@@ -215,6 +220,35 @@ class CertificateNumberFormatter extends TextInputFormatter {
     return TextEditingValue(
       text: formattedText,
       selection: TextSelection.collapsed(offset: selectionIndex),
+    );
+  }
+}
+
+class EmojiFilteringTextInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    // Regular expression to match emoji characters
+    final emojiRegex = RegExp(
+        r'[\u{1F600}-\u{1F64F}' // Emoticons
+        r'\u{1F300}-\u{1F5FF}' // Misc Symbols and Pictographs
+        r'\u{1F680}-\u{1F6FF}' // Transport and Map
+        r'\u{1F700}-\u{1F77F}' // Alchemical Symbols
+        r'\u{1F780}-\u{1F7FF}' // Geometric Shapes Extended
+        r'\u{1F800}-\u{1F8FF}' // Supplemental Arrows-C
+        r'\u{1F900}-\u{1F9FF}' // Supplemental Symbols and Pictographs
+        r'\u{1FA00}-\u{1FA6F}' // Chess Symbols
+        r'\u{1FA70}-\u{1FAFF}' // Symbols and Pictographs Extended-A
+        r'\u{2600}-\u{26FF}'   // Misc symbols
+        r'\u{2700}-\u{27BF}]'  // Dingbats
+        , unicode: true);
+
+    // Remove any emoji characters from the new input value
+    String newText = newValue.text.replaceAll(emojiRegex, '');
+
+    return TextEditingValue(
+      text: newText,
+      selection: newValue.selection,
     );
   }
 }
@@ -524,3 +558,68 @@ void showToast(String message) {
     fontSize: 14.0,
   );
 }
+
+
+class CustomProgressIndicator extends StatelessWidget {
+  final double width;
+  final double height;
+  final double strokeWidth;
+  final Color backgroundColor;
+  final Color valueColor;
+  final double logoWidth;
+  final double logoHeight;
+
+  const CustomProgressIndicator({
+    Key? key,
+    this.width = 150,
+    this.height = 150,
+    this.strokeWidth = 10,
+    this.backgroundColor = AppColors.yellow,
+    this.valueColor = const Color(0xffFFF9E8),
+    this.logoWidth = 60,
+    this.logoHeight = 60,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        SizedBox(
+          width: width,
+          height: height,
+          child: CircularProgressIndicator(
+            strokeWidth: strokeWidth,
+            backgroundColor: backgroundColor,
+            valueColor: AlwaysStoppedAnimation<Color>(valueColor),
+          ),
+        ),
+        Image.asset(
+          "assets/images/app_logo.png",
+          width: logoWidth,
+          height: logoHeight,
+        ),
+      ],
+    );
+  }
+}
+
+
+
+class CapitalizeFirstLetterFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    if (newValue.text.isEmpty) return newValue;
+
+    // Capitalize only the first letter of the entire text and keep the rest as it is
+    String newText = newValue.text[0].toUpperCase() + newValue.text.substring(1);
+
+    return newValue.copyWith(
+      text: newText,
+      selection: newValue.selection,
+    );
+  }
+}
+
+
+

@@ -73,7 +73,8 @@ class DocumentUI extends StatelessWidget {
                   future:controller.onRefresh(),
                   builder: (BuildContext context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return SizedBox(
+                      return
+                        SizedBox(
                         height: Get.height * .7,
                         child: const Center(
                           child: CircularProgressIndicator(),
@@ -83,7 +84,8 @@ class DocumentUI extends StatelessWidget {
                  else  if (snapshot.hasData || controller.trainerDocStatusModel.value.result!.isNotEmpty) {
                       controller.trainerDocStatusModel.value =
                           controller.trainerDocStatusModel.value;
-                      return Obx(
+                      return
+                        Obx(
                             () => SizedBox(
                             height: Get.height * .8,
                             child:

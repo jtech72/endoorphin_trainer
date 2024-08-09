@@ -1,10 +1,10 @@
-class UpdateBankDetailModel {
+class WithdrawRequestModel {
   String? message;
-  dynamic? status;
+  int? status;
 
-  UpdateBankDetailModel({this.message, this.status});
+  WithdrawRequestModel({this.message, this.status});
 
-  UpdateBankDetailModel.fromJson(Map<dynamic, dynamic> json) {
+  WithdrawRequestModel.fromJson(Map<dynamic, dynamic> json) {
     message = json['message'];
     status = json['status'];
   }

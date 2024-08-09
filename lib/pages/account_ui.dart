@@ -78,7 +78,7 @@ class AccountUI extends StatelessWidget {
                           ? ""
                           : snapshot.data!.result!.bio!.toString();
                   controller.selectedOption1.value =
-                      snapshot.data!.result!.gender!.toString();
+                      snapshot.data?.result?.gender?.toString()??"";
                   return
                     Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -374,6 +374,7 @@ class AccountUI extends StatelessWidget {
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(64),
                             FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                            EmojiFilteringTextInputFormatter()
                           ],
                           style: Theme.of(context)
                               .textTheme
@@ -611,7 +612,8 @@ class AccountUI extends StatelessWidget {
                           textCapitalization: TextCapitalization.words,
                           inputFormatters: [
                             // LengthLimitingTextInputFormatter(64),
-                            NoLeadingSpaceFormatter()
+                            NoLeadingSpaceFormatter(),
+                            EmojiFilteringTextInputFormatter()
                           ],
                           maxLines: 10,
                           style: Theme.of(context)

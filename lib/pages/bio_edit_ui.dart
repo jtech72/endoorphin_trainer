@@ -261,7 +261,10 @@ class BioEditUi extends StatelessWidget {
                           child: TextField(
                             controller: controller.funFactController,
                             keyboardType: TextInputType.text,
-                            inputFormatters: [NoLeadingSpaceFormatter()],
+                            inputFormatters: [
+                              NoLeadingSpaceFormatter(),
+                              EmojiFilteringTextInputFormatter()
+                            ],
                             style: Theme.of(context)
                                 .textTheme
                                 .labelMedium!
@@ -315,7 +318,10 @@ class BioEditUi extends StatelessWidget {
                           child: TextField(
                             controller: controller.motivationController,
                             keyboardType: TextInputType.text,
-                            inputFormatters: [NoLeadingSpaceFormatter()],
+                            inputFormatters: [
+                              NoLeadingSpaceFormatter(),
+                              EmojiFilteringTextInputFormatter()
+                            ],
                             style: Theme.of(context)
                                 .textTheme
                                 .labelMedium!
@@ -369,7 +375,10 @@ class BioEditUi extends StatelessWidget {
                           child: TextField(
                             controller: controller.bioController,
                             keyboardType: TextInputType.text,
-                            inputFormatters: [NoLeadingSpaceFormatter()],
+                            inputFormatters: [
+                              NoLeadingSpaceFormatter(),
+                              EmojiFilteringTextInputFormatter()
+                            ],
                             maxLines: 10,
                             style: Theme.of(context)
                                 .textTheme

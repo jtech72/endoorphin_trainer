@@ -89,53 +89,68 @@ class NotificationServices {
 
   }
   void showNotification(RemoteMessage message) async {
-    AndroidNotificationChannel channel=const AndroidNotificationChannel( "high_importance_channel", "high_importance_channel",importance: Importance.max);
-    AndroidNotificationDetails androidNotificationDetails =
-    AndroidNotificationDetails(
-        channel.id.toString(),
-        channel.name.toString(),
-        channelDescription: "Description",
-        importance: Importance.max,
-        priority: Priority.high,
-        ticker: "ticker",
+    AndroidNotificationChannel channel = const AndroidNotificationChannel(
+      "high_importance_channel",
+      "high_importance_channel",
+      importance: Importance.max,
     );
-    DarwinNotificationDetails darwinNotificationDetails=const DarwinNotificationDetails(
+
+    AndroidNotificationDetails androidNotificationDetails = AndroidNotificationDetails(
+      channel.id.toString(),
+      channel.name.toString(),
+      channelDescription: "Description",
+      importance: Importance.max,
+      priority: Priority.high,
+      ticker: "ticker",
+    );
+
+    DarwinNotificationDetails darwinNotificationDetails = const DarwinNotificationDetails(
       presentBanner: true,
-        presentAlert: true,
-        presentBadge: true,
-        presentSound: true);
-    NotificationDetails notificationDetails=NotificationDetails(
-        android: androidNotificationDetails,
-        iOS: darwinNotificationDetails
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
     );
+
+    NotificationDetails notificationDetails = NotificationDetails(
+      android: androidNotificationDetails,
+      iOS: darwinNotificationDetails,
+    );
+
     final notificationBody = message.notification?.body;
 
     if (notificationBody != null) {
       log("NOTIFICATION DATA: $notificationBody");
-        final keyValuePairs = notificationBody.split(',');
-        final Map<String, String> data = {};
-        for (var pair in keyValuePairs) {
-          // Using a regular expression to split each pair only at the first colon
-          final keyValue = pair.split(RegExp(r'(?<!http[s]?):'));
-          if (keyValue.length == 2) {
-            final key = keyValue[0].trim();
-            final value = keyValue[1].trim();
-            data[key] = value;
-          }
+
+      // Extract and clean up relevant data
+      final keyValuePairs = notificationBody.split(',');
+      final Map<String, String> data = {};
+      for (var pair in keyValuePairs) {
+        // Using a regular expression to split each pair only at the first colon
+        final keyValue = pair.split(RegExp(r'(?<!http[s]?):'));
+        if (keyValue.length == 2) {
+          final key = keyValue[0].trim();
+          final value = keyValue[1].trim();
+          data[key] = value;
         }
-        final name = data['Name'] ?? '';
-        final address = data['Address'] ?? '';
-      Future.delayed(Duration.zero,(){
-        flutterLocalNotificationsPlugin
-            .show(0, message.notification!.title.toString(),
-            "Name: $name, Address: $address", notificationDetails);
+      }
+
+      // Extract specific information
+      final name = data['Name'] ?? 'Unknown';
+      final address = data['Address'] ?? 'Unknown';
+
+      // Show the notification with cleaned up data
+      Future.delayed(Duration.zero, () {
+        flutterLocalNotificationsPlugin.show(
+          0,
+          message.notification!.title.toString(),
+          "Name: $name, Address: $address",
+          notificationDetails,
+        );
       });
     } else {
       log("Notification body is null");
     }
-
   }
-
   void handleNotification(RemoteMessage message) {
     final notificationBody = message.notification?.body;
 
