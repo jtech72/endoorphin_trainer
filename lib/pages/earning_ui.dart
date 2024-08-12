@@ -178,12 +178,12 @@ class EarningUi extends StatelessWidget {
                                   color: controller.isWeekly.value == false ? AppColors.blackShade : AppColors.yellow,
                                 ),
                                 child: Text(
-                                  textAlign: TextAlign.center,
-                                  "Weekly",
-                                  style: Theme.of(context)
-                                     .textTheme
-                                     .displayLarge!.copyWith(color: controller.isWeekly.value ==false ?  AppColors.yellow:Colors.black)
-                              ),).paddingOnly(right: Get.width*0.05),
+                                    textAlign: TextAlign.center,
+                                    "Weekly",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displayLarge!.copyWith(color: controller.isWeekly.value ==false ?  AppColors.yellow:Colors.black)
+                                ),).paddingOnly(right: Get.width*0.05),
                             ),
                             GestureDetector(
                               onTap: (){
@@ -286,8 +286,8 @@ class EarningUi extends StatelessWidget {
                                     height: 25,
                                     width: 25,
                                     decoration: const BoxDecoration(
-                                      color: Colors.transparent,
-                                      shape: BoxShape.circle
+                                        color: Colors.transparent,
+                                        shape: BoxShape.circle
                                     ),
                                     child: const Icon(Icons.arrow_back_ios,size: 16,).paddingOnly(right: Get.width*0.01))),
                             Container(alignment: Alignment.center,
@@ -393,7 +393,9 @@ class EarningUi extends StatelessWidget {
                                     );
                                   },
                                 ),
-                                primaryXAxis: const CategoryAxis(
+                                primaryXAxis:
+
+                                CategoryAxis(
                                   labelStyle: TextStyle(color: AppColors.impgrey),
                                   majorGridLines: MajorGridLines(width: 0),
                                 ),
