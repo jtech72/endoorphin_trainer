@@ -53,7 +53,7 @@ dependencies:
   location:
   image_picker:
   flutter_page_view_indicator:
-  syncfusion_flutter_charts: ^25.1.40
+  syncfusion_flutter_charts: ^20.3.47
   multi_select_flutter: ^4.0.0
   dotted_border: ^2.1.0
   motion_tab_bar: ^2.0.4
