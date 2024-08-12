@@ -411,6 +411,7 @@ class BioUi extends StatelessWidget {
                               borderRadius: BorderRadius.circular(7),
                             ),
                             child: TextField(
+                              maxLength: 450,
                               textCapitalization: TextCapitalization.none,
                               controller: controller.bioController,
                               inputFormatters: [

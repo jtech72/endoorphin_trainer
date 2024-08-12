@@ -1,10 +1,10 @@
 import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../controllers/session_running_controller.dart';
 import '../utils/exports.dart';
-import 'bottom_navigation_bar_ui.dart';
 
 class SessionRunningUi extends StatelessWidget {
   const SessionRunningUi({super.key});
@@ -288,15 +288,17 @@ class SessionRunningUi extends StatelessWidget {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 color: AppColors.greyButton),
-                            child: Text(
-                              "00:28 | 01:00",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge
-                                  ?.copyWith(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 14,
-                                      color: AppColors.yellow),
+                            child: Obx(
+                                ()=> Text(
+                                  controller.time.value.toString(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge
+                                    ?.copyWith(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 14,
+                                        color: AppColors.yellow),
+                              ),
                             ),
                           ),
                         ),
@@ -304,9 +306,9 @@ class SessionRunningUi extends StatelessWidget {
                       Text(snapshot.data!.result!.categoryName.toString(),
                           style: Theme.of(context).textTheme.headlineLarge),
                       Text(
-                        "Experience the art of boxing firsthand. Train with expert coaches, sharpen your skills, and achieve your fitness goals in our dynamic boxing program.",
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
                             fontWeight: FontWeight.w300, fontSize: 12),
+                        ""
                       ).paddingOnly(top: 10, bottom: Get.height * .03),
                       Text(
                         "Customer Details",
@@ -416,7 +418,10 @@ class SessionRunningUi extends StatelessWidget {
                                             ?.copyWith(
                                                 fontWeight: FontWeight.w500))
                                     .paddingOnly(right: Get.width * .146),
-                                Text(snapshot.data!.result!.bookingDate.toString(),
+                                Text(DateFormat('dd MMM yyyy, h:mm a')
+                                    .format(DateTime.parse(snapshot!
+                                    .data!.result!.bookingDate
+                                    .toString())),
                                     style: Theme.of(context)
                                         .textTheme
                                         .labelLarge
@@ -460,7 +465,10 @@ class SessionRunningUi extends StatelessWidget {
                                             ?.copyWith(
                                                 fontWeight: FontWeight.w500))
                                     .paddingOnly(right: Get.width * .1),
-                                Text(snapshot.data!.result!.bookingDate.toString(),
+                                Text(DateFormat('dd MMM yyyy')
+                                    .format(DateTime.parse(snapshot!
+                                    .data!.result!.bookingDate
+                                    .toString())),
                                     style: Theme.of(context)
                                         .textTheme
                                         .labelLarge
@@ -482,7 +490,10 @@ class SessionRunningUi extends StatelessWidget {
                                             ?.copyWith(
                                                 fontWeight: FontWeight.w500))
                                     .paddingOnly(right: Get.width * .02),
-                                Text(snapshot.data!.result!.startSession.toString(),
+                                Text(DateFormat('h:mm a')
+                                    .format(DateTime.parse(snapshot!
+                                    .data!.result!.startSession
+                                    .toString())),
                                     style: Theme.of(context)
                                         .textTheme
                                         .labelLarge
@@ -504,7 +515,10 @@ class SessionRunningUi extends StatelessWidget {
                                             ?.copyWith(
                                                 fontWeight: FontWeight.w500))
                                     .paddingOnly(right: Get.width * .04),
-                                Text(snapshot.data!.result!.endSession.toString(),
+                                Text(DateFormat('h:mm a')
+                                    .format(DateTime.parse(snapshot!
+                                    .data!.result!.endSession
+                                    .toString())),
                                     style: Theme.of(context)
                                         .textTheme
                                         .labelLarge
