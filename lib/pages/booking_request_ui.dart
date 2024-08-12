@@ -1,6 +1,8 @@
 import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../utils/exports.dart';
 class BookingRequestUi extends StatelessWidget {
   const BookingRequestUi({super.key});
@@ -158,7 +160,7 @@ class BookingRequestUi extends StatelessWidget {
               height: controller.selectedIndex.value == 1
                   ? Get.height * .52
                   : controller.selectedIndex.value == 2
-                      ? Get.height * .3
+                      ? Get.height * .35
                       : Get.height * .38,
               child:  controller.selectedIndex.value == 2
                   ? SingleChildScrollView(
@@ -235,7 +237,7 @@ class BookingRequestUi extends StatelessWidget {
                                   color: AppColors.impgrey,
                                 ).paddingOnly(right: 20),
                                 SizedBox(
-                                  width: Get.width*0.7,
+                                  width: Get.width*.75,
                                   child: Text(
                                     "${controller.bookingDetails?.result?.userHouseNo ?? ""} ${controller.bookingDetails?.result?.userStreetArea ?? ""} ${controller.bookingDetails?.result?.userCity ?? ""} ",
                                     style: Theme.of(context)
@@ -281,9 +283,8 @@ class BookingRequestUi extends StatelessWidget {
                                                           .bookingDetails!
                                                           .result!
                                                           .userProfile
-                                                          .toString() ==
-                                                      ""
-                                                  ? const AssetImage("")
+                                                          .toString() == null
+                                                  ? const AssetImage("assets/images/profile_img.png")
                                                       as ImageProvider<Object>
                                                   : CachedNetworkImageProvider(
                                                       controller.bookingDetails!
@@ -395,6 +396,7 @@ class BookingRequestUi extends StatelessWidget {
                                       ),
                                       GestureDetector(
                                         onTap: () {
+                                          print(controller.bookingDetails!.result!.phoneNumber);
                                           _launchTelephone(controller.bookingDetails
                                                   ?.result?.phoneNumber
                                                   .toString() ??
@@ -637,7 +639,7 @@ class BookingRequestUi extends StatelessWidget {
                                                                       "userProfile"]
                                                                   .toString() ==
                                                               ""
-                                                          ? const AssetImage("")
+                                                          ? const AssetImage("assets/images/profile_img.png")
                                                               as ImageProvider<
                                                                   Object>
                                                           : CachedNetworkImageProvider(
@@ -770,7 +772,7 @@ class BookingRequestUi extends StatelessWidget {
 //
 
 _launchTelephone(String number) async {
-  final telephoneNumber = number;
+  final telephoneNumber = 'tel:$number'; // Add 'tel:' prefix to the number
   if (await canLaunch(telephoneNumber)) {
     await launch(telephoneNumber);
   } else {

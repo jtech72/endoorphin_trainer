@@ -16,7 +16,7 @@ class BioEditController extends GetxController{
   Future<void> onUpdateButton() async {
     if(niceNameController.text.isEmpty ||
         areaOfExpertiseController.text.isEmpty ||
-        experienceController.text.isEmpty){
+        experienceController.text.isEmpty||bioController.text.isEmpty){
       showSnackBar("Please fill all the mandatory fields");
 
     }else{

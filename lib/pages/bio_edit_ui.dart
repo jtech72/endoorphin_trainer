@@ -356,13 +356,11 @@ class BioEditUi extends StatelessWidget {
                         SizedBox(
                           height: Get.height * 0.01,
                         ),
-                        Text(
-                          'Mention Bio',
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelLarge!
-                              .copyWith(color: AppColors.white),
-                          textAlign: TextAlign.start,
+                        Row(
+                          children: [
+                            Text("Mention Bio",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
+                            Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
+                          ],
                         ),
                         SizedBox(
                           height: Get.height * 0.011,
@@ -373,6 +371,7 @@ class BioEditUi extends StatelessWidget {
                               border: Border.all(color: AppColors.grey3),
                               borderRadius: BorderRadius.circular(5)),
                           child: TextField(
+                            maxLength: 450,
                             controller: controller.bioController,
                             keyboardType: TextInputType.text,
                             inputFormatters: [

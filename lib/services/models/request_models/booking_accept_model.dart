@@ -3,22 +3,23 @@ class BookingAcceptDetailsModel {
   int? status;
   String? message;
 
-  BookingAcceptDetailsModel({this.result, this.status,this.message});
 
-  BookingAcceptDetailsModel.fromJson(Map<dynamic, dynamic> json) {
+  BookingAcceptDetailsModel({this.result, this.status});
+
+  BookingAcceptDetailsModel.fromJson(Map<String, dynamic> json) {
     result =
-    json['result'] != null ? new Result.fromJson(json['result']) : null;
+    json['result'] != null ? Result.fromJson(json['result']) : null;
     status = json['status'];
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.result != null) {
-      data['result'] = this.result!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (result != null) {
+      data['result'] = result!.toJson();
     }
-    data['status'] = this.status;
-    data['message'] = this.message;
+    data['status'] = status;
+    data['message'] = message;
     return data;
   }
 }
@@ -43,10 +44,11 @@ class Result {
   double? trainerLong;
   int? sessionPin;
   int? bookingId;
+  String? bookingType;
+  Null? averageReview;
 
   Result(
-      {
-        this.userName,
+      {this.userName,
         this.lastName,
         this.userId,
         this.phoneNumber,
@@ -64,7 +66,9 @@ class Result {
         this.trainerLat,
         this.trainerLong,
         this.sessionPin,
-        this.bookingId});
+        this.bookingId,
+        this.bookingType,
+        this.averageReview});
 
   Result.fromJson(Map<String, dynamic> json) {
     userName = json['userName'];
@@ -86,29 +90,33 @@ class Result {
     trainerLong = json['trainerLong'];
     sessionPin = json['sessionPin'];
     bookingId = json['bookingId'];
+    bookingType = json['bookingType'];
+    averageReview = json['averageReview'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['userName'] = this.userName;
-    data['lastName'] = this.lastName;
-    data['userId'] = this.userId;
-    data['phoneNumber'] = this.phoneNumber;
-    data['userProfile'] = this.userProfile;
-    data['userAddressType'] = this.userAddressType;
-    data['userHouseNo'] = this.userHouseNo;
-    data['UserCity'] = this.userCity;
-    data['userStreetArea'] = this.userStreetArea;
-    data['userLat'] = this.userLat;
-    data['userLong'] = this.userLong;
-    data['trainerddressType'] = this.trainerddressType;
-    data['trainerHouseNo'] = this.trainerHouseNo;
-    data['trainerCity'] = this.trainerCity;
-    data['trainerStreetArea'] = this.trainerStreetArea;
-    data['trainerLat'] = this.trainerLat;
-    data['trainerLong'] = this.trainerLong;
-    data['sessionPin'] = this.sessionPin;
-    data['bookingId'] = this.bookingId;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['userName'] = userName;
+    data['lastName'] = lastName;
+    data['userId'] = userId;
+    data['phoneNumber'] = phoneNumber;
+    data['userProfile'] = userProfile;
+    data['userAddressType'] = userAddressType;
+    data['userHouseNo'] = userHouseNo;
+    data['UserCity'] = userCity;
+    data['userStreetArea'] = userStreetArea;
+    data['userLat'] = userLat;
+    data['userLong'] = userLong;
+    data['trainerddressType'] = trainerddressType;
+    data['trainerHouseNo'] = trainerHouseNo;
+    data['trainerCity'] = trainerCity;
+    data['trainerStreetArea'] = trainerStreetArea;
+    data['trainerLat'] = trainerLat;
+    data['trainerLong'] = trainerLong;
+    data['sessionPin'] = sessionPin;
+    data['bookingId'] = bookingId;
+    data['bookingType'] = bookingType;
+    data['averageReview'] = averageReview;
     return data;
   }
 }
