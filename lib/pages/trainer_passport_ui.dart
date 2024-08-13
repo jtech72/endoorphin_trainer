@@ -31,21 +31,22 @@ class TrainerPassportUI extends StatelessWidget {
               ),
             ),
             context: context),
-        body: Container(
-          height: Get.height,
-          width: Get.width,
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(
-                    ImagesPaths.bgBlackShade,
-                  ),
-                  fit: BoxFit.cover)),
-          child: SingleChildScrollView(
+        body: SingleChildScrollView(
+          child: Container(
+            height:(MediaQuery.of(context).viewInsets.bottom == 0) ? Get.height*.7 : Get.height,
+
+            width: Get.width,
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(
+                      ImagesPaths.bgBlackShade,
+                    ),
+                    fit: BoxFit.cover)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'The following information will be collected as a part of the onboarding process, so please ensure that you provide \ncorrect details.',
+                  'The following information will be collected as a part of the onboarding process, so please ensure that you provide correct details.',
                   style: Theme.of(context)
                       .textTheme
                       .labelLarge!
@@ -105,7 +106,7 @@ class TrainerPassportUI extends StatelessWidget {
                       hintStyle: Theme.of(context).textTheme.labelMedium,
                       contentPadding:
                           const EdgeInsets.only(bottom: 3, left: 15),
-
+          
                       hintText: controller
                                   .certificationDetails!["categoryName"] ==
                               "emirates"

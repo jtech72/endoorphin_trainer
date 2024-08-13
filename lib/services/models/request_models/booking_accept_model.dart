@@ -6,7 +6,7 @@ class BookingAcceptDetailsModel {
 
   BookingAcceptDetailsModel({this.result, this.status});
 
-  BookingAcceptDetailsModel.fromJson(Map<String, dynamic> json) {
+  BookingAcceptDetailsModel.fromJson(Map<dynamic, dynamic> json) {
     result =
     json['result'] != null ? Result.fromJson(json['result']) : null;
     status = json['status'];
@@ -27,25 +27,25 @@ class BookingAcceptDetailsModel {
 class Result {
   String? userName;
   String? lastName;
-  int? userId;
+  dynamic userId;
   String? phoneNumber;
   String? userProfile;
   String? userAddressType;
   String? userHouseNo;
   String? userCity;
   String? userStreetArea;
-  double? userLat;
-  double? userLong;
+  dynamic userLat;
+  dynamic userLong;
   String? trainerddressType;
   String? trainerHouseNo;
   String? trainerCity;
   String? trainerStreetArea;
-  double? trainerLat;
-  double? trainerLong;
+  dynamic trainerLat;
+  dynamic trainerLong;
   int? sessionPin;
   int? bookingId;
   String? bookingType;
-  Null? averageReview;
+  dynamic averageReview;
 
   Result(
       {this.userName,

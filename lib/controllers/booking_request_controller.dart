@@ -205,6 +205,7 @@ class BookingRequestController extends GetxController {
           selectedIndex.value = 1;
         }else{
           Get.toNamed(AppRoutes.bottomNavigation);
+          showSnackBar("Booking successfully scheduled");
         }
 
       } else {
