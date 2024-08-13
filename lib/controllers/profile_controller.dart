@@ -10,7 +10,8 @@ class ProfileController extends GetxController{
   try{
     Map<String, String> fields = {
       "id":storage.read("userId").toString(),
-      "deviceId":""
+      "deviceId":"",
+      "activeStatus":"false"
     };
     Map<String, File> files = {};
     log("fields = $fields , files = $files ");

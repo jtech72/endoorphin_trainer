@@ -171,14 +171,19 @@ class SessionRunningUi extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(40),
                                     color: Colors.white.withOpacity(0.4),
                                   ),
-                                  child: Text(snapshot.data!.result!.categoryName.toString(),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelMedium
-                                          ?.copyWith(
-                                              color: AppColors.impgrey,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600)),
+                                  child: SizedBox(
+                                    width: 80,
+                                    child: Text(
+                                      textAlign: TextAlign.center,
+                                        snapshot.data!.result!.categoryName.toString(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelMedium
+                                            ?.copyWith(
+                                                color: AppColors.impgrey,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600)),
+                                  ),
                                 ),
                               ],
                             ).paddingOnly(left: 10, right: 10),
