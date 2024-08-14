@@ -193,7 +193,7 @@ class HomeController extends GetxController {
         "addressType":  addressComponents['name'] ?? "",
         // "name": addressComponents['name'] ?? "Unknown",
         // "houseNo": addressComponents['houseNo'] ?? "Unknown",
-        // "city": addressComponents['city'] ?? "Unknown",
+        "city": addressComponents['city'] ?? "Unknown",
         // "streetArea": addressComponents['streetArea'] ?? "Unknown",
         "lat": currentLocation.latitude,
         "long": currentLocation.longitude,
