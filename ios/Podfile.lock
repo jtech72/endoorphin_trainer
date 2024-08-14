@@ -128,8 +128,8 @@ PODS:
     - Toast
   - geolocator_apple (1.2.0):
     - Flutter
-  - Google-Maps-iOS-Utils (5.0.0):
-    - GoogleMaps (~> 8.0)
+  - Google-Maps-iOS-Utils (6.0.0):
+    - GoogleMaps (~> 9.0)
   - google_maps_flutter_ios (0.0.1):
     - Flutter
     - Google-Maps-iOS-Utils (< 7.0, >= 5.0)
@@ -158,10 +158,10 @@ PODS:
     - GoogleUtilities/Environment (~> 7.7)
     - nanopb (< 2.30911.0, >= 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleMaps (8.4.0):
-    - GoogleMaps/Maps (= 8.4.0)
-  - GoogleMaps/Base (8.4.0)
-  - GoogleMaps/Maps (8.4.0):
+  - GoogleMaps (9.0.0):
+    - GoogleMaps/Maps (= 9.0.0)
+  - GoogleMaps/Base (9.0.0)
+  - GoogleMaps/Maps (9.0.0):
     - GoogleMaps/Base
   - GoogleUtilities/AppDelegateSwizzler (7.13.3):
     - GoogleUtilities/Environment
@@ -337,11 +337,11 @@ SPEC CHECKSUMS:
   flutter_local_notifications: 4cde75091f6327eb8517fa068a0a5950212d2086
   fluttertoast: e9a18c7be5413da53898f660530c56f35edfba9c
   geolocator_apple: 6cbaf322953988e009e5ecb481f07efece75c450
-  Google-Maps-iOS-Utils: 66d6de12be1ce6d3742a54661e7a79cb317a9321
+  Google-Maps-iOS-Utils: cfe6a0239c7ca634b7e001ad059a6707143dc8dc
   google_maps_flutter_ios: e31555a04d1986ab130f2b9f24b6cdc861acc6d3
   GoogleAppMeasurement: f9de05ee17401e3355f68e8fc8b5064d429f5918
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
-  GoogleMaps: 8939898920281c649150e0af74aa291c60f2e77d
+  GoogleMaps: 4907d0d42bf8cd58f56743e31f91d23c10682745
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
   image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
   location: d5cf8598915965547c3f36761ae9cc4f4e87d22e
@@ -359,6 +359,6 @@ SPEC CHECKSUMS:
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
   video_player_avfoundation: 7c6c11d8470e1675df7397027218274b6d2360b3
 
-PODFILE CHECKSUM: 80c79d7fb14fbf5aad8d01f85894ad8a82f55d9d
+PODFILE CHECKSUM: b75ed20dadccaa18fca26eb373f713d90ca99f49
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.15.0

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 class AppThemes {
   static ThemeData appTheme = ThemeData(
+    canvasColor: AppColors.white,
     scaffoldBackgroundColor: AppColors.backgroundBlack,
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.backgroundBlack,
@@ -13,6 +14,7 @@ class AppThemes {
       useMaterial3: true,
       brightness: Brightness.dark,
       colorScheme: const ColorScheme.dark(
+
         primary: AppColors.yellow,
         onPrimary: AppColors.impgrey,
         surface: AppColors.backgroundBlack,
@@ -97,6 +99,7 @@ class AppThemes {
             color: AppColors.Black3,
             fontSize: 20),
 
-      ));
+      )
+  );
 }
 

@@ -29,7 +29,7 @@ class BookingRequestController extends GetxController {
   Timer? _timer;
   int remainingSeconds = 60;
   RxBool timerIsVisible = true.obs;
-  final time = '01.00'.obs;
+  final time = '03.00'.obs;
   RxString totalTIme = "".obs;
   RxString totalDistance = "".obs;
   dynamic socketData ;
@@ -200,8 +200,14 @@ class BookingRequestController extends GetxController {
         _timer!.cancel();
         timerIsVisible.value = false;
         isLoading.value = false;
-        bookingDetails = response;
-        selectedIndex.value = 1;
+        if(response.result!.bookingType == "bookNow" ){
+          bookingDetails = response;
+          selectedIndex.value = 1;
+        }else{
+          Get.toNamed(AppRoutes.bottomNavigation);
+          showSnackBar("Booking successfully scheduled");
+        }
+
       } else {
         _timer!.cancel();
         isLoading.value = false;
@@ -470,7 +476,12 @@ class BookingRequestController extends GetxController {
       log('Exception caught: $e');
     }
   }
-
+@override
+  void dispose() {
+    socket.disconnected;
+    // TODO: implement dispose
+    super.dispose();
+  }
   @override
   void onInit() async {
     notificationData = Get.arguments ?? {};

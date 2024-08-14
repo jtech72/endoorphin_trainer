@@ -77,7 +77,7 @@ class MoreAboutYouUi extends StatelessWidget {
                   style: Theme.of(context).textTheme.displayLarge,
                 ).paddingOnly(top: Get.height * .02, bottom: Get.height * .02),
                 Container(
-                  height: Get.height * 0.26,
+                  height: Get.height * 0.28,
                   width: Get.width,
                   decoration: BoxDecoration(
                       color: AppColors.greyButton,

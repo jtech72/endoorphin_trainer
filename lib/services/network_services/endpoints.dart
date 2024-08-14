@@ -44,4 +44,8 @@ class Endpoints{
   static const String epGetBookingSessionDetails="booking/sessionCompletedDetails";
   /// POST REVIEW
   static const String epPostReviewUser="review/saveReview";
+  /// get Unpaid request
+
+  static const String epUnpaid="trainer/getAllUnpaidBookingForTrainers?trainerId=";
+
 }

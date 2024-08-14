@@ -130,43 +130,41 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                         Container(
                           height: 1, width: Get.width, color: AppColors.grey,)
                             .paddingOnly(top: 15,),
-                        GestureDetector(
-                          onTap: (){
-                            Get.toNamed(AppRoutes.bookingdetails,
-                                arguments: "Upcomming");
-                          },
-                          child:
+                        FutureBuilder(
+                            future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"pending" ),
+                            builder: (BuildContext context, snapshot) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                return SizedBox(
+                                  height: Get.height * .7,
+                                  child: const Center(
+                                    child: CircularProgressIndicator(),
+                                  ).paddingOnly(top: 0),
+                                );
+                              }else  if (snapshot.hasError) {
+                                return Center(
+                                  child: Text('Error: ${snapshot.error}'),
+                                );
+                              }else{
 
-                          FutureBuilder(
-                              future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"pending" ),
-                              builder: (BuildContext context, snapshot) {
-                                if (snapshot.connectionState == ConnectionState.waiting) {
-                                  return SizedBox(
+                                return
+                                  snapshot.data!.result ==  null ?
+                                  SizedBox(
                                     height: Get.height * .7,
                                     child: const Center(
-                                      child: CircularProgressIndicator(),
+                                      child: Text("No data available",style: TextStyle(color: AppColors.white,fontWeight: FontWeight.w600,fontSize: 17),),
                                     ).paddingOnly(top: 0),
-                                  );
-                                }else  if (snapshot.hasError) {
-                                  return Center(
-                                    child: Text('Error: ${snapshot.error}'),
-                                  );
-                                }else{
-
-                                  return
-                                    snapshot.data!.result ==  null ?
-                                    SizedBox(
-                                      height: Get.height * .7,
-                                      child: const Center(
-                                        child: Text("No data available",style: TextStyle(color: AppColors.white,fontWeight: FontWeight.w600,fontSize: 17),),
-                                      ).paddingOnly(top: 0),
-                                    ):
-                                    SizedBox(
-                                      height: Get.height * .68,
-                                      child: ListView.builder(
-                                          itemCount: snapshot.data!.result!.length,
-                                          itemBuilder: (context, index) {
-                                            return Column(
+                                  ):
+                                  SizedBox(
+                                    height: Get.height * .68,
+                                    child: ListView.builder(
+                                        itemCount: snapshot.data!.result!.length,
+                                        itemBuilder: (context, index) {
+                                          return GestureDetector(
+                                            onTap: (){
+                                              Get.toNamed(AppRoutes.bookingdetails,
+                                                  arguments: snapshot.data!.result![index].id.toString());
+                                            },
+                                            child: Column(
                                               children: [
                                                 Row(
                                                   mainAxisAlignment: MainAxisAlignment
@@ -214,12 +212,12 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                                   color: AppColors.grey,).paddingOnly(
                                                   top: 15,),
                                               ],
-                                            );
-                                          }),
-                                    );
-                                }
+                                            ),
+                                          );
+                                        }),
+                                  );
                               }
-                          ),
+                            }
                         )
 
 
@@ -286,42 +284,41 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                         Container(
                           height: 1, width: Get.width, color: AppColors.grey,)
                             .paddingOnly(top: 15,),
-                        GestureDetector(
-                          onTap: (){
-                            Get.toNamed(
-                                AppRoutes.bookingdetails, arguments: "");
-                          },
-                          child:
-                          FutureBuilder(
-                              future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"inprogress" ),
-                              builder: (BuildContext context, snapshot) {
-                                if (snapshot.connectionState == ConnectionState.waiting) {
-                                  return SizedBox(
+                        FutureBuilder(
+                            future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"inprogress" ),
+                            builder: (BuildContext context, snapshot) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                return SizedBox(
+                                  height: Get.height * .7,
+                                  child: const Center(
+                                    child: CircularProgressIndicator(),
+                                  ).paddingOnly(top: 0),
+                                );
+                              }else  if (snapshot.hasError) {
+                                return Center(
+                                  child: Text('Error: ${snapshot.error}'),
+                                );
+                              }else{
+
+                                return
+                                  snapshot.data!.result!.isEmpty ?
+                                  SizedBox(
                                     height: Get.height * .7,
                                     child: const Center(
-                                      child: CircularProgressIndicator(),
+                                      child: Text("No data available",style: TextStyle(color: AppColors.white,fontWeight: FontWeight.w600,fontSize: 17),),
                                     ).paddingOnly(top: 0),
-                                  );
-                                }else  if (snapshot.hasError) {
-                                  return Center(
-                                    child: Text('Error: ${snapshot.error}'),
-                                  );
-                                }else{
-
-                                  return
-                                    snapshot.data!.result == null ?
-                                    SizedBox(
-                                      height: Get.height * .7,
-                                      child: const Center(
-                                        child: Text("No data available",style: TextStyle(color: AppColors.white,fontWeight: FontWeight.w600,fontSize: 17),),
-                                      ).paddingOnly(top: 0),
-                                    ):
-                                    SizedBox(
-                                      height: Get.height * .68,
-                                      child: ListView.builder(
-                                          itemCount: snapshot.data!.result!.length,
-                                          itemBuilder: (context, index) {
-                                            return Column(
+                                  ):
+                                  SizedBox(
+                                    height: Get.height * .68,
+                                    child: ListView.builder(
+                                        itemCount: snapshot.data!.result!.length,
+                                        itemBuilder: (context, index) {
+                                          return GestureDetector(
+                                            onTap: (){
+                                              Get.toNamed(AppRoutes.bookingdetails,
+                                                  arguments: snapshot.data!.result![index].id.toString());
+                                            },
+                                            child: Column(
                                               children: [
                                                 Row(
                                                   mainAxisAlignment: MainAxisAlignment
@@ -369,13 +366,12 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                                   color: AppColors.grey,).paddingOnly(
                                                   top: 15,),
                                               ],
-                                            );
-                                          }),
-                                    );
-                                }
+                                            ),
+                                          );
+                                        }),
+                                  );
                               }
-                          ),
-
+                            }
                         )
 
                       ],
@@ -441,42 +437,41 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                         Container(
                           height: 1, width: Get.width, color: AppColors.grey,)
                             .paddingOnly(top: 15,),
-                        GestureDetector(
-                          onTap: (){
-                            Get.toNamed(AppRoutes.bookingdetails,
-                                arguments: "Completed");
-                          },
-                          child:
-                          FutureBuilder(
-                              future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"scheduled" ),
-                              builder: (BuildContext context, snapshot) {
-                                if (snapshot.connectionState == ConnectionState.waiting) {
-                                  return SizedBox(
+                        FutureBuilder(
+                            future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"scheduled" ),
+                            builder: (BuildContext context, snapshot) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                return SizedBox(
+                                  height: Get.height * .7,
+                                  child: const Center(
+                                    child: CircularProgressIndicator(),
+                                  ).paddingOnly(top: 0),
+                                );
+                              }else  if (snapshot.hasError) {
+                                return Center(
+                                  child: Text('Error: ${snapshot.error}'),
+                                );
+                              }else{
+
+                                return
+                                  snapshot.data!.result!.isEmpty ?
+                                  SizedBox(
                                     height: Get.height * .7,
                                     child: const Center(
-                                      child: CircularProgressIndicator(),
+                                      child: Text("No data available",style: TextStyle(color: AppColors.white,fontWeight: FontWeight.w600,fontSize: 17),),
                                     ).paddingOnly(top: 0),
-                                  );
-                                }else  if (snapshot.hasError) {
-                                  return Center(
-                                    child: Text('Error: ${snapshot.error}'),
-                                  );
-                                }else{
-
-                                  return
-                                    snapshot.data!.result!.isEmpty ?
-                                    SizedBox(
-                                      height: Get.height * .7,
-                                      child: const Center(
-                                        child: Text("No data available",style: TextStyle(color: AppColors.white,fontWeight: FontWeight.w600,fontSize: 17),),
-                                      ).paddingOnly(top: 0),
-                                    ):
-                                    SizedBox(
-                                      height: Get.height * .68,
-                                      child: ListView.builder(
-                                          itemCount: snapshot.data!.result!.length,
-                                          itemBuilder: (context, index) {
-                                            return Column(
+                                  ):
+                                  Container(
+                                    height: Get.height * .68,
+                                    child: ListView.builder(
+                                        itemCount: snapshot.data!.result!.length,
+                                        itemBuilder: (context, index) {
+                                          return GestureDetector(
+                                            onTap: (){
+                                              Get.toNamed(AppRoutes.bookingdetails,
+                                                  arguments: snapshot.data!.result![index].id.toString());
+                                            },
+                                            child: Column(
                                               children: [
                                                 Row(
                                                   mainAxisAlignment: MainAxisAlignment
@@ -524,12 +519,12 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                                   color: AppColors.grey,).paddingOnly(
                                                   top: 15,),
                                               ],
-                                            );
-                                          }),
-                                    );
-                                }
+                                            ),
+                                          );
+                                        }),
+                                  );
                               }
-                          ),
+                            }
                         )
                       ],
                     ),
@@ -593,42 +588,43 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                         Container(
                           height: 1, width: Get.width, color: AppColors.grey,)
                             .paddingOnly(top: 15,),
-                        GestureDetector(
-                          onTap: (){
-                            Get.toNamed(AppRoutes.bookingdetails,
-                                arguments: "Cancel");
-                          },
-                          child:
-                          FutureBuilder(
-                              future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"cancelled" ),
-                              builder: (BuildContext context, snapshot) {
-                                if (snapshot.connectionState == ConnectionState.waiting) {
-                                  return SizedBox(
+                        FutureBuilder(
+                            future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"cancelled" ),
+                            builder: (BuildContext context, snapshot) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                return SizedBox(
+                                  height: Get.height * .7,
+                                  child: const Center(
+                                    child: CircularProgressIndicator(),
+                                  ).paddingOnly(top: 0),
+                                );
+                              }else  if (snapshot.hasError) {
+                                return Center(
+                                  child: Text('Error: ${snapshot.error}'),
+                                );
+                              }else{
+
+
+                                return
+                                  snapshot.data!.result!.isEmpty ?
+                                  SizedBox(
                                     height: Get.height * .7,
                                     child: const Center(
-                                      child: CircularProgressIndicator(),
+                                      child: Text("No data available",style: TextStyle(color: AppColors.white,fontWeight: FontWeight.w600,fontSize: 17),),
                                     ).paddingOnly(top: 0),
-                                  );
-                                }else  if (snapshot.hasError) {
-                                  return Center(
-                                    child: Text('Error: ${snapshot.error}'),
-                                  );
-                                }else{
+                                  ):
+                                  SizedBox(
 
-                                  return
-                                    snapshot.data!.result!.isEmpty ?
-                                    SizedBox(
-                                      height: Get.height * .7,
-                                      child: const Center(
-                                        child: Text("No data available",style: TextStyle(color: AppColors.white,fontWeight: FontWeight.w600,fontSize: 17),),
-                                      ).paddingOnly(top: 0),
-                                    ):
-                                    SizedBox(
-                                      height: Get.height * .68,
-                                      child: ListView.builder(
-                                          itemCount: snapshot.data!.result!.length,
-                                          itemBuilder: (context, index) {
-                                            return Column(
+                                    height: Get.height * .68,
+                                    child: ListView.builder(
+                                        itemCount: snapshot.data!.result!.length,
+                                        itemBuilder: (context, index) {
+                                          return GestureDetector(
+                                            onTap: (){
+                                              Get.toNamed(AppRoutes.bookingdetails,
+                                                  arguments: snapshot.data!.result![index].id.toString());
+                                            },
+                                            child: Column(
                                               children: [
                                                 Row(
                                                   mainAxisAlignment: MainAxisAlignment
@@ -676,12 +672,12 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                                   color: AppColors.grey,).paddingOnly(
                                                   top: 15,),
                                               ],
-                                            );
-                                          }),
-                                    );
-                                }
+                                            ),
+                                          );
+                                        }),
+                                  );
                               }
-                          ),
+                            }
                         )
                       ],
                     ),
