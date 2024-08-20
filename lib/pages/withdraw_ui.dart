@@ -140,13 +140,13 @@ class WithdrawUI extends StatelessWidget {
                       left: Get.width * 0.02, right: Get.width * 0.02),
                   controller.selectedIndex.value == 0
                       ? SizedBox(
-                          height: Get.height,
+                          height: Get.height*.7,
                           width: Get.width,
-                          child: FutureBuilder(
+                          child:
+                          FutureBuilder(
                             future: CallAPI. getUnpaid(trainerId: storage.read("userId").toString()),
                             builder: (BuildContext context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
                                 return const Center(
                                   child: CircularProgressIndicator(),
                                 ).paddingOnly(top: 20);
@@ -154,8 +154,9 @@ class WithdrawUI extends StatelessWidget {
                                 return Center(
                                   child: Text('Error: ${snapshot.error}'),
                                 );
-                              } else if (snapshot.hasData) {
-                                return Column(
+                              } else if (snapshot.data!.result!.isNotEmpty) {
+                                return
+                                  Column(
                                   children: [
                                     Column(
                                       children: [
@@ -324,152 +325,175 @@ class WithdrawUI extends StatelessWidget {
                                 );
                               } else {
                                 return const Center(
-                                  child: Text("Something went wrong"),
-                                );
+                                  child: Text("No unpaid booking available"),
+                                ).paddingOnly(bottom: 0);
                               }
                             },
-                          )).paddingOnly()
+                          )
+                  )
                       : SizedBox(
-                          height: Get.height * .4,
+                          height: Get.height * .7,
                           width: Get.width,
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 1,
-                                width: Get.width,
-                                color: AppColors.lightyGrey,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
+                          child:
+                          FutureBuilder(
+                            future: CallAPI. getPaidSession(trainerId: storage.read("userId").toString()),
+                            builder: (BuildContext context, snapshot) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                ).paddingOnly(top: 20);
+                              } else if (snapshot.hasError) {
+                                return Center(
+                                  child: Text('Error: ${snapshot.error}'),
+                                );
+                              } else if (snapshot.data!.result!.isNotEmpty) {
+                                return
+                                  Column(
                                     children: [
-                                      const Column(
+                                      Container(
+                                        height: 1,
+                                        width: Get.width,
+                                        color: AppColors.lightyGrey,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
-                                            'Yoga session with Richard',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w500),
+                                          Row(
+                                            children: [
+                                              const Column(
+                                                children: [
+                                                  Text(
+                                                    'Yoga session with Richard',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 14,
+                                                        fontWeight: FontWeight.w500),
+                                                  ),
+                                                  Text(
+                                                    '21 Dec . 1.39 pm ',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 12,
+                                                        fontWeight: FontWeight.w300),
+                                                  ),
+                                                ],
+                                              ).paddingOnly(left: Get.width * 0.05),
+                                            ],
                                           ),
-                                          Text(
-                                            '21 Dec . 1.39 pm ',
+                                          const Text(
+                                            'AED 500',
                                             style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w300),
+                                                color: AppColors.yellow,
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 12),
                                           ),
                                         ],
-                                      ).paddingOnly(left: Get.width * 0.05),
-                                    ],
-                                  ),
-                                  const Text(
-                                    'AED 500',
-                                    style: TextStyle(
-                                        color: AppColors.yellow,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 12),
-                                  ),
-                                ],
-                              ).paddingOnly(
-                                  right: Get.width * 0.03,
-                                  top: Get.height * .026,
-                                  bottom: Get.height * .026),
-                              Container(
-                                height: 1,
-                                width: Get.width,
-                                color: AppColors.lightyGrey,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      const Column(
+                                      ).paddingOnly(
+                                          right: Get.width * 0.03,
+                                          top: Get.height * .026,
+                                          bottom: Get.height * .026),
+                                      Container(
+                                        height: 1,
+                                        width: Get.width,
+                                        color: AppColors.lightyGrey,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
-                                            'Yoga session with Richard',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w500),
+                                          Row(
+                                            children: [
+                                              const Column(
+                                                children: [
+                                                  Text(
+                                                    'Yoga session with Richard',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 14,
+                                                        fontWeight: FontWeight.w500),
+                                                  ),
+                                                  Text(
+                                                    '21 Dec . 1.39 pm ',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 12,
+                                                        fontWeight: FontWeight.w300),
+                                                  ),
+                                                ],
+                                              ).paddingOnly(left: Get.width * 0.05),
+                                            ],
                                           ),
-                                          Text(
-                                            '21 Dec . 1.39 pm ',
+                                          const Text(
+                                            'AED 700',
                                             style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w300),
+                                                color: AppColors.yellow,
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 12),
                                           ),
                                         ],
-                                      ).paddingOnly(left: Get.width * 0.05),
-                                    ],
-                                  ),
-                                  const Text(
-                                    'AED 700',
-                                    style: TextStyle(
-                                        color: AppColors.yellow,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 12),
-                                  ),
-                                ],
-                              ).paddingOnly(
-                                  right: Get.width * 0.03,
-                                  top: Get.height * .026,
-                                  bottom: Get.height * .026),
-                              Container(
-                                height: 1,
-                                width: Get.width,
-                                color: AppColors.lightyGrey,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      const Column(
+                                      ).paddingOnly(
+                                          right: Get.width * 0.03,
+                                          top: Get.height * .026,
+                                          bottom: Get.height * .026),
+                                      Container(
+                                        height: 1,
+                                        width: Get.width,
+                                        color: AppColors.lightyGrey,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
-                                            'Yoga session with Richard',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w500),
+                                          Row(
+                                            children: [
+                                              const Column(
+                                                children: [
+                                                  Text(
+                                                    'Yoga session with Richard',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 14,
+                                                        fontWeight: FontWeight.w500),
+                                                  ),
+                                                  Text(
+                                                    '21 Dec . 1.39 pm ',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 12,
+                                                        fontWeight: FontWeight.w300),
+                                                  ),
+                                                ],
+                                              ).paddingOnly(left: Get.width * 0.05),
+                                            ],
                                           ),
-                                          Text(
-                                            '21 Dec . 1.39 pm ',
+                                          const Text(
+                                            'AED 900',
                                             style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w300),
+                                                color: AppColors.yellow,
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 12),
                                           ),
                                         ],
-                                      ).paddingOnly(left: Get.width * 0.05),
+                                      ).paddingOnly(
+                                          right: Get.width * 0.03,
+                                          top: Get.height * .026,
+                                          bottom: Get.height * .026),
+                                      Container(
+                                        height: 1,
+                                        width: Get.width,
+                                        color: AppColors.lightyGrey,
+                                      ),
                                     ],
-                                  ),
-                                  const Text(
-                                    'AED 900',
-                                    style: TextStyle(
-                                        color: AppColors.yellow,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 12),
-                                  ),
-                                ],
-                              ).paddingOnly(
-                                  right: Get.width * 0.03,
-                                  top: Get.height * .026,
-                                  bottom: Get.height * .026),
-                              Container(
-                                height: 1,
-                                width: Get.width,
-                                color: AppColors.lightyGrey,
-                              ),
-                            ],
-                          )),
+                                  );
+                              } else {
+                                return const Center(
+                                  child: Text("No paid booking available"),
+                                ).paddingOnly(bottom: 0);
+                              }
+                            },
+                          )
+                  ),
                 ],
               ),
             ),

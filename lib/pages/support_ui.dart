@@ -1,3 +1,4 @@
+import 'package:endoorphin_trainer/controllers/support_controller.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +8,7 @@ class SupportUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SupportController controller =Get.put(SupportController());
     return Scaffold(
         appBar: myAppBar(
           title: Text(
@@ -40,6 +42,7 @@ class SupportUI extends StatelessWidget {
                       border: Border.all(color: AppColors.grey3),
                       borderRadius: BorderRadius.circular(5)),
                   child: TextField(
+                    controller:controller.nameController,
                     keyboardType: TextInputType.text,
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(30),
@@ -87,6 +90,7 @@ class SupportUI extends StatelessWidget {
                       border: Border.all(color: AppColors.grey3),
                       borderRadius: BorderRadius.circular(5)),
                   child: TextField(
+                    controller: controller.emailController,
                     keyboardType: TextInputType.text,
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(30),
@@ -135,6 +139,7 @@ class SupportUI extends StatelessWidget {
                       border: Border.all(color: AppColors.grey3),
                       borderRadius: BorderRadius.circular(5)),
                   child: TextField(
+                    controller: controller.phoneNumberController,
                     keyboardType: TextInputType.number,
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(30),
@@ -189,6 +194,7 @@ class SupportUI extends StatelessWidget {
                       border: Border.all(color: AppColors.grey3),
                       borderRadius: BorderRadius.circular(5)),
                   child: TextField(
+                    controller: controller.descriptionController,
                     keyboardType: TextInputType.text,
                     inputFormatters: [
                       NoLeadingSpaceFormatter(),
@@ -205,6 +211,7 @@ class SupportUI extends StatelessWidget {
                       contentPadding: const EdgeInsets.all(20),
 
                       fillColor: Colors.transparent,
+
                       hintText: 'Tell us about your problem',
                       hintStyle: Theme.of(context)
                           .textTheme
@@ -232,7 +239,9 @@ class SupportUI extends StatelessWidget {
                 InkButton(child: Text('Send',style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                     color: Colors.black,
                     fontSize: 18,
-                    fontFamily: 'Montserrat'),), onTap: (){},),
+                    fontFamily: 'Montserrat'),), onTap: (){
+                  controller.onSendButton();
+                },),
                 SizedBox(height: Get.height*0.05,)
 
               ],
