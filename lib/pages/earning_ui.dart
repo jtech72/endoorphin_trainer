@@ -9,48 +9,7 @@ class EarningUi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final EarningController controller = Get.put(EarningController());
-    final List<_SalesData> weeklyData = [
-      _SalesData('Sun', 30),
-      _SalesData('Mon', 42),
-      _SalesData('Tue', 54),
-      _SalesData('Wed', 65),
-      _SalesData('Thu', 35),
-      _SalesData('Fri', 50),
-      _SalesData('Sat', 40),
-    ];
-    final List<_SalesData> monthlyData = [
-      _SalesData('1', 300),
-      _SalesData('2', 420),
-      _SalesData('3', 540),
-      _SalesData('4', 200),
-      _SalesData('5', 350),
-      _SalesData('6', 500),
-      _SalesData('7', 300),
-      _SalesData('8', 450),
-      _SalesData('9', 310),
-      _SalesData('10', 420),
-      _SalesData('11', 510),
-      _SalesData('12', 600),
-      _SalesData('13', 450),
-      _SalesData('14', 350),
-      _SalesData('15', 460),
-      _SalesData('16', 210),
-      _SalesData('17', 310),
-      _SalesData('18', 200),
-      _SalesData('19', 400),
-      _SalesData('20', 550),
-      _SalesData('21', 310),
-      _SalesData('22', 100),
-      _SalesData('23', 150),
-      _SalesData('24', 190),
-      _SalesData('25', 310),
-      _SalesData('26', 210),
-      _SalesData('27', 150),
-      _SalesData('28', 200),
-      _SalesData('29', 330),
-      _SalesData('30', 410),
-      _SalesData('31', 600),
-    ];
+
     final currentMonth = DateTime.now().month.obs;
     final currentDay = DateTime.now().weekday.obs;// Current month index
     return Scaffold(
@@ -326,101 +285,136 @@ class EarningUi extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Expanded(
-                          child: GetBuilder<EarningController>(
-                            builder: (controller) {
-                              final List<CartesianSeries<dynamic, dynamic>> seriesList = [
-                                ColumnSeries<_SalesData, String>(
-                                  width: 0.6,
-                                  dataSource: controller.isWeekly.value ? weeklyData : monthlyData,
-                                  xValueMapper: (_SalesData data, _) => data.period,
-                                  yValueMapper: (_SalesData data, _) => data.amount,
-                                  pointColorMapper: (_SalesData data, int index) {
-                                    return index == controller.tappedIndex.value ? AppColors.yellow : Colors.transparent;
-                                  },
+                        FutureBuilder(
 
-                                  borderColor: AppColors.yellow,
-                                  borderWidth: 1,
-                                  borderRadius: BorderRadius.circular(10),
-                                  onPointTap: (ChartPointDetails details) {
-                                    log('Tapped on index: ${details.pointIndex}');
-                                    controller.updateTappedIndex(details.pointIndex!);
-                                  },
-                                ),
-                              ];
-                              final chart = SfCartesianChart(
-                                plotAreaBorderWidth: 0,
-                                borderWidth: 0,
-                                tooltipBehavior: TooltipBehavior(
-                                  canShowMarker: false,
-                                  enable: true,
-                                  color: Colors.white,
-                                  builder: (dynamic data, dynamic point, dynamic series, int pointIndex, int seriesIndex) {
-                                    return Container(
-                                      decoration: BoxDecoration(
-                                        color: AppColors.yellow,
-                                        borderRadius: BorderRadius.circular(5),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: const Offset(0, 3),
-                                          ),
-                                        ],
-                                      ),
-                                      padding: const EdgeInsets.all(8),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            '${controller.months[currentMonth.value - 1]} : ${data.period}',
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,color: Colors.black,
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 4),
-                                          Text(
-                                            'Amount: AED ${data.amount.toStringAsFixed(2)}',
-                                            style: const TextStyle(
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                ),
-                                primaryXAxis:
+                          future:CallAPI.getMonthlyData(trainerId: storage.read("userId").toString()),
+                          builder: (BuildContext context, snapshot) {
+                            if (snapshot.connectionState == ConnectionState.waiting) {
+                              return
+                                SizedBox(
+                                  height: Get.height * .3,
+                                  child: const Center(
+                                    child: CircularProgressIndicator(),
+                                  ).paddingOnly(top: 0),
+                                );
+                            }
+                            else  if (snapshot.hasData ) {
+                              controller.monthlyData= snapshot.data!.revenueByDay!;
+                              return
+                                Expanded(
+                                  child: GetBuilder<EarningController>(
+                                    builder: (controller) {
+                                      final List<CartesianSeries<dynamic, dynamic>> seriesList = [
+                                        ColumnSeries<dynamic, String>(
+                                          width: 0.6,
+                                          dataSource: controller.isWeekly.value ?controller. weeklyData :controller. monthlyData,
+                                          xValueMapper: (dynamic data, _) => data.date,
+                                          yValueMapper: (dynamic data, _) => data.revenue,
+                                          pointColorMapper: (dynamic data, int index) {
+                                            return index == controller.tappedIndex.value ? AppColors.yellow : Colors.transparent;
+                                          },
+                                          borderColor: AppColors.yellow,
+                                          borderWidth: 1,
+                                          borderRadius: BorderRadius.circular(10),
+                                          onPointTap: (ChartPointDetails details) {
+                                            log('Tapped on index: ${details.pointIndex}');
+                                            controller.updateTappedIndex(details.pointIndex!);
+                                          },
+                                        ),
+                                      ];
+                                      final chart = SfCartesianChart(
+                                        plotAreaBorderWidth: 0,
+                                        borderWidth: 0,
+                                        tooltipBehavior: TooltipBehavior(
+                                          canShowMarker: false,
+                                          enable: true,
+                                          color: Colors.white,
+                                          builder: (dynamic data, dynamic point, dynamic series, int pointIndex, int seriesIndex) {
+                                            return Container(
+                                              decoration: BoxDecoration(
+                                                color: AppColors.yellow,
+                                                borderRadius: BorderRadius.circular(5),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey.withOpacity(0.5),
+                                                    spreadRadius: 2,
+                                                    blurRadius: 5,
+                                                    offset: const Offset(0, 3),
+                                                  ),
+                                                ],
+                                              ),
+                                              padding: const EdgeInsets.all(8),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    '${controller.months[currentMonth.value - 1]} : ${data.period}',
+                                                    style: const TextStyle(
+                                                      fontWeight: FontWeight.bold,color: Colors.black,
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 4),
+                                                  Text(
+                                                    'Amount: AED ${data.amount.toStringAsFixed(2)}',
+                                                    style: const TextStyle(
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                        primaryXAxis:
 
-                                CategoryAxis(
-                                  labelStyle: TextStyle(color: AppColors.impgrey),
-                                  majorGridLines: MajorGridLines(width: 0),
-                                ),
-                                primaryYAxis: NumericAxis(
-                                  isVisible: false,
-                                  labelStyle: const TextStyle(color: AppColors.impgrey),
-                                  majorGridLines: const MajorGridLines(width: 0),
-                                  minimum: 0,
-                                  maximum: controller.isWeekly.value ? 70 : 600,
-                                  interval: controller.isWeekly.value ? 10 : 100,
-                                ),
-                                series: seriesList,
+                                        CategoryAxis(
+                                          labelStyle: TextStyle(color: AppColors.impgrey),
+                                          majorGridLines: MajorGridLines(width: 0),
+                                        ),
+                                        primaryYAxis: NumericAxis(
+                                          isVisible: false,
+                                          labelStyle: const TextStyle(color: AppColors.impgrey),
+                                          majorGridLines: const MajorGridLines(width: 0),
+                                          minimum: 0,
+                                          maximum: controller.isWeekly.value ? 70 : 600,
+                                          interval: controller.isWeekly.value ? 10 : 100,
+                                        ),
+                                        series: seriesList,
+                                      );
+
+                                      return controller.isWeekly.value
+                                          ? chart
+                                          : SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: SizedBox(
+                                          width:controller. monthlyData.length * 50.0,
+                                          child: chart,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                );
+
+                            } else  if (snapshot.hasError) {
+                              return Center(
+                                child: Text('Error: ${snapshot.error}'),
                               );
-
-                              return controller.isWeekly.value
-                                  ? chart
-                                  : SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: SizedBox(
-                                  width: monthlyData.length * 50.0,
-                                  child: chart,
+                            }
+                            else  if (!snapshot.hasData) {
+                              return SizedBox(
+                                height: Get.height * .4,
+                                child: const Center(
+                                  child: Text(
+                                    'No data available',
+                                    style: TextStyle(color: AppColors.white),
+                                  ),
                                 ),
                               );
-                            },
-                          ),
+                            }
+                            return const SizedBox.shrink();
+                          },
                         ),
                       ],
                     ),

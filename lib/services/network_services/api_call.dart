@@ -19,8 +19,10 @@ import '../models/request_models/update_bank_detail_model.dart';
 import '../models/request_models/withdraw_request_model.dart';
 import '../models/response_models/get_bank_detail.dart';
 import '../models/response_models/get_booking_history_model.dart';
+import '../models/response_models/get_monthly_data.dart';
 import '../models/response_models/get_session_detail_model.dart';
 import '../models/response_models/get_trainer_doc_status_model.dart';
+import '../models/response_models/get_trianer_all_data.dart';
 import '../models/response_models/get_unpaid_withdraw_model.dart';
 import '../models/response_models/profile_detail_model.dart';
 import 'api_manager.dart';
@@ -540,7 +542,26 @@ class CallAPI {
   static Future<GetUnpaidBookingModel> getUnpaid({required String trainerId}) async {
     try {
       String endPoint = Endpoints.epUnpaid;
-      String fullUrl = "$endPoint?id=$trainerId";
+      String fullUrl = "$endPoint$trainerId";
+      Map<String, dynamic> json = await APIManager().getAllCall(endPoint: fullUrl);
+      GetUnpaidBookingModel responseModel = GetUnpaidBookingModel.fromJson(json);
+      if (responseModel.status == 200) {
+        log("CALLING_ENDPOINT: $fullUrl ,RESPONSE:  $json");
+        return responseModel;
+      } else {
+        throw Exception("Error: ${responseModel.status}");
+      }
+    } catch (e, st) {
+      log(e.toString());
+      log(st.toString());
+      return GetUnpaidBookingModel(status: 500); // Return an error status
+    }
+  }
+  /// get unpaid request
+  static Future<GetUnpaidBookingModel> getPaidSession({required String trainerId}) async {
+    try {
+      String endPoint = Endpoints.epGetPaid;
+      String fullUrl = "$endPoint$trainerId";
       Map<String, dynamic> json = await APIManager().getAllCall(endPoint: fullUrl);
       GetUnpaidBookingModel responseModel = GetUnpaidBookingModel.fromJson(json);
       if (responseModel.status == 200) {
@@ -613,6 +634,71 @@ class CallAPI {
       return result;
     }
   }
+  /// Post Withdraw Request
+  static Future<WithdrawRequestModel> supportRequest({required var request}) async {
+    WithdrawRequestModel result = WithdrawRequestModel();
+    try {
+      Map<dynamic, dynamic> json = await APIManager().postAPICall(
+        endpoint: Endpoints.epSupport,
+        request: request,
+      );
 
+      WithdrawRequestModel responseModel = WithdrawRequestModel.fromJson(json);
+
+      if (responseModel.status == 200) {
+        result = responseModel;
+        printResult(
+            screenName: 'API CALL',
+            msg: "CALLING ENDPOINTS ${Endpoints.epLogin}, RESULT:$json");
+
+        return result;
+      } else {
+        result = responseModel;
+        return result;
+      }
+    } on Exception catch (e, st) {
+      printResult(
+          screenName: 'API CALL', msg: "", error: e.toString(), stackTrace: st);
+      return result;
+    }
+  }
+  /// get unpaid request
+  static Future<GetTrainerAllData> getTrainerAllData({required String trainerId}) async {
+    try {
+      String endPoint = Endpoints.epTrainerData;
+      String fullUrl = "$endPoint$trainerId";
+      Map<String, dynamic> json = await APIManager().getAllCall(endPoint: fullUrl);
+      GetTrainerAllData responseModel = GetTrainerAllData.fromJson(json);
+      if (responseModel.status == 200) {
+        log("CALLING_ENDPOINT: $fullUrl ,RESPONSE:  $json");
+        return responseModel;
+      } else {
+        throw Exception("Error: ${responseModel.status}");
+      }
+    } catch (e, st) {
+      log(e.toString());
+      log(st.toString());
+      return GetTrainerAllData(status: 500); // Return an error status
+    }
+  }
+  /// GET MONTHLY DATA
+  static Future<GetMonthlyData> getMonthlyData({required String trainerId}) async {
+    try {
+      String endPoint = Endpoints.epGetMonthlyData;
+      String fullUrl = "$endPoint$trainerId";
+      Map<String, dynamic> json = await APIManager().getAllCall(endPoint: fullUrl);
+      GetMonthlyData responseModel = GetMonthlyData.fromJson(json);
+      if (responseModel.status == 200) {
+        log("CALLING_ENDPOINT: $fullUrl ,RESPONSE:  $json");
+        return responseModel;
+      } else {
+        throw Exception("Error: ${responseModel.status}");
+      }
+    } catch (e, st) {
+      log(e.toString());
+      log(st.toString());
+      return GetMonthlyData(status: 500); // Return an error status
+    }
+  }
 }
 

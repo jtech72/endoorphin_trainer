@@ -1,4 +1,5 @@
 import 'package:endoorphin_trainer/controllers/home_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_page_view_indicator/flutter_page_view_indicator.dart';
 import '../utils/app_drawer.dart';
@@ -90,9 +91,9 @@ class HomeUi extends StatelessWidget {
                     controller.currentIndex.value = index;
                   },
                   children: [
-                    Image.asset(ImagesPaths.homepackage, fit: BoxFit.fill),
-                    Image.asset(ImagesPaths.homepackage, fit: BoxFit.fill),
-                    Image.asset(ImagesPaths.homepackage, fit: BoxFit.fill),
+                    Image.asset(ImagesPaths.homepackage, fit: BoxFit.contain),
+                    Image.asset(ImagesPaths.homepackage, fit: BoxFit.contain),
+                    Image.asset(ImagesPaths.homepackage, fit: BoxFit.contain),
                   ],
                 ),
               ),
@@ -104,7 +105,7 @@ class HomeUi extends StatelessWidget {
                   onTap: () {
                     controller.pageController.animateToPage(
                       controller.currentIndex.value,
-                      duration: Duration(milliseconds: 300),
+                      duration: Duration(seconds: 3),
                       curve: Curves.easeInOut,
                     );
                   },
@@ -191,91 +192,131 @@ class HomeUi extends StatelessWidget {
                   SizedBox(
                     height: Get.height*0.02,
                   ),
-                  SizedBox(
-                    height: Get.height * 0.45,
+                  Container(
+                    height: Get.height * 0.42,
                     width: Get.width,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: GridView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: controller.quickGlanceList.length,
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 20,
-                          mainAxisExtent: 155,
-                        ),
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            splashColor: Colors.transparent,
-                            onTap: () {
-                              controller.selectedIndex.value = index;
-                              if (controller.selectedIndex.value == 0) {
-                                Get.toNamed(AppRoutes.earning);
-                              } else if (controller.selectedIndex.value == 1) {
-                                Get.toNamed(AppRoutes.booking);
+                      child:
+                      FutureBuilder(
 
-                              } else if (controller.selectedIndex.value == 2) {
-                                Get.toNamed(AppRoutes.booking);
-                              } else if (controller.selectedIndex.value == 3) {
-                                Get.toNamed(AppRoutes.booking);
-                              } else {
-                                Get.toNamed(AppRoutes.bookingdetails);
-                              }
-                            },
-                            child:Obx(
-                                  () => Container(
-                                height: Get.height * 0.15,
-                                width: Get.width * 0.42,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: controller.selectedIndex.value ==index?
-                                  AppColors.yellow: AppColors.greyButton,
-
+                        future:controller.onDateChange(),
+                        builder: (BuildContext context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return
+                              SizedBox(
+                                height: Get.height * .7,
+                                child: const Center(
+                                  child: CircularProgressIndicator(),
+                                ).paddingOnly(top: 0),
+                              );
+                          }
+                          else  if (snapshot.hasData ) {
+                            controller.trainerSessionDetails.value = controller.trainerSessionDetails.value;
+                            return
+                              GridView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: controller.quickGlanceList.length,
+                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 10,
+                                  mainAxisSpacing: 20,
+                                  mainAxisExtent: 155,
                                 ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.center,
-                                      height: Get.height * 0.06,
-                                      width: Get.width * 0.14,
-                                      decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: AppColors.lightBlack,
-                                      ),
-                                      child: Text(
-                                        "0",
-                                        style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                                itemBuilder: (context, index) {
+                                  return InkWell(
+                                    splashColor: Colors.transparent,
+                                    onTap: () {
+                                      controller.selectedIndex.value = index;
+                                      if (controller.selectedIndex.value == 0) {
+                                        Get.toNamed(AppRoutes.earning);
+                                      } else if (controller.selectedIndex.value == 1) {
+                                        Get.toNamed(AppRoutes.booking);
 
-                                          color: AppColors.yellow,
-                                          fontWeight: FontWeight.w600,
+                                      } else if (controller.selectedIndex.value == 2) {
+                                        Get.toNamed(AppRoutes.booking);
+                                      } else if (controller.selectedIndex.value == 3) {
+                                        Get.toNamed(AppRoutes.booking);
+                                      } else {
+                                        Get.toNamed(AppRoutes.bookingdetails);
+                                      }
+                                    },
+                                    child:Obx(
+                                          () => Container(
+                                        height: Get.height * 0.15,
+                                        width: Get.width * 0.42,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20),
+                                          color: controller.selectedIndex.value ==index?
+                                          AppColors.yellow: AppColors.greyButton,
+
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              alignment: Alignment.center,
+                                              height: Get.height * 0.06,
+                                              width: Get.width * 0.14,
+                                              decoration: const BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: AppColors.lightBlack,
+                                              ),
+                                              child: Text(
+                                                index == 2 ? "0" :
+                                                index == 0 ?controller.trainerSessionDetails.value.walletAmount.toString() :
+                                                index == 3 ? controller.trainerSessionDetails.value.upcomingBookingCount.toString() : controller.trainerSessionDetails.value.totalSession.toString(),
+                                                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+
+                                                  color: AppColors.yellow,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(height: 8), // Adjust the gap here
+                                            Text(
+                                              index == 2 ? "Reward" :
+                                              index == 0 ? "Total" :
+                                              index == 3 ? "Upcoming" : "Total",
+                                              style: Theme.of(context).textTheme.titleLarge!.copyWith(color: controller.selectedIndex.value ==index?
+                                              AppColors.black: AppColors.white,),
+                                            ),
+
+                                            const SizedBox(height: 4), // Adjust the gap here
+                                            Text(
+                                              controller.quickGlanceList[index],
+                                              style: Theme.of(context).textTheme.titleLarge!.copyWith(color: controller.selectedIndex.value ==index?
+                                              AppColors.black: AppColors.white,),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(height: 8), // Adjust the gap here
-                                    Text(
-                                      index == 2 ? "Reward" :
-                                      index == 0 ? "Total" :
-                                      index == 3 ? "Upcoming" : "Total",
-                                      style: Theme.of(context).textTheme.titleLarge!.copyWith(color: controller.selectedIndex.value ==index?
-                                      AppColors.black: AppColors.white,),
-                                    ),
+                                  );
+                                },
+                              );
 
-                                    const SizedBox(height: 4), // Adjust the gap here
-                                    Text(
-                                      controller.quickGlanceList[index],
-                                      style: Theme.of(context).textTheme.titleLarge!.copyWith(color: controller.selectedIndex.value ==index?
-                                      AppColors.black: AppColors.white,),
-                                    ),
-                                  ],
+                          } else  if (snapshot.hasError) {
+                            return Center(
+                              child: Text('Error: ${snapshot.error}'),
+                            );
+                          }
+                          else  if (!snapshot.hasData) {
+                            return SizedBox(
+                              height: Get.height * .7,
+                              child: const Center(
+                                child: Text(
+                                  'No data available',
+                                  style: TextStyle(color: AppColors.white),
                                 ),
                               ),
-                            ),
-                          );
+                            );
+                          }
+                          return const SizedBox.shrink();
                         },
                       ),
+
                     ),
                   ),
 

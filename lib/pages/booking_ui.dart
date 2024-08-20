@@ -147,7 +147,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                               }else{
 
                                 return
-                                  snapshot.data!.result ==  null ?
+                                  snapshot.data!.result!.isEmpty ?
                                   SizedBox(
                                     height: Get.height * .7,
                                     child: const Center(
@@ -194,8 +194,10 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                                                   .of(context)
                                                                   .textTheme
                                                                   .displayLarge,),
-                                                            Text(
-                                                              controller.formatDateTime(snapshot.data!.result![index].createdAt.toString(),snapshot.data!.result![index].createdAt.toString()) ,
+                                                            Text(DateFormat('dd MMM yyyy, h:mm a')
+                                                                .format(DateTime.parse(snapshot!
+                                                                .data!.result![index].createdAt
+                                                                .toString())),
                                                               style: Theme
                                                                   .of(context)
                                                                   .textTheme
@@ -348,8 +350,10 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                                                   .of(context)
                                                                   .textTheme
                                                                   .displayLarge,),
-                                                            Text(
-                                                              controller.formatDateTime(snapshot.data!.result![index].createdAt.toString(),snapshot.data!.result![index].createdAt.toString()) ,
+                                                            Text(DateFormat('dd MMM yyyy, h:mm a')
+                                                                .format(DateTime.parse(snapshot!
+                                                                .data!.result![index].createdAt
+                                                                .toString())),
                                                               style: Theme
                                                                   .of(context)
                                                                   .textTheme
@@ -502,7 +506,10 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                                                   .textTheme
                                                                   .displayLarge,),
                                                             Text(
-                                                              controller.formatDateTime(snapshot.data!.result![index].createdAt.toString(),snapshot.data!.result![index].createdAt.toString()) ,
+                                                              DateFormat('dd MMM yyyy, h:mm a')
+                                                                  .format(DateTime.parse(snapshot!
+                                                                  .data!.result![index].createdAt
+                                                                  .toString())),
                                                               style: Theme
                                                                   .of(context)
                                                                   .textTheme
@@ -654,8 +661,10 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                                                   .of(context)
                                                                   .textTheme
                                                                   .displayLarge,),
-                                            Text(
-                                            controller.formatDateTime(snapshot.data!.result![index].createdAt.toString(),snapshot.data!.result![index].createdAt.toString()) ,
+                                            Text(DateFormat('dd MMM yyyy, h:mm a')
+                                                .format(DateTime.parse(snapshot!
+                                                .data!.result![index].createdAt
+                                                .toString())),
                                                                                                          style: Theme
                                                                   .of(context)
                                                                   .textTheme

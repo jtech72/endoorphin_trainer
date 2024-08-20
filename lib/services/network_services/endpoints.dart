@@ -45,7 +45,13 @@ class Endpoints{
   /// POST REVIEW
   static const String epPostReviewUser="review/saveReview";
   /// get Unpaid request
-
   static const String epUnpaid="trainer/getAllUnpaidBookingForTrainers?trainerId=";
-
+  /// get paid request
+  static const String epGetPaid="trainer/getAllPaidBookingForTrainers?trainerId=";
+  /// TRAINER DATA
+  static const String epTrainerData="trainer/trainerDetailsCount?trainerId=";
+  /// TRAINER MONTHLY DATA
+  static const String epGetMonthlyData="trainer/revenueChartForMonthlyWiseDetailsForTrainer?trainerId=";
+  /// SUPPORT
+  static const String epSupport="support/raiseTicket";
 }
