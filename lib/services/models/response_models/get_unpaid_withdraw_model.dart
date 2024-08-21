@@ -28,22 +28,145 @@ class GetUnpaidBookingModel {
 }
 
 class Result {
+  int? id;
+  int? userId;
+  int? trainerId;
+  dynamic packageName;
   int? bookingAmount;
+  String? categoryName;
+  int? sessionTime;
+  String? startSession;
+  String? endSession;
+  dynamic totalTimePeriod;
+  String? bookingStatus;
+  dynamic bookingRemark;
+  String? bookingType;
+  dynamic bookingCancellationReason;
+  int? sessionPin;
+  int? orderId;
+  dynamic paymentDetails;
+  int? createOrderId;
+  String? trainerName;
+  String? userName;
+  bool? trainerOnTheWay;
+  dynamic scheduleDate;
+  String? scheduletime;
+  dynamic paymentType;
+  int? categoryId;
+  bool? pinStatus;
+  dynamic trainerPaymentRequest;
+  dynamic paidStatus;
+  dynamic paymentAttachment;
+  dynamic paymentId;
   String? createdAt;
+  String? updatedAt;
   User? user;
 
-  Result({this.bookingAmount, this.createdAt, this.user});
+  Result(
+      {this.id,
+        this.userId,
+        this.trainerId,
+        this.packageName,
+        this.bookingAmount,
+        this.categoryName,
+        this.sessionTime,
+        this.startSession,
+        this.endSession,
+        this.totalTimePeriod,
+        this.bookingStatus,
+        this.bookingRemark,
+        this.bookingType,
+        this.bookingCancellationReason,
+        this.sessionPin,
+        this.orderId,
+        this.paymentDetails,
+        this.createOrderId,
+        this.trainerName,
+        this.userName,
+        this.trainerOnTheWay,
+        this.scheduleDate,
+        this.scheduletime,
+        this.paymentType,
+        this.categoryId,
+        this.pinStatus,
+        this.trainerPaymentRequest,
+        this.paidStatus,
+        this.paymentAttachment,
+        this.paymentId,
+        this.createdAt,
+        this.updatedAt,
+        this.user});
 
   Result.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    userId = json['userId'];
+    trainerId = json['trainerId'];
+    packageName = json['packageName'];
     bookingAmount = json['bookingAmount'];
+    categoryName = json['categoryName'];
+    sessionTime = json['sessionTime'];
+    startSession = json['startSession'];
+    endSession = json['endSession'];
+    totalTimePeriod = json['totalTimePeriod'];
+    bookingStatus = json['bookingStatus'];
+    bookingRemark = json['bookingRemark'];
+    bookingType = json['bookingType'];
+    bookingCancellationReason = json['bookingCancellationReason'];
+    sessionPin = json['sessionPin'];
+    orderId = json['orderId'];
+    paymentDetails = json['paymentDetails'];
+    createOrderId = json['createOrderId'];
+    trainerName = json['trainerName'];
+    userName = json['userName'];
+    trainerOnTheWay = json['trainerOnTheWay'];
+    scheduleDate = json['scheduleDate'];
+    scheduletime = json['scheduletime'];
+    paymentType = json['paymentType'];
+    categoryId = json['categoryId'];
+    pinStatus = json['pinStatus'];
+    trainerPaymentRequest = json['trainerPaymentRequest'];
+    paidStatus = json['paidStatus'];
+    paymentAttachment = json['paymentAttachment'];
+    paymentId = json['paymentId'];
     createdAt = json['createdAt'];
+    updatedAt = json['updatedAt'];
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['userId'] = this.userId;
+    data['trainerId'] = this.trainerId;
+    data['packageName'] = this.packageName;
     data['bookingAmount'] = this.bookingAmount;
+    data['categoryName'] = this.categoryName;
+    data['sessionTime'] = this.sessionTime;
+    data['startSession'] = this.startSession;
+    data['endSession'] = this.endSession;
+    data['totalTimePeriod'] = this.totalTimePeriod;
+    data['bookingStatus'] = this.bookingStatus;
+    data['bookingRemark'] = this.bookingRemark;
+    data['bookingType'] = this.bookingType;
+    data['bookingCancellationReason'] = this.bookingCancellationReason;
+    data['sessionPin'] = this.sessionPin;
+    data['orderId'] = this.orderId;
+    data['paymentDetails'] = this.paymentDetails;
+    data['createOrderId'] = this.createOrderId;
+    data['trainerName'] = this.trainerName;
+    data['userName'] = this.userName;
+    data['trainerOnTheWay'] = this.trainerOnTheWay;
+    data['scheduleDate'] = this.scheduleDate;
+    data['scheduletime'] = this.scheduletime;
+    data['paymentType'] = this.paymentType;
+    data['categoryId'] = this.categoryId;
+    data['pinStatus'] = this.pinStatus;
+    data['trainerPaymentRequest'] = this.trainerPaymentRequest;
+    data['paidStatus'] = this.paidStatus;
+    data['paymentAttachment'] = this.paymentAttachment;
+    data['paymentId'] = this.paymentId;
     data['createdAt'] = this.createdAt;
+    data['updatedAt'] = this.updatedAt;
     if (this.user != null) {
       data['user'] = this.user!.toJson();
     }
@@ -59,23 +182,23 @@ class User {
   String? email;
   String? phoneNumber;
   String? token;
-  Null? sessionCode;
-  Null? gender;
+  dynamic sessionCode;
+  dynamic gender;
   String? deviceId;
   String? profileImg;
-  Null? creditAmount;
-  Null? activeStatus;
-  Null? otp;
+  dynamic creditAmount;
+  dynamic activeStatus;
+  dynamic otp;
   bool? status;
-  Null? nickName;
-  Null? professionalTitle;
-  Null? yearExperience;
-  Null? areaExpertise;
-  Null? funFact;
-  Null? quote;
-  Null? bio;
-  int? reviewCount;
-  int? averageReview;
+  dynamic nickName;
+  dynamic professionalTitle;
+  dynamic yearExperience;
+  dynamic areaExpertise;
+  dynamic funFact;
+  dynamic quote;
+  dynamic bio;
+  dynamic reviewCount;
+  dynamic averageReview;
   String? createdAt;
   String? updatedAt;
   int? roleId;

@@ -48,10 +48,16 @@ class Endpoints{
   static const String epUnpaid="trainer/getAllUnpaidBookingForTrainers?trainerId=";
   /// get paid request
   static const String epGetPaid="trainer/getAllPaidBookingForTrainers?trainerId=";
+  /// Post Requested request
+  static const String epWithDrawalReq="trainer/trainerSendWithdrawRequest";
   /// TRAINER DATA
   static const String epTrainerData="trainer/trainerDetailsCount?trainerId=";
   /// TRAINER MONTHLY DATA
   static const String epGetMonthlyData="trainer/revenueChartForMonthlyWiseDetailsForTrainer?trainerId=";
+  /// TRAINER MONTHLY DATA
+  static const String epGetWeeklyData="trainer/revenueWeekleyChartDetailsForTrainer?trainerId=";
   /// SUPPORT
   static const String epSupport="support/raiseTicket";
+  /// SUPPORT
+  static const String epGetWalletAmount="users/getWalletAmount?userId=";
 }

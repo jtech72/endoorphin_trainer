@@ -1,31 +1,22 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
 import '../services/models/request_models/withdraw_request_model.dart';
 class WithdrawController extends GetxController {
-  var isChecked1 = false.obs;
-  var isChecked2 = false.obs;
-  var isChecked3 = false.obs;
   RxInt selectedIndex = 0.obs;
-
-  // Data to be posted
-  var bookingId = [];
-
-  void toggleCheckbox1() {
-    isChecked1.value = !isChecked1.value;
+  var selectedItems = <String>[].obs;
+  void toggleSelection(String id) {
+    if (selectedItems.contains(id)) {
+      selectedItems.remove(id);
+    } else {
+      selectedItems.add(id);
+    }
   }
 
-  void toggleCheckbox2() {
-    isChecked2.value = !isChecked2.value;
-  }
-
-  void toggleCheckbox3() {
-    isChecked3.value = !isChecked3.value;
-  }
 
   // Function to post data
   Future<void> postWithdrawRequest() async {
     var request = {
       "trainerId":"${storage.read("userId")}",
-      "bookingId": bookingId,
+      "bookingId": selectedItems.value,
     };
 
     try {

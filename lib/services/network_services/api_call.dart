@@ -24,6 +24,7 @@ import '../models/response_models/get_session_detail_model.dart';
 import '../models/response_models/get_trainer_doc_status_model.dart';
 import '../models/response_models/get_trianer_all_data.dart';
 import '../models/response_models/get_unpaid_withdraw_model.dart';
+import '../models/response_models/get_weekly_data_model.dart';
 import '../models/response_models/profile_detail_model.dart';
 import 'api_manager.dart';
 import 'endpoints.dart';
@@ -557,8 +558,27 @@ class CallAPI {
       return GetUnpaidBookingModel(status: 500); // Return an error status
     }
   }
-  /// get unpaid request
+  /// get Paid request
   static Future<GetUnpaidBookingModel> getPaidSession({required String trainerId}) async {
+    try {
+      String endPoint = Endpoints.epGetPaid;
+      String fullUrl = "$endPoint$trainerId";
+      Map<String, dynamic> json = await APIManager().getAllCall(endPoint: fullUrl);
+      GetUnpaidBookingModel responseModel = GetUnpaidBookingModel.fromJson(json);
+      if (responseModel.status == 200) {
+        log("CALLING_ENDPOINT: $fullUrl ,RESPONSE:  $json");
+        return responseModel;
+      } else {
+        throw Exception("Error: ${responseModel.status}");
+      }
+    } catch (e, st) {
+      log(e.toString());
+      log(st.toString());
+      return GetUnpaidBookingModel(status: 500); // Return an error status
+    }
+  }
+  /// get Requested request
+  static Future<GetUnpaidBookingModel> getRequestedSession({required String trainerId}) async {
     try {
       String endPoint = Endpoints.epGetPaid;
       String fullUrl = "$endPoint$trainerId";
@@ -700,5 +720,43 @@ class CallAPI {
       return GetMonthlyData(status: 500); // Return an error status
     }
   }
+  /// GET WEEKLY DATA
+  static Future<GetWeeklyDataModel> getWeeklyData({required String trainerId}) async {
+    try {
+      String endPoint = Endpoints.epGetWeeklyData;
+      String fullUrl = "$endPoint$trainerId";
+      Map<String, dynamic> json = await APIManager().getAllCall(endPoint: fullUrl);
+      GetWeeklyDataModel responseModel = GetWeeklyDataModel.fromJson(json);
+      if (responseModel.status ==200) {
+        log("CALLING_ENDPOINT: $fullUrl ,RESPONSE:  $json");
+        return responseModel;
+      } else {
+        throw Exception("Error: ${responseModel}");
+      }
+    } catch (e, st) {
+      log(e.toString());
+      log(st.toString());
+      return GetWeeklyDataModel(); // Return an error status
+    }
+  }
+  /// GET WALLET AMOUNT DATA
+  // static Future<GetWeeklyDataModel> getWalletAmount({required String trainerId}) async {
+  //   try {
+  //     String endPoint = Endpoints.epGetWalletAmount;
+  //     String fullUrl = "$endPoint$trainerId";
+  //     Map<String, dynamic> json = await APIManager().getAllCall(endPoint: fullUrl);
+  //     GetWeeklyDataModel responseModel = GetWeeklyDataModel.fromJson(json);
+  //     if (responseModel.currentWeek!.dailyRevenue!.isNotEmpty) {
+  //       log("CALLING_ENDPOINT: $fullUrl ,RESPONSE:  $json");
+  //       return responseModel;
+  //     } else {
+  //       throw Exception("Error: ${responseModel}");
+  //     }
+  //   } catch (e, st) {
+  //     log(e.toString());
+  //     log(st.toString());
+  //     return GetWeeklyDataModel(); // Return an error status
+  //   }
+  // }
 }
 

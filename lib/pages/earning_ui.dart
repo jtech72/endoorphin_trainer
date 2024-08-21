@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:endoorphin_trainer/controllers/earning_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 class EarningUi extends StatelessWidget {
   const EarningUi({super.key});
@@ -277,7 +278,7 @@ class EarningUi extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Text(
-                            controller.isWeekly.value ? 'AED 1959.90' : 'AED 7950.90',
+                          'AED ${controller.totalEarnings.value}',
                             style: const TextStyle(
                               color: AppColors.yellow,
                               fontWeight: FontWeight.w700,
@@ -285,8 +286,142 @@ class EarningUi extends StatelessWidget {
                             ),
                           ),
                         ),
+                        controller.isWeekly.value ?
                         FutureBuilder(
+                          future:CallAPI.getWeeklyData(trainerId: storage.read("userId").toString()),
+                          builder: (BuildContext context, snapshot) {
+                            if (snapshot.connectionState == ConnectionState.waiting) {
+                              return
+                                SizedBox(
+                                  height: Get.height * .3,
+                                  child: const Center(
+                                    child: CircularProgressIndicator(),
+                                  ).paddingOnly(top: 0),
+                                );
+                            }
+                            else  if (snapshot.hasData ) {
+                              SchedulerBinding.instance.addPostFrameCallback((_) {
+                                controller.weeklyData = snapshot.data!.dailyRevenue!;
+                                controller.totalSession.value = snapshot.data!.totalSession.toString();
+                                controller.totalEarnings.value = snapshot.data!.totalRevenue.toString();
+                              });
+                              return
+                                Expanded(
+                                  child: GetBuilder<EarningController>(
+                                    builder: (controller) {
+                                      final List<CartesianSeries<dynamic, dynamic>> seriesList = [
+                                        ColumnSeries<dynamic, String>(
+                                          width: 0.6,
+                                          dataSource: controller. weeklyData ,
+                                          xValueMapper: (dynamic data, _) => data.dayName,
+                                          yValueMapper: (dynamic data, _) => data.revenue,
+                                          pointColorMapper: (dynamic data, int index) {
+                                            return index == controller.tappedIndex.value ? AppColors.yellow : Colors.transparent;
+                                          },
+                                          borderColor: AppColors.yellow,
+                                          borderWidth: 1,
+                                          borderRadius: BorderRadius.circular(10),
+                                          onPointTap: (ChartPointDetails details) {
+                                            log('Tapped on index: ${details.pointIndex}');
+                                            controller.updateTappedIndex(details.pointIndex!);
+                                          },
+                                        ),
+                                      ];
+                                      final chart = SfCartesianChart(
+                                        plotAreaBorderWidth: 0,
+                                        borderWidth: 0,
+                                        tooltipBehavior: TooltipBehavior(
+                                          canShowMarker: false,
+                                          enable: true,
+                                          color: Colors.white,
+                                          builder: (dynamic data, dynamic point, dynamic series, int pointIndex, int seriesIndex) {
+                                            return Container(
+                                              decoration: BoxDecoration(
+                                                color: AppColors.yellow,
+                                                borderRadius: BorderRadius.circular(5),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey.withOpacity(0.5),
+                                                    spreadRadius: 2,
+                                                    blurRadius: 5,
+                                                    offset: const Offset(0, 3),
+                                                  ),
+                                                ],
+                                              ),
+                                              padding: const EdgeInsets.all(8),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    '${controller.months[currentMonth.value - 1]} : ${data.period}',
+                                                    style: const TextStyle(
+                                                      fontWeight: FontWeight.bold,color: Colors.black,
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 4),
+                                                  Text(
+                                                    'Amount: AED ${data.amount.toStringAsFixed(2)}',
+                                                    style: const TextStyle(
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                        primaryXAxis:
 
+                                        CategoryAxis(
+                                          labelStyle: TextStyle(color: AppColors.impgrey),
+                                          majorGridLines: MajorGridLines(width: 0),
+                                        ),
+                                        primaryYAxis: NumericAxis(
+                                          isVisible: false,
+                                          labelStyle: const TextStyle(color: AppColors.impgrey),
+                                          majorGridLines: const MajorGridLines(width: 0),
+                                          minimum: 0,
+                                          maximum: controller.isWeekly.value ? 70 : 600,
+                                          interval: controller.isWeekly.value ? 10 : 100,
+                                        ),
+                                        series: seriesList,
+                                      );
+
+                                      return controller.isWeekly.value
+                                          ? chart
+                                          : SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: SizedBox(
+                                          width:controller. monthlyData.length * 50.0,
+                                          child: chart,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                );
+
+                            } else  if (snapshot.hasError) {
+                              return Center(
+                                child: Text('Error: ${snapshot.error}'),
+                              );
+                            }
+                            else  if (!snapshot.hasData) {
+                              return SizedBox(
+                                height: Get.height * .4,
+                                child: const Center(
+                                  child: Text(
+                                    'No data available',
+                                    style: TextStyle(color: AppColors.white),
+                                  ),
+                                ),
+                              );
+                            }
+                            return const SizedBox.shrink();
+                          },
+                        ):
+                        FutureBuilder(
                           future:CallAPI.getMonthlyData(trainerId: storage.read("userId").toString()),
                           builder: (BuildContext context, snapshot) {
                             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -299,7 +434,11 @@ class EarningUi extends StatelessWidget {
                                 );
                             }
                             else  if (snapshot.hasData ) {
-                              controller.monthlyData= snapshot.data!.revenueByDay!;
+                              SchedulerBinding.instance.addPostFrameCallback((_) {
+                                controller.monthlyData= snapshot.data!.revenueByDay!;
+                                controller.totalSession.value = snapshot.data!.totalSession.toString();
+                                controller.totalEarnings.value = snapshot.data!.totalRevenue.toString();
+                              });
                               return
                                 Expanded(
                                   child: GetBuilder<EarningController>(
@@ -307,7 +446,7 @@ class EarningUi extends StatelessWidget {
                                       final List<CartesianSeries<dynamic, dynamic>> seriesList = [
                                         ColumnSeries<dynamic, String>(
                                           width: 0.6,
-                                          dataSource: controller.isWeekly.value ?controller. weeklyData :controller. monthlyData,
+                                          dataSource: controller. monthlyData,
                                           xValueMapper: (dynamic data, _) => data.date,
                                           yValueMapper: (dynamic data, _) => data.revenue,
                                           pointColorMapper: (dynamic data, int index) {
@@ -441,7 +580,7 @@ class EarningUi extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              controller.isWeekly.value ? 'AED 1959.90' : 'AED 7950.90',
+                              'AED ${controller.totalEarnings.value}',
                               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                 color: AppColors.impgrey,
                               ),
@@ -458,7 +597,7 @@ class EarningUi extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              controller.isWeekly.value ?"30":"140",
+                              controller.totalSession.value,
                               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                 color: AppColors.impgrey,
                               ),

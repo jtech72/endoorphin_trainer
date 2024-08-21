@@ -695,8 +695,7 @@ class RegistrationUi extends StatelessWidget {
                                               fontWeight: FontWeight.w400,
                                             ),
                                           ),
-                                          value: controller.selectedItems
-                                              .contains(item.id.toString()),
+                                          value: controller.selectedItems.contains(item.id.toString()),
                                           onChanged: (bool? value) {
                                             controller.toggleSelection(
                                                 item.id.toString(),

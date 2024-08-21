@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:endoorphin_trainer/controllers/withdraw_controller.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class WithdrawUI extends StatelessWidget {
   const WithdrawUI({
@@ -108,6 +112,39 @@ class WithdrawUI extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
+                              controller.selectedIndex.value = 3;
+                            },
+                            child: Container(
+                              height: 31,
+                              width: 93,
+                              decoration: BoxDecoration(
+                                  color: controller.selectedIndex.value == 3
+                                      ? AppColors.yellow
+                                      : Colors.transparent,
+                                  border: Border.all(
+                                      color: controller.selectedIndex.value == 3
+                                          ? AppColors.yellow
+                                          : AppColors.yellow),
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: Center(
+                                  child: Text(
+                                'Requested',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall!
+                                    .copyWith(
+                                        color:
+                                            controller.selectedIndex.value == 3
+                                                ? AppColors.black
+                                                : AppColors.yellow),
+                              )),
+                            ),
+                          ),
+                          SizedBox(
+                            width: Get.width * 0.1,
+                          ),
+                          GestureDetector(
+                            onTap: () {
                               controller.selectedIndex.value = 1;
                             },
                             child: Container(
@@ -139,7 +176,8 @@ class WithdrawUI extends StatelessWidget {
                   ).paddingOnly(
                       left: Get.width * 0.02, right: Get.width * 0.02),
                   controller.selectedIndex.value == 0
-                      ? SizedBox(
+                      ?
+                  SizedBox(
                           height: Get.height*.7,
                           width: Get.width,
                           child:
@@ -157,172 +195,189 @@ class WithdrawUI extends StatelessWidget {
                               } else if (snapshot.data!.result!.isNotEmpty) {
                                 return
                                   Column(
-                                  children: [
-                                    Column(
-                                      children: [
-
-                                        Container(
-                                          height: 1,
-                                          width: Get.width,
-                                          color: AppColors.lightyGrey,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
+                                    children: [
+                                      Container(
+                                        height: Get.height*.6,
+                                        width: Get.width,
+                                        child: ListView.builder(
+                                                                            itemCount:snapshot.data!.result!.length,
+                                          itemBuilder: (context,index) {
+                                            return Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
-                                                Obx(
-                                                  () => Checkbox(
-                                                    checkColor:
-                                                        AppColors.yellow,
-                                                    activeColor:
-                                                        Colors.transparent,
-                                                    side: const BorderSide(
-                                                        color: AppColors.grey3,
-                                                        width: 2),
-                                                    value: controller
-                                                        .isChecked3.value,
-                                                    onChanged: (value) {
-                                                      controller
-                                                          .toggleCheckbox3();
-                                                    },
-                                                  ),
+
+                                                Container(
+                                                  height: 1,
+                                                  width: Get.width,
+                                                  color: AppColors.lightyGrey,
                                                 ),
-                                                const Column(
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.spaceBetween,
                                                   children: [
-                                                    Text(
-                                                      'Yoga session with Richard',
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w500),
+                                                    Row(
+                                                      children: [
+                                                        Obx(
+                                                          () => Checkbox(
+                                                            checkColor:
+                                                                AppColors.yellow,
+                                                            activeColor:
+                                                                Colors.transparent,
+                                                            side: const BorderSide(
+                                                                color: AppColors.grey3,
+                                                                width: 2),
+                                                            value: controller.selectedItems.contains(snapshot.data!.result![index].id.toString()),
+                                                            onChanged: (value) {
+                                                              controller.toggleSelection(snapshot.data!.result![index].id.toString());
+                                                              log(controller.selectedItems.toString());
+                                                            },
+                                                          ),
+                                                        ),
+                                                         Column(
+                                                           crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children: [
+                                                            SizedBox(
+                                                              width:250,
+                                                              child: Text(
+                                                                '${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].user!.userName}',
+                                                                style: TextStyle(
+                                                                    color: Colors.white,
+                                                                    fontSize: 14,
+                                                                    fontWeight:
+                                                                        FontWeight.w500),
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              DateFormat('dd MMM  h:mm a')
+                                                                  .format(DateTime.parse(snapshot!
+                                                                  .data!.result![index].createdAt
+                                                                  .toString())),
+                                                              style: TextStyle(
+                                                                  color: Colors.white,
+                                                                  fontSize: 12,
+                                                                  fontWeight:
+                                                                      FontWeight.w300),
+                                                            ),
+                                                          ],
+                                                        ).paddingOnly(
+                                                            left: Get.width * 0.05),
+                                                      ],
                                                     ),
-                                                    Text(
-                                                      '21 Dec . 1.39 pm ',
+                                                     Text(
+                                                      'AED ${snapshot.data!.result![index].bookingAmount}',
                                                       style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w300),
+                                                          color: AppColors.yellow,
+                                                          fontWeight: FontWeight.w700,
+                                                          fontSize: 12),
                                                     ),
                                                   ],
                                                 ).paddingOnly(
-                                                    left: Get.width * 0.05),
+                                                    right: Get.width * 0.03,
+                                                    top: Get.height * .02,
+                                                    bottom: Get.height * .02),
+                                                Container(
+                                                  height: 1,
+                                                  width: Get.width,
+                                                  color: AppColors.lightyGrey,
+                                                ),
                                               ],
-                                            ),
-                                            const Text(
-                                              'AED 900',
-                                              style: TextStyle(
-                                                  color: AppColors.yellow,
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 12),
-                                            ),
-                                          ],
-                                        ).paddingOnly(
-                                            right: Get.width * 0.03,
-                                            top: Get.height * .02,
-                                            bottom: Get.height * .02),
-                                        Container(
-                                          height: 1,
-                                          width: Get.width,
-                                          color: AppColors.lightyGrey,
+                                            ).paddingOnly();
+                                          }
                                         ),
-                                      ],
-                                    ).paddingOnly(bottom: Get.height * 0.35),
-                                    InkButton(
-                                        child: Text(
-                                          'Sent Request',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headlineSmall!
-                                              .copyWith(
-                                                  color: AppColors.black,
-                                                  fontSize: 18,
-                                                  fontFamily: 'Montserrat'),
-                                        ),
-                                        onTap: () {
-                                          controller.postWithdrawRequest();
-                                          showDialog(
-                                            barrierDismissible: false,
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                backgroundColor:
-                                                    AppColors.Black3,
-                                                title: Column(
-                                                  children: [
+                                      ),
+                                      InkButton(
+                                          child: Text(
+                                            'Sent Request',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headlineSmall!
+                                                .copyWith(
+                                                color: AppColors.black,
+                                                fontSize: 18,
+                                                fontFamily: 'Montserrat'),
+                                          ),
+                                          onTap: () {
+                                            controller.postWithdrawRequest();
+                                            showDialog(
+                                              barrierDismissible: false,
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  backgroundColor:
+                                                  AppColors.Black3,
+                                                  title: Column(
+                                                    children: [
+                                                      SizedBox(
+                                                        height: Get.height * 0.03,
+                                                      ),
+                                                      Image.asset(
+                                                        ImagesPaths.cooltick,
+                                                        scale: 4,
+                                                      ),
+                                                      SizedBox(
+                                                        height: Get.height * 0.02,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  content: SizedBox(
+                                                      width: Get.width,
+                                                      height: Get.height * 0.07,
+                                                      child: Text(
+                                                        "Your Request has been sent\nsuccessfully. You will be notified\nshortly",
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .labelLarge!
+                                                            .copyWith(
+                                                            fontWeight:
+                                                            FontWeight
+                                                                .w400,
+                                                            color: AppColors
+                                                                .white),
+                                                        textAlign:
+                                                        TextAlign.center,
+                                                      )),
+                                                  actions: [
+                                                    Center(
+                                                      child: InkButton(
+                                                          child: Text(
+                                                            'OK',
+                                                            style: Theme.of(
+                                                                context)
+                                                                .textTheme
+                                                                .headlineSmall!
+                                                                .copyWith(
+                                                                color:
+                                                                AppColors
+                                                                    .black,
+                                                                fontSize: 18,
+                                                                fontFamily:
+                                                                'Montserrat'),
+                                                          ),
+                                                          onTap: () {
+                                                            Get.back();
+                                                            controller
+                                                                .selectedIndex
+                                                                .value = 1;
+                                                          },
+                                                          height: 35,
+                                                          width: 95),
+                                                    ),
                                                     SizedBox(
                                                       height: Get.height * 0.03,
                                                     ),
-                                                    Image.asset(
-                                                      ImagesPaths.cooltick,
-                                                      scale: 4,
-                                                    ),
-                                                    SizedBox(
-                                                      height: Get.height * 0.02,
-                                                    ),
                                                   ],
-                                                ),
-                                                content: SizedBox(
-                                                    width: Get.width,
-                                                    height: Get.height * 0.07,
-                                                    child: Text(
-                                                      "Your Request has been sent\nsuccessfully. You will be notified\nshortly",
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .labelLarge!
-                                                          .copyWith(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                              color: AppColors
-                                                                  .white),
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                    )),
-                                                actions: [
-                                                  Center(
-                                                    child: InkButton(
-                                                        child: Text(
-                                                          'OK',
-                                                          style: Theme.of(
-                                                                  context)
-                                                              .textTheme
-                                                              .headlineSmall!
-                                                              .copyWith(
-                                                                  color:
-                                                                      AppColors
-                                                                          .black,
-                                                                  fontSize: 18,
-                                                                  fontFamily:
-                                                                      'Montserrat'),
-                                                        ),
-                                                        onTap: () {
-                                                          Get.back();
-                                                          controller
-                                                              .selectedIndex
-                                                              .value = 1;
-                                                        },
-                                                        height: 35,
-                                                        width: 95),
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        10.0),
                                                   ),
-                                                  SizedBox(
-                                                    height: Get.height * 0.03,
-                                                  ),
-                                                ],
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        })
-                                  ],
-                                );
+                                                );
+                                              },
+                                            );
+                                          })
+
+                                    ],
+                                  );
                               } else {
                                 return const Center(
                                   child: Text("No unpaid booking available"),
@@ -330,169 +385,206 @@ class WithdrawUI extends StatelessWidget {
                               }
                             },
                           )
-                  )
-                      : SizedBox(
-                          height: Get.height * .7,
-                          width: Get.width,
-                          child:
-                          FutureBuilder(
-                            future: CallAPI. getPaidSession(trainerId: storage.read("userId").toString()),
-                            builder: (BuildContext context, snapshot) {
-                              if (snapshot.connectionState == ConnectionState.waiting) {
-                                return const Center(
-                                  child: CircularProgressIndicator(),
-                                ).paddingOnly(top: 20);
-                              } else if (snapshot.hasError) {
-                                return Center(
-                                  child: Text('Error: ${snapshot.error}'),
-                                );
-                              } else if (snapshot.data!.result!.isNotEmpty) {
-                                return
-                                  Column(
-                                    children: [
-                                      Container(
-                                        height: 1,
-                                        width: Get.width,
-                                        color: AppColors.lightyGrey,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
+                  ):
+                  controller.selectedIndex.value == 2?
+                  SizedBox(
+                      height: Get.height*.7,
+                      width: Get.width,
+                      child:
+                      FutureBuilder(
+                        future: CallAPI. getUnpaid(trainerId: storage.read("userId").toString()),
+                        builder: (BuildContext context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            ).paddingOnly(top: 20);
+                          } else if (snapshot.hasError) {
+                            return Center(
+                              child: Text('Error: ${snapshot.error}'),
+                            );
+                          } else if (snapshot.data!.result!.isNotEmpty) {
+                            return
+                              Column(
+                                children: [
+                                  Container(
+                                    height: Get.height*.6,
+                                    width: Get.width,
+                                    child: ListView.builder(
+                                        itemCount:snapshot.data!.result!.length,
+                                        itemBuilder: (context,index) {
+                                          return Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              const Column(
+
+                                              Container(
+                                                height: 1,
+                                                width: Get.width,
+                                                color: AppColors.lightyGrey,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                                 children: [
-                                                  Text(
-                                                    'Yoga session with Richard',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 14,
-                                                        fontWeight: FontWeight.w500),
+                                                  Row(
+                                                    children: [
+                                                      Column(
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: [
+                                                          Text(
+                                                            '${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].user!.userName}',
+                                                            style: TextStyle(
+                                                                color: Colors.white,
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                FontWeight.w500),
+                                                          ),
+                                                          Text(
+                                                            DateFormat('dd MMM  h:mm a')
+                                                                .format(DateTime.parse(snapshot!
+                                                                .data!.result![index].createdAt
+                                                                .toString())),
+                                                            style: TextStyle(
+                                                                color: Colors.white,
+                                                                fontSize: 12,
+                                                                fontWeight:
+                                                                FontWeight.w300),
+                                                          ),
+                                                        ],
+                                                      ).paddingOnly(
+                                                          left: Get.width * 0.05),
+                                                    ],
                                                   ),
                                                   Text(
-                                                    '21 Dec . 1.39 pm ',
+                                                    'AED ${snapshot.data!.result![index].bookingAmount}',
                                                     style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 12,
-                                                        fontWeight: FontWeight.w300),
+                                                        color: AppColors.yellow,
+                                                        fontWeight: FontWeight.w700,
+                                                        fontSize: 12),
                                                   ),
                                                 ],
-                                              ).paddingOnly(left: Get.width * 0.05),
+                                              ).paddingOnly(
+                                                  right: Get.width * 0.03,
+                                                  top: Get.height * .02,
+                                                  bottom: Get.height * .02),
+                                              Container(
+                                                height: 1,
+                                                width: Get.width,
+                                                color: AppColors.lightyGrey,
+                                              ),
                                             ],
-                                          ),
-                                          const Text(
-                                            'AED 500',
-                                            style: TextStyle(
-                                                color: AppColors.yellow,
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 12),
-                                          ),
-                                        ],
-                                      ).paddingOnly(
-                                          right: Get.width * 0.03,
-                                          top: Get.height * .026,
-                                          bottom: Get.height * .026),
-                                      Container(
-                                        height: 1,
-                                        width: Get.width,
-                                        color: AppColors.lightyGrey,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
+                                          ).paddingOnly();
+                                        }
+                                    ),
+                                  ),
+
+                                ],
+                              );
+                          } else {
+                            return const Center(
+                              child: Text("No unpaid booking available"),
+                            ).paddingOnly(bottom: 0);
+                          }
+                        },
+                      )
+                  ): SizedBox(
+                      height: Get.height*.7,
+                      width: Get.width,
+                      child:
+                      FutureBuilder(
+                        future: CallAPI. getUnpaid(trainerId: storage.read("userId").toString()),
+                        builder: (BuildContext context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            ).paddingOnly(top: 20);
+                          } else if (snapshot.hasError) {
+                            return Center(
+                              child: Text('Error: ${snapshot.error}'),
+                            );
+                          } else if (snapshot.data!.result!.isNotEmpty) {
+                            return
+                              Column(
+                                children: [
+                                  Container(
+                                    height: Get.height*.6,
+                                    width: Get.width,
+                                    child: ListView.builder(
+                                        itemCount:snapshot.data!.result!.length,
+                                        itemBuilder: (context,index) {
+                                          return Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              const Column(
+
+                                              Container(
+                                                height: 1,
+                                                width: Get.width,
+                                                color: AppColors.lightyGrey,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                                 children: [
-                                                  Text(
-                                                    'Yoga session with Richard',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 14,
-                                                        fontWeight: FontWeight.w500),
+                                                  Row(
+                                                    children: [
+
+                                                      Column(
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: [
+                                                          Text(
+                                                            '${snapshot.data!.result![index].user!.userName} session with ${snapshot.data!.result![index].user!.userName}',
+                                                            style: TextStyle(
+                                                                color: Colors.white,
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                FontWeight.w500),
+                                                          ),
+                                                          Text(
+                                                            DateFormat('dd MMM  h:mm a')
+                                                                .format(DateTime.parse(snapshot!
+                                                                .data!.result![index].createdAt
+                                                                .toString())),
+                                                            style: TextStyle(
+                                                                color: Colors.white,
+                                                                fontSize: 12,
+                                                                fontWeight:
+                                                                FontWeight.w300),
+                                                          ),
+                                                        ],
+                                                      ).paddingOnly(
+                                                          left: Get.width * 0.05),
+                                                    ],
                                                   ),
                                                   Text(
-                                                    '21 Dec . 1.39 pm ',
+                                                    'AED ${snapshot.data!.result![index].bookingAmount}',
                                                     style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 12,
-                                                        fontWeight: FontWeight.w300),
+                                                        color: AppColors.yellow,
+                                                        fontWeight: FontWeight.w700,
+                                                        fontSize: 12),
                                                   ),
                                                 ],
-                                              ).paddingOnly(left: Get.width * 0.05),
+                                              ).paddingOnly(
+                                                  right: Get.width * 0.03,
+                                                  top: Get.height * .02,
+                                                  bottom: Get.height * .02),
+                                              Container(
+                                                height: 1,
+                                                width: Get.width,
+                                                color: AppColors.lightyGrey,
+                                              ),
                                             ],
-                                          ),
-                                          const Text(
-                                            'AED 700',
-                                            style: TextStyle(
-                                                color: AppColors.yellow,
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 12),
-                                          ),
-                                        ],
-                                      ).paddingOnly(
-                                          right: Get.width * 0.03,
-                                          top: Get.height * .026,
-                                          bottom: Get.height * .026),
-                                      Container(
-                                        height: 1,
-                                        width: Get.width,
-                                        color: AppColors.lightyGrey,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              const Column(
-                                                children: [
-                                                  Text(
-                                                    'Yoga session with Richard',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 14,
-                                                        fontWeight: FontWeight.w500),
-                                                  ),
-                                                  Text(
-                                                    '21 Dec . 1.39 pm ',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 12,
-                                                        fontWeight: FontWeight.w300),
-                                                  ),
-                                                ],
-                                              ).paddingOnly(left: Get.width * 0.05),
-                                            ],
-                                          ),
-                                          const Text(
-                                            'AED 900',
-                                            style: TextStyle(
-                                                color: AppColors.yellow,
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 12),
-                                          ),
-                                        ],
-                                      ).paddingOnly(
-                                          right: Get.width * 0.03,
-                                          top: Get.height * .026,
-                                          bottom: Get.height * .026),
-                                      Container(
-                                        height: 1,
-                                        width: Get.width,
-                                        color: AppColors.lightyGrey,
-                                      ),
-                                    ],
-                                  );
-                              } else {
-                                return const Center(
-                                  child: Text("No paid booking available"),
-                                ).paddingOnly(bottom: 0);
-                              }
-                            },
-                          )
+                                          ).paddingOnly();
+                                        }
+                                    ),
+                                  ),
+                                ],
+                              );
+                          } else {
+                            return const Center(
+                              child: Text("No unpaid booking available"),
+                            ).paddingOnly(bottom: 0);
+                          }
+                        },
+                      )
                   ),
                 ],
               ),

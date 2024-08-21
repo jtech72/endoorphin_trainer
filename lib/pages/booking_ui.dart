@@ -131,7 +131,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                           height: 1, width: Get.width, color: AppColors.grey,)
                             .paddingOnly(top: 15,),
                         FutureBuilder(
-                            future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"pending" ),
+                            future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"scheduled" ),
                             builder: (BuildContext context, snapshot) {
                               if (snapshot.connectionState == ConnectionState.waiting) {
                                 return SizedBox(
@@ -287,7 +287,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                           height: 1, width: Get.width, color: AppColors.grey,)
                             .paddingOnly(top: 15,),
                         FutureBuilder(
-                            future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"inprogress" ),
+                            future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"pending" ),
                             builder: (BuildContext context, snapshot) {
                               if (snapshot.connectionState == ConnectionState.waiting) {
                                 return SizedBox(
@@ -442,7 +442,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                           height: 1, width: Get.width, color: AppColors.grey,)
                             .paddingOnly(top: 15,),
                         FutureBuilder(
-                            future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"scheduled" ),
+                            future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"completed" ),
                             builder: (BuildContext context, snapshot) {
                               if (snapshot.connectionState == ConnectionState.waiting) {
                                 return SizedBox(
@@ -596,7 +596,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                           height: 1, width: Get.width, color: AppColors.grey,)
                             .paddingOnly(top: 15,),
                         FutureBuilder(
-                            future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"cancelled" ),
+                            future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"canceled" ),
                             builder: (BuildContext context, snapshot) {
                               if (snapshot.connectionState == ConnectionState.waiting) {
                                 return SizedBox(
