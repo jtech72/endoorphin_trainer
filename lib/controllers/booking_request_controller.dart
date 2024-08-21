@@ -479,7 +479,6 @@ class BookingRequestController extends GetxController {
 @override
   void dispose() {
     socket.disconnected;
-    // TODO: implement dispose
     super.dispose();
   }
   @override

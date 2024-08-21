@@ -6,6 +6,8 @@ import '../services/models/response_models/get_monthly_data.dart';
 
 class EarningController extends GetxController{
   RxString type = "".obs;
+  RxString totalEarnings = "".obs;
+  RxString totalSession = "".obs;
   final List<String> months = [
     'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
   ];
@@ -23,18 +25,6 @@ class EarningController extends GetxController{
     update();
 
   }
-  Future<void> getMonthlyData()async{
-    try{
-      final response = await CallAPI.getMonthlyData(trainerId: storage.read("userId").toString());
-      if(response.status == 200){
 
-      }
-    }
-        catch(e,st){
-      log(e.toString());
-      log(st.toString());
-
-        }
-  }
 
 }
