@@ -1,7 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:endoorphin_trainer/services/network_services/api_call.dart';
+import 'package:endoorphin_trainer/utils/exports.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:endoorphin_trainer/utils/app_colors.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../controllers/booking_controller.dart';
@@ -172,28 +176,23 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                                   children: [
                                                     Row(
                                                       children: [
-                                                        Container(
-                                                            height: 50,
-                                                            width: 50,
-                                                            decoration: BoxDecoration(
-                                                                color: AppColors.grey,
-                                                                borderRadius: BorderRadius
-                                                                    .circular(100)),
-
-                                                            child: Center(
-                                                                child: Image.asset(
-                                                                  ImagesPaths.yoga,
-                                                                  scale: 3,))),
+                                                        CircleAvatar(
+                                                            radius: 25,
+                                                            backgroundColor: Colors.transparent,
+                                                            backgroundImage: CachedNetworkImageProvider(snapshot.data!.result![index].category!.logo.toString())),
                                                         Column(
                                                           crossAxisAlignment: CrossAxisAlignment
                                                               .start,
                                                           children: [
-                                                            Text(
-                                                              "${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].userName}",
-                                                              style: Theme
-                                                                  .of(context)
-                                                                  .textTheme
-                                                                  .displayLarge,),
+                                                            SizedBox(
+                                                              width: Get.width*0.6,
+                                                              child: Text(
+                                                                "${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].userName}",
+                                                                style: Theme
+                                                                    .of(context)
+                                                                    .textTheme
+                                                                    .displayLarge,),
+                                                            ),
                                                             Text(DateFormat('dd MMM yyyy, h:mm a')
                                                                 .format(DateTime.parse(snapshot!
                                                                 .data!.result![index].createdAt
@@ -328,28 +327,23 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                                   children: [
                                                     Row(
                                                       children: [
-                                                        Container(
-                                                            height: 50,
-                                                            width: 50,
-                                                            decoration: BoxDecoration(
-                                                                color: AppColors.grey,
-                                                                borderRadius: BorderRadius
-                                                                    .circular(100)),
-
-                                                            child: Center(
-                                                                child: Image.asset(
-                                                                  ImagesPaths.yoga,
-                                                                  scale: 3,))),
+                                                        CircleAvatar(
+                                                            radius: 25,
+                                                            backgroundColor: Colors.transparent,
+                                                            backgroundImage: CachedNetworkImageProvider(snapshot.data!.result![index].category!.logo.toString())),
                                                         Column(
                                                           crossAxisAlignment: CrossAxisAlignment
                                                               .start,
                                                           children: [
-                                                            Text(
-                                                              "${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].userName}",
-                                                              style: Theme
-                                                                  .of(context)
-                                                                  .textTheme
-                                                                  .displayLarge,),
+                                                            SizedBox(
+                                                              width: Get.width*0.6,
+                                                              child: Text(
+                                                                "${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].userName}",
+                                                                style: Theme
+                                                                    .of(context)
+                                                                    .textTheme
+                                                                    .displayLarge,),
+                                                            ),
                                                             Text(DateFormat('dd MMM yyyy, h:mm a')
                                                                 .format(DateTime.parse(snapshot!
                                                                 .data!.result![index].createdAt
@@ -483,28 +477,23 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                                   children: [
                                                     Row(
                                                       children: [
-                                                        Container(
-                                                            height: 50,
-                                                            width: 50,
-                                                            decoration: BoxDecoration(
-                                                                color: AppColors.grey,
-                                                                borderRadius: BorderRadius
-                                                                    .circular(100)),
-
-                                                            child: Center(
-                                                                child: Image.asset(
-                                                                  ImagesPaths.yoga,
-                                                                  scale: 3,))),
+                                                        CircleAvatar(
+                                                            radius: 25,
+                                                            backgroundColor: Colors.transparent,
+                                                            backgroundImage: CachedNetworkImageProvider(snapshot.data!.result![index].category!.logo.toString())),
                                                         Column(
                                                           crossAxisAlignment: CrossAxisAlignment
                                                               .start,
                                                           children: [
-                                                            Text(
-                                                              "${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].userName}",
-                                                              style: Theme
-                                                                  .of(context)
-                                                                  .textTheme
-                                                                  .displayLarge,),
+                                                            SizedBox(
+                                                              width: Get.width*0.6,
+                                                              child: Text(
+                                                                "${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].userName}",
+                                                                style: Theme
+                                                                    .of(context)
+                                                                    .textTheme
+                                                                    .displayLarge,),
+                                                            ),
                                                             Text(
                                                               DateFormat('dd MMM yyyy, h:mm a')
                                                                   .format(DateTime.parse(snapshot!
@@ -639,28 +628,23 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                                   children: [
                                                     Row(
                                                       children: [
-                                                        Container(
-                                                            height: 50,
-                                                            width: 50,
-                                                            decoration: BoxDecoration(
-                                                                color: AppColors.grey,
-                                                                borderRadius: BorderRadius
-                                                                    .circular(100)),
-
-                                                            child: Center(
-                                                                child: Image.asset(
-                                                                  ImagesPaths.yoga,
-                                                                  scale: 3,))),
+                                                        CircleAvatar(
+                                                            radius: 25,
+                                                            backgroundColor: Colors.transparent,
+                                                            backgroundImage: CachedNetworkImageProvider(snapshot.data!.result![index].category!.logo.toString())),
                                                         Column(
                                                           crossAxisAlignment: CrossAxisAlignment
                                                               .start,
                                                           children: [
-                                                            Text(
-                                                              "${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].userName}",
-                                                              style: Theme
-                                                                  .of(context)
-                                                                  .textTheme
-                                                                  .displayLarge,),
+                                                            Container(
+                                                              width: Get.width*0.6,
+                                                              child: Text(
+                                                                "${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].userName}",
+                                                                style: Theme
+                                                                    .of(context)
+                                                                    .textTheme
+                                                                    .displayLarge,),
+                                                            ),
                                             Text(DateFormat('dd MMM yyyy, h:mm a')
                                                 .format(DateTime.parse(snapshot!
                                                 .data!.result![index].createdAt
