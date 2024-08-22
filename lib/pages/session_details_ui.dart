@@ -61,7 +61,7 @@ class SessionDetailsUi extends StatelessWidget {
                                   text: "Thanks for the Fitness Session,",
                                   style: Theme.of(context).textTheme.headlineLarge),
                               TextSpan(
-                                  text: "\n${snapshot.data!.result!.trainerName.toString()}",
+                                  text: "${snapshot.data!.result!.trainerName.toString()}",
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineLarge
@@ -138,8 +138,8 @@ class SessionDetailsUi extends StatelessWidget {
                                             fontWeight: FontWeight.w500,
                                             color: AppColors.impgrey),
                                       ),
-                                      const TextSpan(
-                                        text: '\n1234567895',
+                                       TextSpan(
+                                        text: '\n${snapshot.data!.result!.customerPhoneNumber.toString()}',
                                         style: TextStyle(
                                             color: AppColors.impgrey,
                                             fontSize: 14,
@@ -188,7 +188,7 @@ class SessionDetailsUi extends StatelessWidget {
                                 ),
                               ),
                               Container(
-                                height: Get.height*0.091,
+                                height: Get.height*0.12,
                                 width: 1,
                                 color: AppColors.yellow,
                               ).paddingOnly(top: 3,bottom: 3),

@@ -304,12 +304,8 @@ class SessionRunningUi extends StatelessWidget {
                         ),
                       ),
                       Text(snapshot.data!.result!.categoryName.toString(),
-                          style: Theme.of(context).textTheme.headlineLarge),
-                      Text(
-                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            fontWeight: FontWeight.w300, fontSize: 12),
-                        ""
-                      ).paddingOnly(top: 10, bottom: Get.height * .03),
+                          style: Theme.of(context).textTheme.headlineLarge).paddingOnly(top: 10, bottom: Get.height * .03),
+
                       Text(
                         "Customer Details",
                         style: Theme.of(context)
