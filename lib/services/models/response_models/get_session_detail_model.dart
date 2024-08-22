@@ -6,16 +6,16 @@ class SessionBookingDetailModel {
 
   SessionBookingDetailModel.fromJson(Map<String, dynamic> json) {
     result =
-    json['result'] != null ? new Result.fromJson(json['result']) : null;
+    json['result'] != null ? Result.fromJson(json['result']) : null;
     status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.result != null) {
-      data['result'] = this.result!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (result != null) {
+      data['result'] = result!.toJson();
     }
-    data['status'] = this.status;
+    data['status'] = status;
     return data;
   }
 }
@@ -30,12 +30,14 @@ class Result {
   String? trainerProfileImg;
   String? bookingDate;
   dynamic duration;
-  dynamic startSession;
-  dynamic endSession;
-  dynamic scheduletime;
+  String? startSession;
+  String? endSession;
+  String? scheduletime;
   String? bookingStatus;
   String? customerAddress;
+  String? customerCity;
   String? trainerAddress;
+  String? trainerCity;
   dynamic trainerId;
   dynamic userId;
   dynamic bookingId;
@@ -60,7 +62,9 @@ class Result {
         this.scheduletime,
         this.bookingStatus,
         this.customerAddress,
+        this.customerCity,
         this.trainerAddress,
+        this.trainerCity,
         this.trainerId,
         this.userId,
         this.bookingId,
@@ -85,7 +89,9 @@ class Result {
     scheduletime = json['scheduletime'];
     bookingStatus = json['bookingStatus'];
     customerAddress = json['customerAddress'];
+    customerCity = json['customerCity'];
     trainerAddress = json['trainerAddress'];
+    trainerCity = json['trainerCity'];
     trainerId = json['trainerId'];
     userId = json['userId'];
     bookingId = json['bookingId'];
@@ -97,30 +103,32 @@ class Result {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['categoryName'] = this.categoryName;
-    data['trainerName'] = this.trainerName;
-    data['trainerBio'] = this.trainerBio;
-    data['customerName'] = this.customerName;
-    data['customerEmail'] = this.customerEmail;
-    data['customerProfileImg'] = this.customerProfileImg;
-    data['trainerProfileImg'] = this.trainerProfileImg;
-    data['bookingDate'] = this.bookingDate;
-    data['duration'] = this.duration;
-    data['startSession'] = this.startSession;
-    data['endSession'] = this.endSession;
-    data['scheduletime'] = this.scheduletime;
-    data['bookingStatus'] = this.bookingStatus;
-    data['customerAddress'] = this.customerAddress;
-    data['trainerAddress'] = this.trainerAddress;
-    data['trainerId'] = this.trainerId;
-    data['userId'] = this.userId;
-    data['bookingId'] = this.bookingId;
-    data['sessionCount'] = this.sessionCount;
-    data['trainerReviewCount'] = this.trainerReviewCount;
-    data['trainerEmail'] = this.trainerEmail;
-    data['trainerContactNumber'] = this.trainerContactNumber;
-    data['userReviewCount'] = this.userReviewCount;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['categoryName'] = categoryName;
+    data['trainerName'] = trainerName;
+    data['trainerBio'] = trainerBio;
+    data['customerName'] = customerName;
+    data['customerEmail'] = customerEmail;
+    data['customerProfileImg'] = customerProfileImg;
+    data['trainerProfileImg'] = trainerProfileImg;
+    data['bookingDate'] = bookingDate;
+    data['duration'] = duration;
+    data['startSession'] = startSession;
+    data['endSession'] = endSession;
+    data['scheduletime'] = scheduletime;
+    data['bookingStatus'] = bookingStatus;
+    data['customerAddress'] = customerAddress;
+    data['customerCity'] = customerCity;
+    data['trainerAddress'] = trainerAddress;
+    data['trainerCity'] = trainerCity;
+    data['trainerId'] = trainerId;
+    data['userId'] = userId;
+    data['bookingId'] = bookingId;
+    data['sessionCount'] = sessionCount;
+    data['trainerReviewCount'] = trainerReviewCount;
+    data['trainerEmail'] = trainerEmail;
+    data['trainerContactNumber'] = trainerContactNumber;
+    data['userReviewCount'] = userReviewCount;
     return data;
   }
 }

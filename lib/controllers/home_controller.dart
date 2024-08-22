@@ -152,6 +152,7 @@ class HomeController extends GetxController {
     const apiKey = 'AIzaSyAb-OJXPRTflwkd0huWLB2ygvwMv2Iwzgo';
     final url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=$apiKey';
     log("url for placename $url");
+
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
@@ -159,23 +160,40 @@ class HomeController extends GetxController {
         if (jsonData['status'] == 'OK' && jsonData['results'].isNotEmpty) {
           final components = jsonData['results'][0]['address_components'];
           final formattedAddress = jsonData['results'][0]['formatted_address'];
-          String? addressType, houseNo, city, streetArea;
+          String? addressType, houseNo, city, streetArea, postalCode, country, premise, subPremise;
 
           for (var component in components) {
             log('Component: ${component['long_name']} - Types: ${component['types']}');
-            if (component['types'].contains('administrative_area_level_2')) {
-              addressType = component['long_name'];
-            } else if (component['types'].contains('premise')) {
-              houseNo = component['long_name'];
-            } else if (component['types'].contains('locality')) {
-              city = component['long_name'];
+            if (component['types'].contains('premise')) {
+              premise = component['long_name']; // E.g., Berkeley Square, Plot 24
+            } else if (component['types'].contains('subpremise')) {
+              subPremise = component['long_name']; // E.g., Unit 21, Level 2
             } else if (component['types'].contains('sublocality_level_1') || component['types'].contains('sublocality')) {
               streetArea = component['long_name'];
+            } else if (component['types'].contains('locality')) {
+              city = component['long_name'];
+            } else if (component['types'].contains('administrative_area_level_1')) {
+              addressType = component['long_name'];  // State/Province
+            } else if (component['types'].contains('country')) {
+              country = component['long_name'];
+            } else if (component['types'].contains('postal_code')) {
+              postalCode = component['long_name'];
             }
           }
 
+          // Construct the full address string without commas
+          String fullAddress = [
+            subPremise,  // E.g., Unit 21, Level 2
+            premise,     // E.g., Berkeley Square, Plot 24
+            streetArea,  // E.g., Industrial Area Phase I
+            city,        // E.g., Chandigarh
+            addressType, // E.g., Chandigarh
+            country,     // E.g., India
+            postalCode   // E.g., 160002
+          ].where((element) => element != null && element.isNotEmpty).join(' ');
+
           return {
-            'addressType': addressType,
+            'addressType': fullAddress,
             'name': formattedAddress,  // Assign the formatted address to name
             'houseNo': houseNo,
             'city': city,
@@ -204,7 +222,7 @@ class HomeController extends GetxController {
       var addressComponents = await getAddressComponentsFromLatLng(currentLocation.latitude!, currentLocation.longitude!);
       Map<String, dynamic> request = {
         "trianerId": storage.read("userId").toString(),
-        "addressType":  addressComponents['name'] ?? "",
+        "addressType":  addressComponents['addressType'] ?? "",
         // "name": addressComponents['name'] ?? "Unknown",
         // "houseNo": addressComponents['houseNo'] ?? "Unknown",
         "city": addressComponents['city'] ?? "Unknown",

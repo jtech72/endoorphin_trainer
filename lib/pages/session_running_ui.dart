@@ -70,16 +70,11 @@ class SessionRunningUi extends StatelessWidget {
                                   color: AppColors.impgrey,
                                   size: 18,
                                 )),
-                            GestureDetector(
-                              onTap: () {
-                                Get.offAllNamed(AppRoutes.bottomNavigation);
-                              },
-                              child: Text(
-                                snapshot.data!.result!.categoryName.toString(),
-                                style:
-                                    Theme.of(context).textTheme.headlineSmall,
-                              ).paddingOnly(left: 20),
-                            )
+                            Text(
+                              snapshot.data!.result!.categoryName.toString(),
+                              style:
+                                  Theme.of(context).textTheme.headlineSmall,
+                            ).paddingOnly(left: 20)
                           ],
                         ).paddingOnly(
                             top: Get.height * .06, left: Get.width * .06),
@@ -141,7 +136,7 @@ class SessionRunningUi extends StatelessWidget {
                                               .labelMedium
                                               ?.copyWith(
                                                   color: AppColors.impgrey,
-                                                  fontSize: 16,
+                                                  fontSize: 15,
                                                   fontWeight: FontWeight.w600)),
                                     ],
                                   ).paddingOnly(top: 9),
@@ -172,7 +167,7 @@ class SessionRunningUi extends StatelessWidget {
                                     color: Colors.white.withOpacity(0.4),
                                   ),
                                   child: SizedBox(
-                                    width: 80,
+                                    width: 85,
                                     child: Text(
                                       textAlign: TextAlign.center,
                                         snapshot.data!.result!.categoryName.toString(),
@@ -181,7 +176,7 @@ class SessionRunningUi extends StatelessWidget {
                                             .labelMedium
                                             ?.copyWith(
                                                 color: AppColors.impgrey,
-                                                fontSize: 16,
+                                                fontSize: 15,
                                                 fontWeight: FontWeight.w600)),
                                   ),
                                 ),
@@ -329,6 +324,13 @@ class SessionRunningUi extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
+                            snapshot.data!.result!.customerProfileImg == " "?
+                            const CircleAvatar(
+                              maxRadius: 35,
+                              backgroundColor: AppColors.black,
+                              backgroundImage: AssetImage("assets/images/img_profile.png"),
+                            ).paddingOnly(
+                                left: Get.height * .02, right: Get.width * .08):
                              CircleAvatar(
                               maxRadius: 35,
                               backgroundColor: AppColors.black,
@@ -362,7 +364,7 @@ class SessionRunningUi extends StatelessWidget {
                                                 color: AppColors.impgrey),
                                       ),
                                        TextSpan(
-                                        text: "\n${snapshot.data!.result!.customerEmail.toString()}",
+                                        text: "\n${snapshot.data!.result!.customerPhoneNumber.toString()}",
                                         style: TextStyle(
                                             color: AppColors.impgrey,
                                             fontSize: 14,

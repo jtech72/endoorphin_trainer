@@ -24,6 +24,7 @@ class Result {
   String? categoryName;
   String? customerName;
   String? customerEmail;
+  String? customerPhoneNumber;
   String? customerProfileImg;
   String? bookingDate;
   int? duration;
@@ -34,6 +35,7 @@ class Result {
       {this.categoryName,
         this.customerName,
         this.customerEmail,
+        this.customerPhoneNumber,
         this.customerProfileImg,
         this.bookingDate,
         this.duration,
@@ -44,6 +46,7 @@ class Result {
     categoryName = json['categoryName'];
     customerName = json['customerName'];
     customerEmail = json['customerEmail'];
+    customerPhoneNumber = json['customerPhoneNumber'];
     customerProfileImg = json['customerProfileImg'];
     bookingDate = json['bookingDate'];
     duration = json['duration'];
@@ -56,6 +59,7 @@ class Result {
     data['categoryName'] = this.categoryName;
     data['customerName'] = this.customerName;
     data['customerEmail'] = this.customerEmail;
+    data['customerPhoneNumber'] = this.customerPhoneNumber;
     data['customerProfileImg'] = this.customerProfileImg;
     data['bookingDate'] = this.bookingDate;
     data['duration'] = this.duration;

@@ -154,10 +154,8 @@ class NotificationServices {
   }
   void handleNotification(RemoteMessage message) {
     final notificationBody = message.notification?.body;
-;
     if (notificationBody != null) {
       log("NOTIFICATION DATA: $notificationBody");
-
       try {
         // Splitting the notification body by commas to separate key-value pairs
         final keyValuePairs = notificationBody.split(',');
@@ -184,6 +182,7 @@ class NotificationServices {
         final userLat = data['userLat'] ?? '';
         final userLong = data['userLong'] ?? '';
         final categoryLogo = data['categoryLogo'] ?? '';
+        final type = data['type'] ?? '';
 
         Get.toNamed(AppRoutes.bookingrequest, arguments: {
           "name": name,
@@ -195,6 +194,7 @@ class NotificationServices {
           "userLat": userLat,
           "userLong": userLong,
           "categoryLogo": categoryLogo,
+          "type": type,
         });
       } catch (e) {
         log("Error parsing notification data: $e");
