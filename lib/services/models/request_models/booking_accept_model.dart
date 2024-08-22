@@ -4,22 +4,22 @@ class BookingAcceptDetailsModel {
   String? message;
 
 
-  BookingAcceptDetailsModel({this.result, this.status});
+  BookingAcceptDetailsModel({this.result, this.status,this.message});
 
   BookingAcceptDetailsModel.fromJson(Map<dynamic, dynamic> json) {
     result =
-    json['result'] != null ? Result.fromJson(json['result']) : null;
+    json['result'] != null ? new Result.fromJson(json['result']) : null;
     status = json['status'];
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (result != null) {
-      data['result'] = result!.toJson();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.result != null) {
+      data['result'] = this.result!.toJson();
     }
-    data['status'] = status;
-    data['message'] = message;
+    data['status'] = this.status;
+    data['message'] = this.message;
     return data;
   }
 }
@@ -31,19 +31,15 @@ class Result {
   String? phoneNumber;
   String? userProfile;
   String? userAddressType;
-  String? userHouseNo;
   String? userCity;
-  String? userStreetArea;
   dynamic userLat;
   dynamic userLong;
   String? trainerddressType;
-  String? trainerHouseNo;
   String? trainerCity;
-  String? trainerStreetArea;
   dynamic trainerLat;
   dynamic trainerLong;
-  int? sessionPin;
-  int? bookingId;
+  dynamic sessionPin;
+  dynamic bookingId;
   String? bookingType;
   dynamic averageReview;
 
@@ -54,15 +50,11 @@ class Result {
         this.phoneNumber,
         this.userProfile,
         this.userAddressType,
-        this.userHouseNo,
         this.userCity,
-        this.userStreetArea,
         this.userLat,
         this.userLong,
         this.trainerddressType,
-        this.trainerHouseNo,
         this.trainerCity,
-        this.trainerStreetArea,
         this.trainerLat,
         this.trainerLong,
         this.sessionPin,
@@ -77,15 +69,11 @@ class Result {
     phoneNumber = json['phoneNumber'];
     userProfile = json['userProfile'];
     userAddressType = json['userAddressType'];
-    userHouseNo = json['userHouseNo'];
     userCity = json['UserCity'];
-    userStreetArea = json['userStreetArea'];
     userLat = json['userLat'];
     userLong = json['userLong'];
     trainerddressType = json['trainerddressType'];
-    trainerHouseNo = json['trainerHouseNo'];
     trainerCity = json['trainerCity'];
-    trainerStreetArea = json['trainerStreetArea'];
     trainerLat = json['trainerLat'];
     trainerLong = json['trainerLong'];
     sessionPin = json['sessionPin'];
@@ -95,28 +83,24 @@ class Result {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['userName'] = userName;
-    data['lastName'] = lastName;
-    data['userId'] = userId;
-    data['phoneNumber'] = phoneNumber;
-    data['userProfile'] = userProfile;
-    data['userAddressType'] = userAddressType;
-    data['userHouseNo'] = userHouseNo;
-    data['UserCity'] = userCity;
-    data['userStreetArea'] = userStreetArea;
-    data['userLat'] = userLat;
-    data['userLong'] = userLong;
-    data['trainerddressType'] = trainerddressType;
-    data['trainerHouseNo'] = trainerHouseNo;
-    data['trainerCity'] = trainerCity;
-    data['trainerStreetArea'] = trainerStreetArea;
-    data['trainerLat'] = trainerLat;
-    data['trainerLong'] = trainerLong;
-    data['sessionPin'] = sessionPin;
-    data['bookingId'] = bookingId;
-    data['bookingType'] = bookingType;
-    data['averageReview'] = averageReview;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['userName'] = this.userName;
+    data['lastName'] = this.lastName;
+    data['userId'] = this.userId;
+    data['phoneNumber'] = this.phoneNumber;
+    data['userProfile'] = this.userProfile;
+    data['userAddressType'] = this.userAddressType;
+    data['UserCity'] = this.userCity;
+    data['userLat'] = this.userLat;
+    data['userLong'] = this.userLong;
+    data['trainerddressType'] = this.trainerddressType;
+    data['trainerCity'] = this.trainerCity;
+    data['trainerLat'] = this.trainerLat;
+    data['trainerLong'] = this.trainerLong;
+    data['sessionPin'] = this.sessionPin;
+    data['bookingId'] = this.bookingId;
+    data['bookingType'] = this.bookingType;
+    data['averageReview'] = this.averageReview;
     return data;
   }
 }

@@ -231,7 +231,8 @@ class BookingRequestController extends GetxController {
       Map<String, dynamic> request = {
         "trainerId": storage.read("userId").toString(),
         "userId": notificationData["userId"].toString(),
-        "acceptBookingStatus": false
+        "acceptBookingStatus": false,
+        "exploreNow":notificationData["type"].toString() ?? ""
       };
       var response = await CallAPI.bookingAccept(request: request);
       if (response.status == 200) {

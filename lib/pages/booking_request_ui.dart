@@ -239,7 +239,7 @@ class BookingRequestUi extends StatelessWidget {
                                 SizedBox(
                                   width: Get.width*.75,
                                   child: Text(
-                                    "${controller.bookingDetails?.result?.userHouseNo ?? ""} ${controller.bookingDetails?.result?.userStreetArea ?? ""} ${controller.bookingDetails?.result?.userCity ?? ""} ",
+    controller.bookingDetails?.result?.userAddressType ?? "",
                                     style: Theme.of(context)
                                         .textTheme
                                         .labelMedium!
@@ -283,8 +283,8 @@ class BookingRequestUi extends StatelessWidget {
                                                           .bookingDetails!
                                                           .result!
                                                           .userProfile
-                                                          .toString() == null
-                                                  ? const AssetImage("assets/images/profile_img.png")
+                                                          .toString() == " "
+                                                  ? const AssetImage("assets/images/img_profile.png")
                                                       as ImageProvider<Object>
                                                   : CachedNetworkImageProvider(
                                                       controller.bookingDetails!
@@ -330,7 +330,7 @@ class BookingRequestUi extends StatelessWidget {
                                             scale: 4,
                                           ).paddingOnly(right: 5),
                                           Text(
-                                            '4.78',
+                                            controller.bookingDetails?.result?.averageReview.toString() ?? "0",
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .labelMedium!
@@ -543,7 +543,7 @@ class BookingRequestUi extends StatelessWidget {
                                             ).paddingOnly(top: 10, bottom: 15),
                                             Text(
                                               maxLines: 2,
-                                              "${controller.bookingDetails?.result?.userHouseNo ?? ""} ${controller.bookingDetails?.result?.userStreetArea ?? ""} ${controller.bookingDetails?.result?.userCity ?? ""}",
+    controller.bookingDetails?.result?.userAddressType ?? "",
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .labelLarge
@@ -639,7 +639,7 @@ class BookingRequestUi extends StatelessWidget {
                                                                       "userProfile"]
                                                                   .toString() ==
                                                               ""
-                                                          ? const AssetImage("assets/images/profile_img.png")
+                                                          ? const AssetImage("assets/images/img_profile.png")
                                                               as ImageProvider<
                                                                   Object>
                                                           : CachedNetworkImageProvider(
@@ -678,22 +678,22 @@ class BookingRequestUi extends StatelessWidget {
                                                 ])),
                                               ],
                                             ),
-                                            Row(
-                                              children: [
-                                                Image.asset(
-                                                  ImagesPaths.star2,
-                                                  scale: 4,
-                                                ).paddingOnly(right: 5),
-                                                Text(
-                                                  '4.78',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .labelMedium!
-                                                      .copyWith(
-                                                          color: Colors.white),
-                                                )
-                                              ],
-                                            )
+                                            // Row(
+                                            //   children: [
+                                            //     Image.asset(
+                                            //       ImagesPaths.star2,
+                                            //       scale: 4,
+                                            //     ).paddingOnly(right: 5),
+                                            //     Text(
+                                            //       '4.78',
+                                            //       style: Theme.of(context)
+                                            //           .textTheme
+                                            //           .labelMedium!
+                                            //           .copyWith(
+                                            //               color: Colors.white),
+                                            //     )
+                                            //   ],
+                                            // )
                                           ],
                                         ).paddingOnly(top: 15, bottom: 15),
                                         Text(

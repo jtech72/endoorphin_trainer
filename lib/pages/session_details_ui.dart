@@ -99,6 +99,13 @@ class SessionDetailsUi extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
+                            snapshot.data!.result!.customerProfileImg == " "?
+                            const CircleAvatar(
+                              maxRadius: 35,
+                              backgroundColor: Colors.black,
+                              backgroundImage: AssetImage("assets/images/img_profile.png",),
+                            ).paddingOnly(
+                                left: Get.height * .02, right: Get.width * .08):
                              CircleAvatar(
                               maxRadius: 35,
                               backgroundColor: AppColors.black,
@@ -153,7 +160,7 @@ class SessionDetailsUi extends StatelessWidget {
                                   children: [
                                     Image.asset(ImagesPaths.star2,scale: 3.8,).paddingOnly(right: Get.width*0.01),
                                     Text(
-                                      "4.86 (49)",
+                                      snapshot.data!.result!.userReviewCount.toString(),
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleMedium
@@ -197,7 +204,7 @@ class SessionDetailsUi extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Aryarup Comples",
+                                  snapshot.data!.result!.trainerCity.toString(),
                                   style: Theme.of(context).textTheme.labelLarge?.copyWith(
                                       color: AppColors.impgrey, fontWeight: FontWeight.w600),
                                 ).paddingOnly(bottom: 5),
@@ -209,7 +216,10 @@ class SessionDetailsUi extends StatelessWidget {
                                         color: AppColors.impgrey,
                                       ),
                                     )).paddingOnly(bottom: 5),
-                                Text("9:54 AM",style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                                Text(DateFormat('h:mm a')
+                                    .format(DateTime.parse(snapshot!
+                                    .data!.result!.startSession
+                                    .toString())),style: Theme.of(context).textTheme.labelMedium?.copyWith(
                                   color: AppColors.yellow,),).paddingOnly(bottom: 8),
                                 Container(
                                   width: Get.width*.82,
@@ -217,7 +227,7 @@ class SessionDetailsUi extends StatelessWidget {
                                   color: AppColors.grey,
                                 ).paddingOnly(top: 6,bottom: 12),
                                 Text(
-                                  "Aryarup Comples",
+                                  snapshot.data!.result!.customerCity.toString(),
                                   style: Theme.of(context).textTheme.labelLarge?.copyWith(
                                       color: AppColors.impgrey, fontWeight: FontWeight.w600),
                                 ).paddingOnly(bottom: 5),
@@ -228,7 +238,10 @@ class SessionDetailsUi extends StatelessWidget {
                                       style: Theme.of(context).textTheme.labelMedium?.copyWith(
                                         color: AppColors.impgrey,),
                                     )).paddingOnly(bottom: 5),
-                                Text("9:54 AM",style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                                Text(DateFormat('h:mm a')
+                                    .format(DateTime.parse(snapshot!
+                                    .data!.result!.endSession
+                                    .toString())),style: Theme.of(context).textTheme.labelMedium?.copyWith(
                                   color: AppColors.yellow,),),
                               ],
                             ),

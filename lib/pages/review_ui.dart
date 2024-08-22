@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
+
 import '../controllers/review_controller.dart';
 import '../controllers/session_running_controller.dart';
 import '../utils/exports.dart';
@@ -51,7 +53,13 @@ class ReviewUi extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-
+                          snapshot.data!.result!.customerProfileImg == " "?
+                          const CircleAvatar(
+                            maxRadius: 35,
+                            backgroundColor: AppColors.black,
+                            backgroundImage: AssetImage("assets/images/img_profile.png"),
+                          ).paddingOnly(
+                              left: Get.height * .02, right: Get.width * .08):
                           CircleAvatar(
                             maxRadius: 40,
                             backgroundColor: AppColors.black,
