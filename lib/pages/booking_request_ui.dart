@@ -330,7 +330,7 @@ class BookingRequestUi extends StatelessWidget {
                                             scale: 4,
                                           ).paddingOnly(right: 5),
                                           Text(
-                                            controller.bookingDetails?.result?.averageReview.toString() ?? "0",
+    controller.bookingDetails!.result!.averageReview == null?"0": controller.bookingDetails?.result?.averageReview.toString() ?? "0",
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .labelMedium!

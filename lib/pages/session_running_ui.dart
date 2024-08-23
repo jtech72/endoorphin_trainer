@@ -5,10 +5,8 @@ import 'package:intl/intl.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../controllers/session_running_controller.dart';
 import '../utils/exports.dart';
-
 class SessionRunningUi extends StatelessWidget {
   const SessionRunningUi({super.key});
-
   @override
   Widget build(BuildContext context) {
     SessionRunningController controller = Get.find();
@@ -387,7 +385,7 @@ class SessionRunningUi extends StatelessWidget {
                                       size: 16,
                                     ),
                                     Text(
-                                      " ${snapshot.data!.result!.customerAverageReviewCount} (${snapshot.data!.result!.customerReviewCount})",
+                                      " ${snapshot.data!.result!.customerAverageReviewCount == null?"0":snapshot.data!.result!.customerAverageReviewCount} (${snapshot.data!.result!.customerReviewCount == null ?"0":snapshot.data!.result!.customerReviewCount})",
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleMedium

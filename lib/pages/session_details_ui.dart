@@ -160,7 +160,7 @@ class SessionDetailsUi extends StatelessWidget {
                                   children: [
                                     Image.asset(ImagesPaths.star2,scale: 3.8,).paddingOnly(right: Get.width*0.01),
                                     Text(
-                                      snapshot.data!.result!.userReviewCount.toString(),
+                                      snapshot.data!.result!.userReviewCount ==null?"0":snapshot.data!.result!.userReviewCount.toString(),
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleMedium

@@ -411,21 +411,32 @@ class BioUi extends StatelessWidget {
                               borderRadius: BorderRadius.circular(7),
                             ),
                             child: TextField(
-                              maxLength: 450,
+                              maxLength: 250,
                               textCapitalization: TextCapitalization.none,
                               controller: controller.bioController,
                               inputFormatters: [
                                 NoLeadingSpaceFormatter(),
-                                LengthLimitingTextInputFormatter(100),
+                                LengthLimitingTextInputFormatter(250),
                                 CapitalizeFirstLetterFormatter(),
                                 EmojiFilteringTextInputFormatter()// Add the custom formatter here
                               ],
+                              buildCounter: (
+                                  BuildContext context, {
+                                    required int currentLength,
+                                    required bool isFocused,
+                                    required int? maxLength,
+                                  }) {
+                                return Text(
+                                  '$currentLength/$maxLength',
+                                  style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 12,color: AppColors.grey), // Adjust the font size here
+                                );
+                              },
                               keyboardType: TextInputType.text,
-                              minLines: 1,
+                              minLines: 4,
                               maxLines: 10,
                               style: Theme.of(context).textTheme.labelMedium,
                               decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(bottom: 3, left: 15, right: 15),
+                                contentPadding: const EdgeInsets.only(bottom: 3, left: 15, right: 15,top: 10),
                                 fillColor: AppColors.yellowishWhite,
                                 hintText: 'Tell us something about yourself ',
                                 hintStyle: Theme.of(context).textTheme.labelMedium,
