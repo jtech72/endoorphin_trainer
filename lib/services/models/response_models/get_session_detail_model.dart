@@ -30,7 +30,7 @@ class Result {
   String? customerProfileImg;
   String? trainerProfileImg;
   String? bookingDate;
-  int? duration;
+  dynamic duration;
   dynamic startSession;
   dynamic endSession;
   dynamic scheduletime;
@@ -39,14 +39,14 @@ class Result {
   String? customerCity;
   String? trainerAddress;
   String? trainerCity;
-  int? trainerId;
-  int? userId;
-  int? bookingId;
-  int? sessionCount;
-  double? trainerReviewCount;
+  dynamic trainerId;
+  dynamic userId;
+  dynamic bookingId;
+  dynamic sessionCount;
+  dynamic trainerReviewCount;
   String? trainerEmail;
   String? trainerContactNumber;
-  double? userReviewCount;
+  dynamic userReviewCount;
 
   Result(
       {this.categoryName,

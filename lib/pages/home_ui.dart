@@ -91,9 +91,9 @@ class HomeUi extends StatelessWidget {
                     controller.currentIndex.value = index;
                   },
                   children: [
-                    Image.asset(ImagesPaths.homepackage, fit: BoxFit.contain),
-                    Image.asset(ImagesPaths.homepackage, fit: BoxFit.contain),
-                    Image.asset(ImagesPaths.homepackage, fit: BoxFit.contain),
+                    Image.asset("assets/images/image 8.png", fit: BoxFit.cover),
+                    Image.asset("assets/images/image 12.png", fit: BoxFit.cover),
+                    Image.asset("assets/images/image 13.png", fit: BoxFit.cover),
                   ],
                 ),
               ),
@@ -265,8 +265,9 @@ class HomeUi extends StatelessWidget {
                                               ),
                                               child: Text(
                                                 index == 2 ? "0" :
-                                                index == 0 ?controller.trainerSessionDetails.value.walletAmount.toString() :
-                                                index == 3 ? controller.trainerSessionDetails.value.upcomingBookingCount.toString() : controller.trainerSessionDetails.value.totalSession.toString(),
+                                                index == 0 ?controller.trainerSessionDetails.value.walletAmount == null?"0":controller.trainerSessionDetails.value.walletAmount.toString() :
+                                                index == 3 ?controller.trainerSessionDetails.value.upcomingBookingCount == null?"0": controller.trainerSessionDetails.value.upcomingBookingCount.toString()
+                                                    :controller.trainerSessionDetails.value.totalSession == null? "0": controller.trainerSessionDetails.value.totalSession.toString(),
                                                 style: Theme.of(context).textTheme.headlineLarge?.copyWith(
 
                                                   color: AppColors.yellow,

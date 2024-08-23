@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:endoorphin_trainer/controllers/withdraw_controller.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,7 +9,6 @@ class WithdrawUI extends StatelessWidget {
   const WithdrawUI({
     super.key,
   });
-
   @override
   Widget build(BuildContext context) {
     WithdrawController controller = Get.put(WithdrawController());
@@ -59,7 +57,7 @@ class WithdrawUI extends StatelessWidget {
                                   .copyWith(fontWeight: FontWeight.w500),
                             ),
                             Text(
-                              'AED2648.00',
+                              'AED ${controller.totalBalance.value.toString()}',
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineLarge!
@@ -145,13 +143,13 @@ class WithdrawUI extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              controller.selectedIndex.value = 1;
+                              controller.selectedIndex.value = 2;
                             },
                             child: Container(
                               height: 31,
                               width: 84,
                               decoration: BoxDecoration(
-                                  color: controller.selectedIndex.value == 1
+                                  color: controller.selectedIndex.value == 2
                                       ? AppColors.yellow
                                       : AppColors.black,
                                   border: Border.all(color: AppColors.yellow),
@@ -164,7 +162,7 @@ class WithdrawUI extends StatelessWidget {
                                     .headlineSmall!
                                     .copyWith(
                                         color:
-                                            controller.selectedIndex.value == 1
+                                            controller.selectedIndex.value == 2
                                                 ? AppColors.black
                                                 : AppColors.yellow),
                               )),
@@ -175,8 +173,7 @@ class WithdrawUI extends StatelessWidget {
                     ],
                   ).paddingOnly(
                       left: Get.width * 0.02, right: Get.width * 0.02),
-                  controller.selectedIndex.value == 0
-                      ?
+                  controller.selectedIndex.value == 0 ?
                   SizedBox(
                           height: Get.height*.7,
                           width: Get.width,
@@ -193,14 +190,21 @@ class WithdrawUI extends StatelessWidget {
                                   child: Text('Error: ${snapshot.error}'),
                                 );
                               } else if (snapshot.data!.result!.isNotEmpty) {
-                                return
+                                double totalBalance = 0.0;
+                                for (var item in snapshot.data!.result!) {
+                                  totalBalance += double.parse( item.bookingAmount.toString());
+                                }
+                                WidgetsBinding.instance.addPostFrameCallback((_) {
+                                  controller.totalBalance.value = totalBalance;
+                                });                                return
                                   Column(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: Get.height*.6,
                                         width: Get.width,
-                                        child: ListView.builder(
-                                                                            itemCount:snapshot.data!.result!.length,
+                                        child:
+                                        ListView.builder(
+                                            itemCount:snapshot.data!.result!.length,
                                           itemBuilder: (context,index) {
                                             return Column(
                                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -357,7 +361,7 @@ class WithdrawUI extends StatelessWidget {
                                                             Get.back();
                                                             controller
                                                                 .selectedIndex
-                                                                .value = 1;
+                                                                .value = 3;
                                                           },
                                                           height: 35,
                                                           width: 95),
@@ -392,7 +396,7 @@ class WithdrawUI extends StatelessWidget {
                       width: Get.width,
                       child:
                       FutureBuilder(
-                        future: CallAPI. getUnpaid(trainerId: storage.read("userId").toString()),
+                        future: CallAPI. getPaidSession(trainerId: storage.read("userId").toString()),
                         builder: (BuildContext context, snapshot) {
                           if (snapshot.connectionState == ConnectionState.waiting) {
                             return const Center(
@@ -403,6 +407,13 @@ class WithdrawUI extends StatelessWidget {
                               child: Text('Error: ${snapshot.error}'),
                             );
                           } else if (snapshot.data!.result!.isNotEmpty) {
+                            double totalBalance = 0.0;
+                            for (var item in snapshot.data!.result!) {
+                              totalBalance += double.parse(item == null?"0": item.bookingAmount.toString());
+                            }
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              controller.totalBalance.value = totalBalance;
+                            });
                             return
                               Column(
                                 children: [
@@ -432,7 +443,7 @@ class WithdrawUI extends StatelessWidget {
                                                         children: [
                                                           Text(
                                                             '${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].user!.userName}',
-                                                            style: TextStyle(
+                                                            style: const TextStyle(
                                                                 color: Colors.white,
                                                                 fontSize: 14,
                                                                 fontWeight:
@@ -443,7 +454,7 @@ class WithdrawUI extends StatelessWidget {
                                                                 .format(DateTime.parse(snapshot!
                                                                 .data!.result![index].createdAt
                                                                 .toString())),
-                                                            style: TextStyle(
+                                                            style: const TextStyle(
                                                                 color: Colors.white,
                                                                 fontSize: 12,
                                                                 fontWeight:
@@ -486,12 +497,13 @@ class WithdrawUI extends StatelessWidget {
                           }
                         },
                       )
-                  ): SizedBox(
+                  ):
+                  SizedBox(
                       height: Get.height*.7,
                       width: Get.width,
                       child:
                       FutureBuilder(
-                        future: CallAPI. getUnpaid(trainerId: storage.read("userId").toString()),
+                        future: CallAPI. getRequestedBookings(trainerId: storage.read("userId").toString()),
                         builder: (BuildContext context, snapshot) {
                           if (snapshot.connectionState == ConnectionState.waiting) {
                             return const Center(
@@ -502,10 +514,17 @@ class WithdrawUI extends StatelessWidget {
                               child: Text('Error: ${snapshot.error}'),
                             );
                           } else if (snapshot.data!.result!.isNotEmpty) {
+                            double totalBalance = 0.0;
+                            for (var item in snapshot.data!.result!) {
+                              totalBalance += double.parse(item == null?"0": item.bookingAmount.toString());
+                            }
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              controller.totalBalance.value = totalBalance;
+                            });
                             return
                               Column(
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     height: Get.height*.6,
                                     width: Get.width,
                                     child: ListView.builder(
@@ -531,7 +550,7 @@ class WithdrawUI extends StatelessWidget {
                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
                                                           Text(
-                                                            '${snapshot.data!.result![index].user!.userName} session with ${snapshot.data!.result![index].user!.userName}',
+                                                            '${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].user!.userName}',
                                                             style: TextStyle(
                                                                 color: Colors.white,
                                                                 fontSize: 14,

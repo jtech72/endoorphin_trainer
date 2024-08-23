@@ -3,6 +3,7 @@ import 'package:endoorphin_trainer/controllers/earning_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 class EarningUi extends StatelessWidget {
   const EarningUi({super.key});
@@ -75,19 +76,21 @@ class EarningUi extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        RichText(
-                          text: TextSpan(
-                            text: "Wallet Balance\n",
-                            style: Theme.of(context).textTheme.displayLarge,
-                            children: [
-                              TextSpan(
-                                text: "AED 59.90",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineLarge
-                                    ?.copyWith(color: AppColors.yellow),
-                              ),
-                            ],
+                        Obx(
+                        ()=> RichText(
+                            text: TextSpan(
+                              text: "Wallet Balance\n",
+                              style: Theme.of(context).textTheme.displayLarge,
+                              children: [
+                                TextSpan(
+                                  text: "AED ${controller.totalAmount.value}",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineLarge
+                                      ?.copyWith(color: AppColors.yellow),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         InkButton(
@@ -312,8 +315,8 @@ class EarningUi extends StatelessWidget {
                                       final List<CartesianSeries<dynamic, dynamic>> seriesList = [
                                         ColumnSeries<dynamic, String>(
                                           width: 0.6,
-                                          dataSource: controller. weeklyData ,
-                                          xValueMapper: (dynamic data, _) => data.dayName,
+                                          dataSource: controller.weeklyData ,
+                                          xValueMapper: (dynamic data, _) => data.dayName[0],
                                           yValueMapper: (dynamic data, _) => data.revenue,
                                           pointColorMapper: (dynamic data, int index) {
                                             return index == controller.tappedIndex.value ? AppColors.yellow : Colors.transparent;
@@ -354,7 +357,7 @@ class EarningUi extends StatelessWidget {
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    '${controller.months[currentMonth.value - 1]} : ${data.period}',
+                                                    '',
                                                     style: const TextStyle(
                                                       fontWeight: FontWeight.bold,color: Colors.black,
                                                       fontSize: 16,
@@ -362,7 +365,7 @@ class EarningUi extends StatelessWidget {
                                                   ),
                                                   const SizedBox(height: 4),
                                                   Text(
-                                                    'Amount: AED ${data.amount.toStringAsFixed(2)}',
+                                                    '',
                                                     style: const TextStyle(
                                                       color: Colors.black,
                                                     ),
@@ -445,8 +448,8 @@ class EarningUi extends StatelessWidget {
                                     builder: (controller) {
                                       final List<CartesianSeries<dynamic, dynamic>> seriesList = [
                                         ColumnSeries<dynamic, String>(
-                                          width: 0.6,
-                                          dataSource: controller. monthlyData,
+                                          width: 0.8,
+                                          dataSource: controller.monthlyData,
                                           xValueMapper: (dynamic data, _) => data.date,
                                           yValueMapper: (dynamic data, _) => data.revenue,
                                           pointColorMapper: (dynamic data, int index) {
@@ -463,7 +466,7 @@ class EarningUi extends StatelessWidget {
                                       ];
                                       final chart = SfCartesianChart(
                                         plotAreaBorderWidth: 0,
-                                        borderWidth: 0,
+                                        borderWidth: 10,
                                         tooltipBehavior: TooltipBehavior(
                                           canShowMarker: false,
                                           enable: true,

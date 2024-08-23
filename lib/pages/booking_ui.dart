@@ -314,10 +314,9 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                     child: ListView.builder(
                                         itemCount: snapshot.data!.result!.length,
                                         itemBuilder: (context, index) {
-                                          return GestureDetector(
+                                          return InkWell(
                                             onTap: (){
-                                              Get.toNamed(AppRoutes.bookingdetails,
-                                                  arguments: snapshot.data!.result![index].id.toString());
+                                              Get.toNamed(AppRoutes.bookingdetails, arguments: snapshot.data!.result![index].id.toString());
                                             },
                                             child: Column(
                                               children: [
@@ -585,7 +584,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                           height: 1, width: Get.width, color: AppColors.grey,)
                             .paddingOnly(top: 15,),
                         FutureBuilder(
-                            future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"canceled" ),
+                            future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"cancelled" ),
                             builder: (BuildContext context, snapshot) {
                               if (snapshot.connectionState == ConnectionState.waiting) {
                                 return SizedBox(
