@@ -25,7 +25,6 @@ void main() async {
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
   };
-
   GetStorage.init();
   runApp(const EndoorphinTrainer());
 }

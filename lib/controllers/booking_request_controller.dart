@@ -269,6 +269,7 @@ class BookingRequestController extends GetxController {
       selectedIndex.value = 2;
     }else{
       dismissLoader();
+      Get.toNamed(AppRoutes.bottomNavigation);
       showToast(result.message.toString());
     }
     }

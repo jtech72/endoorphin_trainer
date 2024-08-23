@@ -27,7 +27,7 @@ class APIManager {
 
       responseJson = _response(response);
     } on SocketException {
-      Get.toNamed(AppRoutes.error);
+      // Get.toNamed(AppRoutes.error);
       throw FetchDataException('No Internet connection');
     } on HttpException {
       throw FetchDataException('HTTP Exception occurred');
