@@ -30,7 +30,7 @@ void main() async {
 }
 @pragma("vm:entry-point")
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  log("FIREBASE BG NOTIFICATION => ${message.notification!.title.toString()}");
+  log("FIREBASE BG NOTIFICATION => ${message.data!.toString()}");
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 }
 Future<void> configure() async {
