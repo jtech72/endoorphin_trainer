@@ -144,7 +144,7 @@ class NotificationServices {
         flutterLocalNotificationsPlugin.show(
           0,
           message.notification!.title.toString(),
-          "Name: $name $lastName, Address: $address",
+          message.notification!.body.toString(),
           notificationDetails,
         );
       });
@@ -152,55 +152,49 @@ class NotificationServices {
       log("Notification body is null");
     }
   }
+
   void handleNotification(RemoteMessage message) {
-    final notificationBody = message.notification?.body;
-    if (notificationBody != null) {
-      log("NOTIFICATION DATA: $notificationBody");
+    final Map<String, dynamic> data = message.data;
+
+    if (data.isNotEmpty) {
       try {
-        // Splitting the notification body by commas to separate key-value pairs
-        final keyValuePairs = notificationBody.split(',');
-
-        // Initialize an empty map to hold the parsed key-value pairs
-        final Map<String, String> data = {};
-
-        for (var pair in keyValuePairs) {
-          // Using a regular expression to split each pair only at the first colon
-          final keyValue = pair.split(RegExp(r'(?<!http[s]?):'));
-          if (keyValue.length == 2) {
-            final key = keyValue[0].trim();
-            final value = keyValue[1].trim();
-            data[key] = value;
-          }
-        }
-
-        final name = data['Name'] ?? '';
+        // Directly access the values from the data map
         final lastName = data['lastName'] ?? '';
-        final address = data['Address'] ?? '';
-        final contact = data['Contact'] ?? '';
+        final phoneNumber = data['phoneNumber'] ?? '';
+        final city = data['city'] ?? '';
+        final addressType = data['addressType'] ?? '';
+        final userName = data['userName'] ?? '';
+        final type = data['type'] ?? '';
         final userId = data['userId'] ?? '';
-        final userProfile = data['userProfile'] ?? '';
-        final userLat = data['userLat'] ?? '';
         final userLong = data['userLong'] ?? '';
         final categoryLogo = data['categoryLogo'] ?? '';
-        final type = data['type'] ?? '';
+        final userProfile = data['userProfile'] ?? '';
+        final userLat = data['userLat'] ?? '';
+        final status = data['status'] ?? '';
 
+        // Construct address using city and addressType if needed
+        final address = '$addressType, $city';
+
+        // Navigating to the specified route with extracted data
         Get.toNamed(AppRoutes.bookingrequest, arguments: {
-          "name": name,
           "lastName": lastName,
+          "phoneNumber": phoneNumber,
           "address": address,
-          "contact": contact,
+          "userName": userName,
+          "type": type,
           "userId": userId,
-          "userProfile": userProfile,
-          "userLat": userLat,
           "userLong": userLong,
           "categoryLogo": categoryLogo,
-          "type": type,
+          "userProfile": userProfile,
+          "userLat": userLat,
+          "status": status,
         });
-      } catch (e) {
+      } catch (e, st) {
         log("Error parsing notification data: $e");
+        log("Stack trace: $st");
       }
     } else {
-      log("Notification body is null");
+      log("Notification data is empty");
     }
   }
 
