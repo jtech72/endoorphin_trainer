@@ -327,6 +327,7 @@ class SessionRunningUi extends StatelessWidget {
                             snapshot.data!.result!.customerProfileImg == " "?
                             const CircleAvatar(
                               maxRadius: 35,
+                              ///
                               backgroundColor: AppColors.black,
                               backgroundImage: AssetImage("assets/images/img_profile.png"),
                             ).paddingOnly(
