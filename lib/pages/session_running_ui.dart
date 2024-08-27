@@ -5,10 +5,8 @@ import 'package:intl/intl.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../controllers/session_running_controller.dart';
 import '../utils/exports.dart';
-
 class SessionRunningUi extends StatelessWidget {
   const SessionRunningUi({super.key});
-
   @override
   Widget build(BuildContext context) {
     SessionRunningController controller = Get.find();
@@ -143,13 +141,13 @@ class SessionRunningUi extends StatelessWidget {
                                 ),
                                 InkWell(
                                     onTap: () {
-                                      print(controller.isPaused.value
-                                          .toString()); // Logging the current state of the timer
-                                      if (controller.isPaused.value == true) {
-                                        controller.resumeTimer();
-                                      } else {
-                                        controller.pauseTimer();
-                                      }
+                                      // print(controller.isPaused.value
+                                      //     .toString()); // Logging the current state of the timer
+                                      // if (controller.isPaused.value == true) {
+                                      //   controller.resumeTimer();
+                                      // } else {
+                                      //   controller.pauseTimer();
+                                      // }
                                     },
                                     child: Icon(
                                       controller.isPaused.value == true
@@ -304,12 +302,10 @@ class SessionRunningUi extends StatelessWidget {
                         ),
                       ),
                       Text(snapshot.data!.result!.categoryName.toString(),
-                          style: Theme.of(context).textTheme.headlineLarge),
-                      Text(
-                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            fontWeight: FontWeight.w300, fontSize: 12),
-                        ""
-                      ).paddingOnly(top: 10, bottom: Get.height * .03),
+                          style: Theme.of(context).textTheme.headlineLarge).paddingOnly(top: 10, bottom: Get.height * .01),
+                      Text(snapshot.data!.result!.trainerBio.toString(),
+                          style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 12,color: AppColors.whiteShade2)).paddingOnly(top: 5, bottom: Get.height * .01),
+
                       Text(
                         "Customer Details",
                         style: Theme.of(context)
@@ -390,7 +386,7 @@ class SessionRunningUi extends StatelessWidget {
                                       size: 16,
                                     ),
                                     Text(
-                                      " 4.86 (49)",
+                                      " ${snapshot.data!.result!.customerAverageReviewCount == null?"0":snapshot.data!.result!.customerAverageReviewCount} (${snapshot.data!.result!.customerReviewCount == null ?"0":snapshot.data!.result!.customerReviewCount})",
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleMedium

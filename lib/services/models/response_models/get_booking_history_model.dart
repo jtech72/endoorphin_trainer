@@ -10,14 +10,14 @@ class GetBookingHistoryModel {
     if (json['result'] != null) {
       result = <Result>[];
       json['result'].forEach((v) {
-        result!.add(Result.fromJson(v));
+        result!.add(new Result.fromJson(v));
       });
     }
     status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['message'] = this.message;
     if (this.result != null) {
       data['result'] = this.result!.map((v) => v.toJson()).toList();
@@ -31,12 +31,12 @@ class Result {
   int? id;
   int? userId;
   int? trainerId;
-  Null? packageName;
+  dynamic packageName;
   int? bookingAmount;
   String? categoryName;
   int? sessionTime;
-  String? startSession;
-  String? endSession;
+  dynamic startSession;
+  dynamic endSession;
   dynamic totalTimePeriod;
   String? bookingStatus;
   dynamic bookingRemark;
@@ -50,12 +50,17 @@ class Result {
   String? userName;
   bool? trainerOnTheWay;
   dynamic scheduleDate;
-  String? scheduletime;
+  dynamic scheduletime;
   dynamic paymentType;
   int? categoryId;
-  bool? pinStatus;
+  dynamic pinStatus;
+  dynamic trainerPaymentRequest;
+  dynamic paidStatus;
+  dynamic paymentAttachment;
+  dynamic paymentId;
   String? createdAt;
   String? updatedAt;
+  Category? category;
 
   Result(
       {this.id,
@@ -84,8 +89,13 @@ class Result {
         this.paymentType,
         this.categoryId,
         this.pinStatus,
+        this.trainerPaymentRequest,
+        this.paidStatus,
+        this.paymentAttachment,
+        this.paymentId,
         this.createdAt,
-        this.updatedAt});
+        this.updatedAt,
+        this.category});
 
   Result.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -114,12 +124,19 @@ class Result {
     paymentType = json['paymentType'];
     categoryId = json['categoryId'];
     pinStatus = json['pinStatus'];
+    trainerPaymentRequest = json['trainerPaymentRequest'];
+    paidStatus = json['paidStatus'];
+    paymentAttachment = json['paymentAttachment'];
+    paymentId = json['paymentId'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
+    category = json['category'] != null
+        ? new Category.fromJson(json['category'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['userId'] = this.userId;
     data['trainerId'] = this.trainerId;
@@ -146,6 +163,66 @@ class Result {
     data['paymentType'] = this.paymentType;
     data['categoryId'] = this.categoryId;
     data['pinStatus'] = this.pinStatus;
+    data['trainerPaymentRequest'] = this.trainerPaymentRequest;
+    data['paidStatus'] = this.paidStatus;
+    data['paymentAttachment'] = this.paymentAttachment;
+    data['paymentId'] = this.paymentId;
+    data['createdAt'] = this.createdAt;
+    data['updatedAt'] = this.updatedAt;
+    if (this.category != null) {
+      data['category'] = this.category!.toJson();
+    }
+    return data;
+  }
+}
+
+class Category {
+  int? id;
+  String? name;
+  String? price;
+  String? image;
+  String? description;
+  bool? status;
+  String? logo;
+  String? durations;
+  String? createdAt;
+  String? updatedAt;
+
+  Category(
+      {this.id,
+        this.name,
+        this.price,
+        this.image,
+        this.description,
+        this.status,
+        this.logo,
+        this.durations,
+        this.createdAt,
+        this.updatedAt});
+
+  Category.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    price = json['price'];
+    image = json['image'];
+    description = json['description'];
+    status = json['status'];
+    logo = json['logo'];
+    durations = json['durations'];
+    createdAt = json['createdAt'];
+    updatedAt = json['updatedAt'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['price'] = this.price;
+    data['image'] = this.image;
+    data['description'] = this.description;
+    data['status'] = this.status;
+    data['logo'] = this.logo;
+    data['durations'] = this.durations;
     data['createdAt'] = this.createdAt;
     data['updatedAt'] = this.updatedAt;
     return data;

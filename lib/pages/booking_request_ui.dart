@@ -1,12 +1,9 @@
 import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import '../utils/exports.dart';
 class BookingRequestUi extends StatelessWidget {
   const BookingRequestUi({super.key});
-
   @override
   Widget build(BuildContext context) {
     LocationController locationController = Get.put(LocationController());
@@ -283,7 +280,7 @@ class BookingRequestUi extends StatelessWidget {
                                                           .bookingDetails!
                                                           .result!
                                                           .userProfile
-                                                          .toString() == " "
+                                                          .toString().isEmpty
                                                   ? const AssetImage("assets/images/img_profile.png")
                                                       as ImageProvider<Object>
                                                   : CachedNetworkImageProvider(
@@ -330,7 +327,7 @@ class BookingRequestUi extends StatelessWidget {
                                             scale: 4,
                                           ).paddingOnly(right: 5),
                                           Text(
-                                            controller.bookingDetails?.result?.averageReview.toString() ?? "0",
+    controller.bookingDetails!.result!.averageReview == null?"0": controller.bookingDetails?.result?.averageReview.toString() ?? "0",
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .labelMedium!
@@ -543,7 +540,7 @@ class BookingRequestUi extends StatelessWidget {
                                             ).paddingOnly(top: 10, bottom: 15),
                                             Text(
                                               maxLines: 2,
-    controller.bookingDetails?.result?.userAddressType ?? "",
+                                               controller.bookingDetails?.result?.userAddressType ?? "",
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .labelLarge
@@ -655,7 +652,7 @@ class BookingRequestUi extends StatelessWidget {
                                                     text: TextSpan(children: [
                                                   TextSpan(
                                                     text: controller
-                                                        .notificationData["name"],
+                                                        .notificationData["userName"],
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .headlineSmall,

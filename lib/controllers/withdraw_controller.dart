@@ -1,8 +1,11 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
+import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
 import '../services/models/request_models/withdraw_request_model.dart';
 class WithdrawController extends GetxController {
   RxInt selectedIndex = 0.obs;
   var selectedItems = <String>[].obs;
+
   void toggleSelection(String id) {
     if (selectedItems.contains(id)) {
       selectedItems.remove(id);
@@ -10,7 +13,7 @@ class WithdrawController extends GetxController {
       selectedItems.add(id);
     }
   }
-
+  RxDouble totalBalance = 0.0.obs;
 
   // Function to post data
   Future<void> postWithdrawRequest() async {

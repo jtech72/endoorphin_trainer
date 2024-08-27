@@ -8,6 +8,7 @@ class EarningController extends GetxController{
   RxString type = "".obs;
   RxString totalEarnings = "".obs;
   RxString totalSession = "".obs;
+  RxString totalAmount = "".obs;
   final List<String> months = [
     'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
   ];
@@ -25,6 +26,16 @@ class EarningController extends GetxController{
     update();
 
   }
-
+  Future<void> getWalletAmount()async{
+    final result = await CallAPI.getWalletAmount(trainerId: storage.read("userId").toString());
+    if(result.status == 200){
+      totalAmount.value = result.result.toString();
+    }
+  }
+@override
+  void onInit() {
+  getWalletAmount();
+  super.onInit();
+  }
 
 }

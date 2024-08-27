@@ -46,10 +46,12 @@ class Endpoints{
   static const String epPostReviewUser="review/saveReview";
   /// get Unpaid request
   static const String epUnpaid="trainer/getAllUnpaidBookingForTrainers?trainerId=";
+  /// Post withdraw request
+  static const String epWithdraw="trainer/trainerSendWithdrawRequest";
   /// get paid request
   static const String epGetPaid="trainer/getAllPaidBookingForTrainers?trainerId=";
-  /// Post Requested request
-  static const String epWithDrawalReq="trainer/trainerSendWithdrawRequest";
+  /// get requested request
+  static const String epGetRequested="trainer/getAllRequestedBookingForTrainers?trainerId=";
   /// TRAINER DATA
   static const String epTrainerData="trainer/trainerDetailsCount?trainerId=";
   /// TRAINER MONTHLY DATA
@@ -58,6 +60,13 @@ class Endpoints{
   static const String epGetWeeklyData="trainer/revenueWeekleyChartDetailsForTrainer?trainerId=";
   /// SUPPORT
   static const String epSupport="support/raiseTicket";
-  /// SUPPORT
+  /// GET WALLET AMOUNT
   static const String epGetWalletAmount="users/getWalletAmount?userId=";
+  /// GET WALLET AMOUNT
+  static const String epGetTodayNotification="getNotification?userId=";
+  /// GET WALLET AMOUNT
+  static const String epGetYesterdayNotification="getYesterDayNotification?userId=";
+  /// GET WALLET AMOUNT
+  static const String epGetWeeklyNotification="getWeekelyNotification?userId=";
+
 }

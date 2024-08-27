@@ -90,7 +90,7 @@ class BookingDetailsUi extends StatelessWidget {
                                             color: AppColors.impgrey),
                                       ),
                                        TextSpan(
-                                        text: '\n${snapshot.data!.result!.customerEmail.toString()}',
+                                        text: '\n${snapshot.data!.result!.customerPhoneNumber.toString()}',
                                         style: TextStyle(
                                             color: AppColors.impgrey,
                                             fontSize: 14,

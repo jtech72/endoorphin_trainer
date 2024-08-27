@@ -2,10 +2,7 @@ class BookingAcceptDetailsModel {
   Result? result;
   int? status;
   String? message;
-
-
   BookingAcceptDetailsModel({this.result, this.status,this.message});
-
   BookingAcceptDetailsModel.fromJson(Map<dynamic, dynamic> json) {
     result =
     json['result'] != null ? new Result.fromJson(json['result']) : null;
@@ -61,7 +58,6 @@ class Result {
         this.bookingId,
         this.bookingType,
         this.averageReview});
-
   Result.fromJson(Map<String, dynamic> json) {
     userName = json['userName'];
     lastName = json['lastName'];
@@ -81,7 +77,6 @@ class Result {
     bookingType = json['bookingType'];
     averageReview = json['averageReview'];
   }
-
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['userName'] = this.userName;

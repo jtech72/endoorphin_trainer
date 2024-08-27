@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../services/models/request_models/booking_accept_model.dart';
 import '../utils/exports.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
@@ -269,6 +268,7 @@ class BookingRequestController extends GetxController {
       selectedIndex.value = 2;
     }else{
       dismissLoader();
+      Get.toNamed(AppRoutes.bottomNavigation);
       showToast(result.message.toString());
     }
     }
