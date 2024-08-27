@@ -76,31 +76,34 @@ class OtpUI extends StatelessWidget {
                 ).paddingOnly(left: 5, right: 5),
                 Center(
                   child: Obx(
-                        () => Text(
-                      controller.time.value == "00:01" ? "00:00" : controller.time.value.toString(),
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: AppColors.yellow, fontSize: 14, fontWeight: FontWeight.w700),
+                        () => GestureDetector(
+                      onTap: () {
+                        if (controller.time.value == "00:01") {
+                          controller.resendOtp();
+                        }
+                      },
+                      child: Text(
+                        controller.time.value == "00:01" ? "Resend OTP" : controller.time.value.toString(),
+                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          color: AppColors.yellow,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
                     ),
                   ),
+
                 ),
                 SizedBox(
                   height: Get.height * 0.08,
                 ),
-                GestureDetector(
-                  onTap: (){
-                    controller.resendOtp();
-                  },
-                  child: Center(
-                    child: Obx(
-                          () => controller.showResendText.value
-                          ? Text(
-                        'Resend the code if not received?',
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelLarge!
-                            .copyWith(color: AppColors.yellow, fontWeight: FontWeight.w500),
-                      )
-                          : Container(),
-                    ),
+                Center(
+                  child: Text(
+                    'Resend the code if not received?',
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelLarge!
+                        .copyWith(color: AppColors.whiteShade, fontWeight: FontWeight.w500),
                   ),
                 ),
                 SizedBox(

@@ -95,14 +95,28 @@ class ProfileUI extends StatelessWidget {
                                     AssetImage(ImagesPaths.profile),
                               ),
                             ).paddingOnly(left: 30)
-                          :  CircleAvatar(
-                              radius: 42,
-                              backgroundColor: AppColors.yellow,
-                              child: CircleAvatar(
-                                radius: 40,
-                                backgroundImage:CachedNetworkImageProvider(snapshot.data!.result!.profileImg.toString()), // Your profile image
-                              ),
-                            ).paddingOnly(left: 30),
+                          :  CachedNetworkImage(
+                        imageUrl: snapshot.data!.result!.profileImg.toString(),
+                        imageBuilder: (context, imageProvider) => CircleAvatar(
+                          radius: 42,
+                          backgroundColor: AppColors.yellow,
+                          child: CircleAvatar(
+                            radius: 40,
+                            backgroundColor: Colors.transparent,
+                            backgroundImage: imageProvider,
+                          ),
+                        ),
+                        placeholder: (context, url) => CircleAvatar(
+                          radius: 42,
+                          backgroundColor: Colors.transparent,
+                          child: CircularProgressIndicator(),
+                        ),
+                        errorWidget: (context, url, error) => CircleAvatar(
+                          radius: 42,
+                          child: Icon(Icons.error),
+                        ),
+                      )
+                          .paddingOnly(left: 30),
                       const SizedBox(
                         width: 30,
                       ),
@@ -515,7 +529,56 @@ class ProfileUI extends StatelessWidget {
                     ),
                   )),
               SizedBox(
-                height: Get.height * 0.1,
+                height: Get.height * 0.02,
+              ),
+              Container(
+                  height: Get.height * 0.05,
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(color: AppColors.grey3),
+                      color: AppColors.greyButton),
+                  child: InkWell(
+                    onTap: () {
+                      Get.toNamed(AppRoutes.rating);
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: Get.width * 0.04,
+                            ),
+                            Image.asset(
+                              ImagesPaths.starRating,
+                              width: 20,
+                              color: AppColors.white,
+                            ),
+                            SizedBox(
+                              width: Get.width * 0.057,
+                            ),
+                            Text(
+                              'Rating & Reviews',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge!
+                                  .copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.white),
+                            ),
+                          ],
+                        ),
+                        const Icon(
+                          Icons.arrow_forward_ios,
+                          color: AppColors.white,
+                          size: 20,
+                        ).paddingOnly(right: Get.width * 0.028)
+                      ],
+                    ),
+                  )),
+              SizedBox(
+                height: Get.height * 0.05,
               ),
               InkButton(
                   child: Text(

@@ -28,6 +28,7 @@ import '../models/response_models/get_unpaid_withdraw_model.dart';
 import '../models/response_models/get_wallet_amount_model.dart';
 import '../models/response_models/get_weekly_data_model.dart';
 import '../models/response_models/profile_detail_model.dart';
+import '../models/response_models/review_and_rating_model.dart';
 import 'api_manager.dart';
 import 'endpoints.dart';
 
@@ -813,6 +814,25 @@ class CallAPI {
       log(e.toString());
       log(st.toString());
       return GetNotificationDataModel(); // Return an error status
+    }
+  }
+  /// Get RATING FOR TRAINER
+  static Future<ReviewAndRatingModel> getReviewForTrainer({required String trainerId}) async {
+    try {
+      String endPoint = Endpoints.epGetReviewAndRating;
+      String fullUrl = "$endPoint$trainerId";
+      Map<String, dynamic> json = await APIManager().getAllCall(endPoint: fullUrl);
+      ReviewAndRatingModel responseModel = ReviewAndRatingModel.fromJson(json);
+      if (responseModel.status == 200) {
+        log("CALLING_ENDPOINT: $fullUrl ,RESPONSE:  $json");
+        return responseModel;
+      } else {
+        throw Exception("Error: ${responseModel}");
+      }
+    } catch (e, st) {
+      log(e.toString());
+      log(st.toString());
+      return ReviewAndRatingModel(); // Return an error status
     }
   }
 }

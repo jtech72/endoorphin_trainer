@@ -68,5 +68,8 @@ class Endpoints{
   static const String epGetYesterdayNotification="getYesterDayNotification?userId=";
   /// GET WALLET AMOUNT
   static const String epGetWeeklyNotification="getWeekelyNotification?userId=";
+ /// GET REVIEW FOR TRAINER
+  static const String epGetReviewAndRating= "review/getAllReviewForTrainer?trainerId=";
+
 
 }
