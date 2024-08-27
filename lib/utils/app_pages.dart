@@ -1,10 +1,12 @@
 import 'package:endoorphin_trainer/bindings/banking_details_binding.dart';
 import 'package:endoorphin_trainer/bindings/bio_edit_binding.dart';
+import 'package:endoorphin_trainer/bindings/rating_binding.dart';
 import 'package:endoorphin_trainer/bindings/session_complete_binding.dart';
 import 'package:endoorphin_trainer/bindings/sign_in_option_binding.dart';
 import 'package:endoorphin_trainer/bindings/upload_images_binding.dart';
 import 'package:endoorphin_trainer/pages/banking_details_ui.dart';
 import 'package:endoorphin_trainer/pages/bio_edit_ui.dart';
+import 'package:endoorphin_trainer/pages/rating_ui.dart';
 import 'package:endoorphin_trainer/pages/session_complete_ui.dart';
 import 'package:endoorphin_trainer/pages/sign_in_option_ui.dart';
 import 'package:endoorphin_trainer/pages/upload_images_ui.dart';
@@ -158,5 +160,9 @@ GetPage(
         name: AppRoutes.bioEdit,        transitionDuration: const Duration(milliseconds: 800),
         page: () => const BioEditUi(),
         binding: BioEditBinding()),
+    GetPage(
+        name: AppRoutes.rating,        transitionDuration: const Duration(milliseconds: 800),
+        page: () => const RatingUi(),
+        binding: RatingBinding()),
   ];
 }

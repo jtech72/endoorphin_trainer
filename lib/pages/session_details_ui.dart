@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
@@ -106,12 +108,26 @@ class SessionDetailsUi extends StatelessWidget {
                               backgroundImage: AssetImage("assets/images/img_profile.png",),
                             ).paddingOnly(
                                 left: Get.height * .02, right: Get.width * .08):
-                             CircleAvatar(
-                              maxRadius: 35,
-                              backgroundColor: AppColors.black,
-                              backgroundImage: NetworkImage(snapshot.data!.result!.customerProfileImg.toString()),
-                            ).paddingOnly(
-                                left: Get.height * .02, right: Get.width * .08),
+                              CachedNetworkImage(
+                                  imageUrl: snapshot.data!.result!.customerProfileImg.toString(),
+                                   imageBuilder: (context, imageProvider) => CircleAvatar(
+                                  maxRadius: 35,
+                                  backgroundColor: Colors.transparent,
+                                   backgroundImage: imageProvider,
+                                     ),
+                                  placeholder: (context, url) => CircleAvatar(
+                                   maxRadius: 35,
+                                    backgroundColor: Colors.transparent,
+                               child: CircularProgressIndicator(), // Loader while the image is loading
+                                   ),
+                                  errorWidget: (context, url, error) => CircleAvatar(
+                                  maxRadius: 35,
+                                   backgroundColor: Colors.transparent,
+                                     backgroundImage: AssetImage("assets/images/img_profile.png"),
+                                       ),
+                                   ).paddingOnly(
+                                   left: Get.height * .02, right: Get.width * .08,
+                                    ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,13 +161,7 @@ class SessionDetailsUi extends StatelessWidget {
                                             fontSize: 14,
                                             fontWeight: FontWeight.w500),
                                       ),
-                                      const TextSpan(
-                                        text: ' ',
-                                        style: TextStyle(
-                                            color: AppColors.impgrey,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w500),
-                                      ),
+
                                     ],
                                   ),
                                 ),
@@ -159,12 +169,16 @@ class SessionDetailsUi extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Image.asset(ImagesPaths.star2,scale: 3.8,).paddingOnly(right: Get.width*0.01),
-                                    Text(
-                                      snapshot.data!.result!.userReviewCount ==null?"0":snapshot.data!.result!.userReviewCount.toString(),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(color: AppColors.yellow),
+                                    SizedBox(
+                                      width: Get.width*0.09,
+                                      child: Text(
+                                        overflow: TextOverflow.ellipsis,
+                                        snapshot.data!.result!.userReviewCount ==null?"0":snapshot.data!.result!.userReviewCount.toString(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(color: AppColors.yellow),
+                                      ),
                                     )
                                   ],
                                 )

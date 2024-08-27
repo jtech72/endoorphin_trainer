@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../utils/exports.dart';
 class BookingRequestUi extends StatelessWidget {
@@ -271,24 +272,32 @@ class BookingRequestUi extends StatelessWidget {
                                     children: [
                                       Row(
                                         children: [
-                                          CircleAvatar(
-                                            radius: 32,
-                                            backgroundColor: AppColors.yellow,
-                                            child: CircleAvatar(
-                                              radius: 30,
-                                              backgroundImage: controller
-                                                          .bookingDetails!
-                                                          .result!
-                                                          .userProfile
-                                                          .toString().isEmpty
-                                                  ? const AssetImage("assets/images/img_profile.png")
-                                                      as ImageProvider<Object>
-                                                  : CachedNetworkImageProvider(
-                                                      controller.bookingDetails!
-                                                          .result!.userProfile
-                                                          .toString()), // Your profile image
+                                          CachedNetworkImage(
+                                            imageUrl: controller.bookingDetails!.result!.userProfile.toString(),
+                                            imageBuilder: (context, imageProvider) => CircleAvatar(
+                                              radius: 32,
+                                              backgroundColor: AppColors.yellow,
+                                              child: CircleAvatar(
+                                                radius: 30,
+                                                backgroundColor: Colors.transparent,
+                                                backgroundImage: imageProvider,
+                                              ),
                                             ),
-                                          ),
+                                            placeholder: (context, url) => CircleAvatar(
+                                              radius: 32,
+                                              backgroundColor: Colors.transparent,
+                                              child: CircularProgressIndicator(),
+                                            ),
+                                            errorWidget: (context, url, error) => CircleAvatar(
+                                              radius: 32,
+                                              child: CircleAvatar(
+                                                radius: 30,
+                                                backgroundColor: Colors.transparent,
+                                                backgroundImage: const AssetImage("assets/images/img_profile.png"),
+                                              ),
+                                            ),
+                                          )
+                                          ,
                                           const SizedBox(
                                             width: 10,
                                           ),
@@ -326,12 +335,15 @@ class BookingRequestUi extends StatelessWidget {
                                             ImagesPaths.star2,
                                             scale: 4,
                                           ).paddingOnly(right: 5),
-                                          Text(
-    controller.bookingDetails!.result!.averageReview == null?"0": controller.bookingDetails?.result?.averageReview.toString() ?? "0",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelMedium!
-                                                .copyWith(color: Colors.white),
+                                          SizedBox(
+                                            width: Get.width*0.09,
+                                            child: Text(overflow: TextOverflow.ellipsis,
+                                                controller.bookingDetails!.result!.averageReview == null?"0": controller.bookingDetails?.result?.averageReview.toString() ?? "0",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelMedium!
+                                                  .copyWith(color: Colors.white),
+                                            ),
                                           )
                                         ],
                                       ),
@@ -604,19 +616,17 @@ class BookingRequestUi extends StatelessWidget {
                               ],
                             );
                           } else {
-                            return SingleChildScrollView(
-                              child: Container(
-                                width: Get.width,
-                                decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(ImagesPaths.bgBlackShade),
-                                        fit: BoxFit.cover)),
+                            return Container(
+                              width: Get.width,
+                              decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(ImagesPaths.bgBlackShade),
+                                      fit: BoxFit.cover)),
+                              child: SingleChildScrollView(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(
-                                      height: Get.height * 0.03,
-                                    ),
+                                                            
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
@@ -626,26 +636,43 @@ class BookingRequestUi extends StatelessWidget {
                                           children: [
                                             Row(
                                               children: [
-                                                CircleAvatar(
-                                                  radius: 32,
-                                                  backgroundColor: AppColors.yellow,
-                                                  child: CircleAvatar(
-                                                      radius: 30,
-                                                      backgroundImage: controller
-                                                                  .notificationData[
-                                                                      "userProfile"]
-                                                                  .toString() ==
-                                                              ""
-                                                          ? const AssetImage("assets/images/img_profile.png")
-                                                              as ImageProvider<
-                                                                  Object>
-                                                          : CachedNetworkImageProvider(
-                                                              controller
-                                                                  .notificationData[
-                                                                      "userProfile"]
-                                                                  .toString())),
-                                                ),
-                                                const SizedBox(
+                                    controller.notificationData["userProfile"].toString() == ""
+                                        ? CircleAvatar(
+                                      radius: 32,
+                                      backgroundColor: AppColors.yellow,
+                                      child: CircleAvatar(
+                                        radius: 30,
+                                        backgroundImage: const AssetImage("assets/images/img_profile.png"),
+                                      ),
+                                    )
+                                        : CachedNetworkImage(
+                                      imageUrl: controller.notificationData["userProfile"].toString(),
+                                      imageBuilder: (context, imageProvider) => CircleAvatar(
+                                        radius: 32,
+                                        backgroundColor: AppColors.yellow,
+                                        child: CircleAvatar(
+                                          radius: 30,
+                                          backgroundColor: Colors.transparent,
+                                          backgroundImage: imageProvider,
+                                        ),
+                                      ),
+                                      placeholder: (context, url) => CircleAvatar(
+                                        radius: 32,
+                                        backgroundColor: Colors.transparent,
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                      errorWidget: (context, url, error) => CircleAvatar(
+                                        radius: 32,
+                                        backgroundColor: AppColors.yellow,
+                                        child: CircleAvatar(
+                                          radius: 30,
+                                          backgroundColor: Colors.transparent,
+                                          backgroundImage: const AssetImage("assets/images/img_profile.png"),
+                                        ),
+                                      ),
+                                    ),
+                                                            
+                                const SizedBox(
                                                   width: 10,
                                                 ),
                                                 RichText(
@@ -710,8 +737,7 @@ class BookingRequestUi extends StatelessWidget {
                                       ],
                                     ).paddingOnly(
                                         left: Get.width * 0.04,
-                                        right: Get.width * 0.04,
-                                        bottom: Get.height * 0.01),
+                                        right: Get.width * 0.04,),
                                     Center(
                                         child: InkButton(
                                             child: Text(
@@ -747,7 +773,7 @@ class BookingRequestUi extends StatelessWidget {
                                                   () {
                                                 controller.onRejectButton();
                                               });
-                                            })).paddingOnly(top: 10, bottom: 15),
+                                            })).paddingOnly(top: 10,),
                                     SizedBox(
                                       height: Get.height * 0.02,
                                     ),

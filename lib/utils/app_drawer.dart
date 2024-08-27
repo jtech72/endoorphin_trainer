@@ -96,13 +96,19 @@ class _MyDrawerState extends State<MyDrawer> {
                           Get.toNamed(AppRoutes.profile);
                         },
                         child: CircleAvatar(
-                                                  radius: 32,
-                                                  backgroundColor: AppColors.yellow,
-                                                  child: CircleAvatar(
-                                                    radius: 30,
-                                                    backgroundImage:CachedNetworkImageProvider(snapshot.data!.result!.profileImg.toString()), // Your profile image
-                                                  ),
-                                                ),
+                          backgroundColor: Colors.transparent,
+                          radius: 30,
+                          child: CachedNetworkImage(
+                            imageUrl: snapshot.data!.result!.profileImg.toString(),
+                            imageBuilder: (context, imageProvider) => CircleAvatar(
+                              radius: 30,
+                              backgroundImage: imageProvider,
+                            ),
+                            placeholder: (context, url) => CircularProgressIndicator(), // Loader while the image loads
+                            errorWidget: (context, url, error) => Icon(Icons.error), // In case of error
+                          ),
+                        )
+                        ,
                           ),
                       SizedBox(width: Get.width*0.06,),
                       Column(
@@ -192,26 +198,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 setState(() {
                   selectedTile = 1; // Set selected index
                 });
-                Navigator.pushReplacement(
-                  context,
-                  PageRouteBuilder(
-                    pageBuilder: (context, animation1, animation2) => BookingUi(initialIndex: 1),
-                    transitionDuration: const Duration(milliseconds: 600),
-                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                      const begin = Offset(1.0, 0.0);
-                      const end = Offset.zero;
-                      const curve = Curves.ease;
-
-                      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-                      var offsetAnimation = animation.drive(tween);
-
-                      return SlideTransition(
-                        position: offsetAnimation,
-                        child: child,
-                      );
-                    },
-                  ),
-                );                // Add functionality here
+                Get.toNamed(AppRoutes.booking) ;           // Add functionality here
 
               },
             ).paddingOnly(left: Get.width*0.05),

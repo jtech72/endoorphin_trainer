@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -384,12 +385,16 @@ class SessionRunningUi extends StatelessWidget {
                                       color: AppColors.yellow,
                                       size: 16,
                                     ),
-                                    Text(
-                                      " ${snapshot.data!.result!.customerAverageReviewCount == null?"0":snapshot.data!.result!.customerAverageReviewCount} (${snapshot.data!.result!.customerReviewCount == null ?"0":snapshot.data!.result!.customerReviewCount})",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(color: AppColors.yellow),
+                                    SizedBox(
+                                      width: Get.width*0.09,
+                                      child: Text(
+                                        overflow: TextOverflow.ellipsis,
+                                        " ${snapshot.data!.result!.customerAverageReviewCount == null?"0":snapshot.data!.result!.customerAverageReviewCount} (${snapshot.data!.result!.customerReviewCount == null ?"0":snapshot.data!.result!.customerReviewCount})",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(color: AppColors.yellow),
+                                      ),
                                     )
                                   ],
                                 )
