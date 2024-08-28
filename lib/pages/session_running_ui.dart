@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../controllers/session_running_controller.dart';
@@ -419,13 +420,16 @@ class SessionRunningUi extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Text("Booked on:",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelLarge
-                                            ?.copyWith(
-                                                fontWeight: FontWeight.w500))
-                                    .paddingOnly(right: Get.width * .146),
+                                SizedBox(
+                                  width: Get.width * 0.37,
+                                  child: Text("Booked on:",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge
+                                              ?.copyWith(
+                                                  fontWeight: FontWeight.w500))
+                                      .paddingOnly(right: Get.width * .146),
+                                ),
                                 Text(DateFormat('dd MMM yyyy, h:mm a')
                                     .format(DateTime.parse(snapshot!
                                     .data!.result!.bookingDate
@@ -444,13 +448,16 @@ class SessionRunningUi extends StatelessWidget {
                             ).paddingOnly(left: 12, right: 5),
                             Row(
                               children: [
-                                Text("Session Duration:",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelLarge
-                                            ?.copyWith(
-                                                fontWeight: FontWeight.w500))
-                                    .paddingOnly(right: Get.width * .04),
+                                SizedBox(
+                                  width: Get.width * 0.37,
+                                  child: Text("Session Duration:",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge
+                                              ?.copyWith(
+                                                  fontWeight: FontWeight.w500))
+                                      .paddingOnly(right: Get.width * .04),
+                                ),
                                 Text("${snapshot.data!.result!.duration.toString()} min",
                                     style: Theme.of(context)
                                         .textTheme
@@ -466,13 +473,16 @@ class SessionRunningUi extends StatelessWidget {
                             ).paddingOnly(left: 12, right: 5),
                             Row(
                               children: [
-                                Text("Booking Date:",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelLarge
-                                            ?.copyWith(
-                                                fontWeight: FontWeight.w500))
-                                    .paddingOnly(right: Get.width * .1),
+                                SizedBox(
+                                  width: Get.width * 0.37,
+                                  child: Text("Booking Date:",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge
+                                              ?.copyWith(
+                                                  fontWeight: FontWeight.w500))
+                                      .paddingOnly(right: Get.width * .1),
+                                ),
                                 Text(DateFormat('dd MMM yyyy')
                                     .format(DateTime.parse(snapshot!
                                     .data!.result!.bookingDate
@@ -491,13 +501,16 @@ class SessionRunningUi extends StatelessWidget {
                             ).paddingOnly(left: 12, right: 5),
                             Row(
                               children: [
-                                Text("Session Start time:",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelLarge
-                                            ?.copyWith(
-                                                fontWeight: FontWeight.w500))
-                                    .paddingOnly(right: Get.width * .02),
+                                SizedBox(
+                                  width: Get.width * 0.37,
+                                  child: Text("Session Start time:",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge
+                                              ?.copyWith(
+                                                  fontWeight: FontWeight.w500))
+                                      .paddingOnly(right: Get.width * .02),
+                                ),
                                 Text(DateFormat('h:mm a')
                                     .format(DateTime.parse(snapshot!
                                     .data!.result!.startSession
@@ -516,13 +529,16 @@ class SessionRunningUi extends StatelessWidget {
                             ).paddingOnly(left: 12, right: 5),
                             Row(
                               children: [
-                                Text("Session End time:",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelLarge
-                                            ?.copyWith(
-                                                fontWeight: FontWeight.w500))
-                                    .paddingOnly(right: Get.width * .04),
+                                SizedBox(
+                                  width: Get.width * 0.37,
+                                  child: Text("Session End time:",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge
+                                              ?.copyWith(
+                                                  fontWeight: FontWeight.w500))
+                                      .paddingOnly(right: Get.width * .04),
+                                ),
                                 Text(DateFormat('h:mm a')
                                     .format(DateTime.parse(snapshot!
                                     .data!.result!.endSession

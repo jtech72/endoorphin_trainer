@@ -52,7 +52,7 @@ class NotificationUi extends StatelessWidget {
               children: [
 
                 FutureBuilder(
-                  future: CallAPI.getYesterdayNotification(trainerId: storage.read("userId").toString()),
+                  future: CallAPI.getTodayNotification(trainerId: storage.read("userId").toString()),
                   builder: (BuildContext context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return SizedBox.shrink();
@@ -210,7 +210,7 @@ class NotificationUi extends StatelessWidget {
                   },
                 ),
                 FutureBuilder(
-                  future: CallAPI.getYesterdayNotification(trainerId: storage.read("userId").toString()),
+                  future: CallAPI.getWeeklyNotification(trainerId: storage.read("userId").toString()),
                   builder: (BuildContext context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return SizedBox.shrink();

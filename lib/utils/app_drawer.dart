@@ -81,32 +81,24 @@ class _MyDrawerState extends State<MyDrawer> {
                               Get.toNamed(AppRoutes.profile);
                             },
                             child: const CircleAvatar(
-                                                      radius: 32,
-                                                      backgroundColor: AppColors.yellow,
-                                                      child: CircleAvatar(
-                                radius: 30,
-                                backgroundColor: AppColors.blackShade,
-                                backgroundImage:
-                                AssetImage(ImagesPaths.profile),
-                                                      ),
-                                                    ),
+                                                            radius: 30,
+                                                            backgroundColor: AppColors.blackShade,
+                                                            backgroundImage:
+                                                            AssetImage(ImagesPaths.profile),
+                            ),
                           )
                           :  GestureDetector(
                         onTap: (){
                           Get.toNamed(AppRoutes.profile);
                         },
-                        child: CircleAvatar(
-                          backgroundColor: Colors.transparent,
-                          radius: 30,
-                          child: CachedNetworkImage(
-                            imageUrl: snapshot.data!.result!.profileImg.toString(),
-                            imageBuilder: (context, imageProvider) => CircleAvatar(
-                              radius: 30,
-                              backgroundImage: imageProvider,
-                            ),
-                            placeholder: (context, url) => CircularProgressIndicator(), // Loader while the image loads
-                            errorWidget: (context, url, error) => Icon(Icons.error), // In case of error
+                        child: CachedNetworkImage(
+                          imageUrl: snapshot.data!.result!.profileImg.toString(),
+                          imageBuilder: (context, imageProvider) => CircleAvatar(
+                            radius: 30,
+                            backgroundImage: imageProvider,
                           ),
+                          placeholder: (context, url) => CircularProgressIndicator(), // Loader while the image loads
+                          errorWidget: (context, url, error) => Icon(Icons.error), // In case of error
                         )
                         ,
                           ),

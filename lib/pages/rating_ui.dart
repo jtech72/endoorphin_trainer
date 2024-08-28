@@ -119,7 +119,7 @@ class RatingUi extends StatelessWidget {
                                         children: [
                                           RatingBar.builder(
                                             itemSize: 16,
-                                            initialRating: snapshot.data!.result![index].userData![0].reviewCount!.toDouble(),
+                                            initialRating: snapshot.data!.result![index].reviewCount!.toDouble(),
                                             minRating: 0,
                                             unratedColor: AppColors.impgrey,
                                             direction: Axis.horizontal,
@@ -138,6 +138,7 @@ class RatingUi extends StatelessWidget {
                                             ),
                                             onRatingUpdate: (rating) {
                                             },
+                                            ignoreGestures: true,
                                           ).paddingOnly(right: Get.width*0.02),
 
                                           Text(
