@@ -57,13 +57,31 @@ class BookingDetailsUi extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
-                            CircleAvatar(
-                              maxRadius: 35,
-                              backgroundColor: AppColors.black,
-                              backgroundImage: snapshot.data!.result!.customerProfileImg == null
-                                  ? const AssetImage("assets/images/profile_img.png") as ImageProvider
-                                  : CachedNetworkImageProvider(snapshot.data!.result!.customerProfileImg.toString()),
-                            ).paddingOnly(left: Get.height * .02, right: Get.width * .08),
+                        snapshot.data!.result!.customerProfileImg == null
+                          ? CircleAvatar(
+                          maxRadius: 35,
+                          backgroundColor: AppColors.black,
+                          backgroundImage: const AssetImage("assets/images/profile_img.png"),
+                        )
+                      : CachedNetworkImage(
+              imageUrl: snapshot.data!.result!.customerProfileImg.toString(),
+          imageBuilder: (context, imageProvider) => CircleAvatar(
+          maxRadius: 35,
+          backgroundColor: AppColors.black,
+          backgroundImage: imageProvider,
+          ),
+          placeholder: (context, url) => CircleAvatar(
+          maxRadius: 35,
+          backgroundColor: AppColors.black,
+          child: CircularProgressIndicator(), // Loader while the image is loading
+          ),
+          errorWidget: (context, url, error) => CircleAvatar(
+          maxRadius: 35,
+          backgroundColor: AppColors.black,
+          backgroundImage: const AssetImage("assets/images/profile_img.png"), // Fallback image
+          ),
+          )
+              .paddingOnly(left: Get.height * .02, right: Get.width * .08),
 
                             Column(
                               mainAxisAlignment: MainAxisAlignment.start,

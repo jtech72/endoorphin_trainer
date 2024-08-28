@@ -74,6 +74,7 @@ dependencies:
   flutter_polyline_points: ^2.1.0
   firebase_analytics:
   shimmer: ^3.0.0
+  image_gallery_saver:
 
 dev_dependencies:
   flutter_test:

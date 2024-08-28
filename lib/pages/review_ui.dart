@@ -144,13 +144,25 @@ class ReviewUi extends StatelessWidget {
                                       padding:
                                       const EdgeInsets.symmetric(horizontal: 12.0),
                                       child: TextField(
+                                        maxLength: 250,
                                         controller: controller.descriptionController,
                                         style: const TextStyle(
                                           color: AppColors.impgrey,
                                           fontSize: 12,
                                           fontWeight: FontWeight.w400,
                                         ),
-                                        maxLines: null,
+                                        buildCounter: (
+                                            BuildContext context, {
+                                              required int currentLength,
+                                              required bool isFocused,
+                                              required int? maxLength,
+                                            }) {
+                                          return Text(
+                                            '$currentLength/$maxLength',
+                                            style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 12,color: AppColors.whiteShade), // Adjust the font size here
+                                          );
+                                        },
+                                        maxLines: 3,
                                         decoration: const InputDecoration(
                                           filled: true,
                                           fillColor: Colors.transparent,
