@@ -98,7 +98,11 @@ class _MyDrawerState extends State<MyDrawer> {
                             backgroundImage: imageProvider,
                           ),
                           placeholder: (context, url) => CircularProgressIndicator(), // Loader while the image loads
-                          errorWidget: (context, url, error) => Icon(Icons.error), // In case of error
+                          errorWidget: (context, url, error) => CircleAvatar(
+                            maxRadius: 30,
+                            backgroundColor: AppColors.black,
+                            backgroundImage: AssetImage("assets/images/img_profile.png"), // Fallback image
+                          ), // In case of error
                         )
                         ,
                           ),

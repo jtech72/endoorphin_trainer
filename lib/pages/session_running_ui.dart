@@ -322,20 +322,35 @@ class SessionRunningUi extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
-                            snapshot.data!.result!.customerProfileImg == " "?
-                            const CircleAvatar(
-                              maxRadius: 35,
-                              backgroundColor: AppColors.black,
-                              backgroundImage: AssetImage("assets/images/img_profile.png"),
-                            ).paddingOnly(
-                                left: Get.height * .02, right: Get.width * .08):
-                             CircleAvatar(
-                              maxRadius: 35,
-                              backgroundColor: AppColors.black,
-                              backgroundImage: CachedNetworkImageProvider(snapshot.data!.result!.customerProfileImg.toString()),
-                            ).paddingOnly(
-                                left: Get.height * .02, right: Get.width * .08),
-                            Column(
+                        snapshot.data!.result!.customerProfileImg != " "
+                            ? CircleAvatar(
+                          maxRadius: 35,
+                          backgroundColor: AppColors.black,
+                          backgroundImage: const AssetImage("assets/images/img_profile.png"),
+                        ).paddingOnly(
+                          left: Get.height * .02, right: Get.width * .08,
+                        )
+                            : CachedNetworkImage(
+                          imageUrl: snapshot.data!.result!.customerProfileImg.toString(),
+                          imageBuilder: (context, imageProvider) => CircleAvatar(
+                            maxRadius: 35,
+                            backgroundColor: AppColors.black,
+                            backgroundImage: imageProvider,
+                          ),
+                          placeholder: (context, url) => CircleAvatar(
+                            maxRadius: 35,
+                            backgroundColor: AppColors.black,
+                            child: CircularProgressIndicator(), // Loader while the image is loading
+                          ),
+                          errorWidget: (context, url, error) => CircleAvatar(
+                            maxRadius: 35,
+                            backgroundColor: AppColors.black,
+                            backgroundImage: const AssetImage("assets/images/img_profile.png"), // Fallback image
+                          ),
+                        ).paddingOnly(
+                          left: Get.height * .02, right: Get.width * .08,
+                        ),
+                        Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

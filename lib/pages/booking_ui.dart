@@ -733,7 +733,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
 
     );
     const currentDayTextStyle = TextStyle(
-      color: Colors.green,
+      color: Colors.black,
       fontWeight: FontWeight.w700,
     );
 
@@ -762,7 +762,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
       ),
       centerAlignModePicker: true,
       customModePickerIcon: const SizedBox(),
-      selectedDayTextStyle: dayTextStyle.copyWith(color: Colors.white),
+      selectedDayTextStyle: dayTextStyle.copyWith(color: Colors.black),
       dayTextStylePredicate: ({required date}) {
         TextStyle? textStyle;
         if (date.weekday == DateTime.saturday || date.weekday == DateTime.sunday) {

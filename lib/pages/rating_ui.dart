@@ -97,7 +97,11 @@ class RatingUi extends StatelessWidget {
                                               placeholder: (context, url) => CircularProgressIndicator(
                                                 color: Colors.black, // Loader color set to black
                                               ),
-                                              errorWidget: (context, url, error) => Icon(Icons.error),
+                                              errorWidget: (context, url, error) =>CircleAvatar(
+                                                maxRadius: 25,
+                                                backgroundColor: AppColors.black,
+                                                backgroundImage: AssetImage("assets/images/img_profile.png"), // Fallback image
+                                              ),
                                             ),
                                           ).paddingOnly(right: Get.width*0.03),
                                           RichText(text: TextSpan(
