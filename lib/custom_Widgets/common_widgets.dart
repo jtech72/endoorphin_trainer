@@ -34,6 +34,16 @@ void printResult({
 
 void showSnackBar(message) {
   Get.snackbar(
+      duration: const Duration(seconds: 3),
+      colorText: AppColors.black,
+      AppStrings.appName,
+      "${message ?? "Something went wrong Status Code"}",
+      snackPosition: SnackPosition.TOP,
+      backgroundColor: AppColors.yellow);
+}
+
+void showSnackBarOtp(message) {
+  Get.snackbar(
       duration: const Duration(seconds: 6),
       colorText: AppColors.black,
       AppStrings.appName,

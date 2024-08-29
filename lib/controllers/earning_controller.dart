@@ -17,6 +17,24 @@ class EarningController extends GetxController{
   late List<RevenueByDay> monthlyData = [];
   var isWeekly = true.obs;
   Rx<int> tappedIndex = (-1).obs;
+  ////////////////////////////////////////////////////////////////
+  var tooltipVisible = false.obs;
+
+  Timer? _tooltipTimer;
+
+  void showTooltip() {
+    tooltipVisible.value = true;
+    _tooltipTimer?.cancel();
+    _tooltipTimer = Timer(Duration(seconds: 3), () {
+      tooltipVisible.value = false;
+    });
+  }
+
+  @override
+  void onClose() {
+    _tooltipTimer?.cancel();
+    super.onClose();
+  }
   void toggleView() {
     isWeekly.value = !isWeekly.value;
     update();

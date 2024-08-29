@@ -254,7 +254,7 @@ class EarningUi extends StatelessWidget {
                                     ),
                                     child: const Icon(Icons.arrow_back_ios,size: 16,).paddingOnly(right: Get.width*0.01))),
                             Container(alignment: Alignment.center,
-                              width: Get.width*0.18,
+                              width: Get.width*0.23,
                               child: Text(controller.months[currentMonth.value - 1],
                                 style: const TextStyle(
                                   color: Colors.white,
@@ -316,7 +316,7 @@ class EarningUi extends StatelessWidget {
                                         ColumnSeries<dynamic, String>(
                                           width: 0.6,
                                           dataSource: controller.weeklyData ,
-                                          xValueMapper: (dynamic data, _) => data.dayName[0],
+                                          xValueMapper: (dynamic data, _) => data.dayName,
                                           yValueMapper: (dynamic data, _) => data.revenue,
                                           pointColorMapper: (dynamic data, int index) {
                                             return index == controller.tappedIndex.value ? AppColors.yellow : Colors.transparent;
@@ -334,11 +334,13 @@ class EarningUi extends StatelessWidget {
                                         plotAreaBorderWidth: 0,
                                         borderWidth: 0,
                                         tooltipBehavior: TooltipBehavior(
-                                          canShowMarker: false,
-                                          enable: true,
+                                          canShowMarker: true,
+                                          enable: false,
                                           color: Colors.white,
                                           builder: (dynamic data, dynamic point, dynamic series, int pointIndex, int seriesIndex) {
                                             return Container(
+                                              height: 60,
+                                              width: 120,
                                               decoration: BoxDecoration(
                                                 color: AppColors.yellow,
                                                 borderRadius: BorderRadius.circular(5),
@@ -352,22 +354,15 @@ class EarningUi extends StatelessWidget {
                                                 ],
                                               ),
                                               padding: const EdgeInsets.all(8),
-                                              child: Column(
+                                              child: const Column(
                                                 mainAxisSize: MainAxisSize.min,
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     '',
-                                                    style: const TextStyle(
+                                                    style: TextStyle(
                                                       fontWeight: FontWeight.bold,color: Colors.black,
-                                                      fontSize: 16,
-                                                    ),
-                                                  ),
-                                                  const SizedBox(height: 4),
-                                                  Text(
-                                                    '',
-                                                    style: const TextStyle(
-                                                      color: Colors.black,
+                                                      fontSize: 10,
                                                     ),
                                                   ),
                                                 ],
@@ -376,18 +371,17 @@ class EarningUi extends StatelessWidget {
                                           },
                                         ),
                                         primaryXAxis:
-
                                         CategoryAxis(
-                                          labelStyle: TextStyle(color: AppColors.impgrey),
-                                          majorGridLines: MajorGridLines(width: 0),
+                                          isVisible: true,
+                                          labelStyle: const TextStyle(color: AppColors.impgrey),
+                                          majorGridLines: const MajorGridLines(width: 0),
                                         ),
                                         primaryYAxis: NumericAxis(
                                           isVisible: false,
-                                          labelStyle: const TextStyle(color: AppColors.impgrey),
                                           majorGridLines: const MajorGridLines(width: 0),
-                                          minimum: 0,
-                                          maximum: controller.isWeekly.value ? 70 : 600,
-                                          interval: controller.isWeekly.value ? 10 : 100,
+                                          minimum: controller.isWeekly.value ? null : 10,
+                                          maximum: controller.isWeekly.value ? null : 100,
+                                          interval: controller.isWeekly.value ? null : 10,
                                         ),
                                         series: seriesList,
                                       );
@@ -448,7 +442,7 @@ class EarningUi extends StatelessWidget {
                                     builder: (controller) {
                                       final List<CartesianSeries<dynamic, dynamic>> seriesList = [
                                         ColumnSeries<dynamic, String>(
-                                          width: 0.8,
+                                          width: 0.6,
                                           dataSource: controller.monthlyData,
                                           xValueMapper: (dynamic data, _) => data.date,
                                           yValueMapper: (dynamic data, _) => data.revenue,
@@ -466,11 +460,11 @@ class EarningUi extends StatelessWidget {
                                       ];
                                       final chart = SfCartesianChart(
                                         plotAreaBorderWidth: 0,
-                                        borderWidth: 10,
+                                        borderWidth: 0,
                                         tooltipBehavior: TooltipBehavior(
-                                          canShowMarker: false,
+                                          canShowMarker: true,
                                           enable: true,
-                                          color: Colors.white,
+                                          color: Colors.red,
                                           builder: (dynamic data, dynamic point, dynamic series, int pointIndex, int seriesIndex) {
                                             return Container(
                                               decoration: BoxDecoration(
@@ -510,18 +504,20 @@ class EarningUi extends StatelessWidget {
                                           },
                                         ),
                                         primaryXAxis:
-
                                         CategoryAxis(
-                                          labelStyle: TextStyle(color: AppColors.impgrey),
-                                          majorGridLines: MajorGridLines(width: 0),
+                                          labelStyle: const TextStyle(color: AppColors.impgrey),
+                                          majorGridLines: const MajorGridLines(width: 0),
                                         ),
                                         primaryYAxis: NumericAxis(
                                           isVisible: false,
-                                          labelStyle: const TextStyle(color: AppColors.impgrey),
                                           majorGridLines: const MajorGridLines(width: 0),
-                                          minimum: 0,
-                                          maximum: controller.isWeekly.value ? 70 : 600,
-                                          interval: controller.isWeekly.value ? 10 : 100,
+                                          autoScrollingMode: AutoScrollingMode.end,
+                                          labelStyle: const TextStyle(color: AppColors.impgrey),
+                                          edgeLabelPlacement: EdgeLabelPlacement.shift,
+                                          // Setting minimum and maximum to null will allow the axis to auto scale based on the data
+                                          minimum: null,
+                                          maximum: null,
+                                          interval: null,  // Let the chart handle intervals automatically
                                         ),
                                         series: seriesList,
                                       );

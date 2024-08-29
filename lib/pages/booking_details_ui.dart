@@ -187,14 +187,14 @@ class BookingDetailsUi extends StatelessWidget {
                                           ?.copyWith(
                                         color: AppColors.impgrey,
                                       ),
-                                    )).paddingOnly(bottom: 5),
+                                    )).paddingOnly(bottom: 0),
                                 Text(
                                   snapshot.data!.result!.startSession == null ?"":snapshot.data!.result!.startSession.toString(),
                                   style:
                                   Theme.of(context).textTheme.labelMedium?.copyWith(
                                     color: AppColors.yellow,
                                   ),
-                                ).paddingOnly(bottom: 8),
+                                ).paddingOnly(bottom: 0),
                                 Container(
                                   width: Get.width * .83,
                                   height: 1,
@@ -216,7 +216,7 @@ class BookingDetailsUi extends StatelessWidget {
                                           ?.copyWith(
                                         color: AppColors.impgrey,
                                       ),
-                                    )).paddingOnly(bottom: 5),
+                                    )).paddingOnly(bottom: 0),
                                 Text(
                                   snapshot.data!.result!.endSession == null ?"":snapshot.data!.result!.endSession.toString(),
                                   style:

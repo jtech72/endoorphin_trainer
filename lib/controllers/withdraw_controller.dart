@@ -55,7 +55,7 @@ class WithdrawController extends GetxController {
         final result = await ImageGallerySaver.saveImage(
             Uint8List.fromList(response.bodyBytes), // Use response.bodyBytes for raw bytes
             quality: 60,
-            name: "hello");
+            name: "Image");
         log("done");
           showSnackBar("Payment slip downloaded");
         print(result);
