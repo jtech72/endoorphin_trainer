@@ -228,10 +228,9 @@ class SessionRunningUi extends StatelessWidget {
           panelBuilder: (c) {
             return WillPopScope(
               onWillPop: () async {
-                // Define the behavior here
                 controller.panelController
-                    .close(); // Assuming you want to close the panel
-                return false; // Return false to prevent default back button behavior
+                    .close();
+                return false;
               },
               child: Container(
                 height: Get.height,
@@ -323,10 +322,10 @@ class SessionRunningUi extends StatelessWidget {
                         child: Row(
                           children: [
                         snapshot.data!.result!.customerProfileImg != " "
-                            ? CircleAvatar(
+                            ? const CircleAvatar(
                           maxRadius: 35,
                           backgroundColor: AppColors.black,
-                          backgroundImage: const AssetImage("assets/images/img_profile.png"),
+                          backgroundImage: AssetImage("assets/images/img_profile.png"),
                         ).paddingOnly(
                           left: Get.height * .02, right: Get.width * .08,
                         )
@@ -337,15 +336,15 @@ class SessionRunningUi extends StatelessWidget {
                             backgroundColor: AppColors.black,
                             backgroundImage: imageProvider,
                           ),
-                          placeholder: (context, url) => CircleAvatar(
+                          placeholder: (context, url) => const CircleAvatar(
                             maxRadius: 35,
                             backgroundColor: AppColors.black,
                             child: CircularProgressIndicator(), // Loader while the image is loading
                           ),
-                          errorWidget: (context, url, error) => CircleAvatar(
+                          errorWidget: (context, url, error) => const CircleAvatar(
                             maxRadius: 35,
                             backgroundColor: AppColors.black,
-                            backgroundImage: const AssetImage("assets/images/img_profile.png"), // Fallback image
+                            backgroundImage: AssetImage("assets/images/img_profile.png"), // Fallback image
                           ),
                         ).paddingOnly(
                           left: Get.height * .02, right: Get.width * .08,
@@ -378,7 +377,7 @@ class SessionRunningUi extends StatelessWidget {
                                       ),
                                        TextSpan(
                                         text: "\n${snapshot.data!.result!.customerPhoneNumber.toString()}",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: AppColors.impgrey,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w500),

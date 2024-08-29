@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:developer'as dev;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -616,6 +617,7 @@ class BookingRequestUi extends StatelessWidget {
                               ],
                             );
                           } else {
+                            dev.log("PROFILE IMAGE ${controller.notificationData['userProfile']}");
                             return Container(
                               width: Get.width,
                               decoration: const BoxDecoration(
@@ -626,7 +628,6 @@ class BookingRequestUi extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                                            
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
@@ -636,7 +637,7 @@ class BookingRequestUi extends StatelessWidget {
                                           children: [
                                             Row(
                                               children: [
-                                    controller.notificationData["userProfile"].toString() == ""
+                                    controller.notificationData["userProfile"] == null
                                         ? CircleAvatar(
                                       radius: 32,
                                       backgroundColor: AppColors.yellow,
@@ -646,33 +647,35 @@ class BookingRequestUi extends StatelessWidget {
                                       ),
                                     )
                                         : CachedNetworkImage(
-                                      imageUrl: controller.notificationData["userProfile"].toString(),
+                                      imageUrl: controller.notificationData["userProfile"].toString().trim(),
                                       imageBuilder: (context, imageProvider) => CircleAvatar(
                                         radius: 32,
                                         backgroundColor: AppColors.yellow,
                                         child: CircleAvatar(
                                           radius: 30,
-                                          backgroundColor: Colors.transparent,
                                           backgroundImage: imageProvider,
                                         ),
                                       ),
                                       placeholder: (context, url) => CircleAvatar(
                                         radius: 32,
-                                        backgroundColor: Colors.transparent,
-                                        child: CircularProgressIndicator(),
+                                        backgroundColor: AppColors.yellow,
+                                        child: CircularProgressIndicator(
+                                          color: Colors.black,
+                                        ),
                                       ),
                                       errorWidget: (context, url, error) => CircleAvatar(
                                         radius: 32,
                                         backgroundColor: AppColors.yellow,
                                         child: CircleAvatar(
                                           radius: 30,
-                                          backgroundColor: Colors.transparent,
+                                          backgroundColor: Colors.black,
                                           backgroundImage: const AssetImage("assets/images/img_profile.png"),
                                         ),
                                       ),
                                     ),
-                                                            
-                                const SizedBox(
+
+
+                                                const SizedBox(
                                                   width: 10,
                                                 ),
                                                 RichText(

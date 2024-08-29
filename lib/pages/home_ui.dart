@@ -49,7 +49,6 @@ class HomeUi extends StatelessWidget {
                       value: controller.isTrainerOnline.value,
                       onChanged: (v) {
                         controller.onToggleButton();
-
                       },
                     ),
                   ),
