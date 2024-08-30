@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 class EarningUi extends StatelessWidget {
   const EarningUi({super.key});
@@ -195,89 +196,89 @@ class EarningUi extends StatelessWidget {
                         //       },
                         //     )
                         // ),
-                        controller.isWeekly.value ==true ?
-                        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Row(
-                              children: [
-                                GestureDetector(
-                                    onTap: () {
-                                      if (currentDay.value > 1) {
-                                        currentDay.value = currentDay.value - 1;
-                                      }
-                                    },
-                                    child: Container(
-                                        height: 25,
-                                        width: 25,
-                                        decoration: const BoxDecoration(
-                                            color: Colors.transparent,
-                                            shape: BoxShape.circle
-                                        ),
-                                        child: const Icon(Icons.arrow_back_ios,size: 16,).paddingOnly(right: Get.width*0.01))),
-                                Container(
-                                  width: Get.width*0.29,
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    controller.days[currentDay.value - 1],
-                                    style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w300),),
-                                ),
-                                GestureDetector(
-                                    onTap: () {
-                                      if (currentDay.value < controller.days.length) {
-                                        currentDay.value = currentDay.value + 1;
-                                      }
-                                    },
-                                    child: Container(
-                                        height: 25,
-                                        width: 25,
-                                        decoration: const BoxDecoration(
-                                            color: Colors.transparent,
-                                            shape: BoxShape.circle
-                                        ),
-                                        child: const Icon(Icons.arrow_forward_ios,size: 16,).paddingOnly(left: Get.width*0.01))),
-                              ],
-                            ),
-                          ],
-                        ):
-                        Row(mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                                onTap: () {
-                                  currentMonth.value = (currentMonth.value - 2 + 12) % 12 + 1;
-                                },
-                                child: Container(
-                                    height: 25,
-                                    width: 25,
-                                    decoration: const BoxDecoration(
-                                        color: Colors.transparent,
-                                        shape: BoxShape.circle
-                                    ),
-                                    child: const Icon(Icons.arrow_back_ios,size: 16,).paddingOnly(right: Get.width*0.01))),
-                            Container(alignment: Alignment.center,
-                              width: Get.width*0.23,
-                              child: Text(controller.months[currentMonth.value - 1],
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                                onTap: () {
-                                  currentMonth.value = (currentMonth.value % 12) + 1;
-                                },
-                                child: Container(
-                                    height: 25,
-                                    width: 25,
-                                    decoration: const BoxDecoration(
-                                        color: Colors.transparent,
-                                        shape: BoxShape.circle
-                                    ),
-                                    child: const Icon(Icons.arrow_forward_ios,size: 16,).paddingOnly(left: Get.width*0.01))),
-
-                          ],
-                        ),
+                        // controller.isWeekly.value ==true ?
+                        // Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        //   children: [
+                        //     Row(
+                        //       children: [
+                        //         GestureDetector(
+                        //             onTap: () {
+                        //               if (currentDay.value > 1) {
+                        //                 currentDay.value = currentDay.value - 1;
+                        //               }
+                        //             },
+                        //             child: Container(
+                        //                 height: 25,
+                        //                 width: 25,
+                        //                 decoration: const BoxDecoration(
+                        //                     color: Colors.transparent,
+                        //                     shape: BoxShape.circle
+                        //                 ),
+                        //                 child: const Icon(Icons.arrow_back_ios,size: 16,).paddingOnly(right: Get.width*0.01))),
+                        //         Container(
+                        //           width: Get.width*0.29,
+                        //           alignment: Alignment.center,
+                        //           child: Text(
+                        //             controller.days[currentDay.value - 1],
+                        //             style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w300),),
+                        //         ),
+                        //         GestureDetector(
+                        //             onTap: () {
+                        //               if (currentDay.value < controller.days.length) {
+                        //                 currentDay.value = currentDay.value + 1;
+                        //               }
+                        //             },
+                        //             child: Container(
+                        //                 height: 25,
+                        //                 width: 25,
+                        //                 decoration: const BoxDecoration(
+                        //                     color: Colors.transparent,
+                        //                     shape: BoxShape.circle
+                        //                 ),
+                        //                 child: const Icon(Icons.arrow_forward_ios,size: 16,).paddingOnly(left: Get.width*0.01))),
+                        //       ],
+                        //     ),
+                        //   ],
+                        // ):
+                        // Row(mainAxisAlignment: MainAxisAlignment.center,
+                        //   children: [
+                        //     GestureDetector(
+                        //         onTap: () {
+                        //           currentMonth.value = (currentMonth.value - 2 + 12) % 12 + 1;
+                        //         },
+                        //         child: Container(
+                        //             height: 25,
+                        //             width: 25,
+                        //             decoration: const BoxDecoration(
+                        //                 color: Colors.transparent,
+                        //                 shape: BoxShape.circle
+                        //             ),
+                        //             child: const Icon(Icons.arrow_back_ios,size: 16,).paddingOnly(right: Get.width*0.01))),
+                        //     Container(alignment: Alignment.center,
+                        //       width: Get.width*0.23,
+                        //       child: Text(controller.months[currentMonth.value - 1],
+                        //         style: const TextStyle(
+                        //           color: Colors.white,
+                        //           fontSize: 14,
+                        //           fontWeight: FontWeight.w500,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     GestureDetector(
+                        //         onTap: () {
+                        //           currentMonth.value = (currentMonth.value % 12) + 1;
+                        //         },
+                        //         child: Container(
+                        //             height: 25,
+                        //             width: 25,
+                        //             decoration: const BoxDecoration(
+                        //                 color: Colors.transparent,
+                        //                 shape: BoxShape.circle
+                        //             ),
+                        //             child: const Icon(Icons.arrow_forward_ios,size: 16,).paddingOnly(left: Get.width*0.01))),
+                        //
+                        //   ],
+                        // ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Text(
@@ -433,6 +434,7 @@ class EarningUi extends StatelessWidget {
                             else  if (snapshot.hasData ) {
                               SchedulerBinding.instance.addPostFrameCallback((_) {
                                 controller.monthlyData= snapshot.data!.revenueByDay!;
+                                // controller.totalAmount.value = snapshot.data!.totalRevenue.toString();
                                 controller.totalSession.value = snapshot.data!.totalSession.toString();
                                 controller.totalEarnings.value = snapshot.data!.totalRevenue.toString();
                               });
@@ -444,7 +446,8 @@ class EarningUi extends StatelessWidget {
                                         ColumnSeries<dynamic, String>(
                                           width: 0.6,
                                           dataSource: controller.monthlyData,
-                                          xValueMapper: (dynamic data, _) => data.date,
+                                          xValueMapper: (dynamic data, _) => DateFormat('dd MMM')
+                                              .format(DateTime.parse(data.date)),
                                           yValueMapper: (dynamic data, _) => data.revenue,
                                           pointColorMapper: (dynamic data, int index) {
                                             return index == controller.tappedIndex.value ? AppColors.yellow : Colors.transparent;
