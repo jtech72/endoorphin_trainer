@@ -256,12 +256,13 @@ class HomeUi extends StatelessWidget {
                                             Container(
                                               alignment: Alignment.center,
                                               height: Get.height * 0.09,
-
+                                                 width: 140,
                                               decoration: const BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 color: AppColors.lightBlack,
                                               ),
                                               child: Text(
+                                                overflow: TextOverflow.ellipsis,
                                                 index == 2 ? "0" :
                                                 index == 0 ?controller.trainerSessionDetails.value.walletAmount == null?"0":controller.trainerSessionDetails.value.walletAmount.toString() :
                                                 index == 3 ?controller.trainerSessionDetails.value.upcomingBookingCount == null?"0": controller.trainerSessionDetails.value.upcomingBookingCount.toString()
