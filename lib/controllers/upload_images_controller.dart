@@ -142,7 +142,7 @@ class UploadImagesController extends GetxController {
         storage.write("Passport","true");
         log("Successfully uploaded");
         uploadImage == UploadImage.byProfile?
-        Get.offAllNamed(AppRoutes.document):
+        Get.offAllNamed(AppRoutes.document,arguments: "upload"):
         Get.offAllNamed(AppRoutes.moreaboutyou);
         showSnackBar(result.message.toString());
 
@@ -182,7 +182,7 @@ class UploadImagesController extends GetxController {
         storage.write("Emirates ID","true");
         log("Successfully uploaded");
         uploadImage == UploadImage.byProfile?
-        Get.offAllNamed(AppRoutes.document):
+        Get.offAllNamed(AppRoutes.document,arguments: "upload"):
         Get.offAllNamed(AppRoutes.moreaboutyou);
         showSnackBar(result.message.toString());
 
@@ -220,7 +220,7 @@ class UploadImagesController extends GetxController {
         dismissLoader();
         log("Successfully uploaded");
         uploadImage == UploadImage.byProfile?
-            Get.offAllNamed(AppRoutes.document):
+            Get.offAllNamed(AppRoutes.document,arguments: "upload"):
         Get.offAllNamed(AppRoutes.moreaboutyou);
         showSnackBar(result.message.toString());
 
