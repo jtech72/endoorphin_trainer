@@ -150,7 +150,7 @@ class SupportUI extends StatelessWidget {
                         .labelMedium!
                         .copyWith(color: AppColors.white),
                     decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.only(top: 6, left: 20),
+                      contentPadding: const EdgeInsets.only(top: 0, left: 20,bottom: 0),
                       filled: true,
                       fillColor: Colors.transparent,
                       hintText: 'Enter Phone Number',

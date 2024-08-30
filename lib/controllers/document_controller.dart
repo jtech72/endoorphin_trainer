@@ -7,6 +7,7 @@ class DocumentController extends GetxController{
   RxBool isFrontImageVisible1 = true.obs;
   RxBool isFrontImageVisible = true.obs;
   RxBool isFrontImageVisible2 = true.obs;
+  RxString arguments = "".obs;
   Rx<GetTrainerDocStatusModel> trainerDocStatusModel=GetTrainerDocStatusModel().obs;
   Future<GetTrainerDocStatusModel> onRefresh()async{
  await   CallAPI.getDocStatus(storage.read("userId").toString()).then((value){
@@ -17,6 +18,8 @@ class DocumentController extends GetxController{
   }
   @override
   void onInit() {
+     arguments.value = Get.arguments ?? "" ;
+     log(arguments.toString());
     onRefresh();
     super.onInit();
   }
