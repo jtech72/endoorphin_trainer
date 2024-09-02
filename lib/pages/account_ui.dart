@@ -3,8 +3,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
 import '../controllers/account_controller.dart';
-import '../services/network_services/api_call.dart';
-
 class AccountUI extends StatelessWidget {
   const AccountUI({super.key});
   @override
