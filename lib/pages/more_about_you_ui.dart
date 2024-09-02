@@ -2,7 +2,9 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:endoorphin_trainer/controllers/more_about_you_controller.dart';
 import 'package:endoorphin_trainer/services/network_services/api_call.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../utils/exports.dart';
 
 class MoreAboutYouUi extends StatelessWidget {
@@ -23,15 +25,11 @@ class MoreAboutYouUi extends StatelessWidget {
         leading: const SizedBox(),
         title: Transform.translate(
             offset: Offset(-Get.width * 0.09, -3),
-            child: GestureDetector(
-                onTap: () {
-                  Get.toNamed(AppRoutes.registration);
-                },
-                child: Image.asset(
-                  ImagesPaths.logoimg,
-                  height: 36,
-                  width: 146,
-                ))),
+            child: Image.asset(
+              ImagesPaths.logoimg,
+              height: 36,
+              width: 146,
+            )),
         actions: [
           IconButton(
             onPressed: () {
@@ -447,15 +445,31 @@ class MoreAboutYouUi extends StatelessWidget {
                                               .toString());
                                         },
                                       ),
-                                      const Text(
+                                       Text(
                                           'I accept the terms and conditions',
                                           style: TextStyle(
                                               color: Colors.white, fontSize: 12)),
-                                      const Spacer(flex: 1,),
-                                      const Text(
-                                          'view all',
-                                          style: TextStyle(
-                                              color: AppColors.whiteShade, fontSize: 12))
+                                       Spacer(flex: 1,),
+                                      GestureDetector(
+                                        onTap: () async {
+                                          const url = 'http://103.185.212.115:70/';
+                                          if (await canLaunch(url)) {
+                                            await launch(url);
+                                          } else {
+                                            throw 'Could not launch $url';
+                                          }
+                                        },
+                                        child: Container(
+                                          height: 20,
+                                          width: 50,
+                                          color: Colors.transparent,
+                                          child: Text(
+                                            'view all',
+                                            style: TextStyle(color: AppColors.whiteShade, fontSize: 12),
+                                          ),
+                                        ),
+                                      )
+
                                     ],
                                   ),
                                 ),
