@@ -70,6 +70,7 @@ class Endpoints{
   static const String epGetWeeklyNotification="getWeekelyNotification?userId=";
  /// GET REVIEW FOR TRAINER
   static const String epGetReviewAndRating= "review/getAllReviewForTrainer?trainerId=";
-
+  /// TRAINER ONGOING DETAILS
+  static const String epGetTrainerOngoing= "getOnGoingBookingForTrainer";
 
 }

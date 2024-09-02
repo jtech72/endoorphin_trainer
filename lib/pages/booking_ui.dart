@@ -319,7 +319,14 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                         itemBuilder: (context, index) {
                                           return InkWell(
                                             onTap: (){
-                                              Get.toNamed(AppRoutes.bookingdetails, arguments: snapshot.data!.result![index].id.toString());
+                                              Get.toNamed(AppRoutes.bookingrequest, arguments: {
+                                                "userId": snapshot.data!.result![index].userId.toString(),
+                                                "trainerId":snapshot.data!.result![index].trainerId.toString(),
+                                                "trainerOnTheWay":snapshot.data!.result![index].trainerOnTheWay.toString(),
+                                                "userLong":"",
+                                                "userLat":"",
+                                                "bookingId":snapshot.data!.result![index].id.toString()
+                                              });
                                             },
                                             child: Container(
                                               color: Colors.transparent,
