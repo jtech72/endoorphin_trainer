@@ -53,11 +53,11 @@ class WithdrawController extends GetxController {
         dismissLoader();
         // Save the image to the gallery without decoding it as JSON
         final result = await ImageGallerySaver.saveImage(
-            Uint8List.fromList(response.bodyBytes), // Use response.bodyBytes for raw bytes
+            Uint8List.fromList(response.bodyBytes),
             quality: 60,
             name: "Image");
         log("done");
-          showSnackBar("Payment slip downloaded");
+          showSnackBar("Payment slip downloaded in Gallery");
         print(result);
       } else {
         dismissLoader();
