@@ -55,7 +55,7 @@ class SessionRunningUi extends StatelessWidget {
                     child: Stack(
                       children: [
                         Image.asset(
-                          ImagesPaths.sessionType,
+                          ImagesPaths.appLogo,
                           height: Get.height,
                           width: Get.width,
                         ).paddingOnly(bottom: 50),
@@ -251,11 +251,13 @@ class SessionRunningUi extends StatelessWidget {
                         width: Get.width,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            image: const DecorationImage(
-                              fit: BoxFit.cover,
-                              alignment: Alignment.topCenter,
-                              image: AssetImage(ImagesPaths.sessionType),
-                            )),
+                            // image: const DecorationImage(
+                            //   fit: BoxFit.contain,
+                            //   alignment: Alignment.topCenter,
+                            //   image: AssetImage(ImagesPaths.appLogo,),
+                            // )
+                        ),
+                        child: Center(child: Image.asset(ImagesPaths.appLogo,)),
                         // child:
                         // GestureDetector(
                         //   onTap: (){

@@ -44,7 +44,7 @@ class EarningController extends GetxController{
   Future<void> getWalletAmount()async{
     final result = await CallAPI.getWalletAmount(trainerId: storage.read("userId").toString());
     if(result.status == 200){
-      totalAmount.value = result.result.toString();
+      totalAmount.value = result.result == 0?"0": result.result!.amount.toString();
     }
   }
 @override
