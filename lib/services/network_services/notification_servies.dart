@@ -57,23 +57,27 @@ class NotificationServices {
         });
   }
 
-  void firebaseInit() {FirebaseMessaging.onMessage.listen((message) {
-    RemoteNotification? notification=message.notification;
-    AndroidNotification? android=message.notification!.android;
+  void firebaseInit() {
+    FirebaseMessaging.onMessage.listen((message) {
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
 
-    log("FIREBASE MESSAGE ${message.notification!.title.toString()}");
-    log("FIREBASE BODY ${message.notification!.body..toString()}");
-    log("FIREBASE DATA ${message.data.toString()}");
-    if(Platform.isIOS) {
-      foregroundMessage();
-    }
-    if(Platform.isAndroid){
-      initLocationNotification(Get.context!, message);
-      showNotification(message);
-    }
+      log("FIREBASE MESSAGE ${message.notification?.title}");
+      log("FIREBASE BODY ${message.notification?.body}");
+      log("FIREBASE DATA ${message.data}");
 
-
-  });}
+      if (Platform.isIOS) {
+        foregroundMessage();
+      }
+      if (Platform.isAndroid) {
+        initLocationNotification(Get.context!, message);
+        showNotification(message);
+      }
+      if (message.data["status"] == "true") {
+       Get.offAllNamed(AppRoutes.bottomNavigation);
+      }
+    });
+  }
   void setInteractMessage()async{
     /// WHEN APPLICATION TERMINATED
     RemoteMessage? initialMessage=await FirebaseMessaging.instance.getInitialMessage();
