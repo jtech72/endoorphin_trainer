@@ -8,18 +8,18 @@ class GetNotificationDataModel {
     if (json['result'] != null) {
       result = <Result>[];
       json['result'].forEach((v) {
-        result!.add(Result.fromJson(v));
+        result!.add(new Result.fromJson(v));
       });
     }
     status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (result != null) {
-      data['result'] = result!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.result != null) {
+      data['result'] = this.result!.map((v) => v.toJson()).toList();
     }
-    data['status'] = status;
+    data['status'] = this.status;
     return data;
   }
 }
@@ -29,6 +29,7 @@ class Result {
   int? userId;
   String? message;
   String? type;
+  String? categoryLogo;
   String? createdAt;
   String? updatedAt;
 
@@ -37,6 +38,7 @@ class Result {
         this.userId,
         this.message,
         this.type,
+        this.categoryLogo,
         this.createdAt,
         this.updatedAt});
 
@@ -45,18 +47,20 @@ class Result {
     userId = json['userId'];
     message = json['message'];
     type = json['type'];
+    categoryLogo = json['categoryLogo'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['userId'] = userId;
-    data['message'] = message;
-    data['type'] = type;
-    data['createdAt'] = createdAt;
-    data['updatedAt'] = updatedAt;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['userId'] = this.userId;
+    data['message'] = this.message;
+    data['type'] = this.type;
+    data['categoryLogo'] = this.categoryLogo;
+    data['createdAt'] = this.createdAt;
+    data['updatedAt'] = this.updatedAt;
     return data;
   }
 }

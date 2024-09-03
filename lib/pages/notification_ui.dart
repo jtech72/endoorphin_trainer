@@ -73,17 +73,13 @@ class NotificationUi extends StatelessWidget {
                                 children: [
                                   Container(
                                     alignment: Alignment.center,
-                                    height: Get.height * .1,
-                                    width: Get.width * .15,
+                                      height: Get.height * .05,
+                                      width: Get.width * .11,
                                     decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: AppColors.blackShade,
                                     ),
-                                    child: Image.asset(
-                                      ImagesPaths.boxing,
-                                      height: Get.height * .06,
-                                      width: Get.width * .06,
-                                    ),
+                                    child: Image.network(snapshot.data!.result![index].categoryLogo.toString())
                                   ),
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,7 +105,7 @@ class NotificationUi extends StatelessWidget {
                                         ),
                                       ),
                                     ],
-                                  ).paddingOnly(left: 8),
+                                  ).paddingOnly(left: Get.width*0.03),
                                 ],
                               );
                             },
@@ -153,17 +149,13 @@ class NotificationUi extends StatelessWidget {
                                 children: [
                                   Container(
                                     alignment: Alignment.center,
-                                    height: Get.height * .1,
-                                    width: Get.width * .15,
+                                    height: Get.height * .05,
+                                    width: Get.width * .11,
                                     decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: AppColors.blackShade,
                                     ),
-                                    child: Image.asset(
-                                      ImagesPaths.boxing,
-                                      height: Get.height * .06,
-                                      width: Get.width * .06,
-                                    ),
+                                    child:Image.network(snapshot.data!.result![index].categoryLogo.toString())
                                   ),
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,7 +181,7 @@ class NotificationUi extends StatelessWidget {
                                         ),
                                       ),
                                     ],
-                                  ).paddingOnly(left: 8),
+                                  ).paddingOnly(left: Get.width*0.03),
                                 ],
                               );
                             },
@@ -233,17 +225,13 @@ class NotificationUi extends StatelessWidget {
                                 children: [
                                   Container(
                                     alignment: Alignment.center,
-                                    height: Get.height * .1,
-                                    width: Get.width * .15,
+                                    height: Get.height * .05,
+                                    width: Get.width * .11,
                                     decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: AppColors.blackShade,
                                     ),
-                                    child: Image.asset(
-                                      ImagesPaths.boxing,
-                                      height: Get.height * .06,
-                                      width: Get.width * .06,
-                                    ),
+                                    child: Image.network(snapshot.data!.result![index].categoryLogo.toString())
                                   ),
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -269,7 +257,7 @@ class NotificationUi extends StatelessWidget {
                                         ),
                                       ),
                                     ],
-                                  ).paddingOnly(left: 8),
+                                  ).paddingOnly(left: Get.width*0.03),
                                 ],
                               );
                             },
