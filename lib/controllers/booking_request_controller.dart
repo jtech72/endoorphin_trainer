@@ -224,6 +224,8 @@ class BookingRequestController extends GetxController {
         isLoading.value = false;
         timerIsVisible.value = false;
         Get.back();
+        showSnackBar("Booking canceled");
+
       }
     } catch (e, st) {
       isLoading.value = false;
@@ -424,7 +426,7 @@ class BookingRequestController extends GetxController {
         log('Received message: $data');
       });
 
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 2));
 
       if (socketData["message"] !=
           "Your request pin is not correct. Please try again.") {
@@ -509,21 +511,43 @@ class BookingRequestController extends GetxController {
 
   @override
   void onInit() async {
-    notificationData = Get.arguments ?? {};
-    isLocationOn.value = true;
-    await locationController.getCurrentLocation();
-    isLocationOn.value = false;
-    if (notificationData["trainerOnTheWay"] != null) {
-      selectedIndex.value = 1;
-      await findDistanceAndTime(locationController.currentLocation.value!, LatLng(userLat!, userLng!));
-    }else{
-      userLat = double.parse(notificationData["userLat"]);
-      userLng = double.parse(notificationData["userLong"]);
-      await findDistanceAndTime(locationController.currentLocation.value!, LatLng(userLat!, userLng!));
-      startTimer(180);
+    try {
+      // Initialize notification data
+      notificationData = Get.arguments ?? {};
+      isLocationOn.value = true;
+
+      // Get current location
+      await locationController.getCurrentLocation();
+      isLocationOn.value = false;
+
+      // Determine whether the trainer is on the way
+      if (notificationData["trainerOnTheWay"] != null) {
+        selectedIndex.value = 1;
+        log("Notification data ===> $notificationData");
+        await initSocket();
+      } else {
+        // Parse latitude and longitude
+        userLat = double.tryParse(notificationData["userLat"]) ?? 0.0;
+        userLng = double.tryParse(notificationData["userLong"]) ?? 0.0;
+
+        if (userLat == 0.0 || userLng == 0.0) {
+          log("Invalid user location data: $notificationData");
+          return;
+        }
+
+        await findDistanceAndTime(locationController.currentLocation.value!, LatLng(userLat!, userLng!));
+        startTimer(180);
+      }
+
+      // Log the notification data
+      log("Notification data ===> $notificationData");
+
+      // Initialize map polyline and socket
+      getPolyline();
+      await initSocket();
+    } catch (e,st) {
+      log("Error in onInit: $e");
+      log("Error in onInit: $st");
     }
-    log("notification data ===> $notificationData");
-    getPolyline();
-    await initSocket();
   }
 }

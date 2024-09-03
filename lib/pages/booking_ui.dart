@@ -471,66 +471,69 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                       child: Text("No data available",style: TextStyle(color: AppColors.white,fontWeight: FontWeight.w600,fontSize: 17),),
                                     ).paddingOnly(top: 0),
                                   ):
-                                  ListView.builder(
-                                      itemCount: snapshot.data!.result!.length,
-                                      itemBuilder: (context, index) {
-                                        return GestureDetector(
-                                          onTap: (){
-                                            Get.toNamed(AppRoutes.bookingdetails,
-                                                arguments: snapshot.data!.result![index].id.toString());
-                                          },
-                                          child: Container(
-                                            color: Colors.transparent,
-                                            child: Column(
-                                              children: [
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment
-                                                      .spaceBetween,
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        CircleAvatar(
-                                                            radius: 25,
-                                                            backgroundColor: Colors.transparent,
-                                                            backgroundImage: CachedNetworkImageProvider(snapshot.data!.result![index].category!.logo.toString())),
-                                                        Column(
-                                                          crossAxisAlignment: CrossAxisAlignment
-                                                              .start,
-                                                          children: [
-                                                            SizedBox(
-                                                              width: Get.width*0.6,
-                                                              child: Text(
-                                                                "${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].userName}",
+                                  SizedBox(
+                                    height: Get.height * .68,
+                                    child: ListView.builder(
+                                        itemCount: snapshot.data!.result!.length,
+                                        itemBuilder: (context, index) {
+                                          return GestureDetector(
+                                            onTap: (){
+                                              Get.toNamed(AppRoutes.bookingdetails,
+                                                  arguments: snapshot.data!.result![index].id.toString());
+                                            },
+                                            child: Container(
+                                              color: Colors.transparent,
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    mainAxisAlignment: MainAxisAlignment
+                                                        .spaceBetween,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          CircleAvatar(
+                                                              radius: 25,
+                                                              backgroundColor: Colors.transparent,
+                                                              backgroundImage: CachedNetworkImageProvider(snapshot.data!.result![index].category!.logo.toString())),
+                                                          Column(
+                                                            crossAxisAlignment: CrossAxisAlignment
+                                                                .start,
+                                                            children: [
+                                                              SizedBox(
+                                                                width: Get.width*0.6,
+                                                                child: Text(
+                                                                  "${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].userName}",
+                                                                  style: Theme
+                                                                      .of(context)
+                                                                      .textTheme
+                                                                      .displayLarge,),
+                                                              ),
+                                                              Text(
+                                                                DateFormat('dd MMM yyyy, h:mm a')
+                                                                    .format(DateTime.parse(snapshot!
+                                                                    .data!.result![index].createdAt
+                                                                    .toString())),
                                                                 style: Theme
                                                                     .of(context)
                                                                     .textTheme
-                                                                    .displayLarge,),
-                                                            ),
-                                                            Text(
-                                                              DateFormat('dd MMM yyyy, h:mm a')
-                                                                  .format(DateTime.parse(snapshot!
-                                                                  .data!.result![index].createdAt
-                                                                  .toString())),
-                                                              style: Theme
-                                                                  .of(context)
-                                                                  .textTheme
-                                                                  .displayMedium,)
-                                                                .paddingOnly(top: 10),
-                                                          ],).paddingOnly(left: 15)
-                                                      ],
-                                                    ),
-                                                    Image.asset(ImagesPaths.eye, scale: 4,),
-                                                  ],
-                                                ).paddingOnly(top: 15, left: 18, right: 18),
-                                                Container(height: 1,
-                                                  width: Get.width,
-                                                  color: AppColors.grey,).paddingOnly(
-                                                  top: 15,),
-                                              ],
+                                                                    .displayMedium,)
+                                                                  .paddingOnly(top: 10),
+                                                            ],).paddingOnly(left: 15)
+                                                        ],
+                                                      ),
+                                                      Image.asset(ImagesPaths.eye, scale: 4,),
+                                                    ],
+                                                  ).paddingOnly(top: 15, left: 18, right: 18),
+                                                  Container(height: 1,
+                                                    width: Get.width,
+                                                    color: AppColors.grey,).paddingOnly(
+                                                    top: 15,),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        );
-                                      });
+                                          );
+                                        }),
+                                  );
                               }
                             }
                         )
