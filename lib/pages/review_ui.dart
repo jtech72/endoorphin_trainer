@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../controllers/review_controller.dart';
@@ -60,11 +61,25 @@ class ReviewUi extends StatelessWidget {
                             backgroundImage: AssetImage("assets/images/img_profile.png"),
                           ).paddingOnly(
                               left: Get.height * .02, right: Get.width * .08):
-                          CircleAvatar(
-                            maxRadius: 40,
-                            backgroundColor: AppColors.black,
-                            backgroundImage: NetworkImage(snapshot.data!.result!.customerProfileImg.toString()),
+                          CachedNetworkImage(
+                            imageUrl: snapshot.data!.result!.customerProfileImg.toString(),
+                            imageBuilder: (context, imageProvider) => CircleAvatar(
+                              maxRadius: 40,
+                              backgroundColor: AppColors.black,
+                              backgroundImage: imageProvider,
+                            ),
+                            placeholder: (context, url) => CircleAvatar(
+                              maxRadius: 40,
+                              backgroundColor: AppColors.black,
+                              child: CircularProgressIndicator(), // Loader while the image is loading
+                            ),
+                            errorWidget: (context, url, error) => CircleAvatar(
+                              maxRadius: 40,
+                              backgroundColor: AppColors.black,
+                              backgroundImage: AssetImage("assets/images/img_profile.png"), // Fallback image
+                            ),
                           ),
+
                           Text(
                             snapshot.data!.result!.customerName.toString(),
                             style: Theme.of(context).textTheme.headlineSmall,
@@ -129,13 +144,25 @@ class ReviewUi extends StatelessWidget {
                                       padding:
                                       const EdgeInsets.symmetric(horizontal: 12.0),
                                       child: TextField(
+                                        maxLength: 250,
                                         controller: controller.descriptionController,
                                         style: const TextStyle(
                                           color: AppColors.impgrey,
                                           fontSize: 12,
                                           fontWeight: FontWeight.w400,
                                         ),
-                                        maxLines: null,
+                                        buildCounter: (
+                                            BuildContext context, {
+                                              required int currentLength,
+                                              required bool isFocused,
+                                              required int? maxLength,
+                                            }) {
+                                          return Text(
+                                            '$currentLength/$maxLength',
+                                            style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 12,color: AppColors.whiteShade), // Adjust the font size here
+                                          );
+                                        },
+                                        maxLines: 3,
                                         decoration: const InputDecoration(
                                           filled: true,
                                           fillColor: Colors.transparent,

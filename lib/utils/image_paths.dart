@@ -83,4 +83,5 @@ class ImagesPaths {
   static const String checkcross= "${baseUrl}circle-check-cross.png";
   static const String upload2= "${baseUrl}upload.png";
   static const String inVaildPopUp= "${baseUrl}ic_invalid_popup.png";
+  static const String starRating= "${baseUrl}ic_star_rating.png";
   }

@@ -48,6 +48,7 @@ class HomeController extends GetxController {
   void onInit() {
     isTrainerOnline.value = storage.read('isTrainerOnline') ?? false;
     startPageChangeTimer();
+    checkSessionIsRunning();
     if (isTrainerOnline.value) {
       startLocationUpdates();
     }
@@ -211,6 +212,22 @@ class HomeController extends GetxController {
       log('Error retrieving place name: $e');
       log('Error retrieving place name: $st');
       return {};
+    }
+  }
+  Future<void> checkSessionIsRunning() async {
+    final response = await CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"pending" );
+    if (response.result == null || response.result!.isEmpty) {
+      print("No bookings found.");
+      return;
+    }
+    var sessionItem = response.result!.firstWhereOrNull((item) => item.pinStatus != null);
+    if (sessionItem != null) {
+      Get.toNamed(AppRoutes.sessionRunning, arguments: {
+        "id": sessionItem.id.toString(),
+        "pin": sessionItem.sessionPin.toString(),
+      });      print("Pin status is not null in at least one booking.");
+    } else {
+      print("All pinStatus values are null.");
     }
   }
 

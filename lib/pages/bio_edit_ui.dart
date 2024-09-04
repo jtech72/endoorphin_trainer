@@ -371,20 +371,34 @@ class BioEditUi extends StatelessWidget {
                               border: Border.all(color: AppColors.grey3),
                               borderRadius: BorderRadius.circular(5)),
                           child: TextField(
-                            maxLength: 450,
+                            maxLength: 250,
                             controller: controller.bioController,
                             keyboardType: TextInputType.text,
                             inputFormatters: [
                               NoLeadingSpaceFormatter(),
-                              EmojiFilteringTextInputFormatter()
+                              EmojiFilteringTextInputFormatter(),
+                              LengthLimitingTextInputFormatter(250),
+                              CapitalizeFirstLetterFormatter(),
+
+
                             ],
-                            maxLines: 10,
+                            buildCounter: (
+                                BuildContext context, {
+                                  required int currentLength,
+                                  required bool isFocused,
+                                  required int? maxLength,
+                                }) {
+                              return Text(
+                                '$currentLength/$maxLength',
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 12,color: AppColors.whiteShade), // Adjust the font size here
+                              );
+                            },
+                            maxLines: 3,
                             style: Theme.of(context)
                                 .textTheme
                                 .labelMedium!
                                 .copyWith(color: AppColors.white),
                             decoration: InputDecoration(
-                              counterText: "",
                               filled: true,
                               contentPadding: const EdgeInsets.all(20),
 

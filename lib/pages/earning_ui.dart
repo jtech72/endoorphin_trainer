@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 class EarningUi extends StatelessWidget {
   const EarningUi({super.key});
@@ -195,89 +196,89 @@ class EarningUi extends StatelessWidget {
                         //       },
                         //     )
                         // ),
-                        controller.isWeekly.value ==true ?
-                        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Row(
-                              children: [
-                                GestureDetector(
-                                    onTap: () {
-                                      if (currentDay.value > 1) {
-                                        currentDay.value = currentDay.value - 1;
-                                      }
-                                    },
-                                    child: Container(
-                                        height: 25,
-                                        width: 25,
-                                        decoration: const BoxDecoration(
-                                            color: Colors.transparent,
-                                            shape: BoxShape.circle
-                                        ),
-                                        child: const Icon(Icons.arrow_back_ios,size: 16,).paddingOnly(right: Get.width*0.01))),
-                                Container(
-                                  width: Get.width*0.29,
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    controller.days[currentDay.value - 1],
-                                    style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w300),),
-                                ),
-                                GestureDetector(
-                                    onTap: () {
-                                      if (currentDay.value < controller.days.length) {
-                                        currentDay.value = currentDay.value + 1;
-                                      }
-                                    },
-                                    child: Container(
-                                        height: 25,
-                                        width: 25,
-                                        decoration: const BoxDecoration(
-                                            color: Colors.transparent,
-                                            shape: BoxShape.circle
-                                        ),
-                                        child: const Icon(Icons.arrow_forward_ios,size: 16,).paddingOnly(left: Get.width*0.01))),
-                              ],
-                            ),
-                          ],
-                        ):
-                        Row(mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                                onTap: () {
-                                  currentMonth.value = (currentMonth.value - 2 + 12) % 12 + 1;
-                                },
-                                child: Container(
-                                    height: 25,
-                                    width: 25,
-                                    decoration: const BoxDecoration(
-                                        color: Colors.transparent,
-                                        shape: BoxShape.circle
-                                    ),
-                                    child: const Icon(Icons.arrow_back_ios,size: 16,).paddingOnly(right: Get.width*0.01))),
-                            Container(alignment: Alignment.center,
-                              width: Get.width*0.18,
-                              child: Text(controller.months[currentMonth.value - 1],
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                                onTap: () {
-                                  currentMonth.value = (currentMonth.value % 12) + 1;
-                                },
-                                child: Container(
-                                    height: 25,
-                                    width: 25,
-                                    decoration: const BoxDecoration(
-                                        color: Colors.transparent,
-                                        shape: BoxShape.circle
-                                    ),
-                                    child: const Icon(Icons.arrow_forward_ios,size: 16,).paddingOnly(left: Get.width*0.01))),
-
-                          ],
-                        ),
+                        // controller.isWeekly.value ==true ?
+                        // Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        //   children: [
+                        //     Row(
+                        //       children: [
+                        //         GestureDetector(
+                        //             onTap: () {
+                        //               if (currentDay.value > 1) {
+                        //                 currentDay.value = currentDay.value - 1;
+                        //               }
+                        //             },
+                        //             child: Container(
+                        //                 height: 25,
+                        //                 width: 25,
+                        //                 decoration: const BoxDecoration(
+                        //                     color: Colors.transparent,
+                        //                     shape: BoxShape.circle
+                        //                 ),
+                        //                 child: const Icon(Icons.arrow_back_ios,size: 16,).paddingOnly(right: Get.width*0.01))),
+                        //         Container(
+                        //           width: Get.width*0.29,
+                        //           alignment: Alignment.center,
+                        //           child: Text(
+                        //             controller.days[currentDay.value - 1],
+                        //             style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w300),),
+                        //         ),
+                        //         GestureDetector(
+                        //             onTap: () {
+                        //               if (currentDay.value < controller.days.length) {
+                        //                 currentDay.value = currentDay.value + 1;
+                        //               }
+                        //             },
+                        //             child: Container(
+                        //                 height: 25,
+                        //                 width: 25,
+                        //                 decoration: const BoxDecoration(
+                        //                     color: Colors.transparent,
+                        //                     shape: BoxShape.circle
+                        //                 ),
+                        //                 child: const Icon(Icons.arrow_forward_ios,size: 16,).paddingOnly(left: Get.width*0.01))),
+                        //       ],
+                        //     ),
+                        //   ],
+                        // ):
+                        // Row(mainAxisAlignment: MainAxisAlignment.center,
+                        //   children: [
+                        //     GestureDetector(
+                        //         onTap: () {
+                        //           currentMonth.value = (currentMonth.value - 2 + 12) % 12 + 1;
+                        //         },
+                        //         child: Container(
+                        //             height: 25,
+                        //             width: 25,
+                        //             decoration: const BoxDecoration(
+                        //                 color: Colors.transparent,
+                        //                 shape: BoxShape.circle
+                        //             ),
+                        //             child: const Icon(Icons.arrow_back_ios,size: 16,).paddingOnly(right: Get.width*0.01))),
+                        //     Container(alignment: Alignment.center,
+                        //       width: Get.width*0.23,
+                        //       child: Text(controller.months[currentMonth.value - 1],
+                        //         style: const TextStyle(
+                        //           color: Colors.white,
+                        //           fontSize: 14,
+                        //           fontWeight: FontWeight.w500,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     GestureDetector(
+                        //         onTap: () {
+                        //           currentMonth.value = (currentMonth.value % 12) + 1;
+                        //         },
+                        //         child: Container(
+                        //             height: 25,
+                        //             width: 25,
+                        //             decoration: const BoxDecoration(
+                        //                 color: Colors.transparent,
+                        //                 shape: BoxShape.circle
+                        //             ),
+                        //             child: const Icon(Icons.arrow_forward_ios,size: 16,).paddingOnly(left: Get.width*0.01))),
+                        //
+                        //   ],
+                        // ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Text(
@@ -316,7 +317,7 @@ class EarningUi extends StatelessWidget {
                                         ColumnSeries<dynamic, String>(
                                           width: 0.6,
                                           dataSource: controller.weeklyData ,
-                                          xValueMapper: (dynamic data, _) => data.dayName[0],
+                                          xValueMapper: (dynamic data, _) => data.dayName,
                                           yValueMapper: (dynamic data, _) => data.revenue,
                                           pointColorMapper: (dynamic data, int index) {
                                             return index == controller.tappedIndex.value ? AppColors.yellow : Colors.transparent;
@@ -334,11 +335,13 @@ class EarningUi extends StatelessWidget {
                                         plotAreaBorderWidth: 0,
                                         borderWidth: 0,
                                         tooltipBehavior: TooltipBehavior(
-                                          canShowMarker: false,
-                                          enable: true,
+                                          canShowMarker: true,
+                                          enable: false,
                                           color: Colors.white,
                                           builder: (dynamic data, dynamic point, dynamic series, int pointIndex, int seriesIndex) {
                                             return Container(
+                                              height: 60,
+                                              width: 120,
                                               decoration: BoxDecoration(
                                                 color: AppColors.yellow,
                                                 borderRadius: BorderRadius.circular(5),
@@ -352,22 +355,15 @@ class EarningUi extends StatelessWidget {
                                                 ],
                                               ),
                                               padding: const EdgeInsets.all(8),
-                                              child: Column(
+                                              child: const Column(
                                                 mainAxisSize: MainAxisSize.min,
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     '',
-                                                    style: const TextStyle(
+                                                    style: TextStyle(
                                                       fontWeight: FontWeight.bold,color: Colors.black,
-                                                      fontSize: 16,
-                                                    ),
-                                                  ),
-                                                  const SizedBox(height: 4),
-                                                  Text(
-                                                    '',
-                                                    style: const TextStyle(
-                                                      color: Colors.black,
+                                                      fontSize: 10,
                                                     ),
                                                   ),
                                                 ],
@@ -376,18 +372,17 @@ class EarningUi extends StatelessWidget {
                                           },
                                         ),
                                         primaryXAxis:
-
                                         CategoryAxis(
-                                          labelStyle: TextStyle(color: AppColors.impgrey),
-                                          majorGridLines: MajorGridLines(width: 0),
+                                          isVisible: true,
+                                          labelStyle: const TextStyle(color: AppColors.impgrey),
+                                          majorGridLines: const MajorGridLines(width: 0),
                                         ),
                                         primaryYAxis: NumericAxis(
                                           isVisible: false,
-                                          labelStyle: const TextStyle(color: AppColors.impgrey),
                                           majorGridLines: const MajorGridLines(width: 0),
-                                          minimum: 0,
-                                          maximum: controller.isWeekly.value ? 70 : 600,
-                                          interval: controller.isWeekly.value ? 10 : 100,
+                                          minimum: controller.isWeekly.value ? null : 10,
+                                          maximum: controller.isWeekly.value ? null : 100,
+                                          interval: controller.isWeekly.value ? null : 10,
                                         ),
                                         series: seriesList,
                                       );
@@ -439,6 +434,7 @@ class EarningUi extends StatelessWidget {
                             else  if (snapshot.hasData ) {
                               SchedulerBinding.instance.addPostFrameCallback((_) {
                                 controller.monthlyData= snapshot.data!.revenueByDay!;
+                                // controller.totalAmount.value = snapshot.data!.totalRevenue.toString();
                                 controller.totalSession.value = snapshot.data!.totalSession.toString();
                                 controller.totalEarnings.value = snapshot.data!.totalRevenue.toString();
                               });
@@ -448,9 +444,10 @@ class EarningUi extends StatelessWidget {
                                     builder: (controller) {
                                       final List<CartesianSeries<dynamic, dynamic>> seriesList = [
                                         ColumnSeries<dynamic, String>(
-                                          width: 0.8,
+                                          width: 0.6,
                                           dataSource: controller.monthlyData,
-                                          xValueMapper: (dynamic data, _) => data.date,
+                                          xValueMapper: (dynamic data, _) => DateFormat('dd MMM')
+                                              .format(DateTime.parse(data.date)),
                                           yValueMapper: (dynamic data, _) => data.revenue,
                                           pointColorMapper: (dynamic data, int index) {
                                             return index == controller.tappedIndex.value ? AppColors.yellow : Colors.transparent;
@@ -466,11 +463,11 @@ class EarningUi extends StatelessWidget {
                                       ];
                                       final chart = SfCartesianChart(
                                         plotAreaBorderWidth: 0,
-                                        borderWidth: 10,
+                                        borderWidth: 0,
                                         tooltipBehavior: TooltipBehavior(
-                                          canShowMarker: false,
+                                          canShowMarker: true,
                                           enable: true,
-                                          color: Colors.white,
+                                          color: Colors.red,
                                           builder: (dynamic data, dynamic point, dynamic series, int pointIndex, int seriesIndex) {
                                             return Container(
                                               decoration: BoxDecoration(
@@ -510,18 +507,20 @@ class EarningUi extends StatelessWidget {
                                           },
                                         ),
                                         primaryXAxis:
-
                                         CategoryAxis(
-                                          labelStyle: TextStyle(color: AppColors.impgrey),
-                                          majorGridLines: MajorGridLines(width: 0),
+                                          labelStyle: const TextStyle(color: AppColors.impgrey),
+                                          majorGridLines: const MajorGridLines(width: 0),
                                         ),
                                         primaryYAxis: NumericAxis(
                                           isVisible: false,
-                                          labelStyle: const TextStyle(color: AppColors.impgrey),
                                           majorGridLines: const MajorGridLines(width: 0),
-                                          minimum: 0,
-                                          maximum: controller.isWeekly.value ? 70 : 600,
-                                          interval: controller.isWeekly.value ? 10 : 100,
+                                          autoScrollingMode: AutoScrollingMode.end,
+                                          labelStyle: const TextStyle(color: AppColors.impgrey),
+                                          edgeLabelPlacement: EdgeLabelPlacement.shift,
+                                          // Setting minimum and maximum to null will allow the axis to auto scale based on the data
+                                          minimum: null,
+                                          maximum: null,
+                                          interval: null,  // Let the chart handle intervals automatically
                                         ),
                                         series: seriesList,
                                       );

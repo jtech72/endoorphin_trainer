@@ -57,13 +57,31 @@ class BookingDetailsUi extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
-                            CircleAvatar(
-                              maxRadius: 35,
-                              backgroundColor: AppColors.black,
-                              backgroundImage: snapshot.data!.result!.customerProfileImg == null
-                                  ? const AssetImage("assets/images/profile_img.png") as ImageProvider
-                                  : CachedNetworkImageProvider(snapshot.data!.result!.customerProfileImg.toString()),
-                            ).paddingOnly(left: Get.height * .02, right: Get.width * .08),
+                        snapshot.data!.result!.customerProfileImg == null
+                          ? CircleAvatar(
+                          maxRadius: 35,
+                          backgroundColor: AppColors.black,
+                          backgroundImage: const AssetImage("assets/images/profile_img.png"),
+                        )
+                      : CachedNetworkImage(
+              imageUrl: snapshot.data!.result!.customerProfileImg.toString(),
+          imageBuilder: (context, imageProvider) => CircleAvatar(
+          maxRadius: 35,
+          backgroundColor: AppColors.black,
+          backgroundImage: imageProvider,
+          ),
+          placeholder: (context, url) => CircleAvatar(
+          maxRadius: 35,
+          backgroundColor: AppColors.black,
+          child: CircularProgressIndicator(), // Loader while the image is loading
+          ),
+          errorWidget: (context, url, error) => CircleAvatar(
+          maxRadius: 35,
+          backgroundColor: AppColors.black,
+          backgroundImage: const AssetImage("assets/images/profile_img.png"), // Fallback image
+          ),
+          )
+              .paddingOnly(left: Get.height * .02, right: Get.width * .08),
 
                             Column(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -110,12 +128,16 @@ class BookingDetailsUi extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Image.asset(ImagesPaths.star2,scale: 3.8,color: AppColors.white,).paddingOnly(right: Get.width*0.01),
-                                    Text(
-                                      snapshot.data!.result!.userReviewCount.toString(),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(color: AppColors.impgrey),
+                                    SizedBox(
+                                      width: 35,
+                                      child: Text(
+                                        overflow: TextOverflow.ellipsis,
+                                        snapshot.data!.result!.userReviewCount.toString(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(color: AppColors.impgrey),
+                                      ),
                                     )
                                   ],
                                 )
@@ -169,14 +191,14 @@ class BookingDetailsUi extends StatelessWidget {
                                           ?.copyWith(
                                         color: AppColors.impgrey,
                                       ),
-                                    )).paddingOnly(bottom: 5),
+                                    )).paddingOnly(bottom: 0),
                                 Text(
                                   snapshot.data!.result!.startSession == null ?"":snapshot.data!.result!.startSession.toString(),
                                   style:
                                   Theme.of(context).textTheme.labelMedium?.copyWith(
                                     color: AppColors.yellow,
                                   ),
-                                ).paddingOnly(bottom: 8),
+                                ).paddingOnly(bottom: 0),
                                 Container(
                                   width: Get.width * .83,
                                   height: 1,
@@ -198,7 +220,7 @@ class BookingDetailsUi extends StatelessWidget {
                                           ?.copyWith(
                                         color: AppColors.impgrey,
                                       ),
-                                    )).paddingOnly(bottom: 5),
+                                    )).paddingOnly(bottom: 0),
                                 Text(
                                   snapshot.data!.result!.endSession == null ?"":snapshot.data!.result!.endSession.toString(),
                                   style:

@@ -1,11 +1,8 @@
 import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
 import '../controllers/account_controller.dart';
-import '../services/network_services/api_call.dart';
-
 class AccountUI extends StatelessWidget {
   const AccountUI({super.key});
   @override
@@ -606,15 +603,33 @@ class AccountUI extends StatelessWidget {
                         decoration: BoxDecoration(
                             border: Border.all(color: AppColors.grey3),
                             borderRadius: BorderRadius.circular(5)),
-                        child: TextField(
+                        child:
+                        TextField(
+                          maxLength: 250,
                           controller: controller.bioController,
                           keyboardType: TextInputType.text,
                           textCapitalization: TextCapitalization.words,
                           inputFormatters: [
                             // LengthLimitingTextInputFormatter(64),
                             NoLeadingSpaceFormatter(),
-                            EmojiFilteringTextInputFormatter()
+                            EmojiFilteringTextInputFormatter(),
+                            LengthLimitingTextInputFormatter(250),
                           ],
+                          buildCounter: (
+                              BuildContext context, {
+                                required int currentLength,
+                                required bool isFocused,
+                                required int? maxLength,
+                              }) {
+                            return Text(
+                              '$currentLength/$maxLength',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(fontSize: 12, color: Colors.white), // Use a contrasting color
+                            ).paddingOnly(bottom: 0);
+                          },
+
                           maxLines: 10,
                           style: Theme.of(context)
                               .textTheme

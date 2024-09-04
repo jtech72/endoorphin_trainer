@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:endoorphin_trainer/controllers/document_controller.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
@@ -18,9 +20,13 @@ class DocumentUI extends StatelessWidget {
         titleSpacing: -10,
         leading: GestureDetector(
             onTap: () {
-              Get.offAllNamed(AppRoutes.bottomNavigation);
-              // Get.back();
+              if (controller.arguments.value == "upload") {
+                Get.offAllNamed(AppRoutes.bottomNavigation);
+              } else {
+                Get.back();
+              }
             },
+
             child: Container(
                 height: 30,
                 width: 40,

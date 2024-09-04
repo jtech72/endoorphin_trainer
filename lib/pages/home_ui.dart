@@ -49,7 +49,6 @@ class HomeUi extends StatelessWidget {
                       value: controller.isTrainerOnline.value,
                       onChanged: (v) {
                         controller.onToggleButton();
-
                       },
                     ),
                   ),
@@ -232,9 +231,8 @@ class HomeUi extends StatelessWidget {
                                         Get.toNamed(AppRoutes.earning);
                                       } else if (controller.selectedIndex.value == 1) {
                                         Get.toNamed(AppRoutes.booking);
-
                                       } else if (controller.selectedIndex.value == 2) {
-                                        Get.toNamed(AppRoutes.booking);
+
                                       } else if (controller.selectedIndex.value == 3) {
                                         Get.toNamed(AppRoutes.booking);
                                       } else {
@@ -257,13 +255,14 @@ class HomeUi extends StatelessWidget {
                                           children: [
                                             Container(
                                               alignment: Alignment.center,
-                                              height: Get.height * 0.06,
-                                              width: Get.width * 0.14,
+                                              height: Get.height * 0.09,
+                                                 width: 140,
                                               decoration: const BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 color: AppColors.lightBlack,
                                               ),
                                               child: Text(
+                                                overflow: TextOverflow.ellipsis,
                                                 index == 2 ? "0" :
                                                 index == 0 ?controller.trainerSessionDetails.value.walletAmount == null?"0":controller.trainerSessionDetails.value.walletAmount.toString() :
                                                 index == 3 ?controller.trainerSessionDetails.value.upcomingBookingCount == null?"0": controller.trainerSessionDetails.value.upcomingBookingCount.toString()

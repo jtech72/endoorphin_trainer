@@ -3,6 +3,7 @@ import 'package:endoorphin_trainer/controllers/withdraw_controller.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 class WithdrawUI extends StatelessWidget {
@@ -241,7 +242,7 @@ class WithdrawUI extends StatelessWidget {
                                                            crossAxisAlignment: CrossAxisAlignment.start,
                                                           children: [
                                                             SizedBox(
-                                                              width:250,
+                                                              width:Get.width*0.6,
                                                               child: Text(
                                                                 '${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].user!.userName}',
                                                                 style: TextStyle(
@@ -288,7 +289,7 @@ class WithdrawUI extends StatelessWidget {
                                             ).paddingOnly();
                                           }
                                         ),
-                                      ),
+                                      ).paddingOnly(bottom: Get.height*0.02),
                                       InkButton(
                                           child: Text(
                                             'Sent Request',
@@ -436,33 +437,46 @@ class WithdrawUI extends StatelessWidget {
                                                 mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                                 children: [
+                                                  InkWell(
+                                                      onTap:(){
+                                                        log("${snapshot.data!.result![index].paymentAttachment}");
+                                                        controller.saveNetworkImage(snapshot.data!.result![index].paymentAttachment);
+                                                      },
+                                                      child: Icon(Icons.download,size: 20,color: AppColors.yellow,).paddingOnly(left: 5)),
                                                   Row(
                                                     children: [
-                                                      Column(
-                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                        children: [
-                                                          Text(
-                                                            '${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].user!.userName}',
-                                                            style: const TextStyle(
-                                                                color: Colors.white,
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                FontWeight.w500),
-                                                          ),
-                                                          Text(
-                                                            DateFormat('dd MMM  h:mm a')
-                                                                .format(DateTime.parse(snapshot!
-                                                                .data!.result![index].createdAt
-                                                                .toString())),
-                                                            style: const TextStyle(
-                                                                color: Colors.white,
-                                                                fontSize: 12,
-                                                                fontWeight:
-                                                                FontWeight.w300),
-                                                          ),
-                                                        ],
-                                                      ).paddingOnly(
-                                                          left: Get.width * 0.05),
+                                                      SizedBox(
+                                                        width: Get.width * 0.7,
+                                                        child: Column(
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children: [
+                                                            Text(
+                                                              '${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].user!.userName}',
+                                                              style: const TextStyle(
+                                                                  color: Colors.white,
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                  FontWeight.w500),
+                                                            ),
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  DateFormat('dd MMM  h:mm a')
+                                                                      .format(DateTime.parse(snapshot!
+                                                                      .data!.result![index].createdAt
+                                                                      .toString())),
+                                                                  style: const TextStyle(
+                                                                      color: Colors.white,
+                                                                      fontSize: 12,
+                                                                      fontWeight:
+                                                                      FontWeight.w300),
+                                                                ).paddingOnly(right: Get.width*0.03),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ).paddingOnly(
+                                                            left: Get.width * 0.05),
+                                                      ),
                                                     ],
                                                   ),
                                                   Text(

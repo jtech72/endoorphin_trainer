@@ -54,7 +54,9 @@ class OtpController extends GetxController {
 
           });
           startTimer(29);
+
           secondOtp = response.result!.otp.toString();
+          countryCodeController.finalOTP = 0;
           if (response.status == 200) {
             dismissLoader();
             showSnackBar (response.message.toString());
@@ -73,7 +75,7 @@ class OtpController extends GetxController {
           startTimer(29);
           secondOtp = response.otp;
           if (response.status == 200) {
-            showSnackBar("${response.otp}");
+            showSnackBarOtp("${response.otp}");
           } else {
             showSnackBar("Failed to send OTP: ${response.message}");
           }
@@ -100,7 +102,6 @@ class OtpController extends GetxController {
       showSnackBar("Invalid OTP");
       return;
     }
-
     try {
       int enteredOtp = int.parse(otp);
       if (enteredOtp == countryCodeController.finalOTP || enteredOtp == secondOtp) {

@@ -8,7 +8,7 @@ class EarningController extends GetxController{
   RxString type = "".obs;
   RxString totalEarnings = "".obs;
   RxString totalSession = "".obs;
-  RxString totalAmount = "".obs;
+  RxString totalAmount = "0.0".obs;
   final List<String> months = [
     'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
   ];
@@ -17,6 +17,21 @@ class EarningController extends GetxController{
   late List<RevenueByDay> monthlyData = [];
   var isWeekly = true.obs;
   Rx<int> tappedIndex = (-1).obs;
+  var tooltipVisible = false.obs;
+  Timer? _tooltipTimer;
+  void showTooltip() {
+    tooltipVisible.value = true;
+    _tooltipTimer?.cancel();
+    _tooltipTimer = Timer(Duration(seconds: 3), () {
+      tooltipVisible.value = false;
+    });
+  }
+
+  @override
+  void onClose() {
+    _tooltipTimer?.cancel();
+    super.onClose();
+  }
   void toggleView() {
     isWeekly.value = !isWeekly.value;
     update();
@@ -29,7 +44,7 @@ class EarningController extends GetxController{
   Future<void> getWalletAmount()async{
     final result = await CallAPI.getWalletAmount(trainerId: storage.read("userId").toString());
     if(result.status == 200){
-      totalAmount.value = result.result.toString();
+      totalAmount.value = result.result == 0?"0": result.result!.amount.toString();
     }
   }
 @override
