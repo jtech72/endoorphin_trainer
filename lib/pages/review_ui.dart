@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 
 import '../controllers/review_controller.dart';
 import '../controllers/session_running_controller.dart';
@@ -41,16 +42,21 @@ class ReviewUi extends StatelessWidget {
               controller.bookingId = snapshot.data!.result!.bookingId.toString();
               controller.userId = snapshot.data!.result!.userId.toString();
               return
-                SingleChildScrollView(
-                  child: Center(
-                    child: Container(
-                      height: Get.height*.75,
-                      width: Get.width,
-                      decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(ImagesPaths.bgBlackShade)
-                          )
+                Stack(
+                  children: [
+                    SingleChildScrollView(
+                      physics: NeverScrollableScrollPhysics(),
+                      child: Container(
+                        height: Get.height,
+                        width: Get.width,
+                        decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(ImagesPaths.bgBlackShade),fit: BoxFit.cover
+                            )
+                        ),
                       ),
+                    ),
+                    SingleChildScrollView(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -144,6 +150,7 @@ class ReviewUi extends StatelessWidget {
                                       padding:
                                       const EdgeInsets.symmetric(horizontal: 12.0),
                                       child: TextField(
+                                        textInputAction: TextInputAction.done,
                                         maxLength: 250,
                                         controller: controller.descriptionController,
                                         style: const TextStyle(
@@ -199,7 +206,7 @@ class ReviewUi extends StatelessWidget {
                         ],
                       ).paddingOnly(top: Get.height*0.03,left: Get.height*0.025,right: Get.height*0.025),
                     ),
-                  ),
+                  ],
                 );
 
             } else  if (snapshot.hasError) {

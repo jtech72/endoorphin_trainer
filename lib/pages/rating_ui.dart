@@ -44,7 +44,7 @@ class RatingUi extends StatelessWidget {
               );
             } else if (snapshot.hasData) {
               return
-               snapshot.data!.result!.isEmpty?
+             snapshot.data!.result == null || snapshot.data!.result!.isEmpty?
                 const Center(
                   child: Text('No Review Yet'),
                 ):
@@ -56,7 +56,7 @@ class RatingUi extends StatelessWidget {
                           text: TextSpan(
                               children: [
                                 TextSpan(
-                                    text: 'Reviews',
+                                    text: 'Reviews ',
                                     style: Theme.of(context).textTheme.headlineSmall
                                 ),
                                 TextSpan(
@@ -146,7 +146,7 @@ class RatingUi extends StatelessWidget {
                                           ).paddingOnly(right: Get.width*0.02),
 
                                           Text(
-                                            snapshot.data!.result![index].userData![0].averageReview!.toStringAsFixed(1),
+                                            "${snapshot.data!.result![index].reviewCount!.toString()}.0",
                                             style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 12),
                                           )
                                         ],

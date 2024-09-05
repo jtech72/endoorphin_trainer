@@ -13,7 +13,7 @@ class SessionRunningController extends GetxController {
   var scheduleTime = 0.obs;
   Timer? _timer;
   int remainingSeconds = 60;
-  var time = '0';
+  var time = '00:00:00';
   RxBool isPaused = false.obs;
   Map<String, dynamic>? sessionIds;
   Timer? timerSession;
