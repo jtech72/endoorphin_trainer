@@ -174,16 +174,14 @@ class SessionDetailsUi extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Image.asset(ImagesPaths.star2,scale: 3.8,).paddingOnly(right: Get.width*0.01),
-                                      SizedBox(
-                                        width: Get.width*0.09,
-                                        child: Text(
-                                          overflow: TextOverflow.ellipsis,
-                                          snapshot.data!.result!.userReviewCount ==null?"0":snapshot.data!.result!.userReviewCount.toString(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleMedium
-                                              ?.copyWith(color: AppColors.yellow),
-                                        ),
+                                      Text(
+                                        snapshot.data!.result!.userReviewCount == null
+                                            ? "0"
+                                            : NumberFormat("##0.0").format(snapshot.data!.result!.userReviewCount),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(color: AppColors.yellow),
                                       )
                                     ],
                                   )
