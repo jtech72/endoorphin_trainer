@@ -18,6 +18,11 @@ class HomeController extends GetxController {
     "Points",
     "Sessions",
   ];
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
   RxInt selectedIndex = (-1).obs;
   Location location = Location();
   PageController pageController = PageController();

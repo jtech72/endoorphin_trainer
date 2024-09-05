@@ -128,16 +128,13 @@ class BookingDetailsUi extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Image.asset(ImagesPaths.star2,scale: 3.8,color: AppColors.white,).paddingOnly(right: Get.width*0.01),
-                                    SizedBox(
-                                      width: 35,
-                                      child: Text(
-                                        overflow: TextOverflow.ellipsis,
-                                        snapshot.data!.result!.userReviewCount.toString(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium
-                                            ?.copyWith(color: AppColors.impgrey),
-                                      ),
+                                    Text(
+
+                                      snapshot.data!.result!.userReviewCount.toStringAsFixed(1),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium
+                                          ?.copyWith(color: AppColors.impgrey),
                                     )
                                   ],
                                 )
