@@ -63,7 +63,7 @@ class SessionRunningUi extends StatelessWidget {
                               children: [
                                 InkWell(
                                     onTap: () {
-                                      Get.offAllNamed(AppRoutes.bottomNavigation);
+                                      Get.toNamed(AppRoutes.bottomNavigation);
                                     },
                                     child: const Icon(
                                       Icons.arrow_back_ios_new_rounded,
