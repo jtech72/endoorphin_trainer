@@ -191,8 +191,7 @@ class HomeUi extends StatelessWidget {
                   SizedBox(
                     height: Get.height*0.02,
                   ),
-                  Container(
-                    height: Get.height * 0.42,
+                  SizedBox(
                     width: Get.width,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -214,6 +213,7 @@ class HomeUi extends StatelessWidget {
                             controller.trainerSessionDetails.value = controller.trainerSessionDetails.value;
                             return
                               GridView.builder(
+                                shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemCount: controller.quickGlanceList.length,
                                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -321,7 +321,7 @@ class HomeUi extends StatelessWidget {
                   ),
 
                 ],
-              ).paddingOnly(left: Get.width*0.04, right:Get.width*0.04, top: Get.height*0.02,),
+              ).paddingOnly(left: Get.width*0.04, right:Get.width*0.04, top: Get.height*0.02,bottom: 10),
             ],
           ),
         ),

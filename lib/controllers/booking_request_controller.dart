@@ -117,8 +117,7 @@ class BookingRequestController extends GetxController {
         .toInt();
   }
 
-  Future<void> addMarker(LatLng position, String id, String image,
-      {bool isNetworkImage = false}) async {
+  Future<void> addMarker(LatLng position, String id, String image, {bool isNetworkImage = false}) async {
     int markerSize = getMarkerSize();
     Uint8List markerIcon;
 
