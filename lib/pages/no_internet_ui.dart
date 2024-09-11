@@ -39,6 +39,7 @@ class NoInternetUI extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
+
               )
             ],
           ).paddingOnly(left: 20, right: 20),

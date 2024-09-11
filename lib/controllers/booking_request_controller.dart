@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
-import '../services/models/request_models/booking_accept_model.dart';
 import '../utils/exports.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:http/http.dart' as http;
+
 
 class BookingRequestController extends GetxController {
   final TextEditingController pinController = TextEditingController();
