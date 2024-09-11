@@ -621,9 +621,3 @@ class EarningUi extends StatelessWidget {
     );
   }
 }
-class _SalesData {
-  final String period;
-  final double amount;
-
-  _SalesData(this.period, this.amount);
-}

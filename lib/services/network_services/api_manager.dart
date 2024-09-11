@@ -55,7 +55,7 @@ class APIManager {
       );
       responseJson = _response(response);
     } on SocketException {
-      // Get.toNamed(AppRoutes.noInternet);
+      Get.toNamed(AppRoutes.noInternet);
       throw FetchDataException('No Internet connection');
     } catch (e, st) {
       log('Error in API Manager: $e', stackTrace: st);

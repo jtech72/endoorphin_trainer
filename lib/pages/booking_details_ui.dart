@@ -173,7 +173,7 @@ class BookingDetailsUi extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  snapshot.data!.result!.trainerName.toString(),
+                                  snapshot.data!.result!.trainerCity.toString(),
                                   style: Theme.of(context).textTheme.labelLarge?.copyWith(
                                       color: AppColors.impgrey,
                                       fontWeight: FontWeight.w600),
@@ -190,7 +190,10 @@ class BookingDetailsUi extends StatelessWidget {
                                       ),
                                     )).paddingOnly(bottom: 0),
                                 Text(
-                                  snapshot.data!.result!.startSession == null ?"":snapshot.data!.result!.startSession.toString(),
+                                  snapshot.data!.result!.startSession == null ?"":DateFormat('h:mm a')
+                                      .format(DateTime.parse(snapshot!
+                                      .data!.result!.startSession
+                                      .toString())),
                                   style:
                                   Theme.of(context).textTheme.labelMedium?.copyWith(
                                     color: AppColors.yellow,
@@ -202,7 +205,7 @@ class BookingDetailsUi extends StatelessWidget {
                                   color: AppColors.grey,
                                 ).paddingOnly(top: 6, bottom: 12),
                                 Text(
-                                  snapshot.data!.result!.customerName.toString(),
+                                  snapshot.data!.result!.customerCity.toString(),
                                   style: Theme.of(context).textTheme.labelLarge?.copyWith(
                                       color: AppColors.impgrey,
                                       fontWeight: FontWeight.w600),
@@ -219,7 +222,10 @@ class BookingDetailsUi extends StatelessWidget {
                                       ),
                                     )).paddingOnly(bottom: 0),
                                 Text(
-                                  snapshot.data!.result!.endSession == null ?"":snapshot.data!.result!.endSession.toString(),
+                                  snapshot.data!.result!.endSession == null ?"":DateFormat('h:mm a')
+                                      .format(DateTime.parse(snapshot!
+                                      .data!.result!.endSession
+                                      .toString())),
                                   style:
                                   Theme.of(context).textTheme.labelMedium?.copyWith(
                                     color: AppColors.yellow,
