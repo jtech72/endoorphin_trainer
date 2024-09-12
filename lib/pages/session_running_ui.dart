@@ -1,11 +1,4 @@
-import 'dart:developer';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
-import '../controllers/session_running_controller.dart';
+
 import '../utils/exports.dart';
 class SessionRunningUi extends StatelessWidget {
   const SessionRunningUi({super.key});

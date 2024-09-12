@@ -1,5 +1,3 @@
-import 'package:endoorphin_trainer/controllers/bio_controller.dart';
-import 'package:flutter/material.dart';
 
 import '../utils/exports.dart';
 

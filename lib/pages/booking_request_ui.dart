@@ -37,6 +37,7 @@ class BookingRequestUi extends StatelessWidget {
                                     color: AppColors.yellow,
                                   ))
                                   : GetBuilder<BookingRequestController>(
+
                                   builder: (context) {
                                     return GoogleMap(
                                       mapType: MapType.normal,
@@ -318,17 +319,12 @@ class BookingRequestUi extends StatelessWidget {
                             child:
                             FutureBuilder(
                               future: CallAPI.getTrainerOngoingDetails(
-                                  trainerId:
-                                  controller.notificationData["trainerId"],
+                                  trainerId: controller.notificationData["trainerId"],
                                   userId: controller.notificationData["userId"],
-                                  bookingId:
-                                  controller.notificationData["bookingId"]),
+                                  bookingId: controller.notificationData["bookingId"]),
                               builder: (context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return SizedBox(
-                                    height: Get.height*.5,
-                                  );
+                                if (snapshot.connectionState == ConnectionState.waiting) {
+                                  return SizedBox(height: Get.height*.5,);
                                 } else if (snapshot.hasData) {
                                   controller.userLat = snapshot.data!.result!.userLat!;
                                   controller.userLng = snapshot.data!.result!.userLong!;

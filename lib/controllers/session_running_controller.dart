@@ -1,53 +1,46 @@
-import 'dart:async';
-import 'dart:developer';
-import 'package:endoorphin_trainer/utils/app_routes.dart';
-import 'package:get/get.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
+import '../utils/exports.dart';
 
-import '../custom_Widgets/common_widgets.dart';
-import '../services/network_services/api_call.dart';
 
 class SessionRunningController extends GetxController {
   PanelController panelController = PanelController();
   var scheduleTime = 0.obs;
   Timer? _timer;
   int remainingSeconds = 60;
-  var time = '00:00:00';
+  var time = '00:00';
   RxBool isPaused = false.obs;
   Map<String, dynamic>? sessionIds;
   Timer? timerSession;
 
-  Future<void> initSocket() async {
-    log("Initializing socket...");
-
-    try {
-      socket = IO.io("http://103.185.212.115:5002", <String, dynamic>{
-        'autoConnect': false,
-        'transports': ['websocket'],
-      });
-
-      socket.connect();
-
-      socket.onConnect((_) {
-        log('Connection established');
-      });
-
-      socket.onDisconnect((_) {
-        log('Connection Disconnected');
-      });
-
-      socket.onConnectError((err) {
-        log('Connection Error: $err');
-      });
-
-      socket.onError((err) {
-        log('General Error: $err');
-      });
-    } catch (e) {
-      log('Exception caught: $e');
-    }
-  }
+  // Future<void> initSocket() async {
+  //   log("Initializing socket...");
+  //
+  //   try {
+  //     socket = IO.io("http://103.185.212.115:5002", <String, dynamic>{
+  //       'autoConnect': false,
+  //       'transports': ['websocket'],
+  //     });
+  //
+  //     socket.connect();
+  //
+  //     socket.onConnect((_) {
+  //       log('Connection established');
+  //     });
+  //
+  //     socket.onDisconnect((_) {
+  //       log('Connection Disconnected');
+  //     });
+  //
+  //     socket.onConnectError((err) {
+  //       log('Connection Error: $err');
+  //     });
+  //
+  //     socket.onError((err) {
+  //       log('General Error: $err');
+  //     });
+  //   } catch (e) {
+  //     log('Exception caught: $e');
+  //   }
+  // }
   void updateScheduleTime(int newTime) {
     scheduleTime.value = newTime;
     log('Updated scheduleTime: $newTime');
@@ -55,9 +48,8 @@ class SessionRunningController extends GetxController {
   @override
   void onInit() async {
     sessionIds = Get.arguments;
-  await getSessionTimer();
-    await initSocket();
-
+    await getSessionTimer();
+    // await initSocket();
     super.onInit();
   }
   Future<void> getSessionTimer() async {
@@ -95,6 +87,62 @@ class SessionRunningController extends GetxController {
     }
     return rawTime; // Fallback if the time is not in expected format
   }
+//   Future<void> getSessionTimer() async {
+//     timerSession = Timer.periodic(const Duration(seconds: 1), (timer) {
+//       CallAPI.getSessionDetails(
+//           id: sessionIds!["id"].toString(),
+//           pinSession: sessionIds!["pin"].toString()).then((v) {
+//         if (v.status == 200) {
+//           if (v.result!.bookingStatus != "pending") {
+//             timer.cancel();
+//             timerSession!.cancel();
+//             Get.toNamed(AppRoutes.sessionComplete);
+//           }
+//
+//           // Parse the scheduletime (in HH:MM:SS) into seconds
+//           int currentTime = parseHHMMSS(v.result!.scheduletime!);
+//           int maxTime = v.result!.duration * 60; // Assuming duration is in minutes, convert to seconds
+//           int remainingTime = maxTime - currentTime; // Reverse the countdown
+//
+//           // Convert remaining time to MM:SS format
+//           final formattedTime = formatTimeToMinutesAndSeconds(remainingTime);
+//           time = formattedTime;
+//
+//           // If remaining time reaches 0, cancel the timer
+//           if (remainingTime <= 0) {
+//             timer.cancel();
+//           }
+//
+//           update(); // Update UI to reflect the countdown
+//         } else {
+//           timer.cancel();
+//         }
+//       }).catchError((error) {
+//         timer.cancel();
+//       });
+//     });
+//   }
+//
+// // Function to format seconds into MM:SS
+//   String formatTimeToMinutesAndSeconds(int seconds) {
+//     final int minutes = seconds ~/ 60; // Integer division for minutes
+//     final int remainingSeconds = seconds % 60; // Remainder for seconds
+//     // Format the result as MM:SS
+//     return '${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
+//   }
+//
+// // Function to parse scheduletime from HH:MM:SS into total seconds
+//   int parseHHMMSS(String time) {
+//     final parts = time.split(':'); // Split into hours, minutes, seconds
+//     final int hours = int.parse(parts[0]);
+//     final int minutes = int.parse(parts[1]);
+//     final int seconds = int.parse(parts[2]);
+//
+//     // Convert everything to seconds
+//     return hours * 3600 + minutes * 60 + seconds;
+//   }
+
+
   @override
   void onClose() {
     timerSession!.cancel();
