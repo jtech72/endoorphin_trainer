@@ -71,7 +71,9 @@ class SessionRunningController extends GetxController {
             timerSession!.cancel();
             Get.toNamed(AppRoutes.sessionComplete);
           }
-          time = v.result!.scheduletime!;
+          final rawTime = v.result!.scheduletime!;
+          final formattedTime = formatTimeToMinutesAndSeconds(rawTime); // Call formatTime to get MM:SS format
+          time = formattedTime;
           update();
         } else {
           timer.cancel();
@@ -81,7 +83,18 @@ class SessionRunningController extends GetxController {
       });
     });
   }
-
+// Helper function to format time from "00:00:00" to "MM:SS"
+  String formatTimeToMinutesAndSeconds(String rawTime) {
+    // Assuming rawTime is in the format "HH:mm:ss"
+    List<String> timeParts = rawTime.split(':');
+    if (timeParts.length == 3) {
+      // Take the minutes and seconds part
+      String minutes = timeParts[1];
+      String seconds = timeParts[2];
+      return '$minutes:$seconds';
+    }
+    return rawTime; // Fallback if the time is not in expected format
+  }
   @override
   void onClose() {
     timerSession!.cancel();
