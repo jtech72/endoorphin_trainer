@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../utils/app_colors.dart';
 import '../utils/image_paths.dart';
-
 class SplashUI extends StatefulWidget {
   const SplashUI({Key? key}) : super(key: key);
 
