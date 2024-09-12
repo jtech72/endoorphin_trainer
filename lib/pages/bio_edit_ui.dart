@@ -1,6 +1,4 @@
-import 'package:endoorphin_trainer/controllers/bio_edit_controller.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
-import 'package:flutter/material.dart';
 class BioEditUi extends StatelessWidget {
   const BioEditUi({super.key});
   @override

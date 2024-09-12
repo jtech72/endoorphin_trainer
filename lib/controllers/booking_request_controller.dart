@@ -222,7 +222,7 @@ class BookingRequestController extends GetxController {
         _timer!.cancel();
         isLoading.value = false;
         timerIsVisible.value = false;
-        Get.back();
+        Get.offAllNamed(AppRoutes.bottomNavigation);
         showSnackBar("Booking canceled");
 
       }
