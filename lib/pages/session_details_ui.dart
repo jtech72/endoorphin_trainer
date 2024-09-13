@@ -65,7 +65,7 @@ class SessionDetailsUi extends StatelessWidget {
                             child: RichText(
                               text: TextSpan(children: [
                                 TextSpan(
-                                    text: "Thanks for the Fitness Session,",
+                                    text: "Thanks for the Fitness Session, ",
                                     style: Theme.of(context).textTheme.headlineLarge),
                                 TextSpan(
                                     text: "${snapshot.data!.result!.trainerName.toString()}",
@@ -205,7 +205,7 @@ class SessionDetailsUi extends StatelessWidget {
                                   ),
                                 ),
                                 Container(
-                                  height: Get.height*0.12,
+                                  height: Get.height*0.125,
                                   width: 1,
                                   color: AppColors.yellow,
                                 ).paddingOnly(top: 3,bottom: 3),
@@ -277,8 +277,8 @@ class SessionDetailsUi extends StatelessWidget {
                             children: [
                               Center(child: Text("How was your session with ${snapshot.data!.result!.customerName} ?",style: Theme.of(context).textTheme.labelLarge)),
                               RatingBar.builder(
-                                initialRating: -1,
-                                minRating: 0,
+                                initialRating: 5,
+                                minRating: 5,
                                 direction: Axis.horizontal,
                                 allowHalfRating: true,
                                 itemCount: 5,
@@ -291,7 +291,6 @@ class SessionDetailsUi extends StatelessWidget {
                                     child:Image.asset(ImagesPaths.star,scale: 5,)
                                 ),
                                 onRatingUpdate: (rating) {
-                                  Get.toNamed(AppRoutes.review);
                                 },
                               ).paddingOnly(top: Get.height*0.02),
                             ],
