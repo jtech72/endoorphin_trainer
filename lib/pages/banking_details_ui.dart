@@ -1,4 +1,5 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
+import 'package:flutter/material.dart';
 
 class BankingDetailsUI extends StatelessWidget {
   const BankingDetailsUI({super.key});

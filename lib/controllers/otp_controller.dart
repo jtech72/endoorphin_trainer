@@ -76,8 +76,9 @@ class OtpController extends GetxController {
           startTimer(29);
           secondOtp = response.otp;
           if (response.status == 200) {
+            otpController.clear();
             countryCodeController.finalOTP = 0;
-            showSnackBarOtp("${response.otp}");
+            showSnackBarOtp("OTP: ${response.otp}");
           } else {
             showSnackBar("Failed to send OTP: ${response.message}");
           }

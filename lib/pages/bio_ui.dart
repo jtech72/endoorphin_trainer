@@ -1,4 +1,6 @@
 
+import 'package:flutter/material.dart';
+
 import '../utils/exports.dart';
 
 class BioUi extends StatelessWidget {
