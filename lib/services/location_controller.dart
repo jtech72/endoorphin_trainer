@@ -20,7 +20,6 @@ class LocationController extends GetxController {
     if (!_serviceEnabled) {
       _serviceEnabled = await location.requestService();
       if (!_serviceEnabled) {
-        // If service is not enabled, handle accordingly
         log("Location service is disabled.");
         return;
       }
