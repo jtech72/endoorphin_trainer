@@ -205,7 +205,7 @@ class SessionDetailsUi extends StatelessWidget {
                                   ),
                                 ),
                                 Container(
-                                  height: Get.height*0.125,
+                                  height: Get.height*0.101,
                                   width: 1,
                                   color: AppColors.yellow,
                                 ).paddingOnly(top: 3,bottom: 3),
@@ -227,6 +227,7 @@ class SessionDetailsUi extends StatelessWidget {
                                   ).paddingOnly(bottom: 5),
                                   SizedBox(
                                       width: Get.width * .77,
+                                      height: 30,
                                       child: Text(
                                         snapshot.data!.result!.trainerAddress.toString(),
                                         style: Theme.of(context).textTheme.labelMedium?.copyWith(

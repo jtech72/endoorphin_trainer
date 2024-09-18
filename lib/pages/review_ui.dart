@@ -110,7 +110,7 @@ class ReviewUi extends StatelessWidget {
                                 Obx(
                                       ()=> Text(
                                       controller.writeReviewVisible.value == false?
-                                      "Tap the stars to rate":"Check what applies to Richard",
+                                      "Tap the stars to rate":"Check what applies to ${snapshot.data!.result!.customerName.toString()}",
                                       style: Theme.of(context)
                                           .textTheme
                                           .labelMedium
