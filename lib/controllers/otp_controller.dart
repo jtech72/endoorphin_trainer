@@ -1,7 +1,5 @@
-import 'dart:async';
 import 'dart:developer';
 import 'package:endoorphin_trainer/utils/exports.dart';
-import '../services/network_services/api_call.dart';
 class OtpController extends GetxController {
   CountryCodeController countryCodeController = Get.put(CountryCodeController());
   final otpController = TextEditingController();

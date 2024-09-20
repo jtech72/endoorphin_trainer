@@ -1,12 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
-
-import '../controllers/session_running_controller.dart';
 import '../utils/exports.dart';
-
 class SessionDetailsUi extends StatelessWidget {
   const SessionDetailsUi({super.key});
 
@@ -53,10 +47,10 @@ class SessionDetailsUi extends StatelessWidget {
                               onTap: (){
                                 Get.offAllNamed(AppRoutes.bottomNavigation);
                               },
-                              child: Container(
+                              child: SizedBox(
                                   height: 30,
                                   width: 30,
-                                  child: Icon(Icons.arrow_back_ios,size: 18,).paddingOnly(right: Get.width*0.02)),
+                                  child: const Icon(Icons.arrow_back_ios,size: 18,).paddingOnly(right: Get.width*0.02)),
                             ),
                           ],
                         ).paddingOnly(left: Get.width*0.0),
@@ -68,7 +62,7 @@ class SessionDetailsUi extends StatelessWidget {
                                     text: "Thanks for the Fitness Session, ",
                                     style: Theme.of(context).textTheme.headlineLarge),
                                 TextSpan(
-                                    text: "${snapshot.data!.result!.trainerName.toString()}",
+                                    text: snapshot.data!.result!.trainerName.toString(),
                                     style: Theme.of(context)
                                         .textTheme
                                         .headlineLarge
@@ -120,12 +114,12 @@ class SessionDetailsUi extends StatelessWidget {
                                     backgroundColor: Colors.transparent,
                                      backgroundImage: imageProvider,
                                        ),
-                                    placeholder: (context, url) => CircleAvatar(
+                                    placeholder: (context, url) => const CircleAvatar(
                                      maxRadius: 35,
                                       backgroundColor: Colors.transparent,
                                  child: CircularProgressIndicator(), // Loader while the image is loading
                                      ),
-                                    errorWidget: (context, url, error) => CircleAvatar(
+                                    errorWidget: (context, url, error) => const CircleAvatar(
                                     maxRadius: 35,
                                      backgroundColor: Colors.transparent,
                                        backgroundImage: AssetImage("assets/images/img_profile.png"),
@@ -161,7 +155,7 @@ class SessionDetailsUi extends StatelessWidget {
                                         ),
                                          TextSpan(
                                           text: '\n${snapshot.data!.result!.customerPhoneNumber.toString()}',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: AppColors.impgrey,
                                               fontSize: 14,
                                               fontWeight: FontWeight.w500),
@@ -330,7 +324,7 @@ class SessionDetailsUi extends StatelessWidget {
 class DateTextWidget extends StatelessWidget {
   final String isoDate;
 
-  DateTextWidget({required this.isoDate});
+  const DateTextWidget({required this.isoDate});
 
   String formatDate(String isoDate) {
     // Parse the ISO date string

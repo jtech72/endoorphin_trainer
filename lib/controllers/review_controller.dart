@@ -1,9 +1,5 @@
 import 'dart:developer';
-
-import 'package:get/get.dart';
-
 import '../utils/exports.dart';
-
 class ReviewController extends GetxController{
  RxBool writeReviewVisible = false.obs;
  RxDouble ratingCount = (0.0).obs;

@@ -1,14 +1,12 @@
 import 'dart:developer';
-import 'package:endoorphin_trainer/controllers/registration_controller.dart';
 import 'package:flutter/material.dart';
 import '../utils/exports.dart';
-
 class RegistrationUi extends StatelessWidget {
-  RegistrationUi({super.key});
-  RegistrationController controller = Get.put(RegistrationController());
+  const RegistrationUi({super.key});
 
   @override
   Widget build(BuildContext context) {
+    RegistrationController controller = Get.put(RegistrationController());
     return WillPopScope(
       onWillPop: () async {
         Navigator.of(context)
@@ -64,7 +62,7 @@ class RegistrationUi extends StatelessWidget {
             body: Stack(
               children: [
                 SingleChildScrollView(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   child: Container(
                     height: Get.height,
                     width: Get.width,
@@ -582,7 +580,7 @@ class RegistrationUi extends StatelessWidget {
                                         title: Text(
                                           value,
                                           style:
-                                              TextStyle(color: AppColors.lightGrey),
+                                              const TextStyle(color: AppColors.lightGrey),
                                         ),
                                         onTap: () {
                                           controller.selectedOption1.value = value;

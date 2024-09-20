@@ -1,6 +1,5 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
-
 class NoInternetUI extends StatelessWidget {
   const NoInternetUI({super.key});
 

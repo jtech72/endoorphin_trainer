@@ -3,9 +3,7 @@ import 'dart:io';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../services/models/request_models/category_document_model.dart';
-import '../services/network_services/api_call.dart';
 class AccountController extends GetxController {
   RxBool scaffoldColor = false.obs;
   var isOptionsVisible = false.obs;

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../controllers/select_category_controller.dart';
 import '../utils/exports.dart';
-
 class SelectCategoryUI extends StatelessWidget {
   const SelectCategoryUI({super.key});
 
@@ -105,69 +102,6 @@ class SelectCategoryUI extends StatelessWidget {
                           .copyWith(color: AppColors.black),
                     ),
                     onTap: () {
-                      print("object");
-                      // showDialog(
-                      //   context: context,
-                      //   builder: (BuildContext context) {
-                      //     return AlertDialog(
-                      //       backgroundColor: AppColors.white,
-                      //       title: Column(
-                      //         children: [
-                      //           SizedBox(
-                      //             height: Get.height * 0.03,
-                      //           ),
-                      //           Image.asset(
-                      //             ImagesPaths.cooltick,
-                      //             scale: 4,
-                      //           ),
-                      //           SizedBox(
-                      //             height: Get.height * 0.02,
-                      //           ),
-                      //           Text(
-                      //             'Cancellation Successful',
-                      //             style: Theme.of(context)
-                      //                 .textTheme
-                      //                 .headlineSmall!
-                      //                 .copyWith(color: AppColors.black),
-                      //           )
-                      //         ],
-                      //       ),
-                      //       content: SizedBox(
-                      //           width: Get
-                      //               .width, // Set width as per your requirement
-                      //           height: Get.height *
-                      //               0.07, // Set height as per your requirement
-                      //           child: Text(
-                      //             'Lorem Ipsum is simply dummy text\nof the printing and typesetting industry.',
-                      //             style: Theme.of(context)
-                      //                 .textTheme
-                      //                 .labelMedium!
-                      //                 .copyWith(color: AppColors.black),
-                      //             textAlign: TextAlign.center,
-                      //           )),
-                      //       actions: [
-                      //         Center(
-                      //           child: InkButton(
-                      //               child: Text(
-                      //                 'OK',
-                      //                 style: Theme.of(context)
-                      //                     .textTheme
-                      //                     .headlineSmall!
-                      //                     .copyWith(color: AppColors.black),
-                      //               ),
-                      //               onTap: () {
-                      //                 // Get.offAllNamed(AppRoutes.bottomNavigation);
-                      //               },
-                      //               height: 35,
-                      //               width: 95),
-                      //         ),
-                      //       ],
-                      //       shape: RoundedRectangleBorder(
-                      //         borderRadius: BorderRadius.circular(10.0),
-                      //       ),
-                      //     );
-                      //   },
-                      // )
                       showDialog(
                           context: context,
                           builder: (BuildContext context) {

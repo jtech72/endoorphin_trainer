@@ -1,7 +1,4 @@
-
-import 'package:get/get.dart';
-
-import '../controllers/splash_controller.dart';
+import 'package:endoorphin_trainer/utils/exports.dart';
 class SplashBinding implements Bindings{
   @override
   void dependencies() {

@@ -1,8 +1,5 @@
 import 'dart:developer';
-
 import '../utils/exports.dart';
-
-
 class SessionRunningController extends GetxController {
   PanelController panelController = PanelController();
   var scheduleTime = 0.obs;

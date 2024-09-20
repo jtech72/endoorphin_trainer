@@ -1,11 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
-import '../controllers/rating_controller.dart';
-import '../services/network_services/api_call.dart';
 import '../utils/exports.dart';
-
 class RatingUi extends StatelessWidget {
   const RatingUi({super.key});
 
@@ -94,29 +88,27 @@ class RatingUi extends StatelessWidget {
                                                 radius: 25,
                                                 backgroundImage: imageProvider, // Apply the loaded image
                                               ),
-                                              placeholder: (context, url) => CircularProgressIndicator(
+                                              placeholder: (context, url) => const CircularProgressIndicator(
                                                 color: Colors.black, // Loader color set to black
                                               ),
-                                              errorWidget: (context, url, error) =>CircleAvatar(
+                                              errorWidget: (context, url, error) =>const CircleAvatar(
                                                 maxRadius: 25,
                                                 backgroundColor: AppColors.black,
                                                 backgroundImage: AssetImage("assets/images/img_profile.png"), // Fallback image
                                               ),
                                             ),
                                           ).paddingOnly(right: Get.width*0.03),
-                                          RichText(text: TextSpan(
+                                          Container(
+                                            width: Get.width*0.42,
+                                            child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
-                                                TextSpan(
-                                                    text:"${snapshot.data!.result![index].userData![0].userName.toString()} ${snapshot.data!.result![index].userData![0].lastName.toString()}\n",
-                                                    style:Theme.of(context).textTheme.headlineSmall
-                                                ),
-                                                TextSpan(
-                                                    text: controller.calculateDifferenceInDays(snapshot.data!.result![index].booking!.createdAt! ),
+                                                Text(overflow: TextOverflow.ellipsis,"${snapshot.data!.result![index].userData![0].userName.toString()} ${snapshot.data!.result![index].userData![0].lastName.toString()}",style:Theme.of(context).textTheme.headlineSmall),
+                                                Text(controller.calculateDifferenceInDays(snapshot.data!.result![index].booking!.createdAt!),
                                                     style:Theme.of(context).textTheme.labelMedium!.copyWith(fontWeight: FontWeight.w500,color: AppColors.grey7)
-                                                ),
-
-                                              ]
-                                          ))
+                                                )
+                                              ],
+                                            ),
+                                          )
                                         ],
                                       ),
                                       Row(

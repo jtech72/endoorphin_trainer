@@ -1,8 +1,5 @@
-
 import 'package:flutter/material.dart';
-
 import '../utils/exports.dart';
-
 class BioUi extends StatelessWidget {
   const BioUi({super.key});
 
@@ -32,7 +29,7 @@ class BioUi extends StatelessWidget {
         body: Stack(
           children: [
             SingleChildScrollView(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               child: Container(
                 height: Get.height,
                 width: Get.width,

@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:endoorphin_trainer/controllers/document_controller.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
 class DocumentUI extends StatelessWidget {
@@ -94,7 +91,7 @@ class DocumentUI extends StatelessWidget {
                             () => SizedBox(
                             height: Get.height * .8,
                             child:
-                            controller.trainerDocStatusModel.value.result!.isEmpty?SizedBox.shrink():
+                            controller.trainerDocStatusModel.value.result!.isEmpty?const SizedBox.shrink():
                             ListView.builder(
                                 itemCount: controller
                                     .trainerDocStatusModel.value.result!.length,

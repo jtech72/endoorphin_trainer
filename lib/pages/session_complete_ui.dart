@@ -1,6 +1,5 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
-
 class SessionCompleteUI extends StatelessWidget {
   const SessionCompleteUI({super.key});
 

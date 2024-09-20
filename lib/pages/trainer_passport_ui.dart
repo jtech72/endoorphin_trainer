@@ -1,14 +1,11 @@
-import 'package:endoorphin_trainer/controllers/trainer_passport_controller.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
-
 class TrainerPassportUI extends StatelessWidget {
   const TrainerPassportUI({super.key});
 
   @override
   Widget build(BuildContext context) {
     TrainerPassportController controller = Get.find();
-    String? username;
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();

@@ -1,10 +1,6 @@
 import 'dart:developer';
-
 import 'package:endoorphin_trainer/utils/exports.dart';
-
 import '../services/models/request_models/category_document_model.dart';
-import '../services/network_services/api_call.dart';
-
 class BioEditController extends GetxController{
   TextEditingController niceNameController = TextEditingController();
   TextEditingController areaOfExpertiseController = TextEditingController();
@@ -12,7 +8,6 @@ class BioEditController extends GetxController{
   TextEditingController funFactController = TextEditingController();
   TextEditingController motivationController = TextEditingController();
   TextEditingController bioController = TextEditingController();
-
   Future<void> onUpdateButton() async {
     if(niceNameController.text.isEmpty ||
         areaOfExpertiseController.text.isEmpty ||

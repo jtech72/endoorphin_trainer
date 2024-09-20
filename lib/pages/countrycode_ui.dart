@@ -17,7 +17,7 @@ class CountryCodeUI extends StatelessWidget {
         body: Container(
           height: Get.height,
           width: Get.width,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage(ImagesPaths.bgBlackShade),
               fit: BoxFit.cover,
@@ -29,12 +29,12 @@ class CountryCodeUI extends StatelessWidget {
               children: [
                 SizedBox(height: Get.height * 0.023),
                 Transform.translate(
-                  offset: Offset(-5, 0),
+                  offset: const Offset(-5, 0),
                   child: IconButton(
                     onPressed: () {
                       Get.back();
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_back_ios,
                       size: 18,
                       color: Colors.white,
@@ -45,7 +45,7 @@ class CountryCodeUI extends StatelessWidget {
                   height: Get.height * .14,
                 ),
                 Center(
-                  child: Container(
+                  child: SizedBox(
                     height: 55,
                     width: 259.03,
                     child: Image.asset(ImagesPaths.logoimg),
@@ -74,7 +74,7 @@ class CountryCodeUI extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         width: 80,
                         child: Transform.translate(
-                          offset: Offset(-2, 0),
+                          offset: const Offset(-2, 0),
                           child: GestureDetector(
                             onTap: () {
                               _focusNode.requestFocus();
@@ -139,7 +139,7 @@ class CountryCodeUI extends StatelessWidget {
                           _focusNode.requestFocus();
                         },
                         child: Transform.translate(
-                          offset: Offset(-30, 0),
+                          offset: const Offset(-30, 0),
                           child: const Icon(
                             Icons.keyboard_arrow_down_rounded,
                             color: AppColors.greyButton,
