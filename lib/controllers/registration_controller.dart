@@ -1,9 +1,6 @@
 import 'dart:developer';
 import 'package:endoorphin_trainer/utils/exports.dart';
-import 'package:get/get.dart';
 import '../services/models/response_models/get_category_model.dart';
-import '../services/network_services/api_call.dart';
-import '../services/network_services/notification_servies.dart';
 class RegistrationController extends GetxController{
   // NotificationServices notificationServices=NotificationServices();
  RxBool isValidVisible = false.obs;
@@ -111,11 +108,11 @@ class RegistrationController extends GetxController{
       }
     }
   }
+  @override
   void onInit() {
   // notificationServices.getDeviceToken();
   // notificationServices.isDeviceTokenRefresh();
   fetchCategories();
-
   super.onInit();
 }
   void fetchCategories() async {

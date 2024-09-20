@@ -1,7 +1,5 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
-
-import '../services/network_services/api_call.dart';
 class ForgotPasswordController extends GetxController{
   TextEditingController emailController = TextEditingController();
 Future<void> onSubmitButton (BuildContext context)async{

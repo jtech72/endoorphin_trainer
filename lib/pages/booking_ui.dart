@@ -15,7 +15,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
   late TabController tabController;
   bool showCalendar = false;
   var tabindex = Get.arguments ??0;
-  RxList _selectedDates = [].obs;
+  final RxList _selectedDates = [].obs;
   late CalendarDatePicker2WithActionButtonsConfig config;
 
 
@@ -699,34 +699,6 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
   }
 
 
-  String _getValueText(CalendarDatePicker2Type datePickerType,
-      List<DateTime?> values,) {
-    values =
-        values.map((e) => e != null ? DateUtils.dateOnly(e) : null).toList();
-    var valueText = (values.isNotEmpty ? values[0] : null)
-        .toString()
-        .replaceAll('00:00:00.000', '');
-
-    if (datePickerType == CalendarDatePicker2Type.multi) {
-      valueText = values.isNotEmpty
-          ? values
-          .map((v) => v.toString().replaceAll('00:00:00.000', ''))
-          .join(', ')
-          : 'null';
-    } else if (datePickerType == CalendarDatePicker2Type.range) {
-      if (values.isNotEmpty) {
-        final startDate = values[0].toString().replaceAll('00:00:00.000', '');
-        final endDate = values.length > 1
-            ? values[1].toString().replaceAll('00:00:00.000', '')
-            : 'null';
-        valueText = '$startDate to $endDate';
-      } else {
-        return 'null';
-      }
-    }
-
-    return valueText;
-  }
 
   _buildCalendarDialogButton() {
     const dayTextStyle = TextStyle(color: Colors.white, fontWeight: FontWeight.w700);

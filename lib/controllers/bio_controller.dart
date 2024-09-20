@@ -3,11 +3,8 @@ import 'dart:io';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../services/models/request_models/category_document_model.dart';
-import '../services/network_services/api_call.dart';
 import '../services/network_services/notification_servies.dart';
-
 class BioController extends GetxController {
   Rx<File?> profileImage = Rx<File?>(null);
   NotificationServices notificationServices=NotificationServices();

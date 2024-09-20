@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import '../utils/exports.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:http/http.dart' as http;
-
-
 class BookingRequestController extends GetxController {
   final TextEditingController pinController = TextEditingController();
   // BookingAcceptDetailsModel? bookingDetails;
@@ -138,7 +136,7 @@ class BookingRequestController extends GetxController {
   }
 
   void addPolyLine() {
-    PolylineId id = PolylineId("poly");
+    PolylineId id = const PolylineId("poly");
     Polyline polyline = Polyline(
         polylineId: id, color: AppColors.yellow, points: polylineCoordinates);
     polyLines[id] = polyline;
@@ -450,7 +448,7 @@ class BookingRequestController extends GetxController {
   }
 
   void addPolyline(LatLng origin, LatLng destination) {
-    final PolylineId polylineId = PolylineId('route');
+    const PolylineId polylineId = PolylineId('route');
     final Polyline polyline = Polyline(
       polylineId: polylineId,
       color: AppColors.yellow,

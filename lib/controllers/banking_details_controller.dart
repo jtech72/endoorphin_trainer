@@ -1,13 +1,9 @@
 import 'dart:developer';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
-import '../services/network_services/api_call.dart';
-
 class BankingDetailsController extends GetxController {
   final items2 = ['CURRENT ACCOUNT', 'SAVING ACCOUNT'];
   var buttonText = 0.obs;
-
   String accountType = "";
   RxString selectedOption1 = 'ACCOUNT TYPE'.obs;
   final ifscController = TextEditingController();

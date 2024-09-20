@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../utils/exports.dart';
-
 class ForgotPasswordUI extends StatelessWidget {
   const ForgotPasswordUI({super.key});
 

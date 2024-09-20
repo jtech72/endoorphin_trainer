@@ -1,9 +1,4 @@
-
-
-
-import '../services/network_services/api_call.dart';
 import '../utils/exports.dart';
-
 class CountryCodeController extends GetxController {
   final phoneNumber = TextEditingController();
   String countryCode = "+971";

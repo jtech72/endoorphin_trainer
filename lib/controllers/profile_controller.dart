@@ -1,10 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
-
 import '../services/models/request_models/category_document_model.dart';
-import '../services/network_services/api_call.dart';
 import '../utils/exports.dart';
-
 class ProfileController extends GetxController{
  onLogoutButton() async{
   try{

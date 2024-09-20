@@ -1,16 +1,11 @@
-import 'dart:convert';
 import 'dart:developer';
-
 import 'package:endoorphin_trainer/utils/exports.dart';
-import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import '../services/models/request_models/withdraw_request_model.dart';
 import 'package:http/http.dart'as http;
 class WithdrawController extends GetxController {
   RxInt selectedIndex = 0.obs;
   var selectedItems = <String>[].obs;
-
   void toggleSelection(String id) {
     if (selectedItems.contains(id)) {
       selectedItems.remove(id);
@@ -24,18 +19,18 @@ class WithdrawController extends GetxController {
   Future<void> postWithdrawRequest() async {
     var request = {
       "trainerId":"${storage.read("userId")}",
-      "bookingId": selectedItems.value,
+      "bookingId": selectedItems,
     };
 
     try {
       WithdrawRequestModel result = await CallAPI.withdrawReq(request: request);
       if (result.status == 200) {
-        print('Withdraw request successful');
+        log('Withdraw request successful');
       } else {
-        print('Withdraw request failed');
+        log('Withdraw request failed');
       }
     } catch (e) {
-      print('Error: $e');
+      log('Error: $e');
     }
   }
 
@@ -61,7 +56,7 @@ class WithdrawController extends GetxController {
         print(result);
       } else {
         dismissLoader();
-        print("Failed to download image");
+        log("Failed to download image");
       }
     }catch(e,st){
       dismissLoader();

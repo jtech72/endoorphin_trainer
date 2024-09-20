@@ -1,11 +1,8 @@
 import 'dart:math';
 import 'dart:developer' as dev;
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../utils/exports.dart';
-
 class BookingRequestUi extends StatelessWidget {
   const BookingRequestUi({super.key});
   @override
@@ -768,14 +765,14 @@ class BookingRequestUi extends StatelessWidget {
                                                   controller.notificationData[
                                                   "userProfile"] ==
                                                       null
-                                                      ? CircleAvatar(
+                                                      ? const CircleAvatar(
                                                     radius: 32,
                                                     backgroundColor:
                                                     AppColors.yellow,
                                                     child: CircleAvatar(
                                                       radius: 30,
                                                       backgroundImage:
-                                                      const AssetImage(
+                                                      AssetImage(
                                                           "assets/images/img_profile.png"),
                                                     ),
                                                   )
@@ -809,7 +806,7 @@ class BookingRequestUi extends StatelessWidget {
                                                         ),
                                                     errorWidget: (context,
                                                         url, error) =>
-                                                        CircleAvatar(
+                                                        const CircleAvatar(
                                                           radius: 32,
                                                           backgroundColor:
                                                           AppColors
@@ -819,7 +816,7 @@ class BookingRequestUi extends StatelessWidget {
                                                             backgroundColor:
                                                             Colors.black,
                                                             backgroundImage:
-                                                            const AssetImage(
+                                                            AssetImage(
                                                                 "assets/images/img_profile.png"),
                                                           ),
                                                         ),

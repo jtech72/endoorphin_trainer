@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-import '../controllers/notification_controller.dart';
 import '../utils/exports.dart';
 
 class NotificationUi extends StatelessWidget {

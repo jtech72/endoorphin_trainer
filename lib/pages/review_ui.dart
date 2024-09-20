@@ -1,10 +1,6 @@
 import 'dart:developer';
-import '../controllers/review_controller.dart';
 import '../utils/exports.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
-
 class ReviewUi extends StatelessWidget {
   const ReviewUi({super.key});
 

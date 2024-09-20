@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-
 import '../utils/app_colors.dart';
-
 PreferredSizeWidget myTabBar(TabController tabController, BuildContext context,) {
   return TabBar(
-
     controller: tabController,
     unselectedLabelStyle: Theme.of(context).textTheme.labelLarge!.copyWith(fontSize: 11),
     labelStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 11,color: AppColors.yellow),

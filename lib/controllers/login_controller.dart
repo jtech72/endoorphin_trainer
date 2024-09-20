@@ -1,12 +1,8 @@
 import 'dart:developer';
-
 import 'package:endoorphin_trainer/utils/exports.dart';
-
-import '../services/network_services/api_call.dart';
 import '../services/network_services/notification_servies.dart';
 class LoginController extends GetxController{
   NotificationServices notificationServices=NotificationServices();
-
   RxBool obscureText = true.obs;
   void toggleObscureText() {
     obscureText.toggle();

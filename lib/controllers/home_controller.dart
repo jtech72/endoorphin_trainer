@@ -4,14 +4,12 @@ import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
-
 import '../services/models/response_models/get_trianer_all_data.dart';
 class HomeController extends GetxController {
   RxBool isTrainerOnline = false.obs;
   RxInt currentIndex = 0.obs;
   Timer? pageChangeTimer;
   Rx<GetTrainerAllData> trainerSessionDetails = GetTrainerAllData().obs;
-
   List<String> quickGlanceList = [
     "Earnings",
     "Sessions",
@@ -44,7 +42,7 @@ class HomeController extends GetxController {
       // Use animateToPage instead of jumpToPage for a smooth transition
       pageController.animateToPage(
         currentIndex.value,
-        duration: Duration(milliseconds: 500), // adjust the duration as needed
+        duration: const Duration(milliseconds: 500), // adjust the duration as needed
         curve: Curves.easeInOut, // you can change the curve to your preference
       );
     });

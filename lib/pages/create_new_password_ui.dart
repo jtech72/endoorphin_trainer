@@ -1,5 +1,3 @@
-
-import 'package:endoorphin_trainer/controllers/create_new_password_controller.dart';
 import 'package:flutter/material.dart';
 import '../utils/exports.dart';
 class CreateNewPasswordUI extends StatelessWidget {

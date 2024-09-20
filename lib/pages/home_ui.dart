@@ -1,4 +1,3 @@
-import 'package:endoorphin_trainer/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_page_view_indicator/flutter_page_view_indicator.dart';
 import '../utils/app_drawer.dart';

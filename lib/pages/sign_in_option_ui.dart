@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../controllers/sign_in_option_controller.dart';
 import '../utils/exports.dart';
-
 class SignInOptionUi extends StatelessWidget {
   const SignInOptionUi({super.key});
 

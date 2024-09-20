@@ -1,9 +1,7 @@
 import 'dart:developer';
-import 'package:endoorphin_trainer/controllers/earning_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 class EarningUi extends StatelessWidget {
@@ -14,7 +12,6 @@ class EarningUi extends StatelessWidget {
     final EarningController controller = Get.put(EarningController());
 
     final currentMonth = DateTime.now().month.obs;
-    final currentDay = DateTime.now().weekday.obs;// Current month index
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 50,

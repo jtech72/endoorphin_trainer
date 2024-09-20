@@ -1,11 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:endoorphin_trainer/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
-
-import '../services/network_services/api_call.dart';
 import '../utils/exports.dart';
-import 'bottom_navigation_bar_ui.dart';
-
 class ProfileUI extends StatelessWidget {
   const ProfileUI({super.key});
 
@@ -45,8 +39,6 @@ class ProfileUI extends StatelessWidget {
           ),
         ),
       ),
-      // appBar:myAppBar(
-      //     title: Text("Profile",style: Theme.of(context).textTheme.bodyMedium), context: context, ),
       body: Container(
         height: Get.height,
         width: Get.width,
@@ -74,13 +66,11 @@ class ProfileUI extends StatelessWidget {
                       child: Text('Error: ${snapshot.error}'),
                     );
                   }
-
                   if (!snapshot.hasData || snapshot.data!.result == null) {
                     return const Center(
                       child: Text('No data available'),
                     );
                   }
-
                   return
                     Row(
                     children: [
@@ -106,12 +96,12 @@ class ProfileUI extends StatelessWidget {
                             backgroundImage: imageProvider,
                           ),
                         ),
-                        placeholder: (context, url) => CircleAvatar(
+                        placeholder: (context, url) => const CircleAvatar(
                           radius: 42,
                           backgroundColor: Colors.transparent,
                           child: CircularProgressIndicator(),
                         ),
-                        errorWidget: (context, url, error) => CircleAvatar(
+                        errorWidget: (context, url, error) => const CircleAvatar(
                           radius: 42,
                           child: Icon(Icons.error),
                         ),
@@ -123,25 +113,22 @@ class ProfileUI extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            children: [
-                              Text(
-                                snapshot.data!.result!.userName == null?'':snapshot.data!.result!.userName.toString(),
-                                style: Theme.of(context).textTheme.headlineSmall,
-                              ).paddingOnly(right: 3),
-                              Text(
-                                snapshot.data!.result!.lastName == null?'':snapshot.data!.result!.lastName.toString(),
-                                style: Theme.of(context).textTheme.headlineSmall,
-                              ),
-                            ],
+                          SizedBox(
+                            width: Get.width * 0.5,
+                            child: Text(
+                              overflow: TextOverflow.ellipsis,
+                              "${snapshot.data!.result!.userName == null?'':snapshot.data!.result!.userName.toString()} ${snapshot.data!.result!.lastName == null?'':snapshot.data!.result!.lastName.toString()}",
+                              style: Theme.of(context).textTheme.headlineSmall,
+                            ).paddingOnly(right: 3),
                           ),
                           SizedBox(
                             height: Get.height * 0.003,
                           ),
-                          Container(
-                            width: Get.width*0.4,
+                          SizedBox(
+                            width: Get.width*0.5,
                             child: Text(
-                                              snapshot.data!.result!.email == null?'':snapshot.data!.result!.email.toString(),
+                              overflow: TextOverflow.ellipsis,
+                              snapshot.data!.result!.email == null?'':snapshot.data!.result!.email.toString(),
                               style: Theme.of(context)
                                   .textTheme
                                   .labelMedium!
@@ -173,11 +160,7 @@ class ProfileUI extends StatelessWidget {
                 height: 1,
                 width: Get.width,
                 color: AppColors.grey3,
-              ).paddingOnly(
-                  left: Get.width * 0.01,
-                  right: Get.width * 0.01,
-                  bottom: Get.height * 0.03,
-                  top: Get.height * 0.03),
+              ).paddingOnly(left: Get.width * 0.01, right: Get.width * 0.01, bottom: Get.height * 0.03, top: Get.height * 0.03),
               Container(
                   height: Get.height * 0.05,
                   width: Get.width,

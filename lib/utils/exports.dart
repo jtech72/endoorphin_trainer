@@ -5,7 +5,6 @@ export 'package:get/get.dart';
 export 'package:get/get_core/src/get_main.dart';
 export 'package:get/get_instance/src/bindings_interface.dart';
 export '../controllers/countrycode_controller.dart';
-export 'package:get/get.dart';
 export 'package:get/get_navigation/src/routes/get_route.dart';
 export '../bindings/countrycode_binding.dart';
 export '../bindings/splash_binding.dart';
@@ -14,8 +13,6 @@ export '../pages/splash_ui.dart';
 export 'app_routes.dart';
 export '../bindings/otp_binding.dart';
 export '../pages/otp_ui.dart';
-export 'package:get/get_core/src/get_main.dart';
-export 'package:get/get_instance/src/bindings_interface.dart';
 export '../controllers/forgot_password_controller.dart';
 export '../bindings/bio_binding.dart';
 export '../bindings/create_new_password_binding.dart';
@@ -90,3 +87,47 @@ export 'package:endoorphin_trainer/controllers/banking_details_controller.dart';
 export 'package:endoorphin_trainer/controllers/bio_edit_controller.dart';
 export 'package:endoorphin_trainer/controllers/bio_controller.dart';
 export 'package:endoorphin_trainer/controllers/booking_details_controller.dart';
+export 'package:endoorphin_trainer/controllers/profile_controller.dart';
+export 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
+export 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
+export 'package:endoorphin_trainer/controllers/booking_controller.dart';
+export 'package:endoorphin_trainer/controllers/earning_controller.dart';
+export '../controllers/home_controller.dart';
+export 'package:endoorphin_trainer/controllers/create_new_password_controller.dart';
+export 'package:endoorphin_trainer/controllers/document_controller.dart';
+export '../controllers/error_controller.dart';
+export '../controllers/login_controller.dart';
+export 'package:endoorphin_trainer/controllers/more_about_you_controller.dart';
+export '../controllers/notification_controller.dart';
+export '../controllers/otp_controller.dart';
+export 'package:flutter_rating_bar/flutter_rating_bar.dart';
+export '../controllers/rating_controller.dart';
+export 'package:endoorphin_trainer/controllers/registration_controller.dart';
+export '../controllers/review_controller.dart';
+export '../controllers/select_category_controller.dart';
+export '../controllers/sign_in_option_controller.dart';
+export 'package:endoorphin_trainer/controllers/support_controller.dart';
+export 'package:endoorphin_trainer/controllers/trainer_passport_controller.dart';
+export 'package:endoorphin_trainer/controllers/withdraw_controller.dart';
+export '../controllers/bottom_navigation_bar_controller.dart';
+export '../controllers/no_internet_controller.dart';
+export 'package:endoorphin_trainer/controllers/session_complete_controller.dart';
+export '../controllers/session_details_controller.dart';
+export '../controllers/splash_controller.dart';
+export '../controllers/verify_phone_number_controller.dart';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

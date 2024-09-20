@@ -1,7 +1,5 @@
 import 'dart:developer';
-
 import 'package:endoorphin_trainer/utils/exports.dart';
-
 class SupportController extends GetxController{
 TextEditingController nameController = TextEditingController();
 TextEditingController emailController = TextEditingController();
@@ -12,7 +10,6 @@ Future<void> onSendButton() async {
   RegExp emailRegExp = RegExp(emailPattern);
   String phonePattern = r'^\d{9}$'; // Adjust the length as per your requirements
   RegExp phoneRegExp = RegExp(phonePattern);
-
   if (nameController.text.isEmpty ||
       emailController.text.isEmpty ||
       phoneNumberController.text.isEmpty ||

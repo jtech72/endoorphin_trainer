@@ -1,12 +1,9 @@
 import 'dart:developer';
 import 'package:endoorphin_trainer/utils/exports.dart';
-import 'package:get/get.dart';
-
 class TrainerPassportController extends GetxController {
   Map<String, dynamic>? certificationDetails;
   TextEditingController certificateName = TextEditingController();
   TextEditingController certificateNumber = TextEditingController();
-
   onFileUpload() {
     // Trim the input to remove leading and trailing whitespace
     String trimmedCertificateNumber = certificateNumber.text.trim();
