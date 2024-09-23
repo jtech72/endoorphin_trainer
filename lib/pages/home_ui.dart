@@ -1,5 +1,3 @@
-import 'package:endoorphin_trainer/controllers/home_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_page_view_indicator/flutter_page_view_indicator.dart';
 import '../utils/app_drawer.dart';
@@ -27,7 +25,7 @@ class HomeUi extends StatelessWidget {
               onTap: () {
                 controller.onToggleButton();
               },
-              child: Container(
+              child: SizedBox(
                 height: 30,
                 width: 43,
                 child: Container(
@@ -104,7 +102,7 @@ class HomeUi extends StatelessWidget {
                   onTap: () {
                     controller.pageController.animateToPage(
                       controller.currentIndex.value,
-                      duration: Duration(seconds: 3),
+                      duration: const Duration(seconds: 3),
                       curve: Curves.easeInOut,
                     );
                   },
@@ -230,7 +228,7 @@ class HomeUi extends StatelessWidget {
                                       if (controller.selectedIndex.value == 0) {
                                         Get.toNamed(AppRoutes.earning);
                                       } else if (controller.selectedIndex.value == 1) {
-                                        Get.toNamed(AppRoutes.booking);
+                                      Get.to(BookingUi(initialIndex: 2,));
                                       } else if (controller.selectedIndex.value == 2) {
 
                                       } else if (controller.selectedIndex.value == 3) {

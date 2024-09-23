@@ -1,14 +1,6 @@
 import 'dart:io';
-import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
-import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
-import 'package:endoorphin_trainer/controllers/booking_controller.dart';
-import 'package:endoorphin_trainer/controllers/earning_controller.dart';
-import 'package:endoorphin_trainer/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
-import '../controllers/home_controller.dart';
-import '../services/location_controller.dart';
 import '../utils/exports.dart';
-
 class BottomNavigationBarUI extends StatefulWidget {
   BottomNavigationBarUI({Key? key, this.currentTabIndex = 0}) : super(key: key);
   int? currentTabIndex;
@@ -39,10 +31,10 @@ class _BottomNavigationBarUIState extends State<BottomNavigationBarUI> {
     super.initState();
     navigatorKeys = List<GlobalKey<NavigatorState>>.generate(4, (index) => GlobalKey<NavigatorState>());
     pages = [
-      _buildTabNavigator(0, HomeUi()),
-      _buildTabNavigator(1, EarningUi()),
-      _buildTabNavigator(2, BookingUi(initialIndex: 0)),
-      _buildTabNavigator(3, ProfileUI()),
+      _buildTabNavigator(0, const HomeUi()),
+      _buildTabNavigator(1, const EarningUi()),
+      _buildTabNavigator(2, const BookingUi(initialIndex: 0)),
+      _buildTabNavigator(3, const ProfileUI()),
     ];
   }
 
@@ -145,7 +137,7 @@ class _BottomNavigationBarUIState extends State<BottomNavigationBarUI> {
 
   Widget _buildGradientButton(String assetPath, double scale) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [
             Color(0XFFFDF7B9),

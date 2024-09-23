@@ -29,7 +29,7 @@ class UploadImagesUi extends StatelessWidget {
               Get.back();
             }
           }
-        ,child: Container(
+        ,child: SizedBox(
             height: 2,width: 2,
             child: const Icon(Icons.arrow_back_ios,size: 18,color: Colors.white,)),
         ),

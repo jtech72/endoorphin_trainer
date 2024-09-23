@@ -1,9 +1,5 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
-
-import '../controllers/otp_controller.dart';
-
 class VerifyPhoneNumberUI extends StatelessWidget {
   const VerifyPhoneNumberUI({super.key});
 

@@ -1,8 +1,5 @@
-import 'package:endoorphin_trainer/controllers/support_controller.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
-
-
 class SupportUI extends StatelessWidget {
   const SupportUI({super.key});
 

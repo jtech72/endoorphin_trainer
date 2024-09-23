@@ -1,11 +1,6 @@
 import 'dart:developer';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
-import '../controllers/session_running_controller.dart';
 import '../utils/exports.dart';
 class SessionRunningUi extends StatelessWidget {
   const SessionRunningUi({super.key});
@@ -412,7 +407,7 @@ class SessionRunningUi extends StatelessWidget {
                                           width: Get.width*0.09,
                                           child: Text(
                                             overflow: TextOverflow.ellipsis,
-                                            " ${snapshot.data!.result!.customerAverageReviewCount == null?"0":snapshot.data!.result!.customerAverageReviewCount} (${snapshot.data!.result!.customerReviewCount == null ?"0":snapshot.data!.result!.customerReviewCount})",
+                                            " ${snapshot.data!.result!.customerAverageReviewCount ?? "0"} (${snapshot.data!.result!.customerReviewCount ?? "0"})",
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .titleMedium

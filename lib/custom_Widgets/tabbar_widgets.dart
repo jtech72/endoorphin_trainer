@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
 import '../utils/app_colors.dart';
-
 PreferredSizeWidget myTabBar(TabController tabController, BuildContext context,) {
   return TabBar(
 

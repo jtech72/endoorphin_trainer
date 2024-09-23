@@ -1,11 +1,7 @@
 import 'dart:developer';
-import 'package:endoorphin_trainer/controllers/withdraw_controller.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-
 class WithdrawUI extends StatelessWidget {
   const WithdrawUI({
     super.key,
@@ -245,7 +241,7 @@ class WithdrawUI extends StatelessWidget {
                                                               width:Get.width*0.6,
                                                               child: Text(
                                                                 '${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].user!.userName}',
-                                                                style: TextStyle(
+                                                                style: const TextStyle(
                                                                     color: Colors.white,
                                                                     fontSize: 14,
                                                                     fontWeight:
@@ -257,7 +253,7 @@ class WithdrawUI extends StatelessWidget {
                                                                   .format(DateTime.parse(snapshot!
                                                                   .data!.result![index].createdAt
                                                                   .toString())),
-                                                              style: TextStyle(
+                                                              style: const TextStyle(
                                                                   color: Colors.white,
                                                                   fontSize: 12,
                                                                   fontWeight:
@@ -270,7 +266,7 @@ class WithdrawUI extends StatelessWidget {
                                                     ),
                                                      Text(
                                                       'AED ${snapshot.data!.result![index].bookingAmount}',
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                           color: AppColors.yellow,
                                                           fontWeight: FontWeight.w700,
                                                           fontSize: 12),
@@ -326,7 +322,7 @@ class WithdrawUI extends StatelessWidget {
                                                   ),
                                                   content: SizedBox(
                                                       width: Get.width,
-                                                      height: Get.height * 0.07,
+                                                      height: Get.height * 0.075,
                                                       child: Text(
                                                         "Your Request has been sent\nsuccessfully. You will be notified\nshortly",
                                                         style: Theme.of(context)
@@ -418,7 +414,7 @@ class WithdrawUI extends StatelessWidget {
                             return
                               Column(
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     height: Get.height*.6,
                                     width: Get.width,
                                     child: ListView.builder(
@@ -442,7 +438,9 @@ class WithdrawUI extends StatelessWidget {
                                                         log("${snapshot.data!.result![index].paymentAttachment}");
                                                         controller.saveNetworkImage(snapshot.data!.result![index].paymentAttachment);
                                                       },
-                                                      child: Icon(Icons.download,size: 20,color: AppColors.yellow,).paddingOnly(left: 5)),
+                                                      child: Container(
+                                                          height:40,width: 40,color: Colors.transparent,
+                                                          child:  const Icon(Icons.download,size: 20,color: AppColors.yellow,)).paddingOnly(left: Get.width*0.04)),
                                                   Row(
                                                     children: [
                                                       SizedBox(
@@ -450,13 +448,16 @@ class WithdrawUI extends StatelessWidget {
                                                         child: Column(
                                                           crossAxisAlignment: CrossAxisAlignment.start,
                                                           children: [
-                                                            Text(
-                                                              '${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].user!.userName}',
-                                                              style: const TextStyle(
-                                                                  color: Colors.white,
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                  FontWeight.w500),
+                                                            SizedBox(
+                                                              width: Get.width*0.6,
+                                                              child: Text(
+                                                                '${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].user!.userName}',
+                                                                style: const TextStyle(
+                                                                    color: Colors.white,
+                                                                    fontSize: 14,
+                                                                    fontWeight:
+                                                                    FontWeight.w500),
+                                                              ),
                                                             ),
                                                             Row(
                                                               children: [
@@ -481,7 +482,7 @@ class WithdrawUI extends StatelessWidget {
                                                   ),
                                                   Text(
                                                     'AED ${snapshot.data!.result![index].bookingAmount}',
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         color: AppColors.yellow,
                                                         fontWeight: FontWeight.w700,
                                                         fontSize: 12),
@@ -506,7 +507,7 @@ class WithdrawUI extends StatelessWidget {
                               );
                           } else {
                             return const Center(
-                              child: Text("No unpaid booking available"),
+                              child: Text("No paid booking available"),
                             ).paddingOnly(bottom: 0);
                           }
                         },
@@ -563,20 +564,23 @@ class WithdrawUI extends StatelessWidget {
                                                       Column(
                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
-                                                          Text(
-                                                            '${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].user!.userName}',
-                                                            style: TextStyle(
-                                                                color: Colors.white,
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                FontWeight.w500),
+                                                          SizedBox(
+                                                            width: Get.width*0.65,
+                                                            child: Text(
+                                                              '${snapshot.data!.result![index].categoryName} session with ${snapshot.data!.result![index].user!.userName}',
+                                                              style: const TextStyle(
+                                                                  color: Colors.white,
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                  FontWeight.w500),
+                                                            ),
                                                           ),
                                                           Text(
                                                             DateFormat('dd MMM  h:mm a')
                                                                 .format(DateTime.parse(snapshot!
                                                                 .data!.result![index].createdAt
                                                                 .toString())),
-                                                            style: TextStyle(
+                                                            style: const TextStyle(
                                                                 color: Colors.white,
                                                                 fontSize: 12,
                                                                 fontWeight:
@@ -589,7 +593,7 @@ class WithdrawUI extends StatelessWidget {
                                                   ),
                                                   Text(
                                                     'AED ${snapshot.data!.result![index].bookingAmount}',
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         color: AppColors.yellow,
                                                         fontWeight: FontWeight.w700,
                                                         fontSize: 12),

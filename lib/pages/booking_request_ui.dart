@@ -1,11 +1,8 @@
 import 'dart:math';
 import 'dart:developer' as dev;
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../utils/exports.dart';
-
 class BookingRequestUi extends StatelessWidget {
   const BookingRequestUi({super.key});
   @override
@@ -37,8 +34,12 @@ class BookingRequestUi extends StatelessWidget {
                                     color: AppColors.yellow,
                                   ))
                                   : GetBuilder<BookingRequestController>(
+
                                   builder: (context) {
                                     return GoogleMap(
+                                      mapToolbarEnabled: false,
+                                      myLocationButtonEnabled: false,
+                                      myLocationEnabled: false,
                                       mapType: MapType.normal,
                                       zoomControlsEnabled: false,
                                       scrollGesturesEnabled: true,
@@ -217,8 +218,7 @@ class BookingRequestUi extends StatelessWidget {
                                             onCompleted: (v) {
                                               controller.onPinVerify(snapshot.data!.result!.bookingId.toString());
                                             },
-                                            controller:
-                                            controller.pinController,
+                                            controller: controller.pinController,
                                             inputFormatters: <TextInputFormatter>[
                                               FilteringTextInputFormatter.allow(
                                                   RegExp(r'[0-9]')),
@@ -291,7 +291,7 @@ class BookingRequestUi extends StatelessWidget {
                                         )
                                       ],
                                     ).paddingOnly(
-                                        top: 20, bottom: 50, left: 25, right: 25),
+                                        top: 40, bottom: 50, left: 25, right: 25),
                                   );
                                 } else if (snapshot.hasError) {
                                   return Center(
@@ -318,17 +318,12 @@ class BookingRequestUi extends StatelessWidget {
                             child:
                             FutureBuilder(
                               future: CallAPI.getTrainerOngoingDetails(
-                                  trainerId:
-                                  controller.notificationData["trainerId"],
+                                  trainerId: controller.notificationData["trainerId"],
                                   userId: controller.notificationData["userId"],
-                                  bookingId:
-                                  controller.notificationData["bookingId"]),
+                                  bookingId: controller.notificationData["bookingId"]),
                               builder: (context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return SizedBox(
-                                    height: Get.height*.5,
-                                  );
+                                if (snapshot.connectionState == ConnectionState.waiting) {
+                                  return SizedBox(height: Get.height*.5,);
                                 } else if (snapshot.hasData) {
                                   controller.userLat = snapshot.data!.result!.userLat!;
                                   controller.userLng = snapshot.data!.result!.userLong!;
@@ -450,8 +445,7 @@ class BookingRequestUi extends StatelessWidget {
                                                     ],
                                                   ).paddingOnly(
                                                       bottom: 15,
-                                                      left: Get.width * 0.04,
-                                                      right: Get.width * 0.04),
+                                                     ),
                                                   Container(
                                                     height: 1,
                                                     width: Get.width,
@@ -601,12 +595,8 @@ class BookingRequestUi extends StatelessWidget {
                                                             height: 3,
                                                             width: 2,
                                                             color: AppColors.white,
-                                                          ).paddingOnly(top: 3, bottom: 3),
-                                                          Container(
-                                                            height: 3,
-                                                            width: 2,
-                                                            color: AppColors.white,
-                                                          ).paddingOnly(top: 3, bottom: 3),
+                                                          ).paddingOnly(top: 3, bottom: 4),
+
                                                           const Icon(
                                                             Icons.circle,
                                                             color: AppColors.yellow,
@@ -772,14 +762,14 @@ class BookingRequestUi extends StatelessWidget {
                                                   controller.notificationData[
                                                   "userProfile"] ==
                                                       null
-                                                      ? CircleAvatar(
+                                                      ? const CircleAvatar(
                                                     radius: 32,
                                                     backgroundColor:
                                                     AppColors.yellow,
                                                     child: CircleAvatar(
                                                       radius: 30,
                                                       backgroundImage:
-                                                      const AssetImage(
+                                                      AssetImage(
                                                           "assets/images/img_profile.png"),
                                                     ),
                                                   )
@@ -813,7 +803,7 @@ class BookingRequestUi extends StatelessWidget {
                                                         ),
                                                     errorWidget: (context,
                                                         url, error) =>
-                                                        CircleAvatar(
+                                                        const CircleAvatar(
                                                           radius: 32,
                                                           backgroundColor:
                                                           AppColors
@@ -823,7 +813,7 @@ class BookingRequestUi extends StatelessWidget {
                                                             backgroundColor:
                                                             Colors.black,
                                                             backgroundImage:
-                                                            const AssetImage(
+                                                            AssetImage(
                                                                 "assets/images/img_profile.png"),
                                                           ),
                                                         ),

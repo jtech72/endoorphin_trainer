@@ -1,8 +1,5 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../controllers/error_controller.dart';
 class ErrorUi extends StatelessWidget {
   const ErrorUi({super.key});
 

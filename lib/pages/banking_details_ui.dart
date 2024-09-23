@@ -1,11 +1,5 @@
-import 'package:endoorphin_trainer/controllers/banking_details_controller.dart';
-import 'package:endoorphin_trainer/custom_Widgets/common_widgets.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import '../services/network_services/api_call.dart';
-
 class BankingDetailsUI extends StatelessWidget {
   const BankingDetailsUI({super.key});
 
@@ -27,7 +21,7 @@ class BankingDetailsUI extends StatelessWidget {
       body: Stack(
         children: [
           SingleChildScrollView(
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             child: Container(
               height: Get.height,
               width: Get.width,
@@ -90,7 +84,7 @@ class BankingDetailsUI extends StatelessWidget {
                                 color: AppColors.greyButton,
                                 borderRadius: BorderRadius.circular(10)),
                             child: Column(children: [
-                              Container(
+                              SizedBox(
                                 height: Get.height * 0.05,
                                 width: Get.width,
                                 child: TextField(
@@ -127,7 +121,7 @@ class BankingDetailsUI extends StatelessWidget {
                                 width: Get.width,
                                 color: AppColors.darkGrey,
                               ),
-                              Container(
+                              SizedBox(
                                 height: Get.height * 0.05,
                                 width: Get.width,
                                 child: TextField(
@@ -162,7 +156,7 @@ class BankingDetailsUI extends StatelessWidget {
                                 width: Get.width,
                                 color: AppColors.darkGrey,
                               ),
-                              Container(
+                              SizedBox(
                                 height: Get.height * 0.05,
                                 width: Get.width,
                                 child: TextField(
@@ -195,7 +189,7 @@ class BankingDetailsUI extends StatelessWidget {
                                 width: Get.width,
                                 color: AppColors.darkGrey,
                               ),
-                              Container(
+                              SizedBox(
                                 height: Get.height * 0.05,
                                 width: Get.width,
                                 child: TextField(
@@ -249,7 +243,7 @@ class BankingDetailsUI extends StatelessWidget {
                                 color: AppColors.greyButton,
                                 borderRadius: BorderRadius.circular(10)),
                             child: Column(children: [
-                              Container(
+                              SizedBox(
                                 height: Get.height * 0.05,
                                 width: Get.width,
                                 child: TextField(
@@ -286,7 +280,7 @@ class BankingDetailsUI extends StatelessWidget {
                                 width: Get.width,
                                 color: AppColors.darkGrey,
                               ),
-                              Container(
+                              SizedBox(
                                 height: Get.height * 0.05,
                                 width: Get.width,
                                 child: TextField(
@@ -373,7 +367,7 @@ class BankingDetailsUI extends StatelessWidget {
                                                   FocusScope.of(context).unfocus();
                                                   controller.showBottomSheet.value = !controller.showBottomSheet.value;
                                                 },
-                                                child: Container(
+                                                child: SizedBox(
                                                   width: Get.width * 0.25,
                                                   child: Obx(
                                                         () => TextField(
@@ -512,7 +506,7 @@ class BankingDetailsUI extends StatelessWidget {
             child: Obx(
                   () => Visibility(
                 visible: controller.showBottomSheet.value,
-                child: Container(
+                child: SizedBox(
                   width: Get.width*.4,
                   child: BottomSheet(
                     onClosing: () {

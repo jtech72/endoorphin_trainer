@@ -5,7 +5,6 @@ export 'package:get/get.dart';
 export 'package:get/get_core/src/get_main.dart';
 export 'package:get/get_instance/src/bindings_interface.dart';
 export '../controllers/countrycode_controller.dart';
-export 'package:get/get.dart';
 export 'package:get/get_navigation/src/routes/get_route.dart';
 export '../bindings/countrycode_binding.dart';
 export '../bindings/splash_binding.dart';
@@ -14,8 +13,6 @@ export '../pages/splash_ui.dart';
 export 'app_routes.dart';
 export '../bindings/otp_binding.dart';
 export '../pages/otp_ui.dart';
-export 'package:get/get_core/src/get_main.dart';
-export 'package:get/get_instance/src/bindings_interface.dart';
 export '../controllers/forgot_password_controller.dart';
 export '../bindings/bio_binding.dart';
 export '../bindings/create_new_password_binding.dart';
@@ -32,11 +29,7 @@ export '../pages/select_category_ui.dart';
 export '../pages/registration_ui.dart';
 export '../pages/verify_phone_number_ui.dart';
 export 'package:country_code_picker/country_code_picker.dart';
-export 'package:flutter/cupertino.dart';
 export 'package:flutter/services.dart';
-export 'package:get/get_core/src/get_main.dart';
-
-export '../controllers/countrycode_controller.dart';
 export '../custom_Widgets/common_widgets.dart';
 export 'package:endoorphin_trainer/bindings/profile_binding.dart';
 export 'package:endoorphin_trainer/pages/profile_ui.dart';
@@ -45,7 +38,6 @@ export 'package:endoorphin_trainer/bindings/home_binding.dart';
 export 'package:endoorphin_trainer/pages/earning_ui.dart';
 export 'package:endoorphin_trainer/pages/home_ui.dart';
 export 'package:endoorphin_trainer/utils/exports.dart';
-
 export '../bindings/account_binding.dart';
 export '../bindings/notification_binding.dart';
 export '../bindings/review_binding.dart';
@@ -87,3 +79,55 @@ export 'package:google_maps_flutter/google_maps_flutter.dart';
 export 'package:endoorphin_trainer/controllers/booking_request_controller.dart';
 export 'package:pin_code_fields/pin_code_fields.dart';
 export 'package:url_launcher/url_launcher.dart';
+export 'package:sliding_up_panel/sliding_up_panel.dart';
+export 'package:cached_network_image/cached_network_image.dart';
+export '../controllers/session_running_controller.dart';
+export '../controllers/account_controller.dart';
+export 'package:endoorphin_trainer/controllers/banking_details_controller.dart';
+export 'package:endoorphin_trainer/controllers/bio_edit_controller.dart';
+export 'package:endoorphin_trainer/controllers/bio_controller.dart';
+export 'package:endoorphin_trainer/controllers/booking_details_controller.dart';
+export 'package:endoorphin_trainer/controllers/profile_controller.dart';
+export 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
+export 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
+export 'package:endoorphin_trainer/controllers/booking_controller.dart';
+export 'package:endoorphin_trainer/controllers/earning_controller.dart';
+export '../controllers/home_controller.dart';
+export 'package:endoorphin_trainer/controllers/create_new_password_controller.dart';
+export 'package:endoorphin_trainer/controllers/document_controller.dart';
+export '../controllers/error_controller.dart';
+export '../controllers/login_controller.dart';
+export 'package:endoorphin_trainer/controllers/more_about_you_controller.dart';
+export '../controllers/notification_controller.dart';
+export '../controllers/otp_controller.dart';
+export 'package:flutter_rating_bar/flutter_rating_bar.dart';
+export '../controllers/rating_controller.dart';
+export 'package:endoorphin_trainer/controllers/registration_controller.dart';
+export '../controllers/review_controller.dart';
+export '../controllers/select_category_controller.dart';
+export '../controllers/sign_in_option_controller.dart';
+export 'package:endoorphin_trainer/controllers/support_controller.dart';
+export 'package:endoorphin_trainer/controllers/trainer_passport_controller.dart';
+export 'package:endoorphin_trainer/controllers/withdraw_controller.dart';
+export '../controllers/bottom_navigation_bar_controller.dart';
+export '../controllers/no_internet_controller.dart';
+export 'package:endoorphin_trainer/controllers/session_complete_controller.dart';
+export '../controllers/session_details_controller.dart';
+export '../controllers/splash_controller.dart';
+export '../controllers/verify_phone_number_controller.dart';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

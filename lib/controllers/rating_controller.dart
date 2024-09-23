@@ -1,6 +1,5 @@
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-
 class RatingController extends GetxController{
   String calculateDifferenceInDays(String dateString) {
     // Parse the input date string

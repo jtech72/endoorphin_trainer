@@ -1,9 +1,4 @@
-
-
-
-import '../services/network_services/api_call.dart';
 import '../utils/exports.dart';
-
 class CountryCodeController extends GetxController {
   final phoneNumber = TextEditingController();
   String countryCode = "+971";
@@ -22,7 +17,7 @@ class CountryCodeController extends GetxController {
             dismissLoader();
             storage.write("phoneNumber", "$countryCode${phoneNumber.text.trim()}");
             finalOTP = value.otp;
-            showSnackBarOtp("${value.otp}");
+            showSnackBarOtp("OTP: ${value.otp}");
             Get.toNamed(AppRoutes.otp, arguments: {
               "otp": "",
               "phoneNumber": "",

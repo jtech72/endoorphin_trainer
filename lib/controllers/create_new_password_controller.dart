@@ -1,13 +1,8 @@
 import 'dart:developer';
-
-import 'package:endoorphin_trainer/custom_Widgets/common_widgets.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
-
-import '../services/network_services/api_call.dart';
 class CreateNewPasswordController extends GetxController{
   RxBool isValidVisible = false.obs;
-
   bool isPasswordValid(String password) {
     // Define your password validation logic here
     RegExp passwordRegExp = RegExp(r'^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$');

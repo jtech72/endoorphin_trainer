@@ -1,7 +1,5 @@
-import 'dart:async';
 import 'dart:developer';
 import 'package:endoorphin_trainer/utils/exports.dart';
-import '../services/network_services/api_call.dart';
 class OtpController extends GetxController {
   CountryCodeController countryCodeController = Get.put(CountryCodeController());
   final otpController = TextEditingController();
@@ -58,6 +56,7 @@ class OtpController extends GetxController {
           secondOtp = response.result!.otp.toString();
           countryCodeController.finalOTP = 0;
           if (response.status == 200) {
+            log(countryCodeController.finalOTP.toString());
             dismissLoader();
             showSnackBar (response.message.toString());
           } else {
@@ -75,7 +74,9 @@ class OtpController extends GetxController {
           startTimer(29);
           secondOtp = response.otp;
           if (response.status == 200) {
-            showSnackBarOtp("${response.otp}");
+            otpController.clear();
+            countryCodeController.finalOTP = 0;
+            showSnackBarOtp("OTP: ${response.otp}");
           } else {
             showSnackBar("Failed to send OTP: ${response.message}");
           }
@@ -109,6 +110,7 @@ class OtpController extends GetxController {
         Get.toNamed(AppRoutes.registration);
         printResult(screenName: "OTP SCREEN", msg: "OTP VERIFIED");
       } else {
+        otpController.clear();
         dismissLoader();
         showSnackBar("Invalid OTP");
       }
@@ -145,6 +147,7 @@ class OtpController extends GetxController {
             arguments: phoneNumber!["phoneNumber"].toString());
         printResult(screenName: "OTP SCREEN", msg: "OTP VERIFIED");
       } else {
+        otpController.clear();
         dismissLoader();
         showSnackBar("Invalid OTP");
       }

@@ -4,14 +4,12 @@ import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
-
 import '../services/models/response_models/get_trianer_all_data.dart';
 class HomeController extends GetxController {
   RxBool isTrainerOnline = false.obs;
   RxInt currentIndex = 0.obs;
   Timer? pageChangeTimer;
-  Rx<GetTrainerAllData> trainerSessionDetails=GetTrainerAllData().obs;
-
+  Rx<GetTrainerAllData> trainerSessionDetails = GetTrainerAllData().obs;
   List<String> quickGlanceList = [
     "Earnings",
     "Sessions",
@@ -35,7 +33,7 @@ class HomeController extends GetxController {
     state.showButtonMenu();
   }
   void startPageChangeTimer() {
-    pageChangeTimer = Timer.periodic(Duration(seconds: 3), (timer) {
+    pageChangeTimer = Timer.periodic(const Duration(seconds: 3), (timer) {
       if (currentIndex.value < 2) { // assuming there are 3 pages (0, 1, 2)
         currentIndex.value++;
       } else {
@@ -44,7 +42,7 @@ class HomeController extends GetxController {
       // Use animateToPage instead of jumpToPage for a smooth transition
       pageController.animateToPage(
         currentIndex.value,
-        duration: Duration(milliseconds: 500), // adjust the duration as needed
+        duration: const Duration(milliseconds: 500), // adjust the duration as needed
         curve: Curves.easeInOut, // you can change the curve to your preference
       );
     });
@@ -89,7 +87,8 @@ class HomeController extends GetxController {
       );
       Map<String, dynamic> request = {
         "trianerId": storage.read("userId").toString(),
-        "addressType":  addressComponents['name'] ?? "",
+        "addressType":  addressComponents['addressType'] ?? "",
+        "city": addressComponents['city'] ?? "Unknown",
         "lat": currentLocation.latitude,
         "long": currentLocation.longitude,
         "activeStatus": true,
@@ -123,42 +122,37 @@ class HomeController extends GetxController {
         postAddress();
         log("Permission already granted");
       } else {
-        Get.defaultDialog(
-          title: "Enable Location",
-          middleText: "Please allow location access to go online.",
-          textCancel: "Cancel",
-          textConfirm: "Allow",
-          onConfirm: () async {
-            bool isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
-            if (!isLocationServiceEnabled) {
-              Geolocator.openLocationSettings();
-              return;
-            }
-            LocationPermission newPermission = await Geolocator.requestPermission();
-            if (newPermission == LocationPermission.whileInUse ||
-                newPermission == LocationPermission.always) {
-              postAddress();
-            } else {
-              Get.snackbar('Permission Denied', 'Location permission is required to go online.');
-            }
-            Get.back();
-          },
-        );
+        bool isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
+        if (!isLocationServiceEnabled) {
+          Geolocator.requestPermission();
+          return;
+        }
+        LocationPermission newPermission = await Geolocator.requestPermission();
+        if (newPermission == LocationPermission.whileInUse ||
+            newPermission == LocationPermission.always) {
+          postAddress();
+        } else {
+          Get.snackbar('Permission Denied', 'Location permission is required to go online.');
+        }
+        // Get.defaultDialog(
+        //   title: "Enable Location",
+        //   middleText: "Please allow location access to go online.",
+        //   textCancel: "Cancel",
+        //   textConfirm: "Allow",
+        //   onConfirm: () async {
+        //
+        //     Get.back();
+        //   },
+        // );
       }
     } else {
       postAddress();
     }
   }
-
-
-
-
-
   Future<Map<String, String?>> getAddressComponentsFromLatLng(double latitude, double longitude) async {
     const apiKey = 'AIzaSyAb-OJXPRTflwkd0huWLB2ygvwMv2Iwzgo';
     final url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=$apiKey';
     log("url for placename $url");
-
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {

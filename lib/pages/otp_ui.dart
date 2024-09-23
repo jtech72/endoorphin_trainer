@@ -1,9 +1,5 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
-
-import '../controllers/otp_controller.dart';
-
 class OtpUI extends StatelessWidget {
   const OtpUI({super.key});
 
@@ -23,8 +19,8 @@ class OtpUI extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Transform.translate(
-                    offset: Offset(-17,0),
-                    child: IconButton(onPressed: (){Get.back();}, icon: Icon(Icons.arrow_back_ios,size: 18,color: Colors.white,))),
+                    offset: const Offset(-17,0),
+                    child: IconButton(onPressed: (){Get.back();}, icon: const Icon(Icons.arrow_back_ios,size: 18,color: Colors.white,))),
 
                 Text(
                   'Verification',

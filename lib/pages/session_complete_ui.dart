@@ -1,6 +1,5 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
-
 class SessionCompleteUI extends StatelessWidget {
   const SessionCompleteUI({super.key});
 
@@ -39,7 +38,7 @@ class SessionCompleteUI extends StatelessWidget {
                       ),
                       TextSpan(
                         text: '\n Please review the details and ',
-                        style: Theme.of(context).textTheme.bodyLarge
+                        style: Theme.of(context).textTheme.labelMedium
                       ),TextSpan(
                         text: 'share your feedback',
                         style: Theme.of(context).textTheme.labelMedium

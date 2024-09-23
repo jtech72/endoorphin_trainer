@@ -1,9 +1,5 @@
-import 'dart:developer';
-
 import 'package:endoorphin_trainer/utils/exports.dart';
-
 import '../services/models/response_models/get_monthly_data.dart';
-
 class EarningController extends GetxController{
   RxString type = "".obs;
   RxString totalEarnings = "".obs;
@@ -22,7 +18,7 @@ class EarningController extends GetxController{
   void showTooltip() {
     tooltipVisible.value = true;
     _tooltipTimer?.cancel();
-    _tooltipTimer = Timer(Duration(seconds: 3), () {
+    _tooltipTimer = Timer(const Duration(seconds: 3), () {
       tooltipVisible.value = false;
     });
   }

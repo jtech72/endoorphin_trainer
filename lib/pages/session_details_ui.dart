@@ -1,12 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
-
-import '../controllers/session_running_controller.dart';
 import '../utils/exports.dart';
-
 class SessionDetailsUi extends StatelessWidget {
   const SessionDetailsUi({super.key});
 
@@ -53,10 +47,10 @@ class SessionDetailsUi extends StatelessWidget {
                               onTap: (){
                                 Get.offAllNamed(AppRoutes.bottomNavigation);
                               },
-                              child: Container(
+                              child: SizedBox(
                                   height: 30,
                                   width: 30,
-                                  child: Icon(Icons.arrow_back_ios,size: 18,).paddingOnly(right: Get.width*0.02)),
+                                  child: const Icon(Icons.arrow_back_ios,size: 18,).paddingOnly(right: Get.width*0.02)),
                             ),
                           ],
                         ).paddingOnly(left: Get.width*0.0),
@@ -65,10 +59,10 @@ class SessionDetailsUi extends StatelessWidget {
                             child: RichText(
                               text: TextSpan(children: [
                                 TextSpan(
-                                    text: "Thanks for the Fitness Session,",
+                                    text: "Thanks for the Fitness Session, ",
                                     style: Theme.of(context).textTheme.headlineLarge),
                                 TextSpan(
-                                    text: "${snapshot.data!.result!.trainerName.toString()}",
+                                    text: snapshot.data!.result!.trainerName.toString(),
                                     style: Theme.of(context)
                                         .textTheme
                                         .headlineLarge
@@ -120,12 +114,12 @@ class SessionDetailsUi extends StatelessWidget {
                                     backgroundColor: Colors.transparent,
                                      backgroundImage: imageProvider,
                                        ),
-                                    placeholder: (context, url) => CircleAvatar(
+                                    placeholder: (context, url) => const CircleAvatar(
                                      maxRadius: 35,
                                       backgroundColor: Colors.transparent,
                                  child: CircularProgressIndicator(), // Loader while the image is loading
                                      ),
-                                    errorWidget: (context, url, error) => CircleAvatar(
+                                    errorWidget: (context, url, error) => const CircleAvatar(
                                     maxRadius: 35,
                                      backgroundColor: Colors.transparent,
                                        backgroundImage: AssetImage("assets/images/img_profile.png"),
@@ -137,37 +131,43 @@ class SessionDetailsUi extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  RichText(
-                                    text: TextSpan(
-                                      text: snapshot.data!.result!.customerName.toString(),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelMedium!
-                                          .copyWith(
-                                        fontWeight: FontWeight.w700,
-                                        color: AppColors.impgrey,
-                                        fontSize: 16,
-                                      ),
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                          text: '\n${snapshot.data!.result!.customerEmail.toString()}',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headlineSmall!
-                                              .copyWith(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500,
-                                              color: AppColors.impgrey),
-                                        ),
-                                         TextSpan(
-                                          text: '\n${snapshot.data!.result!.customerPhoneNumber.toString()}',
-                                          style: TextStyle(
-                                              color: AppColors.impgrey,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500),
-                                        ),
+                                  Container(
+                                    width: Get.width*.5,
+                                    child: RichText(
+                                      text: TextSpan(
 
-                                      ],
+                                        text: snapshot.data!.result!.customerName.toString(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelMedium!
+                                            .copyWith(
+                                          fontWeight: FontWeight.w700,
+                                          color: AppColors.impgrey,
+                                          fontSize: 16,
+                                        ),
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                            text: '\n${snapshot.data!.result!.customerEmail.toString()}',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headlineSmall!
+                                                .copyWith(
+                                              overflow: TextOverflow.ellipsis,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w500,
+                                                color: AppColors.impgrey),
+                                          ),
+                                           TextSpan(
+                                            text: '\n${snapshot.data!.result!.customerPhoneNumber.toString()}',
+                                            style: const TextStyle(
+
+                                                color: AppColors.impgrey,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+
+                                        ],
+                                      ),
                                     ),
                                   ),
                                   Row(
@@ -205,7 +205,7 @@ class SessionDetailsUi extends StatelessWidget {
                                   ),
                                 ),
                                 Container(
-                                  height: Get.height*0.12,
+                                  height: Get.height*0.101,
                                   width: 1,
                                   color: AppColors.yellow,
                                 ).paddingOnly(top: 3,bottom: 3),
@@ -227,6 +227,7 @@ class SessionDetailsUi extends StatelessWidget {
                                   ).paddingOnly(bottom: 5),
                                   SizedBox(
                                       width: Get.width * .77,
+                                      height: 30,
                                       child: Text(
                                         snapshot.data!.result!.trainerAddress.toString(),
                                         style: Theme.of(context).textTheme.labelMedium?.copyWith(
@@ -277,8 +278,8 @@ class SessionDetailsUi extends StatelessWidget {
                             children: [
                               Center(child: Text("How was your session with ${snapshot.data!.result!.customerName} ?",style: Theme.of(context).textTheme.labelLarge)),
                               RatingBar.builder(
-                                initialRating: -1,
-                                minRating: 0,
+                                initialRating: 5,
+                                minRating: 5,
                                 direction: Axis.horizontal,
                                 allowHalfRating: true,
                                 itemCount: 5,
@@ -291,7 +292,6 @@ class SessionDetailsUi extends StatelessWidget {
                                     child:Image.asset(ImagesPaths.star,scale: 5,)
                                 ),
                                 onRatingUpdate: (rating) {
-                                  Get.toNamed(AppRoutes.review);
                                 },
                               ).paddingOnly(top: Get.height*0.02),
                             ],
@@ -330,7 +330,7 @@ class SessionDetailsUi extends StatelessWidget {
 class DateTextWidget extends StatelessWidget {
   final String isoDate;
 
-  DateTextWidget({required this.isoDate});
+  const DateTextWidget({required this.isoDate});
 
   String formatDate(String isoDate) {
     // Parse the ISO date string

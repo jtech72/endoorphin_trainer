@@ -1,20 +1,11 @@
 import 'dart:developer';
-import 'dart:io';
-import 'dart:io';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import '../utils/app_colors.dart';
 import '../utils/app_strings.dart';
 import '../utils/exports.dart';
-import 'dart:convert';
-import 'dart:typed_data';
-import 'package:image_picker/image_picker.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
-
 GetStorage storage=GetStorage();
 late IO.Socket socket;
 
@@ -278,7 +269,7 @@ class TrainerDocumentStatusCard extends StatelessWidget {
   final void Function()? onReuploadTap;
   final bool isFrontImageVisible;
 
-  TrainerDocumentStatusCard({
+  const TrainerDocumentStatusCard({super.key,
     required this.categoryName,
     required this.docName,
     required this.docNumber,
@@ -448,7 +439,7 @@ class TrainerDocumentStatusCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(docName, style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.white)).paddingOnly(bottom: 2),
-        Container(
+        SizedBox(
             width: 120,
             child: Text(categoryName, style: Theme.of(context).textTheme.labelSmall!.copyWith(color:AppColors.lightGrey)).paddingOnly(bottom: 8)),
         Text(docNumber, style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.white)).paddingOnly(bottom: 2),
@@ -580,7 +571,7 @@ class CustomProgressIndicator extends StatelessWidget {
   final double logoHeight;
 
   const CustomProgressIndicator({
-    Key? key,
+    super.key,
     this.width = 150,
     this.height = 150,
     this.strokeWidth = 10,
@@ -588,7 +579,7 @@ class CustomProgressIndicator extends StatelessWidget {
     this.valueColor = const Color(0xffFFF9E8),
     this.logoWidth = 60,
     this.logoHeight = 60,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

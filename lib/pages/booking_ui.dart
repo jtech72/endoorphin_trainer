@@ -1,18 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
-import 'package:endoorphin_trainer/services/network_services/api_call.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:endoorphin_trainer/utils/app_colors.dart';
-import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../controllers/booking_controller.dart';
-import '../custom_Widgets/common_widgets.dart';
 import '../custom_widgets/tabbar_widgets.dart';
-import '../utils/app_routes.dart';
-import '../utils/image_paths.dart';
 final today = DateUtils.dateOnly(DateTime.now());
 class BookingUi extends StatefulWidget {
   final initialIndex;
@@ -23,7 +14,8 @@ class BookingUi extends StatefulWidget {
 class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMixin {
   late TabController tabController;
   bool showCalendar = false;
-  RxList _selectedDates = [].obs;
+  var tabindex = Get.arguments ??0;
+  final RxList _selectedDates = [].obs;
   late CalendarDatePicker2WithActionButtonsConfig config;
 
 
@@ -196,7 +188,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                                                       .displayLarge,),
                                                               ),
                                                               Text(DateFormat('dd MMM yyyy, h:mm a')
-                                                                  .format(DateTime.parse(snapshot!
+                                                                  .format(DateTime.parse(snapshot
                                                                   .data!.result![index].createdAt
                                                                   .toString())),
                                                                 style: Theme
@@ -324,15 +316,17 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                                   "id": snapshot.data!.result![index].id.toString(),
                                                   "pin": snapshot.data!.result![index].sessionPin.toString(),
                                                 });
+                                              }else{
+                                                Get.toNamed(AppRoutes.bookingrequest, arguments: {
+                                                  "userId": snapshot.data!.result![index].userId.toString(),
+                                                  "trainerId":snapshot.data!.result![index].trainerId.toString(),
+                                                  "trainerOnTheWay":snapshot.data!.result![index].trainerOnTheWay.toString(),
+                                                  "userLong":"",
+                                                  "userLat":"",
+                                                  "bookingId":snapshot.data!.result![index].id.toString()
+                                                });
                                               }
-                                              Get.toNamed(AppRoutes.bookingrequest, arguments: {
-                                                "userId": snapshot.data!.result![index].userId.toString(),
-                                                "trainerId":snapshot.data!.result![index].trainerId.toString(),
-                                                "trainerOnTheWay":snapshot.data!.result![index].trainerOnTheWay.toString(),
-                                                "userLong":"",
-                                                "userLat":"",
-                                                "bookingId":snapshot.data!.result![index].id.toString()
-                                              });
+
                                             },
                                             child: Container(
                                               color: Colors.transparent,
@@ -362,7 +356,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                                                       .displayLarge,),
                                                               ),
                                                               Text(DateFormat('dd MMM yyyy, h:mm a')
-                                                                  .format(DateTime.parse(snapshot!
+                                                                  .format(DateTime.parse(snapshot
                                                                   .data!.result![index].createdAt
                                                                   .toString())),
                                                                 style: Theme
@@ -516,7 +510,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                                               ),
                                                               Text(
                                                                 DateFormat('dd MMM yyyy, h:mm a')
-                                                                    .format(DateTime.parse(snapshot!
+                                                                    .format(DateTime.parse(snapshot
                                                                     .data!.result![index].createdAt
                                                                     .toString())),
                                                                 style: Theme
@@ -666,7 +660,7 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                                                     .textTheme
                                                                     .displayLarge,),
                                               Text(DateFormat('dd MMM yyyy, h:mm a')
-                                                  .format(DateTime.parse(snapshot!
+                                                  .format(DateTime.parse(snapshot
                                                   .data!.result![index].createdAt
                                                   .toString())),
                                                                                                            style: Theme
@@ -705,34 +699,6 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
   }
 
 
-  String _getValueText(CalendarDatePicker2Type datePickerType,
-      List<DateTime?> values,) {
-    values =
-        values.map((e) => e != null ? DateUtils.dateOnly(e) : null).toList();
-    var valueText = (values.isNotEmpty ? values[0] : null)
-        .toString()
-        .replaceAll('00:00:00.000', '');
-
-    if (datePickerType == CalendarDatePicker2Type.multi) {
-      valueText = values.isNotEmpty
-          ? values
-          .map((v) => v.toString().replaceAll('00:00:00.000', ''))
-          .join(', ')
-          : 'null';
-    } else if (datePickerType == CalendarDatePicker2Type.range) {
-      if (values.isNotEmpty) {
-        final startDate = values[0].toString().replaceAll('00:00:00.000', '');
-        final endDate = values.length > 1
-            ? values[1].toString().replaceAll('00:00:00.000', '')
-            : 'null';
-        valueText = '$startDate to $endDate';
-      } else {
-        return 'null';
-      }
-    }
-
-    return valueText;
-  }
 
   _buildCalendarDialogButton() {
     const dayTextStyle = TextStyle(color: Colors.white, fontWeight: FontWeight.w700);

@@ -1,4 +1,3 @@
-import 'package:endoorphin_trainer/controllers/bio_edit_controller.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
 class BioEditUi extends StatelessWidget {
@@ -23,7 +22,7 @@ class BioEditUi extends StatelessWidget {
         body: Stack(
           children: [
             SingleChildScrollView(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               child: Container(
               height: Get.height,
               width: Get.width,
@@ -79,9 +78,6 @@ class BioEditUi extends StatelessWidget {
                           textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
                         ],
                       ),
-                      SizedBox(
-                        height: Get.height * 0.011,
-                      ),
                       Container(
                         height: 45,
                         decoration: BoxDecoration(
@@ -125,17 +121,11 @@ class BioEditUi extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: Get.height * 0.01,
-                      ),
                       Row(
                         children: [
                           Text("Areas of Expertise relevant for coaching",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
                           Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
                         ],
-                      ),
-                      SizedBox(
-                        height: Get.height * 0.011,
                       ),
                       Container(
                         height: 45,
@@ -180,17 +170,11 @@ class BioEditUi extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: Get.height * 0.01,
-                      ),
                       Row(
                         children: [
                           Text("Years of Experience",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
                           Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
                         ],
-                      ),
-                      SizedBox(
-                        height: Get.height * 0.011,
                       ),
                       Container(
                         height: 45,
@@ -235,9 +219,7 @@ class BioEditUi extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: Get.height * 0.01,
-                      ),
+
                       Text(
                         'Fun Fact/Profesional Anecdote',
                         style: Theme.of(context)
@@ -245,10 +227,7 @@ class BioEditUi extends StatelessWidget {
                             .labelLarge!
                             .copyWith(color: AppColors.white),
                         textAlign: TextAlign.start,
-                      ),
-                      SizedBox(
-                        height: Get.height * 0.011,
-                      ),
+                      ).paddingOnly(top: 15,bottom: 8),
                       Container(
                         height: 45,
                         decoration: BoxDecoration(
@@ -292,9 +271,6 @@ class BioEditUi extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: Get.height * 0.01,
-                      ),
                       Text(
                         'Motivational Quote',
                         style: Theme.of(context)
@@ -302,10 +278,7 @@ class BioEditUi extends StatelessWidget {
                             .labelLarge!
                             .copyWith(color: AppColors.white),
                         textAlign: TextAlign.start,
-                      ),
-                      SizedBox(
-                        height: Get.height * 0.011,
-                      ),
+                      ).paddingOnly(top: 15,bottom: 8),
                       Container(
                         height: 45,
                         decoration: BoxDecoration(
@@ -349,17 +322,11 @@ class BioEditUi extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: Get.height * 0.01,
-                      ),
                       Row(
                         children: [
                           Text("Mention Bio",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
                           Text(" *",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,color: Colors.red),).paddingOnly(top: 15,bottom: 8),
                         ],
-                      ),
-                      SizedBox(
-                        height: Get.height * 0.011,
                       ),
                       Container(
                         height: Get.height * 0.16,

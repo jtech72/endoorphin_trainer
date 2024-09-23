@@ -1,26 +1,20 @@
 import 'dart:developer';
 import 'dart:io';
-import 'package:endoorphin_trainer/services/network_services/api_call.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../services/models/request_models/category_document_model.dart';
-import 'package:open_file_manager/open_file_manager.dart';
-
 class UploadImagesController extends GetxController {
   RxInt selectedoption = 0.obs;
   Map<String, dynamic>? certificationDetails;
   Rx<File?> fontImagePicked = Rx<File?>(null);
   Rx<File?> backImagePicked = Rx<File?>(null);
   var defaultImage = File("path_to_your_default_image");
-
   Future<void> openFilePicker(bool isFrontImage) async {
     try {
       FilePickerResult? result = await FilePicker.platform.pickFiles( type: FileType.custom,
         allowedExtensions: ['jpg', 'jpeg', 'png','heic'],);
-
       if (result != null) {
         PlatformFile pickedFile = result.files.first;
         if (pickedFile.path != null) {

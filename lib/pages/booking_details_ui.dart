@@ -1,7 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:endoorphin_trainer/controllers/booking_details_controller.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
 
 import '../utils/exports.dart';
@@ -58,10 +56,10 @@ class BookingDetailsUi extends StatelessWidget {
                         child: Row(
                           children: [
                         snapshot.data!.result!.customerProfileImg == null
-                          ? CircleAvatar(
+                          ? const CircleAvatar(
                           maxRadius: 35,
                           backgroundColor: AppColors.black,
-                          backgroundImage: const AssetImage("assets/images/profile_img.png"),
+                          backgroundImage: AssetImage("assets/images/profile_img.png"),
                         )
                       : CachedNetworkImage(
               imageUrl: snapshot.data!.result!.customerProfileImg.toString(),
@@ -70,15 +68,15 @@ class BookingDetailsUi extends StatelessWidget {
           backgroundColor: AppColors.black,
           backgroundImage: imageProvider,
           ),
-          placeholder: (context, url) => CircleAvatar(
+          placeholder: (context, url) => const CircleAvatar(
           maxRadius: 35,
           backgroundColor: AppColors.black,
           child: CircularProgressIndicator(), // Loader while the image is loading
           ),
-          errorWidget: (context, url, error) => CircleAvatar(
+          errorWidget: (context, url, error) => const CircleAvatar(
           maxRadius: 35,
           backgroundColor: AppColors.black,
-          backgroundImage: const AssetImage("assets/images/profile_img.png"), // Fallback image
+          backgroundImage: AssetImage("assets/images/profile_img.png"), // Fallback image
           ),
           )
               .paddingOnly(left: Get.height * .02, right: Get.width * .08),
@@ -109,7 +107,7 @@ class BookingDetailsUi extends StatelessWidget {
                                       ),
                                        TextSpan(
                                         text: '\n${snapshot.data!.result!.customerPhoneNumber.toString()}',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: AppColors.impgrey,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w500),
@@ -325,7 +323,7 @@ class BookingDetailsUi extends StatelessWidget {
                               width: Get.width,
                               color: AppColors.Black3,
                             ).paddingOnly(left: 10, right: 10),
-                            snapshot.data!.result!.startSession ==null?SizedBox.shrink():
+                            snapshot.data!.result!.startSession ==null?const SizedBox.shrink():
                             Row(
                               children: [
                                 SizedBox(
@@ -344,13 +342,13 @@ class BookingDetailsUi extends StatelessWidget {
                                         ?.copyWith(fontWeight: FontWeight.w500)),
                               ],
                             ).paddingOnly(left: 10, right: 10,bottom: 5,top: 5),
-                            snapshot.data!.result!.startSession ==null?SizedBox.shrink():
+                            snapshot.data!.result!.startSession ==null?const SizedBox.shrink():
                             Container(
                               height: 1,
                               width: Get.width,
                               color: AppColors.Black3,
                             ).paddingOnly(left: 10, right: 10),
-                            snapshot.data!.result!.startSession ==null?SizedBox.shrink():
+                            snapshot.data!.result!.startSession ==null?const SizedBox.shrink():
                             Row(
                               children: [
                                 SizedBox(
@@ -369,7 +367,7 @@ class BookingDetailsUi extends StatelessWidget {
                                         ?.copyWith(fontWeight: FontWeight.w500)),
                               ],
                             ).paddingOnly(left: 10, right: 10,top: 5),
-                            snapshot.data!.result!.startSession ==null?SizedBox.shrink():
+                            snapshot.data!.result!.startSession ==null?const SizedBox.shrink():
                             Container(
                               height: 1,
                               width: Get.width,

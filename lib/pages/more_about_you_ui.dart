@@ -1,12 +1,6 @@
 import 'dart:developer';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:endoorphin_trainer/controllers/more_about_you_controller.dart';
-import 'package:endoorphin_trainer/services/network_services/api_call.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import '../utils/exports.dart';
-
 class MoreAboutYouUi extends StatelessWidget {
   const MoreAboutYouUi({super.key});
   @override
@@ -445,11 +439,11 @@ class MoreAboutYouUi extends StatelessWidget {
                                               .toString());
                                         },
                                       ),
-                                       Text(
+                                       const Text(
                                           'I accept the terms and conditions',
                                           style: TextStyle(
                                               color: Colors.white, fontSize: 12)),
-                                       Spacer(flex: 1,),
+                                       const Spacer(flex: 1,),
                                       GestureDetector(
                                         onTap: () async {
                                           const url = 'http://103.185.212.115:70/';
@@ -463,7 +457,7 @@ class MoreAboutYouUi extends StatelessWidget {
                                           height: 20,
                                           width: 50,
                                           color: Colors.transparent,
-                                          child: Text(
+                                          child: const Text(
                                             'view all',
                                             style: TextStyle(color: AppColors.whiteShade, fontSize: 12),
                                           ),
