@@ -228,7 +228,7 @@ class HomeUi extends StatelessWidget {
                                       if (controller.selectedIndex.value == 0) {
                                         Get.toNamed(AppRoutes.earning);
                                       } else if (controller.selectedIndex.value == 1) {
-                                        Get.toNamed(AppRoutes.booking);
+                                      Get.to(BookingUi(initialIndex: 2,));
                                       } else if (controller.selectedIndex.value == 2) {
 
                                       } else if (controller.selectedIndex.value == 3) {

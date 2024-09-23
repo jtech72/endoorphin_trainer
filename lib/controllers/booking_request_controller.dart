@@ -382,9 +382,9 @@ class BookingRequestController extends GetxController {
           data['rows'][0]['elements'] != null &&
           data['rows'][0]['elements'][0]['duration'] != null &&
           data['rows'][0]['elements'][0]['distance'] != null) {
-        totalTIme.value = data['rows'][0]['elements'][0]['duration']['text'];
-        totalDistance.value =
-            data['rows'][0]['elements'][0]['distance']['text'];
+        String durationText = data['rows'][0]['elements'][0]['duration']['text'];
+        totalTIme.value = durationText.replaceAll('mins', 'min'); // Change here
+        totalDistance.value = data['rows'][0]['elements'][0]['distance']['text'];
 
         log("ETA fetched successfully: ${totalTIme.value}");
         log("Distance fetched successfully: ${totalDistance.value}");
@@ -425,8 +425,7 @@ class BookingRequestController extends GetxController {
 
       await Future.delayed(const Duration(seconds: 2));
 
-      if (socketData["message"] !=
-          "Your request pin is not correct. Please try again.") {
+      if (socketData["message"] != "Your request pin is not correct. Please try again.") {
         dismissLoader();
         Get.toNamed(AppRoutes.sessionRunning, arguments: {
           "id": id,
@@ -437,6 +436,7 @@ class BookingRequestController extends GetxController {
         log(socketData.toString());
         showDialogBox("Your Request pin is not correct. Please try again.",
             ImagesPaths.inVaildPopUp.toString(), () {
+          pinController.clear();
           Get.back();
         });
       }
@@ -519,7 +519,12 @@ class BookingRequestController extends GetxController {
 
       // Determine whether the trainer is on the way
       if (notificationData["trainerOnTheWay"] != null) {
-        selectedIndex.value = 1;
+        if(notificationData["trainerOnTheWay"] == "true"){
+          selectedIndex.value = 2;
+        }else{
+          selectedIndex.value = 1;
+        }
+
         log("Notification data ===> $notificationData");
         await initSocket();
       } else {

@@ -37,6 +37,9 @@ class BookingRequestUi extends StatelessWidget {
 
                                   builder: (context) {
                                     return GoogleMap(
+                                      mapToolbarEnabled: false,
+                                      myLocationButtonEnabled: false,
+                                      myLocationEnabled: false,
                                       mapType: MapType.normal,
                                       zoomControlsEnabled: false,
                                       scrollGesturesEnabled: true,
@@ -215,8 +218,7 @@ class BookingRequestUi extends StatelessWidget {
                                             onCompleted: (v) {
                                               controller.onPinVerify(snapshot.data!.result!.bookingId.toString());
                                             },
-                                            controller:
-                                            controller.pinController,
+                                            controller: controller.pinController,
                                             inputFormatters: <TextInputFormatter>[
                                               FilteringTextInputFormatter.allow(
                                                   RegExp(r'[0-9]')),
@@ -289,7 +291,7 @@ class BookingRequestUi extends StatelessWidget {
                                         )
                                       ],
                                     ).paddingOnly(
-                                        top: 20, bottom: 50, left: 25, right: 25),
+                                        top: 40, bottom: 50, left: 25, right: 25),
                                   );
                                 } else if (snapshot.hasError) {
                                   return Center(
@@ -443,8 +445,7 @@ class BookingRequestUi extends StatelessWidget {
                                                     ],
                                                   ).paddingOnly(
                                                       bottom: 15,
-                                                      left: Get.width * 0.04,
-                                                      right: Get.width * 0.04),
+                                                     ),
                                                   Container(
                                                     height: 1,
                                                     width: Get.width,
@@ -594,12 +595,8 @@ class BookingRequestUi extends StatelessWidget {
                                                             height: 3,
                                                             width: 2,
                                                             color: AppColors.white,
-                                                          ).paddingOnly(top: 3, bottom: 3),
-                                                          Container(
-                                                            height: 3,
-                                                            width: 2,
-                                                            color: AppColors.white,
-                                                          ).paddingOnly(top: 3, bottom: 3),
+                                                          ).paddingOnly(top: 3, bottom: 4),
+
                                                           const Icon(
                                                             Icons.circle,
                                                             color: AppColors.yellow,

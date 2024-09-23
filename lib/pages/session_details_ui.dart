@@ -131,37 +131,43 @@ class SessionDetailsUi extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  RichText(
-                                    text: TextSpan(
-                                      text: snapshot.data!.result!.customerName.toString(),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelMedium!
-                                          .copyWith(
-                                        fontWeight: FontWeight.w700,
-                                        color: AppColors.impgrey,
-                                        fontSize: 16,
-                                      ),
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                          text: '\n${snapshot.data!.result!.customerEmail.toString()}',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headlineSmall!
-                                              .copyWith(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500,
-                                              color: AppColors.impgrey),
-                                        ),
-                                         TextSpan(
-                                          text: '\n${snapshot.data!.result!.customerPhoneNumber.toString()}',
-                                          style: const TextStyle(
-                                              color: AppColors.impgrey,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500),
-                                        ),
+                                  Container(
+                                    width: Get.width*.5,
+                                    child: RichText(
+                                      text: TextSpan(
 
-                                      ],
+                                        text: snapshot.data!.result!.customerName.toString(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelMedium!
+                                            .copyWith(
+                                          fontWeight: FontWeight.w700,
+                                          color: AppColors.impgrey,
+                                          fontSize: 16,
+                                        ),
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                            text: '\n${snapshot.data!.result!.customerEmail.toString()}',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headlineSmall!
+                                                .copyWith(
+                                              overflow: TextOverflow.ellipsis,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w500,
+                                                color: AppColors.impgrey),
+                                          ),
+                                           TextSpan(
+                                            text: '\n${snapshot.data!.result!.customerPhoneNumber.toString()}',
+                                            style: const TextStyle(
+
+                                                color: AppColors.impgrey,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+
+                                        ],
+                                      ),
                                     ),
                                   ),
                                   Row(
