@@ -221,7 +221,7 @@ class BookingRequestController extends GetxController {
         isLoading.value = false;
         timerIsVisible.value = false;
         Get.offAllNamed(AppRoutes.bottomNavigation);
-        showSnackBar("Booking canceled");
+        showSnackBar("Booking Canceled");
 
       }
     } catch (e, st) {
@@ -473,7 +473,7 @@ class BookingRequestController extends GetxController {
     log("Initializing socket...");
 
     try {
-      socket = IO.io("http://103.185.212.115:5002", <String, dynamic>{
+      socket = IO.io("http://103.142.118.76:5002", <String, dynamic>{
         'autoConnect': false,
         'transports': ['websocket'],
       });
