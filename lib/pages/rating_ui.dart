@@ -98,7 +98,7 @@ class RatingUi extends StatelessWidget {
                                               ),
                                             ),
                                           ).paddingOnly(right: Get.width*0.03),
-                                          Container(
+                                          SizedBox(
                                             width: Get.width*0.42,
                                             child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [

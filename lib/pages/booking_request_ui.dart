@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../utils/exports.dart';
 class BookingRequestUi extends StatelessWidget {
   const BookingRequestUi({super.key});
@@ -149,18 +148,6 @@ class BookingRequestUi extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            // Positioned(
-                            //     left: Get.width * 0.041,
-                            //     top: Get.height * 0.061,
-                            //     child: IconButton(
-                            //         onPressed: () {
-                            //           Get.back();
-                            //         },
-                            //         icon: const Icon(
-                            //           Icons.arrow_back_ios,
-                            //           size: 18,
-                            //           color: Colors.white,
-                            //         )))
                           ],
                         ),
                       ),
@@ -507,24 +494,6 @@ class BookingRequestUi extends StatelessWidget {
                                                           ), // Your profile image
                                                         ),
                                                       ).paddingOnly(right: 10),
-                                                      // GestureDetector(
-                                                      //   onTap: () {
-                                                      //     showModalBottomSheet(
-                                                      //       context: context,
-                                                      //       isScrollControlled: true,
-                                                      //       builder: (context) => ChatBottomSheet(),
-                                                      //     );
-                                                      //   },
-                                                      //   child: const CircleAvatar(
-                                                      //     radius: 20,
-                                                      //     backgroundColor: AppColors.yellow,
-                                                      //     child: Icon(
-                                                      //       Icons.message_outlined,
-                                                      //       color: AppColors.black,
-                                                      //     ),
-                                                      //     // Your profile image
-                                                      //   ),
-                                                      // ),
                                                     ],
                                                   ).paddingOnly(top: Get.height * 0.015),
                                                   Row(
@@ -667,7 +636,7 @@ class BookingRequestUi extends StatelessWidget {
                                                       top: Get.height * 0.025,
                                                       bottom: Get.height * 0.035),
                                                   Center(
-                                                      child: InkButton(
+                                                      child: inkButton(
                                                           child: Text(
                                                             'Start',
                                                             style: Theme.of(context)
@@ -851,22 +820,6 @@ class BookingRequestUi extends StatelessWidget {
                                                       ])),
                                                 ],
                                               ),
-                                              // Row(
-                                              //   children: [
-                                              //     Image.asset(
-                                              //       ImagesPaths.star2,
-                                              //       scale: 4,
-                                              //     ).paddingOnly(right: 5),
-                                              //     Text(
-                                              //       '4.78',
-                                              //       style: Theme.of(context)
-                                              //           .textTheme
-                                              //           .labelMedium!
-                                              //           .copyWith(
-                                              //               color: Colors.white),
-                                              //     )
-                                              //   ],
-                                              // )
                                             ],
                                           ).paddingOnly(top: 15, bottom: 15),
                                           Text(
@@ -890,7 +843,7 @@ class BookingRequestUi extends StatelessWidget {
                                         right: Get.width * 0.04,
                                       ),
                                       Center(
-                                          child: InkButton(
+                                          child: inkButton(
                                               child: Text(
                                                 'Accept',
                                                 style: Theme.of(context)
@@ -907,7 +860,7 @@ class BookingRequestUi extends StatelessWidget {
                                               })).paddingOnly(
                                           top: 30, bottom: 5),
                                       Center(
-                                          child: InkButton(
+                                          child: inkButton(
                                               backGroundColor: AppColors.black,
                                               child: Text(
                                                 'Reject',

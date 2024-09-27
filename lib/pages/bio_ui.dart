@@ -467,7 +467,7 @@ class BioUi extends StatelessWidget {
                       ),
                     ],
                   ),
-                  InkButton(
+                  inkButton(
                       child: Text(
                         'Submit',
                         style: Theme.of(context)

@@ -91,7 +91,7 @@ class EarningUi extends StatelessWidget {
                             ),
                           ),
                         ),
-                        InkButton(
+                        inkButton(
                           height: 35,
                           width: 130,
                           child: Text(

@@ -185,7 +185,7 @@ class CountryCodeUI extends StatelessWidget {
                   height: Get.height * .07,
                 ),
                 Center(
-                  child: InkButton(
+                  child: inkButton(
                     child: Text(
                       'Next',
                       style: Theme.of(context)

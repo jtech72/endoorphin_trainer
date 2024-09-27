@@ -2,9 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import '../services/models/request_models/category_document_model.dart';
-import '../services/network_services/notification_servies.dart';
 class BioController extends GetxController {
   Rx<File?> profileImage = Rx<File?>(null);
   NotificationServices notificationServices=NotificationServices();
@@ -23,7 +21,7 @@ class BioController extends GetxController {
       profileImage.value = File(image.path);
       log("font Image ${profileImage.value}");
         } else {
-      print('User canceled');
+      log('User canceled');
     }
   }
   Future<void> selectSource() async {
@@ -46,7 +44,7 @@ class BioController extends GetxController {
               Icons.camera_alt,
               'Camera',
                   () {
-                print('Camera opened');
+                log('Camera opened');
                 Get.back();
                 openCameraOrGallery(ImageSource.camera);
               },
@@ -55,7 +53,7 @@ class BioController extends GetxController {
               Icons.photo_library,
               'Gallery',
                   () {
-                print('Gallery opened');
+                log('Gallery opened');
                 Get.back();
                 openCameraOrGallery(ImageSource.gallery);
               },
@@ -177,7 +175,7 @@ class BioController extends GetxController {
                 )),
             actions: [
               Center(
-                child: InkButton(
+                child: inkButton(
                     child: Text(
                       'OK',
                       style: Theme.of(context)

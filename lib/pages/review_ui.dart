@@ -173,7 +173,7 @@ class ReviewUi extends StatelessWidget {
                                           ),
                                         ).paddingOnly(top: 10,bottom: Get.height*.07),
                                         Center(
-                                          child: InkButton(child: Text(
+                                          child: inkButton(child: Text(
                                             "Submit",
                                             style: Theme.of(context)
                                                 .textTheme

@@ -111,7 +111,7 @@ class ForgotPasswordUI extends StatelessWidget {
                     ),
                   ).paddingOnly(top: Get.height*0.01),
                   Center(
-                      child: InkButton(
+                      child: inkButton(
                           child: Text('Send',
                             style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 18,
                                 fontFamily: 'Montserrat'),),

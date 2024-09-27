@@ -1,12 +1,9 @@
-import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../controllers/booking_controller.dart';
-import '../custom_widgets/tabbar_widgets.dart';
 final today = DateUtils.dateOnly(DateTime.now());
 class BookingUi extends StatefulWidget {
-  final initialIndex;
+  final int initialIndex;
    const BookingUi({super.key,required this.initialIndex});
   @override
   State<BookingUi> createState() => _BookingUiState();

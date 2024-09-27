@@ -84,7 +84,7 @@ class OtpController extends GetxController {
       }
     } catch (e) {
       dismissLoader();
-      print("Error in resendOtp: $e");
+      log("Error in resendOtp: $e");
       showSnackBar("An error occurred while resending OTP. Please try again.");
     }
   }

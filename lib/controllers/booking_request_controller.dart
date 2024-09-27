@@ -331,7 +331,7 @@ class BookingRequestController extends GetxController {
                 )),
             actions: [
               Center(
-                child: InkButton(
+                child: inkButton(
                     child: Text(
                       'OK',
                       style: Theme.of(context)
@@ -508,6 +508,7 @@ class BookingRequestController extends GetxController {
 
   @override
   void onInit() async {
+    super.onInit();
     try {
       // Initialize notification data
       notificationData = Get.arguments ?? {};

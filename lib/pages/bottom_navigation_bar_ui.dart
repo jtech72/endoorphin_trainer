@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import '../utils/exports.dart';
 class BottomNavigationBarUI extends StatefulWidget {
-  BottomNavigationBarUI({Key? key, this.currentTabIndex = 0}) : super(key: key);
+  BottomNavigationBarUI({super.key, this.currentTabIndex = 0});
   int? currentTabIndex;
   List<String> pics = [
     ImagesPaths.home,

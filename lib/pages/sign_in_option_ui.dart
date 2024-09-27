@@ -69,7 +69,7 @@ class SignInOptionUi extends StatelessWidget {
                                 ?.copyWith(fontWeight: FontWeight.w400,color: AppColors.whiteShade),
                           ),
                         ])).paddingOnly(top: 20,bottom: 20),
-                InkButton(
+                inkButton(
                     child: Text(
                       "Create Account",
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -82,7 +82,7 @@ class SignInOptionUi extends StatelessWidget {
                       controller.onCreateAccount();
 
                     }).paddingOnly(bottom: 20),
-                InkButton(
+                inkButton(
                     backGroundColor: Colors.transparent,
                     child: Text("Sign In",  style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         color: AppColors.yellow,

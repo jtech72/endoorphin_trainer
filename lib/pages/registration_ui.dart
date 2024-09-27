@@ -712,7 +712,7 @@ class RegistrationUi extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          InkButton(
+                          inkButton(
                               child: Text(
                                 "Continue",
                                 style: Theme.of(context)

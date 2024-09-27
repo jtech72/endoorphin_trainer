@@ -391,7 +391,7 @@ class BioEditUi extends StatelessWidget {
                         ),
                       ),
                       Center(
-                        child: InkButton(
+                        child: inkButton(
                                 child: Text(
                                   'Update',
                                   style: Theme.of(context)

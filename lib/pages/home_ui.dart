@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_page_view_indicator/flutter_page_view_indicator.dart';
-import '../utils/app_drawer.dart';
 import '../utils/exports.dart';
 class HomeUi extends StatelessWidget {
   const HomeUi({super.key});
@@ -228,7 +226,7 @@ class HomeUi extends StatelessWidget {
                                       if (controller.selectedIndex.value == 0) {
                                         Get.toNamed(AppRoutes.earning);
                                       } else if (controller.selectedIndex.value == 1) {
-                                      Get.to(BookingUi(initialIndex: 2,));
+                                      Get.to(const BookingUi(initialIndex: 2,));
                                       } else if (controller.selectedIndex.value == 2) {
 
                                       } else if (controller.selectedIndex.value == 3) {

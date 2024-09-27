@@ -68,12 +68,12 @@ class BankingDetailsController extends GetxController {
           Get.toNamed(AppRoutes.bottomNavigation);
           return true;
         } else {
-          print('Saving bank details failed: ${response.message}');
+          log('Saving bank details failed: ${response.message}');
           showSnackBar('Saving bank details failed: ${response.message}');
           return false;
         }
       } catch (e) {
-        print('Error: $e');
+        log('Error: $e');
         showSnackBar('Error: $e');
         return false;
       }

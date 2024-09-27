@@ -1,9 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:endoorphin_trainer/utils/exports.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import '../services/models/request_models/category_document_model.dart';
 class UploadImagesController extends GetxController {
   RxInt selectedoption = 0.obs;

@@ -29,9 +29,9 @@ class UploadImagesUi extends StatelessWidget {
               Get.back();
             }
           }
-        ,child: SizedBox(
+        ,child: const SizedBox(
             height: 2,width: 2,
-            child: const Icon(Icons.arrow_back_ios,size: 18,color: Colors.white,)),
+            child: Icon(Icons.arrow_back_ios,size: 18,color: Colors.white,)),
         ),
         title: Text(
           controller.certificationDetails!["categoryName"] == "emirates"? "Emirates ID":controller.certificationDetails!["categoryName"] == "passport"?'Passport':"Certification".toString(),style: Theme.of(context).textTheme.headlineSmall,),
@@ -111,7 +111,7 @@ class UploadImagesUi extends StatelessWidget {
                 SizedBox(height:Get.height*0.2),
                 Text('Check Quality',style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 20),).paddingOnly(bottom: Get.height*0.02),
                 Text('Successfully captured the front side of ID..',style: Theme.of(context).textTheme.displayLarge,textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.024),
-                InkButton(child: Text('Continue',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
+                inkButton(child: Text('Continue',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
                     fontFamily: 'Montserrat'),), onTap: (){
                   controller.selectedoption.value=1;
                 }).paddingOnly(bottom: Get.height*0.024),
@@ -141,7 +141,7 @@ class UploadImagesUi extends StatelessWidget {
                     Image.asset(ImagesPaths.restart,height: 35,width: 35,).paddingOnly(bottom: Get.height*0.02),
                     Text('Flip your card',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.w700,color: Colors.white),).paddingOnly(bottom: Get.height*0.02),
                     Text('Capture the backside of your ID to continue.',style: Theme.of(context).textTheme.displayLarge,textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.015).paddingOnly(bottom: Get.height*0.1),
-                    InkButton(child: Text('Continue',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
+                    inkButton(child: Text('Continue',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
                         fontFamily: 'Montserrat'),), onTap: (){
                       controller.selectedoption.value=2;
                       controller.selectSource(false);
@@ -216,7 +216,7 @@ class UploadImagesUi extends StatelessWidget {
                     SizedBox(height:Get.height*0.2),
                     Text('Check Quality',style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 20),).paddingOnly(bottom: Get.height*0.02),
                     Text('Successfully captured the back side of ID.',style: Theme.of(context).textTheme.displayLarge,textAlign: TextAlign.center,).paddingOnly(bottom: Get.height*0.024),
-                    InkButton(child: Text('Continue',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
+                    inkButton(child: Text('Continue',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
                         fontFamily: 'Montserrat'),), onTap: (){
                       controller.selectedoption.value=3;
                     }).paddingOnly(bottom: Get.height*0.024),
@@ -360,14 +360,14 @@ class UploadImagesUi extends StatelessWidget {
                         ).paddingOnly(bottom: Get.height*0.07),
                       ),
                       Center(
-                        child: InkButton(child: Text('Save',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
+                        child: inkButton(child: Text('Save',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18,
                             fontFamily: 'Montserrat'),),
                             onTap: (){
                           controller.onSaveButton();
                         }).paddingOnly(bottom: Get.height*0.02),
                       ),
                       Center(
-                        child: InkButton(
+                        child: inkButton(
                             backGroundColor: Colors.transparent,
                             child: Text('Try Again',style: Theme.of(context).textTheme.displaySmall!.copyWith(color: AppColors.yellow,fontSize: 18,
                                 fontFamily: 'Montserrat'),),

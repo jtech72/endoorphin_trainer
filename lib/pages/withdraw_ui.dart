@@ -286,7 +286,7 @@ class WithdrawUI extends StatelessWidget {
                                           }
                                         ),
                                       ).paddingOnly(bottom: Get.height*0.02),
-                                      InkButton(
+                                      inkButton(
                                           child: Text(
                                             'Sent Request',
                                             style: Theme.of(context)
@@ -339,7 +339,7 @@ class WithdrawUI extends StatelessWidget {
                                                       )),
                                                   actions: [
                                                     Center(
-                                                      child: InkButton(
+                                                      child: inkButton(
                                                           child: Text(
                                                             'OK',
                                                             style: Theme.of(

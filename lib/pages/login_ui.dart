@@ -285,7 +285,7 @@ class LoginUi extends StatelessWidget {
                           ],
                         ).paddingOnly(top: Get.height * .013),
                         Center(
-                          child: InkButton(
+                          child: inkButton(
                               child: Text(
                                 "Log In",
                                 style: Theme.of(context)

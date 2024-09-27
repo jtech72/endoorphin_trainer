@@ -572,7 +572,7 @@ class AccountUI extends StatelessWidget {
                                   onTap: () {
                                     controller.selectedOption1.value = value;
                                     controller.toggleOptionsVisibility();
-                                    print(controller.selectedOption1.value);
+                                    log(controller.selectedOption1.value);
                                   },
                                 );
                               }).toList(),
@@ -666,7 +666,7 @@ class AccountUI extends StatelessWidget {
                       height: Get.height * 0.04,
                     ),
                     Center(
-                      child: InkButton(
+                      child: inkButton(
                           child: Text(
                             'Update',
                             style: Theme.of(context)
