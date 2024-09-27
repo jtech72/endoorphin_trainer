@@ -87,7 +87,7 @@ onPasswordChanged(BuildContext context){
               )),
           actions: [
             Center(
-              child: InkButton(
+              child: inkButton(
                   child: Text('Continue to login',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,
                       fontFamily: 'Montserrat',fontSize: 12),), onTap: (){
                 Get.offAllNamed(AppRoutes.login);

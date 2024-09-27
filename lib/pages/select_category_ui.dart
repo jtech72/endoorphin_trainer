@@ -93,7 +93,7 @@ class SelectCategoryUI extends StatelessWidget {
             SizedBox(
                 height: 35,
                 width: 195,
-                child: InkButton(
+                child: inkButton(
                     child: Text(
                       'Continue',
                       style: Theme.of(context)
@@ -143,7 +143,7 @@ class SelectCategoryUI extends StatelessWidget {
                               )),
                           actions: [
                             Center(
-                              child: InkButton(
+                              child: inkButton(
                                   child: Text(
                                     'OK',
                                     style: Theme.of(context)

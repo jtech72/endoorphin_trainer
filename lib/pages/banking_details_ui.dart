@@ -476,7 +476,7 @@ class BankingDetailsUI extends StatelessWidget {
                           height: Get.height * .06,
                         ),
                         Center(
-                          child: InkButton(
+                          child: inkButton(
                             child: Obx(() {
                               String buttonTextValue = controller.buttonText.value == 0 ? 'Save' : 'Update';
                               return Text(

@@ -563,7 +563,7 @@ class ProfileUI extends StatelessWidget {
               SizedBox(
                 height: Get.height * 0.05,
               ),
-              InkButton(
+              inkButton(
                   child: Text(
                     'Logout',
                     style: Theme.of(context).textTheme.headlineSmall!.copyWith(

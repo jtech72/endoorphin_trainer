@@ -220,7 +220,7 @@ class CreateNewPasswordUI extends StatelessWidget {
                     height: Get.height*0.13,
                   ),
                   Center(
-                      child: InkButton(
+                      child: inkButton(
                           child: Text('Submit',
                             style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 18,
                                 fontFamily: 'Montserrat'),),

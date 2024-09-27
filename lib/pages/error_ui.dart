@@ -38,7 +38,7 @@ class ErrorUi extends StatelessWidget {
                 textAlign: TextAlign.center,
 
               ).paddingOnly(top: 20),
-              InkButton(
+              inkButton(
                   backGroundColor: Colors.transparent,
                   child: Text("Go back",  style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       color: AppColors.yellow,
@@ -47,7 +47,7 @@ class ErrorUi extends StatelessWidget {
 
                   onTap: () {
                   }).paddingOnly(top: Get.height*0.02,bottom: Get.height*0.02),
-              InkButton(
+              inkButton(
                   child: Text(
                     "Reload",
                     style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 18,

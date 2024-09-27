@@ -71,7 +71,7 @@ class VerifyPhoneNumberUI extends StatelessWidget {
                 height: Get.height*0.2,
               ),
               Center(
-                  child: InkButton(
+                  child: inkButton(
                       child: Text('Verify',
                         style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black),),
                       onTap: (){

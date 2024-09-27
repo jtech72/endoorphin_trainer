@@ -5,10 +5,10 @@ class SplashUI extends StatefulWidget {
   const SplashUI({super.key});
 
   @override
-  _SplashUIState createState() => _SplashUIState();
+  SplashUIState createState() => SplashUIState();
 }
 
-class _SplashUIState extends State<SplashUI> with SingleTickerProviderStateMixin {
+class SplashUIState extends State<SplashUI> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 

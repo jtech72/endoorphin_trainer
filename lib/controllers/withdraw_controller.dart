@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'package:endoorphin_trainer/utils/exports.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
 import '../services/models/request_models/withdraw_request_model.dart';
 import 'package:http/http.dart'as http;
 class WithdrawController extends GetxController {
@@ -53,7 +52,7 @@ class WithdrawController extends GetxController {
             name: "Image");
         log("done");
           showSnackBar("Payment slip downloaded in Gallery");
-        print(result);
+        log(result);
       } else {
         dismissLoader();
         log("Failed to download image");

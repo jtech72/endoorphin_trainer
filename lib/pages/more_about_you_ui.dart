@@ -473,7 +473,7 @@ class MoreAboutYouUi extends StatelessWidget {
                           else if (index == snapshot.data!.result!.length +1) {
                             return
                               Center(
-                                child: InkButton(
+                                child: inkButton(
                                   child: Text(
                                     'Continue',
                                     style: Theme.of(context).textTheme.headlineSmall!.copyWith(

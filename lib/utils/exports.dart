@@ -115,19 +115,23 @@ export 'package:endoorphin_trainer/controllers/session_complete_controller.dart'
 export '../controllers/session_details_controller.dart';
 export '../controllers/splash_controller.dart';
 export '../controllers/verify_phone_number_controller.dart';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export 'package:flutter_spinkit/flutter_spinkit.dart';
+export '../custom_widgets/tabbar_widgets.dart';
+export 'package:calendar_date_picker2/calendar_date_picker2.dart';
+export 'package:flutter_page_view_indicator/flutter_page_view_indicator.dart';
+export '../utils/app_drawer.dart';
+export 'package:endoorphin_trainer/utils/app_pages.dart';
+export 'package:endoorphin_trainer/utils/app_strings.dart';
+export 'package:endoorphin_trainer/utils/app_themes.dart';
+export 'package:firebase_core/firebase_core.dart';
+export 'package:firebase_crashlytics/firebase_crashlytics.dart';
+export 'package:firebase_messaging/firebase_messaging.dart';
+export 'package:flutter_localizations/flutter_localizations.dart';
+export 'package:get_storage/get_storage.dart';
+export 'package:image_picker/image_picker.dart';
+export '../services/network_services/notification_servies.dart';
+export 'package:file_picker/file_picker.dart';
+export 'package:image_gallery_saver/image_gallery_saver.dart';
+export '../controllers/let’s_get_you_verified_controller.dart';
 
 

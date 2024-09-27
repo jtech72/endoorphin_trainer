@@ -1,9 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get_storage/get_storage.dart';
-import '../utils/app_strings.dart';
 import '../utils/exports.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 GetStorage storage=GetStorage();
@@ -43,7 +40,7 @@ void showSnackBarOtp(message) {
       backgroundColor: AppColors.yellow);
 }
 
-Widget InkButton({
+Widget inkButton({
   double? borderRadius,
   double? height,
   double? width,

@@ -216,7 +216,7 @@ class HomeController extends GetxController {
   Future<void> checkSessionIsRunning() async {
     final response = await CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"pending" );
     if (response.result == null || response.result!.isEmpty) {
-      print("No bookings found.");
+      log("No bookings found.");
       return;
     }
     var sessionItem = response.result!.firstWhereOrNull((item) => item.pinStatus != null);
@@ -224,9 +224,9 @@ class HomeController extends GetxController {
       Get.toNamed(AppRoutes.sessionRunning, arguments: {
         "id": sessionItem.id.toString(),
         "pin": sessionItem.sessionPin.toString(),
-      });      print("Pin status is not null in at least one booking.");
+      });      log("Pin status is not null in at least one booking.");
     } else {
-      print("All pinStatus values are null.");
+      log("All pinStatus values are null.");
     }
   }
 

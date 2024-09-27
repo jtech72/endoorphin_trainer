@@ -233,7 +233,7 @@ class SupportUI extends StatelessWidget {
                     ),
                   ),
                 ).paddingOnly(bottom: Get.height*0.13),
-                InkButton(child: Text('Send',style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                inkButton(child: Text('Send',style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                     color: Colors.black,
                     fontSize: 18,
                     fontFamily: 'Montserrat'),), onTap: (){

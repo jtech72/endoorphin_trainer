@@ -1,16 +1,7 @@
-import 'dart:async';
 import 'dart:developer';
 import 'dart:ui';
-import 'package:endoorphin_trainer/utils/app_pages.dart';
-import 'package:endoorphin_trainer/utils/app_strings.dart';
-import 'package:endoorphin_trainer/utils/app_themes.dart';
 import 'package:endoorphin_trainer/utils/exports.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:get_storage/get_storage.dart';
 import 'firebase_options.dart';
 void main() async {
   try {

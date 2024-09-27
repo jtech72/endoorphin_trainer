@@ -106,7 +106,7 @@ class OtpUI extends StatelessWidget {
                   height: Get.height * 0.02,
                 ),
                 Center(
-                  child: InkButton(
+                  child: inkButton(
                     onTap: () {
                       controller.onVerify();
                     },

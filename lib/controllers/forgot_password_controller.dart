@@ -62,7 +62,7 @@ onVerified(BuildContext context,String otp,String phoneNumber,String email){
             )),
         actions: [
           Center(
-            child: InkButton(
+            child: inkButton(
                 child: Text('OK',style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.black,fontSize: 14,
                   fontFamily: 'Montserrat',),),
                 onTap: (){

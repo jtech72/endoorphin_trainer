@@ -131,7 +131,7 @@ class SessionDetailsUi extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     width: Get.width*.5,
                                     child: RichText(
                                       text: TextSpan(
@@ -330,7 +330,7 @@ class SessionDetailsUi extends StatelessWidget {
 class DateTextWidget extends StatelessWidget {
   final String isoDate;
 
-  const DateTextWidget({required this.isoDate});
+  const DateTextWidget({super.key, required this.isoDate});
 
   String formatDate(String isoDate) {
     // Parse the ISO date string
