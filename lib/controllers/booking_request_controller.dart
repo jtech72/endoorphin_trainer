@@ -436,9 +436,9 @@ class BookingRequestController extends GetxController {
         log(socketData.toString());
         showDialogBox("Your Request pin is not correct. Please try again.",
             ImagesPaths.inVaildPopUp.toString(), () {
-          pinController.clear();
-          Get.back();
-        });
+              pinController.clear();
+              Get.back();
+            });
       }
     } catch (e, st) {
       dismissLoader();
@@ -446,7 +446,6 @@ class BookingRequestController extends GetxController {
       log(st.toString());
     }
   }
-
   void addPolyline(LatLng origin, LatLng destination) {
     const PolylineId polylineId = PolylineId('route');
     final Polyline polyline = Polyline(
@@ -473,7 +472,7 @@ class BookingRequestController extends GetxController {
     log("Initializing socket...");
 
     try {
-      socket = IO.io("http://103.142.118.76:5002", <String, dynamic>{
+      socket = IO.io("http://103.185.212.117:5002", <String, dynamic>{
         'autoConnect': false,
         'transports': ['websocket'],
       });

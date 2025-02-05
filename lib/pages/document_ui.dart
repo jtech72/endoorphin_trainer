@@ -72,7 +72,6 @@ class DocumentUI extends StatelessWidget {
                         top: Get.height * 0.01,
                         left: 10)),
                 FutureBuilder(
-
                   future:controller.onRefresh(),
                   builder: (BuildContext context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
@@ -80,7 +79,8 @@ class DocumentUI extends StatelessWidget {
                         SizedBox(
                         height: Get.height * .7,
                         child: const Center(
-                          child: CircularProgressIndicator(),
+                          child: SpinKitThreeBounce(color: AppColors.yellow,size: 30,),
+                          // child: CircularProgressIndicator(),
                         ).paddingOnly(top: 0),
                       );
                     }

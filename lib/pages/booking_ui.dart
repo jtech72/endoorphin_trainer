@@ -1,6 +1,7 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 final today = DateUtils.dateOnly(DateTime.now());
 class BookingUi extends StatefulWidget {
   final int initialIndex;
@@ -127,18 +128,67 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                             future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"scheduled" ),
                             builder: (BuildContext context, snapshot) {
                               if (snapshot.connectionState == ConnectionState.waiting) {
-                                return SizedBox(
-                                  height: Get.height * .7,
-                                  child: const Center(
-                                    child: CircularProgressIndicator(),
-                                  ).paddingOnly(top: 0),
+                                return Skeletonizer(
+                                    child: SizedBox(
+                                      height: Get.height * .68,
+                                      child: ListView.builder(
+                                          itemCount: snapshot.data?.result!.length,
+                                          itemBuilder: (context, index) {
+                                            return Container(
+                                              color: Colors.transparent,
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    mainAxisAlignment: MainAxisAlignment
+                                                        .spaceBetween,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          const CircleAvatar(
+                                                              radius: 25,
+                                                              backgroundColor: AppColors.greyButton,
+                                                              ),
+                                                          Column(
+                                                            crossAxisAlignment: CrossAxisAlignment
+                                                                .start,
+                                                            children: [
+                                                              SizedBox(
+                                                                width: Get.width*0.6,
+                                                                child: Text(
+                                                                  "snapshot.data!.result!",
+                                                                  style: Theme
+                                                                      .of(context)
+                                                                      .textTheme
+                                                                      .displayLarge,),
+                                                              ),
+                                                              Text(
+                                                                "snapshot.data!.",
+                                                                style: Theme
+                                                                    .of(context)
+                                                                    .textTheme
+                                                                    .displayMedium,)
+                                                                  .paddingOnly(top: 10),
+                                                            ],).paddingOnly(left: 15)
+                                                        ],
+                                                      ),
+                                                      Image.asset(ImagesPaths.eye, scale: 4,),
+                                                    ],
+                                                  ).paddingOnly(top: 15, left: 18, right: 18),
+                                                  Container(height: 1,
+                                                    width: Get.width,
+                                                    color: AppColors.grey,).paddingOnly(
+                                                    top: 15,),
+                                                ],
+                                              ),
+                                            );
+                                          }),
+                                    )
                                 );
                               }else  if (snapshot.hasError) {
                                 return Center(
                                   child: Text('Error: ${snapshot.error}'),
                                 );
                               }else{
-
                                 return
                                   snapshot.data!.result!.isEmpty ?
                                   SizedBox(
@@ -146,7 +196,8 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                                     child: const Center(
                                       child: Text("No data available",style: TextStyle(color: AppColors.white,fontWeight: FontWeight.w600,fontSize: 17),),
                                     ).paddingOnly(top: 0),
-                                  ):
+                                  )
+                                      :
                                   SizedBox(
                                     height: Get.height * .68,
                                     child: ListView.builder(
@@ -281,11 +332,61 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                             future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"pending" ),
                             builder: (BuildContext context, snapshot) {
                               if (snapshot.connectionState == ConnectionState.waiting) {
-                                return SizedBox(
-                                  height: Get.height * .7,
-                                  child: const Center(
-                                    child: CircularProgressIndicator(),
-                                  ).paddingOnly(top: 0),
+                                return Skeletonizer(
+                                    child: SizedBox(
+                                      height: Get.height * .68,
+                                      child: ListView.builder(
+                                          itemCount: snapshot.data?.result!.length,
+                                          itemBuilder: (context, index) {
+                                            return Container(
+                                              color: Colors.transparent,
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    mainAxisAlignment: MainAxisAlignment
+                                                        .spaceBetween,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          const CircleAvatar(
+                                                            radius: 25,
+                                                            backgroundColor: AppColors.greyButton,
+                                                          ),
+                                                          Column(
+                                                            crossAxisAlignment: CrossAxisAlignment
+                                                                .start,
+                                                            children: [
+                                                              SizedBox(
+                                                                width: Get.width*0.6,
+                                                                child: Text(
+                                                                  "snapshot.data!.result!",
+                                                                  style: Theme
+                                                                      .of(context)
+                                                                      .textTheme
+                                                                      .displayLarge,),
+                                                              ),
+                                                              Text(
+                                                                "snapshot.data!.",
+                                                                style: Theme
+                                                                    .of(context)
+                                                                    .textTheme
+                                                                    .displayMedium,)
+                                                                  .paddingOnly(top: 10),
+                                                            ],).paddingOnly(left: 15)
+                                                        ],
+                                                      ),
+                                                      Image.asset(ImagesPaths.eye, scale: 4,),
+                                                    ],
+                                                  ).paddingOnly(top: 15, left: 18, right: 18),
+                                                  Container(height: 1,
+                                                    width: Get.width,
+                                                    color: AppColors.grey,).paddingOnly(
+                                                    top: 15,),
+                                                ],
+                                              ),
+                                            );
+                                          }),
+                                    )
                                 );
                               }else  if (snapshot.hasError) {
                                 return Center(
@@ -448,11 +549,61 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                             future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"completed" ),
                             builder: (BuildContext context, snapshot) {
                               if (snapshot.connectionState == ConnectionState.waiting) {
-                                return SizedBox(
-                                  height: Get.height * .7,
-                                  child: const Center(
-                                    child: CircularProgressIndicator(),
-                                  ).paddingOnly(top: 0),
+                                return Skeletonizer(
+                                    child: SizedBox(
+                                      height: Get.height * .68,
+                                      child: ListView.builder(
+                                          itemCount: snapshot.data?.result!.length,
+                                          itemBuilder: (context, index) {
+                                            return Container(
+                                              color: Colors.transparent,
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    mainAxisAlignment: MainAxisAlignment
+                                                        .spaceBetween,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          const CircleAvatar(
+                                                            radius: 25,
+                                                            backgroundColor: AppColors.greyButton,
+                                                          ),
+                                                          Column(
+                                                            crossAxisAlignment: CrossAxisAlignment
+                                                                .start,
+                                                            children: [
+                                                              SizedBox(
+                                                                width: Get.width*0.6,
+                                                                child: Text(
+                                                                  "snapshot.data!.result!",
+                                                                  style: Theme
+                                                                      .of(context)
+                                                                      .textTheme
+                                                                      .displayLarge,),
+                                                              ),
+                                                              Text(
+                                                                "snapshot.data!.",
+                                                                style: Theme
+                                                                    .of(context)
+                                                                    .textTheme
+                                                                    .displayMedium,)
+                                                                  .paddingOnly(top: 10),
+                                                            ],).paddingOnly(left: 15)
+                                                        ],
+                                                      ),
+                                                      Image.asset(ImagesPaths.eye, scale: 4,),
+                                                    ],
+                                                  ).paddingOnly(top: 15, left: 18, right: 18),
+                                                  Container(height: 1,
+                                                    width: Get.width,
+                                                    color: AppColors.grey,).paddingOnly(
+                                                    top: 15,),
+                                                ],
+                                              ),
+                                            );
+                                          }),
+                                    )
                                 );
                               }else  if (snapshot.hasError) {
                                 return Center(
@@ -600,11 +751,62 @@ class _BookingUiState extends State<BookingUi> with SingleTickerProviderStateMix
                             future: CallAPI.getBookingHistory(id: storage.read("userId").toString(), bookingStatus:"cancelled" ),
                             builder: (BuildContext context, snapshot) {
                               if (snapshot.connectionState == ConnectionState.waiting) {
-                                return SizedBox(
-                                  height: Get.height * .7,
-                                  child: const Center(
-                                    child: CircularProgressIndicator(),
-                                  ).paddingOnly(top: 0),
+                                return Skeletonizer(
+                                  // effect: ShimmerEffect(baseColor: AppColors.grey),
+                                    child: SizedBox(
+                                      height: Get.height * .68,
+                                      child: ListView.builder(
+                                          itemCount: snapshot.data?.result!.length,
+                                          itemBuilder: (context, index) {
+                                            return Container(
+                                              color: Colors.transparent,
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    mainAxisAlignment: MainAxisAlignment
+                                                        .spaceBetween,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          const CircleAvatar(
+                                                            radius: 25,
+                                                            backgroundColor: AppColors.greyButton,
+                                                          ),
+                                                          Column(
+                                                            crossAxisAlignment: CrossAxisAlignment
+                                                                .start,
+                                                            children: [
+                                                              SizedBox(
+                                                                width: Get.width*0.6,
+                                                                child: Text(
+                                                                  "snapshot.data!.result!",
+                                                                  style: Theme
+                                                                      .of(context)
+                                                                      .textTheme
+                                                                      .displayLarge,),
+                                                              ),
+                                                              Text(
+                                                                "snapshot.data!.",
+                                                                style: Theme
+                                                                    .of(context)
+                                                                    .textTheme
+                                                                    .displayMedium,)
+                                                                  .paddingOnly(top: 10),
+                                                            ],).paddingOnly(left: 15)
+                                                        ],
+                                                      ),
+                                                      Image.asset(ImagesPaths.eye, scale: 4,),
+                                                    ],
+                                                  ).paddingOnly(top: 15, left: 18, right: 18),
+                                                  Container(height: 1,
+                                                    width: Get.width,
+                                                    color: AppColors.grey,).paddingOnly(
+                                                    top: 15,),
+                                                ],
+                                              ),
+                                            );
+                                          }),
+                                    )
                                 );
                               }else  if (snapshot.hasError) {
                                 return Center(

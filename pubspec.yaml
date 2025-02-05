@@ -53,7 +53,7 @@ dependencies:
   location:
   image_picker:
   flutter_page_view_indicator:
-  syncfusion_flutter_charts:
+  syncfusion_flutter_charts: ^20.4.48
   multi_select_flutter:
   dotted_border:
   motion_tab_bar:
@@ -75,6 +75,7 @@ dependencies:
   firebase_analytics:
   shimmer:
   image_gallery_saver:
+  skeletonizer:
 
 dev_dependencies:
   flutter_test:

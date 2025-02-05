@@ -733,7 +733,7 @@ class CallAPI {
         log("CALLING_ENDPOINT: $fullUrl ,RESPONSE:  $json");
         return responseModel;
       } else {
-        throw Exception("Error: ${responseModel}");
+        throw Exception("Error: $responseModel");
       }
     } catch (e, st) {
       log(e.toString());
@@ -752,7 +752,7 @@ class CallAPI {
         log("CALLING_ENDPOINT: $fullUrl ,RESPONSE:  $json");
         return responseModel;
       } else {
-        throw Exception("Error: ${responseModel}");
+        throw Exception("Error: $responseModel");
       }
     } catch (e, st) {
       log(e.toString());
@@ -771,7 +771,7 @@ class CallAPI {
         log("CALLING_ENDPOINT: $fullUrl ,RESPONSE:  $json");
         return responseModel;
       } else {
-        throw Exception("Error: ${responseModel}");
+        throw Exception("Error: $responseModel");
       }
     } catch (e, st) {
       log(e.toString());
@@ -790,7 +790,7 @@ class CallAPI {
         log("CALLING_ENDPOINT: $fullUrl ,RESPONSE:  $json");
         return responseModel;
       } else {
-        throw Exception("Error: ${responseModel}");
+        throw Exception("Error: $responseModel");
       }
     } catch (e, st) {
       log(e.toString());
@@ -809,7 +809,7 @@ class CallAPI {
         log("CALLING_ENDPOINT: $fullUrl ,RESPONSE:  $json");
         return responseModel;
       } else {
-        throw Exception("Error: ${responseModel}");
+        throw Exception("Error: $responseModel");
       }
     } catch (e, st) {
       log(e.toString());
@@ -828,7 +828,7 @@ class CallAPI {
         log("CALLING_ENDPOINT: $fullUrl ,RESPONSE:  $json");
         return responseModel;
       } else {
-        throw Exception("Error: ${responseModel}");
+        throw Exception("Error: $responseModel");
       }
     } catch (e, st) {
       log(e.toString());
@@ -847,7 +847,7 @@ class CallAPI {
         log("CALLING_ENDPOINT: $fullUrl ,RESPONSE:  $json");
         return responseModel;
       } else {
-        throw Exception("Error: ${responseModel}");
+        throw Exception("Error: $responseModel");
       }
     } catch (e, st) {
       log(e.toString());

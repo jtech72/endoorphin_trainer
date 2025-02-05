@@ -1,7 +1,8 @@
 class Endpoints{
 
   /// DEV BASE URL
-  static const String baseUrl="http://103.142.118.76:5002/api/";
+  // static const String baseUrl="http://103.142.118.76:5002/api/";
+  static const String baseUrl="http://103.185.212.117:5002/api/";
   /// LOGIN
   static const String epLogin="trainer/signIn";
   ///SIGN UP

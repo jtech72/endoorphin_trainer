@@ -7,7 +7,6 @@ class NotificationUi extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    NotificationController controller = Get.put(NotificationController());
     return Scaffold(
       appBar: myAppBar(
         title: GestureDetector(

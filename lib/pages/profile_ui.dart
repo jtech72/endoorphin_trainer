@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../utils/exports.dart';
+import 'bottom_navigation_bar_ui.dart';
 class ProfileUI extends StatelessWidget {
   const ProfileUI({super.key});
 
@@ -57,9 +59,65 @@ class ProfileUI extends StatelessWidget {
                     storage.read("userId").toString()),
                 builder: (BuildContext context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    ).paddingOnly(top: 20);
+                    return Skeletonizer(
+                        child: Row(
+                          children: [
+                            const CircleAvatar(
+                              radius: 42,
+                              backgroundColor: AppColors.blackShade,
+                              child: CircleAvatar(
+                                radius: 40,
+                                backgroundColor: AppColors.blackShade,
+                              ),
+                            ).paddingOnly(left: 30),
+                            const SizedBox(
+                              width: 30,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  width: Get.width * 0.5,
+                                  child: Text(
+                                    overflow: TextOverflow.ellipsis,
+                                    "snapshot.data.",
+                                    style: Theme.of(context).textTheme.headlineSmall,
+                                  ).paddingOnly(right: 3),
+                                ),
+                                SizedBox(
+                                  height: Get.height * 0.003,
+                                ),
+                                SizedBox(
+                                  width: Get.width*0.5,
+                                  child: Text(
+                                    overflow: TextOverflow.ellipsis,
+                                    "snapshot.data.result.",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelMedium!
+                                        .copyWith(
+                                        fontWeight: FontWeight.w500,
+                                        color: AppColors.white),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: Get.height * 0.003,
+                                ),
+                                Text(
+                                  'View Activity',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelMedium!
+                                      .copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.yellow,
+                                      fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
+                    );
                   }
                   if (snapshot.hasError) {
                     return Center(
@@ -374,6 +432,7 @@ class ProfileUI extends StatelessWidget {
                       color: AppColors.greyButton),
                   child: InkWell(
                     onTap: () {
+                      // Get.to(BottomNavigationBarUI(currentTabIndex: 1,));
                       Get.toNamed(AppRoutes.earning);
                     },
                     child: Row(
