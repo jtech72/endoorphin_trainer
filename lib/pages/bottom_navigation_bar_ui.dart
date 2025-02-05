@@ -162,3 +162,4 @@ class _BottomNavigationBarUIState extends State<BottomNavigationBarUI> {
     );
   }
 }
+

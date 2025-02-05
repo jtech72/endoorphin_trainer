@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 class AccountUI extends StatelessWidget {
   const AccountUI({super.key});
   @override
@@ -40,12 +41,209 @@ class AccountUI extends StatelessWidget {
                   storage.read("userId").toString()),
               builder: (BuildContext context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return SizedBox(
-                    height: Get.height,
-                    child: const Center(
-                            // child: CircularProgressIndicator(),
-                            )
-                        .paddingOnly(top: 0),
+                  return Skeletonizer(
+                    // effect: ShimmerEffect(baseColor: AppColors.greyButton),
+                      child:Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Center(
+                            child: Stack(
+                              children: [
+                               CircleAvatar(
+                                        radius: 42,
+                                   backgroundColor:
+                                   AppColors.blackShade,
+                                        child:
+                                           CircleAvatar(
+                                          radius: 40,
+                                          backgroundColor:
+                                          AppColors.blackShade,
+                                        )
+                                      ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: Get.height * 0.007,
+                          ),
+                          Center(
+                              child: Text(
+                                "snapshot.data",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall!
+                                    .copyWith(color: AppColors.white),
+                              )),
+                          SizedBox(
+                            height: Get.height * 0.003,
+                          ),
+                          Center(
+                              child: Text("{snapshot.data!.result} ",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelMedium!
+                                      .copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      color: AppColors.white))),
+                          SizedBox(
+                            height: Get.height * 0.003,
+                          ),
+                          Center(
+                              child: Text('View Activity',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelMedium!
+                                      .copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.yellow))),
+                          SizedBox(
+                            height: Get.height * 0.02,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'First Name',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelLarge!
+                                    .copyWith(color: AppColors.white),
+                                textAlign: TextAlign.start,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: Get.height * 0.011,
+                          ),
+                          Container(
+                            height: 45,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: AppColors.grey3),
+                                borderRadius: BorderRadius.circular(5)),
+                          ),
+                          SizedBox(
+                            height: Get.height * 0.01,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'Last Name',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelLarge!
+                                    .copyWith(color: AppColors.white),
+                                textAlign: TextAlign.start,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: Get.height * 0.011,
+                          ),
+                          Container(
+                            height: 45,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: AppColors.grey3),
+                                borderRadius: BorderRadius.circular(5)),
+                          ),
+                          SizedBox(
+                            height: Get.height * 0.01,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'Email address',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelLarge!
+                                    .copyWith(color: AppColors.white),
+                                textAlign: TextAlign.start,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: Get.height * 0.011,
+                          ),
+                          Container(
+                            height: 45,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: AppColors.grey3),
+                                borderRadius: BorderRadius.circular(5)),
+                          ),
+                          SizedBox(
+                            height: Get.height * 0.01,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'Phone Number',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelLarge!
+                                    .copyWith(color: AppColors.white),
+                                textAlign: TextAlign.start,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: Get.height * 0.011,
+                          ),
+                          Container(
+                            height: 45,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: AppColors.grey3),
+                                borderRadius: BorderRadius.circular(5)),
+                          ),
+                          SizedBox(
+                            height: Get.height * 0.01,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'Gender',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelLarge!
+                                    .copyWith(color: AppColors.white),
+                                textAlign: TextAlign.start,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: Get.height * 0.011,
+                          ),
+                         Container(
+                                  height: 45,
+                                  width: Get.width,
+                                  decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    border: Border.all(color: AppColors.grey3),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                ),
+                          SizedBox(
+                            height: Get.height * 0.01,
+                          ),
+                          Text(
+                            'Description',
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge!
+                                .copyWith(color: AppColors.white),
+                            textAlign: TextAlign.start,
+                          ),
+                          SizedBox(
+                            height: Get.height * 0.011,
+                          ),
+                          Container(
+                            height: Get.height * 0.16,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: AppColors.grey3),
+                                borderRadius: BorderRadius.circular(5)),
+                          ),
+                          SizedBox(
+                            height: Get.height * 0.04,
+                          ),
+                        ],
+                      ).paddingOnly(left: Get.width * 0.05, right: Get.width * 0.05)
                   );
                 }
                 if (snapshot.hasError) {

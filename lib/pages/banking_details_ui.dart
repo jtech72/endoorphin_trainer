@@ -1,5 +1,6 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 class BankingDetailsUI extends StatelessWidget {
   const BankingDetailsUI({super.key});
 
@@ -39,8 +40,169 @@ class BankingDetailsUI extends StatelessWidget {
                       id: storage.read("userId").toString()),
                   builder: (BuildContext context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(
-                        child: Text(""),
+                      return Skeletonizer(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: Get.height * 0.03,
+                              ),
+                              Text(
+                                'Bank Information',
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ).paddingOnly(bottom: Get.height * 0.01),
+                              Container(
+                                  width: Get.width,
+                                  decoration: BoxDecoration(
+                                      color: AppColors.greyButton,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Column(children: [
+                                    SizedBox(
+                                      height: Get.height * 0.05,
+                                      width: Get.width,
+                                    ),
+                                    Container(
+                                      height: 1,
+
+                                      width: Get.width,
+                                      color: AppColors.darkGrey,
+                                    ),
+                                    SizedBox(
+                                      height: Get.height * 0.05,
+                                      width: Get.width,
+                                    ),
+                                    Container(
+                                      height: 1,
+                                      width: Get.width,
+                                      color: AppColors.darkGrey,
+                                    ),
+                                    SizedBox(
+                                      height: Get.height * 0.05,
+                                      width: Get.width,
+                                    ),
+                                    Container(
+                                      height: 1,
+                                      width: Get.width,
+                                      color: AppColors.darkGrey,
+                                    ),
+                                    SizedBox(
+                                      height: Get.height * 0.05,
+                                      width: Get.width,
+                                    ),
+                                    Container(
+                                      height: 1,
+
+                                      width: Get.width,
+                                      color: AppColors.darkGrey,
+                                    ),
+                                  ]).paddingOnly(
+                                      left: Get.width * 0.04,
+                                      right: Get.width * 0.04,
+                                      top: Get.height * 0.01,
+                                      bottom: Get.height * 0.035)),
+                              SizedBox(
+                                height: Get.height * 0.04,
+                              ),
+                              Text(
+                                'Account Information',
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ).paddingOnly(bottom: Get.height * 0.01),
+                              Container(
+                                // height: Get.height*0.26,
+                                  width: Get.width,
+                                  decoration: BoxDecoration(
+                                      color: AppColors.greyButton,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Column(children: [
+                                    SizedBox(
+                                      height: Get.height * 0.05,
+                                      width: Get.width,
+                                    ),
+                                    Container(
+                                      height: 1,
+                                      width: Get.width,
+                                      color: AppColors.darkGrey,
+                                    ),
+                                    SizedBox(
+                                      height: Get.height * 0.05,
+                                      width: Get.width,
+                                    ),
+                                    Container(
+                                      height: 1,
+                                      width: Get.width,
+                                      color: AppColors.darkGrey,
+                                    ),
+                                    SizedBox(
+                                      height: Get.height * 0.05,
+                                      width: Get.width,
+                                    ),
+                                    Container(
+                                      height: 1,
+                                      width: Get.width,
+                                      color: AppColors.darkGrey,
+                                    ).paddingOnly(bottom: 2),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 5,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Column(
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      SizedBox(
+                                                        height: Get.height * 0.05,
+                                                        width: Get.width * 0.25,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              )   ,
+                                              Container(
+                                                height: 1,
+                                                width: Get.width,
+                                                color: AppColors.darkGrey,
+                                              ).paddingOnly(bottom: 0),
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Expanded(
+                                          flex: 5,
+                                          child: Column(
+                                            children: [
+                                              SizedBox(
+                                                height: Get.height * 0.05,
+                                                width: Get.width * 0.25,
+                                              ),
+                                              Container(
+                                                height: 1,
+                                                width: Get.width,
+                                                color: AppColors.darkGrey,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ]).paddingOnly(
+                                      left: Get.width * 0.04,
+                                      right: Get.width * 0.04,
+                                      top: Get.height * 0.01,
+                                      bottom: Get.height * 0.035)),
+                              SizedBox(
+                                height: Get.height * .06,
+                              ),
+
+
+                            ],
+                          ).paddingOnly(
+                              left: Get.width * 0.05, right: Get.width * 0.05)
                       );
                     }
                     if (snapshot.hasError) {

@@ -171,6 +171,7 @@ class WithdrawUI extends StatelessWidget {
                   ).paddingOnly(
                       left: Get.width * 0.02, right: Get.width * 0.02),
                   controller.selectedIndex.value == 0 ?
+                  //UNPAID
                   SizedBox(
                           height: Get.height*.7,
                           width: Get.width,
@@ -179,9 +180,7 @@ class WithdrawUI extends StatelessWidget {
                             future: CallAPI. getUnpaid(trainerId: storage.read("userId").toString()),
                             builder: (BuildContext context, snapshot) {
                               if (snapshot.connectionState == ConnectionState.waiting) {
-                                return const Center(
-                                  child: CircularProgressIndicator(),
-                                ).paddingOnly(top: 20);
+                                return const Center();
                               } else if (snapshot.hasError) {
                                 return Center(
                                   child: Text('Error: ${snapshot.error}'),
@@ -193,8 +192,8 @@ class WithdrawUI extends StatelessWidget {
                                 }
                                 WidgetsBinding.instance.addPostFrameCallback((_) {
                                   controller.totalBalance.value = totalBalance;
-                                });                                return
-                                  Column(
+                                });
+                                return Column(
                                     children: [
                                       SizedBox(
                                         height: Get.height*.6,
@@ -250,7 +249,7 @@ class WithdrawUI extends StatelessWidget {
                                                             ),
                                                             Text(
                                                               DateFormat('dd MMM  h:mm a')
-                                                                  .format(DateTime.parse(snapshot!
+                                                                  .format(DateTime.parse(snapshot
                                                                   .data!.result![index].createdAt
                                                                   .toString())),
                                                               style: const TextStyle(
@@ -276,11 +275,12 @@ class WithdrawUI extends StatelessWidget {
                                                     right: Get.width * 0.03,
                                                     top: Get.height * .02,
                                                     bottom: Get.height * .02),
-                                                Container(
-                                                  height: 1,
-                                                  width: Get.width,
-                                                  color: AppColors.lightyGrey,
-                                                ),
+                                                if (index == snapshot.data!.result!.length - 1)
+                                                  Container(
+                                                    height: 1,
+                                                    width: Get.width,
+                                                    color: AppColors.lightyGrey,
+                                                  ),
                                               ],
                                             ).paddingOnly();
                                           }
@@ -388,6 +388,7 @@ class WithdrawUI extends StatelessWidget {
                           )
                   ):
                   controller.selectedIndex.value == 2?
+                  //PAID
                   SizedBox(
                       height: Get.height*.7,
                       width: Get.width,
@@ -397,7 +398,7 @@ class WithdrawUI extends StatelessWidget {
                         builder: (BuildContext context, snapshot) {
                           if (snapshot.connectionState == ConnectionState.waiting) {
                             return const Center(
-                              child: CircularProgressIndicator(),
+                              // child: CircularProgressIndicator(),
                             ).paddingOnly(top: 20);
                           } else if (snapshot.hasError) {
                             return Center(
@@ -463,7 +464,7 @@ class WithdrawUI extends StatelessWidget {
                                                               children: [
                                                                 Text(
                                                                   DateFormat('dd MMM  h:mm a')
-                                                                      .format(DateTime.parse(snapshot!
+                                                                      .format(DateTime.parse(snapshot
                                                                       .data!.result![index].createdAt
                                                                       .toString())),
                                                                   style: const TextStyle(
@@ -492,11 +493,12 @@ class WithdrawUI extends StatelessWidget {
                                                   right: Get.width * 0.03,
                                                   top: Get.height * .02,
                                                   bottom: Get.height * .02),
-                                              Container(
-                                                height: 1,
-                                                width: Get.width,
-                                                color: AppColors.lightyGrey,
-                                              ),
+                                              if (index == snapshot.data!.result!.length - 1)
+                                                Container(
+                                                  height: 1,
+                                                  width: Get.width,
+                                                  color: AppColors.lightyGrey,
+                                                ),
                                             ],
                                           ).paddingOnly();
                                         }
@@ -513,6 +515,7 @@ class WithdrawUI extends StatelessWidget {
                         },
                       )
                   ):
+                  //REQUESTED
                   SizedBox(
                       height: Get.height*.7,
                       width: Get.width,
@@ -522,7 +525,7 @@ class WithdrawUI extends StatelessWidget {
                         builder: (BuildContext context, snapshot) {
                           if (snapshot.connectionState == ConnectionState.waiting) {
                             return const Center(
-                              child: CircularProgressIndicator(),
+                              // child: CircularProgressIndicator(),
                             ).paddingOnly(top: 20);
                           } else if (snapshot.hasError) {
                             return Center(
@@ -577,7 +580,7 @@ class WithdrawUI extends StatelessWidget {
                                                           ),
                                                           Text(
                                                             DateFormat('dd MMM  h:mm a')
-                                                                .format(DateTime.parse(snapshot!
+                                                                .format(DateTime.parse(snapshot
                                                                 .data!.result![index].createdAt
                                                                 .toString())),
                                                             style: const TextStyle(
@@ -603,11 +606,12 @@ class WithdrawUI extends StatelessWidget {
                                                   right: Get.width * 0.03,
                                                   top: Get.height * .02,
                                                   bottom: Get.height * .02),
-                                              Container(
-                                                height: 1,
-                                                width: Get.width,
-                                                color: AppColors.lightyGrey,
-                                              ),
+                                              if (index == snapshot.data!.result!.length - 1)
+                                                Container(
+                                                  height: 1,
+                                                  width: Get.width,
+                                                  color: AppColors.lightyGrey,
+                                                ),
                                             ],
                                           ).paddingOnly();
                                         }

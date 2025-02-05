@@ -1,12 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:endoorphin_trainer/pages/booking_ui.dart';
 import 'package:endoorphin_trainer/pages/home_ui.dart';
 import 'package:endoorphin_trainer/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../custom_Widgets/common_widgets.dart';
-import '../pages/bottom_navigation_bar_ui.dart';
 import '../services/network_services/api_call.dart';
 import 'app_colors.dart';
 import 'image_paths.dart';
@@ -27,10 +26,10 @@ class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
 
   @override
-  _MyDrawerState createState() => _MyDrawerState();
+  MyDrawerState createState() => MyDrawerState();
 }
 
-class _MyDrawerState extends State<MyDrawer> {
+class MyDrawerState extends State<MyDrawer> {
   int selectedTileIndex = 0;
   int selectedTile =-1;
   @override
@@ -51,12 +50,42 @@ class _MyDrawerState extends State<MyDrawer> {
                 storage.read("userId").toString()),
             builder: (BuildContext context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return SizedBox(
-                  height: Get.height*.15,
-                  child: const Center(
-                    child: CircularProgressIndicator(),
-                  ).paddingOnly(top: 20),
-                );
+                return
+                    Skeletonizer(
+                        child: SizedBox(
+                          height: Get.height*.15,
+                          child: Row(
+                            children: [
+                             const CircleAvatar(
+                                    radius: 30,
+                                    backgroundColor: AppColors.blackShade,
+                                    backgroundImage:
+                                    AssetImage(ImagesPaths.profile),
+                                  ),
+                              SizedBox(width: Get.width*0.06,),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text( "snapshot.data!",
+
+                                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: AppColors.yellow),).paddingOnly(bottom: 5),
+                                  Text(
+                                   " snapshot.data!.result!",
+                                    style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.lightGrey1),),
+                                ],
+                              ),
+                            ],
+
+                          ).paddingOnly(top: Get.height*0.05,left: Get.width*0.09,bottom: Get.height*0.03),
+                        )
+                    );
+                //   SizedBox(
+                //   height: Get.height*.15,
+                //   child: const Center(
+                //     child: CircularProgressIndicator(),
+                //   ).paddingOnly(top: 20),
+                // );
               }
               if (snapshot.hasError) {
                 return Center(
@@ -97,8 +126,8 @@ class _MyDrawerState extends State<MyDrawer> {
                             radius: 30,
                             backgroundImage: imageProvider,
                           ),
-                          placeholder: (context, url) => CircularProgressIndicator(), // Loader while the image loads
-                          errorWidget: (context, url, error) => CircleAvatar(
+                          placeholder: (context, url) => const CircularProgressIndicator(), // Loader while the image loads
+                          errorWidget: (context, url, error) => const CircleAvatar(
                             maxRadius: 30,
                             backgroundColor: AppColors.black,
                             backgroundImage: AssetImage("assets/images/img_profile.png"), // Fallback image
@@ -150,10 +179,10 @@ class _MyDrawerState extends State<MyDrawer> {
                 Navigator.pushReplacement(
                   context,
                   PageRouteBuilder(
-                    pageBuilder: (context, animation1, animation2) => HomeUi(),
+                    pageBuilder: (context, animation1, animation2) => const HomeUi(),
                     transitionDuration: const Duration(milliseconds: 600),
                     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                      const begin = Offset(1.0, 0.0);
+                      const begin = Offset(-1.0, 0.0);
                       const end = Offset.zero;
                       const curve = Curves.ease;
 
@@ -337,10 +366,10 @@ class _MyDrawerState extends State<MyDrawer> {
                 Navigator.pushReplacement(
                   context,
                   PageRouteBuilder(
-                    pageBuilder: (context, animation1, animation2) => HomeUi(),
+                    pageBuilder: (context, animation1, animation2) => const HomeUi(),
                     transitionDuration: const Duration(milliseconds: 600),
                     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                      const begin = Offset(1.0, 0.0);
+                      const begin = Offset(-1.0, 0.0);
                       const end = Offset.zero;
                       const curve = Curves.ease;
 
@@ -385,10 +414,10 @@ class _MyDrawerState extends State<MyDrawer> {
                 Navigator.pushReplacement(
                   context,
                   PageRouteBuilder(
-                    pageBuilder: (context, animation1, animation2) => HomeUi(),
+                    pageBuilder: (context, animation1, animation2) => const HomeUi(),
                     transitionDuration: const Duration(milliseconds: 600),
                     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                      const begin = Offset(1.0, 0.0);
+                      const begin = Offset(-1.0, 0.0);
                       const end = Offset.zero;
                       const curve = Curves.ease;
 

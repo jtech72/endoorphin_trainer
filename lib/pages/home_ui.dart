@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../utils/exports.dart';
 class HomeUi extends StatelessWidget {
   const HomeUi({super.key});
@@ -198,11 +199,67 @@ class HomeUi extends StatelessWidget {
                         builder: (BuildContext context, snapshot) {
                           if (snapshot.connectionState == ConnectionState.waiting) {
                             return
-                              SizedBox(
-                                height: Get.height * .7,
-                                child: const Center(
-                                  child: CircularProgressIndicator(),
-                                ).paddingOnly(top: 0),
+                              Skeletonizer(
+                                  child: GridView.builder(
+                                    shrinkWrap: true,
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    itemCount: controller.quickGlanceList.length,
+                                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 10,
+                                      mainAxisSpacing: 20,
+                                      mainAxisExtent: 155,
+                                    ),
+                                    itemBuilder: (context, index) {
+                                      return Obx(
+                                            () => Container(
+                                          height: Get.height * 0.15,
+                                          width: Get.width * 0.42,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(20),
+                                            color: AppColors.greyButton,
+                                          ),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                alignment: Alignment.center,
+                                                height: Get.height * 0.09,
+                                                width: 140,
+                                                decoration: const BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: AppColors.lightBlack,
+                                                ),
+                                                child: Text(
+                                                  overflow: TextOverflow.ellipsis,
+                                                  "00",
+                                                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+
+                                                    color: AppColors.yellow,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 8), // Adjust the gap here
+                                              Text(
+                                                "Totalll",
+                                                style: Theme.of(context).textTheme.titleLarge!.copyWith(color: controller.selectedIndex.value ==index?
+                                                AppColors.black: AppColors.white,),
+                                              ),
+
+                                              const SizedBox(height: 4), // Adjust the gap here
+                                              Text(
+                                                "controller.",
+                                                style: Theme.of(context).textTheme.titleLarge!.copyWith(color: controller.selectedIndex.value ==index?
+                                                AppColors.black: AppColors.white,),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  )
                               );
                           }
                           else  if (snapshot.hasData ) {

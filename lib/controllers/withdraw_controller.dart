@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:endoorphin_trainer/utils/exports.dart';
 import '../services/models/request_models/withdraw_request_model.dart';
 import 'package:http/http.dart'as http;
+
 class WithdrawController extends GetxController {
   RxInt selectedIndex = 0.obs;
   var selectedItems = <String>[].obs;
@@ -34,34 +35,38 @@ class WithdrawController extends GetxController {
   }
 
   //save image
-  saveNetworkImage(String url) async {
-    try{
+  Future<void> saveNetworkImage(String url) async {
+    try {
       showLoader();
-      log("message");
+      log("Downloading image...");
 
       // Fetch the image data using http
       final response = await http.get(Uri.parse(url));
-      log("messageq");
 
       if (response.statusCode == 200) {
-        dismissLoader();
-        // Save the image to the gallery without decoding it as JSON
+        // Save the image to the gallery
         final result = await ImageGallerySaver.saveImage(
-            Uint8List.fromList(response.bodyBytes),
-            quality: 60,
-            name: "Image");
-        log("done");
+          Uint8List.fromList(response.bodyBytes),
+          quality: 60,
+          name: "Image",
+        );
+
+        dismissLoader();
+        log("Image saved result: $result");
+
+        // Check if the result contains the saved file path
+        if (result is Map && result["isSuccess"] == true) {
           showSnackBar("Payment slip downloaded in Gallery");
-        log(result);
+        } else {
+          showSnackBar("Failed to save image.");
+        }
       } else {
         dismissLoader();
-        log("Failed to download image");
+        log("Failed to download image. Status code: ${response.statusCode}");
       }
-    }catch(e,st){
+    } catch (e, st) {
       dismissLoader();
-      log("ERROR-> ",error: e.toString(),stackTrace: st);
+      log("ERROR-> ", error: e.toString(), stackTrace: st);
     }
-
   }
-
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../utils/exports.dart';
 class RatingUi extends StatelessWidget {
   const RatingUi({super.key});
@@ -29,9 +30,75 @@ class RatingUi extends StatelessWidget {
           future: CallAPI.getReviewForTrainer(trainerId: storage.read("userId").toString()),
           builder: (BuildContext context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              ).paddingOnly(top: 20);
+              return Skeletonizer(
+                  // effect: ShimmerEffect(baseColor: AppColors.greyButton),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        RichText(
+                            text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                      text: 'Reviews ',
+                                      style: Theme.of(context).textTheme.headlineSmall
+                                  ),
+                                  TextSpan(
+                                      text: "00",
+                                      style: Theme.of(context).textTheme.headlineSmall
+                                  ),
+                                ]
+                            )).paddingOnly(bottom: Get.height*0.01
+                        ),
+                        Container(
+                          height: 1,
+                          width: Get.width,
+                          color: AppColors.grey2,
+                        ).paddingOnly(bottom: Get.height*0.01),
+                        SizedBox(
+                          height: Get.height,
+                          child: ListView.builder(
+                              itemCount: snapshot.data?.result!.length,
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            const CircleAvatar(
+                                              radius: 25,
+                                              backgroundColor: AppColors.greyButton,
+                                            ).paddingOnly(right: Get.width*0.03),
+                                            SizedBox(
+                                              width: Get.width*0.42,
+                                              child: const Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text("{snapshot.data."),
+                                                  Text("controller")
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        const Text(
+                                          "0000000",
+                                        ).paddingOnly(right: Get.width*0.04)
+                                      ],
+                                    ).paddingOnly(bottom: Get.height*0.02),
+                                    Text("snapshot.data!.",
+                                      style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.whiteShade,),)
+
+                                  ],
+                                ).paddingOnly(bottom: Get.height*0.029);
+                              }),
+                        )
+                      ],
+                    ).paddingOnly(left: Get.width*0.05, right: Get.width*0.05),
+                  )
+              );
             } else if (snapshot.hasError) {
               return Center(
                 child: Text('Error: ${snapshot.error}'),
@@ -66,7 +133,7 @@ class RatingUi extends StatelessWidget {
                         color: AppColors.grey2,
                       ).paddingOnly(bottom: Get.height*0.01),
                       SizedBox(
-                        height: Get.height*0.8,
+                        height: Get.height,
                         child: ListView.builder(
                             itemCount: snapshot.data!.result!.length,
                             itemBuilder: (context, index) {

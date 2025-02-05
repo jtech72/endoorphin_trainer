@@ -22,7 +22,7 @@ class AppPages {
   static List<GetPage> routes =[
     GetPage(
         name: AppRoutes.splash,          transitionDuration: const Duration(milliseconds: 800),
-        page: () => const SplashUI(),
+        page: () =>  SplashUI(),
         binding: SplashBinding()),
     GetPage(
         name: AppRoutes.earning,        transitionDuration: const Duration(milliseconds: 800),

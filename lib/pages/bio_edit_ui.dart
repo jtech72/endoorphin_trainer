@@ -1,5 +1,6 @@
 import 'package:endoorphin_trainer/utils/exports.dart';
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 class BioEditUi extends StatelessWidget {
   const BioEditUi({super.key});
   @override
@@ -39,9 +40,86 @@ class BioEditUi extends StatelessWidget {
                 future: CallAPI.getProfileDetails(storage.read("userId").toString()),
                 builder: (BuildContext context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    ).paddingOnly(top: 20);
+                    return Skeletonizer(
+                        // effect: ShimmerEffect(baseColor: AppColors.greyButton),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Text("Nick Name",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
+                              ],
+                            ),
+                            Container(
+                              height: 45,
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: AppColors.grey3),
+                                  borderRadius: BorderRadius.circular(5)),
+                            ),
+                            Row(
+                              children: [
+                                Text("Areas of Expertise relevant for coaching",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
+                              ],
+                            ),
+                            Container(
+                              height: 45,
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: AppColors.grey3),
+                                  borderRadius: BorderRadius.circular(5)),
+                            ),
+                            Row(
+                              children: [
+                                Text("Years of Experience",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
+                              ],
+                            ),
+                            Container(
+                              height: 45,
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: AppColors.grey3),
+                                  borderRadius: BorderRadius.circular(5)),
+                            ),
+                            Text(
+                              'Fun Fact/Profesional Anecdote',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge!
+                                  .copyWith(color: AppColors.white),
+                              textAlign: TextAlign.start,
+                            ).paddingOnly(top: 15,bottom: 8),
+                            Container(
+                              height: 45,
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: AppColors.grey3),
+                                  borderRadius: BorderRadius.circular(5)),
+                            ),
+                            Text(
+                              'Motivational Quote',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge!
+                                  .copyWith(color: AppColors.white),
+                              textAlign: TextAlign.start,
+                            ).paddingOnly(top: 15,bottom: 8),
+                            Container(
+                              height: 45,
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: AppColors.grey3),
+                                  borderRadius: BorderRadius.circular(5)),
+                            ),
+                            Row(
+                              children: [
+                                Text("Mention Bio",style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14,fontWeight: FontWeight.w500),).paddingOnly(top: 15,bottom: 8),
+                              ],
+                            ),
+                            Container(
+                              height: Get.height * 0.16,
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: AppColors.grey3),
+                                  borderRadius: BorderRadius.circular(5)),
+                            ),
+                          ],
+                        ).paddingOnly(left: 18, right: 18)
+                    );
                   }
                   if (snapshot.hasError) {
                     return Center(
