@@ -173,7 +173,7 @@ class WithdrawUI extends StatelessWidget {
                   controller.selectedIndex.value == 0 ?
                   //UNPAID
                   SizedBox(
-                          height: Get.height*.7,
+                          height: Get.height,
                           width: Get.width,
                           child:
                           FutureBuilder(
@@ -390,7 +390,7 @@ class WithdrawUI extends StatelessWidget {
                   controller.selectedIndex.value == 2?
                   //PAID
                   SizedBox(
-                      height: Get.height*.7,
+                      height: Get.height,
                       width: Get.width,
                       child:
                       FutureBuilder(
@@ -416,7 +416,7 @@ class WithdrawUI extends StatelessWidget {
                               Column(
                                 children: [
                                   SizedBox(
-                                    height: Get.height*.6,
+                                    height: Get.height,
                                     width: Get.width,
                                     child: ListView.builder(
                                         itemCount:snapshot.data!.result!.length,
@@ -517,7 +517,7 @@ class WithdrawUI extends StatelessWidget {
                   ):
                   //REQUESTED
                   SizedBox(
-                      height: Get.height*.7,
+                      height: Get.height,
                       width: Get.width,
                       child:
                       FutureBuilder(
@@ -543,7 +543,7 @@ class WithdrawUI extends StatelessWidget {
                               Column(
                                 children: [
                                   SizedBox(
-                                    height: Get.height*.6,
+                                    height: Get.height,
                                     width: Get.width,
                                     child: ListView.builder(
                                         itemCount:snapshot.data!.result!.length,
