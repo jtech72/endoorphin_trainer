@@ -437,7 +437,7 @@ class WithdrawUI extends StatelessWidget {
                                                   InkWell(
                                                       onTap:(){
                                                         log("${snapshot.data!.result![index].paymentAttachment}");
-                                                        controller.saveNetworkImage(snapshot.data!.result![index].paymentAttachment);
+                                                        // controller.saveNetworkImage(snapshot.data!.result![index].paymentAttachment);
                                                       },
                                                       child: Container(
                                                           height:40,width: 40,color: Colors.transparent,

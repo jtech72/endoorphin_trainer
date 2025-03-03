@@ -131,7 +131,7 @@ export 'package:get_storage/get_storage.dart';
 export 'package:image_picker/image_picker.dart';
 export '../services/network_services/notification_servies.dart';
 export 'package:file_picker/file_picker.dart';
-export 'package:image_gallery_saver/image_gallery_saver.dart';
+// export 'package:image_gallery_saver/image_gallery_saver.dart';
 export '../controllers/let’s_get_you_verified_controller.dart';
 
 

@@ -53,7 +53,8 @@ dependencies:
   location:
   image_picker:
   flutter_page_view_indicator:
-  syncfusion_flutter_charts: ^20.4.48
+  syncfusion_flutter_charts: ^28.2.7
+#    ^20.4.48
   multi_select_flutter:
   dotted_border:
   motion_tab_bar:
@@ -67,14 +68,14 @@ dependencies:
   logger:
   cached_network_image:
   socket_io_client:
-  open_file_manager:
+#  open_file_manager:
   permission_handler:
   file_picker:
   firebase_crashlytics:
   flutter_polyline_points:
   firebase_analytics:
   shimmer:
-  image_gallery_saver:
+#  image_gallery_saver:
   skeletonizer:
 
 dev_dependencies:
