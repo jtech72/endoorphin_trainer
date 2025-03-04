@@ -192,7 +192,7 @@ class BookingRequestController extends GetxController {
   }
 
   Future<void> onAcceptButton() async {
-    _timer!.cancel();
+    // _timer!.cancel();
     timerIsVisible.value = false;
     startTimer(180);
     isLoading.value = true;
@@ -508,6 +508,7 @@ class BookingRequestController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+     await initSocket();
     try {
       // Initialize notification data
       notificationData = Get.arguments ?? {};
